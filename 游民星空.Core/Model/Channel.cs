@@ -10,7 +10,7 @@ namespace 游民星空.Core.Model
     {
         public string errorCode;
         public string errorMessage;
-        public channelResult[] result;
+        public List<channelResult> result;
     }
     public struct channelResult
     {
