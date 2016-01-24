@@ -5,16 +5,21 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空", "游民星空\游民星空.csproj", "{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空.Core", "游民星空.Core\游民星空.Core.csproj", "{75F07E89-F8A9-49DA-8C32-035515B4EBF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Debug|ARM.ActiveCfg = Debug|ARM
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Debug|ARM.Build.0 = Debug|ARM
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -24,6 +29,7 @@ Global
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Debug|x86.ActiveCfg = Debug|x86
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Debug|x86.Build.0 = Debug|x86
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Debug|x86.Deploy.0 = Debug|x86
+		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Release|Any CPU.ActiveCfg = Release|x86
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Release|ARM.ActiveCfg = Release|ARM
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Release|ARM.Build.0 = Release|ARM
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Release|ARM.Deploy.0 = Release|ARM
@@ -33,17 +39,36 @@ Global
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Release|x86.ActiveCfg = Release|x86
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Release|x86.Build.0 = Release|x86
 		{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}.Release|x86.Deploy.0 = Release|x86
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Debug|ARM.ActiveCfg = Debug|ARM
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Debug|ARM.Build.0 = Debug|ARM
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Debug|x64.ActiveCfg = Debug|x64
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Debug|x64.Build.0 = Debug|x64
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Debug|x86.ActiveCfg = Debug|x86
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Debug|x86.Build.0 = Debug|x86
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|ARM.ActiveCfg = Release|ARM
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|ARM.Build.0 = Release|ARM
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|x64.ActiveCfg = Release|x64
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|x64.Build.0 = Release|x64
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|x86.ActiveCfg = Release|x86
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://wangx86.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = 游民星空\\游民星空.csproj
 		SccProjectName1 = 游民星空
 		SccLocalPath1 = 游民星空
+		SccProjectUniqueName2 = 游民星空.Core\\游民星空.Core.csproj
+		SccProjectName2 = 游民星空.Core
+		SccLocalPath2 = 游民星空.Core
 	EndGlobalSection
 EndGlobal
