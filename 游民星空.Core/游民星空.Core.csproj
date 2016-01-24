@@ -112,9 +112,24 @@
     <None Include="project.lock.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\Functions.cs" />
+    <Compile Include="Helper\NetworkManager.cs" />
+    <Compile Include="Http\ApiBaseService.cs" />
     <Compile Include="Http\HttpBaseService.cs" />
+    <Compile Include="Http\ServiceUri.cs" />
+    <Compile Include="Model\AllChannelListPostData.cs" />
+    <Compile Include="Http\ApiService.cs" />
+    <Compile Include="Model\Channel.cs" />
+    <Compile Include="Model\ChannelPostData.cs" />
+    <Compile Include="Model\Essay.cs" />
+    <Compile Include="Model\List.cs" />
+    <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\游民星空.Core.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
