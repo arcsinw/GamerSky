@@ -19,15 +19,22 @@ namespace 游民星空.Core.Http
         /// 获取频道列表
         /// </summary>
         /// <returns></returns>
-        public async Task<Channel> GetChannelList()
+        public async Task<List<ChannelResult>> GetChannelList()
         {
             AllChannelListPostData postData = new AllChannelListPostData();
 
-            postData.deviceId = DeviceInformationHelper.GetDeviceId();
-            postData.deviceType = DeviceInformationHelper.GetOS();
-            postData.os = "android";
-            postData.osVersion = DeviceInformationHelper.GetOSVer();
+            //postData.deviceId = DeviceInformationHelper.GetDeviceId();
+            //postData.deviceType = DeviceInformationHelper.GetOS();
+            //postData.os = "android";
+            //postData.osVersion = DeviceInformationHelper.GetOSVer();
+            postData.request = new request() { type = "0" };
+            //postData.request.type = "0";
             Channel channel = await PostJson<AllChannelListPostData,Channel>(ServiceUri.AllChannel, postData);
+            List<ChannelResult> Channels = new List<ChannelResult>();
+            foreach (var item in channel?.result)
+            {
+                Channels.Add(new ChannelResult() { isTop = item.isTop, nodeId = item.nodeId, nodeName = item.nodeName });
+            }
             //JsonObject jsonObj = await GetJson(ServiceUri.AllChannel);
             //if(jsonObj!= null)
             //{
@@ -40,7 +47,7 @@ namespace 游民星空.Core.Http
             //        channel.result.Add(new ChannelResult() { isTop = obj["isTop"].GetString(), nodeId = obj["nodeId"].GetString(), nodeName = obj["nodeName"].GetString() });
             //    }
             //}
-            return channel;
+            return Channels;
         }
         /// <summary>
         /// 获取新闻列表
@@ -54,7 +61,7 @@ namespace 游民星空.Core.Http
             postData.osVersion = DeviceInformationHelper.GetOSVer();
             Essay essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.AllChannelList, postData);
 
-            foreach (var item in essay.result)
+            foreach (var item in essay?.result)
             {
                 essayList.Add(item);
             }

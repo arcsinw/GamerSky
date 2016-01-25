@@ -17,11 +17,11 @@ namespace 游民星空.Core.Model
     }
     public class ChannelResult
     {
-        public string isTop;
-        public string nodeId;
+        public string isTop { get; set; }
+        public string nodeId { get; set; }
         /// <summary>
         /// 栏目名
         /// </summary>
-        public string nodeName;
+        public string nodeName { get; set; }
     }
 }

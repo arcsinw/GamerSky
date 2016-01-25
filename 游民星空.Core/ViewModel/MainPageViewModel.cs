@@ -30,22 +30,33 @@ namespace 游民星空.Core.ViewModel
 
         private async void LoadData()
         {
-           Channel channel = await apiService.GetChannelList();
-            foreach (var item in channel.result)
+            List<ChannelResult> channels = await apiService.GetChannelList();
+            foreach (var item in channels)
             {
-                Channels.Add(new ChannelResult() { isTop = item.isTop, nodeId = item.nodeId, nodeName = item.nodeName });
+                Channels.Add(item);
             }
 
             AllChannelListPostData postData = new AllChannelListPostData();
             //postData.deviceId = DeviceInformationHelper.GetDeviceId();
             //postData.deviceType = DeviceInformationHelper.GetOS();
             //postData.osVersion = DeviceInformationHelper.GetOSVer();
-            postData.request.elementsCountPerPage = 20;
-            postData.request.nodeIds = 0;
-            postData.request.pageIndex = 1;
-            postData.request.parentNodeId = "news";
-            postData.request.type = "null";
-             await apiService.GetEssayList(postData);
+            postData.request = new request() {
+                elementsCountPerPage = 20,
+                nodeIds = 0,
+                pageIndex = 1,
+                parentNodeId = "news",
+                type = "null",
+             };
+             List<EssayResult> essays = await apiService.GetEssayList(postData);
+            foreach (var item in essays)
+            {
+                Essays.Add(item);
+            }
+        }
+
+        public void NavigateToEssay()
+        {
+
         }
     }
 }

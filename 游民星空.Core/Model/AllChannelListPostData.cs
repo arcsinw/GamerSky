@@ -18,11 +18,11 @@ namespace 游民星空.Core.Model
         [DataMember]
         public string deviceId;
         [DataMember]
-        public string deviceType;
+        public string deviceType = "NOKIA";
         [DataMember]
-        public string os;
+        public string os = "android";
         [DataMember]
-        public string osVersion;
+        public string osVersion = "5.0.0";
         [DataMember]
         public request request;
     }

@@ -13,30 +13,33 @@ namespace 游民星空.Core.Model
     [DataContract]
     public class Essay
     {
+        [DataMember]
         public int errorCode;
+        [DataMember]
         public string errorMessage;
-        public EssayResult[] result;
+        [DataMember]
+        public List<EssayResult> result;
     }
-    public struct EssayResult
+    public class EssayResult
     {
-        public string adId;
-        public string authorHeaderImageURL;
-        public string authorName;
-        public string badges;
-        public EssayResult[] childElements;
-        public string commentsCount;
-        public string contentId;
-        public string contentType;
-        public string contentURL;
-        public string readingCount;
+        public string adId { get; set; }
+        public string authorHeadImageURL { get; set; }
+        public string authorName { get; set; }
+        public string[] badges { get; set; }
+        public EssayResult[] childElements { get; set; }
+        public string commentsCount { get; set; }
+        public string contentId { get; set; }
+        public string contentType { get; set; }
+        public string contentURL { get; set; }
+        public string readingCount { get; set; }
         /// <summary>
         /// 缩略图
         /// </summary>
-        public string[] thumbnailURLs; 
+        public string[] thumbnailURLs { get; set; } 
         /// <summary>
         /// 标题
         /// </summary>
-        public string title; 
-        public string type;
+        public string title { get; set; }
+        public string type { get; set; }
     }
 }
