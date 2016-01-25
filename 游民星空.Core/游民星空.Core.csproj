@@ -112,6 +112,7 @@
     <None Include="project.lock.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\DeviceInformationHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\NetworkManager.cs" />
@@ -124,12 +125,12 @@
     <Compile Include="Model\ChannelPostData.cs" />
     <Compile Include="Model\Essay.cs" />
     <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\News.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\MainPageViewModel.cs" />
     <EmbeddedResource Include="Properties\游民星空.Core.rd.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

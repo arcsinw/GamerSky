@@ -12,7 +12,7 @@ namespace 游民星空.Core.Http
     static class ServiceUri
     {
         /// <summary>
-        /// 头条新闻 AllChannelListPostData
+        /// 新闻 AllChannelListPostData
         /// </summary>
         public const string AllChannelList = "http://appapi2.gamersky.com/v2/AllChannelList";
 

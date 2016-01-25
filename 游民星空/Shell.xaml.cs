@@ -4,6 +4,7 @@ using System.Linq;
 using Windows.UI.Xaml.Controls;
 using 游民星空.Pages;
 using 游民星空.Presentation;
+using 游民星空.View;
 
 namespace 游民星空
 {
@@ -14,7 +15,7 @@ namespace 游民星空
             this.InitializeComponent();
 
             var vm = new ShellViewModel();
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Welcome", PageType = typeof(WelcomePage) });
+            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Welcome", PageType = typeof(MainPage) });
             vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Page 1", PageType = typeof(Page1) });
             vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Page 2", PageType = typeof(Page2) });
             vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Page 3", PageType = typeof(Page3) });

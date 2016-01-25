@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace 游民星空.Core.Model
 {
+    /// <summary>
+    /// 新闻列表
+    /// </summary>
     [DataContract]
     public class Essay
     {
@@ -16,18 +19,24 @@ namespace 游民星空.Core.Model
     }
     public struct EssayResult
     {
-        public int adId;
+        public string adId;
         public string authorHeaderImageURL;
         public string authorName;
         public string badges;
-        public string childElements;
+        public EssayResult[] childElements;
         public string commentsCount;
         public string contentId;
         public string contentType;
         public string contentURL;
         public string readingCount;
-        public string[] thumbnailURLs;
-        public string title;
+        /// <summary>
+        /// 缩略图
+        /// </summary>
+        public string[] thumbnailURLs; 
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string title; 
         public string type;
     }
 }

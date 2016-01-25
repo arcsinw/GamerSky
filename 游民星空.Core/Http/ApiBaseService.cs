@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
+using 游民星空.Core.Helper;
 
 namespace 游民星空.Core.Http
 {
@@ -32,6 +34,67 @@ namespace 游民星空.Core.Http
                 return null;
             }
         }
+
+        protected async Task<JsonObject> PostJson(string uri,string body)
+        {
+            try
+            {
+                string json = await HttpBaseService.SendPostRequest(uri, body);
+                if(json!= null)
+                {
+                    return JsonObject.Parse(json);
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Post
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="uri"></param>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        protected async Task<JsonObject>PostJson<T> (string uri,T t) where T : class
+        {
+            string body = Functions.JsonDataSerializer(t);
+            try
+            {
+                string json = await HttpBaseService.SendPostRequest(uri, body);
+                if (json != null)
+                {
+                    return JsonObject.Parse(json);
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        protected async Task<ReturnT> PostJson<SendT,ReturnT>(string uri,SendT sendT) where ReturnT : class
+        {
+            string body = Functions.JsonDataSerializer(sendT);
+            try
+            {
+                string json = await HttpBaseService.SendPostRequest(uri, body);
+                if (json != null)
+                {
+                    return Functions.Deserlialize<ReturnT>(json);
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        
         protected async Task<string> GetHtml(string url)
         {
             try

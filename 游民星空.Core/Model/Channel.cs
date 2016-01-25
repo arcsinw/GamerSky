@@ -6,16 +6,22 @@ using System.Threading.Tasks;
 
 namespace 游民星空.Core.Model
 {
+    /// <summary>
+    /// allChannel 返回的频道信息
+    /// </summary>
     public class Channel
     {
         public string errorCode;
         public string errorMessage;
-        public List<channelResult> result;
+        public List<ChannelResult> result;
     }
-    public struct channelResult
+    public class ChannelResult
     {
         public string isTop;
         public string nodeId;
+        /// <summary>
+        /// 栏目名
+        /// </summary>
         public string nodeName;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
 
-namespace 游民星空.Pages
+namespace 游民星空.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

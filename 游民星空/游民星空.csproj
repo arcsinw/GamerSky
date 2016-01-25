@@ -113,7 +113,7 @@
     <Compile Include="Pages\Page3.xaml.cs">
       <DependentUpon>Page3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SettingsPage.xaml.cs">
+    <Compile Include="View\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\WelcomePage.xaml.cs">
@@ -164,7 +164,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\SettingsPage.xaml">
+    <Page Include="View\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -185,6 +185,12 @@
     <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
       <Name>Microsoft Mobile Extension SDK for Universal App Platform</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\游民星空.Core\游民星空.Core.csproj">
+      <Project>{75f07e89-f8a9-49da-8c32-035515b4ebf6}</Project>
+      <Name>游民星空.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
