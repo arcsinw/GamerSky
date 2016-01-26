@@ -12,6 +12,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Http;
+using 游民星空.Core.Model;
+using 游民星空.Core.ViewModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -22,9 +25,53 @@ namespace 游民星空.View
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private ApiService apiService;
+
         public MainPage()
         {
             this.InitializeComponent();
+        }
+        /// <summary>
+        /// 当前频道Id
+        /// </summary>
+        private int currentChannelId;
+        /// <summary>
+        /// 当前频道名
+        /// </summary>
+        private string currentChannelName;
+
+        #region pageIndex
+        private int pageIndex = 1;
+        #endregion 
+
+        private bool IsDataLoaded = false;
+
+
+        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        {
+
+        }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            EssayResult essay =  e.ClickedItem as EssayResult;
+            if (essay == null) return;
+            
+            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essay.contentId);
+        }
+
+        private async void ListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            foreach (var essay in await apiService.LoadMoreEssay(currentChannelId, pageIndex))
+            {
+                MVM.EssaysDictionary[currentChannelName]?.Add(essay);
+            }
+           
         }
     }
 }

@@ -23,7 +23,7 @@ namespace 游民星空.Core.Http
         {
             AllChannelListPostData postData = new AllChannelListPostData();
 
-            //postData.deviceId = DeviceInformationHelper.GetDeviceId();
+            postData.deviceId = DeviceInformationHelper.GetDeviceId();
             //postData.deviceType = DeviceInformationHelper.GetOS();
             //postData.os = "android";
             //postData.osVersion = DeviceInformationHelper.GetOSVer();
@@ -57,8 +57,8 @@ namespace 游民星空.Core.Http
         {
             List<EssayResult> essayList = new List<EssayResult>();
             postData.deviceId = DeviceInformationHelper.GetDeviceId();
-            postData.deviceType = DeviceInformationHelper.GetOS();
-            postData.osVersion = DeviceInformationHelper.GetOSVer();
+            //postData.deviceType = DeviceInformationHelper.GetOS();
+            //postData.osVersion = DeviceInformationHelper.GetOSVer();
             Essay essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.AllChannelList, postData);
 
             foreach (var item in essay?.result)
@@ -91,10 +91,23 @@ namespace 游民星空.Core.Http
         public async Task<News> ReadEssay(AllChannelListPostData postData)
         {
             postData.deviceId = DeviceInformationHelper.GetDeviceId();
-            postData.deviceType = DeviceInformationHelper.GetOS();
-            postData.osVersion = DeviceInformationHelper.GetOSVer();
+            //postData.deviceType = DeviceInformationHelper.GetOS();
+            //postData.osVersion = DeviceInformationHelper.GetOSVer();
             News news = await PostJson<AllChannelListPostData, News>(ServiceUri.TwoArticle, postData);
             return news;
+        }
+
+        /// <summary>
+        /// 加载更多文章
+        /// </summary>
+        /// <param name="nodeId">频道ID</param>
+        /// <param name="pageIndex">页码</param>
+        /// <returns></returns>
+        public async Task<List<EssayResult>> LoadMoreEssay(int nodeId,int pageIndex)
+        {
+            AllChannelListPostData postData = new AllChannelListPostData();
+            postData.request = new request { nodeIds = nodeId, pageIndex = pageIndex };
+            return await GetEssayList(postData);
         }
     }
 }

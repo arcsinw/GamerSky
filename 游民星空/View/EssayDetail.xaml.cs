@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Http;
+using 游民星空.Core.Model;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -25,6 +27,25 @@ namespace 游民星空.View
         public EssayDetail()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
+        }
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            string contentId = e.Parameter as string;
+            if (string.IsNullOrEmpty(contentId)) return;
+            AllChannelListPostData postData = new AllChannelListPostData();
+            postData.request = new request { contentId = contentId };
+            News news = await new ApiService().ReadEssay(postData);
+        }
+
+        protected override async void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            string contentId = e.Parameter as string;
+            if (string.IsNullOrEmpty(contentId)) return;
+            AllChannelListPostData postData = new AllChannelListPostData();
+            postData.request = new request { contentId = contentId };
+            News news = await new ApiService().ReadEssay(postData);
+
         }
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
@@ -20,11 +22,18 @@ namespace 游民星空.Core.ViewModel
 
         public ObservableCollection<EssayResult> Essays { get; set; }
 
+        public ObservableDictionary<string, List<EssayResult>> EssaysDictionary { get; set; }
+
         public MainPageViewModel()
         {
             Channels = new ObservableCollection<ChannelResult>();
             Essays = new ObservableCollection<EssayResult>();
-
+            EssaysDictionary = new ObservableDictionary<string, List<EssayResult>>();
+            NavigateToEssayCommand = new RelayCommand((contentId) =>
+            {
+                (Window.Current.Content as Frame)?.Navigate(typeof(EssayResult), contentId);
+            });
+            
             LoadData();
         }
 
@@ -47,16 +56,36 @@ namespace 游民星空.Core.ViewModel
                 parentNodeId = "news",
                 type = "null",
              };
-             List<EssayResult> essays = await apiService.GetEssayList(postData);
+
+            List<EssayResult> essays = await apiService.GetEssayList(postData);
             foreach (var item in essays)
             {
                 Essays.Add(item);
             }
+
+            foreach (var channel in Channels)
+            {
+                postData.request.nodeIds = channel.nodeId;
+                EssaysDictionary.Add(channel.nodeName, essays);
+            }
         }
 
-        public void NavigateToEssay()
-        {
+        public RelayCommand NavigateToEssayCommand { get; set; }
 
+        /// <summary>
+        /// 加载更多数据
+        /// </summary>
+        /// <param name="nodeId"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        public async Task LoadMoreData(int nodeId,int pageIndex)
+        {
+            await apiService.LoadMoreEssay(nodeId, pageIndex);
+        }
+        
+        public void NavigateToEssay(string contentId)
+        {
+           
         }
     }
 }

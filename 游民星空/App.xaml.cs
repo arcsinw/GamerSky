@@ -5,7 +5,9 @@ using Windows.Foundation.Metadata;
 using Windows.Phone.UI.Input;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.View;
 
 namespace 游民星空
 {
@@ -33,62 +35,69 @@ namespace 游民星空
         {
 
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached) {
-                // disabled, obscures the hamburger button, enable if you need it
-                //this.DebugSettings.EnableFrameRateCounter = true;
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
 
-            var shell = Window.Current.Content as Shell;
+            Frame rootFrame = Window.Current.Content as Frame;
 
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (shell == null) {
-                // Create a Shell which navigates to the first page
-                shell = new Shell();
+            // 不要在窗口已包含内容时重复应用程序初始化，
+            // 只需确保窗口处于活动状态
+            if (rootFrame == null)
+            {
+                // 创建要充当导航上下文的框架，并导航到第一页
+                rootFrame = new Frame();
 
-                // hook-up shell root frame navigation events
-                shell.RootFrame.NavigationFailed += OnNavigationFailed;
-                shell.RootFrame.Navigated += OnNavigated;
-
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated) {
-                    //TODO: Load state from previously suspended application
+                rootFrame.NavigationFailed += OnNavigationFailed;
+                rootFrame.Navigated += OnNavigated;
+                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
+                    //TODO: 从之前挂起的应用程序加载状态
                 }
 
-                // set the Shell as content
-                Window.Current.Content = shell;
+                // 将框架放在当前窗口中
+                Window.Current.Content = rootFrame;
 
-                // listen for back button clicks (both soft- and hardware)
                 SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
 
-                if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons")) {
+                if (ApiInformation.IsTypePresent("Windows.Phone.UI.HardwareButtons"))
+                {
                     HardwareButtons.BackPressed += OnBackPressed;
                 }
-
                 UpdateBackButtonVisibility();
             }
 
-            // Ensure the current window is active
+            if (rootFrame.Content == null)
+            {
+                // 当导航堆栈尚未还原时，导航到第一页，
+                // 并通过将所需信息作为导航参数传入来配置
+                // 参数
+                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+            }
+            // 确保当前窗口处于活动状态
             Window.Current.Activate();
         }
+
 
         // handle hardware back button press
         void OnBackPressed(object sender, BackPressedEventArgs e)
         {
-            var shell = (Shell)Window.Current.Content;
-            if (shell.RootFrame.CanGoBack) {
+            var frame = (Frame)Window.Current.Content;
+            if (frame.CanGoBack) {
                 e.Handled = true;
-                shell.RootFrame.GoBack();
+                frame.GoBack();
             }
         }
 
         // handle software back button press
         void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
-            var shell = (Shell)Window.Current.Content;
-            if (shell.RootFrame.CanGoBack) {
+            var frame = (Frame)Window.Current.Content;
+            if (frame.CanGoBack) {
                 e.Handled = true;
-                shell.RootFrame.GoBack();
+                frame.GoBack();
             }
         }
 
@@ -123,10 +132,10 @@ namespace 游民星空
 
         private void UpdateBackButtonVisibility()
         {
-            var shell = (Shell)Window.Current.Content;
+            var frame = (Frame)Window.Current.Content;
 
             var visibility = AppViewBackButtonVisibility.Collapsed;
-            if (shell.RootFrame.CanGoBack) {
+            if (frame.CanGoBack) {
                 visibility = AppViewBackButtonVisibility.Visible;
             }
 

@@ -35,13 +35,13 @@ namespace 游民星空.Core.Model
         public int elementsCountPerPage;
         public int lastUpdateTime;
         /// <summary>
-        /// 用于区别不同的类别 0为要闻
+        /// 
         /// </summary>
         public int nodeIds;
         public int pageIndex;   //页码
-                                /// <summary>
-                                /// news | yaowen
-                                /// </summary>
+        /// <summary>
+        /// news | yaowen
+        /// </summary>
         public string parentNodeId;
 
         /// <summary>

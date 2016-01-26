@@ -21,7 +21,7 @@ namespace 游民星空.Core.Http
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync();
             }
-            catch
+            catch(Exception e)
             {
                 return null;
             }
@@ -37,7 +37,7 @@ namespace 游民星空.Core.Http
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync();
             }
-            catch
+            catch(Exception e)
             {
                 return null;
             }
@@ -51,7 +51,7 @@ namespace 游民星空.Core.Http
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsBufferAsync();
             }
-            catch
+            catch(Exception e)
             {
                 return null;
             }

@@ -18,7 +18,7 @@ namespace 游民星空.Core.Model
     public class ChannelResult
     {
         public string isTop { get; set; }
-        public string nodeId { get; set; }
+        public int nodeId { get; set; }
         /// <summary>
         /// 栏目名
         /// </summary>
