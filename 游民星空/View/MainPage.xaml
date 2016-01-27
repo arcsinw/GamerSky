@@ -26,13 +26,16 @@
             <Pivot.ItemTemplate>
                 <DataTemplate>
                     <PivotItem Margin="0" Padding="0">
-                        <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >-->
-                        <ListView Background="Gray" DataContext="{Binding Source={StaticResource MVM}}"
+                        <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >
+                            <ListView Background="Gray" DataContext="{Binding Source={StaticResource MVM}}"
                                   ItemsSource="{Binding Essays}" Padding="0" Margin="0"
                                   IsItemClickEnabled="True"
                                   ItemClick="ListView_ItemClick"
                                   ContainerContentChanging="ListView_ContainerContentChanging"
                                   >
+                            <ListView.Transitions>
+                                <ContentThemeTransition />
+                            </ListView.Transitions>
                                 <ListView.HeaderTemplate>
                                     <DataTemplate>
                                         <FlipView Height="200">
@@ -54,9 +57,10 @@
 
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
+                                    <Border BorderThickness="0,0,0,1" Padding="0,5">
                                         <Grid Margin="0">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="1*"/>
                                                 <ColumnDefinition Width="3*"/>
                                             </Grid.ColumnDefinitions>
 
@@ -67,15 +71,18 @@
                                             </Image>
 
                                             <Grid Grid.Column="1" HorizontalAlignment="Right" Margin="5,2">
-                                                <StackPanel>
+                                                <StackPanel Orientation="Vertical">
                                                     <TextBlock Text="{Binding title}" />
-                                                    <TextBlock Text="{Binding readingCount}"/>
-                                                    <TextBlock Text="{Binding commentsCount}"/>
+                                                    <!--<TextBlock Text="{Binding readingCount}"/>-->
+                                                    <TextBlock HorizontalAlignment="Right">
+                                                        <Run Text="{Binding commentsCount}"/>
+                                                        <Run Text="评论"/>
+                                                    </TextBlock>
                                                 </StackPanel>
                                             </Grid>
                                         </Grid>
-
-                                    </DataTemplate>
+                                    </Border>
+                                </DataTemplate>
                                 </ListView.ItemTemplate>
 
                                 <ListView.ItemContainerStyle>
@@ -87,14 +94,14 @@
                                     </Style>
                                 </ListView.ItemContainerStyle>
                             </ListView>
-                        <!--</pr:PullToRefreshBox>-->
+                        </pr:PullToRefreshBox>
                     </PivotItem>
                 </DataTemplate>
             </Pivot.ItemTemplate>
         </Pivot>
 
         <Grid>
-            <ProgressRing Visibility="{Binding}" Height="60" Width="60" Background="Transparent"/>
+            <ProgressRing Visibility="{Binding IsProgressVisbility}" Height="60" Width="60" Background="Transparent"/>
         </Grid>
     </Grid>
 </Page>

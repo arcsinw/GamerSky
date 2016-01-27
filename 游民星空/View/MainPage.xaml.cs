@@ -27,8 +27,21 @@ namespace 游民星空.View
     {
         private ApiService apiService;
 
+        private int isProgressVisibility;
+        public int IsProgressVisibility
+        {
+            get
+            {
+                return isProgressVisibility;
+            }
+            set
+            {
+                isProgressVisibility = value;
+            }
+        }
         public MainPage()
         {
+            apiService = new ApiService();
             this.InitializeComponent();
         }
         /// <summary>
@@ -67,7 +80,9 @@ namespace 游民星空.View
 
         private async void ListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
         {
-            foreach (var essay in await apiService.LoadMoreEssay(currentChannelId, pageIndex))
+            List<EssayResult> essays = await apiService.LoadMoreEssay(currentChannelId, pageIndex);
+            if (essays == null) return;
+            foreach (var essay in essays)
             {
                 MVM.EssaysDictionary[currentChannelName]?.Add(essay);
             }

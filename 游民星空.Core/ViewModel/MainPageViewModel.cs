@@ -29,17 +29,19 @@ namespace 游民星空.Core.ViewModel
             Channels = new ObservableCollection<ChannelResult>();
             Essays = new ObservableCollection<EssayResult>();
             EssaysDictionary = new ObservableDictionary<string, List<EssayResult>>();
+           
+            
+            LoadData();
             NavigateToEssayCommand = new RelayCommand((contentId) =>
             {
                 (Window.Current.Content as Frame)?.Navigate(typeof(EssayResult), contentId);
             });
-            
-            LoadData();
         }
 
         private async void LoadData()
         {
             List<ChannelResult> channels = await apiService.GetChannelList();
+            if (channels == null) return;
             foreach (var item in channels)
             {
                 Channels.Add(item);
@@ -58,6 +60,7 @@ namespace 游民星空.Core.ViewModel
              };
 
             List<EssayResult> essays = await apiService.GetEssayList(postData);
+            if (essays == null) return;
             foreach (var item in essays)
             {
                 Essays.Add(item);
@@ -66,7 +69,7 @@ namespace 游民星空.Core.ViewModel
             foreach (var channel in Channels)
             {
                 postData.request.nodeIds = channel.nodeId;
-                EssaysDictionary.Add(channel.nodeName, essays);
+//                EssaysDictionary.Add(channel.nodeName, essays);
             }
         }
 
@@ -80,7 +83,7 @@ namespace 游民星空.Core.ViewModel
         /// <returns></returns>
         public async Task LoadMoreData(int nodeId,int pageIndex)
         {
-            await apiService.LoadMoreEssay(nodeId, pageIndex);
+            //await apiService.LoadMoreEssay(nodeId, pageIndex);
         }
         
         public void NavigateToEssay(string contentId)

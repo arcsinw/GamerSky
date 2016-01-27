@@ -60,7 +60,7 @@ namespace 游民星空.Core.Http
             //postData.deviceType = DeviceInformationHelper.GetOS();
             //postData.osVersion = DeviceInformationHelper.GetOSVer();
             Essay essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.AllChannelList, postData);
-
+            if (essay == null) return null;
             foreach (var item in essay?.result)
             {
                 essayList.Add(item);

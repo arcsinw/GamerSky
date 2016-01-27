@@ -18,7 +18,7 @@ namespace 游民星空.Core.Model
         [DataMember]
         public string deviceId;
         [DataMember]
-        public string deviceType = "NOKIA";
+        public string deviceType = "NOKIA N1";
         [DataMember]
         public string os = "android";
         [DataMember]
