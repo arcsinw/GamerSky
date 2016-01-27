@@ -33,12 +33,17 @@ namespace 游民星空.Core.Model
         public string originURL;
         public int pageCount;
         public string pageIndexNames;
-        public string subscribes;
+        public subscribe[] subscribes;
         public string subTitle;
         public string templateURL;
         public string templateVersion;
         public string title;
         public string type;
         public string videoContent;
+    }
+
+    public struct subscribe
+    {
+        public string subscribeld;
     }
 }

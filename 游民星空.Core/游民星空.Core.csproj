@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\DeviceInformationHelper.cs" />
+    <Compile Include="Helper\EssayListViewItemTemplateSelector.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\NetworkManager.cs" />

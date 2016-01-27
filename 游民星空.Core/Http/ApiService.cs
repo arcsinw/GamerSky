@@ -52,13 +52,24 @@ namespace 游民星空.Core.Http
         /// <summary>
         /// 获取新闻列表
         /// </summary>
+        /// <param name="nodeId">频道ID</param>
+        /// <param name="pageIndex">页码</param>
         /// <returns></returns>
-        public async Task<List<EssayResult>>GetEssayList(AllChannelListPostData postData)
+        public async Task<List<EssayResult>>GetEssayList(int nodeId,int pageIndex)
         {
             List<EssayResult> essayList = new List<EssayResult>();
+            AllChannelListPostData postData = new AllChannelListPostData();
             postData.deviceId = DeviceInformationHelper.GetDeviceId();
             //postData.deviceType = DeviceInformationHelper.GetOS();
             //postData.osVersion = DeviceInformationHelper.GetOSVer();
+            postData.request = new request()
+            {
+                elementsCountPerPage = 20,
+                nodeIds = nodeId,
+                pageIndex = pageIndex,
+                parentNodeId = "news",
+                type = "null",
+            };
             Essay essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.AllChannelList, postData);
             if (essay == null) return null;
             foreach (var item in essay?.result)
@@ -105,9 +116,9 @@ namespace 游民星空.Core.Http
         /// <returns></returns>
         public async Task<List<EssayResult>> LoadMoreEssay(int nodeId,int pageIndex)
         {
-            AllChannelListPostData postData = new AllChannelListPostData();
-            postData.request = new request { nodeIds = nodeId, pageIndex = pageIndex };
-            return await GetEssayList(postData);
+            //AllChannelListPostData postData = new AllChannelListPostData();
+            //postData.request = new request { nodeIds = nodeId, pageIndex = pageIndex };
+            return await GetEssayList(nodeId,pageIndex);
         }
     }
 }

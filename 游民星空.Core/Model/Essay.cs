@@ -40,6 +40,9 @@ namespace 游民星空.Core.Model
         /// 标题
         /// </summary>
         public string title { get; set; }
+        /// <summary>
+        /// huandeng 则为幻灯片内容
+        /// </summary>
         public string type { get; set; }
     }
 }

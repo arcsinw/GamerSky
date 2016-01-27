@@ -5,6 +5,9 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace 游民星空.Core.Helper
 {
@@ -71,6 +74,38 @@ namespace 游民星空.Core.Helper
                 return result;
             }
             return result;
+        }
+
+     
+
+        /// <summary>
+        /// 在UI对象中查找一个子元素
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static T FindChildOfType<T>(DependencyObject root) where T : class
+        {
+            //创建一个队列结构来存放可视化树的对象
+            var queue = new Queue<DependencyObject>();
+            queue.Enqueue(root);
+            //循环查找类型
+            while (queue.Count > 0)
+            {
+                DependencyObject current = queue.Dequeue();
+                //查找子节点的对象类型
+                for (int i = VisualTreeHelper.GetChildrenCount(current) - 1; 0 <= i; i--)
+                {
+                    var child = VisualTreeHelper.GetChild(current, i);
+                    var typedChild = child as T;
+                    if (typedChild != null)
+                    {
+                        return typedChild;
+                    }
+                    queue.Enqueue(child);
+                }
+            }
+            return null;
         }
     }
 }

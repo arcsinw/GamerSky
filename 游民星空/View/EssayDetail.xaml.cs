@@ -36,16 +36,12 @@ namespace 游民星空.View
             AllChannelListPostData postData = new AllChannelListPostData();
             postData.request = new request { contentId = contentId };
             News news = await new ApiService().ReadEssay(postData);
+            if (news != null)
+            {
+                webView.NavigateToString(news.result.mainBody);
+            }
         }
 
-        protected override async void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            string contentId = e.Parameter as string;
-            if (string.IsNullOrEmpty(contentId)) return;
-            AllChannelListPostData postData = new AllChannelListPostData();
-            postData.request = new request { contentId = contentId };
-            News news = await new ApiService().ReadEssay(postData);
-
-        }
+  
     }
 }

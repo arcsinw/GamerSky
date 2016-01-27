@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -12,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
@@ -26,23 +31,41 @@ namespace 游民星空.View
     public sealed partial class MainPage : Page
     {
         private ApiService apiService;
+        private ScrollViewer scrollViewer;
 
-        private int isProgressVisibility;
-        public int IsProgressVisibility
+        #region OnPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        private Visibility isProgressVisible;
+        /// <summary>
+        /// ProgressRing
+        /// </summary>
+        public Visibility IsProgressVisible
         {
             get
             {
-                return isProgressVisibility;
+                return isProgressVisible;
             }
             set
             {
-                isProgressVisibility = value;
+                isProgressVisible = value;
+                OnPropertyChanged();
             }
         }
+
+
         public MainPage()
         {
-            apiService = new ApiService();
             this.InitializeComponent();
+            apiService = new ApiService();
+
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
         /// <summary>
         /// 当前频道Id
@@ -65,9 +88,15 @@ namespace 游民星空.View
 
         }
 
-        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            int index = essayPivot.SelectedIndex;
 
+            currentChannelId =  MVM.Channels[index].nodeId;
+
+            Debug.WriteLine(MVM.Channels[index].nodeName);
+
+            await MVM.LoadMoreEssay(currentChannelId, pageIndex);
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -78,15 +107,39 @@ namespace 游民星空.View
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essay.contentId);
         }
 
-        private async void ListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+
+
+        private void ListView_Loaded(object sender, RoutedEventArgs e)
         {
-            List<EssayResult> essays = await apiService.LoadMoreEssay(currentChannelId, pageIndex);
-            if (essays == null) return;
-            foreach (var essay in essays)
+            scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
+            if (scrollViewer != null)
             {
-                MVM.EssaysDictionary[currentChannelName]?.Add(essay);
+                scrollViewer.ViewChanged += scrollViewer_ViewChanged;
             }
-           
+        }
+
+        private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (scrollViewer != null)
+            {
+
+                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
+                {
+                    IsProgressVisible = Visibility.Visible;
+                    await MVM.LoadMoreEssay(currentChannelId, pageIndex);
+                    pageIndex++;
+                    IsProgressVisible = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void FlipView_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var essay = (sender as FlipView)?.SelectedItem as EssayResult;
+            //EssayResult essay = (e.OriginalSource as FlipViewItem;
+            if (essay == null) return;
+
+            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essay.contentId);
         }
     }
 }
