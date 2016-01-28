@@ -32,10 +32,10 @@ namespace 游民星空.Core.Model
         public string contentType { get; set; }
         public string contentURL { get; set; }
         public string readingCount { get; set; }
-        /// <summary>
+        /// <summary> 
         /// 缩略图
         /// </summary>
-        public string[] thumbnailURLs { get; set; } 
+        public string[] thumbnailURLs { get; set; } = { "ms-appx:///Assets/image_loading.png", "ms-appx:///Assets/image_loading.png", "ms-appx:///Assets/image_loading.png" };
         /// <summary>
         /// 标题
         /// </summary>

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -24,24 +26,89 @@ namespace 游民星空.View
     /// </summary>
     public sealed partial class EssayDetail : Page
     {
+        private ApiService apiService;
         public EssayDetail()
         {
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Required;
+            apiService = new ApiService();
         }
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+
+        /// <summary>
+        /// 页面是否分析完成
+        /// </summary>
+        private bool isDomLoaded = false;
+
+        private EssayResult essayResult;
+
+        #region OnPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
-            string contentId = e.Parameter as string;
-            if (string.IsNullOrEmpty(contentId)) return;
-            AllChannelListPostData postData = new AllChannelListPostData();
-            postData.request = new request { contentId = contentId };
-            News news = await new ApiService().ReadEssay(postData);
-            if (news != null)
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        private bool isActive = true;
+        public bool IsActive
+        {
+            get
             {
-                webView.NavigateToString(news.result.mainBody);
+                return isActive;
+            }
+            set
+            {
+                isActive = value;
+                OnPropertyChanged();
             }
         }
 
-  
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            essayResult = e.Parameter as EssayResult;
+           
+        }
+
+        private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
+        {
+            isDomLoaded = true;
+
+            if (essayResult != null)
+            {
+                News news = await apiService.ReadEssay(essayResult.contentId);
+                if (news != null)
+                {
+                    //webView.Source = new Uri("ms-appx-web:///Html/gsAppHTMLTemplate_News.html");
+
+                    if (isDomLoaded)
+                    {
+                        await webView.InvokeScriptAsync("setContent", new[] { news.result.mainBody });
+                        await webView.InvokeScriptAsync("setTitle", new[] { news.result.title });
+                        await webView.InvokeScriptAsync("setSubTitle", new[] { news.result.subTitle });
+                    }
+                }
+                List<RelatedReadingsResult> relateReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
+            }
+
+            IsActive = false;
+        }
+
+        protected override async void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            try
+            {
+                if (isDomLoaded)
+                {
+                    await webView.InvokeScriptAsync("clearContent", new[] { "" });
+                    await webView.InvokeScriptAsync("clearTitle", new[] { "" });
+                    await webView.InvokeScriptAsync("clearSubTitle", new[] { "" });
+                }
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

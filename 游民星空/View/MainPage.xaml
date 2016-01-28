@@ -16,62 +16,68 @@
         <vm:MainPageViewModel x:Name="MVM"/>
         <x:String x:Key="ErrorString">Error</x:String>
 
+        <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="DarkBlue"/>
+        <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="Green"/>
+
+        <!--BorderMargin-->
+        <Thickness x:Key="BorderMargin">0,2</Thickness>
+        <!--BorderThickness-->
+        <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
+        <!--BorderBrush-->
+        <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
+        
         <!--有三张图的文章模板-->
         <DataTemplate x:Key="ThreePicEssayDataTemplate">
-            <Border BorderThickness="0,0,0,1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="{Binding title}" Margin="0,0,0,2"/>
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0">
-                            <Image.Source>
-                                <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
-                            </Image.Source>
-                        </Image>
-                        <Image Grid.Column="1">
-                            <Image.Source>
-                                <BitmapImage UriSource="{Binding thumbnailURLs[1]}"/>
-                            </Image.Source>
-                        </Image>
-                        <Image Grid.Column="2">
-                            <Image.Source>
-                                <BitmapImage UriSource="{Binding thumbnailURLs[2]}"/>
-                            </Image.Source>
-                        </Image>
-                    </Grid>
-                    <TextBlock Grid.Row="2" Margin="0,2,0,0" HorizontalAlignment="Right">
+            <Grid Margin="2,0" Padding="5" BorderThickness="{StaticResource BorderThickness}" BorderBrush="{StaticResource BorderBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding title}" Margin="0,0,0,2"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" >
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
+                        </Image.Source>
+                    </Image>
+                    <Image Grid.Column="1" >
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding thumbnailURLs[1]}"/>
+                        </Image.Source>
+                    </Image>
+                    <Image Grid.Column="2" >
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding thumbnailURLs[2]}"/>
+                        </Image.Source>
+                    </Image>
+                </Grid>
+                <TextBlock Grid.Row="2" Margin="0,2,0,0" HorizontalAlignment="Right">
                     <Run Text="评论"/>
                     <Run Text="{Binding commentsCount}"/>
-                    </TextBlock>
-                </Grid>
-            </Border>
+                </TextBlock>
+            </Grid>
         </DataTemplate>
-        
         <!--一张图文章模板-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Border BorderThickness="0,0,0,1">
-                <Grid Margin="0">
+              <Grid Margin="2,0" Padding="5" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" Stretch="UniformToFill" HorizontalAlignment="Left">
+                    <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
                         </Image.Source>
                     </Image>
 
-                    <Grid Grid.Column="1" HorizontalAlignment="Left" Margin="5,2">
+                    <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="{Binding title}" TextWrapping="Wrap" />
                             <!--<TextBlock Text="{Binding readingCount}"/>-->
@@ -82,13 +88,14 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-            </Border>
         </DataTemplate>
+
+        
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot x:Name="essayPivot"  DataContext="{Binding Source={StaticResource MVM}}"
                ItemsSource="{Binding Channels}" SelectionChanged="Pivot_SelectionChanged"
-               Padding="0" Margin="0" HorizontalContentAlignment="Stretch">
+               Padding="0" Margin="0" HorizontalContentAlignment="Stretch" Style="{StaticResource EssayPivotStyle}">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding nodeName}"/>
@@ -97,57 +104,55 @@
             <Pivot.ItemTemplate>
                 <DataTemplate>
                     <PivotItem Margin="0" HorizontalAlignment="Stretch" Padding="0">
-                        <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >-->
-                        <ListView x:Name="essayListView" 
+                        <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >
+                            <ListView x:Name="essayListView" 
                                   DataContext="{Binding Source={StaticResource MVM}}"
                                   ItemsSource="{Binding Essays}" Padding="0" Margin="0"
                                   IsItemClickEnabled="True"
                                   ItemClick="ListView_ItemClick"
                                   Loaded="ListView_Loaded"
                                   >
-                            <ListView.ItemTemplateSelector>
-                                <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+                                <ListView.ItemTemplateSelector>
+                                    <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                                                       ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
                                                                       />
-                            </ListView.ItemTemplateSelector>
+                                </ListView.ItemTemplateSelector>
                                 <ListView.HeaderTemplate>
                                     <DataTemplate>
-                                    <Grid>
-                                        <FlipView Height="165" DataContext="{StaticResource MVM}" 
+                                        <Grid>
+                                            <FlipView Height="180" DataContext="{StaticResource MVM}" 
                                                   ItemsSource="{Binding HeaderEssays}"
                                                   Tapped="FlipView_Tapped">
-                                            <FlipView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid>
-                                                        <Image Height="Auto" Stretch="Fill">
-                                                            <Image.Source>
-                                                                <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
-                                                            </Image.Source>
-                                                        </Image>
-                                                        <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
+                                                <FlipView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Image Height="180" Stretch="Fill">
+                                                                <Image.Source>
+                                                                    <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
+                                                                </Image.Source>
+                                                            </Image>
                                                             <TextBlock Text="{Binding title}" Foreground="White" VerticalAlignment="Bottom"/>
-                                                        </Border>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </FlipView.ItemTemplate>
-                                        </FlipView>
-                                        
-                                    </Grid>
-                                </DataTemplate>
-                                </ListView.HeaderTemplate>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </FlipView.ItemTemplate>
+                                            </FlipView>
+                                            <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
 
-                    
+                                            </Border>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.HeaderTemplate>
 
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0,5"/>
+                                        <Setter Property="Margin" Value="0"/>
                                         <Setter Property="Padding" Value="0"/>
                                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
                                     </Style>
                                 </ListView.ItemContainerStyle>
                             </ListView>
-                        <!--</pr:PullToRefreshBox>-->
+                        </pr:PullToRefreshBox>
                     </PivotItem>
                 </DataTemplate>
             </Pivot.ItemTemplate>
@@ -162,7 +167,8 @@
         </Pivot>
 
         <Grid>
-            <ProgressRing Visibility="{Binding IsProgressVisible}" Height="60" Width="60" Background="Transparent"/>
+            <ProgressRing IsActive="True" Foreground="{ThemeResource ThemeColorBrush}" Visibility="{Binding IsProgressVisible}" 
+                          Height="60" Width="60" Background="Transparent"/>
         </Grid>
     </Grid>
 </Page>

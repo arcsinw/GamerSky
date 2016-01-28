@@ -44,6 +44,7 @@ namespace 游民星空.Core.ViewModel
                 (Window.Current.Content as Frame)?.Navigate(typeof(EssayResult), contentId);
             });
 
+           
             if (DesignMode.DesignModeEnabled)
             {
                 LoadDesignTimeData();
@@ -61,23 +62,24 @@ namespace 游民星空.Core.ViewModel
             {
                 Channels.Add(item);
             }
-
             
+            //if (channels.Count > 0)
+            //{
+            //    List<EssayResult> essays = await apiService.GetEssayList(channels[0].nodeId, 1);
 
-            List<EssayResult> essays = await apiService.GetEssayList(channels[0].nodeId,1);
-            foreach (var item in essays)
-            {
-                if (item.type.Equals("huandeng"))
-                {
-                    foreach (var c in item.childElements)
-                    {
-                        HeaderEssays.Add(c);
-                    }
-                    continue;
-                }
-                Essays.Add(item);
-            }
-
+            //    foreach (var item in essays)
+            //    {
+            //        if (item.type.Equals("huandeng"))
+            //        {
+            //            foreach (var c in item.childElements)
+            //            {
+            //                HeaderEssays.Add(c);
+            //            }
+            //            continue;
+            //        }
+            //        Essays.Add(item);
+            //    }
+            //}
             //foreach (var channel in Channels)
             //{
             //    postData.request.nodeIds = channel.nodeId;
@@ -96,18 +98,20 @@ namespace 游民星空.Core.ViewModel
         public async Task LoadMoreEssay(int nodeId,int pageIndex)
         {
             List<EssayResult> essays = await apiService.LoadMoreEssay(nodeId, pageIndex);
-            foreach (var item in essays)
-            {
-                if (item.type.Equals("huandeng"))
+            
+                foreach (var item in essays)
                 {
-                    foreach (var c in item.childElements)
+                    if (item.type.Equals("huandeng"))
                     {
-                        HeaderEssays.Add(c);
+                        foreach (var c in item.childElements)
+                        {
+                            HeaderEssays.Add(c);
+                        }
+                        continue;
                     }
-                    continue;
+                    Essays.Add(item);
                 }
-                Essays.Add(item);
-            }
+            
         }
 
         
@@ -123,15 +127,21 @@ namespace 游民星空.Core.ViewModel
             Essay essay = Functions.Deserlialize<Essay>(essaysData);
             Channel channel =  Functions.Deserlialize<Channel>(channelData);
 
-            foreach (var item in channel?.result)
+            foreach (var item in channel.result)
             {
                 Channels.Add(new ChannelResult() { isTop = item.isTop, nodeId = item.nodeId, nodeName = item.nodeName });
             }
 
-            foreach (var item in essay?.result)
+            foreach (var item in essay.result)
             {
                 Essays.Add(item);
             }
+        }
+
+        public async Task Refresh(int channelId)
+        {
+            Essays.Clear();
+            await LoadMoreEssay(channelId, 1);
         }
     }
 }

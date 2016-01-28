@@ -42,29 +42,28 @@ namespace 游民星空.View
         }
         #endregion
 
-        private Visibility isProgressVisible;
+        
+        private bool isActive;
         /// <summary>
-        /// ProgressRing
+        /// ProgressRing is active
         /// </summary>
-        public Visibility IsProgressVisible
+        public bool IsActive
         {
             get
             {
-                return isProgressVisible;
+                return isActive;
             }
             set
             {
-                isProgressVisible = value;
-                OnPropertyChanged();
+                isActive = value;
+                OnPropertyChanged("IsActive");
             }
         }
-
 
         public MainPage()
         {
             this.InitializeComponent();
             apiService = new ApiService();
-
             NavigationCacheMode = NavigationCacheMode.Required;
         }
         /// <summary>
@@ -80,16 +79,23 @@ namespace 游民星空.View
         private int pageIndex = 1;
         #endregion 
 
-        private bool IsDataLoaded = false;
+        /// <summary>
+        /// 是否正在加载数据
+        /// </summary>
+        private bool IsDataLoading = false;
 
 
-        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
-
+            IsActive = true;
+            await MVM.Refresh(currentChannelId);
+            IsActive = false;
         }
 
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            IsActive = true;
+
             int index = essayPivot.SelectedIndex;
 
             currentChannelId =  MVM.Channels[index].nodeId;
@@ -97,14 +103,18 @@ namespace 游民星空.View
             Debug.WriteLine(MVM.Channels[index].nodeName);
 
             await MVM.LoadMoreEssay(currentChannelId, pageIndex);
+            pageIndex++;
+
+            IsActive = false;
         }
+
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            EssayResult essay =  e.ClickedItem as EssayResult;
-            if (essay == null) return;
+            EssayResult essayResult =  e.ClickedItem as EssayResult;
+            if (essayResult == null) return;
             
-            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essay.contentId);
+            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
 
 
@@ -125,10 +135,15 @@ namespace 游民星空.View
 
                 if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
                 {
-                    IsProgressVisible = Visibility.Visible;
-                    await MVM.LoadMoreEssay(currentChannelId, pageIndex);
-                    pageIndex++;
-                    IsProgressVisible = Visibility.Collapsed;
+                    if (!IsDataLoading)  //未加载数据
+                    {
+                        IsDataLoading = true;
+                        IsActive = true;
+                        await MVM.LoadMoreEssay(currentChannelId, pageIndex);
+                        pageIndex++;
+                        IsActive = false;
+                        IsDataLoading = false;
+                    }
                 }
             }
         }

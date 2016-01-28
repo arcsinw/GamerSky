@@ -24,29 +24,18 @@ namespace 游民星空.Core.Http
             AllChannelListPostData postData = new AllChannelListPostData();
 
             postData.deviceId = DeviceInformationHelper.GetDeviceId();
-            //postData.deviceType = DeviceInformationHelper.GetOS();
-            //postData.os = "android";
-            //postData.osVersion = DeviceInformationHelper.GetOSVer();
             postData.request = new request() { type = "0" };
             //postData.request.type = "0";
-            Channel channel = await PostJson<AllChannelListPostData,Channel>(ServiceUri.AllChannel, postData);
+            Channel channel = await PostJson<AllChannelListPostData, Channel>(ServiceUri.AllChannel, postData);
             List<ChannelResult> Channels = new List<ChannelResult>();
-            foreach (var item in channel?.result)
+            Channels.Add(new ChannelResult { isTop = "False", nodeId = 0, nodeName = "头条" });
+            if (channel != null)
             {
-                Channels.Add(new ChannelResult() { isTop = item.isTop, nodeId = item.nodeId, nodeName = item.nodeName });
+                foreach (var item in channel?.result)
+                {
+                    Channels.Add(new ChannelResult() { isTop = item.isTop, nodeId = item.nodeId, nodeName = item.nodeName });
+                }
             }
-            //JsonObject jsonObj = await GetJson(ServiceUri.AllChannel);
-            //if(jsonObj!= null)
-            //{
-            //    channel.errorCode = jsonObj["errorCode"].GetString();
-            //    channel.errorMessage = jsonObj["errorMessage"].GetString();
-            //    JsonArray array = jsonObj["result"].GetArray();
-            //    foreach (var item in array)
-            //    {
-            //        var obj = item.GetObject();
-            //        channel.result.Add(new ChannelResult() { isTop = obj["isTop"].GetString(), nodeId = obj["nodeId"].GetString(), nodeName = obj["nodeName"].GetString() });
-            //    }
-            //}
             return Channels;
         }
         /// <summary>
@@ -71,39 +60,26 @@ namespace 游民星空.Core.Http
                 type = "null",
             };
             Essay essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.AllChannelList, postData);
-            if (essay == null) return null;
-            foreach (var item in essay?.result)
+            if (essay != null)
             {
-                essayList.Add(item);
+                foreach (var item in essay.result)
+                {
+                    essayList.Add(item);
+                }
             }
-            //too hard
-            //JsonObject jsonObj = await PostJson(ServiceUri.AllChannelList,postData);
-            //if(jsonObj!= null)
-            //{
-            //    JsonArray array = jsonObj["result"].GetArray();
-            //    foreach (var item in array)
-            //    {
-            //        var obj = item.GetObject();
-            //        essayList.Add(new EssayResult() { adId = obj["addId"].GetString(),
-            //            authorHeaderImageURL = obj["authorHeaderImageURL"].GetString(),
-            //            authorName = obj["authorName"].GetString(),
-            //            badges = obj["badges"].GetString(),
-            //            childElements = obj["childElements"].GetArray(),
-            //        });
-            //    }
-            //}
             return essayList;
         }
 
         /// <summary>
         /// 阅读文章
         /// </summary>
+        /// <param name="contentId">文章Id</param>
         /// <returns></returns>
-        public async Task<News> ReadEssay(AllChannelListPostData postData)
+        public async Task<News> ReadEssay(string contentId)
         {
+            AllChannelListPostData postData = new AllChannelListPostData();
+            postData.request = new request { contentId = contentId };
             postData.deviceId = DeviceInformationHelper.GetDeviceId();
-            //postData.deviceType = DeviceInformationHelper.GetOS();
-            //postData.osVersion = DeviceInformationHelper.GetOSVer();
             News news = await PostJson<AllChannelListPostData, News>(ServiceUri.TwoArticle, postData);
             return news;
         }
@@ -116,9 +92,28 @@ namespace 游民星空.Core.Http
         /// <returns></returns>
         public async Task<List<EssayResult>> LoadMoreEssay(int nodeId,int pageIndex)
         {
-            //AllChannelListPostData postData = new AllChannelListPostData();
-            //postData.request = new request { nodeIds = nodeId, pageIndex = pageIndex };
             return await GetEssayList(nodeId,pageIndex);
+        }
+        /// <summary>
+        /// 获取相关阅读
+        /// </summary>
+        /// <param name="contentId">文章Id</param>
+        /// <returns></returns>
+        public async Task<List<RelatedReadingsResult>> GetRelatedReadings(string contentId,string contentType)
+        {
+            AllChannelListPostData postData = new AllChannelListPostData();
+            postData.request = new request { contentId = contentId ,contentType = contentType};
+            postData.deviceId = DeviceInformationHelper.GetDeviceId();
+            List<RelatedReadingsResult> relatedResults = new List<RelatedReadingsResult>();
+            RelatedReadings readings =  await PostJson<AllChannelListPostData, RelatedReadings>(ServiceUri.TwoCorrelation, postData);
+            if(readings != null)
+            {
+                foreach (var item in readings.result)
+                {
+                    relatedResults.Add(item);
+                }
+            }
+            return relatedResults;
         }
     }
 }

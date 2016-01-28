@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace 游民星空.Core.Model
 {
     /// <summary>
-    /// 
+    /// 新闻实体
     /// </summary>
     public class News
     {

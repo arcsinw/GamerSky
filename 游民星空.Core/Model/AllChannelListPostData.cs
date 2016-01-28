@@ -50,5 +50,11 @@ namespace 游民星空.Core.Model
         public string contentId;
 
         public string type;
+
+        /// <summary>
+        /// 文章类型（news） 
+        /// /v2/TwoCorrelation (获取相关阅读)
+        /// </summary>
+        public string contentType;
     }
 }
