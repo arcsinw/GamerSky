@@ -20,7 +20,7 @@ namespace 游民星空.Core.Model
         [DataMember]
         public List<EssayResult> result;
     }
-    public class EssayResult
+    public class EssayResult:ModelBase
     {
         public string adId { get; set; }
         public string authorHeadImageURL { get; set; }
@@ -32,10 +32,23 @@ namespace 游民星空.Core.Model
         public string contentType { get; set; }
         public string contentURL { get; set; }
         public string readingCount { get; set; }
+
+        private string[] urls = { "ms-appx:///Assets/image_loading.png", "ms-appx:///Assets/image_loading.png", "ms-appx:///Assets/image_loading.png" };
         /// <summary> 
         /// 缩略图
         /// </summary>
-        public string[] thumbnailURLs { get; set; } = { "ms-appx:///Assets/image_loading.png", "ms-appx:///Assets/image_loading.png", "ms-appx:///Assets/image_loading.png" };
+        public string[] thumbnailURLs
+        {
+            get
+            {
+                return urls;
+            }
+            set
+            {
+                urls = value;
+                OnPropertyChanged();
+            }
+        } 
         /// <summary>
         /// 标题
         /// </summary>

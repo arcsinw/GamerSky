@@ -81,6 +81,10 @@ namespace 游民星空.Core.Http
             postData.request = new request { contentId = contentId };
             postData.deviceId = DeviceInformationHelper.GetDeviceId();
             News news = await PostJson<AllChannelListPostData, News>(ServiceUri.TwoArticle, postData);
+            if(news!= null)
+            {
+                
+            }
             return news;
         }
 

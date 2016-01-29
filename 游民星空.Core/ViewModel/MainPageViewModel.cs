@@ -13,32 +13,50 @@ using 游民星空.Core.Model;
 
 namespace 游民星空.Core.ViewModel
 {
-    public class MainPageViewModel
+    public class MainPageViewModel:ViewModelBase
     {
         ApiService apiService = new ApiService();
         /// <summary>
         /// 频道 
         /// </summary>
-        public ObservableCollection<ChannelResult> Channels { get; set; }
+        //public ObservableCollection<ChannelResult> Channels { get; set; }
 
         /// <summary>
         /// 文章列表
         /// </summary>
-        public ObservableCollection<EssayResult> Essays { get; set; }
+        //public ObservableCollection<EssayResult> Essays { get; set; }
+
+        private ObservableCollection<PivotData> essayAndChannels;
+        /// <summary>
+        /// 同时提供频道和文章列表
+        /// </summary>
+        public ObservableCollection<PivotData> EssaysAndChannels
+        {
+            get
+            {
+                return essayAndChannels;
+            }
+            set
+            {
+                essayAndChannels = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// 幻灯片上的文章
         /// </summary>
-        public ObservableCollection<EssayResult> HeaderEssays { get; set; }
+        //public ObservableCollection<EssayResult> HeaderEssays { get; set; }
 
         public ObservableDictionary<string, List<EssayResult>> EssaysDictionary { get; set; }
 
         public MainPageViewModel()
         {
-            Channels = new ObservableCollection<ChannelResult>();
-            Essays = new ObservableCollection<EssayResult>();
-            EssaysDictionary = new ObservableDictionary<string, List<EssayResult>>();
-            HeaderEssays = new ObservableCollection<EssayResult>();
+            //Channels = new ObservableCollection<ChannelResult>();
+            //Essays = new ObservableCollection<EssayResult>();
+            //EssaysDictionary = new ObservableDictionary<string, List<EssayResult>>();
+            EssaysAndChannels = new ObservableCollection<PivotData>();
+            //HeaderEssays = new ObservableCollection<EssayResult>();
             NavigateToEssayCommand = new RelayCommand((contentId) =>
             {
                 (Window.Current.Content as Frame)?.Navigate(typeof(EssayResult), contentId);
@@ -60,31 +78,10 @@ namespace 游民星空.Core.ViewModel
             List<ChannelResult> channels = await apiService.GetChannelList();
             foreach (var item in channels)
             {
-                Channels.Add(item);
+                //Channels.Add(item);
+                EssaysAndChannels.Add(new PivotData { Channel = item });
             }
-            
-            //if (channels.Count > 0)
-            //{
-            //    List<EssayResult> essays = await apiService.GetEssayList(channels[0].nodeId, 1);
 
-            //    foreach (var item in essays)
-            //    {
-            //        if (item.type.Equals("huandeng"))
-            //        {
-            //            foreach (var c in item.childElements)
-            //            {
-            //                HeaderEssays.Add(c);
-            //            }
-            //            continue;
-            //        }
-            //        Essays.Add(item);
-            //    }
-            //}
-            //foreach (var channel in Channels)
-            //{
-            //    postData.request.nodeIds = channel.nodeId;
-            //    EssaysDictionary.Add(channel.nodeName, essays);
-            //}
         }
 
         public RelayCommand NavigateToEssayCommand { get; set; }
@@ -98,19 +95,22 @@ namespace 游民星空.Core.ViewModel
         public async Task LoadMoreEssay(int nodeId,int pageIndex)
         {
             List<EssayResult> essays = await apiService.LoadMoreEssay(nodeId, pageIndex);
-            
-                foreach (var item in essays)
+
+            foreach (var item in essays)
+            {
+                if (item.type.Equals("huandeng"))
                 {
-                    if (item.type.Equals("huandeng"))
+                    foreach (var c in item.childElements)
                     {
-                        foreach (var c in item.childElements)
-                        {
-                            HeaderEssays.Add(c);
-                        }
-                        continue;
+                        //HeaderEssays.Add(c);
+                        EssaysAndChannels.Where(x => x.Channel.nodeId == nodeId).First().HeaderEssays.Add(c);
                     }
-                    Essays.Add(item);
+                    continue;
                 }
+                //Essays.Add(item);
+                EssaysAndChannels.Where(x => x.Channel.nodeId == nodeId).First().Essays.Add(item);
+            }
+
             
         }
 
@@ -129,18 +129,20 @@ namespace 游民星空.Core.ViewModel
 
             foreach (var item in channel.result)
             {
-                Channels.Add(new ChannelResult() { isTop = item.isTop, nodeId = item.nodeId, nodeName = item.nodeName });
+                EssaysAndChannels.Add(new PivotData { Channel = item });
+                //Channels.Add(new ChannelResult() { isTop = item.isTop, nodeId = item.nodeId, nodeName = item.nodeName });
             }
 
             foreach (var item in essay.result)
             {
-                Essays.Add(item);
+                EssaysAndChannels.Where(x => x.Channel.nodeId == 0).First().Essays.Add(item);
+                //Essays.Add(item);
             }
         }
 
         public async Task Refresh(int channelId)
         {
-            Essays.Clear();
+            //Essays.Clear();
             await LoadMoreEssay(channelId, 1);
         }
     }

@@ -113,7 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\DeviceInformationHelper.cs" />
+    <Compile Include="Helper\DispatcherManager.cs" />
     <Compile Include="Helper\EssayListViewItemTemplateSelector.cs" />
+    <Compile Include="Helper\ExtensionHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\NetworkManager.cs" />
@@ -126,13 +128,16 @@
     <Compile Include="Http\ApiService.cs" />
     <Compile Include="Model\Channel.cs" />
     <Compile Include="Model\Essay.cs" />
+    <Compile Include="Model\EssayPageIndex.cs" />
     <Compile Include="Model\JSParameter.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\PivotData.cs" />
     <Compile Include="Model\RelatedReadings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\EssayDetailViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <EmbeddedResource Include="Properties\游民星空.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup />

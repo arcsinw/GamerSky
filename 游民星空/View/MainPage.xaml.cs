@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
-using 游民星空.Core.ViewModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -42,7 +31,7 @@ namespace 游民星空.View
         }
         #endregion
 
-        
+
         private bool isActive;
         /// <summary>
         /// ProgressRing is active
@@ -76,7 +65,9 @@ namespace 游民星空.View
         private string currentChannelName;
 
         #region pageIndex
+        private HashSet<EssayPageIndex> pageIndexs;
         private int pageIndex = 1;
+        private int pageIndex1 = 1;
         #endregion 
 
         /// <summary>
@@ -87,25 +78,31 @@ namespace 游民星空.View
 
         private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
-            IsActive = true;
+            //IsActive = true;
+            progressRing.IsActive = true;
             await MVM.Refresh(currentChannelId);
-            IsActive = false;
+            //IsActive = false;
+            progressRing.IsActive = false;
         }
 
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            IsActive = true;
-
+            //IsActive = true;
+            progressRing.IsActive = true;
             int index = essayPivot.SelectedIndex;
+            pageIndexs = new HashSet<EssayPageIndex>();
+            //currentChannelId =  MVM.Channels[index].nodeId;
+            currentChannelId = MVM.EssaysAndChannels[index].Channel.nodeId;
 
-            currentChannelId =  MVM.Channels[index].nodeId;
+            pageIndexs.Add(new EssayPageIndex { ChannelId = currentChannelId, PageIndex = 1 });
 
-            Debug.WriteLine(MVM.Channels[index].nodeName);
+            Debug.WriteLine(MVM.EssaysAndChannels[index].Channel.nodeName);
 
             await MVM.LoadMoreEssay(currentChannelId, pageIndex);
             pageIndex++;
 
-            IsActive = false;
+            //IsActive = false;
+            progressRing.IsActive = false;
         }
 
 
@@ -138,10 +135,12 @@ namespace 游民星空.View
                     if (!IsDataLoading)  //未加载数据
                     {
                         IsDataLoading = true;
-                        IsActive = true;
+                        //IsActive = true;
+                        progressRing.IsActive = true;
                         await MVM.LoadMoreEssay(currentChannelId, pageIndex);
                         pageIndex++;
-                        IsActive = false;
+                        //IsActive = false;
+                        progressRing.IsActive = false;
                         IsDataLoading = false;
                     }
                 }
@@ -150,11 +149,11 @@ namespace 游民星空.View
 
         private void FlipView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var essay = (sender as FlipView)?.SelectedItem as EssayResult;
+            var essayResult = (sender as FlipView)?.SelectedItem as EssayResult;
             //EssayResult essay = (e.OriginalSource as FlipViewItem;
-            if (essay == null) return;
+            if (essayResult == null) return;
 
-            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essay.contentId);
+            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
     }
 }
