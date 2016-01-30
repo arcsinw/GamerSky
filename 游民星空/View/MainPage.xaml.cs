@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
+using 游民星空.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -54,6 +55,10 @@ namespace 游民星空.View
             this.InitializeComponent();
             apiService = new ApiService();
             NavigationCacheMode = NavigationCacheMode.Required;
+            if(Functions.IsMobile())
+            {
+                UIHelper.ShowStatusBar();
+            }
         }
         /// <summary>
         /// 当前频道Id

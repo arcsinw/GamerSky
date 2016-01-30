@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace 游民星空.Core.Model
 {
@@ -48,7 +49,25 @@ namespace 游民星空.Core.Model
                 urls = value;
                 OnPropertyChanged();
             }
-        } 
+        }
+
+        /// <summary>
+        /// 新闻缩略图
+        /// </summary>
+        private BitmapImage[] thumbnailBitmap = new BitmapImage[]
+        public BitmapImage[]  ThumbnailBitmap
+        {
+            get
+            {
+
+                return thumbnailBitmap;
+            }
+            set
+            {
+                thumbnailBitmap.
+            }
+        }
+
         /// <summary>
         /// 标题
         /// </summary>

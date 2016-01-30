@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources.Core;
+using Windows.Foundation.Metadata;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -106,6 +108,26 @@ namespace 游民星空.Core.Helper
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// 判断是否Mobile设备
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsMobile()
+        {
+            ResourceContext resContext = ResourceContext.GetForCurrentView();
+
+            string value = resContext.QualifierValues["DeviceFamily"];
+            return value == "Mobile";
+        }
+
+        public static void ShowStatusBar()
+        {
+            if(ApiInformation.IsTypePresent(""))
+            {
+                
+            }
         }
     }
 }
