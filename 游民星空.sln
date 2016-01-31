@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空", "游民星空\游民星空.csproj", "{6738230A-3F8A-4A50-8E3E-B80F8EB5751E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{75F07E89-F8A9-49DA-8C32-035515B4EBF6} = {75F07E89-F8A9-49DA-8C32-035515B4EBF6}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空.Core", "游民星空.Core\游民星空.Core.csproj", "{75F07E89-F8A9-49DA-8C32-035515B4EBF6}"
 EndProject

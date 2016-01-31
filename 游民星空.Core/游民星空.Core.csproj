@@ -119,7 +119,6 @@
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\NetworkManager.cs" />
-    <Compile Include="Helper\ObservableDictionary.cs" />
     <Compile Include="Helper\RelayCommand.cs" />
     <Compile Include="Http\ApiBaseService.cs" />
     <Compile Include="Http\HttpBaseService.cs" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace 游民星空.Core.Model
 {
     /// <summary>
-    /// 页码 和 对应频道
+    /// 频道的状态 当前页码 是否已下载
     /// </summary>
     public class EssayPageIndex
     {

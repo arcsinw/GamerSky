@@ -48,7 +48,6 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         //public ObservableCollection<EssayResult> HeaderEssays { get; set; }
 
-        public ObservableDictionary<string, List<EssayResult>> EssaysDictionary { get; set; }
 
         public MainPageViewModel()
         {
@@ -110,7 +109,6 @@ namespace 游民星空.Core.ViewModel
                 //Essays.Add(item);
                 EssaysAndChannels.Where(x => x.Channel.nodeId == nodeId).First().Essays.Add(item);
             }
-
             
         }
 
@@ -143,6 +141,7 @@ namespace 游民星空.Core.ViewModel
         public async Task Refresh(int channelId)
         {
             //Essays.Clear();
+            EssaysAndChannels.Where(x => x.Channel.nodeId == channelId).First().Essays.Clear();
             await LoadMoreEssay(channelId, 1);
         }
     }

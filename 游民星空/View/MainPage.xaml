@@ -133,7 +133,7 @@
                                                                 </Image.Source>
                                                             </Image>
                                                         <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
-                                                            <TextBlock Text="{Binding title}" Foreground="White" VerticalAlignment="Bottom"/>
+                                                            <TextBlock Margin="7,0" Text="{Binding title}" Foreground="White" VerticalAlignment="Bottom"/>
                                                         </Border>
                                                     </Grid>
                                                     </DataTemplate>

@@ -67,11 +67,11 @@ namespace 游民星空.Core.ViewModel
                 string css = "<style>"
                        + "html{-ms-content-zooming:none;font-family:微软雅黑;}"
                        + ".author{font-weight:bold;} .bio{color:gray;}"
-                       + "body{padding:12px;word-break:break-all;} p{margin:30px auto;} a{color:skyblue;}"
+                       + "body{padding:8px;word-break:break-all;} p{margin:30px auto;} a{color:skyblue;}"
                        + "body{line-height:120%; font:normal 100% Helvetica, Arial, sans-serif;}"
                        + "img{height:auto;width:auto;width:100%}"
                        + "h1{ text-align:left; font-size:1em;}" //标题栏
-                       + ".heading {margin: 0 10px; padding: 4px; top: 22px; line - height:28px; color:#333;}"
+                       + ".heading {margin: 0; padding: 0; top: 22px; line - height:28px; color:#333;}"
 	                   + ".PageColorMode_Day.heading {color:#333;}"
     	               + ".PageColorMode_Night.heading {color:#966122;}"
                        + ".bar { margin: 10px 10px 0; width: auto; height: 1px;}"

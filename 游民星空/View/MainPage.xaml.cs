@@ -104,21 +104,24 @@ namespace 游民星空.View
             currentChannelId = MVM.EssaysAndChannels[index].Channel.nodeId;
 
             //获取该频道当前页码
-            if(!pageIndexDic.ContainsKey(currentChannelId))
+            if(!pageIndexDic.ContainsKey(currentChannelId)) // 频道未加载
             {
                 pageIndexDic.Add(currentChannelId, 1);
                 pageIndex = 1;
+                await MVM.LoadMoreEssay(currentChannelId, pageIndex);
+                pageIndex++;
+                pageIndexDic[currentChannelId] = pageIndex;
             }
-            else
+            else  //频道已加载
             {
                 pageIndex = pageIndexDic[currentChannelId];
             }
 
             Debug.WriteLine(MVM.EssaysAndChannels[index].Channel.nodeName);
 
-            await MVM.LoadMoreEssay(currentChannelId, pageIndex);
-            pageIndex++;
-            pageIndexDic[currentChannelId] = pageIndex;
+            //await MVM.LoadMoreEssay(currentChannelId, pageIndex);
+            //pageIndex++;
+            //pageIndexDic[currentChannelId] = pageIndex;
             //IsActive = false;
             progressRing.IsActive = false;
         }
@@ -157,6 +160,7 @@ namespace 游民星空.View
                         progressRing.IsActive = true;
                         await MVM.LoadMoreEssay(currentChannelId, pageIndex);
                         pageIndex++;
+                        pageIndexDic[currentChannelId] = pageIndex;
                         //IsActive = false;
                         progressRing.IsActive = false;
                         IsDataLoading = false;
