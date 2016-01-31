@@ -59,6 +59,9 @@ namespace 游民星空.View
             {
                 UIHelper.ShowStatusBar();
             }
+
+            DispatcherManager.Current.Dispatcher = Dispatcher;
+            pageIndexDic = new Dictionary<int, int>();
         }
         /// <summary>
         /// 当前频道Id
@@ -70,9 +73,12 @@ namespace 游民星空.View
         private string currentChannelName;
 
         #region pageIndex
-        private HashSet<EssayPageIndex> pageIndexs;
+        /// <summary>
+        /// 保存不同频道的页码
+        /// </summary>
+        private Dictionary<int, int> pageIndexDic;
+
         private int pageIndex = 1;
-        private int pageIndex1 = 1;
         #endregion 
 
         /// <summary>
@@ -95,17 +101,24 @@ namespace 游民星空.View
             //IsActive = true;
             progressRing.IsActive = true;
             int index = essayPivot.SelectedIndex;
-            pageIndexs = new HashSet<EssayPageIndex>();
-            //currentChannelId =  MVM.Channels[index].nodeId;
             currentChannelId = MVM.EssaysAndChannels[index].Channel.nodeId;
 
-            pageIndexs.Add(new EssayPageIndex { ChannelId = currentChannelId, PageIndex = 1 });
+            //获取该频道当前页码
+            if(!pageIndexDic.ContainsKey(currentChannelId))
+            {
+                pageIndexDic.Add(currentChannelId, 1);
+                pageIndex = 1;
+            }
+            else
+            {
+                pageIndex = pageIndexDic[currentChannelId];
+            }
 
             Debug.WriteLine(MVM.EssaysAndChannels[index].Channel.nodeName);
 
             await MVM.LoadMoreEssay(currentChannelId, pageIndex);
             pageIndex++;
-
+            pageIndexDic[currentChannelId] = pageIndex;
             //IsActive = false;
             progressRing.IsActive = false;
         }

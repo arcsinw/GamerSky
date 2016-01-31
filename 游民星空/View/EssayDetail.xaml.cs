@@ -31,14 +31,10 @@ namespace 游民星空.View
         public EssayDetail()
         {
             this.InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Required;
+            NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
-        /// <summary>
-        /// 页面是否分析完成
-        /// </summary>
-        private bool isDomLoaded = false;
-
+       
         private EssayResult essayResult;
 
         #region OnPropertyChanged
@@ -66,26 +62,13 @@ namespace 游民星空.View
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            progress.IsActive = true;
             essayResult = e.Parameter as EssayResult;
            if(essayResult!= null)
             {
                 this.DataContext = viewModel = new EssayDetailViewModel(essayResult);
             }
+            progress.IsActive = false;
         }
-
-        private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
-        {
-            isDomLoaded = true;
-
-            if (essayResult != null)
-            {
-                //await webView.InvokeScriptAsync("setContent", new[] { news.result.mainBody });
-                //await webView.InvokeScriptAsync("setTitle", new[] { news.result.title });
-                //await webView.InvokeScriptAsync("setSubTitle", new[] { news.result.subTitle });
-            }
-                IsActive = false;
-        }
-
-
     }
 }

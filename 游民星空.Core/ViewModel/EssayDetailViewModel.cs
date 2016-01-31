@@ -70,7 +70,7 @@ namespace 游民星空.Core.ViewModel
                        + "body{padding:12px;word-break:break-all;} p{margin:30px auto;} a{color:skyblue;}"
                        + "body{line-height:120%; font:normal 100% Helvetica, Arial, sans-serif;}"
                        + "img{height:auto;width:auto;width:100%}"
-                       + "h1{ text-align:center; font-size:1em;}" //标题栏
+                       + "h1{ text-align:left; font-size:1em;}" //标题栏
                        + ".heading {margin: 0 10px; padding: 4px; top: 22px; line - height:28px; color:#333;}"
 	                   + ".PageColorMode_Day.heading {color:#333;}"
     	               + ".PageColorMode_Night.heading {color:#966122;}"
@@ -82,7 +82,55 @@ namespace 游民星空.Core.ViewModel
                 string head = "<meta name=\"viewport\" content=\"width-width, initial-scale=1\"/>"
                     + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
                     + "<meta name=\"msapplication-tap-highlight\" content=\"no\">"; //wp点击无高光;
-                string js = "";
+
+                string js = "<script>" +
+                    @"function gsVideo(videoType, videoContent, videoParam, videoWidth, videoHeight)
+                    {
+                    switch (videoType)
+                    {
+                        case ""优酷"":
+                        case ""土豆"":
+                            {
+                                videoContent = videoContent;
+                            }
+                            break;
+                        case ""乐视"":
+                            {
+                                videoContent
+                                    = gsCreateLeTvVideoContent(videoContent, videoParam);
+                            }
+                            break;
+                    }
+
+                    var videoHTML = videoContent;
+
+                    if ((gsIsCurrentOSIOS() && _kGSAppVersionNumberCode >= 201)
+                    ||
+                        gsIsCurrentOSAndroid())
+                    {
+                        var videoIndex = gsSaveAnVideoOriginContent(videoContent);
+
+                        if (videoIndex > -1)
+                        {
+                            var videoDefaultWidth
+                                = document.body.clientWidth - 20.0;
+                            var videoDefaultHeight
+                                = videoDefaultWidth
+                                * 1080.0 / 1920.0;"
+                                
+                                +"videoHTML = <table class=\"GSTemplateContent_VideoBoxer\" id=\"videoBoxer_\" + videoIndex + \" style=\"\" border=\"0\" width=\"\" + videoDefaultWidth + \"\" height=\"\" + videoDefaultHeight + \"\" cellspacing=\"0\" cellpadding=\"0\">"
+                                + "<tr>"
+                                + "<td valign=\"middle\" align=\"center\">"
+                                + "<div class=\"PlayButtonBackground\"></div>"
+                                + "<div class=\"PlayButton\" onclick=\"gsPlayVideoWithVideoIndex(\" + videoIndex + \")\"></div>"
+                                + "</td>"
+                                + "</tr>"
+                                + "</table>"
+                + "}"
+            + "}"
+            + "document.write(videoHTML)"
+            + "}"
+            + "</script>";
                 string title = news.result.title;
                 string subTitle = news.result.subTitle;
 
@@ -103,7 +151,7 @@ namespace 游民星空.Core.ViewModel
                                         "<div class=\"txtlist\" id=\"gsTemplateContent_RelatedReadingContent\">" +"</div>"+
                                   "</div>" +
                         "</div>" +
-                   "</body>" +
+                   "</body>" +js+
                    "</html>";
 
             }

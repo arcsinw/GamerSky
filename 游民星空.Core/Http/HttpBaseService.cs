@@ -13,6 +13,11 @@ namespace 游民星空.Core.Http
     /// </summary>
     public class HttpBaseService
     {
+        /// <summary>
+        /// 向服务器发送get请求  返回服务器回复数据(string)
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public async static Task<string> SendGetRequest(string uri)
         {
             try
@@ -27,6 +32,12 @@ namespace 游民星空.Core.Http
             }
         }
 
+        /// <summary>
+        /// 向服务器发送post请求 返回服务器回复数据(string)
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         public async static Task<string> SendPostRequest(string uri, string body)
         {
             try
@@ -42,7 +53,12 @@ namespace 游民星空.Core.Http
                 return null;
             }
         }
-        
+
+        /// <summary>
+        /// 向服务器发送get请求  返回服务器回复数据(bytes)
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public async static Task<IBuffer> SendGetRequestAsBytes(string uri)
         {
             try

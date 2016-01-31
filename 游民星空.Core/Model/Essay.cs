@@ -1,27 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage.Streams;
+using Windows.System.Threading;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.Web.Http;
+using 游民星空.Core.Helper;
+using 游民星空.Core.Http;
 
 namespace 游民星空.Core.Model
 {
     /// <summary>
     /// 新闻列表
     /// </summary>
-    [DataContract]
     public class Essay
     {
-        [DataMember]
         public int errorCode;
-        [DataMember]
         public string errorMessage;
-        [DataMember]
         public List<EssayResult> result;
     }
-    public class EssayResult:ModelBase
+    public class EssayResult : ModelBase
     {
         public string adId { get; set; }
         public string authorHeadImageURL { get; set; }
@@ -33,7 +40,6 @@ namespace 游民星空.Core.Model
         public string contentType { get; set; }
         public string contentURL { get; set; }
         public string readingCount { get; set; }
-
         private string[] urls = { "ms-appx:///Assets/image_loading.png", "ms-appx:///Assets/image_loading.png", "ms-appx:///Assets/image_loading.png" };
         /// <summary> 
         /// 缩略图
@@ -50,24 +56,108 @@ namespace 游民星空.Core.Model
                 OnPropertyChanged();
             }
         }
-
+        private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
+        
+        private List<BitmapImage> thumbnailBitmap = new List<BitmapImage>();
         /// <summary>
-        /// 新闻缩略图
+        /// 新闻缩略图  
+        /// 先返回默认图的BitmapImage 图片下载完成后赋值 OnPropertyChanged()
         /// </summary>
-        private BitmapImage[] thumbnailBitmap = new BitmapImage[]
-        public BitmapImage[]  ThumbnailBitmap
+        public List<BitmapImage> ThumbnailBitmap
         {
             get
             {
-
+                if(thumbnailBitmap.Count==0)
+                {
+                    for(int i =0;i<thumbnailURLs.Length;i++)
+                    {
+                        thumbnailBitmap.Add(defaultBitmap);
+                    }
+                }
+                for (int i = 0; i < thumbnailURLs.Length; i++)
+                {
+                   DownloadImage(thumbnailURLs[i]);
+                    
+                }
+                
                 return thumbnailBitmap;
             }
             set
             {
-                thumbnailBitmap.
+                thumbnailBitmap = value;
             }
+           
         }
 
+
+        /// <summary>
+        /// download through image's url
+        /// </summary>
+        /// <param name="url"></param>
+        private async void DownloadImage(string uri)
+        {
+            BitmapImage bitmap = new BitmapImage();
+
+            IBuffer buffer =  await HttpBaseService.SendGetRequestAsBytes(uri);
+            byte[] bytes = buffer.ToArray();
+           
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    ms.Write(bytes, 0, bytes.Length);
+
+                    await bitmap.SetSourceAsync(ms.AsRandomAccessStream());
+
+                }
+            
+            await DispatcherManager.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                thumbnailBitmap.Add(bitmap);
+                //触发UI绑定属性的改变
+                OnPropertyChanged("ThumbnailBitmap");
+            });
+            //HttpWebRequest request = WebRequest.CreateHttp(new Uri(uri));
+            //request.BeginGetResponse(DownloadImageComplete, request);
+        }
+
+        /// <summary>
+        /// image download callback
+        /// </summary>
+        /// <param name="result"></param>
+        async void DownloadImageComplete(IAsyncResult result)
+        {
+            HttpWebRequest request = result.AsyncState as HttpWebRequest;
+            HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(result);
+            // 读取网络的数据
+            using (Stream stream = response.GetResponseStream())
+            {
+                int length = int.Parse(response.Headers["Content-Length"]);
+                // 注意需要把数据流重新复制一份，否则会出现跨线程错误
+                // 网络下载到的图片数据流，属于后台线程的对象，不能在UI上使用
+                using (Stream streamForUI = new MemoryStream(length))
+                {
+                    byte[] buffer = new byte[length];
+                    int read = 0;
+                    do
+                    {
+                        read = stream.Read(buffer, 0, length);
+                        streamForUI.Write(buffer, 0, read);
+                    }
+                    while (read == length);
+                    streamForUI.Seek(0, SeekOrigin.Begin);
+                    // 触发UI线程处理位图和UI更新
+                    //var frame = Window.Current.Content as Frame;
+
+                    await DispatcherManager.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,() =>
+                    {
+                        BitmapImage bm = new BitmapImage();
+                        bm.SetSource(streamForUI.AsRandomAccessStream());
+                        thumbnailBitmap.Add(bm);
+                        //触发UI绑定属性的改变
+                        OnPropertyChanged("ThumbnailBitmap");
+                    });
+                }
+            }
+        }
         /// <summary>
         /// 标题
         /// </summary>

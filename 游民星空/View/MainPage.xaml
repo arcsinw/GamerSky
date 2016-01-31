@@ -35,23 +35,23 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="{Binding title}" Margin="0,0,0,2"/>
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1"  VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Column="0" >
+                    <Image Grid.Column="0" Stretch="Fill">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
                         </Image.Source>
                     </Image>
-                    <Image Grid.Column="1" >
+                    <Image Grid.Column="1" Stretch="Fill">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding thumbnailURLs[1]}"/>
                         </Image.Source>
                     </Image>
-                    <Image Grid.Column="2" >
+                    <Image Grid.Column="2" Stretch="Fill">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding thumbnailURLs[2]}"/>
                         </Image.Source>
@@ -71,7 +71,8 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left">
+                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
+                    <!--Source="{Binding ThumbnailBitmap[0]}"-->
                         <Image.Source>
                             <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
                         </Image.Source>
@@ -141,7 +142,15 @@
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.HeaderTemplate>
+                            <ListView.Transitions>
+                                <TransitionCollection>
+                                    <AddDeleteThemeTransition />
+                                    <ContentThemeTransition />
+                                    <EntranceThemeTransition/>
+                                    <NavigationThemeTransition/>
 
+                                </TransitionCollection>
+                            </ListView.Transitions>
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
