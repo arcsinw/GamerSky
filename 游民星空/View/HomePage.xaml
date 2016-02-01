@@ -132,17 +132,23 @@
         <controls:SwipeableSplitView DisplayMode="Overlay" OpenPaneLength="150">
             <SplitView.Pane>
                 <ListView>
-                    <ListViewItem HorizontalContentAlignment="Center">
-                        <Ellipse Height="100" Width="100"  HorizontalAlignment="Center">
-                            <Ellipse.Fill>
-                                <ImageBrush>
-                                    <ImageBrush.ImageSource>
-                                        <BitmapImage UriSource=""/>
-                                    </ImageBrush.ImageSource>
-                                </ImageBrush>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                    </ListViewItem>
+                    <ListView.Items>
+                        <ListViewItem HorizontalContentAlignment="Center">
+                            <Ellipse Height="100" Width="100"  HorizontalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <ImageBrush>
+                                        <ImageBrush.ImageSource>
+                                            <BitmapImage UriSource=""/>
+                                        </ImageBrush.ImageSource>
+                                    </ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </ListViewItem>
+
+                        <ListViewItem>
+                            
+                        </ListViewItem>
+                    </ListView.Items>
                 </ListView>
             </SplitView.Pane>
 
