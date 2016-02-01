@@ -93,7 +93,7 @@ namespace 游民星空.Core.ViewModel
         /// <returns></returns>
         public async Task LoadMoreEssay(int nodeId,int pageIndex)
         {
-            List<EssayResult> essays = await apiService.LoadMoreEssay(nodeId, pageIndex);
+            List<EssayResult> essays = await apiService.GetEssayList(nodeId, pageIndex);
 
             foreach (var item in essays)
             {

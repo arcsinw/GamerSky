@@ -56,5 +56,9 @@ namespace 游民星空.Core.Model
         /// /v2/TwoCorrelation (获取相关阅读)
         /// </summary>
         public string contentType;
+        /// <summary>
+        /// 获取攻略用
+        /// </summary>
+        public int pageCount;
     }
 }

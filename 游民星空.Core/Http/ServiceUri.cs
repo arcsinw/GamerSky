@@ -30,5 +30,10 @@ namespace 游民星空.Core.Http
         /// 相关阅读
         /// </summary>
         public const string TwoCorrelation = "http://appapi2.gamersky.com/v2/TwoArticle";
+
+        /// <summary>
+        /// 获取攻略
+        /// </summary>
+        public const string Strategy = "http://appapi2.gamersky.com/v2/strategy";
     }
 }

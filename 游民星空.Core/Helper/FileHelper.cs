@@ -55,7 +55,7 @@ namespace 游民星空.Core.Helper
                     serializer.WriteObject(data, obj);
                 }
             }
-            catch
+            catch(Exception e)
             {
 
             }
@@ -72,7 +72,7 @@ namespace 游民星空.Core.Helper
                     return serializer.ReadObject(data) as T;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }

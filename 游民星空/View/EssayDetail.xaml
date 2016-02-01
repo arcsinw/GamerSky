@@ -9,6 +9,14 @@
     mc:Ignorable="d"
     >
 
+    <Page.Transitions>
+        <NavigationThemeTransition>
+            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                <SlideNavigationTransitionInfo>
+                </SlideNavigationTransitionInfo>
+            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+        </NavigationThemeTransition>
+    </Page.Transitions>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ProgressRing x:Name="progress"   Foreground="{ThemeResource ThemeColorBrush}" Visibility="{Binding IsProgressVisible}" 
                           Height="60" Width="60" Background="Transparent"/>

@@ -166,7 +166,7 @@
                                 </ControlTemplate>
                             </Grid.Resources>
                             <ScrollViewer x:Name="ScrollViewer" BringIntoViewOnFocusChange="False" HorizontalSnapPointsAlignment="Center" HorizontalSnapPointsType="MandatorySingle" HorizontalScrollBarVisibility="Hidden" Margin="{TemplateBinding Padding}" Template="{StaticResource ScrollViewerScrollBarlessTemplate}" VerticalSnapPointsType="None" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" VerticalContentAlignment="Stretch" ZoomMode="Disabled">
-                                <PivotPanel x:Name="Panel" VerticalAlignment="Stretch">
+                                <PivotPanel x:Name="Panel" VerticalAlignment="Stretch" HorizontalAlignment="Center">
                                     <Grid x:Name="PivotLayoutElement">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>

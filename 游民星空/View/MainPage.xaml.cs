@@ -55,11 +55,7 @@ namespace 游民星空.View
             this.InitializeComponent();
             apiService = new ApiService();
             NavigationCacheMode = NavigationCacheMode.Required;
-            if(Functions.IsMobile())
-            {
-                UIHelper.ShowStatusBar();
-            }
-
+        
             DispatcherManager.Current.Dispatcher = Dispatcher;
             pageIndexDic = new Dictionary<int, int>();
         }
@@ -177,5 +173,7 @@ namespace 游民星空.View
 
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
+
+   
     }
 }

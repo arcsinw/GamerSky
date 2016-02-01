@@ -11,7 +11,7 @@ using 游民星空.Core.Model;
 
 namespace 游民星空.Core.Http
 {
-    public class ApiService :ApiBaseService
+    public class ApiService : ApiBaseService
     {
         private string LocalFolder = ApplicationData.Current.LocalFolder.Path;
 
@@ -21,21 +21,33 @@ namespace 游民星空.Core.Http
         /// <returns></returns>
         public async Task<List<ChannelResult>> GetChannelList()
         {
-            AllChannelListPostData postData = new AllChannelListPostData();
-
-            postData.deviceId = DeviceInformationHelper.GetDeviceId();
-            postData.request = new request() { type = "0" };
-            //postData.request.type = "0";
-            Channel channel = await PostJson<AllChannelListPostData, Channel>(ServiceUri.AllChannel, postData);
-            List<ChannelResult> Channels = new List<ChannelResult>();
-            Channels.Add(new ChannelResult { isTop = "False", nodeId = 0, nodeName = "头条" });
-            if (channel != null)
+            string filename = "channelList.json";
+            Channel channel = new Channel();
+            if (NetworkManager.Current.Network == 4) //无网络
             {
-                foreach (var item in channel?.result)
+                channel = await FileHelper.Current.ReadObjectAsync<Channel>(filename);
+            }
+            else
+            {
+                AllChannelListPostData postData = new AllChannelListPostData();
+
+                postData.deviceId = DeviceInformationHelper.GetDeviceId();
+                postData.request = new request() { type = "0" };
+                channel = await PostJson<AllChannelListPostData, Channel>(ServiceUri.AllChannel, postData);
+                await FileHelper.Current.WriteObjectAsync<Channel>(channel, filename);
+
+            }
+            List<ChannelResult> Channels = new List<ChannelResult>();
+
+            Channels.Add(new ChannelResult { isTop = "False", nodeId = 0, nodeName = "头条" });
+            if (channel != null & channel.result!=null)
+            {
+                foreach (var item in channel.result)
                 {
                     Channels.Add(new ChannelResult() { isTop = item.isTop, nodeId = item.nodeId, nodeName = item.nodeName });
                 }
             }
+
             return Channels;
         }
         /// <summary>
@@ -44,22 +56,34 @@ namespace 游民星空.Core.Http
         /// <param name="nodeId">频道ID</param>
         /// <param name="pageIndex">页码</param>
         /// <returns></returns>
-        public async Task<List<EssayResult>>GetEssayList(int nodeId,int pageIndex)
+        public async Task<List<EssayResult>> GetEssayList(int nodeId, int pageIndex)
         {
-            List<EssayResult> essayList = new List<EssayResult>();
-            AllChannelListPostData postData = new AllChannelListPostData();
-            postData.deviceId = DeviceInformationHelper.GetDeviceId();
-            //postData.deviceType = DeviceInformationHelper.GetOS();
-            //postData.osVersion = DeviceInformationHelper.GetOSVer();
-            postData.request = new request()
+            string filename = "essayList_"+nodeId+"_"+pageIndex+".json";
+            Essay essay = new Essay();
+            if (NetworkManager.Current.Network == 4) //无网络
             {
-                elementsCountPerPage = 20,
-                nodeIds = nodeId,
-                pageIndex = pageIndex,
-                parentNodeId = "news",
-                type = "null",
-            };
-            Essay essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.AllChannelList, postData);
+                essay = await FileHelper.Current.ReadObjectAsync<Essay>(filename);
+            }
+            else
+            {
+                AllChannelListPostData postData = new AllChannelListPostData();
+                postData.deviceId = DeviceInformationHelper.GetDeviceId();
+                //postData.deviceType = DeviceInformationHelper.GetOS();
+                //postData.osVersion = DeviceInformationHelper.GetOSVer();
+                postData.request = new request()
+                {
+                    elementsCountPerPage = 20,
+                    nodeIds = nodeId,
+                    pageIndex = pageIndex,
+                    parentNodeId = "news",
+                    type = "null",
+                };
+                essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.AllChannelList, postData);
+                await FileHelper.Current.WriteObjectAsync<Essay>(essay, filename);
+
+            }
+            List<EssayResult> essayList = new List<EssayResult>();
+
             if (essay != null)
             {
                 foreach (var item in essay.result)
@@ -67,6 +91,7 @@ namespace 游民星空.Core.Http
                     essayList.Add(item);
                 }
             }
+
             return essayList;
         }
 
@@ -77,47 +102,127 @@ namespace 游民星空.Core.Http
         /// <returns></returns>
         public async Task<News> ReadEssay(string contentId)
         {
-            AllChannelListPostData postData = new AllChannelListPostData();
-            postData.request = new request { contentId = contentId };
-            postData.deviceId = DeviceInformationHelper.GetDeviceId();
-            News news = await PostJson<AllChannelListPostData, News>(ServiceUri.TwoArticle, postData);
-            if(news!= null)
+            string filename = "news_" + contentId + ".json";
+            News news = new News();
+            if (NetworkManager.Current.Network == 4)  //无网络
             {
-                
+                news = await FileHelper.Current.ReadObjectAsync<News>(filename);
             }
+            else
+            {
+                AllChannelListPostData postData = new AllChannelListPostData();
+                postData.request = new request { contentId = contentId };
+                postData.deviceId = DeviceInformationHelper.GetDeviceId();
+                news = await PostJson<AllChannelListPostData, News>(ServiceUri.TwoArticle, postData);
+                await FileHelper.Current.WriteObjectAsync<News>(news, filename);
+
+            }
+          
             return news;
+
         }
 
-        /// <summary>
-        /// 加载更多文章
-        /// </summary>
-        /// <param name="nodeId">频道ID</param>
-        /// <param name="pageIndex">页码</param>
-        /// <returns></returns>
-        public async Task<List<EssayResult>> LoadMoreEssay(int nodeId,int pageIndex)
-        {
-            return await GetEssayList(nodeId,pageIndex);
-        }
+        ///// <summary>
+        ///// 加载更多文章
+        ///// </summary>
+        ///// <param name="nodeId">频道ID</param>
+        ///// <param name="pageIndex">页码</param>
+        ///// <returns></returns>
+        //public async Task<List<EssayResult>> LoadMoreEssay(int nodeId, int pageIndex)
+        //{
+        //    return await GetEssayList(nodeId, pageIndex);
+        //}
         /// <summary>
         /// 获取相关阅读
         /// </summary>
         /// <param name="contentId">文章Id</param>
         /// <returns></returns>
-        public async Task<List<RelatedReadingsResult>> GetRelatedReadings(string contentId,string contentType)
+        public async Task<List<RelatedReadingsResult>> GetRelatedReadings(string contentId, string contentType)
         {
-            AllChannelListPostData postData = new AllChannelListPostData();
-            postData.request = new request { contentId = contentId ,contentType = contentType};
-            postData.deviceId = DeviceInformationHelper.GetDeviceId();
+            string filename = "relatedReadings_" + contentId + ".json";
+            RelatedReadings readings = new RelatedReadings();
+            if (NetworkManager.Current.Network == 4)  //无网络
+            {
+                readings = await FileHelper.Current.ReadObjectAsync<RelatedReadings>(filename);
+            }
+            else
+            {
+                AllChannelListPostData postData = new AllChannelListPostData();
+                postData.request = new request { contentId = contentId, contentType = contentType };
+                postData.deviceId = DeviceInformationHelper.GetDeviceId();
+                readings = await PostJson<AllChannelListPostData, RelatedReadings>(ServiceUri.TwoCorrelation, postData);
+
+                await FileHelper.Current.WriteObjectAsync<RelatedReadings>(readings, filename);
+
+            }
             List<RelatedReadingsResult> relatedResults = new List<RelatedReadingsResult>();
-            RelatedReadings readings =  await PostJson<AllChannelListPostData, RelatedReadings>(ServiceUri.TwoCorrelation, postData);
-            if(readings != null)
+
+            if (readings != null)
             {
                 foreach (var item in readings.result)
                 {
                     relatedResults.Add(item);
                 }
             }
+
             return relatedResults;
+        }
+
+        /// <summary>
+        /// 获取攻略 关注
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<StrategyResult>> GetStrategys(int pageCount = 20)
+        {
+            string filename = "focusStrategys.json";
+            Strategy strategy = new Strategy();
+            if (NetworkManager.Current.Network == 4)  //无网络
+            {
+                strategy = await FileHelper.Current.ReadObjectAsync<Strategy>(filename);
+            }
+            else
+            {
+                pageCount = 20;
+                AllChannelListPostData postData = new AllChannelListPostData();
+                postData.request = new request { pageIndex = 1, pageCount = pageCount, type = "1" };
+                strategy = await PostJson<AllChannelListPostData, Strategy>(ServiceUri.Strategy, postData);
+                await FileHelper.Current.WriteObjectAsync<Strategy>(strategy, filename);
+
+            }
+            List<StrategyResult> strategys = new List<StrategyResult>();
+
+            if (strategy != null)
+            {
+                foreach (var item in strategy.result)
+                {
+                    strategys.Add(item);
+                }
+            }
+
+            return strategys;
+        }
+
+        /// <summary>
+        /// 获取所有攻略
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<StrategyResult>> GetAllStrategys()
+        {
+            string filename = "allStrategys.json";
+            List<StrategyResult> allStrategys = await GetStrategys(10000);
+
+            if (NetworkManager.Current.Network == 4)  //无网络
+            {
+                allStrategys = await FileHelper.Current.ReadObjectAsync<List<StrategyResult>>(filename);
+            }
+            else
+            {
+                if (allStrategys != null)
+                {
+                    await FileHelper.Current.WriteObjectAsync<List<StrategyResult>>(allStrategys, filename);
+                }
+            }
+            return allStrategys;
         }
     }
 }
