@@ -94,7 +94,7 @@
                 </ListView.ItemContainerStyle>
             </ListView>
         </pr:PullToRefreshBox>
-        <ProgressRing x:Name="progress"   Foreground="{ThemeResource ThemeColorBrush}" Visibility="{Binding IsProgressVisible}" 
+        <ProgressRing x:Name="progress" IsActive="{Binding IsActive}"  Foreground="{ThemeResource ThemeColorBrush}" 
                           Height="60" Width="60" Background="Transparent"/>
     </Grid>
     

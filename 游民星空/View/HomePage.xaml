@@ -176,7 +176,9 @@
                          GroupName="Module"  Style="{StaticResource TabRadioStyle}">
                             <RadioButton.Content>
                                 <StackPanel>
-                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE1CE;"  />
+                                    
+                                    <!--<SymbolIcon Symbol="ZoomOut"/>-->
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph=""  />
                                     <TextBlock Text="新闻" />
                                 </StackPanel>
                             </RadioButton.Content>

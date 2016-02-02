@@ -51,7 +51,9 @@ namespace 游民星空.View
 
         private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
+            progress.IsActive = true;
             viewModel.Refresh();
+            progress.IsActive = false;
         }
     }
 }

@@ -16,11 +16,29 @@ namespace 游民星空.Core.ViewModel
 
         public EssayDetailViewModel(EssayResult essay)
         {
+            IsActive = true;
             apiService = new ApiService();
             this.essayResult = essay;
 
             GenerateHtmlString();
         }
+        /// <summary>
+        /// ProgressRing IsActive
+        /// </summary>
+        private bool isActive;
+        public bool IsActive
+        {
+            get
+            {
+                return isActive;
+            }
+            set
+            {
+                isActive = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string htmlString;
         /// <summary>
         /// HTML正文
@@ -155,6 +173,7 @@ namespace 游民星空.Core.ViewModel
                    "</html>";
 
             }
+            IsActive = false;
 
         }
 

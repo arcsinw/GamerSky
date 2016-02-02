@@ -40,7 +40,7 @@ namespace 游民星空.Core.Http
             List<ChannelResult> Channels = new List<ChannelResult>();
 
             Channels.Add(new ChannelResult { isTop = "False", nodeId = 0, nodeName = "头条" });
-            if (channel != null & channel.result!=null)
+            if (channel != null && channel.result!=null)
             {
                 foreach (var item in channel.result)
                 {

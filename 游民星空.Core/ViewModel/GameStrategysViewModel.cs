@@ -16,7 +16,25 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public ObservableCollection<EssayResult> Strategys { get; set; }
 
+
         private ApiService apiService;
+
+        /// <summary>
+        /// ProgressRing IsActive
+        /// </summary>
+        private bool isActive = true;
+        public bool IsActive
+        {
+            get
+            {
+                return isActive;
+            }
+            set
+            {
+                isActive = value;
+                OnPropertyChanged();
+            }
+        }
 
         private StrategyResult strategyResult;
         public GameStrategysViewModel(StrategyResult strategyResult)
@@ -35,13 +53,16 @@ namespace 游民星空.Core.ViewModel
             {
                 Strategys.Add(item);
             }
+            IsActive = false;
         }
 
 
         public void Refresh()
         {
+            IsActive = true;
             Strategys.Clear();
             LoadData(strategyResult);
+            IsActive = false;
         }
 
     }
