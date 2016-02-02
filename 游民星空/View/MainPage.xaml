@@ -108,12 +108,13 @@
                     <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >
                     <ListView x:Name="essayListView" 
                                  ItemsSource="{Binding Essays}"
-                                      DataContext="{Binding }"
-                                      Padding="0" Margin="0"
-                                  IsItemClickEnabled="True"
-                                  ItemClick="ListView_ItemClick"
-                                  Loaded="ListView_Loaded"
-                                  >
+                                 SelectionMode="None"
+                                 DataContext="{Binding }"
+                                 Padding="0" Margin="0"
+                                 IsItemClickEnabled="True"
+                                 ItemClick="ListView_ItemClick"
+                                 Loaded="ListView_Loaded"
+                                 >
                         <ListView.ItemTemplateSelector>
                             <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                                                       ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"

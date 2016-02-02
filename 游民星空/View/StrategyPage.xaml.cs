@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
@@ -56,6 +57,25 @@ namespace 游民星空.View
             {
                 ViewModel.RefreshAllStrategy();
             }
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            StrategyResult result =  e.ClickedItem as StrategyResult;
+            if(result!=null)
+            {
+                this.Frame.Navigate(typeof(GameStrategys), result);
+            }
+        }
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SearchPage));
         }
     }
 }

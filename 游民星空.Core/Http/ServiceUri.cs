@@ -32,8 +32,15 @@ namespace 游民星空.Core.Http
         public const string TwoCorrelation = "http://appapi2.gamersky.com/v2/TwoArticle";
 
         /// <summary>
-        /// 获取攻略
+        /// 获取有攻略的游戏列表
         /// </summary>
         public const string Strategy = "http://appapi2.gamersky.com/v2/strategy";
+
+        /// <summary>
+        /// 获取某一个游戏的攻略列表
+        /// </summary>
+        public const string GameStrategys = "http://appapi2.gamersky.com/v2/AllChannelList";
+
+
     }
 }

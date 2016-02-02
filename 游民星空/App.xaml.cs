@@ -4,9 +4,11 @@ using Windows.ApplicationModel.Activation;
 using Windows.Foundation.Metadata;
 using Windows.Phone.UI.Input;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Helper;
 using 游民星空.View;
 
 namespace 游民星空
@@ -24,7 +26,42 @@ namespace 游民星空
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            this.UnhandledException += OnUnhandledException;
         }
+
+
+        private async void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            await new MessageDialog("Application Unhandled Exception:\r\n" + e.Exception.Message).ShowAsync();
+        }
+
+        #region 处理异步方法里的异常
+        /// <summary>
+        /// Should be called from OnActivated and OnLaunched
+        /// </summary>
+        private void RegisterExceptionHandlingSynchronizationContext()
+        {
+            ExceptionHandlingSynchronizationContext
+                .Register()
+                .UnhandledException += SynchronizationContext_UnhandledException;
+        }
+
+        private async void SynchronizationContext_UnhandledException(object sender, Core.Helper.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            await new MessageDialog("Synchronization Context Unhandled Exception:\r\n" + GetExceptionDetailMessage(e.Exception), "这真是令人尴尬,,ԾㅂԾ,,")
+                .ShowAsync();
+        }
+        #endregion
+
+        #region 获取简短的异常堆栈信息
+        private string GetExceptionDetailMessage(Exception e)
+        {
+            return $"{e.Message}\r\n{e.StackTraceEx()}";
+        }
+        #endregion
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -33,6 +70,8 @@ namespace 游民星空
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            RegisterExceptionHandlingSynchronizationContext();
+
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -140,6 +179,14 @@ namespace 游民星空
             }
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = visibility;
+        }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            RegisterExceptionHandlingSynchronizationContext();
+
+            base.OnActivated(args);
+
         }
     }
 }

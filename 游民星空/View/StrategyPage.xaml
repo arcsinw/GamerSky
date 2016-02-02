@@ -437,9 +437,11 @@
                SelectionChanged="Pivot_SelectionChanged" Style="{StaticResource StrategyPivotStyle}">
 
             <PivotItem Header="关注" Margin="0" Padding="0">
-                <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
+                <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
                     <GridView ItemsSource="{Binding FocusStrategys}" Margin="4"
-                          ItemsPanel="{StaticResource GridViewItemsPanel}">
+                          ItemsPanel="{StaticResource GridViewItemsPanel}"
+                              IsItemClickEnabled="True"
+                              ItemClick="GridView_ItemClick">
 
                         <GridView.Template>
                             <ControlTemplate>
@@ -468,7 +470,7 @@
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
-                </pr:PullToRefreshBox>
+                <!--</pr:PullToRefreshBox>-->
             </PivotItem>
             <PivotItem Header="全部">
                 <PivotItem.Resources>
@@ -477,7 +479,10 @@
                 <SemanticZoom>
                     <!--数据列表-->
                     <SemanticZoom.ZoomedInView>
-                        <ListView ItemsSource="{Binding AllStrategys}">
+                        <ListView ItemsSource="{Binding AllStrategys}"
+                                  SelectionMode="None"
+                                  IsItemClickEnabled="True"
+                                  ItemClick="ListView_ItemClick">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -490,6 +495,30 @@
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
+                            <!--列表头-->
+                            <ListView.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.ContainerStyle>
+                                        <Style TargetType="GroupItem">
+                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                                        </Style>
+                                    </GroupStyle.ContainerStyle>
+                                    <!--显示列表头的数据项模板-->
+                                    <GroupStyle.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Border Margin="0" Background="Transparent"
+												BorderThickness="1" 
+                                                    BorderBrush="{ThemeResource ThemeColorBrush}">
+                                                <TextBlock Text="{Binding Key}" 
+													FontSize="25" 
+													Foreground="{ThemeResource ThemeColorBrush}"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GroupStyle.HeaderTemplate>
+                                </GroupStyle>
+                            </ListView.GroupStyle>
                         </ListView>
                     </SemanticZoom.ZoomedInView>
                     <!--排序列表-->
@@ -506,5 +535,13 @@
             </PivotItem>
 
         </Pivot>
+
+        <Button Background="Transparent" Foreground="White" 
+                HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top"
+                Click="Button_Click">
+            <Button.Content>
+                <SymbolIcon  Symbol="Find"/>
+            </Button.Content>
+        </Button>
     </Grid>
 </Page>

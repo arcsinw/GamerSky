@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace 游民星空.Core.Model
 {
+    /// <summary>
+    /// 有攻略的游戏列表
+    /// </summary>
     public class Strategy
     {
         public string errorCode { get; set; }
@@ -15,7 +18,7 @@ namespace 游民星空.Core.Model
     public class StrategyResult
     {
         public string favoriteCnt { get; set; }
-        public string specialID { get; set; }
+        public int specialID { get; set; }
         /// <summary>
         /// 缩略图
         /// </summary>

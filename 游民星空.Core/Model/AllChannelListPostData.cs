@@ -11,7 +11,7 @@ namespace 游民星空.Core.Model
     /// v2/AllChannelList Post data format
     /// </summary>
     [DataContract]
-    public class AllChannelListPostData
+    public class AllChannelListPostData 
     {
         [DataMember]
         public string appVersion = "2.0.7";

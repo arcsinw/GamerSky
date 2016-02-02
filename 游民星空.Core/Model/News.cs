@@ -32,7 +32,7 @@ namespace 游民星空.Core.Model
         /// </summary>
         public string originURL;
         public int pageCount;
-        public string pageIndexNames;
+        public string[] pageIndexNames;
         public subscribe[] subscribes;
         public string subTitle;
         public string templateURL;

@@ -55,6 +55,7 @@ namespace 游民星空.Core.ViewModel
             {
                 AllStrategys.Add(item);
             }
+
         }
 
         /// <summary>

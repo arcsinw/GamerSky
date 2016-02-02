@@ -97,6 +97,7 @@ namespace 游民星空.Core.Http
 
         /// <summary>
         /// 阅读文章
+        /// 适用于新闻 和 攻略
         /// </summary>
         /// <param name="contentId">文章Id</param>
         /// <returns></returns>
@@ -111,7 +112,7 @@ namespace 游民星空.Core.Http
             else
             {
                 AllChannelListPostData postData = new AllChannelListPostData();
-                postData.request = new request { contentId = contentId };
+                postData.request = new request { contentId = contentId,pageIndex =1 };
                 postData.deviceId = DeviceInformationHelper.GetDeviceId();
                 news = await PostJson<AllChannelListPostData, News>(ServiceUri.TwoArticle, postData);
                 await FileHelper.Current.WriteObjectAsync<News>(news, filename);
@@ -131,7 +132,7 @@ namespace 游民星空.Core.Http
         //public async Task<List<EssayResult>> LoadMoreEssay(int nodeId, int pageIndex)
         //{
         //    return await GetEssayList(nodeId, pageIndex);
-        //}
+        //}\\
         /// <summary>
         /// 获取相关阅读
         /// </summary>
@@ -169,10 +170,10 @@ namespace 游民星空.Core.Http
         }
 
         /// <summary>
-        /// 获取攻略 关注
+        /// 获取有攻略的游戏 关注
         /// </summary>
         /// <returns></returns>
-        public async Task<List<StrategyResult>> GetStrategys(int pageCount = 20)
+        public async Task<List<StrategyResult>> GetStrategys(int pageCount = 20,int type=0)
         {
             string filename = "focusStrategys.json";
             Strategy strategy = new Strategy();
@@ -182,10 +183,10 @@ namespace 游民星空.Core.Http
             }
             else
             {
-                pageCount = 20;
-                AllChannelListPostData postData = new AllChannelListPostData();
-                postData.request = new request { pageIndex = 1, pageCount = pageCount, type = "1" };
-                strategy = await PostJson<AllChannelListPostData, Strategy>(ServiceUri.Strategy, postData);
+                
+                StrategyPostData postData = new StrategyPostData();
+                postData.request = new StrategyRequest { pageIndex = 1, pageCount = pageCount, type = type };
+                strategy = await PostJson<StrategyPostData, Strategy>(ServiceUri.Strategy, postData);
                 await FileHelper.Current.WriteObjectAsync<Strategy>(strategy, filename);
 
             }
@@ -203,13 +204,13 @@ namespace 游民星空.Core.Http
         }
 
         /// <summary>
-        /// 获取所有攻略
+        /// 获取所有有攻略的游戏
         /// </summary>
         /// <returns></returns>
         public async Task<List<StrategyResult>> GetAllStrategys()
         {
             string filename = "allStrategys.json";
-            List<StrategyResult> allStrategys = await GetStrategys(10000);
+            List<StrategyResult> allStrategys = await GetStrategys(10000,1);
 
             if (NetworkManager.Current.Network == 4)  //无网络
             {
@@ -223,6 +224,40 @@ namespace 游民星空.Core.Http
                 }
             }
             return allStrategys;
+        }
+
+        /// <summary>
+        /// 获取某个游戏的所有攻略
+        /// </summary>
+        /// <param name="contentId"></param>
+        /// <returns></returns>
+        public async Task<List<EssayResult>> GetGameStrategys(int specialID)
+        {
+            Essay essay = new Essay();
+            string filename = "gameStrategys_" + specialID + ".json";
+            if (NetworkManager.Current.Network == 4)  //无网络
+            {
+                essay = await FileHelper.Current.ReadObjectAsync<Essay>(filename);
+            }
+            else
+            {
+                AllChannelListPostData postData = new AllChannelListPostData();
+                postData.request = new request { elementsCountPerPage = 20, nodeIds = specialID, pageIndex = 1, parentNodeId = "strategy" };
+                essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.GameStrategys, postData);
+                await FileHelper.Current.WriteObjectAsync<Essay>(essay, filename);
+            }
+
+            List<EssayResult> essayList = new List<EssayResult>();
+
+            if (essay != null)
+            {
+                foreach (var item in essay.result)
+                {
+                    essayList.Add(item);
+                }
+            }
+
+            return essayList;
         }
     }
 }
