@@ -132,6 +132,7 @@
     <Compile Include="Model\Essay.cs" />
     <Compile Include="Model\EssayPageIndex.cs" />
     <Compile Include="Model\JSParameter.cs" />
+    <Compile Include="Model\KeyedList.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\PivotData.cs" />

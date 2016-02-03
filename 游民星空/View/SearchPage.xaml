@@ -166,11 +166,11 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!--搜索栏-->
-        <Grid Background="{ThemeResource ThemeColorBrush}">
+        <Grid Background="{ThemeResource ThemeColorBrush}" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -187,6 +187,11 @@
                     Grid.Column="2">
                 <SymbolIcon Symbol="Find"/>
             </Button>
+        </Grid>
+
+        <Grid Grid.Row="1"  >
+            <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent"
+                          Foreground="Red" IsActive="True" Visibility="Visible" Width="80" Height="80"/>
         </Grid>
     </Grid>
 </Page>

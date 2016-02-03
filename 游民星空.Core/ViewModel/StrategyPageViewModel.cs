@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
 
@@ -19,7 +20,7 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 所有攻略
         /// </summary>
-        public ObservableCollection<StrategyResult> AllStrategys { get; set; }
+        public ObservableCollection<AlphaKeyGroup<StrategyResult>> AllStrategys { get; set; }
 
         private ApiService apiService;
 
@@ -29,7 +30,7 @@ namespace 游民星空.Core.ViewModel
 
             FocusStrategys = new ObservableCollection<StrategyResult>();
 
-            AllStrategys = new ObservableCollection<StrategyResult>();
+            AllStrategys = new ObservableCollection<AlphaKeyGroup<StrategyResult>>();
 
         }
 
@@ -39,9 +40,12 @@ namespace 游民星空.Core.ViewModel
         public async void LoadFocusStrategys()
         {
             List<StrategyResult> strategys = await apiService.GetStrategys();
-            foreach (var item in strategys)
+            if (strategys != null)
             {
-                FocusStrategys.Add(item);
+                foreach (var item in strategys)
+                {
+                    FocusStrategys.Add(item);
+                }
             }
         }
 
@@ -51,11 +55,19 @@ namespace 游民星空.Core.ViewModel
         public async void LoadAllStrategys()
         {
             List<StrategyResult> strategys = await apiService.GetAllStrategys();
-            foreach (var item in strategys)
+            if (strategys != null)
             {
-                AllStrategys.Add(item);
-            }
+                
 
+                //按拼音分组
+                List<AlphaKeyGroup<StrategyResult>> groupData = AlphaKeyGroup<StrategyResult>.CreateGroups(
+                    strategys, (StrategyResult s) => s.title, true);
+
+                foreach (var item in groupData)
+                {
+                    AllStrategys.Add(item);
+                }
+            }
         }
 
         /// <summary>

@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:游民星空.Core.ViewModel"
+    xmlns:converter="using:游民星空.Converter"
     mc:Ignorable="d">
 
     <Page.DataContext>
@@ -223,6 +224,11 @@
         <ItemsPanelTemplate x:Key="GridViewItemsPanel">
             <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Horizontal"/>
         </ItemsPanelTemplate>
+
+        <ItemsPanelTemplate x:Key="FourGridViewItemsPanel">
+            <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+
         <Style x:Key="StrategyPivotStyle" TargetType="Pivot">
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Padding" Value="0"/>
@@ -429,7 +435,9 @@
             </Setter>
         </Style>
 
-
+        <converter:CountToBoolConverter x:Key="CountToConverter"/>
+        <!--数据集合控件Padding-->
+        <Thickness x:Key="ControlPadding">8</Thickness>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -438,15 +446,14 @@
 
             <PivotItem Header="关注" Margin="0" Padding="0">
                 <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
-                    <GridView ItemsSource="{Binding FocusStrategys}" Margin="4"
+                <GridView ItemsSource="{Binding FocusStrategys}" Padding="8"
                           ItemsPanel="{StaticResource GridViewItemsPanel}"
                               IsItemClickEnabled="True"
                               ItemClick="GridView_ItemClick">
-
-                        <GridView.Template>
+                    <GridView.Template>
                             <ControlTemplate>
                                 <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
-                                    <Viewbox Stretch="Uniform" Margin="0" VerticalAlignment="Top" 
+                                    <Viewbox Stretch="Uniform" Margin="8" VerticalAlignment="Stretch" 
                                              ScrollViewer.VerticalScrollMode="Enabled" StretchDirection="Both" >
                                         <ItemsPresenter  />
                                     </Viewbox>
@@ -465,56 +472,66 @@
                                             <BitmapImage UriSource="{Binding thumbnailUrl}"/>
                                         </Image.Source>
                                     </Image>
-                                    <TextBlock Grid.Row="1" Text="{Binding title}" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="{Binding title}" TextWrapping="Wrap"/>
                                 </Grid>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
                 <!--</pr:PullToRefreshBox>-->
             </PivotItem>
-            <PivotItem Header="全部">
+            <PivotItem Header="全部" Margin="0" Padding="0">
                 <PivotItem.Resources>
-                    <CollectionViewSource x:Key="CollectionViewSource" IsSourceGrouped="True" Source="{Binding AllStrategys}"/>
+                    <CollectionViewSource x:Key="CollectionViewSource" IsSourceGrouped="True" 
+                                          ItemsPath="InternalList"
+                                          Source="{Binding AllStrategys}"/>
                 </PivotItem.Resources>
                 <SemanticZoom>
+                    <SemanticZoom.Style>
+                        <Style TargetType="SemanticZoom">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </SemanticZoom.Style>
                     <!--数据列表-->
                     <SemanticZoom.ZoomedInView>
-                        <ListView ItemsSource="{Binding AllStrategys}"
-                                  SelectionMode="None"
+                        <ListView ItemsSource="{Binding Source={StaticResource CollectionViewSource}}"
+                                  SelectionMode="None" 
                                   IsItemClickEnabled="True"
                                   ItemClick="ListView_ItemClick">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <StackPanel>
                                         <Image>
                                             <Image.Source>
                                                 <BitmapImage UriSource="{Binding thumbnailUrl}"/>
                                             </Image.Source>
                                         </Image>
-                                        <TextBlock  Text="{Binding title}"/>
-                                    </Grid>
+                                        <TextBlock  Text="{Binding title}" HorizontalAlignment="Center"/>
+                                    </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
                             <!--列表头-->
                             <ListView.GroupStyle>
-                                <GroupStyle>
+                                <GroupStyle HidesIfEmpty="True" >
                                     <GroupStyle.ContainerStyle>
                                         <Style TargetType="GroupItem">
                                             <Setter Property="Padding" Value="0"/>
-                                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                            <Setter Property="Margin" Value="0"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             <Setter Property="HorizontalAlignment" Value="Left"/>
                                         </Style>
                                     </GroupStyle.ContainerStyle>
                                     <!--显示列表头的数据项模板-->
                                     <GroupStyle.HeaderTemplate>
                                         <DataTemplate>
-                                            <Border Margin="0" Background="Transparent"
-												BorderThickness="1" 
-                                                    BorderBrush="{ThemeResource ThemeColorBrush}">
-                                                <TextBlock Text="{Binding Key}" 
+                                            <TextBlock Text="{Binding Key}" 
 													FontSize="25" 
 													Foreground="{ThemeResource ThemeColorBrush}"/>
-                                            </Border>
                                         </DataTemplate>
                                     </GroupStyle.HeaderTemplate>
                                 </GroupStyle>
@@ -523,12 +540,30 @@
                     </SemanticZoom.ZoomedInView>
                     <!--排序列表-->
                     <SemanticZoom.ZoomedOutView>
-                        <GridView>
+                        <GridView ItemsSource="{Binding Source={StaticResource CollectionViewSource},Path=CollectionGroups}"
+                                  ItemsPanel="{StaticResource FourGridViewItemsPanel}">
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-
+                                    <Border >
+                                        <!--<Button 
+                                            IsEnabled="{Binding Converter={StaticResource CountToConverter},ConverterParameter={StaticResource CollectionViewSource},Path=CollectionGroups}" 
+                                                Content="{Binding Group.Key}"
+                                                BorderThickness="0"/>-->
+                                        <TextBlock Text="{Binding Group.Key}"/>
+                                    </Border>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
+
+                            <GridView.Template>
+                                <ControlTemplate>
+                                    <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
+                                        <Viewbox Stretch="Uniform" Margin="0" VerticalAlignment="Top" 
+                                             ScrollViewer.VerticalScrollMode="Enabled" StretchDirection="Both" >
+                                            <ItemsPresenter  />
+                                        </Viewbox>
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </GridView.Template>
                         </GridView>
                     </SemanticZoom.ZoomedOutView>
                 </SemanticZoom>

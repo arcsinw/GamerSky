@@ -16,10 +16,11 @@
         <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
         <!--BorderBrush-->
         <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
-
+        <Thickness x:Key="GridMargin">2,0</Thickness>
+        <Thickness x:Key="GridPadding">5</Thickness>
         <!--一张图文章模板-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid Margin="2,0" Padding="5" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
@@ -45,15 +46,16 @@
             </Grid>
         </DataTemplate>
 
+        <!--无图模板-->
         <DataTemplate x:Key="NoPicEssayDataTemplate">
             <Grid BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}"
-                  Padding="0,8">
+                  Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"   >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="{Binding title}" TextWrapping="Wrap"/>
-                <TextBlock  HorizontalAlignment="Right" Grid.Row="1" Margin="0,8,0,0">
+                <TextBlock  HorizontalAlignment="Right" Grid.Row="1" Margin="5,2" >
                                 <Run Text="{Binding commentsCount}"/>
                                 <Run Text="评论"/>
                 </TextBlock>
@@ -63,7 +65,7 @@
     
     <!--某款游戏的攻略列表页-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
+        <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
             <ListView ItemsSource="{Binding Strategys}"
                  SelectionMode="None"
                   IsItemClickEnabled="True"
@@ -93,9 +95,11 @@
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-        </pr:PullToRefreshBox>
-        <ProgressRing x:Name="progress" IsActive="{Binding IsActive}"  Foreground="{ThemeResource ThemeColorBrush}" 
+        <!--</pr:PullToRefreshBox>-->
+        <Grid>
+            <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Foreground="{ThemeResource ThemeColorBrush}" 
                           Height="60" Width="60" Background="Transparent"/>
+        </Grid>
     </Grid>
     
     
