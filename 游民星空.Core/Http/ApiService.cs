@@ -259,5 +259,77 @@ namespace 游民星空.Core.Http
 
             return essayList;
         }
+
+
+        /// <summary>
+        /// 获取搜索热点词
+        /// </summary>
+        /// <param name="searchType">热点词类型 strategy news shouyou</param>
+        /// <returns></returns>
+        public async Task<List<string>> GetSearchHotKey(string searchType)
+        {
+            string filename = "";
+            List<string> hotKeyList = new List<string>();
+            if (NetworkManager.Current.Network == 4)  //无网络
+            {
+                //essay = await FileHelper.Current.ReadObjectAsync<Essay>(filename);
+            }
+            else
+            {
+                SearchPostData postData = new SearchPostData() { request = new SearchRequest { searchType = searchType } };
+                SearchResult searchResult = await PostJson<SearchPostData, SearchResult>(ServiceUri.SearchHotDict, postData);
+                for(int i =0;i<searchResult.result.Length;i++)
+                {
+                    hotKeyList.Add(searchResult.result[i]);
+                }
+            }
+
+            return hotKeyList;
+        }
+
+        /// <summary>
+        /// 获取订阅热点词
+        /// </summary>
+        /// <param name="type"></param>
+        public async Task<List<SubscribeResult>> GetSubscribeHotKey(string type="1")
+        {
+            SubscribeSearchPostData postData = new SubscribeSearchPostData { request = new SubscribeSearchRequest { type = type } };
+            Subscribe subscribe = await PostJson<SubscribeSearchPostData, Subscribe>(ServiceUri.Subscribe, postData);
+            List<SubscribeResult> subscribeResults = new List<SubscribeResult>();
+            if (subscribe!= null && subscribe.result!=null)
+            {
+                foreach (var item in subscribe.result)
+                {
+                    subscribeResults.Add(item);
+                }
+            }
+            return subscribeResults;
+        }
+
+        /// <summary>
+        /// 搜索
+        /// </summary>
+        /// <param name="searchKey"></param>
+        /// <param name="searchType"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        public async Task<List<EssayResult>> SearchByKey(string searchKey,string searchType,int pageIndex)
+        {
+            SearchPostData postData = new SearchPostData();
+            postData.request = new SearchRequest { elementsCountPerPage = "20", pageIndex = 1, searchKey = searchKey, searchType = searchType };
+
+            List<EssayResult> essayResults = new List<EssayResult>();
+
+            Essay essay = await PostJson<SearchPostData, Essay>(ServiceUri.Search, postData);
+            if(essay!= null && essay.result!=null)
+            {
+                foreach (var item in essay.result)
+                {
+                    essayResults.Add(item);
+                }
+            }
+
+            return essayResults;
+        }
     }
 }

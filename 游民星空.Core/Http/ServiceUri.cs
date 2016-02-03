@@ -41,6 +41,19 @@ namespace 游民星空.Core.Http
         /// </summary>
         public const string GameStrategys = "http://appapi2.gamersky.com/v2/AllChannelList";
 
+        /// <summary>
+        /// 获取搜索热点关键词
+        /// </summary>
+        public const string SearchHotDict = "http://appapi2.gamersky.com/v2/SearchHotDict";
 
+        /// <summary>
+        /// 订阅热点
+        /// </summary>
+        public const string Subscribe = "http://appapi2.gamersky.com/v2/subscribe";
+
+        /// <summary>
+        /// 搜索
+        /// </summary>
+        public const string Search = "http://appapi2.gamersky.com/v2/TwoSearch";
     }
 }

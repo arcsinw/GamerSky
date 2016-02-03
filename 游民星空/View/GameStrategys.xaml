@@ -68,6 +68,7 @@
         <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
             <ListView ItemsSource="{Binding Strategys}"
                  SelectionMode="None"
+                  ShowsScrollingPlaceholders="True"
                   IsItemClickEnabled="True"
                   ItemClick="ListView_ItemClick">
 

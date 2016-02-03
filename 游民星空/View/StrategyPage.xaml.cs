@@ -70,7 +70,11 @@ namespace 游民星空.View
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            StrategyResult result = e.ClickedItem as StrategyResult;
+            if (result != null)
+            {
+                this.Frame.Navigate(typeof(GameStrategys), result);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

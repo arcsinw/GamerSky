@@ -64,9 +64,14 @@ namespace 游民星空.Core.Helper
                     index = list.FindIndex(alphaKeyGroup => (alphaKeyGroup.Key.Equals(label, StringComparison.CurrentCulture)));
                 }
 
-                if(index>=0 && index< list.Count)
+                if (index >= 0 && index < list.Count)
                 {
                     list[index].InternalList.Add(item);
+                }
+                else
+                {
+                    //临时解决方案，中文加入？？中
+                    list[list.Count - 1].InternalList.Add(item);
                 }
             }
 

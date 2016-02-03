@@ -181,7 +181,7 @@
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
-            <TextBox PlaceholderText="请输入搜索内容" Text="44" Margin="0,8" Grid.Column="1" Style="{StaticResource SearchTextBoxStyle}"/>
+            <TextBox PlaceholderText="请输入搜索内容"  Margin="0,8" Grid.Column="1" Style="{StaticResource SearchTextBoxStyle}"/>
             <Button x:Name="search" Width="48" Height="48" Background="Transparent" 
                     Foreground="White" Click="search_Click"
                     Grid.Column="2">
@@ -189,7 +189,40 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="1"  >
+        <Grid Grid.Row="1">
+            <Pivot>
+                <Pivot.Items>
+                    <PivotItem Header="新闻">
+                        <TextBlock Text="热词搜索"/>
+                    </PivotItem>
+                    <PivotItem Header="攻略">
+                        <TextBlock Text="热词搜索"/>
+                    </PivotItem>
+                    <PivotItem Header="订阅">
+                        <ListView>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0"/>
+                                        <StackPanel Grid.Column="1" Orientation="Vertical">
+                                            <TextBlock />
+                                            <TextBlock/>
+                                        </StackPanel>
+                                        <Button Grid.Column="3"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </PivotItem>
+                </Pivot.Items>
+            </Pivot>
+        </Grid>
+        <Grid Grid.Row="1" Background="Transparent" >
             <ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent"
                           Foreground="Red" IsActive="True" Visibility="Visible" Width="80" Height="80"/>
         </Grid>
