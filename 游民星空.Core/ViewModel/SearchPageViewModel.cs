@@ -15,7 +15,7 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 订阅页面
         /// </summary>
-        public ObservableCollection<EssayResult> Essays { get; set; }
+        public ObservableCollection<SubscribeResult> Subscribes { get; set; }
 
         /// <summary>
         /// 攻略
@@ -27,17 +27,33 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public ObservableCollection<string> News { get; set; }
 
+        private bool isActive;
+        public bool IsActive
+        {
+            get
+            {
+                return isActive;
+            }
+            set
+            {
+                isActive = value;
+                OnPropertyChanged("IsActive");
+            }
+        }
+
         private ApiService apiService;
         public SearchPageViewModel()
         {
             apiService = new ApiService();
-            Essays = new ObservableCollection<EssayResult>();
+            Subscribes = new ObservableCollection<SubscribeResult>();
             Strategys = new ObservableCollection<string>();
             News = new ObservableCollection<string>();
+            LoadData();
         }
 
         public async void LoadData()
         {
+            IsActive = true;
             List<string> strategys = await apiService.GetSearchHotKey(SearchTypeEnum.strategy.ToString());
             if(strategys!= null)
             {
@@ -55,6 +71,14 @@ namespace 游民星空.Core.ViewModel
                     News.Add(item);
                 }
             }
+
+            List<SubscribeResult> subscribes = await apiService.GetSubscribeHotKey();
+            foreach (var item in subscribes)
+            {
+                Subscribes.Add(item);
+            }
+
+            IsActive = false;
         }
     }
 }

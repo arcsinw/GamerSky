@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace 游民星空.Core.Model
+namespace 游民星空.Core.PostDataModel
 {
     /// <summary>
     /// v2/AllChannelList Post data format

@@ -12,7 +12,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using 游民星空.Core.ViewModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -21,13 +20,12 @@ namespace 游民星空.View
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class SearchPage : Page
+    public sealed partial class SettingsPage : Page
     {
-        public SearchPage()
+        public SettingsPage()
         {
             this.InitializeComponent();
         }
-        
 
         private void back_Click(object sender, RoutedEventArgs e)
         {
@@ -35,16 +33,6 @@ namespace 游民星空.View
             {
                 Frame.GoBack();
             }
-        }
-
-        private void search_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -11,7 +11,7 @@ namespace 游民星空.Core.Model
     /// </summary>
     public class Subscribe : ResultBase
     {
-        public SubscribeResult[] result;
+        public SubscribeResult[] result { get; set; }
     }
     public class SubscribeResult
     {
@@ -19,6 +19,6 @@ namespace 游民星空.Core.Model
         public string isHot { get; set; }
         public string sourceId { get; set; }
         public string sourceName { get; set; }
-        public string[] thumbnailUrl { get; set; }
+        public string thumbnailUrl { get; set; }
     }
 }

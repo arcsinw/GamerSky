@@ -27,18 +27,32 @@ namespace 游民星空.View
         public StrategyPage()
         {
             this.InitializeComponent();
+            pageIndexDic = new Dictionary<int, int>();
         }
 
+        /// <summary>
+        /// 保存不同频道的页码
+        /// </summary>
+        private Dictionary<int, int> pageIndexDic;
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(pivot.SelectedIndex==0)
+            if (pivot.SelectedIndex == 0)
             {
-                ViewModel.LoadFocusStrategys();
+                if (!pageIndexDic.ContainsKey(0))
+                {
+                    ViewModel.LoadFocusStrategys();
+                    pageIndexDic.Add(0, 1);
+                }
+
             }
             else
             {
-                ViewModel.LoadAllStrategys();
+                if (!pageIndexDic.ContainsKey(1))
+                {
+                    ViewModel.LoadAllStrategys();
+                    pageIndexDic.Add(1, 1);
+                }
             }
         }
 

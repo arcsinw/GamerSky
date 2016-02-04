@@ -8,6 +8,7 @@ using Windows.Storage;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
+using 游民星空.Core.PostDataModel;
 
 namespace 游民星空.Core.Http
 {

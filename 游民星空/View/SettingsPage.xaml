@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="游民星空.View.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:游民星空.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="{ThemeResource ThemeColorBrush}">
+            <Button x:Name="back" Width="48" Height="48" Background="Transparent" 
+                    Foreground="White" Click="back_Click"
+                    Grid.Column="0">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock Text="设置" Foreground="White" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Row="1" Background="LightGray">
+            <ListView SelectionMode="None">
+                <ListView.Resources>
+                    <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
+                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="Gray"/>
+                </ListView.Resources>
+                <ListView.Items>
+                    <ListViewItem Margin="0,16,0,0">
+                        <Grid>
+                            <TextBlock Text="字体大小"/>
+                        </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem>
+                        <Grid>
+                            <TextBlock Text="要闻推送" VerticalAlignment="Center"/>
+                            <ToggleSwitch MinWidth="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem Margin="0,16,0,0">
+                        <TextBlock Text="封面故事"/>
+                    </ListViewItem>
+
+                    <ListViewItem>
+                        <TextBlock Text="关于"/>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <Grid>
+                            <TextBlock Text="检测新版本" VerticalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ListViewItem>
+                </ListView.Items>
+
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="BorderBrush" Value="LightGray"/>
+                        <Setter Property="BorderThickness" Value="{StaticResource ListViewBorderThickness}"/>
+                    </Style>
+                    
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

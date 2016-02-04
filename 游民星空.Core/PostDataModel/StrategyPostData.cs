@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace 游民星空.Core.Model
+namespace 游民星空.Core.PostDataModel
 {
     /// <summary>
     /// 攻略 PostData

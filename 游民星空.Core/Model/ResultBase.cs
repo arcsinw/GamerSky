@@ -11,7 +11,7 @@ namespace 游民星空.Core.Model
     /// </summary>
     public class ResultBase
     {
-        public string errorCode;
-        public string errorMessage;
+        public string errorCode { get; set; }
+        public string errorMessage { get; set; }
     }
 }
