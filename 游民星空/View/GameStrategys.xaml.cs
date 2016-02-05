@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Helper;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
 
@@ -24,21 +25,22 @@ namespace 游民星空.View
     /// </summary>
     public sealed partial class GameStrategys : Page
     {
+        private ScrollViewer scrollViewer;
         public GameStrategys()
         {
             this.InitializeComponent();
+            
         }
-        private GameStrategysViewModel viewModel;
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            progress.IsActive = true;
+            progressRing.IsActive = true;
             StrategyResult strategyResult = e.Parameter as StrategyResult;
             if (strategyResult != null)
             {
-                this.DataContext = viewModel = new GameStrategysViewModel(strategyResult);
+                await viewModel.LoadData(strategyResult);
             }
-            progress.IsActive = false;
+            progressRing.IsActive = false;
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
@@ -49,11 +51,44 @@ namespace 游民星空.View
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
 
-        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
-            progress.IsActive = true;
-            viewModel.Refresh();
-            progress.IsActive = false;
+            progressRing.IsActive = true;
+            await viewModel.Refresh();
+            progressRing.IsActive = false;
         }
+
+        private void ListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
+            if (scrollViewer != null)
+            {
+                scrollViewer.ViewChanged += scrollViewer_ViewChanged;
+            }
+        }
+
+        private bool IsDataLoading = false;
+        private int pageIndex = 1;
+        private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (scrollViewer != null)
+            {
+                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
+                {
+                    if (!IsDataLoading)  //未加载数据
+                    {
+                        IsDataLoading = true;
+                        //IsActive = true;
+                        progressRing.IsActive = true;
+                        await viewModel.LoadMoreStrategys(pageIndex);
+                        pageIndex++;
+                        //IsActive = false;
+                        progressRing.IsActive = false;
+                        IsDataLoading = false;
+                    }
+                }
+            }
+        }
+
     }
 }

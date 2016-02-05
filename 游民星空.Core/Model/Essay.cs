@@ -7,6 +7,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
 using Windows.System.Threading;
 using Windows.UI.Core;
@@ -57,7 +58,7 @@ namespace 游民星空.Core.Model
             }
         }
         //private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
-        
+
         //private List<BitmapImage> thumbnailBitmap = new List<BitmapImage>();
         ///// <summary>
         ///// 新闻缩略图  
@@ -67,28 +68,56 @@ namespace 游民星空.Core.Model
         //{
         //    get
         //    {
-        //        if(thumbnailBitmap.Count==0)
+        //        if (thumbnailBitmap.Count == 0 && thumbnailURLs!=null)
         //        {
-        //            for(int i =0;i<thumbnailURLs.Length;i++)
+        //            for (int i = 0; i < thumbnailURLs.Length; i++)
         //            {
         //                thumbnailBitmap.Add(defaultBitmap);
         //            }
         //        }
         //        for (int i = 0; i < thumbnailURLs.Length; i++)
         //        {
-        //           DownloadImage(thumbnailURLs[i]);
-                    
+        //            DownloadImage(thumbnailURLs[i]);
+
         //        }
-                
+
         //        return thumbnailBitmap;
         //    }
         //    set
         //    {
         //        thumbnailBitmap = value;
         //    }
-           
+
         //}
 
+        //private async void DownloadImage(string url)
+        //{
+        //    try
+        //    {
+        //        HttpClient hc = new HttpClient();
+        //        HttpResponseMessage resp = await hc.GetAsync(new Uri(url));
+        //        resp.EnsureSuccessStatusCode();
+        //        IInputStream inputStream = await resp.Content.ReadAsInputStreamAsync();
+        //        IRandomAccessStream memStream = new InMemoryRandomAccessStream();
+        //        await RandomAccessStream.CopyAsync(inputStream, memStream);
+        //        BitmapImage bitmap = new BitmapImage();
+        //        await bitmap.SetSourceAsync(memStream);
+        //        await DispatcherManager.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+        //        {
+        //            thumbnailBitmap.Add(bitmap);
+        //                //触发UI绑定属性的改变
+        //                OnPropertyChanged("ThumbnailBitmap");
+        //        });
+
+        //        //BitmapDecoder decoder = await BitmapDecoder.CreateAsync(memStream);
+        //        //SoftwareBitmap softBmp = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
+        //        //return softBmp;
+        //    }
+        //    catch (Exception ex)
+        //    {
+                
+        //    }
+        //}
 
         /// <summary>
         /// download through image's url
@@ -98,17 +127,30 @@ namespace 游民星空.Core.Model
         //{
         //    BitmapImage bitmap = new BitmapImage();
 
-        //    IBuffer buffer =  await HttpBaseService.SendGetRequestAsBytes(uri);
+        //    HttpResponseMessage resposne = await new HttpClient().GetAsync(new Uri(uri));
+
+        //    IInputStream inputStream = await resposne.Content.ReadAsInputStreamAsync();
+        //    IRandomAccessStream randomStream = new InMemoryRandomAccessStream();
+        //    await RandomAccessStream.CopyAsync(inputStream, randomStream);
+
+        //    await bitmap.SetSourceAsync(randomStream);
+
+        //    IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes(uri);
         //    byte[] bytes = buffer.ToArray();
-           
-        //        using (MemoryStream ms = new MemoryStream())
-        //        {
-        //            ms.Write(bytes, 0, bytes.Length);
 
-        //            await bitmap.SetSourceAsync(ms.AsRandomAccessStream());
 
-        //        }
-            
+
+        //    using (MemoryStream ms = new MemoryStream())
+        //    {
+        //        ms.Write(bytes, 0, bytes.Length);
+
+        //        IRandomAccessStream randomStreams = new InMemoryRandomAccessStream();
+        //        await RandomAccessStream.CopyAsync(inputStream, randomStreams);
+
+        //        await bitmap.SetSourceAsync(ms.AsRandomAccessStream());
+
+        //    }
+
         //    await DispatcherManager.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
         //    {
         //        thumbnailBitmap.Add(bitmap);

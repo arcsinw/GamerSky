@@ -80,7 +80,7 @@ namespace 游民星空.Core.Http
                     type = "null",
                 };
                 essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.AllChannelList, postData);
-                await FileHelper.Current.WriteObjectAsync<Essay>(essay, filename);
+                //await FileHelper.Current.WriteObjectAsync<Essay>(essay, filename);
 
             }
             List<EssayResult> essayList = new List<EssayResult>();
@@ -232,7 +232,7 @@ namespace 游民星空.Core.Http
         /// </summary>
         /// <param name="contentId"></param>
         /// <returns></returns>
-        public async Task<List<EssayResult>> GetGameStrategys(int specialID)
+        public async Task<List<EssayResult>> GetGameStrategys(int specialID,int pageIndex=1)
         {
             Essay essay = new Essay();
             string filename = "gameStrategys_" + specialID + ".json";
@@ -243,7 +243,7 @@ namespace 游民星空.Core.Http
             else
             {
                 AllChannelListPostData postData = new AllChannelListPostData();
-                postData.request = new request { elementsCountPerPage = 20, nodeIds = specialID, pageIndex = 1, parentNodeId = "strategy" };
+                postData.request = new request { elementsCountPerPage = 20, nodeIds = specialID, pageIndex = pageIndex, parentNodeId = "strategy" };
                 essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.GameStrategys, postData);
                 await FileHelper.Current.WriteObjectAsync<Essay>(essay, filename);
             }
@@ -314,10 +314,10 @@ namespace 游民星空.Core.Http
         /// <param name="searchType"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<List<EssayResult>> SearchByKey(string searchKey,string searchType,int pageIndex)
+        public async Task<List<EssayResult>> SearchByKey(string searchKey,SearchTypeEnum searchType,int pageIndex)
         {
             SearchPostData postData = new SearchPostData();
-            postData.request = new SearchRequest { elementsCountPerPage = "20", pageIndex = 1, searchKey = searchKey, searchType = searchType };
+            postData.request = new SearchRequest { elementsCountPerPage = "20", pageIndex = 1, searchKey = searchKey, searchType = searchType.ToString() };
 
             List<EssayResult> essayResults = new List<EssayResult>();
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using 游民星空.Core.Http;
+using 游民星空.Core.IncrementalLoadingCollection;
 using 游民星空.Core.Model;
 
 namespace 游民星空.Core.ViewModel
@@ -16,6 +17,7 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public ObservableCollection<EssayResult> Strategys { get; set; }
 
+        public GameStrategysIncrementalLoadingCollection IncreStrategys { get; set; }
 
         private ApiService apiService;
 
@@ -41,27 +43,47 @@ namespace 游民星空.Core.ViewModel
         {
             apiService = new ApiService();
             Strategys = new ObservableCollection<EssayResult>();
+            IncreStrategys = new GameStrategysIncrementalLoadingCollection();
             this.strategyResult = strategyResult;
 
-            LoadData(strategyResult);
         }
 
-        public async void LoadData(StrategyResult strategyResult)
+        public GameStrategysViewModel()
         {
-            List<EssayResult> results = await apiService.GetGameStrategys(strategyResult.specialID);
+            apiService = new ApiService();
+            Strategys = new ObservableCollection<EssayResult>();
+            IncreStrategys = new GameStrategysIncrementalLoadingCollection();
+        }
+
+        public async Task LoadData(StrategyResult strategyResult,int pageIndex=1)
+        {
+            this.strategyResult = strategyResult;
+            IsActive = true;
+            List<EssayResult> results = await apiService.GetGameStrategys(strategyResult.specialID,pageIndex);
             foreach(var item in results)
             {
                 Strategys.Add(item);
+                IncreStrategys.Add(item);
             }
             IsActive = false;
         }
 
+        /// <summary>
+        /// 加载更多攻略
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        public async Task LoadMoreStrategys(int pageIndex)
+        {
+            await LoadData(strategyResult, pageIndex);
+        }
 
-        public void Refresh()
+        public async Task Refresh()
         {
             IsActive = true;
             Strategys.Clear();
-            LoadData(strategyResult);
+            IncreStrategys.Clear();
+            await LoadData(strategyResult);
             IsActive = false;
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,12 +43,22 @@ namespace 游民星空.Core.ViewModel
         }
 
         private ApiService apiService;
+
+
+        public RelayCommand SearchCommand { get; set; }
+
         public SearchPageViewModel()
         {
             apiService = new ApiService();
             Subscribes = new ObservableCollection<SubscribeResult>();
             Strategys = new ObservableCollection<string>();
             News = new ObservableCollection<string>();
+
+            SearchCommand = new RelayCommand(async(parameter) =>
+            {
+                await apiService.SearchByKey((string)parameter,SearchTypeEnum.news,1);
+                Debug.WriteLine(parameter);
+            });
             LoadData();
         }
 

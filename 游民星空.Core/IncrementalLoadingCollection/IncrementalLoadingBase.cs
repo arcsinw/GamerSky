@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Data;
 
-namespace 游民星空.Core.Helper
+namespace 游民星空.Core.IncrementalLoadingCollection
 {
     /// <summary>
     /// a incremental loading class base on the data binding sample on MSDN 

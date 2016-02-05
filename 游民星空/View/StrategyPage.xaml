@@ -438,6 +438,13 @@
         <converter:CountToBoolConverter x:Key="CountToConverter"/>
         <!--数据集合控件Padding-->
         <Thickness x:Key="ControlPadding">8</Thickness>
+        <!--BorderMargin-->
+        <Thickness x:Key="BorderMargin">0,2</Thickness>
+        <!--BorderThickness-->
+        <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
+        <!--BorderBrush-->
+        <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
+
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -505,19 +512,34 @@
                                   ItemClick="ListView_ItemClick">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel>
-                                        <Image>
+                                    <Grid  Padding="0,8"
+                                          BorderThickness="{StaticResource BorderThickness}" BorderBrush="{StaticResource BorderBrush}" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                                             <Image.Source>
                                                 <BitmapImage UriSource="{Binding thumbnailUrl}"/>
                                             </Image.Source>
                                         </Image>
-                                        <TextBlock  Text="{Binding title}" HorizontalAlignment="Center"/>
-                                    </StackPanel>
+                                        <Grid Grid.Column="1" Margin="5,2">
+                                            <TextBlock Text="{Binding title}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+                                            <TextBlock  Margin="4" VerticalAlignment="Bottom">
+                                                <Run Text="{Binding favoriteCnt}"/>
+                                                <Run Text="人订阅"/>
+                                            </TextBlock>
+                                        </Grid>
+                                        <Button Grid.Column="3" Foreground="White" Background="{ThemeResource ThemeColorBrush}" 
+                                                HorizontalAlignment="Center" Content="订阅" Click="Button_Click"/>
+                                    </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0"/>
                                 </Style>
                             </ListView.ItemContainerStyle>
                             <!--列表头-->
@@ -584,5 +606,10 @@
                 <SymbolIcon  Symbol="Find"/>
             </Button.Content>
         </Button>
+
+        <Grid>
+            <ProgressRing x:Name="progress"  Foreground="{ThemeResource ThemeColorBrush}" 
+                          Height="60" Width="60" Background="Transparent"/>
+        </Grid>
     </Grid>
 </Page>

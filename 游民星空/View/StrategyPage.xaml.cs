@@ -27,6 +27,7 @@ namespace 游民星空.View
         public StrategyPage()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
             pageIndexDic = new Dictionary<int, int>();
         }
 
@@ -35,13 +36,14 @@ namespace 游民星空.View
         /// </summary>
         private Dictionary<int, int> pageIndexDic;
 
-        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            progress.IsActive = true;
             if (pivot.SelectedIndex == 0)
             {
                 if (!pageIndexDic.ContainsKey(0))
                 {
-                    ViewModel.LoadFocusStrategys();
+                    await ViewModel.LoadFocusStrategys();
                     pageIndexDic.Add(0, 1);
                 }
 
@@ -50,10 +52,11 @@ namespace 游民星空.View
             {
                 if (!pageIndexDic.ContainsKey(1))
                 {
-                    ViewModel.LoadAllStrategys();
+                    await ViewModel.LoadAllStrategys();
                     pageIndexDic.Add(1, 1);
                 }
             }
+            progress.IsActive = false;
         }
 
         /// <summary>
@@ -61,16 +64,18 @@ namespace 游民星空.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
+            progress.IsActive = true;
             if(pivot.SelectedIndex==0)
             {
-                ViewModel.RefreshFocusStrategy();
+                await ViewModel.RefreshFocusStrategy();
             }
             else
             {
-                ViewModel.RefreshAllStrategy();
+                await ViewModel.RefreshAllStrategy();
             }
+            progress.IsActive = false;
         }
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)

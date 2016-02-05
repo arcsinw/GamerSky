@@ -303,9 +303,9 @@
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
-            <TextBox PlaceholderText="请输入搜索内容"  Margin="0,8" Grid.Column="1" Style="{StaticResource SearchTextBoxStyle}"/>
+            <TextBox x:Name="keyTextBox" PlaceholderText="请输入搜索内容"  Margin="0,8" Grid.Column="1" Style="{StaticResource SearchTextBoxStyle}"/>
             <Button x:Name="search" Width="48" Height="48" Background="Transparent" 
-                    Foreground="White" Click="search_Click"
+                    Foreground="White" Command="{Binding SearchCommand,ConverterParameter={Binding ElementName=keyTextBox,Path=Text}}"
                     Grid.Column="2">
                 <SymbolIcon Symbol="Find"/>
             </Button>
@@ -331,7 +331,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                
+
             </PivotItem>
             <PivotItem Header="攻略">
                 <ListView ItemsSource="{Binding Strategys}" SelectionMode="None">
@@ -351,7 +351,7 @@
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
-                
+
             </PivotItem>
             <PivotItem Header="订阅">
                 <ListView ItemsSource="{Binding Subscribes}" SelectionMode="None" Padding="0" Margin="0">
@@ -372,7 +372,7 @@
                                     <TextBlock Text="{Binding sourceName}" VerticalAlignment="Top"/>
                                     <TextBlock Text="{Binding cnt}" Margin="4" VerticalAlignment="Bottom"/>
                                 </Grid>
-                                <Button Grid.Column="3" HorizontalAlignment="Right" Content="订阅" Click="Button_Click"/>
+                                <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" Click="Button_Click"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>

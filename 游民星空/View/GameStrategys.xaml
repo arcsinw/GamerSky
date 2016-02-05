@@ -6,9 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hp="using:游民星空.Core.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
+    xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:GameStrategysViewModel x:Name="viewModel"/>
+    </Page.DataContext>
+    
     <Page.Resources>
         <!--BorderMargin-->
         <Thickness x:Key="BorderMargin">0,2</Thickness>
@@ -65,9 +70,10 @@
     
     <!--某款游戏的攻略列表页-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
-            <ListView ItemsSource="{Binding Strategys}"
+        <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
+            <ListView ItemsSource="{Binding IncreStrategys}"
                  SelectionMode="None"
+                  Loaded="ListView_Loaded"
                   ShowsScrollingPlaceholders="True"
                   IsItemClickEnabled="True"
                   ItemClick="ListView_ItemClick">
@@ -96,9 +102,10 @@
                     </Style>
                 </ListView.ItemContainerStyle>
             </ListView>
-        <!--</pr:PullToRefreshBox>-->
+        </pr:PullToRefreshBox>
+
         <Grid>
-            <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Foreground="{ThemeResource ThemeColorBrush}" 
+            <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Foreground="{ThemeResource ThemeColorBrush}" 
                           Height="60" Width="60" Background="Transparent"/>
         </Grid>
     </Grid>

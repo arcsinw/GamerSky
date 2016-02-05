@@ -24,6 +24,20 @@ namespace 游民星空.Core.ViewModel
 
         private ApiService apiService;
 
+        private bool isActive;
+        public bool IsActive
+        {
+            get
+            {
+                return isActive;
+            }
+            set
+            {
+                isActive = value;
+                OnPropertyChanged();
+            }
+        }
+
         public StrategyPageViewModel()
         {
             apiService = new ApiService();
@@ -37,8 +51,9 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 加载关注攻略
         /// </summary>
-        public async void LoadFocusStrategys()
+        public async Task LoadFocusStrategys()
         {
+            IsActive = true;
             List<StrategyResult> strategys = await apiService.GetStrategys();
             if (strategys != null)
             {
@@ -47,18 +62,18 @@ namespace 游民星空.Core.ViewModel
                     FocusStrategys.Add(item);
                 }
             }
+            IsActive = false;
         }
 
         /// <summary>
         /// 加载所有攻略
         /// </summary>
-        public async void LoadAllStrategys()
+        public async Task LoadAllStrategys()
         {
+            IsActive = true;
             List<StrategyResult> strategys = await apiService.GetAllStrategys();
             if (strategys != null)
             {
-                
-
                 //按拼音分组
                 List<AlphaKeyGroup<StrategyResult>> groupData = AlphaKeyGroup<StrategyResult>.CreateGroups(
                     strategys, (StrategyResult s) => s.title, true);
@@ -68,24 +83,29 @@ namespace 游民星空.Core.ViewModel
                     AllStrategys.Add(item);
                 }
             }
+            IsActive = false;
         }
 
         /// <summary>
         /// 刷新关注攻略
         /// </summary>
-        public void RefreshFocusStrategy()
+        public async Task RefreshFocusStrategy()
         {
+            IsActive = true;
             FocusStrategys.Clear();
-            LoadFocusStrategys();
+            await LoadFocusStrategys();
+            IsActive = false;
         }
 
         /// <summary>
         /// 刷新所有攻略
         /// </summary>
-        public void RefreshAllStrategy()
+        public async Task RefreshAllStrategy()
         {
+            IsActive = true;
             AllStrategys.Clear();
-            LoadAllStrategys();
+            await LoadAllStrategys();
+            IsActive = false;
         }
     }
 }

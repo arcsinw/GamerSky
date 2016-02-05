@@ -34,40 +34,16 @@ namespace 游民星空.View
             NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
-       
-        private EssayResult essayResult;
-
-        #region OnPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName]string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
-
-        private bool isActive = true;
-        public bool IsActive
-        {
-            get
-            {
-                return isActive;
-            }
-            set
-            {
-                isActive = value;
-                OnPropertyChanged();
-            }
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+      
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             progress.IsActive = true;
-            essayResult = e.Parameter as EssayResult;
+            EssayResult essayResult = e.Parameter as EssayResult;
            if(essayResult!= null)
             {
                 this.DataContext = viewModel = new EssayDetailViewModel(essayResult);
             }
+            await viewModel.GenerateHtmlString();
             progress.IsActive = false;
         }
     }

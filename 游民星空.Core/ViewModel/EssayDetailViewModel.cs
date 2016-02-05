@@ -20,7 +20,7 @@ namespace 游民星空.Core.ViewModel
             apiService = new ApiService();
             this.essayResult = essay;
 
-            GenerateHtmlString();
+            //GenerateHtmlString();
         }
         /// <summary>
         /// ProgressRing IsActive
@@ -76,7 +76,7 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 生成网页
         /// </summary>
-        public async void GenerateHtmlString()
+        public async Task GenerateHtmlString()
         {
             News news = await apiService.ReadEssay(essayResult.contentId);
             if (news != null)
@@ -173,7 +173,7 @@ namespace 游民星空.Core.ViewModel
                    "</html>";
 
             }
-            IsActive = false;
+            //IsActive = false;
 
         }
 
