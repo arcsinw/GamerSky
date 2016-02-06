@@ -112,6 +112,9 @@
     <Compile Include="View\EssayDetail.xaml.cs">
       <DependentUpon>EssayDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Feedback.xaml.cs">
+      <DependentUpon>Feedback.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GameStrategys.xaml.cs">
       <DependentUpon>GameStrategys.xaml</DependentUpon>
     </Compile>
@@ -198,12 +201,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Theme\ThemeDictionary.xaml">
+    <Page Include="Themes\ThemeDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="View\EssayDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Feedback.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,6 +252,9 @@
   </ItemGroup>
   <ItemGroup>
     <AppxSystemBinary Include="游民星空.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Theme\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

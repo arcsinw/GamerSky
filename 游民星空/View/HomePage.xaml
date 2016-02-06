@@ -5,9 +5,11 @@
     xmlns:local="using:游民星空.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:controls="using:游民星空.Controls"
+    xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    
     <Page.Resources>
         <Style x:Key="TabRadioStyle" TargetType="RadioButton">
             <Setter Property="Background" Value="Transparent"/>
@@ -129,15 +131,19 @@
         
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <controls:SwipeableSplitView DisplayMode="Overlay" OpenPaneLength="240">
+        <controls:SwipeableSplitView x:Name="splitView" 
+            DisplayMode="Overlay" OpenPaneLength="240">
             <SplitView.Pane>
-                <ListView ScrollViewer.VerticalScrollMode="Disabled" SelectionMode="None">
+                <ListView ScrollViewer.VerticalScrollMode="Disabled" 
+                          GotFocus="{x:Bind GetCacheSize}" 
+                          SelectionMode="None">
 
                     <ListView.Resources>
                         <Thickness x:Key="TextBlockMargin">8,0</Thickness>
                     </ListView.Resources>
                     <ListView.Items>
-                        <ListViewItem HorizontalContentAlignment="Center" Background="{ThemeResource ThemeColorBrush}">
+                        <ListViewItem HorizontalContentAlignment="Center" 
+                                      Background="{ThemeResource ThemeColorBrush}">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
                                 <Ellipse Height="90" Width="90" HorizontalAlignment="Center">
                                     <Ellipse.Fill>
@@ -159,14 +165,14 @@
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem>
+                        <ListViewItem Tapped="{x:Bind NavigateToSearchPage}">
                             <StackPanel Orientation="Horizontal">
                                 <BitmapIcon UriSource="ms-appx:///Assets/Split_Search.png" Height="24"/>
                                 <TextBlock Text="搜索" Margin="{StaticResource TextBlockMargin}"/>
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem>
+                        <ListViewItem Tapped="{x:Bind YaoWen}">
                             <StackPanel Orientation="Horizontal">
                                 <BitmapIcon UriSource="ms-appx:///Assets/Split_News.png" Height="24"/>
                                 <TextBlock Text="要闻" Margin="{StaticResource TextBlockMargin}"/>
@@ -180,14 +186,24 @@
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem>
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon UriSource="ms-appx:///Assets/Split_Cache.png" Height="24"/>
-                                <TextBlock Text="清空缓存" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
+                        <ListViewItem Tapped="{x:Bind ClearCache}">
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <BitmapIcon UriSource="ms-appx:///Assets/Split_Cache.png" Height="24"/>
+                                    <TextBlock Text="清空缓存" Margin="{StaticResource TextBlockMargin}"/>
+                                </StackPanel>
+                                <TextBlock  Grid.Column="1" HorizontalAlignment="Right">
+                                    <Run Text="{x:Bind CacheSize,Mode=OneWay}"/>
+                                    <Run Text="bytes"/>
+                                </TextBlock>
+                            </Grid>
                         </ListViewItem>
 
-                        <ListViewItem>
+                        <ListViewItem Tapped="{x:Bind ChangeDisplayModel}">
                             <StackPanel Orientation="Horizontal">
                                 <BitmapIcon UriSource="ms-appx:///Assets/Split_Night.png" Height="24"/>
                                 <TextBlock Text="夜间模式" Margin="{StaticResource TextBlockMargin}"/>
@@ -201,14 +217,14 @@
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem>
+                        <ListViewItem Tapped="{x:Bind FeedBack}">
                             <StackPanel Orientation="Horizontal">
                                 <BitmapIcon UriSource="ms-appx:///Assets/Split_Feedback.png" Height="24"/>
                                 <TextBlock Text="意见反馈" Margin="{StaticResource TextBlockMargin}"/>
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem>
+                        <ListViewItem Tapped="{x:Bind NavigateToSettings}">
                             <StackPanel Orientation="Horizontal">
                                 <BitmapIcon UriSource="ms-appx:///Assets/Split_Setting.png" Height="24"/>
                                 <TextBlock Text="更多设置" Margin="{StaticResource TextBlockMargin}"/>

@@ -127,7 +127,9 @@ namespace 游民星空.Core.Helper
         {
             try
             {
-                StorageFolder folder = await localFolder.GetFolderAsync("images_cache");
+                StorageFolder folder = await localFolder.GetFolderAsync("data_cache");
+
+                //StorageFolder folder = await localFolder.GetFolderAsync("images_cache");
                 if(folder != null)
                 {
                     IReadOnlyCollection<StorageFile> files = await folder.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.DefaultQuery);
@@ -152,7 +154,8 @@ namespace 游民星空.Core.Helper
         {
             try
             {
-                StorageFolder folder = await localFolder.GetFolderAsync("images_cache");
+                //StorageFolder folder = await localFolder.GetFolderAsync("images_cache");
+                StorageFolder folder = await localFolder.GetFolderAsync("data_cache"); 
                 var files = await folder.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.DefaultQuery);
                 double size = 0;
                 BasicProperties p;
@@ -163,7 +166,7 @@ namespace 游民星空.Core.Helper
                 }
                 return size;
             }
-            catch 
+            catch (Exception e)
             {
                 return 0;
             }
