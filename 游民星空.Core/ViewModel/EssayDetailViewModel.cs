@@ -97,11 +97,26 @@ namespace 游民星空.Core.ViewModel
 	                   + ".PageColorMode_Night.bar {background-color:#2a2e38;}"
                        + "</style>";   //基础css
 
+                string videoCss= "<style>"+
+                    ".GSTemplateContent_VideoBoxer{width:100%;height:auto;}"+
+                    ".GSTemplateContent_VideoBoxer {background-position:center center; background-repeat:no-repeat; background-size: 177px 49px; background-image:url(../gsAppHTMLTemplate_image/gsAppHTMLTemplate_Video_Background@2x.png);}" +
+                    ".PageColorMode_Day.GSTemplateContent_VideoBoxer {background-color: #eeeeee;}"+
+	                ".PageColorMode_Night.GSTemplateContent_VideoBoxer {background-color: #1B1A1F;}"+
+                    ".GSTemplateContent_VideoBoxer.PlayButtonBackground{"+
+                    "float:none;border-radius:40px;width: 80px;height: 80px;background-position:center center;background - repeat:no - repeat;-webkit - filter:blur(4px);}"+
+                    ".GSTemplateContent_VideoBoxer.PlayButton{"+
+                    "float:none;margin-top:-80px;border-radius:40px;width: 80px;height: 80px;background - repeat:no - repeat;"+
+                    "background-position:center center;"+
+                    "background-size:80px 80px;"+
+                    "background-image:url(../gsAppHTMLTemplate_image/gsAppHTMLTemplate_Video_PlayButton@2x.png);"+
+                    "-webkit-filter:hue-rotate(0deg);}"+
+                    "</style>";
+
                 string head = "<meta name=\"viewport\" content=\"width-width, initial-scale=1\"/>"
                     + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
                     + "<meta name=\"msapplication-tap-highlight\" content=\"no\">"; //wp点击无高光;
 
-                string videoJs = "<script src=\"../ html / js / video.js\"></script>";
+                string videoJs = "<script src=\"../html/js/video.js\"></script>";
 
                 string title = news.result.title;
                 string subTitle = news.result.subTitle;
@@ -109,7 +124,7 @@ namespace 游民星空.Core.ViewModel
                 List<RelatedReadingsResult> relateReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
 
 
-                HtmlString = "<!DOCTYPE html><html><head>"+head+videoJs+"</head>"+css+"</head>" +
+                HtmlString = "<!DOCTYPE html><html><head>"+head+videoJs+"</head>"+css+videoCss+"</head>" +
                     "<body>" +
                         "<div id=\"body\" class=\"fontsizetwo\">"+
                                   "<h1 class=\"heading\" id=\"gsTemplateContent_Title\">" + title + "</h1>" +

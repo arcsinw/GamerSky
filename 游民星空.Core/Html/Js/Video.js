@@ -23,6 +23,9 @@ function gsVideoInApp(videoType, videoContent, videoParam, videoWidth, videoHeig
         if (videoIndex > -1) {
             var videoDefaultWidth
                 = document.body.clientWidth - 20.0;
+            //var videoDefaultWidth = window.screen.width;
+            //window.alert(width);
+            //var videoDefaultWidth = 480;
             var videoDefaultHeight
                 = videoDefaultWidth
                 * 1080.0 / 1920.0;
