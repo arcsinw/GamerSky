@@ -305,7 +305,7 @@
             </Button>
             <TextBox x:Name="keyTextBox" PlaceholderText="请输入搜索内容"  Margin="0,8" Grid.Column="1" Style="{StaticResource SearchTextBoxStyle}"/>
             <Button x:Name="search" Width="48" Height="48" Background="Transparent" 
-                    Foreground="White" Command="{Binding SearchCommand,ConverterParameter={Binding ElementName=keyTextBox,Path=Text}}"
+                    Foreground="White" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=keyTextBox,Path=Text}"
                     Grid.Column="2">
                 <SymbolIcon Symbol="Find"/>
             </Button>

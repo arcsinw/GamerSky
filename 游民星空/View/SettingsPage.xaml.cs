@@ -5,8 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Store;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -97,9 +100,10 @@ namespace 游民星空.View
         /// <summary>
         /// 检测新版本
         /// </summary>
-        public void CheckUpdate()
+        public async void CheckUpdate()
         {
-
+            string uri = "ms-windows-store://pdp/?ProductId=9NBLGGH5Q5TJ";
+            await Launcher.LaunchUriAsync(new Uri(uri));
         }
     }
 }

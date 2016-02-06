@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -33,6 +34,20 @@ namespace 游民星空.View
             {
                 Frame.GoBack();
             }
+        }
+
+        /// <summary>
+        /// feedback
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string subject = subjectTextBox.Text;
+            string body = bodyTextBox.Text;
+            string address = "wangx86@live.com";
+            var mailto = new Uri($"mailto:{address}?subject={subject}&body={body}");
+            await Launcher.LaunchUriAsync(mailto);
         }
     }
 }

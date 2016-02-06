@@ -53,7 +53,7 @@
                     <ListViewItem Tapped="{x:Bind NavigateToAbout}">
                         <TextBlock Text="关于"/>
                     </ListViewItem>
-                    <ListViewItem>
+                    <ListViewItem Tapped="{x:Bind CheckUpdate}">
                         <Grid>
                             <TextBlock Text="检测新版本" VerticalAlignment="Center"/>
                             <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Right" VerticalAlignment="Center"/>

@@ -35,8 +35,10 @@
                     <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Center" />
                     <TextBlock Text="{x:Bind Author}" HorizontalAlignment="Center"/>
                     <TextBlock HorizontalAlignment="Center">
-                        <Run Text="还没写完,侵权就下架"/>
+                        <Run Text="还没写完，侵权就下架"/>
                     </TextBlock>
+                    <HyperlinkButton Content="评论" NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
+                                     HorizontalAlignment="Center"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

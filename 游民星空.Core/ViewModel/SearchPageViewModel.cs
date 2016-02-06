@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
@@ -56,7 +57,16 @@ namespace 游民星空.Core.ViewModel
 
             SearchCommand = new RelayCommand(async(parameter) =>
             {
-                await apiService.SearchByKey((string)parameter,SearchTypeEnum.news,1);
+                //List<EssayResult> essays = await apiService.SearchByKey((string)parameter,SearchTypeEnum.news,1);
+                //if(essays!= null && essays.Count!=0)
+                //{
+                //    News.Clear();
+                //    foreach (var item in essays)
+                //    {
+                //        News.Add(item);
+                //    }
+                //}
+                await new MessageDialog("还没写，莫慌",(string)parameter).ShowAsync();
                 Debug.WriteLine(parameter);
             });
             LoadData();
