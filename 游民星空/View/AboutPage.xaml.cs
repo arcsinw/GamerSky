@@ -23,13 +23,19 @@ namespace 游民星空.View
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class SettingsPage : Page
+    public sealed partial class AboutPage : Page
     {
-        public SettingsPage()
+        public AboutPage()
         {
             this.InitializeComponent();
 
-            GetVersion();
+            UpdateData();
+        }
+
+        public void UpdateData()
+        {
+            Version = Functions.GetVersion();
+            Author = Functions.GetAuthor();
         }
 
         private void back_Click(object sender, RoutedEventArgs e)
@@ -38,11 +44,6 @@ namespace 游民星空.View
             {
                 Frame.GoBack();
             }
-        }
-
-        public void NavigateToAbout()
-        {
-            Frame.Navigate(typeof(AboutPage));
         }
 
         #region OnPropertyChanged
@@ -75,6 +76,20 @@ namespace 游民星空.View
         }
         #endregion
 
+        private string author;
+        public string Author
+        {
+            get
+            {
+                return author;
+            }
+            set
+            {
+                author = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string version;
         public string Version
         {
@@ -89,17 +104,6 @@ namespace 游民星空.View
             }
         }
 
-        public void GetVersion()
-        {
-            Version = Functions.GetVersion();
-        }
 
-        /// <summary>
-        /// 检测新版本
-        /// </summary>
-        public void CheckUpdate()
-        {
-
-        }
     }
 }

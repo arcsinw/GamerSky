@@ -160,6 +160,9 @@
     <EmbeddedResource Include="Properties\游民星空.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="Html\Js\Video.js" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

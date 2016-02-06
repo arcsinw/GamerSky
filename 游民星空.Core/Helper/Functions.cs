@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.Foundation.Metadata;
 using Windows.UI.Xaml;
@@ -122,12 +123,25 @@ namespace 游民星空.Core.Helper
             return value == "Mobile";
         }
 
-        public static void ShowStatusBar()
+        /// <summary>
+        /// 获取版本号
+        /// </summary>
+        /// <returns></returns>
+        public static string GetVersion()
         {
-            if(ApiInformation.IsTypePresent(""))
-            {
-                
-            }
+            var version = Package.Current.Id.Version;
+            return version.Build.ToString() +"."+ version.Major.ToString() + "." + 
+                version.Minor.ToString()+ "." + version.Revision.ToString();
+        }
+
+        /// <summary>
+        /// 获取作者
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAuthor()
+        {
+            var author = Package.Current.PublisherDisplayName;
+            return author;
         }
     }
 }

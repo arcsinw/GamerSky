@@ -24,8 +24,7 @@
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
-            <TextBlock Text="设置" Foreground="White" 
-                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="设置" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
         <Grid Grid.Row="1" Background="LightGray">
             <ListView SelectionMode="None">
@@ -51,13 +50,13 @@
                         <TextBlock Text="封面故事"/>
                     </ListViewItem>
 
-                    <ListViewItem>
+                    <ListViewItem Tapped="{x:Bind NavigateToAbout}">
                         <TextBlock Text="关于"/>
                     </ListViewItem>
                     <ListViewItem>
                         <Grid>
                             <TextBlock Text="检测新版本" VerticalAlignment="Center"/>
-                            <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </Grid>
                     </ListViewItem>
                 </ListView.Items>
