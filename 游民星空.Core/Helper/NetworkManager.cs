@@ -82,9 +82,9 @@ namespace 游民星空.Core
         /// <returns></returns>
         private int GetConnectionGeneration()
         {
-            #if DEBUG
-            return 1;
-            #endif
+            //#if DEBUG
+            //return 1;
+            //#endif
             try
             {
                 ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();

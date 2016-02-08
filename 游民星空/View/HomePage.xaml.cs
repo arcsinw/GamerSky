@@ -46,36 +46,7 @@ namespace 游民星空.View
         }
 
 
-        #region OnPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private async void OnPropertyChanged([CallerMemberName]string propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                if (DispatcherManager.Current.Dispatcher == null)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                }
-                else
-                {
-                    if (DispatcherManager.Current.Dispatcher.HasThreadAccess)
-                    {
-                        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                    }
-                    else
-                    {
-                        await DispatcherManager.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-                            delegate ()
-                            {
-                                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                            });
-                    }
-                }
-            }
-        } 
-        #endregion
-
+       
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
             var radioButton = sender as RadioButton;
@@ -103,11 +74,7 @@ namespace 游民星空.View
         }
 
 
-        public async void GetCacheSize()
-        {
-            CacheSize = await FileHelper.Current.GetCacheSize();
-        }
-
+        
       
 
         /// <summary>
@@ -127,29 +94,7 @@ namespace 游民星空.View
 
         }
 
-        /// <summary>
-        /// 清空缓存
-        /// </summary>
-        public async void ClearCache()
-        {
-            await FileHelper.Current.DeleteCacheFile();
-            GetCacheSize();
-        }
-
-        private double cacheSize;
-        public double CacheSize
-        {
-            get
-            {
-                return cacheSize;
-            }
-            set
-            {
-                cacheSize = value;
-                OnPropertyChanged();
-            }
-        }
-
+        
         ///// <summary>
         ///// 获取缓存大小
         ///// </summary>

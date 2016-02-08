@@ -130,7 +130,7 @@ namespace 游民星空.Core.Helper
         public static string GetVersion()
         {
             var version = Package.Current.Id.Version;
-            return version.Build.ToString() +"."+ version.Major.ToString() + "." + 
+            return version.Major.ToString() + "."+ version.Build.ToString() + "." + 
                 version.Minor.ToString()+ "." + version.Revision.ToString();
         }
 

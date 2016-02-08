@@ -80,7 +80,7 @@ namespace 游民星空.Core.Http
                     type = "null",
                 };
                 essay = await PostJson<AllChannelListPostData, Essay>(ServiceUri.AllChannelList, postData);
-                //await FileHelper.Current.WriteObjectAsync<Essay>(essay, filename);
+                await FileHelper.Current.WriteObjectAsync<Essay>(essay, filename);
 
             }
             List<EssayResult> essayList = new List<EssayResult>();

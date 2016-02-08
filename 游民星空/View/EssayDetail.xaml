@@ -18,7 +18,7 @@
             </NavigationThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Foreground="{ThemeResource ThemeColorBrush}"  
                           Height="60" Width="60" Background="Transparent"/>
@@ -27,4 +27,12 @@
                  />
         <!--Source="ms-appx-web:///Html/gsAppHTMLTemplate_News.html"-->
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Favorite" Label="收藏" HorizontalAlignment="Right"/>
+                <AppBarButton Icon="Globe" Label="Edge" Click="AppBarButton_Click"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

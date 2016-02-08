@@ -142,6 +142,7 @@ namespace 游民星空.Core.ViewModel
         {
             //Essays.Clear();
             EssaysAndChannels.Where(x => x.Channel.nodeId == channelId).First().Essays.Clear();
+            EssaysAndChannels.Where(x => x.Channel.nodeId == channelId).First().HeaderEssays.Clear();
             await LoadMoreEssay(channelId, 1);
         }
     }

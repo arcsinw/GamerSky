@@ -168,7 +168,6 @@ namespace 游民星空.View
         private void FlipView_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var essayResult = (sender as FlipView)?.SelectedItem as EssayResult;
-            //EssayResult essay = (e.OriginalSource as FlipViewItem;
             if (essayResult == null) return;
 
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);

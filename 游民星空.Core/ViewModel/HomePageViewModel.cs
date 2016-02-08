@@ -15,6 +15,36 @@ namespace 游民星空.Core.ViewModel
         {
         }
 
-      
+
+        /// <summary>
+        /// 清空缓存
+        /// </summary>
+        public async void ClearCache()
+        {
+            await FileHelper.Current.DeleteCacheFile();
+            GetCacheSize();
+        }
+
+        private string cacheSize = "0";
+        public string CacheSize
+        {
+            get
+            {
+                return cacheSize;
+            }
+            set
+            {
+                cacheSize = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public async void GetCacheSize()
+        {
+            double size = await FileHelper.Current.GetCacheSize();
+            CacheSize = (size / 1024 /1024).ToString("f2");
+        }
+
+
     }
 }

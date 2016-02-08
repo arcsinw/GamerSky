@@ -135,7 +135,7 @@
             DisplayMode="Overlay" OpenPaneLength="240">
             <SplitView.Pane>
                 <ListView ScrollViewer.VerticalScrollMode="Disabled" 
-                          GotFocus="{x:Bind GetCacheSize}" 
+                          GotFocus="{x:Bind ViewModel.GetCacheSize}" 
                           SelectionMode="None">
 
                     <ListView.Resources>
@@ -186,7 +186,7 @@
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem Tapped="{x:Bind ClearCache}">
+                        <ListViewItem Tapped="{x:Bind ViewModel.ClearCache}">
                             <Grid HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -197,8 +197,8 @@
                                     <TextBlock Text="清空缓存" Margin="{StaticResource TextBlockMargin}"/>
                                 </StackPanel>
                                 <TextBlock  Grid.Column="1" HorizontalAlignment="Right">
-                                    <Run Text="{x:Bind CacheSize,Mode=OneWay}"/>
-                                    <Run Text="bytes"/>
+                                    <Run Text="{x:Bind ViewModel.CacheSize,Mode=OneWay}"/>
+                                    <Run Text="MB"/>
                                 </TextBlock>
                             </Grid>
                         </ListViewItem>
