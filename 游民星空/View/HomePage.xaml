@@ -142,7 +142,7 @@
                         <Thickness x:Key="TextBlockMargin">8,0</Thickness>
                     </ListView.Resources>
                     <ListView.Items>
-                        <ListViewItem HorizontalContentAlignment="Center" 
+                        <ListViewItem HorizontalContentAlignment="Center" Tapped="{x:Bind NavigateToLogin}"
                                       Background="{ThemeResource ThemeColorBrush}">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
                                 <Ellipse Height="90" Width="90" HorizontalAlignment="Center">

@@ -45,6 +45,6 @@ namespace 游民星空.Core.ViewModel
             CacheSize = (size / 1024 /1024).ToString("f2");
         }
 
-
+        
     }
 }

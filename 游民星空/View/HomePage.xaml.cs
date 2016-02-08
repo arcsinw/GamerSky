@@ -128,5 +128,14 @@ namespace 游民星空.View
         {
             this.Frame.Navigate(typeof(Feedback));
         }
+
+        /// <summary>
+        /// 跳转到登录
+        /// </summary>
+        public void NavigateToLogin()
+        {
+            splitView.IsSwipeablePaneOpen = false;
+            this.Frame.Navigate(typeof(LoginPage));
+        }
     }
 }

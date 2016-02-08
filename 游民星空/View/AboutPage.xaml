@@ -37,7 +37,7 @@
                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">
                         <Run Text="还没写完，侵权就下架,"/>
                     </TextBlock>
-                    <TextBlock Text="微软这应用商店真是日了狗了，药丸"/>
+                    <TextBlock Text="微软这应用商店真是日了狗了，药丸" HorizontalAlignment="Center"/>
                     <HyperlinkButton Content="评论" NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
                                      HorizontalAlignment="Center"/>
                 </StackPanel>

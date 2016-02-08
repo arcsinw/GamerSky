@@ -124,6 +124,9 @@
     <Compile Include="View\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
     <None Include="游民星空_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Login_qq.png" />
+    <Content Include="Assets\Login_qq_night.png" />
+    <Content Include="Assets\Login_weibo.png" />
+    <Content Include="Assets\Login_weibo_night.png" />
     <Content Include="Assets\Split_Night.png" />
     <Content Include="Assets\Split_Feedback.png" />
     <Content Include="Assets\Split_News.png" />
@@ -226,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

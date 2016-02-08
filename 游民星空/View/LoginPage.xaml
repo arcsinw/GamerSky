@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="游民星空.View.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:游民星空.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="{ThemeResource ThemeColorBrush}">
+            <Button x:Name="back" Width="48" Height="48" Background="Transparent" 
+                    Foreground="White" Click="back_Click"
+                    Grid.Column="0">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock Text="登录" Style="{ThemeResource PageTitleStyle}"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
+                <StackPanel Padding="16">
+                    <TextBox PlaceholderText="请输入用户名"/>
+                    <TextBox PlaceholderText="请输入密码" Margin="0,16"/>
+                    <Button Content="登录" HorizontalAlignment="Stretch" 
+                            Foreground="White"
+                            Background="{ThemeResource ThemeColorBrush}"/>
+                    <Grid>
+                        <HyperlinkButton Content="忘记密码"  HorizontalAlignment="Left"/>
+                        <HyperlinkButton Content="注册新用户" HorizontalAlignment="Right"/>
+                    </Grid>
+
+                    <TextBlock Text="————————其他方式登录——————————"
+                               Margin="0,8"/>
+
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Ellipse Height="80" Width="80" HorizontalAlignment="Center" Margin="10">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="ms-appx:///Assets/Login_qq.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Ellipse Height="80" Width="80" Margin="10">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="ms-appx:///Assets/Login_weibo.png"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

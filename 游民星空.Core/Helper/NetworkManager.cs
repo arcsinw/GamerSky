@@ -88,6 +88,7 @@ namespace 游民星空.Core
             try
             {
                 ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
+
                 if (profile.IsWwanConnectionProfile)
                 {
                     WwanDataClass connectionClass = profile.WwanConnectionProfileDetails.GetCurrentDataClass();
@@ -127,7 +128,11 @@ namespace 游民星空.Core
                 {
                     return 3;
                 }
-                return 4;
+                else if (profile == null)
+                {
+                    return 4;
+                }
+                return 1;
             }
             catch (Exception)
             {
