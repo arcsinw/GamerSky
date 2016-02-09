@@ -8,6 +8,10 @@
     <!--白色-->
     <Color x:Key="PhoneControlForegroundColor">#FFFFFFFF</Color>
 
+    <!--手机设备 页面内边距-->
+    <Thickness x:Key="PhonePagePadding">12</Thickness>
+    <!--平板和PC设备 页面内边距-->
+    <Thickness x:Key="TabletPagePadding">24</Thickness>
 
     <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="DarkBlue"/>
     <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="Green"/>

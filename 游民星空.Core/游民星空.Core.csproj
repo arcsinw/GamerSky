@@ -131,6 +131,7 @@
     <Compile Include="Http\ServiceUri.cs" />
     <Compile Include="Http\ApiService.cs" />
     <Compile Include="Model\Channel.cs" />
+    <Compile Include="Model\Collect.cs" />
     <Compile Include="Model\Essay.cs" />
     <Compile Include="Model\EssayPageIndex.cs" />
     <Compile Include="Model\JSParameter.cs" />

@@ -269,11 +269,11 @@ namespace 游民星空.Core.Http
         /// <returns></returns>
         public async Task<List<string>> GetSearchHotKey(string searchType)
         {
-            string filename = "";
+            string filename = "searchHotKey_"+searchType+".json";
             List<string> hotKeyList = new List<string>();
             if (NetworkManager.Current.Network == 4)  //无网络
             {
-                //essay = await FileHelper.Current.ReadObjectAsync<Essay>(filename);
+                hotKeyList = await FileHelper.Current.ReadObjectAsync<List<string>>(filename);
             }
             else
             {
@@ -283,6 +283,7 @@ namespace 游民星空.Core.Http
                 {
                     hotKeyList.Add(searchResult.result[i]);
                 }
+                await FileHelper.Current.WriteObjectAsync<List<string>>(hotKeyList, filename);
             }
 
             return hotKeyList;
@@ -294,15 +295,25 @@ namespace 游民星空.Core.Http
         /// <param name="type"></param>
         public async Task<List<SubscribeResult>> GetSubscribeHotKey(string type="1")
         {
-            SubscribeSearchPostData postData = new SubscribeSearchPostData { request = new SubscribeSearchRequest { type = type } };
-            Subscribe subscribe = await PostJson<SubscribeSearchPostData, Subscribe>(ServiceUri.Subscribe, postData);
+            string filename = "subscribeHotKey_" + type + ".json";
             List<SubscribeResult> subscribeResults = new List<SubscribeResult>();
-            if (subscribe!= null && subscribe.result!=null)
+
+            if (NetworkManager.Current.Network == 4)  //无网络
             {
-                foreach (var item in subscribe.result)
+                subscribeResults = await FileHelper.Current.ReadObjectAsync<List<SubscribeResult>>(filename);
+            }
+            else
+            {
+                SubscribeSearchPostData postData = new SubscribeSearchPostData { request = new SubscribeSearchRequest { type = type } };
+                Subscribe subscribe = await PostJson<SubscribeSearchPostData, Subscribe>(ServiceUri.Subscribe, postData);
+                if (subscribe != null && subscribe.result != null)
                 {
-                    subscribeResults.Add(item);
+                    foreach (var item in subscribe.result)
+                    {
+                        subscribeResults.Add(item);
+                    }
                 }
+                await FileHelper.Current.WriteObjectAsync<List<SubscribeResult>>(subscribeResults, filename);
             }
             return subscribeResults;
         }

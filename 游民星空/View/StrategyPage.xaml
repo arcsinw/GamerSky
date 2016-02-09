@@ -221,12 +221,12 @@
             </Setter>
         </Style>
 
-        <ItemsPanelTemplate x:Key="GridViewItemsPanel">
+        <ItemsPanelTemplate x:Key="GridViewItemsPanel" x:Name="GridViewItemsPanel">
             <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Horizontal"/>
         </ItemsPanelTemplate>
 
         <ItemsPanelTemplate x:Key="FourGridViewItemsPanel">
-            <ItemsWrapGrid MaximumRowsOrColumns="4" Orientation="Horizontal"/>
+            <WrapGrid MaximumRowsOrColumns="4" VerticalAlignment="Top" Orientation="Horizontal"/>
         </ItemsPanelTemplate>
 
         <Style x:Key="StrategyPivotStyle" TargetType="Pivot">
@@ -451,14 +451,39 @@
         <Pivot x:Name="pivot"  
                SelectionChanged="Pivot_SelectionChanged" Style="{StaticResource StrategyPivotStyle}">
 
-            <PivotItem Header="关注" Margin="0" Padding="0">
+            <PivotItem Header="关注" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <GridView ItemsSource="{Binding FocusStrategys}" Padding="8"
                           ItemsPanel="{StaticResource GridViewItemsPanel}"
                           ShowsScrollingPlaceholders="True"
                               IsItemClickEnabled="True"
                               ItemClick="GridView_ItemClick">
-                    <GridView.Template>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup>
+                                <VisualState x:Name="Narrow">
+
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger MinWindowWidth="480"/>
+                                    </VisualState.StateTriggers>
+
+                                    <VisualState.Setters>
+                                        <Setter Target="GridViewItemsPanel.MaximumRowsOrColumns" Value="2"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="Medium">
+                                    <VisualState.StateTriggers>
+                                        <AdaptiveTrigger  MinWindowWidth="720"/>
+                                    </VisualState.StateTriggers>
+
+                                    <VisualState.Setters>
+                                        <Setter Target="GridViewItemsPanel.MaximumRowsOrColumns" Value="4"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <GridView.Template>
                             <ControlTemplate>
                                 <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
                                     <Viewbox Stretch="Uniform" Margin="8" VerticalAlignment="Stretch" 
@@ -468,6 +493,7 @@
                                 </ScrollViewer>
                             </ControlTemplate>
                         </GridView.Template>
+
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -475,17 +501,16 @@
                                         <RowDefinition Height="4*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Stretch="Fill">
+                                    <Image Grid.Row="0" Stretch="Fill">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding thumbnailUrl}"/>
                                         </Image.Source>
                                     </Image>
                                     <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="{Binding title}" TextWrapping="Wrap"/>
-                                <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
+                                    <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
                                        Width="30"
                                        HorizontalAlignment="Right" VerticalAlignment="Top"/>
-
-                            </Grid>
+                                </Grid>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>

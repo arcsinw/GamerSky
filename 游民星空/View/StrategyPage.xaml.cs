@@ -100,5 +100,23 @@ namespace 游民星空.View
         {
             this.Frame.Navigate(typeof(SearchPage));
         }
+
+        private void PivotItem_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            try
+            {
+                var pivotItem = sender as PivotItem;
+                if(pivotItem.ActualHeight>=320 && pivotItem.ActualHeight<=720)
+                {
+
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+
+    
     }
 }

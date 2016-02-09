@@ -38,6 +38,10 @@ namespace 游民星空.View
             {
                 UIHelper.ShowStatusBar();
             }
+            else
+            {
+                UIHelper.ShowView();
+            }
             ViewModel = new HomePageViewModel();
 
             rootFrame.SourcePageType = typeof(MainPage);
