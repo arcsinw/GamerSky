@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -71,6 +72,10 @@ namespace 游民星空.View
         {
             if (scrollViewer != null)
             {
+                Debug.WriteLine(scrollViewer.VerticalOffset);
+                
+                titleBarGrid.Opacity = (scrollViewer.VerticalOffset / 180 > 1) ? 1 : scrollViewer.VerticalOffset / 180;
+                
                 if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
                 {
                     if (!IsDataLoading)  //未加载数据
@@ -88,9 +93,14 @@ namespace 游民星空.View
             }
         }
 
-        private void FlipView_Tapped(object sender, TappedRoutedEventArgs e)
-        {
+        
 
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            if(Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
     }
 }

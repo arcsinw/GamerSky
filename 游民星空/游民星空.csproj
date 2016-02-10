@@ -106,7 +106,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SwipeableSplitView.cs" />
-    <Compile Include="Converter\CountToBoolConverter.cs" />
+    <Compile Include="Converter\CountToVisibilityConverter.cs" />
     <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

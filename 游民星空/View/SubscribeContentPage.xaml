@@ -7,6 +7,7 @@
     xmlns:hp="using:游民星空.Core.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:游民星空.Core.ViewModel"
+    xmlns:converter="using:游民星空.Converter"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
@@ -15,6 +16,8 @@
     </Page.DataContext>
 
     <Page.Resources>
+        <converter:CountToVisibilityConverter x:Key="CountToBoolConverter"/>
+
         <!--BorderMargin-->
         <Thickness x:Key="BorderMargin">0,2</Thickness>
         <!--BorderThickness-->
@@ -74,10 +77,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--标题栏-->
-        <Grid Background="{ThemeResource ThemeColorBrush}" Grid.Row="0">
-            <TextBlock Text="{Binding HeaderSubscribe[0].title}" Style="{ThemeResource PageTitleStyle}"/>
-        </Grid>
+        
         <!--订阅栏目内文章列表-->
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
               Grid.Row="0" Grid.RowSpan="2">
@@ -95,23 +95,19 @@
                                                                       />
                     </ListView.ItemTemplateSelector>
 
-                    <ListView.HeaderTemplate>
-                        <DataTemplate>
-
-                            <Grid>
-                                <Image Height="180" Stretch="Fill">
-                                    <Image.Source>
-                                        <BitmapImage UriSource="{Binding HeaderSubscribe.thumbnailURLs[0]}"/>
-                                    </Image.Source>
-                                </Image>
-                                <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
-                                    <TextBlock Margin="7,0" Text="{Binding HeaderSubscribe.title}" Foreground="White" VerticalAlignment="Bottom"/>
-                                </Border>
-                            </Grid>
-
-                        </DataTemplate>
-                    </ListView.HeaderTemplate>
-
+                    <ListView.Header>
+                        <Grid>
+                            <Image Height="180" Stretch="Fill">
+                                <Image.Source>
+                                    <BitmapImage UriSource="{Binding HeaderSubscribe.thumbnailURLs[0]}"/>
+                                </Image.Source>
+                            </Image>
+                            <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
+                                <TextBlock Margin="7,0" Text="{Binding HeaderSubscribe.title}" Foreground="White" VerticalAlignment="Bottom"/>
+                            </Border>
+                        </Grid>
+                    </ListView.Header>
+            
                     <ListView.Transitions>
                         <TransitionCollection>
                             <AddDeleteThemeTransition />
@@ -135,6 +131,18 @@
                 <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Foreground="{ThemeResource ThemeColorBrush}" 
                           Height="60" Width="60" Background="Transparent"/>
             </Grid>
+        </Grid>
+
+        <!--标题栏-->
+        <Grid Background="{ThemeResource ThemeColorBrush}" 
+              Opacity="0" Visibility="{Binding ElementName=titleBarGrid,Path=Opacity,Converter={StaticResource CountToBoolConverter},ConverterParameter={Binding ElementName=titleBarGrid,Path=Opacity}}"
+              x:Name="titleBarGrid" Grid.Row="0">
+            <Button x:Name="back" Width="48" Height="48" Background="Transparent" 
+                    Foreground="White" Click="back_Click"
+                    Grid.Column="0">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock Text="{Binding HeaderSubscribe.title}" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
     </Grid>
 </Page>

@@ -435,7 +435,7 @@
             </Setter>
         </Style>
 
-        <converter:CountToBoolConverter x:Key="CountToConverter"/>
+        <converter:CountToVisibilityConverter x:Key="CountToConverter"/>
         <!--数据集合控件Padding-->
         <Thickness x:Key="ControlPadding">8</Thickness>
         <!--BorderMargin-->
