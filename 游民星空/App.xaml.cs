@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation.Metadata;
 using Windows.Phone.UI.Input;
 using Windows.UI.Core;
@@ -8,7 +9,9 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.BackgroundTask;
 using 游民星空.Core.Helper;
+using 游民星空.Helper;
 using 游民星空.View;
 
 namespace 游民星空
@@ -115,12 +118,18 @@ namespace 游民星空
                 // 参数
                 rootFrame.Navigate(typeof(HomePage), e.Arguments);
             }
+
+            //注册动态磁贴任务
+            LiveTileHelper.RegisterLiveTileTask();
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
         }
 
-
-        // handle hardware back button press
+        /// <summary>
+        /// handle hardware back button press 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void OnBackPressed(object sender, BackPressedEventArgs e)
         {
             var frame = (Frame)Window.Current.Content;
@@ -130,7 +139,11 @@ namespace 游民星空
             }
         }
 
-        // handle software back button press
+        /// <summary>
+        /// handle software back button press 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
             var frame = (Frame)Window.Current.Content;
@@ -169,6 +182,9 @@ namespace 游民星空
             deferral.Complete();
         }
 
+        /// <summary>
+        /// 更新标题栏上后退键显示状态
+        /// </summary>
         private void UpdateBackButtonVisibility()
         {
             var frame = (Frame)Window.Current.Content;
@@ -188,5 +204,8 @@ namespace 游民星空
             base.OnActivated(args);
 
         }
+
+
+        
     }
 }

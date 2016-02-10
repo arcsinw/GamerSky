@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空.Core", "游民
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空.Data", "游民星空.Data\游民星空.Data.csproj", "{ABE2100B-4F53-438C-9ABF-DA84273D3768}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空.BackgroundTask", "游民星空.BackgroundTask\游民星空.BackgroundTask.csproj", "{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,12 +78,28 @@ Global
 		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|x64.Build.0 = Release|x64
 		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|x86.ActiveCfg = Release|x86
 		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|x86.Build.0 = Release|x86
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|ARM.ActiveCfg = Debug|ARM
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|ARM.Build.0 = Debug|ARM
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|x64.ActiveCfg = Debug|x64
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|x64.Build.0 = Debug|x64
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|x86.ActiveCfg = Debug|x86
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|x86.Build.0 = Debug|x86
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Release|ARM.ActiveCfg = Release|ARM
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Release|ARM.Build.0 = Release|ARM
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Release|x64.ActiveCfg = Release|x64
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Release|x64.Build.0 = Release|x64
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Release|x86.ActiveCfg = Release|x86
+		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://wangx86.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -94,5 +112,8 @@ Global
 		SccProjectUniqueName3 = 游民星空.Data\\游民星空.Data.csproj
 		SccProjectName3 = 游民星空.Data
 		SccLocalPath3 = 游民星空.Data
+		SccProjectUniqueName4 = 游民星空.BackgroundTask\\游民星空.BackgroundTask.csproj
+		SccProjectName4 = 游民星空.BackgroundTask
+		SccLocalPath4 = 游民星空.BackgroundTask
 	EndGlobalSection
 EndGlobal

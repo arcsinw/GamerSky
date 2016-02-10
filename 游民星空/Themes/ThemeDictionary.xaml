@@ -344,6 +344,42 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!--一张图文章模板，包含左边缩略图，右边标题和评论数量-->
+    <DataTemplate x:Key="OnePicEssayDataTemplate">
+        <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
+                <Image.Source>
+                    <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
+                </Image.Source>
+            </Image>
+
+            <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding title}" TextWrapping="Wrap" />
+                    <TextBlock  HorizontalAlignment="Right">
+                                <Run Text="{Binding commentsCount}"/>
+                                <Run Text="评论"/>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+
+    <!--ListView.ItemsContainerStyle-->
+    <Style x:Key="EssayListViewItemsContainerStyle" TargetType="ListViewItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    </Style>
+
+    <!--日夜间资源字典-->
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">
             <SolidColorBrush x:Key="ThemeColorBrush" Color="#C93D32"/>

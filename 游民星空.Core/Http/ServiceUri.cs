@@ -47,7 +47,7 @@ namespace 游民星空.Core.Http
         public const string SearchHotDict = "http://appapi2.gamersky.com/v2/SearchHotDict";
 
         /// <summary>
-        /// 订阅热点
+        /// 订阅热点列表
         /// </summary>
         public const string Subscribe = "http://appapi2.gamersky.com/v2/subscribe";
 
@@ -55,5 +55,25 @@ namespace 游民星空.Core.Http
         /// 搜索
         /// </summary>
         public const string Search = "http://appapi2.gamersky.com/v2/TwoSearch";
+
+        /// <summary>
+        /// 订阅栏目内的内容
+        /// </summary>
+        public const string SubscribeContent = "http://appapi2.gamersky.com/v2/AllChannelList";
+
+        /// <summary>
+        /// 启动页广告？
+        /// </summary>
+        public const string AdStart = "http://appapi2.gamersky.com/v2/adstart";
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        public const string Login = "http://appapi2.gamersky.com/v2/login";
+
+        /// <summary>
+        /// 对订阅进行操作
+        /// </summary>
+        public const string EditSubscription = "http://appapi2.gamersky.com/v2/Editsubscription";
     }
 }

@@ -33,9 +33,27 @@ namespace 游民星空.View
         {
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Disabled;
+
+            webView.NewWindowRequested += WebView_NewWindowRequested;
         }
 
-      
+        /// <summary>
+        /// 处理WebView中的新请求
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void WebView_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
+        {
+            if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
+            {
+
+            }
+            else
+            {
+                webView.Navigate(args.Uri);
+            }
+        }
+
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             progress.IsActive = true;

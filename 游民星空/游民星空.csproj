@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Converter\CountToBoolConverter.cs" />
+    <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\AboutPage.xaml.cs">
@@ -138,6 +139,9 @@
     </Compile>
     <Compile Include="View\StrategyPage.xaml.cs">
       <DependentUpon>StrategyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SubscribeContentPage.xaml.cs">
+      <DependentUpon>SubscribeContentPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +260,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\SubscribeContentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
@@ -263,6 +271,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\游民星空.BackgroundTask\游民星空.BackgroundTask.csproj">
+      <Project>{64a1c5ad-0517-4864-9ee3-d7d31fb0e161}</Project>
+      <Name>游民星空.BackgroundTask</Name>
+    </ProjectReference>
     <ProjectReference Include="..\游民星空.Core\游民星空.Core.csproj">
       <Project>{75f07e89-f8a9-49da-8c32-035515b4ebf6}</Project>
       <Name>游民星空.Core</Name>

@@ -9,11 +9,10 @@ namespace 游民星空.Core.PostDataModel
 {
     public class PostDataBase
     {
-        public static string DeviceId = DeviceInformationHelper.GetDeviceId();
         public string appVersion = "2.0.7";
-        public string deviceId = DeviceId;
+        public string deviceId = DeviceInformationHelper.GetDeviceId();
         public string deviceType = "NOKIA N1";
-        public string os = "android";
         public string osVersion = "5.0.0";
+        public string os = "android";
     }
 }

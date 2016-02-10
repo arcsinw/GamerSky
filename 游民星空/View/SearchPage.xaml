@@ -334,7 +334,9 @@
 
             </PivotItem>
             <PivotItem Header="攻略">
-                <ListView ItemsSource="{Binding Strategys}" SelectionMode="None">
+                <ListView x:Name="strategyListView" ItemsSource="{Binding Strategys}" SelectionMode="None"
+                          IsItemClickEnabled="True"
+                          ItemClick="strategyListView_ItemClick">
                     <ListView.Header>
                         热词搜索
                     </ListView.Header>
@@ -354,7 +356,9 @@
 
             </PivotItem>
             <PivotItem Header="订阅">
-                <ListView ItemsSource="{Binding Subscribes}" SelectionMode="None" Padding="0" Margin="0">
+                <ListView x:Name="subscribeListView" ItemsSource="{Binding Subscribes}" 
+                          IsItemClickEnabled="True" ItemClick="subscribeListView_ItemClick"
+                          SelectionMode="None" Padding="0" Margin="0">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>

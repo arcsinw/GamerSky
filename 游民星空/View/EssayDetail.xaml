@@ -25,6 +25,17 @@
         <WebView x:Name="webView"  
                  hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
                  />
+        <FlipView x:Name="imageFlipView" Visibility="Collapsed" ItemsSource="{Binding }">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Image>
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding }"/>
+                        </Image.Source>
+                    </Image>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+        </FlipView>
         <!--Source="ms-appx-web:///Html/gsAppHTMLTemplate_News.html"-->
     </Grid>
     <Page.BottomAppBar>

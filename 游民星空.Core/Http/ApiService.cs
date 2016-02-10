@@ -96,6 +96,16 @@ namespace 游民星空.Core.Http
             return essayList;
         }
 
+        ///// <summary>
+        ///// 加载更多文章
+        ///// </summary>
+        ///// <param name="nodeId">频道ID</param>
+        ///// <param name="pageIndex">页码</param>
+        ///// <returns></returns>
+        //public async Task<List<EssayResult>> LoadMoreEssay(int nodeId, int pageIndex)
+        //{
+        //    return await GetEssayList(nodeId, pageIndex);
+        //}\\
         /// <summary>
         /// 阅读文章
         /// 适用于新闻 和 攻略
@@ -124,16 +134,6 @@ namespace 游民星空.Core.Http
 
         }
 
-        ///// <summary>
-        ///// 加载更多文章
-        ///// </summary>
-        ///// <param name="nodeId">频道ID</param>
-        ///// <param name="pageIndex">页码</param>
-        ///// <returns></returns>
-        //public async Task<List<EssayResult>> LoadMoreEssay(int nodeId, int pageIndex)
-        //{
-        //    return await GetEssayList(nodeId, pageIndex);
-        //}\\
         /// <summary>
         /// 获取相关阅读
         /// </summary>
@@ -343,5 +343,45 @@ namespace 游民星空.Core.Http
 
             return essayResults;
         }
+
+        /// <summary>
+        /// 获取订阅栏目内的内容
+        /// </summary>
+        /// <param name="sourceId">栏目Id</param>
+        /// <param name="pageIndex">当前页码</param>
+        /// <returns></returns>
+        public async Task<List<EssayResult>> GetSubscribeContent(string sourceId, int pageIndex = 1)
+        {
+            Essay subscribeContent = new Essay();
+            string filename = "subscribeContent_" + sourceId + ".json";
+            if (NetworkManager.Current.Network == 4)  //无网络
+            {
+                subscribeContent = await FileHelper.Current.ReadObjectAsync<Essay>(filename);
+            }
+            else
+            {
+                SubscribeContentPostData postData = new SubscribeContentPostData();
+                postData.request = new SubscribeContentRequest { nodeIds = sourceId, pageCount = 10, pageIndex = pageIndex };
+                subscribeContent = await PostJson<SubscribeContentPostData, Essay>(ServiceUri.SubscribeContent, postData);
+            }
+            List<EssayResult> subscribeContentResult = new List<EssayResult>();
+
+            if (subscribeContent != null && subscribeContent.result != null)
+            {
+                foreach (var item in subscribeContent.result)
+                {
+                    subscribeContentResult.Add(item);
+                }
+            }
+            
+            return subscribeContentResult;
+        }
+
+        //public async Task<bool> Login(string passWord,string userName)
+        //{
+        //    LoginPostData postData = new LoginPostData() { passWord = passWord, userName = userName };
+        //    var result = await PostJson<LoginPostData, bool>(ServiceUri.Login, postData);
+
+        //}
     }
 }

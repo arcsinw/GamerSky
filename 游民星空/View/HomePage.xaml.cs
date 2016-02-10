@@ -86,7 +86,7 @@ namespace 游民星空.View
         /// </summary>
         public void NavigateToSearchPage()
         {
-            rootFrame.Navigate(typeof(SearchPage));
+            Frame.Navigate(typeof(SearchPage));
             splitView.IsSwipeablePaneOpen = false;
         }
 

@@ -115,7 +115,7 @@ namespace 游民星空.Core.Model
         //    }
         //    catch (Exception ex)
         //    {
-                
+
         //    }
         //}
 
@@ -200,10 +200,22 @@ namespace 游民星空.Core.Model
         //        }
         //    }
         //}
+        private string _title;
         /// <summary>
         /// 标题
         /// </summary>
-        public string title { get; set; }
+        public string title
+        {
+            get
+            {
+                return _title;
+            }
+            set
+            {
+                _title = value;
+                OnPropertyChanged();
+            }
+        }
         /// <summary>
         /// huandeng 则为幻灯片内容
         /// </summary>

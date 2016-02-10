@@ -98,7 +98,8 @@ namespace 游民星空.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(SearchPage));
+            (Window.Current.Content as Frame)?.Navigate(typeof(SearchPage));
+            //this.Frame.Navigate(typeof(SearchPage));
         }
 
         private void PivotItem_SizeChanged(object sender, SizeChangedEventArgs e)
