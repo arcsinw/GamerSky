@@ -32,6 +32,8 @@ namespace 游民星空.View
         {
             this.InitializeComponent();
 
+            NavigationCacheMode = NavigationCacheMode.Required;
+
             GetVersion();
         }
 

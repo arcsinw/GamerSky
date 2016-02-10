@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using 游民星空.Core.Helper;
 using 游民星空.Core.Model;
 
 namespace 游民星空.BackgroundTask
@@ -24,12 +25,15 @@ namespace 游民星空.BackgroundTask
         private async Task UpdateLiveTile()
         {
             Debug.WriteLine("TEST");
-
+            await UpdatePrimaryTile();
         }
 
-        private void UpdatePrimaryTile(List<EssayResult> essays)
+        /// <summary>
+        /// 更新主磁贴
+        /// </summary>
+        private async Task UpdatePrimaryTile()
         {
-
+            await LiveTileHelper.UpdatePrimaryTile();
         }
     }
 }

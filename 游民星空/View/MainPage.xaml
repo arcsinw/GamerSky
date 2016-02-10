@@ -81,8 +81,7 @@
 
                 <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
                     <TextBlock Text="{Binding title}" TextWrapping="Wrap"  VerticalAlignment="Top"/>
-                    <!--<TextBlock Text="{Binding readingCount}"/>-->
-                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,2,0">
+                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom">
                                 <Run Text="{Binding commentsCount}"/>
                                 <Run Text="评论"/>
                     </TextBlock>

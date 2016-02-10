@@ -9,7 +9,6 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using 游民星空.BackgroundTask;
 using 游民星空.Core.Helper;
 using 游民星空.Helper;
 using 游民星空.View;
@@ -73,6 +72,7 @@ namespace 游民星空
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            ///全局异常处理
             RegisterExceptionHandlingSynchronizationContext();
 
 
@@ -120,7 +120,8 @@ namespace 游民星空
             }
 
             //注册动态磁贴任务
-            LiveTileHelper.RegisterLiveTileTask();
+            //LiveTileHelper.RegisterLiveTileTask();
+            //LiveTileHelper.UpdatePrimaryTile();
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
         }

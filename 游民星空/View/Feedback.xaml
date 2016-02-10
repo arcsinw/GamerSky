@@ -177,9 +177,9 @@
             <TextBlock Text="反馈" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
 
-        <Grid Grid.Row="1" Padding="8">
-            <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
-                <StackPanel ScrollViewer.VerticalScrollMode="Enabled">
+        <Grid Grid.Row="1" >
+            <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" >
+                <StackPanel ScrollViewer.VerticalScrollMode="Enabled" Padding="8">
                     <TextBox x:Name="subjectTextBox" Header="主题 / Subject"/>
                     <TextBox x:Name="bodyTextBox" Header="内容 / Body" Height="300" 
                              TextWrapping="Wrap"

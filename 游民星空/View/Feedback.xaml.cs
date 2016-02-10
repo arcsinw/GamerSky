@@ -26,6 +26,7 @@ namespace 游民星空.View
         public Feedback()
         {
             this.InitializeComponent();
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         private void back_Click(object sender, RoutedEventArgs e)

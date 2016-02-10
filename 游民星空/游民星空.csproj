@@ -22,7 +22,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxBundle>Never</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
@@ -107,7 +107,6 @@
     </Compile>
     <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Converter\CountToVisibilityConverter.cs" />
-    <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\AboutPage.xaml.cs">
@@ -271,10 +270,6 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\游民星空.BackgroundTask\游民星空.BackgroundTask.csproj">
-      <Project>{64a1c5ad-0517-4864-9ee3-d7d31fb0e161}</Project>
-      <Name>游民星空.BackgroundTask</Name>
-    </ProjectReference>
     <ProjectReference Include="..\游民星空.Core\游民星空.Core.csproj">
       <Project>{75f07e89-f8a9-49da-8c32-035515b4ebf6}</Project>
       <Name>游民星空.Core</Name>

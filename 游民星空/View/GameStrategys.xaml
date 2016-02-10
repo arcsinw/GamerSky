@@ -39,13 +39,11 @@
                 </Image>
 
                 <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding title}" TextWrapping="Wrap" />
-                        <TextBlock  HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding title}" VerticalAlignment="Top" TextWrapping="Wrap" />
+                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom">
                                 <Run Text="{Binding commentsCount}"/>
                                 <Run Text="评论"/>
-                        </TextBlock>
-                    </StackPanel>
+                    </TextBlock>
                 </Grid>
             </Grid>
         </DataTemplate>

@@ -35,7 +35,7 @@
                         <HyperlinkButton Content="注册新用户" HorizontalAlignment="Right"/>
                     </Grid>
 
-                    <TextBlock Text="————————其他方式登录——————————"
+                    <TextBlock Text="————————其他方式登录————————"
                                Margin="0,8"/>
 
                     <Grid>
@@ -56,5 +56,11 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
+
+        <Grid Grid.Row="0" Grid.RowSpan="2">
+            <ProgressRing x:Name="progressRing"  Foreground="{ThemeResource ThemeColorBrush}" 
+                          Height="60" Width="60" Background="Transparent"/>
+        </Grid>
+
     </Grid>
 </Page>

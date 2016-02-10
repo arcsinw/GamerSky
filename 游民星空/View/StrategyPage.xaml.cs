@@ -83,7 +83,7 @@ namespace 游民星空.View
             StrategyResult result =  e.ClickedItem as StrategyResult;
             if(result!=null)
             {
-                this.Frame.Navigate(typeof(GameStrategys), result);
+                (Window.Current.Content as Frame)?.Navigate(typeof(GameStrategys), result);
             }
         }
 
@@ -92,7 +92,7 @@ namespace 游民星空.View
             StrategyResult result = e.ClickedItem as StrategyResult;
             if (result != null)
             {
-                this.Frame.Navigate(typeof(GameStrategys), result);
+                (Window.Current.Content as Frame)?.Navigate(typeof(GameStrategys), result);
             }
         }
 

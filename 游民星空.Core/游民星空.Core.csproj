@@ -120,6 +120,7 @@
     <Compile Include="Helper\ExtensionHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
+    <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="IncrementalLoadingCollection\EssayIncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\GameStrategysIncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="PostDataModel\StrategyPostData.cs" />
     <Compile Include="PostDataModel\SubscribeContentPostData.cs" />
     <Compile Include="PostDataModel\SubscribeSearchPostData.cs" />
+    <Compile Include="PostDataModel\YaowenPostData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\EssayDetailViewModel.cs" />
     <Compile Include="ViewModel\GameStrategysViewModel.cs" />

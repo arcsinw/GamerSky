@@ -383,5 +383,36 @@ namespace 游民星空.Core.Http
         //    var result = await PostJson<LoginPostData, bool>(ServiceUri.Login, postData);
 
         //}
+
+        /// <summary>
+        /// 获取要闻
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<EssayResult>> GetYaowen(int pageIndex=1)
+        {
+            string filename = "yaowen.json";
+            Essay essay = new Essay();
+            if (NetworkManager.Current.Network == 4) //无网络
+            {
+                essay = await FileHelper.Current.ReadObjectAsync<Essay>(filename);
+            }
+            else
+            {
+                YaowenPostData postData = new YaowenPostData() { pageIndex = pageIndex };
+                essay = await PostJson<YaowenPostData, Essay>(ServiceUri.AllChannelList, postData);
+            }
+            List<EssayResult> essayList = new List<EssayResult>();
+            if (essay != null && essay.result!=null)
+            {
+                await FileHelper.Current.WriteObjectAsync<Essay>(essay, filename);
+                foreach (var item in essay.result)
+                {
+                    essayList.Add(item);
+                }
+            }
+            return essayList;
+        }
+
+
     }
 }
