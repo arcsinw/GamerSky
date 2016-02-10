@@ -455,6 +455,7 @@
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <GridView ItemsSource="{Binding FocusStrategys}" Padding="8"
                           ItemsPanel="{StaticResource GridViewItemsPanel}"
+                          SelectionMode="None"
                           ShowsScrollingPlaceholders="True"
                               IsItemClickEnabled="True"
                               ItemClick="GridView_ItemClick">

@@ -20,9 +20,6 @@ namespace 游民星空.Core.Helper
         /// </summary>
         public static async void RegisterLiveTileTask()
         {
-
-
-
             var status = await BackgroundExecutionManager.RequestAccessAsync();
             if (status == BackgroundAccessStatus.Unspecified || status == BackgroundAccessStatus.Denied)
             {
