@@ -121,6 +121,7 @@
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\LiveTileHelper.cs" />
+    <Compile Include="Helper\ToastHelper.cs" />
     <Compile Include="IncrementalLoadingCollection\EssayIncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\GameStrategysIncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />
@@ -187,6 +188,7 @@
     <Content Include="Html\gsAppHTMLTemplate_js\gsAppHTMLTemplate.js" />
     <Content Include="Html\gsAppHTMLTemplate_js\gsAppHTMLTemplate_Video.js" />
     <Content Include="Html\gsAppHTMLTemplate_js\gsVideo.js" />
+    <Content Include="Html\gsAppHTMLTemplate_News.html" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

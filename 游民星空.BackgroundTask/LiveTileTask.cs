@@ -12,25 +12,25 @@ namespace 游民星空.BackgroundTask
 {
     public sealed class LiveTileTask : IBackgroundTask
     {
-        public async void Run(IBackgroundTaskInstance taskInstance)
+        public void Run(IBackgroundTaskInstance taskInstance)
         {
             var deferral = taskInstance.GetDeferral();
-            await UpdateLiveTile();
+            UpdateLiveTile();
             deferral.Complete();
         }
 
         /// <summary>
         /// 更新动态磁贴
         /// </summary>
-        private async Task UpdateLiveTile()
+        private void UpdateLiveTile()
         {
-            await UpdatePrimaryTile();
+            UpdatePrimaryTile();
         }
 
         /// <summary>
         /// 更新主磁贴
         /// </summary>
-        private async Task UpdatePrimaryTile()
+        private void UpdatePrimaryTile()
         {
             LiveTileHelper.UpdatePrimaryTile();
         }

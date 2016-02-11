@@ -35,6 +35,8 @@ namespace 游民星空.View
             NavigationCacheMode = NavigationCacheMode.Disabled;
 
             webView.NewWindowRequested += WebView_NewWindowRequested;
+
+          
         }
 
         /// <summary>
@@ -46,7 +48,7 @@ namespace 游民星空.View
         {
             if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
             {
-
+               
             }
             else
             {
