@@ -5,10 +5,12 @@ using Windows.ApplicationModel.Background;
 using Windows.Foundation.Metadata;
 using Windows.Phone.UI.Input;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.BackgroundTask;
 using 游民星空.Core.Helper;
 using 游民星空.Helper;
 using 游民星空.View;
@@ -122,6 +124,7 @@ namespace 游民星空
             //注册动态磁贴任务
             //LiveTileHelper.RegisterLiveTileTask();
             //LiveTileHelper.UpdatePrimaryTile();
+            RegisterLiveTileTask();
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
         }
@@ -207,6 +210,38 @@ namespace 游民星空
         }
 
 
-        
+        private const string TILE_TASK_NAME = "TILETASK";
+        /// <summary>
+        /// 注册后台任务
+        /// </summary>
+        public static async void RegisterLiveTileTask()
+        {
+            var status = await BackgroundExecutionManager.RequestAccessAsync();
+            if (status == BackgroundAccessStatus.Unspecified || status == BackgroundAccessStatus.Denied)
+            {
+                return;
+            }
+            //如果已经注册则先取消注册
+            foreach (var t in BackgroundTaskRegistration.AllTasks)
+            {
+                if (t.Value.Name == TILE_TASK_NAME)
+                {
+                    t.Value.Unregister(true);
+                }
+            }
+
+            var taskBuilder = new BackgroundTaskBuilder { Name = TILE_TASK_NAME, TaskEntryPoint = typeof(LiveTileTask).FullName };
+            taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+
+            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+            updater.Clear();
+
+            //var secondUpdater = TileUpdateManager.CreateTileUpdaterForSecondaryTile();
+            //secondUpdater.Clear();
+
+            taskBuilder.SetTrigger(new TimeTrigger(60, false));
+            taskBuilder.Register();
+
+        }
     }
 }

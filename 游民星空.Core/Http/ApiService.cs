@@ -398,7 +398,8 @@ namespace 游民星空.Core.Http
             }
             else
             {
-                YaowenPostData postData = new YaowenPostData() { pageIndex = pageIndex };
+                YaowenPostData postData = new YaowenPostData();
+                postData.request = new YaowenRequest(){ pageIndex = pageIndex };
                 essay = await PostJson<YaowenPostData, Essay>(ServiceUri.AllChannelList, postData);
             }
             List<EssayResult> essayList = new List<EssayResult>();

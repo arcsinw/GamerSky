@@ -8,6 +8,11 @@ namespace 游民星空.Core.PostDataModel
 {
     public class YaowenPostData : PostDataBase
     {
+        public YaowenRequest request;
+    }
+
+    public class YaowenRequest
+    {
         public int elementsCountPerPage = 20;
         public string lastUpdateTime;
         public string nodeIds = "0";

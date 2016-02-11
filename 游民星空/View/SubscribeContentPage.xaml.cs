@@ -36,7 +36,10 @@ namespace 游民星空.View
             SubscribeResult subscribeResult = e.Parameter as SubscribeResult;
             if (subscribeResult != null)
             {
-                await viewModel.LoadData(subscribeResult);
+                if (viewModel.SubscribeContens.Count == 0)
+                {
+                    await viewModel.LoadData(subscribeResult);
+                }
             }
             progressRing.IsActive = false;
         }
