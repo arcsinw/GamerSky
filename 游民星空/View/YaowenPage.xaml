@@ -4,10 +4,122 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:游民星空.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:vm="using:游民星空.Core.ViewModel"
+    xmlns:hp="using:游民星空.Core.Helper"
+    xmlns:pr="using:PullToRefresh.UWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:YaowenPageViewModel x:Name="viewModel"/>
+    </Page.DataContext>
+    <Page.Resources>
+        <!--BorderMargin-->
+        <Thickness x:Key="BorderMargin">0,2</Thickness>
+        <!--BorderThickness-->
+        <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
+        <!--BorderBrush-->
+        <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
+        <Thickness x:Key="GridMargin">2,0</Thickness>
+        <Thickness x:Key="GridPadding">5</Thickness>
+
+        <!--一张图文章模板，包含左边缩略图，右边标题和评论数量-->
+        <DataTemplate x:Key="OnePicEssayDataTemplate">
+            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
+                    <Image.Source>
+                        <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
+                    </Image.Source>
+                </Image>
+
+                <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
+                    <TextBlock Text="{Binding title}" VerticalAlignment="Top" TextWrapping="Wrap" />
+                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <Run Text="{Binding commentsCount}"/>
+                                <Run Text="评论"/>
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <!--无图模板-->
+        <DataTemplate x:Key="NoPicEssayDataTemplate">
+            <Grid BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}"
+                  Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"   >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding title}" TextWrapping="Wrap"/>
+                <TextBlock  HorizontalAlignment="Right" Grid.Row="1" Margin="5,2" >
+                                <Run Text="{Binding commentsCount}"/>
+                                <Run Text="评论"/>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="{ThemeResource ThemeColorBrush}">
+            <Button x:Name="back" Width="48" Height="48" Background="Transparent" 
+                    Foreground="White" Click="back_Click"
+                    Grid.Column="0">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock Text="要闻" Style="{ThemeResource PageTitleStyle}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
+                <ListView ItemsSource="{Binding Yaowens}"
+                 SelectionMode="None"
+                  Loaded="ListView_Loaded"
+                  ShowsScrollingPlaceholders="True"
+                  ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                  IsItemClickEnabled="True"
+                  ItemClick="ListView_ItemClick">
+
+                    <ListView.ItemTemplateSelector>
+                        <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+                                                      NoPicDt="{StaticResource NoPicEssayDataTemplate}"
+                                                                      />
+                    </ListView.ItemTemplateSelector>
+
+
+                    <ListView.Transitions>
+                        <TransitionCollection>
+                            <AddDeleteThemeTransition />
+                            <ContentThemeTransition />
+                            <EntranceThemeTransition/>
+                            <NavigationThemeTransition/>
+                        </TransitionCollection>
+                    </ListView.Transitions>
+
+                    <!--<ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>-->
+
+                </ListView>
+            </pr:PullToRefreshBox>
+
+            <Grid>
+                <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Foreground="{ThemeResource ThemeColorBrush}" 
+                          Height="60" Width="60" Background="Transparent"/>
+            </Grid>
+        </Grid>
 
     </Grid>
 </Page>

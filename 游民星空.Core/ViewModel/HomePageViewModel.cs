@@ -21,6 +21,7 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public async void ClearCache()
         {
+            CacheSize = "正在删除缓存";
             await FileHelper.Current.DeleteCacheFile();
             GetCacheSize();
         }

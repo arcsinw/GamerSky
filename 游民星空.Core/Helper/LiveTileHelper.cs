@@ -59,22 +59,23 @@ namespace 游民星空.Core.Helper
         /// 前图后文字的磁贴模板
         /// </summary>
         private const string TileTemplateXml = @"
-            <title>
-                <visual version='3' branding='logo'>
+            <tile>
+                <visual version='3' branding='name'>
                     <binding template='TileMedium'>
                         <image src='{0}' placement='peek'/>
-                        <text hint-style='base'>{1}</text>
+                        <text hint-style='captionSubtle' hint-wrap='true'>{1}</text>
                     </binding>
                     <binding template='TileWide'>
                         <image src='{0}' placement='peek'/>
-                        <text hint-style='base'>{1}</text>
+                        <text hint-style='base' hint-wrap='true'>{1}</text>
                     </binding>
                     <binding template='TileLarge'>
                         <image src='{0}' placement='peek'/>
-                        <text hint-style='base'>{1}</text>
+                        <text hint-style='base' hint-wrap='true'>{1}</text>
+                        <text hint-style='captionSubtle' hint-wrap='true'>{2}</text>
                     </binding>
                 </visual>
-            </title>";
+            </tile>";
 
         public static ApiService apiService = new ApiService();
         /// <summary>
@@ -93,12 +94,14 @@ namespace 游民星空.Core.Helper
                 updater.EnableNotificationQueueForWide310x150(true);
                 updater.Clear();
 
+                
+
                 if (essays != null)
                 {
                     foreach (var item in essays)
                     {
                         var doc = new XmlDocument();
-                        var xml = string.Format(TileTemplateXml, item.thumbnailURLs[0], item.title);
+                        var xml = string.Format(TileTemplateXml, item.thumbnailURLs[0], item.title,item.authorName);
                         doc.LoadXml(WebUtility.HtmlDecode(xml), new XmlLoadSettings
                         {
                             ElementContentWhiteSpace = false,

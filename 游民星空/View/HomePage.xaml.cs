@@ -96,7 +96,8 @@ namespace 游民星空.View
         /// </summary>
         public void YaoWen()
         {
-
+            this.Frame.Navigate(typeof(YaowenPage));
+            splitView.IsSwipeablePaneOpen = false;
         }
 
         

@@ -161,12 +161,13 @@
     <Compile Include="ViewModel\HomePageViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\SearchPageViewModel.cs" />
+    <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\StrategyPageViewModel.cs" />
     <Compile Include="ViewModel\SubscribeContentViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\YaowenPageViewModel.cs" />
     <EmbeddedResource Include="Properties\游民星空.Core.rd.xml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Html\gsAppHTMLTemplate_css\gsAppHTMLTemplate.css" />
     <Content Include="Html\gsAppHTMLTemplate_image\gsAppHTMLTemplate_Video_Background%402x.png" />

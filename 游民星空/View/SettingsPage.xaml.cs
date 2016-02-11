@@ -107,5 +107,15 @@ namespace 游民星空.View
             string uri = "ms-windows-store://pdp/?ProductId=9NBLGGH5Q5TJ";
             await Launcher.LaunchUriAsync(new Uri(uri));
         }
+
+        /// <summary>
+        /// 是否推送要闻
+        /// </summary>
+        public bool IsToastShow { get; set; }
+
+        /// <summary>
+        /// 是否显示动态磁贴
+        /// </summary>
+        public bool IsLiveTileShow { get; set; }
     }
 }

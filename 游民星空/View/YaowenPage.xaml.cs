@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Model;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -25,6 +26,39 @@ namespace 游民星空.View
         public YaowenPage()
         {
             this.InitializeComponent();
+
+            NavigationCacheMode = NavigationCacheMode.Required;
+        }
+
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+        }
+
+        private void ListView_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            EssayResult essayResult = e.ClickedItem as EssayResult;
+            if (essayResult == null) return;
+
+            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            await viewModel.LoadData();
+        }
+
+        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        {
+            await viewModel.Refresh();
         }
     }
 }

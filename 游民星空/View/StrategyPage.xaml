@@ -557,7 +557,7 @@
                                                 <Run Text="人订阅"/>
                                             </TextBlock>
                                         </Grid>
-                                        <Button Grid.Column="3" Foreground="White" Background="{ThemeResource ThemeColorBrush}" 
+                                        <Button Grid.Column="3"
                                                 HorizontalAlignment="Center" Content="订阅" Click="Button_Click"/>
                                     </Grid>
                                 </DataTemplate>

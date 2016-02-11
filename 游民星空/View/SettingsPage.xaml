@@ -41,8 +41,16 @@
 
                     <ListViewItem>
                         <Grid>
+                            <TextBlock Text="动态磁贴" VerticalAlignment="Center"/>
+                            <ToggleSwitch IsOn="{x:Bind IsLiveTileShow}"  HorizontalAlignment="Right" MinWidth="0"
+                                          VerticalAlignment="Center"/>
+                        </Grid>    
+                    </ListViewItem>
+ 
+                    <ListViewItem>
+                        <Grid>
                             <TextBlock Text="要闻推送" VerticalAlignment="Center"/>
-                            <ToggleSwitch MinWidth="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <ToggleSwitch IsOn="{x:Bind IsToastShow}" MinWidth="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </Grid>
                     </ListViewItem>
 

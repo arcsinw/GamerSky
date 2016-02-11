@@ -24,7 +24,6 @@ namespace 游民星空.BackgroundTask
         /// </summary>
         private async Task UpdateLiveTile()
         {
-            Debug.WriteLine("TEST");
             await UpdatePrimaryTile();
         }
 

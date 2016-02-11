@@ -122,8 +122,6 @@ namespace 游民星空
             }
 
             //注册动态磁贴任务
-            //LiveTileHelper.RegisterLiveTileTask();
-            //LiveTileHelper.UpdatePrimaryTile();
             RegisterLiveTileTask();
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
@@ -211,6 +209,7 @@ namespace 游民星空
 
 
         private const string TILE_TASK_NAME = "TILETASK";
+        
         /// <summary>
         /// 注册后台任务
         /// </summary>
