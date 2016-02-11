@@ -198,7 +198,6 @@
                                 </StackPanel>
                                 <TextBlock  Grid.Column="1" HorizontalAlignment="Right">
                                     <Run Text="{x:Bind ViewModel.CacheSize,Mode=OneWay}"/>
-                                    <Run Text="MB"/>
                                 </TextBlock>
                             </Grid>
                         </ListViewItem>

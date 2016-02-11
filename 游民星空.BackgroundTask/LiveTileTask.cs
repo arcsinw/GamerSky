@@ -32,7 +32,7 @@ namespace 游民星空.BackgroundTask
         /// </summary>
         private async Task UpdatePrimaryTile()
         {
-            await LiveTileHelper.UpdatePrimaryTile();
+            LiveTileHelper.UpdatePrimaryTile();
         }
     }
 }

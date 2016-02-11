@@ -238,9 +238,11 @@ namespace 游民星空
             //var secondUpdater = TileUpdateManager.CreateTileUpdaterForSecondaryTile();
             //secondUpdater.Clear();
 
-            taskBuilder.SetTrigger(new TimeTrigger(60, false));
+            taskBuilder.SetTrigger(new TimeTrigger(30, false));
             taskBuilder.Register();
 
+            //更新动态磁贴
+            //await LiveTileHelper.UpdatePrimaryTile();
         }
     }
 }

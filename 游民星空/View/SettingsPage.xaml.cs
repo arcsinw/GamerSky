@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
+using 游民星空.Core.ViewModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -28,13 +29,17 @@ namespace 游民星空.View
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
+
+        public SettingsPageViewModel viewModel { get; set; }
+
         public SettingsPage()
         {
             this.InitializeComponent();
 
             NavigationCacheMode = NavigationCacheMode.Required;
 
-            GetVersion();
+            viewModel = new SettingsPageViewModel();
+
         }
 
         private void back_Click(object sender, RoutedEventArgs e)
@@ -85,9 +90,9 @@ namespace 游民星空.View
         {
             get
             {
-                return version;
+                return Functions.GetVersion();
             }
-            set
+            private set
             {
                 version = value;
                 OnPropertyChanged();
@@ -108,14 +113,6 @@ namespace 游民星空.View
             await Launcher.LaunchUriAsync(new Uri(uri));
         }
 
-        /// <summary>
-        /// 是否推送要闻
-        /// </summary>
-        public bool IsToastShow { get; set; }
 
-        /// <summary>
-        /// 是否显示动态磁贴
-        /// </summary>
-        public bool IsLiveTileShow { get; set; }
     }
 }

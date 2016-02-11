@@ -143,9 +143,10 @@ namespace 游民星空.Core.Helper
                     list.ForEach((t) => tasks.Add(t.AsTask()));
 
                     await Task.Run(() => { Task.WaitAll(tasks.ToArray()); });
+
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
             }
         }

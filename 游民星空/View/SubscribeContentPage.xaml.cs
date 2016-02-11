@@ -38,7 +38,8 @@ namespace 游民星空.View
             {
                 if (viewModel.SubscribeContens.Count == 0)
                 {
-                    await viewModel.LoadData(subscribeResult);
+                    await viewModel.LoadData(subscribeResult,pageIndex);
+                    pageIndex++;
                 }
             }
             progressRing.IsActive = false;

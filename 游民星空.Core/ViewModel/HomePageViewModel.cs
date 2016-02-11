@@ -21,12 +21,12 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public async void ClearCache()
         {
-            CacheSize = "正在删除缓存";
+            CacheSize = "删除缓存中...";
             await FileHelper.Current.DeleteCacheFile();
-            GetCacheSize();
+            
         }
 
-        private string cacheSize = "0";
+        private string cacheSize = "0 MB";
         public string CacheSize
         {
             get
@@ -43,7 +43,7 @@ namespace 游民星空.Core.ViewModel
         public async void GetCacheSize()
         {
             double size = await FileHelper.Current.GetCacheSize();
-            CacheSize = (size / 1024 /1024).ToString("f2");
+            CacheSize = (size / 1024 / 1024).ToString("f2") + " MB";
         }
 
         
