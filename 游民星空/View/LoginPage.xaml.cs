@@ -34,5 +34,20 @@ namespace 游民星空.View
                 Frame.GoBack();
             }
         }
+        /// <summary>
+        /// 忘记密码
+        /// </summary>
+        public void ForgetPwd()
+        {
+            this.Frame.Navigate(typeof(FindPasswordPage));
+        }
+
+        /// <summary>
+        /// 注册
+        /// </summary>
+        public void Register()
+        {
+            this.Frame.Navigate(typeof(RegisterPage));
+        }
     }
 }

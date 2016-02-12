@@ -15,7 +15,7 @@
 
         <Grid Background="{ThemeResource ThemeColorBrush}">
             <Button x:Name="back" Width="48" Height="48" Background="Transparent" 
-                    Foreground="White" Click="back_Click"
+                    Foreground="White" Click="{x:Bind Back}"
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
@@ -41,13 +41,13 @@
                     </Grid>
                     <Button Content="注册" HorizontalAlignment="Stretch"
                             Background="{ThemeResource ThemeColorBrush}" Foreground="White"/>
-                    <TextBlock>
+                    <TextBlock Margin="0,16">
                     <Run Text="注册代表同意接受"/>
                     <Hyperlink>"服务条款和声明"</Hyperlink>
                     </TextBlock>
-                    <Rectangle Margin="0,8" Height="1" Fill="Gray"  />
+                    <Rectangle Height="1" Fill="Gray"  />
                     
-                    <HyperlinkButton Content="其他方式注册" HorizontalAlignment="Right"/>
+                    <HyperlinkButton Content="其他方式注册" Click="{x:Bind OtherRegister}" HorizontalAlignment="Right"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

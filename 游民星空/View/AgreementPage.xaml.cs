@@ -20,24 +20,11 @@ namespace 游民星空.View
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class RegisterPage : Page
+    public sealed partial class AgreementPage : Page
     {
-        public RegisterPage()
+        public AgreementPage()
         {
             this.InitializeComponent();
-        }
-
-        private void OtherRegister()
-        {
-            this.Frame.Navigate(typeof(EmailRegisterPage));
-        }
-
-        private void Back()
-        {
-            if(Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
         }
     }
 }

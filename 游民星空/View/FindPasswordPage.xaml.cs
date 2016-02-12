@@ -26,5 +26,13 @@ namespace 游民星空.View
         {
             this.InitializeComponent();
         }
+
+        public void Back()
+        {
+            if(Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+        }
     }
 }

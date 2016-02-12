@@ -122,6 +122,8 @@
     <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\ToastHelper.cs" />
+    <Compile Include="Helper\VerifiableBase.cs" />
+    <Compile Include="Helper\VerifiableObjectErrors.cs" />
     <Compile Include="IncrementalLoadingCollection\EssayIncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\GameStrategysIncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />

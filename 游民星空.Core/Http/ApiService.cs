@@ -489,7 +489,7 @@ namespace 游民星空.Core.Http
         {
             FindPasswordByNamePostData postData = new FindPasswordByNamePostData();
             postData.request = new FindPasswordByNameRequest() { username = username };
-            FindPasswordByName result = await PostJson<FindPasswordByNamePostData, FindPasswordByName>(ServiceUri.FindPassword,);
+            FindPasswordByName result = await PostJson<FindPasswordByNamePostData, FindPasswordByName>(ServiceUri.FindPassword,postData);
             
         }
     }
