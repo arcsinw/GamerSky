@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
@@ -414,6 +415,82 @@ namespace 游民星空.Core.Http
             return essayList;
         }
 
+        /// <summary>
+        /// 获取应用启动图
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<AdStartResult>>GetStartImage()
+        {
+            AdStartPostData postData = new AdStartPostData();
+            AdStart adStart = await PostJson<AdStartPostData, AdStart>(ServiceUri.AdStart, postData);
 
+            List<AdStartResult> adStartResults = new List<AdStartResult>();
+            if (adStart!=null && adStart.result!=null)            
+            {
+                foreach (var item in adStart.result)
+                {
+                    adStartResults.Add(item);
+                }
+            }
+            return adStartResults;
+        }
+
+        /// <summary>
+        /// 获取手机号注册验证码
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <param name="username"></param>
+        /// <param name="email"></param>
+        /// <param name="codetype"></param>
+        /// <returns></returns>
+        public async Task GetVerificationCode(string phoneNumber,string username,string email,string codetype="1")
+        {
+            VerificationCodePostData postData = new VerificationCodePostData();
+            postData.request = new VerificationCodeRequest() { codetype = codetype, email = email, phoneNumber = phoneNumber, username = username };
+
+            VerificationCode verificationCode = await PostJson<VerificationCodePostData, VerificationCode>(ServiceUri.GetVerificationCode, postData);
+
+        }
+
+        /// <summary>
+        /// 通过邮件注册
+        /// </summary>
+        /// <param name="answer">密保问题答案</param>
+        /// <param name="password">密码</param>
+        /// <param name="email">邮箱</param>
+        /// <param name="question">密保问题</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="phoneNumber">手机号</param>
+        /// <param name="phoneVerificationCode">手机验证码</param>
+        /// <returns></returns>
+        public async Task RegisterByEmail(string answer,string password,string email,string question,string userName,string phoneNumber="",string phoneVerificationCode="")
+        {
+            EmailRegisterPostData postData = new EmailRegisterPostData();
+            postData.request = new EmailRegisterRequest()
+            {
+                answer = answer,
+                confirmpassword = password,
+                email = email,
+                password = password,
+                phoneNumber = phoneNumber,
+                phoneVerificationCode = phoneVerificationCode,
+                question = question,
+                userName = userName
+            };
+            VerificationCode verificationCode = await PostJson<EmailRegisterPostData, VerificationCode>(ServiceUri.RegisterByEmail, postData);
+
+        }
+
+        /// <summary>
+        /// 通过用户名查找能找回密码的方式
+        /// </summary>
+        /// <returns></returns>
+        public async Task FindWayByName(string username)
+        {
+            FindPasswordByNamePostData postData = new FindPasswordByNamePostData();
+            postData.request = new FindPasswordByNameRequest() { username = username };
+            FindPasswordByName result = await PostJson<FindPasswordByNamePostData, FindPasswordByName>(ServiceUri.FindPassword,);
+            
+        }
     }
 }

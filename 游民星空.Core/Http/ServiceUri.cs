@@ -75,5 +75,20 @@ namespace 游民星空.Core.Http
         /// 对订阅进行操作
         /// </summary>
         public const string EditSubscription = "http://appapi2.gamersky.com/v2/Editsubscription";
+
+        /// <summary>
+        /// 手机号注册获取验证码
+        /// </summary>
+        public const string GetVerificationCode = "http://appapi2.gamersky.com/v2/GetVerificationCode";
+
+        /// <summary>
+        /// 用邮箱注册账号
+        /// </summary>
+        public const string RegisterByEmail = "http://appapi2.gamersky.com/v2/SubmitRegistrationInfo";
+
+        /// <summary>
+        /// 找回密码第一步 输入用户名
+        /// </summary>
+        public const string FindPassword = "http://appapi2.gamersky.com/v2/TwoGetCodeInformation";
     }
 }

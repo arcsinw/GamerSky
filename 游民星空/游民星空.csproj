@@ -112,11 +112,17 @@
     <Compile Include="View\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EmailRegisterPage.xaml.cs">
+      <DependentUpon>EmailRegisterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EssayDetail.xaml.cs">
       <DependentUpon>EssayDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Feedback.xaml.cs">
       <DependentUpon>Feedback.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FindPasswordPage.xaml.cs">
+      <DependentUpon>FindPasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GameStrategys.xaml.cs">
       <DependentUpon>GameStrategys.xaml</DependentUpon>
@@ -229,11 +235,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\EmailRegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\EssayDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Feedback.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FindPasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
