@@ -34,5 +34,10 @@ namespace 游民星空.View
                 Frame.GoBack();
             }
         }
+
+        public void Agreement()
+        {
+            Frame.Navigate(typeof(AgreementPage));
+        }
     }
 }

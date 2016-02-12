@@ -14,8 +14,7 @@
         </Grid.RowDefinitions>
 
         <Grid Background="{ThemeResource ThemeColorBrush}">
-            <Button x:Name="back" Width="48" Height="48" Background="Transparent" 
-                    Foreground="White" Click="{x:Bind Back}"
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
@@ -43,7 +42,7 @@
                             Background="{ThemeResource ThemeColorBrush}" Foreground="White"/>
                     <TextBlock Margin="0,16">
                     <Run Text="注册代表同意接受"/>
-                    <Hyperlink>"服务条款和声明"</Hyperlink>
+                    <Hyperlink Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>
                     </TextBlock>
                     <Rectangle Height="1" Fill="Gray"  />
                     

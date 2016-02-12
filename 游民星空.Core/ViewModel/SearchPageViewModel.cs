@@ -80,7 +80,7 @@ namespace 游民星空.Core.ViewModel
             {
                 foreach (var item in strategys)
                 {
-                    Strategys.Add(item);
+                    Strategys.Add(item.Trim());
                 }
             }
 
@@ -89,7 +89,7 @@ namespace 游民星空.Core.ViewModel
             {
                 foreach (var item in news)
                 {
-                    News.Add(item);
+                    News.Add(item.Trim());
                 }
             }
 
@@ -100,6 +100,12 @@ namespace 游民星空.Core.ViewModel
             }
 
             IsActive = false;
+        }
+
+        public async Task Search(string key,SearchTypeEnum searchType,int pageIndex=1)
+        {
+            List < EssayResult> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
+
         }
     }
 }

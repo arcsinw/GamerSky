@@ -69,8 +69,7 @@
         </Grid.RowDefinitions>
 
         <Grid Background="{ThemeResource ThemeColorBrush}">
-            <Button x:Name="back" Width="48" Height="48" Background="Transparent" 
-                    Foreground="White" Click="back_Click"
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>

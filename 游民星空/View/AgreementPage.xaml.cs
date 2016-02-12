@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +26,23 @@ namespace 游民星空.View
         public AgreementPage()
         {
             this.InitializeComponent();
+
+            NavigationCacheMode = NavigationCacheMode.Required;
+        }
+
+        public void Back()
+        {
+            if(this.Frame.CanGoBack)
+            {
+                this.Frame.GoBack();
+            }
+        }
+
+        public async void GetAgreement()
+        {
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Data/Agreement.txt"));
+            string text = await FileIO.ReadTextAsync(file);
+            textBlock.Text = text;
         }
     }
 }

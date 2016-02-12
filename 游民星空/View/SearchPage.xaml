@@ -279,12 +279,13 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
     </Page.Resources>
 
     <Page.DataContext>
-        <vm:SearchPageViewModel x:Name="SearchPageViewModel"/>
+        <vm:SearchPageViewModel  x:Name="SearchPageViewModel"/>
     </Page.DataContext>
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -298,40 +299,43 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="back" Width="48" Height="48" Background="Transparent" 
-                    Foreground="White" Click="back_Click"
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
             <TextBox x:Name="keyTextBox" PlaceholderText="请输入搜索内容"  Margin="0,8" Grid.Column="1" Style="{StaticResource SearchTextBoxStyle}"/>
             <Button x:Name="search" Width="48" Height="48" Background="Transparent" 
-                    Foreground="White" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=keyTextBox,Path=Text}"
+                    Foreground="White" Click="{x:Bind Search}"
                     Grid.Column="2">
+                <!--Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=keyTextBox,Path=Text}"-->
                 <SymbolIcon Symbol="Find"/>
             </Button>
         </Grid>
 
-        <Pivot Grid.Row="1">
+        <Pivot Grid.Row="1" x:Name="pivot">
             <PivotItem Header="新闻">
-                <ListView ItemsSource="{Binding News}" SelectionMode="None">
-                    <ListView.Header>
-                        热词搜索
-                    </ListView.Header>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding }" Margin="0"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalAlignment" Value="Left"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Margin" Value="0"/>
-                            <Setter Property="Padding" Value="0"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
+                    <!--显示搜索热词-->
 
+                    <ListView ItemsSource="{Binding News}" SelectionMode="None" >
+                        <ListView.Header>
+                            热词搜索
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding }"  Margin="0"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Padding" Value="0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                
             </PivotItem>
             <PivotItem Header="攻略">
                 <ListView x:Name="strategyListView" ItemsSource="{Binding Strategys}" SelectionMode="None"
@@ -342,7 +346,9 @@
                     </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding }"/>
+                            <Border Background="Red">
+                                <TextBlock Text="{Binding }"/>
+                            </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                     <ListView.ItemContainerStyle>
@@ -374,7 +380,10 @@
                                 </Image>
                                 <Grid Grid.Column="1" Margin="5,2">
                                     <TextBlock Text="{Binding sourceName}" VerticalAlignment="Top"/>
-                                    <TextBlock Text="{Binding cnt}" Margin="4" VerticalAlignment="Bottom"/>
+                                    <TextBlock  Margin="4" VerticalAlignment="Bottom">
+                                        <Run Text="{Binding cnt}"/>
+                                        <Run Text="人订阅"/>
+                                    </TextBlock>
                                 </Grid>
                                 <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" Click="Button_Click"/>
                             </Grid>
@@ -394,6 +403,6 @@
         </Pivot>
         <ProgressRing Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent"
                         Foreground="Red" IsActive="{Binding IsActive}"  Width="70" Height="70"/>
-       
+
     </Grid>
 </Page>

@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Helper;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
 
@@ -27,10 +28,17 @@ namespace 游民星空.View
         public SearchPage()
         {
             this.InitializeComponent();
+
+            viewModel = new SearchPageViewModel();
+
+            pageIndexDic = new Dictionary<int, int>();
+         
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
         
+        public SearchPageViewModel viewModel { get; set; }
 
-        private void back_Click(object sender, RoutedEventArgs e)
+        private void Back()
         {
             if(Frame.CanGoBack)
             {
@@ -38,8 +46,35 @@ namespace 游民星空.View
             }
         }
 
-        private void search_Click(object sender, RoutedEventArgs e)
+        #region pageIndex
+        /// <summary>
+        /// 保存不同频道的页码
+        /// </summary>
+        private Dictionary<int, int> pageIndexDic;
+
+        private int pageIndex = 1;
+        #endregion 
+
+        private async void Search()
         {
+            int pivotIndex = pivot.SelectedIndex;
+            SearchTypeEnum searchType;
+            switch (pivotIndex)
+            {
+                case 0:
+                    searchType = SearchTypeEnum.news;
+                    break;
+                case 1:
+                    searchType = SearchTypeEnum.strategy;
+                    break;
+                default:
+                    searchType = SearchTypeEnum.news;
+                    break;
+                //case 2:
+                //    searchType = SearchTypeEnum.
+            }
+            string key = keyTextBox.Text;
+            await viewModel.Search(key, searchType, pageIndex);
             
         }
 

@@ -29,7 +29,7 @@ namespace 游民星空.View
             NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-        private void back_Click(object sender, RoutedEventArgs e)
+        private void Back()
         {
             if(Frame.CanGoBack)
             {

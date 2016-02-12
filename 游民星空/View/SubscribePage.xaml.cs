@@ -20,29 +20,41 @@ namespace 游民星空.View
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class RegisterPage : Page
+    public sealed partial class SubscribePage : Page
     {
-        public RegisterPage()
+        public SubscribePage()
         {
             this.InitializeComponent();
         }
 
-        private void OtherRegister()
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.Frame.Navigate(typeof(EmailRegisterPage));
+
         }
 
-        private void Back()
+        private void PivotItem_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if(Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
+
         }
 
-        public void Agreement()
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Frame.Navigate(typeof(AgreementPage));
+
+        }
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        {
+
         }
     }
 }

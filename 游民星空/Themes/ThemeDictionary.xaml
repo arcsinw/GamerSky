@@ -383,6 +383,13 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
 
+    <!--Navigation Back Button Style-->
+    <Style x:Key="BackButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="48"/>
+        <Setter Property="Height" Value="48"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
     <!--日夜间资源字典-->
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">

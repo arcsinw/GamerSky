@@ -38,7 +38,7 @@ namespace 游民星空.View
 
         private int pageIndex = 1;
 
-        private void back_Click(object sender, RoutedEventArgs e)
+        private void Back()
         {
             if (Frame.CanGoBack)
             {

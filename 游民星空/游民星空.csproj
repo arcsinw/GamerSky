@@ -154,6 +154,9 @@
     <Compile Include="View\SubscribeContentPage.xaml.cs">
       <DependentUpon>SubscribeContentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SubscribePage.xaml.cs">
+      <DependentUpon>SubscribePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\YaowenPage.xaml.cs">
       <DependentUpon>YaowenPage.xaml</DependentUpon>
     </Compile>
@@ -212,7 +215,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <None Include="Package.StoreAssociation.xml" />
-    <Content Include="Data\agreement.txt" />
+    <Content Include="Data\Agreement.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
@@ -292,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SubscribeContentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SubscribePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

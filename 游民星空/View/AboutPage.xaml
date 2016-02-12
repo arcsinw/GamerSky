@@ -14,9 +14,8 @@
         </Grid.RowDefinitions>
 
         <Grid Background="{ThemeResource ThemeColorBrush}">
-            <Button x:Name="back" Width="48" Height="48" Background="Transparent" 
-                    Foreground="White" Click="back_Click"
-                    Grid.Column="0">
+            <Button x:Name="back"  Click="back_Click"
+                    Style="{ThemeResource BackButtonStyle}" Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
             <TextBlock Text="关于" Style="{ThemeResource PageTitleStyle}"/>
