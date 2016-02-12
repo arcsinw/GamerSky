@@ -35,10 +35,10 @@ namespace 游民星空.Core.ViewModel
         }
 
 
-        public async Task LoadData()
+        public async Task LoadData(int pageIndex = 1)
         {
             IsActive = true;
-            List<EssayResult> essays =  await apiService.GetYaowen();
+            List<EssayResult> essays =  await apiService.GetYaowen(pageIndex);
             if(essays!=null)
             {
                 foreach (var item in essays)

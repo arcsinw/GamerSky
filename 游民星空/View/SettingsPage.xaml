@@ -47,7 +47,7 @@
                         </Grid>    
                     </ListViewItem>
  
-                    <ListViewItem>
+                    <ListViewItem Visibility="Collapsed">
                         <Grid>
                             <TextBlock Text="要闻推送" VerticalAlignment="Center"/>
                             <ToggleSwitch IsOn="{x:Bind viewModel.IsToastShow,Mode=TwoWay}" MinWidth="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>

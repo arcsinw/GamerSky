@@ -33,6 +33,7 @@ namespace 游民星空.BackgroundTask
         private void UpdatePrimaryTile()
         {
             LiveTileHelper.UpdatePrimaryTile();
+            ToastHelper.ShowToast();
         }
     }
 }

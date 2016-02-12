@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Helper;
 using 游民星空.Core.Model;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
@@ -30,6 +31,13 @@ namespace 游民星空.View
             NavigationCacheMode = NavigationCacheMode.Required;
         }
 
+        /// <summary>
+        /// 是否正在加载数据
+        /// </summary>
+        private bool IsDataLoading = false;
+
+        private int pageIndex = 1;
+
         private void back_Click(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack)
@@ -38,10 +46,7 @@ namespace 游民星空.View
             }
         }
 
-        private void ListView_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
+     
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -53,12 +58,48 @@ namespace 游民星空.View
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            await viewModel.LoadData();
+            await viewModel.LoadData(pageIndex);
+            pageIndex++;
         }
+
+        private ScrollViewer scrollViewer;
+
+        private void ListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
+            if (scrollViewer != null)
+            {
+                scrollViewer.ViewChanged += scrollViewer_ViewChanged;
+            }
+        }
+
+        private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (scrollViewer != null)
+            {
+
+                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
+                {
+                    if (!IsDataLoading)  //未加载数据
+                    {
+                        IsDataLoading = true;
+                        //IsActive = true;
+                        progressRing.IsActive = true;
+                        await viewModel.LoadData(pageIndex);
+                        pageIndex++;
+                        //IsActive = false;
+                        progressRing.IsActive = false;
+                        IsDataLoading = false;
+                    }
+                }
+            }
+        }
+
 
         private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
             await viewModel.Refresh();
+            pageIndex = 1;
         }
     }
 }
