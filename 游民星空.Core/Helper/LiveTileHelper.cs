@@ -10,6 +10,9 @@ using 游民星空.Core.Model;
 
 namespace 游民星空.Core.Helper
 {
+    /// <summary>
+    /// 动态磁贴
+    /// </summary>
     public class LiveTileHelper
     {
         private const string TILE_TASK_NAME = "TILETASK";

@@ -462,7 +462,10 @@
         </Setter>
     </Style>
 
-
+    <!--输入框错误提示TextBlock-->
+    <Style x:Key="ErrorTextBlock" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="Red"/>
+    </Style>
     <!--日夜间资源字典-->
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Light">

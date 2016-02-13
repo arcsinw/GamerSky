@@ -59,7 +59,7 @@ namespace 游民星空.View
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             progress.IsActive = true;
-            EssayResult essayResult = e.Parameter as EssayResult;
+            essayResult = e.Parameter as EssayResult;
            if(essayResult!= null)
             {
                 this.DataContext = viewModel = new EssayDetailViewModel(essayResult);
@@ -67,10 +67,26 @@ namespace 游民星空.View
             await viewModel.GenerateHtmlString();
             progress.IsActive = false;
         }
-
+        EssayResult essayResult;
         private async void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
         }
+
+        //private void webView_Loaded(object sender, RoutedEventArgs e)
+        //{
+            
+        //}
+
+        //private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
+        //{
+        //    News news = await new ApiService().ReadEssay(essayResult.contentId);
+        //    if (news != null)
+        //    {
+        //        await webView.InvokeScriptAsync("setContent", new[] { news.result.mainBody });
+        //        await webView.InvokeScriptAsync("setTitle", new[] { news.result.title });
+        //        await webView.InvokeScriptAsync("setSubTitle", new[] { news.result.subTitle });
+        //    }
+        //}
     }
 }

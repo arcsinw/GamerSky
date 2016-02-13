@@ -145,13 +145,5 @@ namespace 游民星空.Core.Helper
             return author;
         }
 
-        /// <summary>
-        /// 获取屏幕宽度
-        /// </summary>
-        /// <returns></returns>
-        public static double GetScreenHeight()
-        {
-            return ApplicationView.GetForCurrentView().VisibleBounds.Height;
-        }
     }
 }

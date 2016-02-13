@@ -22,9 +22,10 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Foreground="{ThemeResource ThemeColorBrush}"  
                           Height="60" Width="60" Background="Transparent"/>
-        <WebView x:Name="webView"  
-                 hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
-                 />
+        <WebView x:Name="webView"  hp:ExtensionHelper.HtmlString="{Binding HtmlString}" 
+                     />
+     
+        <!--      hp:ExtensionHelper.HtmlString="{Binding HtmlString}"-->
         <FlipView x:Name="imageFlipView" Visibility="Collapsed" ItemsSource="{Binding }">
             <FlipView.ItemTemplate>
                 <DataTemplate>

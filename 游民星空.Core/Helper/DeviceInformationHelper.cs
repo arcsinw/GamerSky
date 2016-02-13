@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.ExchangeActiveSyncProvisioning;
+using Windows.UI.ViewManagement;
 
 namespace 游民星空.Core.Helper
 {
+    /// <summary>
+    /// 获取一些设备信息
+    /// </summary>
     public class DeviceInformationHelper
     {
         private static EasClientDeviceInformation easDeviceInfo = new EasClientDeviceInformation();
@@ -53,6 +57,15 @@ namespace 游民星空.Core.Helper
         public static string GetHardVersion()
         {
             return easDeviceInfo.SystemHardwareVersion;
+        }
+
+        /// <summary>
+        /// 获取屏幕宽度
+        /// </summary>
+        /// <returns></returns>
+        public static double GetScreenHeight()
+        {
+            return ApplicationView.GetForCurrentView().VisibleBounds.Height;
         }
     }
 }

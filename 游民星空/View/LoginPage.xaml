@@ -3,10 +3,15 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:游民星空.View"
+    xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:LoginPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,10 +29,14 @@
         <Grid Grid.Row="1">
             <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
                 <StackPanel Padding="16">
-                    <TextBox PlaceholderText="请输入用户名"/>
-                    <TextBox PlaceholderText="请输入密码" Margin="0,16"/>
+                    
+                    <TextBox PlaceholderText="请输入用户名" Text="{Binding Path=UserLoginInfo.UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Margin="0,0,0,8" Text="{Binding Path=UserLoginInfo.Errors[UserName]}" Foreground="Red"/>
+                    <PasswordBox PlaceholderText="请输入密码" Password="{Binding Path=UserLoginInfo.UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                 />
+                    <TextBlock Margin="0,0,0,8" Text="{Binding Path=UserLoginInfo.Errors[UserPassword]}" Foreground="Red"/>
                     <Button Content="登录" HorizontalAlignment="Stretch" 
-                            Foreground="White"
+                            Foreground="White" IsEnabled="{Binding Path=UserLoginInfo.IsValid}"
                             Background="{ThemeResource ThemeColorBrush}"/>
                     <Grid>
                         <HyperlinkButton Content="忘记密码" Click="{x:Bind ForgetPwd}" HorizontalAlignment="Left"/>

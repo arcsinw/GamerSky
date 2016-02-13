@@ -3,10 +3,15 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:游民星空.View"
+    xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:RegisterPageViewModel />
+    </Page.DataContext>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,21 +29,35 @@
         <Grid Grid.Row="1">
             <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
                 <StackPanel Padding="16" >
-                    <TextBox PlaceholderText="请输入手机号"/>
-                    <TextBox PlaceholderText="请输入用户名" Margin="0,16"/>
-                    <PasswordBox PlaceholderText="请输入密码"/>
-
-                    <Grid Margin="0,16">
+                    <StackPanel.Resources>
+                        <Style x:Key="ErrorTextBlock" TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="Red"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBox PlaceholderText="请输入手机号" Text="{Binding Path=RegisterInfo.PhoneNumber,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[PhoneNumber]}" Style="{StaticResource ErrorTextBlock}"/>
+                    <TextBox PlaceholderText="请输入用户名" Margin="0,8" Text="{Binding Path=RegisterInfo.UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserName]}" Style="{StaticResource ErrorTextBlock}"/>
+                    <PasswordBox PlaceholderText="请输入密码" Password="{Binding Path=RegisterInfo.UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserPassword]}" Style="{StaticResource ErrorTextBlock}"/>
+                    <Grid Margin="0,8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBox PlaceholderText="请输入验证码" Grid.Column="0" />
-                        <Button Content="获取验证码" HorizontalAlignment="Right"
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox PlaceholderText="请输入验证码" Grid.Row="0" Text="{Binding Path=RegisterInfo.VerificationCode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" />
+                        <TextBlock Text="{Binding Path=RegisterInfo.Errors[VerificationCode]}" 
+                                   Grid.Row="1"
+                                   Style="{StaticResource ErrorTextBlock}"/>
+                        <Button Content="获取验证码" HorizontalAlignment="Right" Grid.Row="0"
                                 Background="{ThemeResource ThemeColorBrush}" Foreground="White"
                                 Grid.Column="1"/>
                     </Grid>
-                    <Button Content="注册" HorizontalAlignment="Stretch"
+                    <Button Content="注册" HorizontalAlignment="Stretch" IsEnabled="{Binding Path=RegisterInfo.IsValid}"
                             Background="{ThemeResource ThemeColorBrush}" Foreground="White"/>
                     <TextBlock Margin="0,16">
                     <Run Text="注册代表同意接受"/>

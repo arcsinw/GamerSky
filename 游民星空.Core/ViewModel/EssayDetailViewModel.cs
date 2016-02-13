@@ -87,6 +87,47 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
+        private string body;
+        public string Body
+        {
+            get
+            {
+                return body;
+            }
+            set
+            {
+                body = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string title;
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+                OnPropertyChanged();
+            }
+        }
+        private string subTitle;
+        public string SubTitle
+        {
+            get
+            {
+                return subTitle;
+            }
+            set
+            {
+                subTitle = value;
+                OnPropertyChanged();
+            }
+        }
+
         /// <summary>
         /// 生成网页
         /// </summary>
@@ -145,6 +186,26 @@ namespace 游民星空.Core.ViewModel
                     "-webkit-filter:hue-rotate(0deg);}"+
                     "</style>";
 
+                string relatedCss = @"#gsTemplateContent_RelatedTopic {display:none;-webkit-user-select:none;}
+                    # gsTemplateContent_RelatedTopicContent {display:block; width:100%; height:auto; padding:0px;}
+                    # gsTemplateContent_RelatedTopicContent table {margin-bottom:10px; border:1.0px solid #d3d3d3; width:100%; height:74px;}
+                        .PageColorMode_Day #gsTemplateContent_RelatedTopicContent table {border:1.0px solid #d3d3d3;}
+	                    .PageColorMode_Night #gsTemplateContent_RelatedTopicContent table {border:1.0px solid #222b38;}
+                    #gsTemplateContent_RelatedTopicContent .Content img {float:left; margin:0px 6px 0px 6px; width:94px; height:54px;}
+                    #gsTemplateContent_RelatedTopicContent .Content .Title {float:none; width:auto; height:34px; line-height:54px; font-size:16px;}
+	                    .PageColorMode_Day #gsTemplateContent_RelatedTopicContent .Content .Title {color:#333;}
+	                    .PageColorMode_Night #gsTemplateContent_RelatedTopicContent .Content .Title {color:#576476;}
+                    #gsTemplateContent_RelatedTopicContent .Content .Subtitle {float:none; width:auto; height:20px; line-height:20px; font-size:14px;}
+	                    .PageColorMode_Day #gsTemplateContent_RelatedTopicContent .Content .Subtitle {color:#a5a5a5;}
+	                    .PageColorMode_Night #gsTemplateContent_RelatedTopicContent .Content .Subtitle {color:#464950;}
+                    #gsTemplateContent_RelatedTopicContent .ButtonArea {width:74px;}
+                    #gsTemplateContent_RelatedTopicContent .Button {border-radius:2px; width:54px; height:30px; line-height:30px; text-align:center; font-size:12px;}
+	                    .PageColorMode_Day #gsTemplateContent_RelatedTopicContent .Button {background:#ee5449; color:#f7f7f7;}
+	                    .PageColorMode_Night #gsTemplateContent_RelatedTopicContent .Button {background:#812c25; color:#c6a09d;}
+                    #gsTemplateContent_RelatedTopicContent .Readed {}
+	                    .PageColorMode_Day #gsTemplateContent_RelatedTopicContent .Readed {background:#6699ff;}
+	                    .PageColorMode_Night #gsTemplateContent_RelatedTopicContent .Readed {background:#336699;}
+                    ";
                 string head = "<meta name=\"viewport\" content=\"width= device-width, user-scalable = no\" />"
                             + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
                             + "<meta name=\"msapplication-tap-highlight\" content=\"no\">"; //wp点击无高光;

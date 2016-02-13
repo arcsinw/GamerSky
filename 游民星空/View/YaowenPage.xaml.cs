@@ -77,14 +77,14 @@ namespace 游民星空.View
         {
             if (scrollViewer != null)
             {
-                if (scrollViewer.VerticalOffset < Functions.GetScreenHeight())
+                if (scrollViewer.VerticalOffset < DeviceInformationHelper.GetScreenHeight())
                 {
                     if (topPop.IsOpen)
                     {
                         topPop.IsOpen = false;
                     }
                 }
-                else if (scrollViewer.VerticalOffset > Functions.GetScreenHeight())
+                else if (scrollViewer.VerticalOffset > DeviceInformationHelper.GetScreenHeight())
                 {
                     if (!topPop.IsOpen)
                     {

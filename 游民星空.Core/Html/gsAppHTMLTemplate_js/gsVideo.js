@@ -69,6 +69,8 @@ function leTvVideo(width, height, uu, vu) {
 }
 function gsVideo(videoType, videoContent, videoWidth, videoHeight) {
     if (location.protocol == "file:") {
+        videoWidth = window.screen.width;
+        
         gsVideoInApp(videoType, videoContent, null, videoWidth, videoHeight);
     }
     else {

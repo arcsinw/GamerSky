@@ -7,6 +7,9 @@ using Windows.Networking.Connectivity;
 
 namespace 游民星空.Core
 {
+    /// <summary>
+    /// 网络相关
+    /// </summary>
     class NetworkManager
     {
         private static NetworkManager _current;

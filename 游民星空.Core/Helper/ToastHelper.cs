@@ -10,6 +10,9 @@ using 游民星空.Core.Model;
 
 namespace 游民星空.Core.Helper
 {
+    /// <summary>
+    /// Toast 通知
+    /// </summary>
     public class ToastHelper
     {
         private const string toastXml = @"

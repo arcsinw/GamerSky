@@ -7,6 +7,11 @@ using Windows.Globalization.Collation;
 
 namespace 游民星空.Core.Helper
 {
+    /// <summary>
+    /// 用于实现按首字母分组
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+
     public class AlphaKeyGroup<T> : List<T>
     {
         /// <summary>
