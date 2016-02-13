@@ -13,7 +13,7 @@
     <Page.DataContext>
         <vm:GameStrategysViewModel x:Name="viewModel"/>
     </Page.DataContext>
-    
+
     <Page.Resources>
         <!--BorderMargin-->
         <Thickness x:Key="BorderMargin">0,2</Thickness>
@@ -63,35 +63,36 @@
             </Grid>
         </DataTemplate>
     </Page.Resources>
-    
+
     <!--某款游戏的攻略列表页-->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-            <ListView ItemsSource="{Binding IncreStrategys}"
+        <ListView ItemsSource="{Binding Strategys}"
                  SelectionMode="None"
+                  x:Name="listView"
                   Loaded="ListView_Loaded"
                   ShowsScrollingPlaceholders="True"
                   ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
                   IsItemClickEnabled="True"
                   ItemClick="ListView_ItemClick">
 
-                <ListView.ItemTemplateSelector>
-                    <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+            <ListView.ItemTemplateSelector>
+                <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                                       NoPicDt="{StaticResource NoPicEssayDataTemplate}"
                                                                       />
-                </ListView.ItemTemplateSelector>
+            </ListView.ItemTemplateSelector>
 
 
-                <ListView.Transitions>
-                    <TransitionCollection>
-                        <AddDeleteThemeTransition />
-                        <ContentThemeTransition />
-                        <EntranceThemeTransition/>
-                        <NavigationThemeTransition/>
-                    </TransitionCollection>
-                </ListView.Transitions>
-                
-                <!--<ListView.ItemContainerStyle>
+            <ListView.Transitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition />
+                    <ContentThemeTransition />
+                    <EntranceThemeTransition/>
+                    <NavigationThemeTransition/>
+                </TransitionCollection>
+            </ListView.Transitions>
+
+            <!--<ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="Margin" Value="0"/>
@@ -99,15 +100,30 @@
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
                     </Style>
                 </ListView.ItemContainerStyle>-->
-            
-            </ListView>
+
+        </ListView>
         </pr:PullToRefreshBox>
 
         <Grid>
             <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Foreground="{ThemeResource ThemeColorBrush}" 
                           Height="60" Width="60" Background="Transparent"/>
         </Grid>
+
+        <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom"
+               Height="48" x:Name="topPop" Width="48" Margin="16,32" >
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <EdgeUIThemeTransition Edge="Bottom"/>
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Popup.Child>
+                <Button Height="48" Width="48" Background="{ThemeResource ThemeColorBrush}" 
+                        Click="Button_Click" Style="{ThemeResource RoundButtonStyle}">
+                    <SymbolIcon Symbol="Up" Foreground="White" />
+                </Button>
+            </Popup.Child>
+        </Popup>
     </Grid>
-    
-    
+
+
 </Page>

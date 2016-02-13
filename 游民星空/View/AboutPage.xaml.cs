@@ -5,8 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -39,12 +41,23 @@ namespace 游民星空.View
             Author = Functions.GetAuthor();
         }
 
-        private void back_Click(object sender, RoutedEventArgs e)
+        private void Back()
         {
             if(Frame.CanGoBack)
             {
                 Frame.GoBack();
             }
+        }
+
+        /// <summary>
+        /// 复制到剪贴板
+        /// </summary>
+        public async void CopyToClipboard()
+        {
+            DataPackage dp = new DataPackage();
+            dp.SetText(qqTextBlock.Text);
+            Clipboard.SetContent(dp);
+            await new MessageDialog("已复制到剪贴板").ShowAsync();
         }
 
         #region OnPropertyChanged

@@ -24,7 +24,7 @@
         <Grid Grid.Row="1">
             <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" >
                 <StackPanel Padding="16">
-                    <TextBlock x:Name="textBlock" TextWrapping="Wrap"  Loaded="{x:Bind GetAgreement}"/>
+                    <TextBlock x:Name="textBlock" TextAlignment="Justify" TextWrapping="Wrap"  Loaded="{x:Bind GetAgreement}"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

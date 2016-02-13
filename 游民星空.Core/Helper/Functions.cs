@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.Foundation.Metadata;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -142,6 +143,15 @@ namespace 游民星空.Core.Helper
         {
             var author = Package.Current.PublisherDisplayName;
             return author;
+        }
+
+        /// <summary>
+        /// 获取屏幕宽度
+        /// </summary>
+        /// <returns></returns>
+        public static double GetScreenHeight()
+        {
+            return ApplicationView.GetForCurrentView().VisibleBounds.Height;
         }
     }
 }

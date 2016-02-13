@@ -73,8 +73,23 @@ namespace 游民星空.View
         {
             if (scrollViewer != null)
             {
+                if(scrollViewer.VerticalOffset <Functions.GetScreenHeight())
+                {
+                    if(topPop.IsOpen)
+                    {
+                        topPop.IsOpen = false;
+                    }
+                }
+                else if(scrollViewer.VerticalOffset>Functions.GetScreenHeight())
+                {
+                    if (!topPop.IsOpen)
+                    {
+                        topPop.IsOpen = true;
+                    }
+                }
                 if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
                 {
+                    
                     if (!IsDataLoading)  //未加载数据
                     {
                         IsDataLoading = true;
@@ -90,5 +105,9 @@ namespace 游民星空.View
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            listView.ScrollIntoViewSmoothly(listView.Items[0]);
+        }
     }
 }

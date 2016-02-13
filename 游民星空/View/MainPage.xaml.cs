@@ -146,7 +146,7 @@ namespace 游民星空.View
         {
             if (scrollViewer != null)
             {
-
+                
                 if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
                 {
                     if (!IsDataLoading)  //未加载数据
@@ -173,6 +173,9 @@ namespace 游民星空.View
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
 
-   
+        private void essayListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+
+        }
     }
 }

@@ -73,14 +73,14 @@
                 </Grid.ColumnDefinitions>
 
                 <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
-                    <!--Source="{Binding ThumbnailBitmap[0]}"-->
+                    <!--Source="{Binding Thumbnails[0]}">-->
                     <Image.Source>
                         <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
                     </Image.Source>
                 </Image>
 
                 <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
-                    <TextBlock Text="{Binding title}" TextWrapping="Wrap"  VerticalAlignment="Top"/>
+                    <TextBlock Text="{Binding title}" TextWrapping="Wrap" VerticalAlignment="Top"/>
                     <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom">
                                 <Run Text="{Binding commentsCount}"/>
                                 <Run Text="评论"/>
@@ -112,6 +112,7 @@
                                  IsItemClickEnabled="True"
                                  ItemClick="ListView_ItemClick"
                                  Loaded="ListView_Loaded"
+                                 ContainerContentChanging="essayListView_ContainerContentChanging"
                                  >
                         <ListView.ItemTemplateSelector>
                             <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
@@ -142,15 +143,12 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.HeaderTemplate>
-                        <ListView.Transitions>
+                        <ListView.ItemContainerTransitions>
                             <TransitionCollection>
                                 <AddDeleteThemeTransition />
-                                <ContentThemeTransition />
-                                <EntranceThemeTransition/>
-                                <NavigationThemeTransition/>
-
+                         
                             </TransitionCollection>
-                        </ListView.Transitions>
+                        </ListView.ItemContainerTransitions>
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

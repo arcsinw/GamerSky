@@ -120,6 +120,8 @@
     <Compile Include="Helper\ExtensionHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
+    <Compile Include="Helper\ImageDownLoadHelper.cs" />
+    <Compile Include="Helper\ListViewBaseExtensions.cs" />
     <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\ToastHelper.cs" />
     <Compile Include="Helper\VerifiableBase.cs" />

@@ -179,12 +179,12 @@
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem>
+                        <!--<ListViewItem>
                             <StackPanel Orientation="Horizontal">
                                 <BitmapIcon UriSource="ms-appx:///Assets/Split_Manage.png" Height="24"/>
                                 <TextBlock Text="游戏管理" Margin="{StaticResource TextBlockMargin}"/>
                             </StackPanel>
-                        </ListViewItem>
+                        </ListViewItem>-->
 
                         <ListViewItem Tapped="{x:Bind ViewModel.ClearCache}">
                             <Grid HorizontalAlignment="Stretch">

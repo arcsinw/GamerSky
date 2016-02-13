@@ -41,6 +41,7 @@ namespace 游民星空.Core.Model
         public string contentType { get; set; }
         public string contentURL { get; set; }
         public string readingCount { get; set; }
+
         private string[] urls = { "ms-appx:///Assets/image_loading.png", "ms-appx:///Assets/image_loading.png", "ms-appx:///Assets/image_loading.png" };
         /// <summary> 
         /// 缩略图
@@ -57,149 +58,73 @@ namespace 游民星空.Core.Model
                 OnPropertyChanged();
             }
         }
-        //private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
+        //private static SoftwareBitmap defaultBitmap = new SoftwareBitmap { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
+        //#region PlaceHolderImage
+        //private static SoftwareBitmapSource defaultBitmapSource;
 
-        //private List<BitmapImage> thumbnailBitmap = new List<BitmapImage>();
+        //static EssayResult()
+        //{
+        //    LoadDefaultBitmap();
+        //}
+
         ///// <summary>
-        ///// 新闻缩略图  
-        ///// 先返回默认图的BitmapImage 图片下载完成后赋值 OnPropertyChanged()
+        ///// 加载默认图片
         ///// </summary>
-        //public List<BitmapImage> ThumbnailBitmap
+        //private static async void LoadDefaultBitmap()
+        //{
+
+        //    var defaultBitmap = await ImageDownLoadHelper.ReadFromApplicationUri("ms-appx:///Assets/image_loading.png");
+        //    await defaultBitmapSource.SetBitmapAsync(defaultBitmap);
+        //}
+
+        //private SoftwareBitmapSource[] thumbnails;
+        //public SoftwareBitmapSource[] Thumbnails
         //{
         //    get
         //    {
-        //        if (thumbnailBitmap.Count == 0 && thumbnailURLs!=null)
+        //        if(thumbnailURLs != null)
         //        {
-        //            for (int i = 0; i < thumbnailURLs.Length; i++)
+        //            SetBitmap();
+        //            if(thumbnailURLs.Length==1)
         //            {
-        //                thumbnailBitmap.Add(defaultBitmap);
+        //                return new SoftwareBitmapSource[1] { defaultBitmapSource };
+        //            }
+        //            else if(thumbnailURLs.Length==3)
+        //            {
+        //                return new SoftwareBitmapSource[3] { defaultBitmapSource, defaultBitmapSource, defaultBitmapSource };
         //            }
         //        }
-        //        for (int i = 0; i < thumbnailURLs.Length; i++)
-        //        {
-        //            DownloadImage(thumbnailURLs[i]);
-
-        //        }
-
-        //        return thumbnailBitmap;
+        //        return new SoftwareBitmapSource[1] { defaultBitmapSource };
         //    }
         //    set
         //    {
-        //        thumbnailBitmap = value;
+        //          SetBitmap();
         //    }
-
         //}
 
-        //private async void DownloadImage(string url)
+        //private async void SetBitmap()
         //{
-        //    try
+        //    if (thumbnailURLs != null)
         //    {
-        //        HttpClient hc = new HttpClient();
-        //        HttpResponseMessage resp = await hc.GetAsync(new Uri(url));
-        //        resp.EnsureSuccessStatusCode();
-        //        IInputStream inputStream = await resp.Content.ReadAsInputStreamAsync();
-        //        IRandomAccessStream memStream = new InMemoryRandomAccessStream();
-        //        await RandomAccessStream.CopyAsync(inputStream, memStream);
-        //        BitmapImage bitmap = new BitmapImage();
-        //        await bitmap.SetSourceAsync(memStream);
-        //        await DispatcherManager.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+        //        if (thumbnailURLs.Length == 1)
         //        {
-        //            thumbnailBitmap.Add(bitmap);
-        //                //触发UI绑定属性的改变
-        //                OnPropertyChanged("ThumbnailBitmap");
-        //        });
-
-        //        //BitmapDecoder decoder = await BitmapDecoder.CreateAsync(memStream);
-        //        //SoftwareBitmap softBmp = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
-        //        //return softBmp;
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //}
-
-        /// <summary>
-        /// download through image's url
-        /// </summary>
-        /// <param name="url"></param>
-        //private async void DownloadImage(string uri)
-        //{
-        //    BitmapImage bitmap = new BitmapImage();
-
-        //    HttpResponseMessage resposne = await new HttpClient().GetAsync(new Uri(uri));
-
-        //    IInputStream inputStream = await resposne.Content.ReadAsInputStreamAsync();
-        //    IRandomAccessStream randomStream = new InMemoryRandomAccessStream();
-        //    await RandomAccessStream.CopyAsync(inputStream, randomStream);
-
-        //    await bitmap.SetSourceAsync(randomStream);
-
-        //    IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes(uri);
-        //    byte[] bytes = buffer.ToArray();
-
-
-
-        //    using (MemoryStream ms = new MemoryStream())
-        //    {
-        //        ms.Write(bytes, 0, bytes.Length);
-
-        //        IRandomAccessStream randomStreams = new InMemoryRandomAccessStream();
-        //        await RandomAccessStream.CopyAsync(inputStream, randomStreams);
-
-        //        await bitmap.SetSourceAsync(ms.AsRandomAccessStream());
-
-        //    }
-
-        //    await DispatcherManager.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-        //    {
-        //        thumbnailBitmap.Add(bitmap);
-        //        //触发UI绑定属性的改变
-        //        OnPropertyChanged("ThumbnailBitmap");
-        //    });
-        //    //HttpWebRequest request = WebRequest.CreateHttp(new Uri(uri));
-        //    //request.BeginGetResponse(DownloadImageComplete, request);
-        //}
-
-        ///// <summary>
-        ///// image download callback
-        ///// </summary>
-        ///// <param name="result"></param>
-        //private async void DownloadImageComplete(IAsyncResult result)
-        //{
-        //    HttpWebRequest request = result.AsyncState as HttpWebRequest;
-        //    HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(result);
-        //    // 读取网络的数据
-        //    using (Stream stream = response.GetResponseStream())
-        //    {
-        //        int length = int.Parse(response.Headers["Content-Length"]);
-        //        // 注意需要把数据流重新复制一份，否则会出现跨线程错误
-        //        // 网络下载到的图片数据流，属于后台线程的对象，不能在UI上使用
-        //        using (Stream streamForUI = new MemoryStream(length))
+        //            thumbnails = new SoftwareBitmapSource[1];
+        //        }
+        //        else if (thumbnailURLs.Length == 3)
         //        {
-        //            byte[] buffer = new byte[length];
-        //            int read = 0;
-        //            do
-        //            {
-        //                read = stream.Read(buffer, 0, length);
-        //                streamForUI.Write(buffer, 0, read);
-        //            }
-        //            while (read == length);
-        //            streamForUI.Seek(0, SeekOrigin.Begin);
-        //            // 触发UI线程处理位图和UI更新
-        //            //var frame = Window.Current.Content as Frame;
-
-        //            await DispatcherManager.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,() =>
-        //            {
-        //                BitmapImage bm = new BitmapImage();
-        //                bm.SetSource(streamForUI.AsRandomAccessStream());
-        //                thumbnailBitmap.Add(bm);
-        //                //触发UI绑定属性的改变
-        //                OnPropertyChanged("ThumbnailBitmap");
-        //            });
+        //            thumbnails = new SoftwareBitmapSource[3];
+        //        }
+        //        for (int i = 0; i < thumbnailURLs.Length; i++)
+        //        {
+                    
+        //            var softwareBitmap = await ImageDownLoadHelper.DownLoadImageByUri(thumbnailURLs[i]);
+        //            thumbnails[i] = new SoftwareBitmapSource();
+        //            await thumbnails[i].SetBitmapAsync(softwareBitmap);
+        //            OnPropertyChanged("Thumbnails");
         //        }
         //    }
         //}
+        //#endregion
         private string _title;
         /// <summary>
         /// 标题
