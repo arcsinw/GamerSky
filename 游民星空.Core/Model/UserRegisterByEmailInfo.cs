@@ -13,40 +13,125 @@ namespace 游民星空.Core.Model
     /// </summary>
     public class UserRegisterByEmailInfo : VerifiableBase
     {
+        
+        private string userName;
         /// <summary>
         /// 用户名
         /// </summary>
-        [Required(ErrorMessage = "密码不能为空")]
-        public string UserPassword { get; set; }
+        [Required(ErrorMessage = "用户名不能为空")]
+        public string UserName
+        {
+            get
+            {
+                return userName;
+            }
+            set
+            {
+                Set(ref userName, value);
+            }
+        }
+
+        private string userPassword;
         /// <summary>
         /// 密码
         /// </summary>
-        [Required(ErrorMessage = "用户名不能为空")]
-        public string UserName { get; set; }
+        [Required(ErrorMessage = "密码不能为空")]
+        public string UserPassword
+        {
+            get
+            {
+                return userPassword;
+            }
+            set
+            {
+                Set(ref userPassword, value);
+            }
+        }
+
+        private string sureUserPassword;
         /// <summary>
         /// 再次输入的密码
         /// </summary>
-        [Compare("UserName",ErrorMessage ="两次输入的密码不一致")]
-        public string SureUserPassword { get; set; }
+        [Compare("UserPassword",ErrorMessage ="两次输入的密码不一致")]
+        [Required(ErrorMessage ="密码不能为空")]
+        public string SureUserPassword
+        {
+            get
+            {
+                return sureUserPassword;
+            }
+            set
+            {
+                Set(ref sureUserPassword, value);
+            }
+        }
+
+        private string verificationCode;
         /// <summary>
         /// 验证码
         /// </summary>
         [Required(ErrorMessage = "验证码不能为空")]
-        public string VerificationCode { get; set; }
+        public string VerificationCode
+        {
+            get
+            {
+                return verificationCode;
+            }
+            set
+            {
+                Set(ref verificationCode, value);
+            }
+        }
+
+        private string email;
         /// <summary>
         /// 邮箱
         /// </summary>
         [Required(ErrorMessage ="邮箱不能为空")]
-        public string Email { get; set; }
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                Set(ref email, value);
+            }
+        }
+
+        private string answer;
         /// <summary>
         /// 密保问题答案
         /// </summary>
         [Required(ErrorMessage = "密保答案不能为空")]
-        public string Answer { get; set; }
+        public string Answer
+        {
+            get
+            {
+                return answer;
+            }
+            set
+            {
+                Set(ref answer, value);
+            }
+        }
+
+        private string question;
         /// <summary>
         /// 密保问题
         /// </summary>
         [Required(ErrorMessage = "密保问题不能为空")]
-        public string Question { get; set; }
+        public string Question
+        {
+            get
+            {
+                return question;
+            }
+            set
+            {
+                Set(ref question, value);
+            }
+        }
     }
 }

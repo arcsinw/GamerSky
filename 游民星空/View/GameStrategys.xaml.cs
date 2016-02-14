@@ -35,17 +35,17 @@ namespace 游民星空.View
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             progressRing.IsActive = true;
-            StrategyResult strategyResult = e.Parameter as StrategyResult;
+            Strategy strategyResult = e.Parameter as Strategy;
             if (strategyResult != null)
             {
-                await viewModel.LoadData(strategyResult);
+                await viewModel.LoadData(strategyResult,pageIndex++);
             }
             progressRing.IsActive = false;
         }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            EssayResult essayResult =  e.ClickedItem as EssayResult;
+            Essay essayResult =  e.ClickedItem as Essay;
             if (essayResult == null) return;
 
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
@@ -95,8 +95,7 @@ namespace 游民星空.View
                         IsDataLoading = true;
                         //IsActive = true;
                         progressRing.IsActive = true;
-                        await viewModel.LoadMoreStrategys(pageIndex);
-                        pageIndex++;
+                        await viewModel.LoadMoreStrategys(pageIndex++);
                         //IsActive = false;
                         progressRing.IsActive = false;
                         IsDataLoading = false;

@@ -125,7 +125,8 @@
                Height="48" x:Name="topPop" Width="48" Margin="16,32" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
-                    <EdgeUIThemeTransition Edge="Bottom"/>
+                    <!--<EdgeUIThemeTransition Edge="Bottom"/>-->
+                    <AddDeleteThemeTransition />
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <Popup.Child>

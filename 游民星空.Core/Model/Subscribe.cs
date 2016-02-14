@@ -9,11 +9,7 @@ namespace 游民星空.Core.Model
     /// <summary>
     /// 订阅热点词返回数据类型
     /// </summary>
-    public class Subscribe : ResultBase
-    {
-        public SubscribeResult[] result { get; set; }
-    }
-    public class SubscribeResult
+    public class Subscribe
     {
         public string cnt { get; set; }
         public string isHot { get; set; }

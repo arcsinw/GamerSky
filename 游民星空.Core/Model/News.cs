@@ -7,18 +7,9 @@ using System.Threading.Tasks;
 namespace 游民星空.Core.Model
 {
     /// <summary>
-    /// 新闻实体
-    /// </summary>
-    public class News
-    {
-        public string errorCode;
-        public string errorMessage;
-        public NewsResult result;
-    }
-    /// <summary>
     /// 文章实体
     /// </summary>
-    public class NewsResult
+    public class News
     {
         public int adId;
         public string id;
@@ -33,7 +24,7 @@ namespace 游民星空.Core.Model
         public string originURL;
         public int pageCount;
         public string[] pageIndexNames;
-        public subscribe[] subscribes;
+        public Subscriber[] subscribes;
         public string subTitle;
         public string templateURL;
         public string templateVersion;
@@ -42,7 +33,7 @@ namespace 游民星空.Core.Model
         public string videoContent;
     }
 
-    public struct subscribe
+    public struct Subscriber
     {
         public string subscribeld;
     }

@@ -11,7 +11,7 @@ namespace 游民星空.Core.ViewModel
 {
     public class YaowenPageViewModel : ViewModelBase
     {
-        public ObservableCollection<EssayResult> Yaowens { get; set; }
+        public ObservableCollection<Essay> Yaowens { get; set; }
 
         private ApiService apiService;
 
@@ -31,14 +31,14 @@ namespace 游民星空.Core.ViewModel
         public YaowenPageViewModel()
         {
             apiService = new ApiService();
-            Yaowens = new ObservableCollection<EssayResult>();
+            Yaowens = new ObservableCollection<Essay>();
         }
 
 
         public async Task LoadData(int pageIndex = 1)
         {
             IsActive = true;
-            List<EssayResult> essays =  await apiService.GetYaowen(pageIndex);
+            List<Essay> essays =  await apiService.GetYaowen(pageIndex);
             if(essays!=null)
             {
                 foreach (var item in essays)

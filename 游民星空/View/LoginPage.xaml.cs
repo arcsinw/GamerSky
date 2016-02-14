@@ -51,6 +51,5 @@ namespace 游民星空.View
         {
             this.Frame.Navigate(typeof(RegisterPage));
         }
-
     }
 }

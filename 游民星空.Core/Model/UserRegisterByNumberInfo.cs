@@ -13,25 +13,69 @@ namespace 游民星空.Core.Model
     /// </summary>
     public class UserRegisterByNumberInfo : VerifiableBase
     {
+        private string phoneNumber;
         /// <summary>
         /// 手机号
         /// </summary>
         [Required(ErrorMessage = "手机号不能为空")]
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber
+        {
+            get
+            {
+                return phoneNumber;
+            }
+            set
+            {
+                Set(ref phoneNumber, value);
+            }
+        }
+        private string userPassword;
         /// <summary>
         /// 用户名
         /// </summary>
-        [Required(ErrorMessage = "用户名不能为空")]
-        public string UserPassword { get; set; }
+        [Required(ErrorMessage = "密码不能为空")]
+        public string UserPassword
+        {
+            get
+            {
+                return userPassword;
+            }
+            set
+            {
+                Set(ref userPassword, value);
+            }
+        }
+        private string userName;
         /// <summary>
         /// 密码
         /// </summary>
-        [Required(ErrorMessage = "密码不能为空")]
-        public string UserName { get; set; }
+        [Required(ErrorMessage = "用户名不能为空")]
+        public string UserName
+        {
+            get
+            {
+                return userName;
+            }
+            set
+            {
+                Set(ref userName, value);
+            }
+        }
+        private string verificationCode;
         /// <summary>
         /// 验证码
         /// </summary>
         [Required(ErrorMessage = "验证码不能为空")]
-        public string VerificationCode { get; set; }
+        public string VerificationCode
+        {
+            get
+            {
+                return verificationCode;
+            }
+            set
+            {
+                Set(ref verificationCode, value);
+            }
+        }
     }
 }

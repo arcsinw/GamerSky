@@ -14,13 +14,13 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 订阅内容列表
         /// </summary>
-        public ObservableCollection<EssayResult> SubscribeContens { get; set; }
+        public ObservableCollection<Essay> SubscribeContens { get; set; }
 
 
         /// <summary>
         /// 订阅图片的标题
         /// </summary>
-        public EssayResult HeaderSubscribe { get; set; }
+        public Essay HeaderSubscribe { get; set; }
 
         private ApiService apiService;
 
@@ -41,28 +41,27 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
-        private SubscribeResult subscribeResult;
-        public SubscribeContentViewModel(SubscribeResult subscribeResult)
+        private Subscribe subscribe;
+        public SubscribeContentViewModel(Subscribe subscribe)
         {
             apiService = new ApiService();
-            SubscribeContens = new ObservableCollection<EssayResult>();
-            HeaderSubscribe = new EssayResult();
-            this.subscribeResult = subscribeResult;
-
+            SubscribeContens = new ObservableCollection<Essay>();
+            HeaderSubscribe = new Essay();
+            this.subscribe = subscribe;
         }
 
         public SubscribeContentViewModel()
         {
             apiService = new ApiService();
-            SubscribeContens = new ObservableCollection<EssayResult>();
-            HeaderSubscribe = new EssayResult();
+            SubscribeContens = new ObservableCollection<Essay>();
+            HeaderSubscribe = new Essay();
         }
 
-        public async Task LoadData(SubscribeResult subscribeResult, int pageIndex = 1)
+        public async Task LoadData(Subscribe subscribe, int pageIndex = 1)
         {
-            this.subscribeResult = subscribeResult;
+            this.subscribe = subscribe;
             IsActive = true;
-            List<EssayResult> results = await apiService.GetSubscribeContent(subscribeResult.sourceId, pageIndex);
+            List<Essay> results = await apiService.GetSubscribeContent(subscribe.sourceId, pageIndex);
             foreach (var item in results)
             {
                 if (item.type.Equals("dingyueTitle"))
@@ -85,14 +84,14 @@ namespace 游民星空.Core.ViewModel
         /// <returns></returns>
         public async Task LoadMoreData(int pageIndex)
         {
-            await LoadData(subscribeResult, pageIndex);
+            await LoadData(subscribe, pageIndex);
         }
 
         public async Task Refresh()
         {
             IsActive = true;
             SubscribeContens.Clear();
-            await LoadData(subscribeResult);
+            await LoadData(subscribe);
             IsActive = false;
         }
     }

@@ -59,7 +59,7 @@ namespace 游民星空.View
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             progress.IsActive = true;
-            essayResult = e.Parameter as EssayResult;
+            essayResult = e.Parameter as Essay;
            if(essayResult!= null)
             {
                 this.DataContext = viewModel = new EssayDetailViewModel(essayResult);
@@ -67,7 +67,7 @@ namespace 游民星空.View
             await viewModel.GenerateHtmlString();
             progress.IsActive = false;
         }
-        EssayResult essayResult;
+        Essay essayResult;
         private async void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));

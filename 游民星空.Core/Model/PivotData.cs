@@ -26,8 +26,8 @@ namespace 游民星空.Core.Model
         //    }
         //}
 
-        private ChannelResult channel;
-        public ChannelResult Channel
+        private Channel channel;
+        public Channel Channel
         {
             get
             {
@@ -40,11 +40,11 @@ namespace 游民星空.Core.Model
             }
         }
 
-        private ObservableCollection<EssayResult> essays = new ObservableCollection<EssayResult>();
+        private ObservableCollection<Essay> essays = new ObservableCollection<Essay>();
         /// <summary>
         /// 新闻列表
         /// </summary>
-        public ObservableCollection<EssayResult> Essays
+        public ObservableCollection<Essay> Essays
         {
             get
             {
@@ -57,11 +57,11 @@ namespace 游民星空.Core.Model
             }
         }
 
-        private ObservableCollection<EssayResult> headersEssays = new ObservableCollection<EssayResult>();
+        private ObservableCollection<Essay> headersEssays = new ObservableCollection<Essay>();
         /// <summary>
         /// 幻灯片
         /// </summary>
-        public ObservableCollection<EssayResult> HeaderEssays
+        public ObservableCollection<Essay> HeaderEssays
         {
             get
             {

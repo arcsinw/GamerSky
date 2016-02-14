@@ -9,13 +9,7 @@ namespace 游民星空.Core.Model
     /// <summary>
     /// 订阅栏目内的内容
     /// </summary>
-    public class SubscribeContent : ModelBase
-    {
-        public string errorCode { get; set; }
-        public string errorMessage { get; set; }
-        public SubscribeContentResult[] result { get; set; }
-    }
-    public class SubscribeContentResult
+    public class SubscribeContent
     {
         public int commentCount { get; set; }
         public contentDetailUrls[] contentDetailUrls { get; set; }

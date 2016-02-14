@@ -11,12 +11,6 @@ namespace 游民星空.Core.Model
     /// </summary>
     public class Strategy
     {
-        public string errorCode { get; set; }
-        public string errorMessage { get; set; }
-        public StrategyResult[] result { get; set; }
-    }
-    public class StrategyResult
-    {
         public string favoriteCnt { get; set; }
         public int specialID { get; set; }
         /// <summary>

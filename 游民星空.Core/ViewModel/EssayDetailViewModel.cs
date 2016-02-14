@@ -12,9 +12,9 @@ namespace 游民星空.Core.ViewModel
     public class EssayDetailViewModel : ViewModelBase
     {
         private ApiService apiService;
-        private EssayResult essayResult;
+        private Essay essayResult;
 
-        public EssayDetailViewModel(EssayResult essay)
+        public EssayDetailViewModel(Essay essay)
         {
             IsActive = true;
             apiService = new ApiService();
@@ -56,11 +56,11 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
-        private ObservableCollection<RelatedReadingsResult> relatedReadings;
+        private ObservableCollection<RelatedReadings> relatedReadings;
         /// <summary>
         /// 相关阅读
         /// </summary>
-        public ObservableCollection<RelatedReadingsResult> RelatedReadings
+        public ObservableCollection<RelatedReadings> RelatedReadings
         {
             get
             {
@@ -136,9 +136,9 @@ namespace 游民星空.Core.ViewModel
             News news = await apiService.ReadEssay(essayResult.contentId);
             if (news != null)
             {
-                OriginUri = news.result.originURL;
+                OriginUri = news.originURL;
 
-                string body = news.result.mainBody;
+                string body = news.mainBody;
                 string css = "<style>"
                        + "html{-ms-content-zooming:none;font-family:微软雅黑;}"
                        + ".author{font-weight:bold;} .bio{color:gray;}"
@@ -215,10 +215,10 @@ namespace 游民星空.Core.ViewModel
                   "<script src=\"../Html/gsAppHTMLTemplate_js/gsVideo.js\"></script>"+
                   "<link href=\"../Html/gsAppHTMLTemplate_css/gsAppHTMLTemplate.css\" rel=\"stylesheet\" type=\"text/css\"/>";
 
-                string title = news.result.title;
-                string subTitle = news.result.subTitle;
+                string title = news.title;
+                string subTitle = news.subTitle;
                 
-                List<RelatedReadingsResult> relateReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
+                List<RelatedReadings> relateReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
 
 
                 HtmlString = "<!DOCTYPE html><html><head>"+head+videoJs+css+videoCss+"</head>" +

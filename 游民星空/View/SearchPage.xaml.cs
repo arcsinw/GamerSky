@@ -90,7 +90,7 @@ namespace 游民星空.View
 
         private void subscribeListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var result = e.ClickedItem as SubscribeResult;
+            var result = e.ClickedItem as Subscribe;
             if (result != null)
             {
                 this.Frame.Navigate(typeof(SubscribeContentPage), result);

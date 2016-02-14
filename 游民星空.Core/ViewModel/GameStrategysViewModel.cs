@@ -15,7 +15,7 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 攻略
         /// </summary>
-        public ObservableCollection<EssayResult> Strategys { get; set; }
+        public ObservableCollection<Essay> Strategys { get; set; }
 
         public GameStrategysIncrementalLoadingCollection IncreStrategys { get; set; }
 
@@ -38,11 +38,11 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
-        private StrategyResult strategyResult;
-        public GameStrategysViewModel(StrategyResult strategyResult)
+        private Strategy strategyResult;
+        public GameStrategysViewModel(Strategy strategyResult)
         {
             apiService = new ApiService();
-            Strategys = new ObservableCollection<EssayResult>();
+            Strategys = new ObservableCollection<Essay>();
             IncreStrategys = new GameStrategysIncrementalLoadingCollection();
             this.strategyResult = strategyResult;
 
@@ -51,15 +51,15 @@ namespace 游民星空.Core.ViewModel
         public GameStrategysViewModel()
         {
             apiService = new ApiService();
-            Strategys = new ObservableCollection<EssayResult>();
+            Strategys = new ObservableCollection<Essay>();
             IncreStrategys = new GameStrategysIncrementalLoadingCollection();
         }
 
-        public async Task LoadData(StrategyResult strategyResult,int pageIndex=1)
+        public async Task LoadData(Strategy strategyResult,int pageIndex=1)
         {
             this.strategyResult = strategyResult;
             IsActive = true;
-            List<EssayResult> results = await apiService.GetGameStrategys(strategyResult.specialID,pageIndex);
+            List<Essay> results = await apiService.GetGameStrategys(strategyResult.specialID,pageIndex);
             foreach(var item in results)
             {
                 Strategys.Add(item);

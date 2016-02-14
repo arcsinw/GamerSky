@@ -9,12 +9,7 @@ namespace 游民星空.Core.Model
     /// <summary>
     /// 启动图
     /// </summary>
-    public class AdStart : ResultBase
-    {
-        public AdStartResult[] result { get; set; }
-    }
-
-    public class AdStartResult
+    public class AdStart
     {
         public string adId { get; set; }
         public string articleId { get; set; }

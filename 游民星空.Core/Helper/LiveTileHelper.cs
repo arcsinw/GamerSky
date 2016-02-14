@@ -87,7 +87,7 @@ namespace 游民星空.Core.Helper
         public static async void UpdatePrimaryTile()
         {
             //获取要闻
-            List<EssayResult> essays = await apiService.GetYaowen();
+            List<Essay> essays = await apiService.GetYaowen();
             try
             {
                 var updater = TileUpdateManager.CreateTileUpdaterForApplication();

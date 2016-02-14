@@ -21,21 +21,15 @@ using 游民星空.Core.Http;
 namespace 游民星空.Core.Model
 {
     /// <summary>
-    /// 新闻列表
+    /// 新闻
     /// </summary>
-    public class Essay
-    {
-        public int errorCode;
-        public string errorMessage;
-        public List<EssayResult> result;
-    }
-    public class EssayResult : ModelBase
+    public class Essay : ModelBase
     {
         public string adId { get; set; }
         public string authorHeadImageURL { get; set; }
         public string authorName { get; set; }
         public string[] badges { get; set; }
-        public EssayResult[] childElements { get; set; }
+        public Essay[] childElements { get; set; }
         public string commentsCount { get; set; }
         public string contentId { get; set; }
         public string contentType { get; set; }

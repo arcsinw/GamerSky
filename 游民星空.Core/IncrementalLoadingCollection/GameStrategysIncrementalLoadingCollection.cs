@@ -13,7 +13,7 @@ namespace 游民星空.Core.IncrementalLoadingCollection
     /// 可增量加载的游戏攻略集合
     /// 本质是EssayResult
     /// </summary>
-    public class GameStrategysIncrementalLoadingCollection : IncrementalLoadingBase<EssayResult>
+    public class GameStrategysIncrementalLoadingCollection : IncrementalLoadingBase<Essay>
     {
         private ApiService apiService = new ApiService();
 
@@ -24,9 +24,9 @@ namespace 游民星空.Core.IncrementalLoadingCollection
             return true;
         }
 
-        protected override async Task<IList<EssayResult>> LoadMoreItemsOverrideAsync(CancellationToken c, uint count)
+        protected override async Task<IList<Essay>> LoadMoreItemsOverrideAsync(CancellationToken c, uint count)
         {
-            List<EssayResult> strategyResults = new List<EssayResult>();
+            List<Essay> strategyResults = new List<Essay>();
             strategyResults = await apiService.GetGameStrategys(specialId, pageIndex);
             if (strategyResults != null)
             {

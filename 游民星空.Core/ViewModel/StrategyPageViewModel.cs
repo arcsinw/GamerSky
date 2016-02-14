@@ -15,12 +15,12 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 关注攻略
         /// </summary>
-        public ObservableCollection<StrategyResult> FocusStrategys { get; set; }
+        public ObservableCollection<Strategy> FocusStrategys { get; set; }
 
         /// <summary>
         /// 所有攻略
         /// </summary>
-        public ObservableCollection<AlphaKeyGroup<StrategyResult>> AllStrategys { get; set; }
+        public ObservableCollection<AlphaKeyGroup<Strategy>> AllStrategys { get; set; }
 
         private ApiService apiService;
 
@@ -42,9 +42,9 @@ namespace 游民星空.Core.ViewModel
         {
             apiService = new ApiService();
 
-            FocusStrategys = new ObservableCollection<StrategyResult>();
+            FocusStrategys = new ObservableCollection<Strategy>();
 
-            AllStrategys = new ObservableCollection<AlphaKeyGroup<StrategyResult>>();
+            AllStrategys = new ObservableCollection<AlphaKeyGroup<Strategy>>();
 
         }
 
@@ -54,7 +54,7 @@ namespace 游民星空.Core.ViewModel
         public async Task LoadFocusStrategys()
         {
             IsActive = true;
-            List<StrategyResult> strategys = await apiService.GetStrategys();
+            List<Strategy> strategys = await apiService.GetStrategys();
             if (strategys != null)
             {
                 foreach (var item in strategys)
@@ -71,12 +71,12 @@ namespace 游民星空.Core.ViewModel
         public async Task LoadAllStrategys()
         {
             IsActive = true;
-            List<StrategyResult> strategys = await apiService.GetAllStrategys();
+            List<Strategy> strategys = await apiService.GetAllStrategys();
             if (strategys != null)
             {
                 //按拼音分组
-                List<AlphaKeyGroup<StrategyResult>> groupData = AlphaKeyGroup<StrategyResult>.CreateGroups(
-                    strategys, (StrategyResult s) => s.title, true);
+                List<AlphaKeyGroup<Strategy>> groupData = AlphaKeyGroup<Strategy>.CreateGroups(
+                    strategys, (Strategy s) => s.title, true);
 
                 foreach (var item in groupData)
                 {

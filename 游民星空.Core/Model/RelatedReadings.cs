@@ -11,13 +11,6 @@ namespace 游民星空.Core.Model
     /// </summary>
     public class RelatedReadings
     {
-        public string errorCode;
-        public string errorMessage;
-        public RelatedReadingsResult[] result;
-    }
-
-    public class RelatedReadingsResult
-    {
         public string adId;
         public string contentId;
         public string contentType;

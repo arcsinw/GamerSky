@@ -11,12 +11,6 @@ namespace 游民星空.Core.Model
     /// </summary>
     public class Channel
     {
-        public string errorCode;
-        public string errorMessage;
-        public List<ChannelResult> result;
-    }
-    public class ChannelResult
-    {
         public string isTop { get; set; }
         public int nodeId { get; set; }
         /// <summary>

@@ -131,13 +131,14 @@
         
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <RelativePanel>
+        <!--<RelativePanel>-->
             <controls:SwipeableSplitView x:Name="splitView" 
             DisplayMode="Overlay" OpenPaneLength="240">
                 <SplitView.Pane>
                     <ListView ScrollViewer.VerticalScrollMode="Disabled" 
                           GotFocus="{x:Bind ViewModel.GetCacheSize}" 
-                          SelectionMode="None">
+                              SelectionMode="None"
+                         >
 
                         <ListView.Resources>
                             <Thickness x:Key="TextBlockMargin">8,0</Thickness>
@@ -306,7 +307,7 @@
                     </Grid>
                 </SplitView.Content>
             </controls:SwipeableSplitView>
-            <Frame RelativePanel.AlignRightWith="splitView" Background="Red" />
-        </RelativePanel>
+            <!--<Frame RelativePanel.AlignRightWith="splitView" Background="Red" />
+        </RelativePanel>-->
     </Grid>
 </Page>

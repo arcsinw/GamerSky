@@ -21,7 +21,7 @@ namespace 游民星空.Core.Helper
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            EssayResult essay = item as EssayResult;
+            Essay essay = item as Essay;
             if (essay.thumbnailURLs == null || essay.thumbnailURLs.Length==0) return NoPicDt;
             if (essay.thumbnailURLs.Length <= 1)
             {

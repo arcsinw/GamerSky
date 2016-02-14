@@ -50,7 +50,7 @@ namespace 游民星空.View
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            EssayResult essayResult = e.ClickedItem as EssayResult;
+            Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
 
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
@@ -98,8 +98,7 @@ namespace 游民星空.View
                         IsDataLoading = true;
                         //IsActive = true;
                         progressRing.IsActive = true;
-                        await viewModel.LoadData(pageIndex);
-                        pageIndex++;
+                        await viewModel.LoadData(pageIndex++);
                         //IsActive = false;
                         progressRing.IsActive = false;
                         IsDataLoading = false;

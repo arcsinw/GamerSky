@@ -80,7 +80,7 @@ namespace 游民星空.View
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            StrategyResult result =  e.ClickedItem as StrategyResult;
+            Strategy result =  e.ClickedItem as Strategy;
             if(result!=null)
             {
                 (Window.Current.Content as Frame)?.Navigate(typeof(GameStrategys), result);
@@ -89,7 +89,7 @@ namespace 游民星空.View
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            StrategyResult result = e.ClickedItem as StrategyResult;
+            Strategy result = e.ClickedItem as Strategy;
             if (result != null)
             {
                 (Window.Current.Content as Frame)?.Navigate(typeof(GameStrategys), result);

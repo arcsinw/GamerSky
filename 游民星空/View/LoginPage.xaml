@@ -35,7 +35,7 @@
                     <PasswordBox PlaceholderText="请输入密码" Password="{Binding Path=UserLoginInfo.UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                                  />
                     <TextBlock Margin="0,0,0,8" Text="{Binding Path=UserLoginInfo.Errors[UserPassword]}" Foreground="Red"/>
-                    <Button Content="登录" HorizontalAlignment="Stretch" 
+                    <Button Content="登录" HorizontalAlignment="Stretch" Click="{x:Bind ViewModel.Login}"
                             Foreground="White" IsEnabled="{Binding Path=UserLoginInfo.IsValid}"
                             Background="{ThemeResource ThemeColorBrush}"/>
                     <Grid>

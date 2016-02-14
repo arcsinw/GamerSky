@@ -17,7 +17,7 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 订阅页面
         /// </summary>
-        public ObservableCollection<SubscribeResult> Subscribes { get; set; }
+        public ObservableCollection<Subscribe> Subscribes { get; set; }
 
         /// <summary>
         /// 攻略
@@ -51,7 +51,7 @@ namespace 游民星空.Core.ViewModel
         public SearchPageViewModel()
         {
             apiService = new ApiService();
-            Subscribes = new ObservableCollection<SubscribeResult>();
+            Subscribes = new ObservableCollection<Subscribe>();
             Strategys = new ObservableCollection<string>();
             News = new ObservableCollection<string>();
 
@@ -93,7 +93,7 @@ namespace 游民星空.Core.ViewModel
                 }
             }
 
-            List<SubscribeResult> subscribes = await apiService.GetSubscribeHotKey();
+            List<Subscribe> subscribes = await apiService.GetSubscribeHotKey();
             foreach (var item in subscribes)
             {
                 Subscribes.Add(item);
@@ -104,7 +104,7 @@ namespace 游民星空.Core.ViewModel
 
         public async Task Search(string key,SearchTypeEnum searchType,int pageIndex=1)
         {
-            List < EssayResult> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
+            List < Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
 
         }
     }

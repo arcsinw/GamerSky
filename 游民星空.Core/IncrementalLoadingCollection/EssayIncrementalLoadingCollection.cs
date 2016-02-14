@@ -9,7 +9,7 @@ using 游民星空.Core.Model;
 
 namespace 游民星空.Core.IncrementalLoadingCollection
 {
-    public class EssayIncrementalLoadingCollection : IncrementalLoadingBase<EssayResult>
+    public class EssayIncrementalLoadingCollection : IncrementalLoadingBase<Essay>
     {
         private ApiService apiService = new ApiService();
 
@@ -19,10 +19,10 @@ namespace 游民星空.Core.IncrementalLoadingCollection
             return true;
         }
 
-        protected override async Task<IList<EssayResult>> LoadMoreItemsOverrideAsync(CancellationToken c, uint count)
+        protected override async Task<IList<Essay>> LoadMoreItemsOverrideAsync(CancellationToken c, uint count)
         {
             int nodeId = 0;
-            List<EssayResult> essays = await apiService.GetEssayList(nodeId, pageIndex);
+            List<Essay> essays = await apiService.GetEssayList(nodeId, pageIndex);
             return essays;
         }
     }

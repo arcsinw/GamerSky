@@ -84,6 +84,7 @@
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView ItemsSource="{Binding SubscribeContens}"
                  SelectionMode="None"
+                          x:Name="listView"
                   Loaded="ListView_Loaded"
                   ShowsScrollingPlaceholders="True"
                   IsItemClickEnabled="True"
@@ -144,5 +145,22 @@
             </Button>
             <TextBlock Text="{Binding HeaderSubscribe.title}" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
+
+
+        <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"
+               Height="48" x:Name="topPop" Width="48" Margin="16,32" >
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <!--<EdgeUIThemeTransition Edge="Bottom"/>-->
+                    <AddDeleteThemeTransition />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Popup.Child>
+                <Button Height="48" Width="48" Background="{ThemeResource ThemeColorBrush}" 
+                        Click="Button_Click" Style="{ThemeResource RoundButtonStyle}">
+                    <SymbolIcon Symbol="Up" Foreground="White" />
+                </Button>
+            </Popup.Child>
+        </Popup>
     </Grid>
 </Page>

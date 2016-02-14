@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace 游民星空.Core.Model
+namespace 游民星空.Core.ResultDataModel
 {
     /// <summary>
     /// 返回数据类型基类

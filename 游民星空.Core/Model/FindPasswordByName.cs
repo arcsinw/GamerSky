@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using 游民星空.Core.ResultDataModel;
 
 namespace 游民星空.Core.Model
 {
-    public class FindPasswordByName : ResultBase
+    public class FindPasswordByNameResult : ResultBase
     {
-        public FindPasswordByNameResult result { get; set; }
+        public FindPasswordByName result { get; set; }
     }
-    public class FindPasswordByNameResult
+    public class FindPasswordByName
     {
         public string email { get; set; }
         public string phoneNumber { get; set; }

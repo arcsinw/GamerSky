@@ -104,8 +104,7 @@ namespace 游民星空.View
             {
                 pageIndexDic.Add(currentChannelId, 1);
                 pageIndex = 1;
-                await MVM.LoadMoreEssay(currentChannelId, pageIndex);
-                pageIndex++;
+                await MVM.LoadMoreEssay(currentChannelId, pageIndex++);
                 pageIndexDic[currentChannelId] = pageIndex;
             }
             else  //频道已加载
@@ -113,19 +112,13 @@ namespace 游民星空.View
                 pageIndex = pageIndexDic[currentChannelId];
             }
 
-            Debug.WriteLine(MVM.EssaysAndChannels[index].Channel.nodeName);
-
-            //await MVM.LoadMoreEssay(currentChannelId, pageIndex);
-            //pageIndex++;
-            //pageIndexDic[currentChannelId] = pageIndex;
-            //IsActive = false;
             progressRing.IsActive = false;
         }
 
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            EssayResult essayResult =  e.ClickedItem as EssayResult;
+            Essay essayResult =  e.ClickedItem as Essay;
             if (essayResult == null) return;
             
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
@@ -154,8 +147,7 @@ namespace 游民星空.View
                         IsDataLoading = true;
                         //IsActive = true;
                         progressRing.IsActive = true;
-                        await MVM.LoadMoreEssay(currentChannelId, pageIndex);
-                        pageIndex++;
+                        await MVM.LoadMoreEssay(currentChannelId, pageIndex++);
                         pageIndexDic[currentChannelId] = pageIndex;
                         //IsActive = false;
                         progressRing.IsActive = false;
@@ -167,7 +159,7 @@ namespace 游民星空.View
 
         private void FlipView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var essayResult = (sender as FlipView)?.SelectedItem as EssayResult;
+            var essayResult = (sender as FlipView)?.SelectedItem as Essay;
             if (essayResult == null) return;
 
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);

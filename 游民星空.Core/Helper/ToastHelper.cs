@@ -31,7 +31,7 @@ namespace 游民星空.Core.Helper
         public static async void ShowToast()
         {
             //获取要闻
-            List<EssayResult> essays = await apiService.GetYaowen();
+            List<Essay> essays = await apiService.GetYaowen();
             if(essays!= null)
             {
                 foreach (var item in essays)

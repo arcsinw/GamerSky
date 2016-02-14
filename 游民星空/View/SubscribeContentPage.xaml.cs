@@ -33,7 +33,7 @@ namespace 游民星空.View
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             progressRing.IsActive = true;
-            SubscribeResult subscribeResult = e.Parameter as SubscribeResult;
+            Subscribe subscribeResult = e.Parameter as Subscribe;
             if (subscribeResult != null)
             {
                 if (viewModel.SubscribeContens.Count == 0)
@@ -47,7 +47,7 @@ namespace 游民星空.View
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            EssayResult essayResult = e.ClickedItem as EssayResult;
+            Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
 
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
@@ -76,22 +76,37 @@ namespace 游民星空.View
         {
             if (scrollViewer != null)
             {
-                Debug.WriteLine(scrollViewer.VerticalOffset);
-                
-                titleBarGrid.Opacity = (scrollViewer.VerticalOffset / 180 > 1) ? 1 : scrollViewer.VerticalOffset / 180;
-                
-                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
+                if (scrollViewer != null)
                 {
-                    if (!IsDataLoading)  //未加载数据
+                    if (scrollViewer.VerticalOffset < DeviceInformationHelper.GetScreenHeight())
                     {
-                        IsDataLoading = true;
-                        //IsActive = true;
-                        progressRing.IsActive = true;
-                        await viewModel.LoadMoreData(pageIndex);
-                        pageIndex++;
-                        //IsActive = false;
-                        progressRing.IsActive = false;
-                        IsDataLoading = false;
+                        if (topPop.IsOpen)
+                        {
+                            topPop.IsOpen = false;
+                        }
+                    }
+                    else if (scrollViewer.VerticalOffset > DeviceInformationHelper.GetScreenHeight())
+                    {
+                        if (!topPop.IsOpen)
+                        {
+                            topPop.IsOpen = true;
+                        }
+                    }
+
+                    titleBarGrid.Opacity = (scrollViewer.VerticalOffset / 180 > 1) ? 1 : scrollViewer.VerticalOffset / 180;
+
+                    if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
+                    {
+                        if (!IsDataLoading)  //未加载数据
+                        {
+                            IsDataLoading = true;
+                            //IsActive = true;
+                            progressRing.IsActive = true;
+                            await viewModel.LoadMoreData(pageIndex++);
+                            //IsActive = false;
+                            progressRing.IsActive = false;
+                            IsDataLoading = false;
+                        }
                     }
                 }
             }
@@ -105,6 +120,11 @@ namespace 游民星空.View
             {
                 Frame.GoBack();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            listView.ScrollIntoViewSmoothly(listView.Items[0]);
         }
     }
 }
