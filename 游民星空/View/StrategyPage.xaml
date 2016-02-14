@@ -598,7 +598,7 @@
                     <!--排序列表-->
                     <SemanticZoom.ZoomedOutView>
                         <GridView ItemsSource="{Binding Source={StaticResource CollectionViewSource},Path=CollectionGroups}"
-                                  ItemsPanel="{StaticResource FourGridViewItemsPanel}">
+                                  ItemsPanel="{StaticResource FourGridViewItemsPanel}" >
                             <GridView.ItemTemplate>
                                 <DataTemplate>
                                     <Border 
@@ -621,7 +621,7 @@
                             <GridView.Template>
                                 <ControlTemplate>
                                     <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
-                                        <Viewbox Stretch="Uniform" Margin="0" VerticalAlignment="Top" 
+                                        <Viewbox Stretch="Uniform" Margin="8"  VerticalAlignment="Top" 
                                              ScrollViewer.VerticalScrollMode="Enabled" StretchDirection="Both" >
                                             <ItemsPresenter  />
                                         </Viewbox>
