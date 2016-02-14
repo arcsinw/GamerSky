@@ -119,9 +119,8 @@ namespace 游民星空.Core.Helper
         public static bool IsMobile()
         {
             ResourceContext resContext = ResourceContext.GetForCurrentView();
-
             string value = resContext.QualifierValues["DeviceFamily"];
-            return value == "Mobile";
+            return value.Equals("Mobile");
         }
 
         /// <summary>

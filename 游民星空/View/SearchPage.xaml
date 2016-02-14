@@ -315,7 +315,8 @@
         <Pivot Grid.Row="1" x:Name="pivot">
             <PivotItem Header="新闻">
                     <!--显示搜索热词-->
-
+                   
+                
                     <ListView ItemsSource="{Binding News}" SelectionMode="None" >
                         <ListView.Header>
                             热词搜索

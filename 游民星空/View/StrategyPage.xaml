@@ -445,6 +445,9 @@
         <!--BorderBrush-->
         <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
 
+        <JumpListItemBackgroundConverter x:Key="BackgroundConverter" Enabled="{ThemeResource ThemeColorBrush}"
+                                         Disabled="Transparent"/>
+        <JumpListItemBackgroundConverter x:Key="ForegroundConverter" Enabled="White" Disabled="Black"/>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -523,7 +526,7 @@
                                           ItemsPath="InternalList"
                                           Source="{Binding AllStrategys}"/>
                 </PivotItem.Resources>
-                <SemanticZoom>
+                <SemanticZoom >
                     <SemanticZoom.Style>
                         <Style TargetType="SemanticZoom">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -598,16 +601,23 @@
                                   ItemsPanel="{StaticResource FourGridViewItemsPanel}">
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <Border >
-                                        <!--<Button 
-                                            IsEnabled="{Binding Converter={StaticResource CountToConverter},ConverterParameter={StaticResource CollectionViewSource},Path=CollectionGroups}" 
-                                                Content="{Binding Group.Key}"
-                                                BorderThickness="0"/>-->
-                                        <TextBlock Text="{Binding Group.Key}"/>
+                                    <Border 
+                                            Background="{Binding Converter={StaticResource BackgroundConverter}}">
+                                        <TextBlock Text="{Binding Group.Key}" HorizontalAlignment="Center" 
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{Binding Converter={StaticResource ForegroundConverter}}"/>
                                     </Border>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
 
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </GridView.ItemContainerStyle>
                             <GridView.Template>
                                 <ControlTemplate>
                                     <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">

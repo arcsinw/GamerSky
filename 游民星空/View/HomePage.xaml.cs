@@ -68,6 +68,7 @@ namespace 游民星空.View
                     case "2":
                         break;
                     case "3":
+                        rootFrame.Navigate(typeof(SubscribePage));
                         break;
                 }
             }
