@@ -44,5 +44,14 @@ namespace 游民星空.View
         {
             Frame.Navigate(typeof(AgreementPage));
         }
+
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        private void GetVerificationCode()
+        {
+            string phoneNumber = phoneNumberTextBlock.Text;
+            
+        }
     }
 }

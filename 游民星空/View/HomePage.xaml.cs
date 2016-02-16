@@ -116,7 +116,7 @@ namespace 游民星空.View
         /// </summary>
         public void ChangeDisplayModel()
         {
-
+            //(Application.Current).RequestedTheme =  ApplicationTheme.Dark;
         }
 
         /// <summary>

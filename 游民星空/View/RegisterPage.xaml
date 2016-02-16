@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Page.DataContext>
-        <vm:RegisterPageViewModel />
+        <vm:RegisterPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -34,7 +34,7 @@
                             <Setter Property="Foreground" Value="Red"/>
                         </Style>
                     </StackPanel.Resources>
-                    <TextBox PlaceholderText="请输入手机号" Text="{Binding Path=RegisterInfo.PhoneNumber,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox PlaceholderText="请输入手机号" x:Name="phoneNumberTextBlock" Text="{Binding Path=RegisterInfo.PhoneNumber,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[PhoneNumber]}" Style="{StaticResource ErrorTextBlock}"/>
                     <TextBox PlaceholderText="请输入用户名" Margin="0,8" Text="{Binding Path=RegisterInfo.UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserName]}" Style="{StaticResource ErrorTextBlock}"/>
@@ -53,12 +53,12 @@
                         <TextBlock Text="{Binding Path=RegisterInfo.Errors[VerificationCode]}" 
                                    Grid.Row="1"
                                    Style="{StaticResource ErrorTextBlock}"/>
-                        <Button Content="获取验证码" HorizontalAlignment="Right" Grid.Row="0"
+                        <Button Content="获取验证码" HorizontalAlignment="Right" Grid.Row="0" 
                                 Background="{ThemeResource ThemeColorBrush}" Foreground="White"
-                                Grid.Column="1"/>
+                                Grid.Column="1" Click="{x:Bind GetVerificationCode}" IsEnabled="{Binding RegisterInfo.Errors[PhoneNumber]}"/>
                     </Grid>
                     <Button Content="注册" HorizontalAlignment="Stretch" IsEnabled="{Binding Path=RegisterInfo.IsValid}"
-                            Background="{ThemeResource ThemeColorBrush}" Foreground="White"/>
+                            Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind ViewModel.RegisterByPhone}"/>
                     <TextBlock Margin="0,16">
                     <Run Text="注册代表同意接受"/>
                     <Hyperlink Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>

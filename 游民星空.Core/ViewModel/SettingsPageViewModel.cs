@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using 游民星空.Core.Helper;
 
 namespace 游民星空.Core.ViewModel
@@ -48,6 +49,23 @@ namespace 游民星空.Core.ViewModel
                 {
                     LiveTileHelper.UnRegisterLiveTileTask();
                 }
+                OnPropertyChanged();
+            }
+        }
+
+        private ApplicationTheme theme = ApplicationTheme.Light;
+        /// <summary>
+        /// 日/夜间模式
+        /// </summary>
+        public ApplicationTheme Theme
+        {
+            get
+            {
+                return theme;
+            }
+            set
+            {
+                theme = value;
                 OnPropertyChanged();
             }
         }

@@ -180,6 +180,7 @@
     <Compile Include="ResultDataModel\StrategyResult.cs" />
     <Compile Include="ResultDataModel\SubscribeContentResult.cs" />
     <Compile Include="ResultDataModel\SubscribeResult.cs" />
+    <Compile Include="ViewModel\DataShareManager.cs" />
     <Compile Include="ViewModel\EmailRegisterPageViewModel.cs" />
     <Compile Include="ViewModel\EssayDetailViewModel.cs" />
     <Compile Include="ViewModel\GameStrategysViewModel.cs" />

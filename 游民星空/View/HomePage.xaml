@@ -7,6 +7,7 @@
     xmlns:controls="using:游民星空.Controls"
     xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    RequestedTheme="{x:Bind ViewModel.AppTheme,Mode=TwoWay}"
     mc:Ignorable="d">
 
     
@@ -135,12 +136,11 @@
             <controls:SwipeableSplitView x:Name="splitView" 
             DisplayMode="Overlay" OpenPaneLength="240">
                 <SplitView.Pane>
-                    <ListView ScrollViewer.VerticalScrollMode="Disabled" 
+                <ListView ScrollViewer.VerticalScrollMode="Disabled" 
                           GotFocus="{x:Bind ViewModel.GetCacheSize}" 
                               SelectionMode="None"
                          >
-
-                        <ListView.Resources>
+                    <ListView.Resources>
                             <Thickness x:Key="TextBlockMargin">8,0</Thickness>
                         </ListView.Resources>
                         <ListView.Items>
@@ -204,7 +204,7 @@
                                 </Grid>
                             </ListViewItem>
 
-                            <ListViewItem Tapped="{x:Bind ChangeDisplayModel}">
+                        <ListViewItem Tapped="{x:Bind ViewModel.ChangeDisplayMode}">
                                 <StackPanel Orientation="Horizontal">
                                     <BitmapIcon UriSource="ms-appx:///Assets/Split_Night.png" Height="24"/>
                                     <TextBlock Text="夜间模式" Margin="{StaticResource TextBlockMargin}"/>

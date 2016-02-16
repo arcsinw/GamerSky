@@ -481,7 +481,9 @@
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
-            <SolidColorBrush x:Key="PivotHeaderColorBrush">#C93D32</SolidColorBrush>
+            <SolidColorBrush x:Key="ThemeColorBrush" Color="#66FFFFFF"/>
+            <!--PivotHeader 背景色-->
+            <SolidColorBrush x:Key="PivotHeaderColorBrush" Color="{ThemeResource ThemeColorBrush}"></SolidColorBrush>
             <!--PivotHeader 选中的颜色 白色-->
             <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="White" />
             <!--PivotHeader 未选中的颜色 灰色-->

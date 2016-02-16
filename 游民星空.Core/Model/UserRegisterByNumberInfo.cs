@@ -17,6 +17,7 @@ namespace 游民星空.Core.Model
         /// <summary>
         /// 手机号
         /// </summary>
+        [DataType(DataType.PhoneNumber,ErrorMessage = "手机号码格式不正确")]
         [Required(ErrorMessage = "手机号不能为空")]
         public string PhoneNumber
         {

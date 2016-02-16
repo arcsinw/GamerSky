@@ -447,7 +447,7 @@
         <Pivot x:Name="pivot"  
                SelectionChanged="Pivot_SelectionChanged" Style="{StaticResource StrategyPivotStyle}">
 
-            <PivotItem Header="全部订阅" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
+            <PivotItem Header="订阅内容" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
                 <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
                     <GridView ItemsSource="{Binding FocusStrategys}" Padding="8"
                           ItemsPanel="{StaticResource GridViewItemsPanel}"
@@ -513,7 +513,7 @@
                     </GridView>
                 <!--</pr:PullToRefreshBox>-->
             </PivotItem>
-            <PivotItem Header="我的订阅" Margin="0" Padding="0">
+            <PivotItem Header="订阅专题" Margin="0" Padding="0">
                 <PivotItem.Resources>
                     <CollectionViewSource x:Key="CollectionViewSource" IsSourceGrouped="True" 
                                           ItemsPath="InternalList"
@@ -625,7 +625,7 @@
                 HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top"
                 Click="Button_Click">
             <Button.Content>
-                <SymbolIcon  Symbol="Find"/>
+                <SymbolIcon  Symbol="Add"/>
             </Button.Content>
         </Button>
 
