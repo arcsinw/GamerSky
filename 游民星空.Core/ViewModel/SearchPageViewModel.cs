@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
@@ -45,6 +46,24 @@ namespace 游民星空.Core.ViewModel
 
         private ApiService apiService;
 
+        private void Current_ShareDataChanged()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+        }
+
+        private ElementTheme appTheme;
+        public ElementTheme AppTheme
+        {
+            get
+            {
+                return appTheme;
+            }
+            set
+            {
+                appTheme = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand SearchCommand { get; set; }
 
@@ -69,7 +88,11 @@ namespace 游民星空.Core.ViewModel
                 await new MessageDialog("还没写，莫慌",(string)parameter).ShowAsync();
                 Debug.WriteLine(parameter);
             });
+
             LoadData();
+
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
         public async void LoadData()

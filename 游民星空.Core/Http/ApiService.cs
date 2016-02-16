@@ -108,6 +108,7 @@ namespace 游民星空.Core.Http
         //{
         //    return await GetEssayList(nodeId, pageIndex);
         //}\\
+
         /// <summary>
         /// 阅读文章
         /// 适用于新闻 和 攻略
@@ -292,9 +293,9 @@ namespace 游民星空.Core.Http
         }
 
         /// <summary>
-        /// 获取订阅热点词
+        /// 获取热门/全部订阅
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="type">type=0 热门 type=1 全部</param>
         public async Task<List<Subscribe>> GetSubscribeHotKey(string type="1")
         {
             string filename = "subscribeHotKey_" + type + ".json";

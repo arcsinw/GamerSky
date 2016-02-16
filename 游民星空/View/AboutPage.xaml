@@ -13,7 +13,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Background="{ThemeResource ThemeColorBrush}">
+        <Grid Background="{ThemeResource PageBackground}">
             <Button x:Name="back"  Click="{x:Bind Back}"
                     Style="{ThemeResource BackButtonStyle}" Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>

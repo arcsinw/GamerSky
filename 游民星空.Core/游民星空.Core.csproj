@@ -187,6 +187,7 @@
     <Compile Include="ViewModel\HomePageViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
+    <Compile Include="ViewModel\MySubscribePageViewModel.cs" />
     <Compile Include="ViewModel\RegisterPageViewModel.cs" />
     <Compile Include="ViewModel\SearchPageViewModel.cs" />
     <Compile Include="ViewModel\SettingsPageViewModel.cs" />

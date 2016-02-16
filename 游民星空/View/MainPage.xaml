@@ -9,6 +9,7 @@
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:hp="using:游民星空.Core.Helper"
     mc:Ignorable="d"
+    RequestedTheme="{Binding Path=MVM.AppTheme}"
     d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True,Type=vm:MainPageViewModel}"
     >
 

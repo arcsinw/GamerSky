@@ -5,7 +5,8 @@
     xmlns:local="using:游民星空.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    RequestedTheme="{x:Bind viewModel.AppTheme}">
 
     <Page.Resources>
         <Style TargetType="TextBlock">
@@ -25,7 +26,7 @@
             </Button>
             <TextBlock Text="设置" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
-        <Grid Grid.Row="1" Background="LightGray">
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
             <ListView SelectionMode="None">
                 <ListView.Resources>
                     <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
 
@@ -41,6 +42,25 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
+        private void Current_ShareDataChanged()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+        }
+
+        private ElementTheme appTheme;
+        public ElementTheme AppTheme
+        {
+            get
+            {
+                return appTheme;
+            }
+            set
+            {
+                appTheme = value;
+                OnPropertyChanged();
+            }
+        }
+
         private Subscribe subscribe;
         public SubscribeContentViewModel(Subscribe subscribe)
         {
@@ -48,6 +68,9 @@ namespace 游民星空.Core.ViewModel
             SubscribeContens = new ObservableCollection<Essay>();
             HeaderSubscribe = new Essay();
             this.subscribe = subscribe;
+
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
         public SubscribeContentViewModel()

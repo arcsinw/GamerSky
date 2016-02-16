@@ -62,7 +62,9 @@ namespace 游民星空.Core.ViewModel
                 (Window.Current.Content as Frame)?.Navigate(typeof(Essay), contentId);
             });
 
-           
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+
             if (DesignMode.DesignModeEnabled)
             {
                 LoadDesignTimeData();
@@ -70,6 +72,25 @@ namespace 游民星空.Core.ViewModel
             else
             {
                 LoadData();
+            }
+        }
+
+        private void Current_ShareDataChanged()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+        }
+
+        private ElementTheme appTheme;
+        public ElementTheme AppTheme
+        {
+            get
+            {
+                return appTheme;
+            }
+            set
+            {
+                appTheme = value;
+                OnPropertyChanged();
             }
         }
 

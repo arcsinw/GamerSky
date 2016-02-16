@@ -139,6 +139,9 @@
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\MySubscribePage.xaml.cs">
+      <DependentUpon>MySubscribePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
@@ -295,6 +298,10 @@
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MySubscribePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegisterPage.xaml">
       <SubType>Designer</SubType>

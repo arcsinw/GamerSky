@@ -8,7 +8,9 @@
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:converter="using:游民星空.Converter"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    RequestedTheme="{Binding AppTheme}"
+    Margin="0,0,0,50">
 
     <Page.DataContext>
         <vm:StrategyPageViewModel x:Name="ViewModel"/>

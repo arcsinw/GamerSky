@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:游民星空.Core.Helper"
     mc:Ignorable="d"
-    >
+    RequestedTheme="{Binding AppTheme}">
 
     <Page.Transitions>
         <TransitionCollection>

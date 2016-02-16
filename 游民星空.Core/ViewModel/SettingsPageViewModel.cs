@@ -53,19 +53,27 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
-        private ApplicationTheme theme = ApplicationTheme.Light;
-        /// <summary>
-        /// 日/夜间模式
-        /// </summary>
-        public ApplicationTheme Theme
+        public SettingsPageViewModel()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+        }
+
+        private void Current_ShareDataChanged()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+        }
+
+        private ElementTheme appTheme;
+        public ElementTheme AppTheme
         {
             get
             {
-                return theme;
+                return appTheme;
             }
             set
             {
-                theme = value;
+                appTheme = value;
                 OnPropertyChanged();
             }
         }

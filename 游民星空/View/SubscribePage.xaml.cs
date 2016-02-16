@@ -47,12 +47,25 @@ namespace 游民星空.View
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NavigatoToMySubscribe()
+        {
+            (Window.Current.Content as Frame)?.Navigate(typeof(MySubscribePage));
+        }
+
+        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
 
         }
 
-        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        public void Back()
+        {
+            if(Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+        }
+
+        public void AddSubscribe()
         {
 
         }

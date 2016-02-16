@@ -21,7 +21,7 @@
             </Button>
             <TextBlock Text="协议" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
             <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" >
                 <StackPanel Padding="16">
                     <TextBlock x:Name="textBlock" TextAlignment="Justify" TextWrapping="Wrap"  Loaded="{x:Bind GetAgreement}"/>
