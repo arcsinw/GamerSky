@@ -73,18 +73,20 @@ namespace 游民星空.View
                     if (!isHotLoaded)
                     {
                         await ViewModel.LoadHotSubscribes();
+                        isHotLoaded = true;
                     }
                     break;
                 case 1:
                     if (!isAllLoaded)
                     {
                         await ViewModel.LoadAllSubscribes();
+                        isAllLoaded = true;
                     }
                     break;
                 case 2:
                     if(isMyLoaded)
                     {
-
+                        isMyLoaded = true;
                     }
                     //await ViewModel.LoadMySubscribes();
                     break;

@@ -138,7 +138,7 @@
                 <SplitView.Pane>
                 <ListView ScrollViewer.VerticalScrollMode="Disabled" 
                           GotFocus="{x:Bind ViewModel.GetCacheSize}" 
-                              SelectionMode="None"
+                              SelectionMode="None" Background="{ThemeResource PageBackground}"
                          >
                     <ListView.Resources>
                             <Thickness x:Key="TextBlockMargin">8,0</Thickness>
