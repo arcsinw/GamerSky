@@ -71,10 +71,23 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 更改日/夜间模式
         /// </summary>
-        public void ChangeDisplayMode()
+        public void ChangeDisplayMode(bool isNight)
         {
-            AppTheme = (AppTheme == ElementTheme.Dark) ? ElementTheme.Light : ElementTheme.Dark;
+            DataShareManager.Current.UpdateAPPTheme(isNight);
         }
-        
+
+        private bool isNight;
+        public bool IsNight
+        {
+            get
+            {
+                return isNight;
+            }
+            set
+            {
+                isNight = value;
+                ChangeDisplayMode(isNight);
+            }
+        }
     }
 }

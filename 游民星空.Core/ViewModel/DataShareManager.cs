@@ -116,7 +116,10 @@ namespace 游民星空.Core.ViewModel
                 ShareDataChanged();
             }
         }
-
+        /// <summary>
+        /// true 为Dark false 为Light
+        /// </summary>
+        /// <param name="dark"></param>
         public void UpdateAPPTheme(bool dark)
         {
             appTheme = dark ? ElementTheme.Dark : ElementTheme.Light;

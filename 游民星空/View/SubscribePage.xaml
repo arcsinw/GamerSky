@@ -243,9 +243,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-            
-
-        <Pivot x:Name="pivot"  
+        <Pivot x:Name="pivot"  Background="{ThemeResource PageBackground}"
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="订阅内容" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
                 <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
@@ -431,11 +429,10 @@
         
         <!--#region 右边add-->
         <Button Background="Transparent" Foreground="White" 
-                HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top"
-                Click="{x:Bind NavigatoToMySubscribe}">
-            <Button.Content>
-                <SymbolIcon  Symbol="Add"/>
-            </Button.Content>
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                Click="{x:Bind NavigatoToMySubscribe}"
+                Style="{ThemeResource BackButtonStyle}">
+            <SymbolIcon  Symbol="Add"/>
         </Button>
         <!--#endregion-->
         

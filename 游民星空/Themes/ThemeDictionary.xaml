@@ -727,7 +727,7 @@
 
         <ResourceDictionary x:Key="Dark">
             <Color x:Key="ThemeColor">Gray</Color>
-            <SolidColorBrush x:Key="ThemeColorBrush" Color="#66FFFFFF"/>
+            <SolidColorBrush x:Key="ThemeColorBrush" Color="Gray"/>
             <!--PivotHeader 背景色-->
             <SolidColorBrush x:Key="PivotHeaderColorBrush" Color="Gray"></SolidColorBrush>
             <!--PivotHeader 选中的颜色 白色-->

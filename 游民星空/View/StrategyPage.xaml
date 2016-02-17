@@ -453,7 +453,7 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot x:Name="pivot"  
+        <Pivot x:Name="pivot"  Background="{ThemeResource PageBackground}"
                SelectionChanged="Pivot_SelectionChanged" Style="{StaticResource StrategyPivotStyle}">
 
             <PivotItem Header="关注" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
@@ -637,8 +637,8 @@
 
         </Pivot>
 
-        <Button Background="Transparent" Foreground="White" 
-                HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top"
+        <Button Style="{ThemeResource BackButtonStyle}"
+                HorizontalAlignment="Right"  VerticalAlignment="Top"
                 Click="Button_Click">
             <Button.Content>
                 <SymbolIcon  Symbol="Find"/>

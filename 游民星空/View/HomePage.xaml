@@ -133,7 +133,7 @@
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <!--<RelativePanel>-->
-            <controls:SwipeableSplitView x:Name="splitView" 
+        <controls:SwipeableSplitView x:Name="splitView" Background="{ThemeResource PageBackground}"
             DisplayMode="Overlay" OpenPaneLength="240">
                 <SplitView.Pane>
                 <ListView ScrollViewer.VerticalScrollMode="Disabled" 
@@ -204,12 +204,21 @@
                                 </Grid>
                             </ListViewItem>
 
-                        <ListViewItem Tapped="{x:Bind ViewModel.ChangeDisplayMode}">
-                                <StackPanel Orientation="Horizontal">
+                        <ListViewItem  HorizontalContentAlignment="Stretch">
+                            <Grid HorizontalAlignment="Stretch" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>   
+                            
+                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
                                     <BitmapIcon UriSource="ms-appx:///Assets/Split_Night.png" Height="24"/>
-                                    <TextBlock Text="夜间模式" Margin="{StaticResource TextBlockMargin}"/>
+                                    <TextBlock Text="夜间模式" VerticalAlignment="Center" Margin="{StaticResource TextBlockMargin}"/>
                                 </StackPanel>
-                            </ListViewItem>
+
+                                <ToggleSwitch IsOn="{x:Bind ViewModel.IsNight,Mode=TwoWay}"  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </ListViewItem>
 
                             <ListViewItem>
                                 <StackPanel Orientation="Horizontal">

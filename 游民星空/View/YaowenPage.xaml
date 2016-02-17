@@ -77,7 +77,7 @@
             <TextBlock Text="要闻" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
 
-        <Grid Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView ItemsSource="{Binding Yaowens}"
                  SelectionMode="None"

@@ -60,7 +60,7 @@
 
         <!--#region 右边add-->
         <Button Background="Transparent" Foreground="White" 
-                HorizontalAlignment="Right" Margin="10" VerticalAlignment="Top"
+                HorizontalAlignment="Right" Style="{ThemeResource BackButtonStyle}" VerticalAlignment="Top"
                 Click="{x:Bind AddSubscribe}">
             <Button.Content>
                 <SymbolIcon  Symbol="Add"/>

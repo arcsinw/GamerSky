@@ -80,7 +80,7 @@
 
         
         <!--订阅栏目内文章列表-->
-        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+        <Grid Background="{ThemeResource PageBackground}"
               Grid.Row="0" Grid.RowSpan="2">
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView ItemsSource="{Binding SubscribeContens}"

@@ -13,14 +13,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Background="{ThemeResource PageBackground}">
+        <Grid Background="{ThemeResource ThemeColorBrush}">
             <Button x:Name="back"  Click="{x:Bind Back}"
                     Style="{ThemeResource BackButtonStyle}" Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
             <TextBlock Text="关于" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
             <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
                 <StackPanel Padding="8" >
                     <StackPanel.Resources>

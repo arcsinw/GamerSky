@@ -95,7 +95,9 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot x:Name="essayPivot"  DataContext="{Binding Source={StaticResource MVM}}"
                ItemsSource="{Binding EssaysAndChannels}" SelectionChanged="Pivot_SelectionChanged"
-               Padding="0" Margin="0" HorizontalContentAlignment="Stretch" Style="{StaticResource EssayPivotStyle}">
+               Padding="0" Margin="0" HorizontalContentAlignment="Stretch" 
+               Background="{ThemeResource PageBackground}"
+               Style="{StaticResource EssayPivotStyle}">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Channel.nodeName}"/>
