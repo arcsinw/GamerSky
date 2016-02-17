@@ -723,6 +723,8 @@
             <SolidColorBrush x:Key="PhoneForegroundBrush" Color="Black"/>
             <!--页面背景色-->
             <SolidColorBrush x:Key="PageBackground" Color="WhiteSmoke"/>
+            <!--设置ListViewItem背景色-->
+            <SolidColorBrush x:Key="SearchListViewItemBackground" Color="White"/>
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
@@ -738,6 +740,8 @@
             <SolidColorBrush x:Key="PhoneForegroundBrush" Color="White"/>
             <!--页面背景色-->
             <SolidColorBrush x:Key="PageBackground" Color="#FF4F4F4F"/>
+            <!--设置ListViewItem背景色-->
+            <SolidColorBrush x:Key="SearchListViewItemBackground" Color="Gray"/>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
     

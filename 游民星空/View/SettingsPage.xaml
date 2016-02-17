@@ -35,7 +35,7 @@
                 <ListView.Items>
                     <ListViewItem Margin="0,16,0,0">
                         <Grid>
-                            <TextBlock Text="字体大小"/>
+                            <TextBlock Text="字体大小" />
                         </Grid>
                     </ListViewItem>
 
@@ -74,7 +74,7 @@
                         <Setter Property="VerticalAlignment" Value="Center"/>
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Background" Value="{ThemeResource SearchListViewItemBackground}"/>
                         <Setter Property="BorderBrush" Value="LightGray"/>
                         <Setter Property="BorderThickness" Value="{StaticResource ListViewBorderThickness}"/>
                     </Style>

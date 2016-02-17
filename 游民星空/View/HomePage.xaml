@@ -209,8 +209,8 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>   
-                            
+                                </Grid.ColumnDefinitions>
+
                                 <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
                                     <BitmapIcon UriSource="ms-appx:///Assets/Split_Night.png" Height="24"/>
                                     <TextBlock Text="夜间模式" VerticalAlignment="Center" Margin="{StaticResource TextBlockMargin}"/>
@@ -220,7 +220,7 @@
                             </Grid>
                         </ListViewItem>
 
-                            <ListViewItem>
+                        <ListViewItem>
                                 <StackPanel Orientation="Horizontal">
                                     <BitmapIcon UriSource="ms-appx:///Assets/Split_Picmode.png" Height="24"/>
                                     <TextBlock Text="2G/3G无图" Margin="{StaticResource TextBlockMargin}"/>

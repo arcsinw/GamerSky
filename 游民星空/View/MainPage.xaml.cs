@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -50,6 +51,8 @@ namespace 游民星空.View
             }
         }
 
+        //private DispatcherTimer dt;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -58,6 +61,8 @@ namespace 游民星空.View
         
             DispatcherManager.Current.Dispatcher = Dispatcher;
             pageIndexDic = new Dictionary<int, int>();
+
+            //dt = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1000) };
         }
         /// <summary>
         /// 当前频道Id
@@ -106,6 +111,14 @@ namespace 游民星空.View
                 pageIndex = 1;
                 await MVM.LoadMoreEssay(currentChannelId, pageIndex++);
                 pageIndexDic[currentChannelId] = pageIndex;
+
+                //popup
+                //channelTextBlock.Text = MVM.EssaysAndChannels[index].Channel.nodeName.Trim();
+                //popup.IsOpen = true;
+                //两秒后关闭
+                //dt.Start();
+                //dt.Tick += Dt_Tick;
+                
             }
             else  //频道已加载
             {
@@ -115,6 +128,11 @@ namespace 游民星空.View
             progressRing.IsActive = false;
         }
 
+        //private void Dt_Tick(object sender, object e)
+        //{
+        //    popup.IsOpen = false;
+        //    dt.Stop();
+        //}
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {

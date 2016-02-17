@@ -105,7 +105,7 @@
             </Pivot.HeaderTemplate>
             <Pivot.ItemTemplate>
                 <DataTemplate>
-                    <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >
+                    <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >-->
                     <ListView x:Name="essayListView" 
                                  ItemsSource="{Binding Essays}"
                                  ShowsScrollingPlaceholders="True"
@@ -161,7 +161,7 @@
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
-                    </pr:PullToRefreshBox>
+                    <!--</pr:PullToRefreshBox>-->
                 </DataTemplate>
             </Pivot.ItemTemplate>
             <Pivot.ItemContainerStyle>
@@ -173,13 +173,6 @@
                 </Style>
             </Pivot.ItemContainerStyle>
 
-            <!--<Pivot.LeftHeader>
-                <Button >
-                    <Button.Content>
-                        <FontIcon x:Name="Hamburger" FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" Margin="0,10,0,0"/>
-                    </Button.Content>
-                </Button>
-            </Pivot.LeftHeader>-->
         </Pivot>
 
         <Grid>
@@ -187,6 +180,26 @@
                           Height="60" Width="60" Background="Transparent"/>
         </Grid>
 
-       
+        <!--<Popup Width="Auto" 
+               IsLightDismissEnabled="True" x:Name="popup">
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <EdgeUIThemeTransition Edge="Left"/>
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Popup.Child>
+                <Grid Margin="0,56,0,0" HorizontalAlignment="Right" Padding="8"
+                      Background="{ThemeResource ThemeColorBrush}" 
+                      Height="Auto" Width="Auto">
+                    <TextBlock>
+                        <Run x:Name="channelTextBlock"/>
+                        <Run Text="已加载"/>
+                    </TextBlock>
+                </Grid>
+            </Popup.Child>
+        </Popup>-->
+        
     </Grid>
+
+    
 </Page>
