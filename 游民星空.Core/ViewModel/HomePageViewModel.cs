@@ -13,30 +13,13 @@ namespace 游民星空.Core.ViewModel
     {
         public HomePageViewModel()
         {
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+            //AppTheme = DataShareManager.Current.AppTheme;
+            //DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
 
         }
 
 
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
-
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
+    
 
         /// <summary>
         /// 清空缓存
@@ -68,26 +51,6 @@ namespace 游民星空.Core.ViewModel
             CacheSize = (size / 1024 / 1024).ToString("f2") + " MB";
         }
 
-        /// <summary>
-        /// 更改日/夜间模式
-        /// </summary>
-        public void ChangeDisplayMode(bool isNight)
-        {
-            DataShareManager.Current.UpdateAPPTheme(isNight);
-        }
-
-        private bool isNight;
-        public bool IsNight
-        {
-            get
-            {
-                return isNight;
-            }
-            set
-            {
-                isNight = value;
-                ChangeDisplayMode(isNight);
-            }
-        }
+        
     }
 }

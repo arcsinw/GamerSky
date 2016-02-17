@@ -23,7 +23,15 @@ namespace 游民星空.Helper
             statusBar.BackgroundOpacity = 1;
             statusBar.BackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
             await statusBar.ShowAsync();
-            
+        }
+
+        public static async void SetStatusBarColor(Color color)
+        {
+            var statusBar = StatusBar.GetForCurrentView();
+            statusBar.ForegroundColor = Colors.White;
+            statusBar.BackgroundOpacity = 1;
+            statusBar.BackgroundColor = color;
+            await statusBar.ShowAsync();
         }
 
         /// <summary>

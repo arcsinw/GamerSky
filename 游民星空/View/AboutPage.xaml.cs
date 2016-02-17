@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
+using 游民星空.Core.ViewModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -25,7 +26,7 @@ namespace 游民星空.View
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class AboutPage : Page
+    public sealed partial class AboutPage : Page , INotifyPropertyChanged
     {
         public AboutPage()
         {
@@ -33,6 +34,28 @@ namespace 游民星空.View
 
             NavigationCacheMode = NavigationCacheMode.Required;
             UpdateData();
+
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+        }
+
+        private void Current_ShareDataChanged()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+        }
+
+        private ElementTheme appTheme;
+        public ElementTheme AppTheme
+        {
+            get
+            {
+                return appTheme;
+            }
+            set
+            {
+                appTheme = value;
+                OnPropertyChanged();
+            }
         }
 
         public void UpdateData()

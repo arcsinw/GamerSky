@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,7 +26,7 @@ namespace 游民星空.View
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class HomePage : Page
+    public sealed partial class HomePage : Page , INotifyPropertyChanged
     {
         private HomePageViewModel ViewModel { get; set; }
         public HomePage()
@@ -42,7 +43,12 @@ namespace 游民星空.View
             {
                 UIHelper.ShowView();
             }
+
             ViewModel = new HomePageViewModel();
+
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+
 
             rootFrame.SourcePageType = typeof(MainPage);
             newsRadioButton.IsChecked = true;
@@ -101,7 +107,7 @@ namespace 游民星空.View
             splitView.IsSwipeablePaneOpen = false;
         }
 
-        
+
         ///// <summary>
         ///// 获取缓存大小
         ///// </summary>
@@ -114,9 +120,72 @@ namespace 游民星空.View
         /// <summary>
         /// 更改日/夜间模式
         /// </summary>
-        public void ChangeDisplayModel()
+        public void ChangeDisplayMode(bool isNight)
         {
-            //(Application.Current).RequestedTheme =  ApplicationTheme.Dark;
+            DataShareManager.Current.UpdateAPPTheme(isNight);
+        }
+
+        private void Current_ShareDataChanged()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+        }
+
+        private ElementTheme appTheme;
+        public ElementTheme AppTheme
+        {
+            get
+            {
+                if(appTheme.Equals(ElementTheme.Dark))
+                {
+                    UIHelper.SetStatusBarColor(Colors.Gray);
+                }
+                else
+                {
+                    UIHelper.ShowStatusBar();
+                }
+                return appTheme;
+            }
+            set
+            {
+                appTheme = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool isNight;
+
+        #region INotifyPropertyChanged member
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName]string propertyName="")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        /// <summary>
+        /// 是否夜间模式
+        /// </summary>
+        public bool IsNight
+        {
+            get
+            {
+                return isNight;
+            }
+            set
+            {
+                isNight = value;
+                if (isNight) //夜间模式时更改StatusBar颜色
+                {
+                    UIHelper.SetStatusBarColor(Colors.Gray);
+                }
+                else
+                {
+                    UIHelper.ShowStatusBar();
+                }
+                ChangeDisplayMode(isNight);
+                OnPropertyChanged();
+            }
         }
 
         /// <summary>

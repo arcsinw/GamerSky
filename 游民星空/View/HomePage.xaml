@@ -7,7 +7,7 @@
     xmlns:controls="using:游民星空.Controls"
     xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    RequestedTheme="{x:Bind ViewModel.AppTheme,Mode=TwoWay}"
+    RequestedTheme="{x:Bind AppTheme,Mode=OneWay}"
     mc:Ignorable="d">
 
     
@@ -138,7 +138,7 @@
                 <SplitView.Pane>
                 <ListView ScrollViewer.VerticalScrollMode="Disabled" 
                           GotFocus="{x:Bind ViewModel.GetCacheSize}" 
-                              SelectionMode="None" Background="{ThemeResource PageBackground}"
+                          SelectionMode="None" Background="{ThemeResource PageBackground}"
                          >
                     <ListView.Resources>
                             <Thickness x:Key="TextBlockMargin">8,0</Thickness>
@@ -216,7 +216,7 @@
                                     <TextBlock Text="夜间模式" VerticalAlignment="Center" Margin="{StaticResource TextBlockMargin}"/>
                                 </StackPanel>
 
-                                <ToggleSwitch IsOn="{x:Bind ViewModel.IsNight,Mode=TwoWay}"  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
+                                <ToggleSwitch IsOn="{x:Bind IsNight,Mode=TwoWay}"  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
                             </Grid>
                         </ListViewItem>
 

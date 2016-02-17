@@ -728,6 +728,7 @@
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
+            <!--主题色-->
             <Color x:Key="ThemeColor">Gray</Color>
             <SolidColorBrush x:Key="ThemeColorBrush" Color="Gray"/>
             <!--PivotHeader 背景色-->
@@ -737,7 +738,7 @@
             <!--PivotHeader 未选中的颜色 灰色-->
             <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="#CCCCCC" />
             <!--文字颜色-->
-            <SolidColorBrush x:Key="PhoneForegroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="PhoneForegroundBrush" Color="LightGray"/>
             <!--页面背景色-->
             <SolidColorBrush x:Key="PageBackground" Color="#FF4F4F4F"/>
             <!--设置ListViewItem背景色-->
