@@ -7,7 +7,9 @@ using Windows.ApplicationModel.Core;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using 游民星空.Core.Helper;
 
 namespace 游民星空.Helper
@@ -47,13 +49,21 @@ namespace 游民星空.Helper
         public static  void ShowView()
         {
             ApplicationView applicationView = ApplicationView.GetForCurrentView();
-            applicationView.SetPreferredMinSize(new Windows.Foundation.Size(800, 480));
+            applicationView.SetPreferredMinSize(new Windows.Foundation.Size(320, 480));
             applicationView.ShowStandardSystemOverlays();
             //应用标题栏
             ApplicationViewTitleBar titleBar = applicationView.TitleBar;
             titleBar.BackgroundColor = App.Current.Resources["ThemeColorBrush"] as Color?;
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
            
+        }
+
+        public static async void ShowMessage(string content, string title="")
+        {
+            await Window.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+            {
+                await new MessageDialog(content, title).ShowAsync();
+            });
         }
     }
 }

@@ -123,17 +123,19 @@ namespace 游民星空
             }
 
             //注册动态磁贴任务
-            RegisterLiveTileTask();
+            LiveTileHelper.RegisterLiveTileTask();
+            //RegisterLiveTileTask();
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
         }
+
 
         /// <summary>
         /// handle hardware back button press 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void OnBackPressed(object sender, BackPressedEventArgs e)
+        private void OnBackPressed(object sender, BackPressedEventArgs e)
         {
             var frame = (Frame)Window.Current.Content;
             if (frame.CanGoBack) {
@@ -147,7 +149,7 @@ namespace 游民星空
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void OnBackRequested(object sender, BackRequestedEventArgs e)
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
             var frame = (Frame)Window.Current.Content;
             if (frame.CanGoBack) {
@@ -156,7 +158,7 @@ namespace 游民星空
             }
         }
 
-        void OnNavigated(object sender, NavigationEventArgs e)
+        private void OnNavigated(object sender, NavigationEventArgs e)
         {
             UpdateBackButtonVisibility();
         }
@@ -166,7 +168,7 @@ namespace 游民星空
         /// </summary>
         /// <param name="sender">The Frame which failed navigation</param>
         /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
@@ -214,36 +216,36 @@ namespace 游民星空
         /// <summary>
         /// 注册后台任务
         /// </summary>
-        public static async void RegisterLiveTileTask()
-        {
-            var status = await BackgroundExecutionManager.RequestAccessAsync();
-            if (status == BackgroundAccessStatus.Unspecified || status == BackgroundAccessStatus.Denied)
-            {
-                return;
-            }
-            //如果已经注册则先取消注册
-            foreach (var t in BackgroundTaskRegistration.AllTasks)
-            {
-                if (t.Value.Name == TILE_TASK_NAME)
-                {
-                    t.Value.Unregister(true);
-                }
-            }
+        //public static async void RegisterLiveTileTask()
+        //{
+        //    var status = await BackgroundExecutionManager.RequestAccessAsync();
+        //    if (status == BackgroundAccessStatus.Unspecified || status == BackgroundAccessStatus.Denied)
+        //    {
+        //        return;
+        //    }
+        //    //如果已经注册则先取消注册
+        //    foreach (var t in BackgroundTaskRegistration.AllTasks)
+        //    {
+        //        if (t.Value.Name == TILE_TASK_NAME)
+        //        {
+        //            t.Value.Unregister(true);
+        //        }
+        //    }
 
-            var taskBuilder = new BackgroundTaskBuilder { Name = TILE_TASK_NAME, TaskEntryPoint = typeof(LiveTileTask).FullName };
-            taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+        //    var taskBuilder = new BackgroundTaskBuilder { Name = TILE_TASK_NAME, TaskEntryPoint = typeof(LiveTileTask).FullName };
+        //    taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
 
-            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
-            updater.Clear();
+        //    var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+        //    updater.Clear();
 
-            //var secondUpdater = TileUpdateManager.CreateTileUpdaterForSecondaryTile();
-            //secondUpdater.Clear();
+        //    //var secondUpdater = TileUpdateManager.CreateTileUpdaterForSecondaryTile();
+        //    //secondUpdater.Clear();
 
-            taskBuilder.SetTrigger(new TimeTrigger(30, false));
-            taskBuilder.Register();
+        //    taskBuilder.SetTrigger(new TimeTrigger(30, false));
+        //    taskBuilder.Register();
 
-            //更新动态磁贴
-            //await LiveTileHelper.UpdatePrimaryTile();
-        }
+        //    //更新动态磁贴
+        //    //await LiveTileHelper.UpdatePrimaryTile();
+        //}
     }
 }

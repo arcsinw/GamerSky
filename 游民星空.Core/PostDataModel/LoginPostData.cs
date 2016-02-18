@@ -11,6 +11,10 @@ namespace 游民星空.Core.PostDataModel
     /// </summary>
     public class LoginPostData : PostDataBase
     {
+        public LoginPostDataRequest request;
+    }
+    public class LoginPostDataRequest
+    {
         public string passWord;
         public string userName;
     }

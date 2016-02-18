@@ -123,6 +123,10 @@ namespace 游民星空.Core.Helper
             }
         }
 
+        /// <summary>
+        /// 删除缓存文件
+        /// </summary>
+        /// <returns></returns>
         public async Task DeleteCacheFile()
         {
             try
@@ -151,6 +155,10 @@ namespace 游民星空.Core.Helper
             }
         }
 
+        /// <summary>
+        /// 获取缓存文件大小
+        /// </summary>
+        /// <returns></returns>
         public async Task<double> GetCacheSize()
         {
             try
@@ -173,6 +181,11 @@ namespace 游民星空.Core.Helper
             }
         }
 
+        /// <summary>
+        /// 缓存是否存在
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         public async Task<bool> IsCacheExist(string filename)
         {
             try

@@ -39,7 +39,7 @@ namespace 游民星空.Core.Helper
             
             var taskBuilder = new BackgroundTaskBuilder { Name = TILE_TASK_NAME, TaskEntryPoint = ENTRY_NAME };
             taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
-            taskBuilder.SetTrigger(new TimeTrigger(60, false));
+            taskBuilder.SetTrigger(new TimeTrigger(30, false));
             taskBuilder.Register();
 
         }

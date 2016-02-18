@@ -101,5 +101,7 @@ namespace 游民星空.Core.Helper
                 return softwareBitmap;
             }
         }
+
+
     }
 }

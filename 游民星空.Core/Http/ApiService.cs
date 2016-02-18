@@ -387,15 +387,16 @@ namespace 游民星空.Core.Http
         /// <summary>
         /// 登录
         /// </summary>
-        /// <param name="passWord"></param>
-        /// <param name="userName"></param>
+        /// <param name="passWord">用户名</param>
+        /// <param name="userName">密码</param>
         /// <returns></returns>
-        //public async Task<bool> Login(string passWord, string userName)
-        //{
-        //    LoginPostData postData = new LoginPostData() { passWord = passWord, userName = userName };
-        //    var result = await PostJson<LoginPostData, bool>(ServiceUri.Login, postData);
-
-        //}
+        public async Task<VerificationCode> Login(string passWord, string userName)
+        {
+            LoginPostData postData = new LoginPostData();
+            postData.request = new LoginPostDataRequest { passWord = passWord, userName = userName };
+            var verificationCode = await PostJson<LoginPostData, VerificationCode>(ServiceUri.Login, postData);
+            return verificationCode;
+        }
 
         /// <summary>
         /// 获取要闻
@@ -466,13 +467,13 @@ namespace 游民星空.Core.Http
         /// <param name="email"></param>
         /// <param name="codetype"></param>
         /// <returns></returns>
-        public async Task GetVerificationCode(string phoneNumber,string username,string email,string codetype="1")
+        public async Task<VerificationCode> GetVerificationCode(string phoneNumber,string username,string email,string codetype="1")
         {
             VerificationCodePostData postData = new VerificationCodePostData();
             postData.request = new VerificationCodeRequest() { codetype = codetype, email = email, phoneNumber = phoneNumber, username = username };
 
             VerificationCode verificationCode = await PostJson<VerificationCodePostData, VerificationCode>(ServiceUri.GetVerificationCode, postData);
-
+            return verificationCode;
         }
 
         /// <summary>
@@ -486,7 +487,7 @@ namespace 游民星空.Core.Http
         /// <param name="phoneNumber">手机号</param>
         /// <param name="phoneVerificationCode">手机验证码</param>
         /// <returns></returns>
-        public async Task RegisterByEmail(string answer,string password,string email,string question,string userName,string phoneNumber="",string phoneVerificationCode="")
+        public async Task<VerificationCode> RegisterByEmail(string answer,string password,string email,string question,string userName,string phoneNumber="",string phoneVerificationCode="")
         {
             EmailRegisterPostData postData = new EmailRegisterPostData();
             postData.request = new EmailRegisterRequest()
@@ -502,6 +503,7 @@ namespace 游民星空.Core.Http
             };
             VerificationCode verificationCode = await PostJson<EmailRegisterPostData, VerificationCode>(ServiceUri.RegisterByEmail, postData);
 
+            return verificationCode;
         }
 
         /// <summary>

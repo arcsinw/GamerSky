@@ -12,6 +12,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Http;
+using 游民星空.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -22,9 +24,13 @@ namespace 游民星空.View
     /// </summary>
     public sealed partial class RegisterPage : Page
     {
+
+        private ApiService apiService;
         public RegisterPage()
         {
             this.InitializeComponent();
+
+            apiService = new ApiService();
         }
 
         private void OtherRegister()
@@ -48,10 +54,16 @@ namespace 游民星空.View
         /// <summary>
         /// 获取验证码
         /// </summary>
-        private void GetVerificationCode()
+        private async void GetVerificationCode()
         {
             string phoneNumber = phoneNumberTextBlock.Text;
-            
+            string userName = userNameTextBlock.Text;
+
+            var verificationCode = await apiService.GetVerificationCode(phoneNumber, userName, "", "");  
+            if(verificationCode!= null)
+            {
+                UIHelper.ShowMessage(verificationCode.errorMessage);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
@@ -42,9 +43,26 @@ namespace 游民星空.Core.ViewModel
         }
 
         private ApiService apiService;
-        public void Login()
+        public async void Login()
         {
-            //apiService.
+            VerificationCode code = await apiService.Login(UserLoginInfo.UserPassword, UserLoginInfo.UserName);
+            if (code != null)
+            {
+                if (code.errorCode.Equals("0")) //成功
+                {
+                    await Window.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+                     {
+                         await new MessageDialog(code.errorMessage).ShowAsync();
+                     });
+                }
+                else
+                {
+                    await Window.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+                    {
+                        await new MessageDialog(code.errorMessage).ShowAsync();
+                    });
+                }
+            }
         }
     }
 }

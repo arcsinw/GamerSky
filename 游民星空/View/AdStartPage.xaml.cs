@@ -8,6 +8,11 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Provider;
+using Windows.Storage.Streams;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -16,8 +21,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
+using 游民星空.Core.ViewModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -36,6 +43,28 @@ namespace 游民星空.View
 
             AdStarts = new ObservableCollection<AdStart>();
             LoadData();
+
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+        }
+
+        private void Current_ShareDataChanged()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+        }
+
+        private ElementTheme appTheme;
+        public ElementTheme AppTheme
+        {
+            get
+            {
+                return appTheme;
+            }
+            set
+            {
+                appTheme = value;
+                OnPropertyChanged();
+            }
         }
 
         private ApiService apiService;
@@ -81,18 +110,50 @@ namespace 游民星空.View
         private void Image_Holding(object sender, HoldingRoutedEventArgs e)
         {
             FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
-            //var bitmap = e.OriginalSource as BitmapImage;
         }
 
-        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {
             MenuFlyoutItem item = sender as MenuFlyoutItem;
 
             if (item != null)
             {
-                Image img = item.DataContext as Image;
+                AdStart adStart = item.DataContext as AdStart;
 
-               
+                
+
+                FileSavePicker savePicker = new FileSavePicker();
+                savePicker.SuggestedFileName = "游民壁纸_" + DateTime.Now.Month+DateTime.Now.Day;
+                savePicker.DefaultFileExtension = ".jpg";
+                savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
+                savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+                savePicker.ContinuationData["Op"] = "ImgSave";
+                 
+             
+                StorageFile file = await savePicker.PickSaveFileAsync();
+                if(file!= null)
+                {
+                    
+                    CachedFileManager.DeferUpdates(file);
+
+                    try
+                    {
+                        using (Stream stream = await file.OpenStreamForWriteAsync())
+                        {
+                            IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes(adStart.picAdress);
+                            stream.Write(buffer.ToArray(), 0, (int)buffer.Length);
+                            await stream.FlushAsync();
+                        }
+                        FileUpdateStatus updateStatus = await CachedFileManager.CompleteUpdatesAsync(file);
+                        if (updateStatus == FileUpdateStatus.Complete)
+                        {
+                            await new MessageDialog("图片已保存").ShowAsync();
+                        }
+                    }catch(Exception ex)
+                    {
+
+                    }
+                }
             }
         }
     }

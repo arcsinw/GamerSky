@@ -83,7 +83,7 @@
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView ItemsSource="{Binding SubscribeContens}"
                  SelectionMode="None"
-                          x:Name="listView"
+                  x:Name="listView"
                   Loaded="ListView_Loaded"
                   ShowsScrollingPlaceholders="True"
                   IsItemClickEnabled="True"

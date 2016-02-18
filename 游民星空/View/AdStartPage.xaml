@@ -7,7 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+    RequestedTheme="{Binding AppTheme}">
 
  
     
@@ -37,7 +38,7 @@
         </FlipView>
         <Image Source="ms-appx:///Assets/Launch_title.png" 
                HorizontalAlignment="Center"
-               Margin="36,0" Grid.Row="1"
+               Margin="36,8" Grid.Row="1"
                VerticalAlignment="Bottom"/>
     </Grid>
 </Page>
