@@ -713,6 +713,8 @@
             <Color x:Key="ThemeColor">#C93D32</Color>
             <!--主题色Brush-->
             <SolidColorBrush x:Key="ThemeColorBrush" Color="#C93D32"/>
+            <!--HomePage 底栏背景色-->
+            <SolidColorBrush x:Key="BottomBarBackground" Color="LightGray" />
             <!--PivotHeader 背景色-->
             <SolidColorBrush x:Key="PivotHeaderColorBrush">#C93D32</SolidColorBrush>
             <!--PivotHeader 选中的颜色 黑色-->
@@ -731,6 +733,8 @@
             <!--主题色-->
             <Color x:Key="ThemeColor">Gray</Color>
             <SolidColorBrush x:Key="ThemeColorBrush" Color="Gray"/>
+            <!--HomePage 底栏背景色-->
+            <SolidColorBrush x:Key="BottomBarBackground" Color="#FF1B1B1C" />
             <!--PivotHeader 背景色-->
             <SolidColorBrush x:Key="PivotHeaderColorBrush" Color="Gray"></SolidColorBrush>
             <!--PivotHeader 选中的颜色 白色-->

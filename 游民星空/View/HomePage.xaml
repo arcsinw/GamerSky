@@ -198,10 +198,9 @@
                                         <BitmapIcon UriSource="ms-appx:///Assets/Split_Cache.png" Height="24"/>
                                         <TextBlock Text="清空缓存" Margin="{StaticResource TextBlockMargin}"/>
                                     </StackPanel>
-                                    <TextBlock  Grid.Column="1" HorizontalAlignment="Right">
-                                    <Run Text="{x:Bind ViewModel.CacheSize,Mode=OneWay}"/>
-                                    </TextBlock>
-                                </Grid>
+                                <TextBlock  Grid.Column="1" Text="{x:Bind ViewModel.CacheSize,Mode=OneWay,TargetNullValue='计算中'}" 
+                                            HorizontalAlignment="Right"/>
+                            </Grid>
                             </ListViewItem>
 
                         <ListViewItem  HorizontalContentAlignment="Stretch">
@@ -249,8 +248,7 @@
                         <Frame x:Name="rootFrame">
                         </Frame>
                         <!--下方模块选择栏-->
-                        <Grid VerticalAlignment="Bottom" Height="50" 
-                        Background="LightGray" >
+                    <Grid VerticalAlignment="Bottom" Height="50" Background="{ThemeResource BottomBarBackground}" >
                             <Grid.Resources>
                                 <Style TargetType="FontIcon">
                                     <Setter Property="FontSize" Value="20"/>

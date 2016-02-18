@@ -90,5 +90,10 @@ namespace 游民星空.Core.Http
         /// 找回密码第一步 输入用户名
         /// </summary>
         public const string FindPassword = "http://appapi2.gamersky.com/v2/TwoGetCodeInformation";
+
+        /// <summary>
+        /// 订阅专题
+        /// </summary>
+        public const string SubscribeTopic = "http://appapi2.gamersky.com/v2/AllChannelList";
     }
 }

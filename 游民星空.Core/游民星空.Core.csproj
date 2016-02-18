@@ -149,6 +149,7 @@
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\PivotData.cs" />
     <Compile Include="Model\RelatedReadings.cs" />
+    <Compile Include="PostDataModel\SubscribeTopicPostData.cs" />
     <Compile Include="ResultDataModel\AdStartResult.cs" />
     <Compile Include="ResultDataModel\ChannelResult.cs" />
     <Compile Include="ResultDataModel\EssayResult.cs" />

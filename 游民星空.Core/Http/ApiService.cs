@@ -517,5 +517,45 @@ namespace 游民星空.Core.Http
             FindPasswordByName result = await PostJson<FindPasswordByNamePostData, FindPasswordByName>(ServiceUri.FindPassword,postData);
             
         }
+
+        /// <summary>
+        /// 获取订阅专题的内容
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Essay>> GetSubscribeTopic(string nodeIds,int pageIndex)
+        {
+            string filename = "subscribeTopic_" + nodeIds + "_"+pageIndex+ ".json";
+            List<Essay> essays;
+            if (NetworkManager.Current.Network == 4)
+            {
+                essays = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
+            }
+            else
+            {
+                SubscribeTopicPostData postData = new SubscribeTopicPostData();
+                postData.request = new SubscribeTopicRequest
+                {
+                    elementsCountPerPage = "20",
+                    lastUpdateTime = Functions.getUnixTimeStamp().ToString(),
+                    nodeIds = nodeIds,
+                    pageIndex = pageIndex,
+                    parentNodeId = "dingyue",
+                    type = "dingyueTopic"
+                };
+                EssayResult essayResult = await PostJson<SubscribeTopicPostData, EssayResult>(ServiceUri.Subscribe, postData);
+                if (essayResult != null)
+                {
+                    essays = new List<Essay>();
+                    foreach (var item in essayResult.result)
+                    {
+                        essays.Add(item);
+                    }
+                }
+                await FileHelper.Current.WriteObjectAsync<List<Essay>>(essays, filename);
+            }
+            return essays;
+        }
+
+
     }
 }
