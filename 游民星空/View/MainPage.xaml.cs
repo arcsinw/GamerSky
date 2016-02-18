@@ -157,7 +157,20 @@ namespace 游民星空.View
         {
             if (scrollViewer != null)
             {
-                
+                if (scrollViewer.VerticalOffset < DeviceInformationHelper.GetScreenHeight())
+                {
+                    if (topPop.IsOpen)
+                    {
+                        topPop.IsOpen = false;
+                    }
+                }
+                else if (scrollViewer.VerticalOffset > DeviceInformationHelper.GetScreenHeight())
+                {
+                    if (!topPop.IsOpen)
+                    {
+                        topPop.IsOpen = true;
+                    }
+                }
                 if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
                 {
                     if (!IsDataLoading)  //未加载数据
@@ -186,6 +199,24 @@ namespace 游民星空.View
         private void essayListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
         {
 
+        }
+
+        /// <summary>
+        /// scoll to top
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            ListView listView = Functions.FindChildOfType<ListView>(currentItem);
+            listView.ScrollIntoViewSmoothly(listView.Items[0]);
+        }
+        PivotItem currentItem = null;
+
+        private void essayPivot_PivotItemLoaded(Pivot sender, PivotItemEventArgs args)
+        {
+            currentItem = args.Item;
         }
     }
 }

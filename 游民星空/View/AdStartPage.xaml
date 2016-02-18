@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="游民星空.View.AdStartPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:游民星空.View"
+    xmlns:model="using:游民星空.Core.Model"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
+ 
+    
+    <Page.Resources>
+        <MenuFlyout x:Key="ImageMenuFlyout" Placement="Bottom" >
+            <MenuFlyoutItem Text="保存图片" Click="MenuFlyoutItem_Click" DataContext="{Binding }"/>
+        </MenuFlyout>
+    </Page.Resources>
+    <Grid Background="{ThemeResource PageBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <FlipView ItemsSource="{Binding AdStarts}" Grid.Row="0" VerticalAlignment="Top">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Image Holding="Image_Holding" 
+                           
+                           FlyoutBase.AttachedFlyout="{StaticResource ImageMenuFlyout}">
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding picAdress}"/>
+                        </Image.Source>
+                    </Image>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+
+        </FlipView>
+        <Image Source="ms-appx:///Assets/Launch_title.png" 
+               HorizontalAlignment="Center"
+               Margin="36,0" Grid.Row="1"
+               VerticalAlignment="Bottom"/>
+    </Grid>
+</Page>

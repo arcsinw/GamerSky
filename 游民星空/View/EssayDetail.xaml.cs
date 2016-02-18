@@ -60,11 +60,16 @@ namespace 游民星空.View
         {
             progress.IsActive = true;
             essayResult = e.Parameter as Essay;
-           if(essayResult!= null)
+            if (essayResult == null) return;
+           if(!essayResult.contentId.Equals("0"))
             {
                 this.DataContext = viewModel = new EssayDetailViewModel(essayResult);
+                await viewModel.GenerateHtmlString();
             }
-            await viewModel.GenerateHtmlString();
+            else
+            {
+                webView.Navigate(new Uri(essayResult.contentURL));
+            }
             progress.IsActive = false;
         }
         Essay essayResult;

@@ -8,6 +8,7 @@ using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
+using 游民星空.Core.Helper;
 
 namespace 游民星空.Helper
 {
@@ -18,20 +19,26 @@ namespace 游民星空.Helper
         /// </summary>
         public static async void ShowStatusBar()
         {
-            var statusBar = StatusBar.GetForCurrentView();
-            statusBar.ForegroundColor = Colors.White;
-            statusBar.BackgroundOpacity = 1;
-            statusBar.BackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
-            await statusBar.ShowAsync();
+            if (Functions.IsMobile())
+            {
+                var statusBar = StatusBar.GetForCurrentView();
+                statusBar.ForegroundColor = Colors.White;
+                statusBar.BackgroundOpacity = 1;
+                statusBar.BackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
+                await statusBar.ShowAsync();
+            }
         }
 
         public static async void SetStatusBarColor(Color color)
         {
-            var statusBar = StatusBar.GetForCurrentView();
-            statusBar.ForegroundColor = Colors.White;
-            statusBar.BackgroundOpacity = 1;
-            statusBar.BackgroundColor = color;
-            await statusBar.ShowAsync();
+            if (Functions.IsMobile())
+            {
+                var statusBar = StatusBar.GetForCurrentView();
+                statusBar.ForegroundColor = Colors.White;
+                statusBar.BackgroundOpacity = 1;
+                statusBar.BackgroundColor = color;
+                await statusBar.ShowAsync();
+            }
         }
 
         /// <summary>
@@ -40,12 +47,13 @@ namespace 游民星空.Helper
         public static  void ShowView()
         {
             ApplicationView applicationView = ApplicationView.GetForCurrentView();
-
+            applicationView.SetPreferredMinSize(new Windows.Foundation.Size(800, 480));
+            applicationView.ShowStandardSystemOverlays();
             //应用标题栏
             ApplicationViewTitleBar titleBar = applicationView.TitleBar;
             titleBar.BackgroundColor = App.Current.Resources["ThemeColorBrush"] as Color?;
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            
+           
         }
     }
 }

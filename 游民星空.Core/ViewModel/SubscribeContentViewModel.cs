@@ -78,6 +78,9 @@ namespace 游民星空.Core.ViewModel
             apiService = new ApiService();
             SubscribeContens = new ObservableCollection<Essay>();
             HeaderSubscribe = new Essay();
+
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
         public async Task LoadData(Subscribe subscribe, int pageIndex = 1)

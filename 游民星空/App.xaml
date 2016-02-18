@@ -2,7 +2,8 @@
     x:Class="游民星空.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:游民星空">
+    xmlns:local="using:游民星空"
+    >
 
     <Application.Resources>
         <ResourceDictionary>

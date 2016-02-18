@@ -113,6 +113,10 @@ namespace 游民星空.View
             await Launcher.LaunchUriAsync(new Uri(uri));
         }
 
+        public void StartImage()
+        {
+            this.Frame.Navigate(typeof(AdStartPage));
+        }
 
     }
 }

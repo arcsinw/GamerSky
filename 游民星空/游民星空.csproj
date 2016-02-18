@@ -107,10 +107,14 @@
     </Compile>
     <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Converter\CountToVisibilityConverter.cs" />
+    <Compile Include="Converter\IndexToColorConverter.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdStartPage.xaml.cs">
+      <DependentUpon>AdStartPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\AgreementPage.xaml.cs">
       <DependentUpon>AgreementPage.xaml</DependentUpon>
@@ -172,6 +176,7 @@
     <None Include="游民星空_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Launch_title.png" />
     <Content Include="Assets\Login_qq.png" />
     <Content Include="Assets\Login_qq_night.png" />
     <Content Include="Assets\Login_weibo.png" />
@@ -187,7 +192,6 @@
     <Content Include="Assets\Split_Setting.png" />
     <Content Include="Assets\hot.png" />
     <Content Include="Assets\image_loading.png" />
-    <Content Include="Assets\launcher.png" />
     <Content Include="Assets\NewStoreLogo.scale-100.png" />
     <Content Include="Assets\NewStoreLogo.scale-125.png" />
     <Content Include="Assets\NewStoreLogo.scale-150.png" />
@@ -260,6 +264,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="View\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdStartPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

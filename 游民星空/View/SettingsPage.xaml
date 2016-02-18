@@ -54,7 +54,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem Margin="0,16,0,0">
+                    <ListViewItem Margin="0,16,0,0" Tapped="{x:Bind StartImage}">
                         <TextBlock Text="封面故事"/>
                     </ListViewItem>
 

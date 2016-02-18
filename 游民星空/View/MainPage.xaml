@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:hp="using:游民星空.Core.Helper"
+    xmlns:converter="using:游民星空.Converter"
     mc:Ignorable="d"
     RequestedTheme="{Binding Path=MVM.AppTheme}"
     d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True,Type=vm:MainPageViewModel}"
@@ -89,14 +90,15 @@
                 </Grid>
             </Grid>
         </DataTemplate>
-        
 
+        <converter:IndexToColorConverter x:Name="IndexToColorConverter"/>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot x:Name="essayPivot"  DataContext="{Binding Source={StaticResource MVM}}"
                ItemsSource="{Binding EssaysAndChannels}" SelectionChanged="Pivot_SelectionChanged"
                Padding="0" Margin="0" HorizontalContentAlignment="Stretch" 
                Background="{ThemeResource PageBackground}"
+               PivotItemLoaded="essayPivot_PivotItemLoaded"
                Style="{StaticResource EssayPivotStyle}">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
@@ -106,7 +108,7 @@
             <Pivot.ItemTemplate>
                 <DataTemplate>
                     <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >-->
-                    <ListView x:Name="essayListView" 
+                        <ListView x:Name="essayListView" 
                                  ItemsSource="{Binding Essays}"
                                  ShowsScrollingPlaceholders="True"
                                  SelectionMode="None"
@@ -125,8 +127,7 @@
                         <ListView.HeaderTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <FlipView Height="180"  
-                                                  ItemsSource="{Binding HeaderEssays}"
+                                    <FlipView x:Name="headEssay" Height="180" ItemsSource="{Binding HeaderEssays}" 
                                                   Tapped="FlipView_Tapped">
                                         <FlipView.ItemTemplate>
                                             <DataTemplate>
@@ -143,6 +144,43 @@
                                             </DataTemplate>
                                         </FlipView.ItemTemplate>
                                     </FlipView>
+                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                        <RelativePanel Margin="0,0,12,2">
+                                            <RelativePanel.Resources>
+                                                <Style TargetType="Ellipse">
+                                                    <Setter Property="Margin" Value="4"/>
+                                                </Style>
+                                            </RelativePanel.Resources>
+                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                           RelativePanel.AlignHorizontalCenterWithPanel="True"
+                                           Width="6"
+                                           Height="6"
+                                           Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=0}"
+                                           Name="rect11">
+                                            </Ellipse>
+                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                           RelativePanel.RightOf="rect11"
+                                           Width="6"
+                                           Height="6"
+                                           Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=1}"
+                                           Name="rect21">
+                                            </Ellipse>
+                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                           RelativePanel.RightOf="rect21"
+                                           Width="6"
+                                           Height="6"
+                                           Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=2}"
+                                           Name="rect31">
+                                            </Ellipse>
+                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                           RelativePanel.RightOf="rect31"
+                                           Width="6"
+                                           Height="6"
+                                           Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=3}"
+                                           Name="rect41">
+                                            </Ellipse>
+                                        </RelativePanel>
+                                    </Grid>
                                 </Grid>
                             </DataTemplate>
                         </ListView.HeaderTemplate>
@@ -180,6 +218,22 @@
                           Height="60" Width="60" Background="Transparent"/>
         </Grid>
 
+        <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom"
+               Height="48" x:Name="topPop" Width="48" Margin="16,52" >
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <!--<EdgeUIThemeTransition Edge="Bottom"/>-->
+                    <AddDeleteThemeTransition />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Popup.Child>
+                <Button Height="48" Width="48" Background="{ThemeResource ThemeColorBrush}" 
+                        Click="Button_Click" Style="{ThemeResource RoundButtonStyle}">
+                    <SymbolIcon Symbol="Up" Foreground="White" />
+                </Button>
+            </Popup.Child>
+        </Popup>
+        
         <!--<Popup Width="Auto" 
                IsLightDismissEnabled="True" x:Name="popup">
             <Popup.ChildTransitions>

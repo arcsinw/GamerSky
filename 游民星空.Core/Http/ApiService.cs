@@ -133,7 +133,7 @@ namespace 游民星空.Core.Http
 
             }
 
-            return newsResult.result;
+            return newsResult?.result;
         }
 
         /// <summary>
@@ -431,20 +431,31 @@ namespace 游民星空.Core.Http
         /// 获取应用启动图
         /// </summary>
         /// <returns></returns>
-        public async Task<List<AdStart>>GetStartImage()
+        public async Task<List<AdStart>> GetStartImage()
         {
-            AdStartPostData postData = new AdStartPostData();
-            AdStartResult adStart = await PostJson<AdStartPostData, AdStartResult>(ServiceUri.AdStart, postData);
-
-            List<AdStart> adStartResults = new List<AdStart>();
-            if (adStart!=null && adStart.result!=null)            
+            string filename = "adStart" + ".json";
+            List<AdStart> adStarts = new List<AdStart>();
+            if (NetworkManager.Current.Network == 4)
             {
-                foreach (var item in adStart.result)
-                {
-                    adStartResults.Add(item);
-                }
+                adStarts = await FileHelper.Current.ReadObjectAsync<List<AdStart>>(filename);
             }
-            return adStartResults;
+            else
+            {
+                AdStartPostData postData = new AdStartPostData();
+                AdStartResult adStartResult = await PostJson<AdStartPostData, AdStartResult>(ServiceUri.AdStart, postData);
+
+
+                if (adStarts != null && adStartResult.result != null)
+                {
+                    foreach (var item in adStartResult.result)
+                    {
+                        adStarts.Add(item);
+                    }
+                }
+                await FileHelper.Current.WriteObjectAsync<List<AdStart>>(adStarts,filename);
+
+            }
+            return adStarts;
         }
 
         /// <summary>

@@ -43,14 +43,12 @@
                 </Image>
 
                 <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding title}" TextWrapping="Wrap" />
-                        <!--<TextBlock Text="{Binding readingCount}"/>-->
-                        <TextBlock  HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding title}" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <!--<TextBlock Text="{Binding readingCount}"/>-->
+                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom">
                                 <Run Text="{Binding commentsCount}"/>
                                 <Run Text="评论"/>
-                        </TextBlock>
-                    </StackPanel>
+                    </TextBlock>
                 </Grid>
             </Grid>
         </DataTemplate>
@@ -99,7 +97,7 @@
 
                     <ListView.Header>
                         <Grid>
-                            <Image Height="180" Stretch="Fill">
+                            <Image Height="200" Stretch="Fill">
                                 <Image.Source>
                                     <BitmapImage UriSource="{Binding HeaderSubscribe.thumbnailURLs[0]}"/>
                                 </Image.Source>

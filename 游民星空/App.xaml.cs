@@ -30,7 +30,7 @@ namespace 游民星空
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-
+            
             this.UnhandledException += OnUnhandledException;
         }
 
@@ -82,6 +82,7 @@ namespace 游民星空
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
+                this.DebugSettings.IsTextPerformanceVisualizationEnabled = true;
             }
 #endif
 
