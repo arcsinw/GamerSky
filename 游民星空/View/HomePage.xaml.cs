@@ -47,6 +47,14 @@ namespace 游民星空.View
             ViewModel = new HomePageViewModel();
 
             AppTheme = DataShareManager.Current.AppTheme;
+            if(AppTheme == ElementTheme.Light)
+            {
+                isNight = false;
+            }
+            else
+            {
+                isNight = true;
+            }
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
 
 

@@ -16,6 +16,7 @@ namespace 游民星空.Core.ViewModel
             //AppTheme = DataShareManager.Current.AppTheme;
             //DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
 
+            GetCacheSize();
         }
 
 
@@ -32,7 +33,7 @@ namespace 游民星空.Core.ViewModel
             CacheSize = GetFormatSize(cache);
         }
 
-        private string cacheSize = "0";
+        private string cacheSize;
         public string CacheSize
         {
             get

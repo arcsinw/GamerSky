@@ -69,5 +69,10 @@ namespace 游民星空.View
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            (Window.Current.Content as Frame)?.Navigate(typeof(MySubscribePage));
+        }
     }
 }

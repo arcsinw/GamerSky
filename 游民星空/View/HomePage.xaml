@@ -135,73 +135,73 @@
         <!--<RelativePanel>-->
         <controls:SwipeableSplitView x:Name="splitView" Background="{ThemeResource PageBackground}"
             DisplayMode="Overlay" OpenPaneLength="240">
-                <SplitView.Pane>
+            <SplitView.Pane>
                 <ListView ScrollViewer.VerticalScrollMode="Disabled" 
                           GotFocus="{x:Bind ViewModel.GetCacheSize}" 
                           SelectionMode="None" Background="{ThemeResource PageBackground}"
                          >
                     <ListView.Resources>
-                            <Thickness x:Key="TextBlockMargin">8,0</Thickness>
-                        </ListView.Resources>
-                        <ListView.Items>
-                            <ListViewItem HorizontalContentAlignment="Center" Tapped="{x:Bind NavigateToLogin}"
+                        <Thickness x:Key="TextBlockMargin">8,0</Thickness>
+                    </ListView.Resources>
+                    <ListView.Items>
+                        <ListViewItem HorizontalContentAlignment="Center" Tapped="{x:Bind NavigateToLogin}"
                                       Background="{ThemeResource ThemeColorBrush}">
-                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
-                                    <Ellipse Height="90" Width="90" HorizontalAlignment="Center">
-                                        <Ellipse.Fill>
-                                            <ImageBrush>
-                                                <ImageBrush.ImageSource>
-                                                    <BitmapImage UriSource="ms-appx:///Assets/Avatar.png"/>
-                                                </ImageBrush.ImageSource>
-                                            </ImageBrush>
-                                        </Ellipse.Fill>
-                                    </Ellipse>
-                                    <TextBlock Text="立即登录" HorizontalAlignment="Center" Foreground="White"/>
-                                </StackPanel>
-                            </ListViewItem>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
+                                <Ellipse Height="90" Width="90" HorizontalAlignment="Center">
+                                    <Ellipse.Fill>
+                                        <ImageBrush>
+                                            <ImageBrush.ImageSource>
+                                                <BitmapImage UriSource="ms-appx:///Assets/Avatar.png"/>
+                                            </ImageBrush.ImageSource>
+                                        </ImageBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock Text="立即登录" HorizontalAlignment="Center" Foreground="White"/>
+                            </StackPanel>
+                        </ListViewItem>
 
-                            <ListViewItem>
-                                <StackPanel Orientation="Horizontal">
-                                    <BitmapIcon UriSource="ms-appx:///Assets/Split_Collect.png" Height="24"/>
-                                    <TextBlock Text="收藏" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
-                            </ListViewItem>
+                        <ListViewItem>
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Collect.png" Height="24"/>
+                                <TextBlock Text="收藏" Margin="{StaticResource TextBlockMargin}"/>
+                            </StackPanel>
+                        </ListViewItem>
 
-                            <ListViewItem Tapped="{x:Bind NavigateToSearchPage}">
-                                <StackPanel Orientation="Horizontal">
-                                    <BitmapIcon UriSource="ms-appx:///Assets/Split_Search.png" Height="24"/>
-                                    <TextBlock Text="搜索" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
-                            </ListViewItem>
+                        <ListViewItem Tapped="{x:Bind NavigateToSearchPage}">
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Search.png" Height="24"/>
+                                <TextBlock Text="搜索" Margin="{StaticResource TextBlockMargin}"/>
+                            </StackPanel>
+                        </ListViewItem>
 
-                            <ListViewItem Tapped="{x:Bind YaoWen}">
-                                <StackPanel Orientation="Horizontal">
-                                    <BitmapIcon UriSource="ms-appx:///Assets/Split_News.png" Height="24"/>
-                                    <TextBlock Text="要闻" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
-                            </ListViewItem>
+                        <ListViewItem Tapped="{x:Bind YaoWen}">
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_News.png" Height="24"/>
+                                <TextBlock Text="要闻" Margin="{StaticResource TextBlockMargin}"/>
+                            </StackPanel>
+                        </ListViewItem>
 
-                            <!--<ListViewItem>
+                        <!--<ListViewItem>
                             <StackPanel Orientation="Horizontal">
                                 <BitmapIcon UriSource="ms-appx:///Assets/Split_Manage.png" Height="24"/>
                                 <TextBlock Text="游戏管理" Margin="{StaticResource TextBlockMargin}"/>
                             </StackPanel>
                         </ListViewItem>-->
 
-                            <ListViewItem Tapped="{x:Bind ViewModel.ClearCache}">
-                                <Grid HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <BitmapIcon UriSource="ms-appx:///Assets/Split_Cache.png" Height="24"/>
-                                        <TextBlock Text="清空缓存" Margin="{StaticResource TextBlockMargin}"/>
-                                    </StackPanel>
-                                <TextBlock  Grid.Column="1" Text="{x:Bind ViewModel.CacheSize,Mode=OneWay,TargetNullValue='计算中'}" 
+                        <ListViewItem Tapped="{x:Bind ViewModel.ClearCache}">
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Cache.png" Height="24"/>
+                                    <TextBlock Text="清空缓存" Margin="{StaticResource TextBlockMargin}"/>
+                                </StackPanel>
+                                <TextBlock  Grid.Column="1" Text="{x:Bind ViewModel.CacheSize,Mode=OneWay,TargetNullValue=''}" 
                                             HorizontalAlignment="Right"/>
                             </Grid>
-                            </ListViewItem>
+                        </ListViewItem>
 
                         <ListViewItem  HorizontalContentAlignment="Stretch">
                             <Grid HorizontalAlignment="Stretch" >
@@ -211,7 +211,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
-                                    <BitmapIcon UriSource="ms-appx:///Assets/Split_Night.png" Height="24"/>
+                                    <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Night.png" Height="24"/>
                                     <TextBlock Text="夜间模式" VerticalAlignment="Center" Margin="{StaticResource TextBlockMargin}"/>
                                 </StackPanel>
 
@@ -220,30 +220,30 @@
                         </ListViewItem>
 
                         <ListViewItem>
-                                <StackPanel Orientation="Horizontal">
-                                    <BitmapIcon UriSource="ms-appx:///Assets/Split_Picmode.png" Height="24"/>
-                                    <TextBlock Text="2G/3G无图" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
-                            </ListViewItem>
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Picmode.png" Height="24"/>
+                                <TextBlock Text="2G/3G无图" Margin="{StaticResource TextBlockMargin}"/>
+                            </StackPanel>
+                        </ListViewItem>
 
-                            <ListViewItem Tapped="{x:Bind FeedBack}">
-                                <StackPanel Orientation="Horizontal">
-                                    <BitmapIcon UriSource="ms-appx:///Assets/Split_Feedback.png" Height="24"/>
-                                    <TextBlock Text="意见反馈" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
-                            </ListViewItem>
+                        <ListViewItem Tapped="{x:Bind FeedBack}">
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Feedback.png" Height="24"/>
+                                <TextBlock Text="意见反馈" Margin="{StaticResource TextBlockMargin}"/>
+                            </StackPanel>
+                        </ListViewItem>
 
-                            <ListViewItem Tapped="{x:Bind NavigateToSettings}">
-                                <StackPanel Orientation="Horizontal">
-                                    <BitmapIcon UriSource="ms-appx:///Assets/Split_Setting.png" Height="24"/>
-                                    <TextBlock Text="更多设置" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
-                            </ListViewItem>
-                        </ListView.Items>
-                    </ListView>
-                </SplitView.Pane>
+                        <ListViewItem Tapped="{x:Bind NavigateToSettings}">
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Setting.png" Height="24"/>
+                                <TextBlock Text="更多设置" Margin="{StaticResource TextBlockMargin}"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView.Items>
+                </ListView>
+            </SplitView.Pane>
 
-                <SplitView.Content>
+            <SplitView.Content>
                     <Grid>
                         <Frame x:Name="rootFrame">
                         </Frame>

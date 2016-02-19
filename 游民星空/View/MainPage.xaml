@@ -107,7 +107,7 @@
             </Pivot.HeaderTemplate>
             <Pivot.ItemTemplate>
                 <DataTemplate>
-                    <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >-->
+                    <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >
                         <ListView x:Name="essayListView" 
                                  ItemsSource="{Binding Essays}"
                                  ShowsScrollingPlaceholders="True"
@@ -138,14 +138,14 @@
                                                         </Image.Source>
                                                     </Image>
                                                     <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
-                                                        <TextBlock Margin="7,0" Text="{Binding title}" Foreground="White" VerticalAlignment="Bottom"/>
+                                                        <TextBlock Margin="8,0" Text="{Binding title}" Foreground="White" VerticalAlignment="Bottom"/>
                                                     </Border>
                                                 </Grid>
                                             </DataTemplate>
                                         </FlipView.ItemTemplate>
                                     </FlipView>
                                     <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                        <RelativePanel Margin="0,0,12,2">
+                                        <RelativePanel Margin="0,0,8,2">
                                             <RelativePanel.Resources>
                                                 <Style TargetType="Ellipse">
                                                     <Setter Property="Margin" Value="4"/>
@@ -199,7 +199,7 @@
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
-                    <!--</pr:PullToRefreshBox>-->
+                    </pr:PullToRefreshBox>
                 </DataTemplate>
             </Pivot.ItemTemplate>
             <Pivot.ItemContainerStyle>

@@ -110,13 +110,13 @@
                                           ItemsPath="InternalList"
                                           Source="{Binding AllStrategys}"/>
                 </PivotItem.Resources>
-                <StackPanel Margin="16">
+                <StackPanel Margin="4,8">
                     <AutoSuggestBox PlaceholderText="搜索" QueryIcon="Find"/>
-                    <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0">
+                    <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0" Click="Button_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <SymbolIcon Symbol="Add" Margin="0,0,4,0"/>
-                                <TextBlock Text="添加更多订阅"/>
+                                <TextBlock Text="添加更多订阅" />
                             </StackPanel>
                         </Button.Content>
                     </Button>

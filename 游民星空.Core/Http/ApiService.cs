@@ -525,7 +525,7 @@ namespace 游民星空.Core.Http
         public async Task<List<Essay>> GetSubscribeTopic(string nodeIds,int pageIndex)
         {
             string filename = "subscribeTopic_" + nodeIds + "_"+pageIndex+ ".json";
-            List<Essay> essays;
+            List<Essay> essays = new List<Essay>();
             if (NetworkManager.Current.Network == 4)
             {
                 essays = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
