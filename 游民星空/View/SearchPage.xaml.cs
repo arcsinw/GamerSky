@@ -55,6 +55,9 @@ namespace 游民星空.View
         private int pageIndex = 1;
         #endregion 
 
+        /// <summary>
+        /// 搜索
+        /// </summary>
         private async void Search()
         {
             int pivotIndex = pivot.SelectedIndex;
@@ -82,11 +85,7 @@ namespace 游民星空.View
         {
 
         }
-
-        private void strategyListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-          
-        }
+        
 
         private void subscribeListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -95,6 +94,13 @@ namespace 游民星空.View
             {
                 this.Frame.Navigate(typeof(SubscribeContentPage), result);
             }
+        }
+
+        
+
+        private void ItemClick(object sender, ItemClickEventArgs e)
+        {
+            keyTextBox.Text = (string) (e.ClickedItem);
         }
     }
 }

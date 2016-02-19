@@ -5,6 +5,7 @@
     xmlns:local="using:游民星空.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:vm="using:游民星空.Core.ViewModel"
+    xmlns:hp="using:游民星空.Helper"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}">
@@ -314,51 +315,62 @@
 
         <Pivot Grid.Row="1" Background="{ThemeResource PageBackground}" x:Name="pivot">
             <PivotItem Header="新闻">
-                    <!--显示搜索热词-->                
-                    <ListView ItemsSource="{Binding News}" SelectionMode="None" >
-                        <ListView.Header>
-                            热词搜索
-                        </ListView.Header>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding }"  Margin="0"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Margin" Value="0"/>
-                                <Setter Property="Padding" Value="0"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
+                <GridView ItemsSource="{Binding HotNews}" SelectionMode="None" 
+                          IsItemClickEnabled="True"
+                          ItemClick="{x:Bind ItemClick}">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <hp:StringWrapPanel/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Padding="4">
+                                <TextBlock Text="{Binding }" HorizontalAlignment="Center" />
+                            </Border>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                    <GridView.Transitions>
+                        <TransitionCollection>
+                            <AddDeleteThemeTransition/>
+                        </TransitionCollection>
+                    </GridView.Transitions>
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="4"/>
+                            <Setter Property="MinHeight" Value="0"/>
+                        </Style>
+                    </GridView.ItemContainerStyle>
+                </GridView>
             </PivotItem>
             <PivotItem Header="攻略">
-                <ListView x:Name="strategyListView" ItemsSource="{Binding Strategys}" SelectionMode="None"
+                <GridView x:Name="strategyListView" ItemsSource="{Binding HotStrategys}" SelectionMode="None"
                           IsItemClickEnabled="True"
-                          ItemClick="strategyListView_ItemClick">
-                    <ListView.Header>
-                        热词搜索
-                    </ListView.Header>
-                    <ListView.ItemTemplate>
+                          ItemClick="{x:Bind ItemClick}">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <hp:StringWrapPanel/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                    <GridView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding }"/>
+                            <Border BorderThickness="1" BorderBrush="Gray" Padding="4">
+                                <TextBlock Text="{Binding }" HorizontalAlignment="Center"/>
+                            </Border>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
+                    </GridView.ItemTemplate>
+                    <GridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Margin" Value="0,4"/>
-                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin" Value="4"/>
+                            <Setter Property="MinHeight" Value="0"/>
                         </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
-
+                    </GridView.ItemContainerStyle>
+                </GridView>
             </PivotItem>
             <PivotItem Header="订阅">
-                <ListView x:Name="subscribeListView" ItemsSource="{Binding Subscribes}" 
+                <ListView x:Name="subscribeListView" ItemsSource="{Binding HotSubscribes}" 
                           IsItemClickEnabled="True" ItemClick="subscribeListView_ItemClick"
                           SelectionMode="None" Padding="0" Margin="0"
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"

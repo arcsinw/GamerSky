@@ -108,6 +108,7 @@
     <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Converter\CountToVisibilityConverter.cs" />
     <Compile Include="Converter\IndexToColorConverter.cs" />
+    <Compile Include="Helper\StringWrapPanel.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\AboutPage.xaml.cs">

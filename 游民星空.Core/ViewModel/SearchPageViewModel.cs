@@ -18,18 +18,29 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 订阅页面
         /// </summary>
-        public ObservableCollection<Subscribe> Subscribes { get; set; }
+        public ObservableCollection<Subscribe> HotSubscribes { get; set; }
 
         /// <summary>
-        /// 攻略
+        /// 攻略热点词
         /// </summary>
-        public ObservableCollection<string> Strategys { get; set; }
+        public ObservableCollection<string> HotStrategys { get; set; }
 
         /// <summary>
-        /// 新闻
+        /// 新闻热点词
         /// </summary>
-        public ObservableCollection<string> News { get; set; }
+        public ObservableCollection<string> HotNews { get; set; }
 
+        /// <summary>
+        /// 新闻结果页
+        /// </summary>
+        public ObservableCollection<Essay> News { get; set; }
+
+        /// <summary>
+        /// 攻略结果页
+        /// </summary>
+        public ObservableCollection<Essay> Strategys { get; set; }
+
+        #region Properties
         private bool isActive;
         public bool IsActive
         {
@@ -42,13 +53,6 @@ namespace 游民星空.Core.ViewModel
                 isActive = value;
                 OnPropertyChanged("IsActive");
             }
-        }
-
-        private ApiService apiService;
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
         }
 
         private ElementTheme appTheme;
@@ -64,31 +68,23 @@ namespace 游民星空.Core.ViewModel
                 OnPropertyChanged();
             }
         }
+        #endregion
 
-        public RelayCommand SearchCommand { get; set; }
+        private ApiService apiService;
 
+        private void Current_ShareDataChanged()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+        }
+        
         public SearchPageViewModel()
         {
             apiService = new ApiService();
-            Subscribes = new ObservableCollection<Subscribe>();
-            Strategys = new ObservableCollection<string>();
-            News = new ObservableCollection<string>();
+            HotSubscribes = new ObservableCollection<Subscribe>();
+            HotStrategys = new ObservableCollection<string>();
+            HotNews = new ObservableCollection<string>();
 
-            SearchCommand = new RelayCommand(async(parameter) =>
-            {
-                //List<EssayResult> essays = await apiService.SearchByKey((string)parameter,SearchTypeEnum.news,1);
-                //if(essays!= null && essays.Count!=0)
-                //{
-                //    News.Clear();
-                //    foreach (var item in essays)
-                //    {
-                //        News.Add(item);
-                //    }
-                //}
-                await new MessageDialog("还没写，莫慌",(string)parameter).ShowAsync();
-                Debug.WriteLine(parameter);
-            });
-
+            
             LoadData();
 
             AppTheme = DataShareManager.Current.AppTheme;
@@ -103,32 +99,39 @@ namespace 游民星空.Core.ViewModel
             {
                 foreach (var item in strategys)
                 {
-                    Strategys.Add(item.Trim());
+                    HotStrategys.Add(item.Trim());
                 }
             }
 
-            List<string> news = await apiService.GetSearchHotKey(SearchTypeEnum.news.ToString());
-            if (news != null)
+            List<string> hotNews = await apiService.GetSearchHotKey(SearchTypeEnum.news.ToString());
+            if (hotNews != null)
             {
-                foreach (var item in news)
+                foreach (var item in hotNews)
                 {
-                    News.Add(item.Trim());
+                    HotNews.Add(item.Trim());
                 }
             }
 
             List<Subscribe> subscribes = await apiService.GetSubscribeHotKey();
             foreach (var item in subscribes)
             {
-                Subscribes.Add(item);
+                HotSubscribes.Add(item);
             }
 
             IsActive = false;
         }
 
-        public async Task Search(string key,SearchTypeEnum searchType,int pageIndex=1)
+        /// <summary>
+        /// 按关键字搜索
+        /// </summary>
+        /// <param name="key">关键字</param>
+        /// <param name="searchType">搜索类型 新闻或攻略</param>
+        /// <param name="pageIndex">页码</param>
+        /// <returns></returns>
+        public async Task<List<Essay>> Search(string key,SearchTypeEnum searchType,int pageIndex=1)
         {
-            List < Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
-
+            List<Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
+            return essayResults;
         }
     }
 }

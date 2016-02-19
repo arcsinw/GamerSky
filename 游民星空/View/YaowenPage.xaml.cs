@@ -29,7 +29,13 @@ namespace 游民星空.View
             this.InitializeComponent();
 
             NavigationCacheMode = NavigationCacheMode.Required;
+            
         }
+
+        /// <summary>
+        /// 是否已经加载数据
+        /// </summary>
+        private bool isDataLoaded = false;
 
         /// <summary>
         /// 是否正在加载数据
@@ -58,8 +64,11 @@ namespace 游民星空.View
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            await viewModel.LoadData(pageIndex);
-            pageIndex++;
+            if (!isDataLoaded)
+            {
+                await viewModel.LoadData(pageIndex++);
+                isDataLoaded = true;
+            }
         }
 
         private ScrollViewer scrollViewer;

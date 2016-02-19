@@ -1,29 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.Foundation;
+using Windows.UI.Xaml.Data;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
 
 namespace 游民星空.Core.IncrementalLoadingCollection
 {
-    public class EssayIncrementalLoadingCollection : IncrementalLoadingBase<Essay>
+    public class EssayIncrementalLoadingCollection : ObservableCollection<Essay>, ISupportIncrementalLoading
     {
         private ApiService apiService = new ApiService();
 
+        private bool isBusy = false;
         private int pageIndex = 1;
-        protected override bool HasMoreItemsOverride()
+
+
+        private bool hasMoreItems = true;
+        public bool HasMoreItems
         {
-            return true;
+            get
+            {
+                if(isBusy)
+                {
+                    return false;
+                }
+                else
+                {
+                    return hasMoreItems;
+                }
+            }
+            private set
+            {
+                hasMoreItems = value;
+            }
         }
 
-        protected override async Task<IList<Essay>> LoadMoreItemsOverrideAsync(CancellationToken c, uint count)
+        public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
-            int nodeId = 0;
-            List<Essay> essays = await apiService.GetEssayList(nodeId, pageIndex);
-            return essays;
+            throw new NotImplementedException();
         }
     }
 }
