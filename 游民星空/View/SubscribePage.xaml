@@ -105,22 +105,29 @@
                 <!--</pr:PullToRefreshBox>-->
             </PivotItem>
             <PivotItem Header="订阅专题" Padding="0">
-                <PivotItem.Resources>
-                    <CollectionViewSource x:Key="CollectionViewSource" IsSourceGrouped="True" 
-                                          ItemsPath="InternalList"
-                                          Source="{Binding AllStrategys}"/>
-                </PivotItem.Resources>
-                <StackPanel Margin="4,8">
-                    <AutoSuggestBox PlaceholderText="搜索" QueryIcon="Find"/>
-                    <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0" Click="Button_Click">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <SymbolIcon Symbol="Add" Margin="0,0,4,0"/>
-                                <TextBlock Text="添加更多订阅" />
-                            </StackPanel>
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
+                <ListView>
+                    <ListView.Header>
+                        <AutoSuggestBox PlaceholderText="搜索" QueryIcon="Find"/>    
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ListView>
+                                
+                            </ListView>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0" Click="Button_Click">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <SymbolIcon Symbol="Add" Margin="0,0,4,0"/>
+                                    <TextBlock Text="添加更多订阅" />
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                    </ListView.Footer>
+                </ListView>
+            
             </PivotItem>
 
         </Pivot>

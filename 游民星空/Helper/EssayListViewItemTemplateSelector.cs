@@ -7,7 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using 游民星空.Core.Model;
 
-namespace 游民星空.Core.Helper
+namespace 游民星空.Helper
 {
     /// <summary>
     /// 文章列表ListView的ItemTemplate选择器

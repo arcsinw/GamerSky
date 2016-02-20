@@ -17,12 +17,15 @@ namespace 游民星空.Core.PostDataModel
     public class SubscribeContentRequest
     {
         public string parentNodeId { get; set; } = "dingyue";
+        /// <summary>
+        /// dingyueTopic | dingyueList | newsList
+        /// </summary>
         public string type { get; set; } = "dingyueList";
         /// <summary>
         /// 对应订阅栏目中的sourceId
         /// </summary>
         public string nodeIds { get; set; }  
-        public string lastUpdateTime { get; set; }
+        //public string lastUpdateTime { get; set; }
         public string elementsCountPerPage { get; set; } = "20";
         public int pageCount { get; set; }
         public int pageIndex { get; set; }

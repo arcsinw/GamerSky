@@ -208,7 +208,6 @@ namespace 游民星空.View
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             ListView listView = Functions.FindChildOfType<ListView>(currentItem);
             listView.ScrollIntoViewSmoothly(listView.Items[0]);
         }

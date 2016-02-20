@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:游民星空.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:hp="using:游民星空.Core.Helper"
+    xmlns:hp="using:游民星空.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:converter="using:游民星空.Converter"

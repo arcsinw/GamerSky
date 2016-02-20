@@ -9,6 +9,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
+using 游民星空.Core.IncrementalLoadingCollection;
 using 游民星空.Core.Model;
 
 namespace 游民星空.Core.ViewModel
@@ -31,14 +32,20 @@ namespace 游民星空.Core.ViewModel
         public ObservableCollection<string> HotNews { get; set; }
 
         /// <summary>
-        /// 新闻结果页
+        /// 新闻搜索结果
         /// </summary>
         public ObservableCollection<Essay> News { get; set; }
+        //public EssayIncrementalCollection News { get; set; }
 
         /// <summary>
-        /// 攻略结果页
+        /// 攻略搜索结果
         /// </summary>
         public ObservableCollection<Essay> Strategys { get; set; }
+
+        /// <summary>
+        /// 订阅搜索结果
+        /// </summary>
+        public ObservableCollection<Subscribe> Subscribes { get; set; }
 
         #region Properties
         private bool isActive;
@@ -68,6 +75,38 @@ namespace 游民星空.Core.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private Visibility newsGridViewVisibility;
+        /// <summary>
+        /// 新闻GridView's Visibility
+        /// </summary>
+        public Visibility NewsGridViewVisibility
+        {
+            get
+            {
+                return newsGridViewVisibility;
+            }
+            set
+            {
+                newsGridViewVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Visibility strategysGridViewVisibility;
+        public Visibility StrategysGridViewVisibility
+        {
+            get
+            {
+                return strategysGridViewVisibility;
+            }
+            set
+            {
+                strategysGridViewVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         private ApiService apiService;
@@ -76,22 +115,27 @@ namespace 游民星空.Core.ViewModel
         {
             AppTheme = DataShareManager.Current.AppTheme;
         }
-        
         public SearchPageViewModel()
         {
             apiService = new ApiService();
             HotSubscribes = new ObservableCollection<Subscribe>();
             HotStrategys = new ObservableCollection<string>();
             HotNews = new ObservableCollection<string>();
+            News = new ObservableCollection<Essay>();
+            //News = new EssayIncrementalCollection("囧", SearchTypeEnum.news);
+            Strategys = new ObservableCollection<Essay>();
+            Subscribes = new ObservableCollection<Subscribe>();
 
-            
-            LoadData();
+            LoadHotkey();
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
-        public async void LoadData()
+        /// <summary>
+        /// 加载hot keyword
+        /// </summary>
+        public async void LoadHotkey()
         {
             IsActive = true;
             List<string> strategys = await apiService.GetSearchHotKey(SearchTypeEnum.strategy.ToString());
@@ -122,16 +166,48 @@ namespace 游民星空.Core.ViewModel
         }
 
         /// <summary>
+        /// 加载搜索结果
+        /// </summary>
+        public void LoadSearchResult()
+        {
+
+        }
+        /// <summary>
         /// 按关键字搜索
         /// </summary>
         /// <param name="key">关键字</param>
         /// <param name="searchType">搜索类型 新闻或攻略</param>
         /// <param name="pageIndex">页码</param>
         /// <returns></returns>
-        public async Task<List<Essay>> Search(string key,SearchTypeEnum searchType,int pageIndex=1)
+        public async Task Search(string key,SearchTypeEnum searchType,int pageIndex=1)
         {
+            IsActive = true;
             List<Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
-            return essayResults;
+            switch(searchType)
+            {
+                case SearchTypeEnum.news:
+                    //News = new EssayIncrementalCollection(key, searchType, pageIndex);
+                    foreach (var item in essayResults)
+                    {
+                        News.Add(item);
+                    }
+                    NewsGridViewVisibility = Visibility.Collapsed;
+                    break;
+                case SearchTypeEnum.strategy:
+                    foreach (var item in essayResults)
+                    {
+                        Strategys.Add(item);
+                    }
+                    StrategysGridViewVisibility = Visibility.Collapsed;
+                    break;
+                //case SearchTypeEnum.subscribe:
+                //    foreach (var item in essayResults)
+                //    {
+                //        Subscribes.Add(item);
+                //    }
+                //    break;
+            }
+            IsActive = false;
         }
     }
 }

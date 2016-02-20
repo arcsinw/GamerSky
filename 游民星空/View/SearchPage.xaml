@@ -281,11 +281,58 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
+        <!--BorderMargin-->
+        <Thickness x:Key="BorderMargin">0,2</Thickness>
+        <!--BorderThickness-->
+        <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
+        <!--BorderBrush-->
+        <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
+        <Thickness x:Key="GridMargin">2,0</Thickness>
+        <Thickness x:Key="GridPadding">5</Thickness>
+
+        <!--一张图文章模板，包含左边缩略图，右边标题和评论数量-->
+        <DataTemplate x:Key="OnePicEssayDataTemplate">
+            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
+                    <Image.Source>
+                        <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
+                    </Image.Source>
+                </Image>
+
+                <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
+                    <TextBlock Text="{Binding title}" VerticalAlignment="Top" TextWrapping="Wrap" />
+                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <Run Text="{Binding commentsCount}"/>
+                                <Run Text="评论"/>
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <!--无图模板-->
+        <DataTemplate x:Key="NoPicEssayDataTemplate">
+            <Grid BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}"
+                  Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"   >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding title}" TextWrapping="Wrap"/>
+                <TextBlock  HorizontalAlignment="Right" Grid.Row="1" Margin="5,2" >
+                                <Run Text="{Binding commentsCount}"/>
+                                <Run Text="评论"/>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
     <Page.DataContext>
-        <vm:SearchPageViewModel  x:Name="SearchPageViewModel"/>
+        <vm:SearchPageViewModel  x:Name="viewModel"/>
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -314,60 +361,123 @@
         </Grid>
 
         <Pivot Grid.Row="1" Background="{ThemeResource PageBackground}" x:Name="pivot">
-            <PivotItem Header="新闻">
-                <GridView ItemsSource="{Binding HotNews}" SelectionMode="None" 
-                          IsItemClickEnabled="True"
-                          ItemClick="{x:Bind ItemClick}">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <hp:StringWrapPanel/>
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="Gray" BorderThickness="1" Padding="4">
-                                <TextBlock Text="{Binding }" HorizontalAlignment="Center" />
-                            </Border>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                    <GridView.Transitions>
-                        <TransitionCollection>
-                            <AddDeleteThemeTransition/>
-                        </TransitionCollection>
-                    </GridView.Transitions>
-                    <GridView.ItemContainerStyle>
-                        <Style TargetType="GridViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Margin" Value="4"/>
-                            <Setter Property="MinHeight" Value="0"/>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-                </GridView>
+            <PivotItem Header="新闻" >
+                <Grid>
+                    <ListView ItemsSource="{Binding News}"
+                              x:Name="newsListView"
+                              ShowsScrollingPlaceholders="True"
+                              SelectionMode="None"
+                              IsItemClickEnabled="True"
+                              ItemClick="ListView_ItemClick"
+                              Loaded="ListView_Loaded">
+                        <ListView.ItemTemplateSelector>
+                                <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+                                                      NoPicDt="{StaticResource NoPicEssayDataTemplate}"
+                                                                      />
+                        </ListView.ItemTemplateSelector>
+                        
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <AddDeleteThemeTransition />
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                    
+                    <GridView ItemsSource="{Binding HotNews}" SelectionMode="None" 
+                          IsItemClickEnabled="True" Visibility="{Binding NewsGridViewVisibility}"
+                          ItemClick="{x:Bind ItemClick}" >
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <hp:StringWrapPanel/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Gray" BorderThickness="1" Padding="4">
+                                    <TextBlock Text="{Binding }" HorizontalAlignment="Center" />
+                                </Border>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.Transitions>
+                            <TransitionCollection>
+                                <AddDeleteThemeTransition/>
+                            </TransitionCollection>
+                        </GridView.Transitions>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="4"/>
+                                <Setter Property="MinHeight" Value="0"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                    </GridView>
+
+                    
+                </Grid>
             </PivotItem>
             <PivotItem Header="攻略">
-                <GridView x:Name="strategyListView" ItemsSource="{Binding HotStrategys}" SelectionMode="None"
+                <Grid>
+                    <ListView ItemsSource="{Binding Strategys}"
+                              x:Name="strategysListView"
+                              ShowsScrollingPlaceholders="True"
+                              SelectionMode="None"
+                              IsItemClickEnabled="True"
+                              ItemClick="ListView_ItemClick"
+                              Loaded="ListView_Loaded">
+                        <ListView.ItemTemplateSelector>
+                            <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+                                                      NoPicDt="{StaticResource NoPicEssayDataTemplate}"
+                                                                      />
+                        </ListView.ItemTemplateSelector>
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <AddDeleteThemeTransition />
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="0"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+
+                    <GridView x:Name="strategyListView" ItemsSource="{Binding HotStrategys}" 
+                          Visibility="{Binding StrategysGridViewVisibility}"
+                          SelectionMode="None"
                           IsItemClickEnabled="True"
                           ItemClick="{x:Bind ItemClick}">
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <hp:StringWrapPanel/>
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderThickness="1" BorderBrush="Gray" Padding="4">
-                                <TextBlock Text="{Binding }" HorizontalAlignment="Center"/>
-                            </Border>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                    <GridView.ItemContainerStyle>
-                        <Style TargetType="GridViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Margin" Value="4"/>
-                            <Setter Property="MinHeight" Value="0"/>
-                        </Style>
-                    </GridView.ItemContainerStyle>
-                </GridView>
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <hp:StringWrapPanel/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderThickness="1" BorderBrush="Gray" Padding="4">
+                                    <TextBlock Text="{Binding }" HorizontalAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Margin" Value="4"/>
+                                <Setter Property="MinHeight" Value="0"/>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                    </GridView>
+                </Grid>
             </PivotItem>
             <PivotItem Header="订阅">
                 <ListView x:Name="subscribeListView" ItemsSource="{Binding HotSubscribes}" 
@@ -383,5 +493,20 @@
         <ProgressRing Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent"
                         Foreground="{ThemeResource ThemeColorBrush}" IsActive="{Binding IsActive}"  Width="70" Height="70"/>
 
+        <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom" Grid.Row="0" Grid.RowSpan="2"
+               Height="48" x:Name="topPop" Width="48" Margin="16,52" >
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Popup.Child>
+                <Button Height="48" Width="48" Background="{ThemeResource ThemeColorBrush}" 
+                        Click="Button_Click" Style="{ThemeResource RoundButtonStyle}">
+                    <SymbolIcon Symbol="Up" Foreground="White" />
+                </Button>
+            </Popup.Child>
+        </Popup>
+        
     </Grid>
 </Page>

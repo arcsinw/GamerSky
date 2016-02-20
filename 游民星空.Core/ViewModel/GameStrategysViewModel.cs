@@ -18,7 +18,7 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public ObservableCollection<Essay> Strategys { get; set; }
 
-        public GameStrategysIncrementalLoadingCollection IncreStrategys { get; set; }
+       //public GameStrategysIncrementalLoadingCollection IncreStrategys { get; set; }
 
         private ApiService apiService;
 
@@ -55,7 +55,7 @@ namespace 游民星空.Core.ViewModel
         {
             apiService = new ApiService();
             Strategys = new ObservableCollection<Essay>();
-            IncreStrategys = new GameStrategysIncrementalLoadingCollection();
+            //IncreStrategys = new GameStrategysIncrementalLoadingCollection();
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
@@ -91,7 +91,7 @@ namespace 游民星空.Core.ViewModel
             foreach(var item in results)
             {
                 Strategys.Add(item);
-                IncreStrategys.Add(item);
+                //IncreStrategys.Add(item);
             }
             IsActive = false;
         }
@@ -110,7 +110,7 @@ namespace 游民星空.Core.ViewModel
         {
             IsActive = true;
             Strategys.Clear();
-            IncreStrategys.Clear();
+            //IncreStrategys.Clear();
             await LoadData(strategyResult);
             IsActive = false;
         }

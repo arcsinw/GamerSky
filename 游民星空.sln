@@ -10,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空", "游民星�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空.Core", "游民星空.Core\游民星空.Core.csproj", "{75F07E89-F8A9-49DA-8C32-035515B4EBF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空.Data", "游民星空.Data\游民星空.Data.csproj", "{ABE2100B-4F53-438C-9ABF-DA84273D3768}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "游民星空.BackgroundTask", "游民星空.BackgroundTask\游民星空.BackgroundTask.csproj", "{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}"
 EndProject
 Global
@@ -62,22 +60,6 @@ Global
 		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|x64.Build.0 = Release|x64
 		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|x86.ActiveCfg = Release|x86
 		{75F07E89-F8A9-49DA-8C32-035515B4EBF6}.Release|x86.Build.0 = Release|x86
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Debug|ARM.ActiveCfg = Debug|ARM
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Debug|ARM.Build.0 = Debug|ARM
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Debug|x64.ActiveCfg = Debug|x64
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Debug|x64.Build.0 = Debug|x64
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Debug|x86.ActiveCfg = Debug|x86
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Debug|x86.Build.0 = Debug|x86
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|ARM.ActiveCfg = Release|ARM
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|ARM.Build.0 = Release|ARM
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|x64.ActiveCfg = Release|x64
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|x64.Build.0 = Release|x64
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|x86.ActiveCfg = Release|x86
-		{ABE2100B-4F53-438C-9ABF-DA84273D3768}.Release|x86.Build.0 = Release|x86
 		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64A1C5AD-0517-4864-9EE3-D7D31FB0E161}.Debug|ARM.ActiveCfg = Debug|ARM
@@ -99,7 +81,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://wangx86.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -109,11 +91,8 @@ Global
 		SccProjectUniqueName2 = 游民星空.Core\\游民星空.Core.csproj
 		SccProjectName2 = 游民星空.Core
 		SccLocalPath2 = 游民星空.Core
-		SccProjectUniqueName3 = 游民星空.Data\\游民星空.Data.csproj
-		SccProjectName3 = 游民星空.Data
-		SccLocalPath3 = 游民星空.Data
-		SccProjectUniqueName4 = 游民星空.BackgroundTask\\游民星空.BackgroundTask.csproj
-		SccProjectName4 = 游民星空.BackgroundTask
-		SccLocalPath4 = 游民星空.BackgroundTask
+		SccProjectUniqueName3 = 游民星空.BackgroundTask\\游民星空.BackgroundTask.csproj
+		SccProjectName3 = 游民星空.BackgroundTask
+		SccLocalPath3 = 游民星空.BackgroundTask
 	EndGlobalSection
 EndGlobal

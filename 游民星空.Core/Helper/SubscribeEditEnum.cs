@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 namespace 游民星空.Core.Helper
 {
     /// <summary>
-    /// 搜索类型枚举
+    /// 订阅操作枚举
     /// </summary>
-    public enum SearchTypeEnum
+    public enum SubscribeOperateEnum
     {
-        strategy,   //攻略
-        news,       //新闻
-        shouyou,  //手游
-        subscribe //订阅
+        add, //增
+        minus //减
     }
 }

@@ -335,7 +335,7 @@ namespace 游民星空.Core.Http
 
             }
             SearchPostData postData = new SearchPostData();
-            postData.request = new SearchRequest { elementsCountPerPage = "20", pageIndex = 1, searchKey = searchKey, searchType = searchType.ToString() };
+            postData.request = new SearchRequest { elementsCountPerPage = "20", pageIndex = pageIndex, searchKey = searchKey, searchType = searchType.ToString() };
 
             List<Essay> essayResults = new List<Essay>();
 
@@ -519,7 +519,7 @@ namespace 游民星空.Core.Http
         }
 
         /// <summary>
-        /// 获取订阅专题的内容
+        /// 获取订阅专题
         /// </summary>
         /// <returns></returns>
         public async Task<List<Essay>> GetSubscribeTopic(string nodeIds,int pageIndex)
@@ -556,6 +556,40 @@ namespace 游民星空.Core.Http
             return essays;
         }
 
-
+        /// <summary>
+        /// 获取订阅内容 （订阅页面）
+        /// </summary>
+        /// <param name="nodeIds">48,51</param>
+        /// <returns></returns>
+        //public async Task<EssayResult> GetSubscribeContent(string nodeIds,int pageIndex)
+        //{
+        //    string filename = "subscribeContent_" + nodeIds + "_" + pageIndex + ".json";
+        //    EssayResult essayResult = new EssayResult();
+        //    if (NetworkManager.Current.Network == 4)
+        //    {
+        //        essayResult.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
+        //    }
+        //    else
+        //    {
+        //        SubscribeContentPostData postData = new SubscribeContentPostData();
+        //        postData.request = new SubscribeContentRequest { nodeIds = nodeIds, pageIndex = pageIndex, type = "newsList" };
+        //        essayResult = await PostJson<SubscribeContentPostData, EssayResult>(ServiceUri.SubscribeContent, postData);
+        //    }
+        //        return essayResult;
+        //}
+        
+        /// <summary>
+        /// 对订阅进行操作
+        /// </summary>
+        /// <param name="operate"></param>
+        /// <param name="subscribeId"></param>
+        /// <returns></returns>
+        public async Task<VerificationCode> EditSubscribe(SubscribeOperateEnum operate,string subscribeId)
+        {
+            EditSubscribePostData postData = new EditSubscribePostData();
+            postData.request = new EditSubscribeRequest { operate = operate.ToString(), subscribeId = subscribeId };
+            VerificationCode result = await PostJson<EditSubscribePostData, VerificationCode>(ServiceUri.EditSubscription, postData);
+            return result;
+        }
     }
 }

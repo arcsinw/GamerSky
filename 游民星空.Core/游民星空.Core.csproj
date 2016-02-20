@@ -115,7 +115,6 @@
     <Compile Include="Helper\AlphaKeyGroup.cs" />
     <Compile Include="Helper\DeviceInformationHelper.cs" />
     <Compile Include="Helper\DispatcherManager.cs" />
-    <Compile Include="Helper\EssayListViewItemTemplateSelector.cs" />
     <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
     <Compile Include="Helper\ExtensionHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
@@ -124,12 +123,10 @@
     <Compile Include="Helper\ListViewBaseExtensions.cs" />
     <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\LocalSettingsHelper.cs" />
+    <Compile Include="Helper\SubscribeEditEnum.cs" />
     <Compile Include="Helper\ToastHelper.cs" />
     <Compile Include="Helper\VerifiableBase.cs" />
     <Compile Include="Helper\VerifiableObjectErrors.cs" />
-    <Compile Include="IncrementalLoadingCollection\EssayIncrementalLoadingCollection.cs" />
-    <Compile Include="IncrementalLoadingCollection\GameStrategysIncrementalLoadingCollection.cs" />
-    <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />
     <Compile Include="Helper\NetworkManager.cs" />
     <Compile Include="Helper\RelayCommand.cs" />
     <Compile Include="Helper\SearchTypeEnum.cs" />
@@ -137,6 +134,8 @@
     <Compile Include="Http\HttpBaseService.cs" />
     <Compile Include="Http\ServiceUri.cs" />
     <Compile Include="Http\ApiService.cs" />
+    <Compile Include="IncrementalLoadingCollection\EssayIncrementalCollection.cs" />
+    <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />
     <Compile Include="Model\AdStart.cs" />
     <Compile Include="Model\Channel.cs" />
     <Compile Include="Model\Collect.cs" />
@@ -149,6 +148,7 @@
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\PivotData.cs" />
     <Compile Include="Model\RelatedReadings.cs" />
+    <Compile Include="PostDataModel\EditSubscribePostData.cs" />
     <Compile Include="PostDataModel\SubscribeTopicPostData.cs" />
     <Compile Include="ResultDataModel\AdStartResult.cs" />
     <Compile Include="ResultDataModel\ChannelResult.cs" />
@@ -194,6 +194,7 @@
     <Compile Include="ViewModel\SettingsPageViewModel.cs" />
     <Compile Include="ViewModel\StrategyPageViewModel.cs" />
     <Compile Include="ViewModel\SubscribeContentViewModel.cs" />
+    <Compile Include="ViewModel\SubscribePageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\YaowenPageViewModel.cs" />
     <EmbeddedResource Include="Properties\游民星空.Core.rd.xml" />
@@ -218,6 +219,7 @@
     <Content Include="Html\gsAppHTMLTemplate_js\gsAppHTMLTemplate_Video.js" />
     <Content Include="Html\gsAppHTMLTemplate_js\gsVideo.js" />
     <Content Include="Html\gsAppHTMLTemplate_News.html" />
+    <Content Include="Http\代码规范.txt" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
