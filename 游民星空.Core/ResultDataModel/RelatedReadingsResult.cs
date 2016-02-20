@@ -9,7 +9,7 @@ namespace 游民星空.Core.ResultDataModel
 {
     public class RelatedReadingsResult : ResultBase
     {
-        public RelatedReadings[] result;
+        public List<RelatedReadings> result;
 
     }
 }

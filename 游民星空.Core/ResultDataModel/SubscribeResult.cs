@@ -9,6 +9,6 @@ namespace 游民星空.Core.ResultDataModel
 {
     public class SubscribeResult : ResultBase
     {
-        public Subscribe[] result { get; set; }
+        public List<Subscribe> result { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace 游民星空.Core.ResultDataModel
 {
     public class StrategyResult : ResultBase
     {
-        public Strategy[] result { get; set; }
+        public List<Strategy> result { get; set; }
 
     }
 }

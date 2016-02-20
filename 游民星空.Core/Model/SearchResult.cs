@@ -15,6 +15,6 @@ namespace 游民星空.Core.Model
 
         public string errorMessage { get; set; }
 
-        public string[] result { get; set; }
+        public List<string> result { get; set; }
     }
 }

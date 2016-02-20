@@ -28,7 +28,7 @@ namespace 游民星空.Core.Http
             ChannelResult channelResult = new ChannelResult();
             if (NetworkManager.Current.Network == 4) //无网络
             {
-                channelResult = await FileHelper.Current.ReadObjectAsync<ChannelResult>(filename);
+                channelResult.result = await FileHelper.Current.ReadObjectAsync<List<Channel>>(filename);
             }
             else
             {
@@ -37,22 +37,20 @@ namespace 游民星空.Core.Http
                 postData.deviceId = DeviceInformationHelper.GetDeviceId();
                 postData.request = new request() { type = "0" };
                 channelResult = await PostJson<AllChannelListPostData, ChannelResult>(ServiceUri.AllChannel, postData);
-                await FileHelper.Current.WriteObjectAsync<ChannelResult>(channelResult, filename);
-
-            }
-            List<Channel> Channels = new List<Channel>();
-
-            Channels.Add(new Channel { isTop = "False", nodeId = 0, nodeName = "头条" });
-            if (channelResult != null && channelResult.result!=null)
-            {
-                foreach (var item in channelResult.result)
+                if (channelResult !=null && channelResult.result!=null)
                 {
-                    Channels.Add(new Channel() { isTop = item.isTop, nodeId = item.nodeId, nodeName = item.nodeName });
+                    await FileHelper.Current.WriteObjectAsync<List<Channel>>(channelResult.result, filename);
                 }
             }
 
-            return Channels;
+            if(channelResult!= null && channelResult.result !=null)
+            {
+                channelResult.result.Add(new Channel { isTop = "False", nodeId = 0, nodeName = "头条" });
+            }
+
+            return channelResult?.result;
         }
+        
         /// <summary>
         /// 获取新闻列表
         /// </summary>
@@ -65,14 +63,12 @@ namespace 游民星空.Core.Http
             EssayResult essayResult = new EssayResult();
             if (NetworkManager.Current.Network == 4) //无网络
             {
-                essayResult = await FileHelper.Current.ReadObjectAsync<EssayResult>(filename);
+                essayResult.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
                 AllChannelListPostData postData = new AllChannelListPostData();
                 postData.deviceId = DeviceInformationHelper.GetDeviceId();
-                //postData.deviceType = DeviceInformationHelper.GetOS();
-                //postData.osVersion = DeviceInformationHelper.GetOSVer();
                 postData.request = new request()
                 {
                     elementsCountPerPage = 20,
@@ -82,20 +78,13 @@ namespace 游民星空.Core.Http
                     type = "null",
                 };
                 essayResult = await PostJson<AllChannelListPostData, EssayResult>(ServiceUri.AllChannelList, postData);
-                await FileHelper.Current.WriteObjectAsync<EssayResult>(essayResult, filename);
-
-            }
-            List<Essay> essayList = new List<Essay>();
-
-            if (essayResult != null && essayResult.result !=null)
-            {
-                foreach (var item in essayResult.result)
+                if (essayResult != null && essayResult.result!=null)
                 {
-                    essayList.Add(item);
+                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.result, filename);
                 }
             }
-
-            return essayList;
+            
+            return essayResult?.result;
         }
 
         ///// <summary>
@@ -121,7 +110,7 @@ namespace 游民星空.Core.Http
             NewsResult newsResult = new NewsResult();
             if (NetworkManager.Current.Network == 4)  //无网络
             {
-                newsResult = await FileHelper.Current.ReadObjectAsync<NewsResult>(filename);
+                newsResult.result = await FileHelper.Current.ReadObjectAsync<News>(filename);
             }
             else
             {
@@ -129,7 +118,10 @@ namespace 游民星空.Core.Http
                 postData.request = new request { contentId = contentId,pageIndex =1 };
                 postData.deviceId = DeviceInformationHelper.GetDeviceId();
                 newsResult = await PostJson<AllChannelListPostData, NewsResult>(ServiceUri.TwoArticle, postData);
-                await FileHelper.Current.WriteObjectAsync<NewsResult>(newsResult, filename);
+                if (newsResult != null && newsResult.result != null)
+                {
+                    await FileHelper.Current.WriteObjectAsync<News>(newsResult.result, filename);
+                }
 
             }
 
@@ -147,7 +139,7 @@ namespace 游民星空.Core.Http
             RelatedReadingsResult readings = new RelatedReadingsResult();
             if (NetworkManager.Current.Network == 4)  //无网络
             {
-                readings = await FileHelper.Current.ReadObjectAsync<RelatedReadingsResult>(filename);
+                readings.result = await FileHelper.Current.ReadObjectAsync<List<RelatedReadings>>(filename);
             }
             else
             {
@@ -155,21 +147,13 @@ namespace 游民星空.Core.Http
                 postData.request = new request { contentId = contentId, contentType = contentType };
                 postData.deviceId = DeviceInformationHelper.GetDeviceId();
                 readings = await PostJson<AllChannelListPostData, RelatedReadingsResult>(ServiceUri.TwoCorrelation, postData);
-
-                await FileHelper.Current.WriteObjectAsync<RelatedReadingsResult>(readings, filename);
-
-            }
-            List<RelatedReadings> relatedResults = new List<RelatedReadings>();
-
-            if (readings != null)
-            {
-                foreach (var item in readings.result)
+                if (readings != null && readings.result != null)
                 {
-                    relatedResults.Add(item);
+                    await FileHelper.Current.WriteObjectAsync<List<RelatedReadings>>(readings.result, filename);
                 }
             }
-
-            return relatedResults;
+  
+            return readings?.result;
         }
 
         /// <summary>
@@ -182,29 +166,20 @@ namespace 游民星空.Core.Http
             StrategyResult strategyResult = new StrategyResult();
             if (NetworkManager.Current.Network == 4)  //无网络
             {
-                strategyResult = await FileHelper.Current.ReadObjectAsync<StrategyResult>(filename);
+                strategyResult.result = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(filename);
             }
             else
             {
-                
                 StrategyPostData postData = new StrategyPostData();
                 postData.request = new StrategyRequest { pageIndex = 1, pageCount = pageCount, type = type };
                 strategyResult = await PostJson<StrategyPostData, StrategyResult>(ServiceUri.Strategy, postData);
-
-                await FileHelper.Current.WriteObjectAsync<StrategyResult>(strategyResult, filename);
-
-            }
-            List<Strategy> strategys = new List<Strategy>();
-
-            if (strategyResult != null)
-            {
-                foreach (var item in strategyResult.result)
+                if (strategyResult != null && strategyResult.result != null)
                 {
-                    strategys.Add(item);
+                    await FileHelper.Current.WriteObjectAsync<List<Strategy>>(strategyResult.result, filename);
                 }
             }
 
-            return strategys;
+            return strategyResult?.result;
         }
 
         /// <summary>
@@ -214,14 +189,15 @@ namespace 游民星空.Core.Http
         public async Task<List<Strategy>> GetAllStrategys()
         {
             string filename = "allStrategys.json";
-            List<Strategy> allStrategys = await GetStrategys(10000,1);
-
+            List<Strategy> allStrategys = new List<Strategy>();
             if (NetworkManager.Current.Network == 4)  //无网络
             {
                 allStrategys = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(filename);
             }
             else
             {
+                allStrategys = await GetStrategys(10000, 1);
+
                 if (allStrategys != null)
                 {
                     await FileHelper.Current.WriteObjectAsync<List<Strategy>>(allStrategys, filename);
@@ -241,27 +217,20 @@ namespace 游民星空.Core.Http
             string filename = "gameStrategys_" + specialID + ".json";
             if (NetworkManager.Current.Network == 4)  //无网络
             {
-                essayResult = await FileHelper.Current.ReadObjectAsync<EssayResult>(filename);
+                essayResult.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
                 AllChannelListPostData postData = new AllChannelListPostData();
                 postData.request = new request { elementsCountPerPage = 20, nodeIds = specialID, pageIndex = pageIndex, parentNodeId = "strategy" };
                 essayResult = await PostJson<AllChannelListPostData, EssayResult>(ServiceUri.GameStrategys, postData);
-                await FileHelper.Current.WriteObjectAsync<EssayResult>(essayResult, filename);
-            }
-
-            List<Essay> essayList = new List<Essay>();
-
-            if (essayResult != null)
-            {
-                foreach (var item in essayResult.result)
+                if (essayResult != null && essayResult.result != null)
                 {
-                    essayList.Add(item);
+                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.result, filename);
                 }
             }
 
-            return essayList;
+            return essayResult?.result ;
         }
 
 
@@ -273,23 +242,23 @@ namespace 游民星空.Core.Http
         public async Task<List<string>> GetSearchHotKey(string searchType)
         {
             string filename = "searchHotKey_"+searchType+".json";
-            List<string> hotKeyList = new List<string>();
+            SearchResult searchResult = new SearchResult();
             if (NetworkManager.Current.Network == 4)  //无网络
             {
-                hotKeyList = await FileHelper.Current.ReadObjectAsync<List<string>>(filename);
+                searchResult.result = await FileHelper.Current.ReadObjectAsync<List<string>>(filename);
             }
             else
             {
                 SearchPostData postData = new SearchPostData() { request = new SearchRequest { searchType = searchType } };
-                SearchResult searchResult = await PostJson<SearchPostData, SearchResult>(ServiceUri.SearchHotDict, postData);
-                for(int i =0;i<searchResult.result.Length;i++)
+                searchResult = await PostJson<SearchPostData, SearchResult>(ServiceUri.SearchHotDict, postData);
+
+                if (searchResult != null && searchResult.result != null)
                 {
-                    hotKeyList.Add(searchResult.result[i]);
+                    await FileHelper.Current.WriteObjectAsync<List<string>>(searchResult.result, filename);
                 }
-                await FileHelper.Current.WriteObjectAsync<List<string>>(hotKeyList, filename);
             }
 
-            return hotKeyList;
+            return searchResult?.result;
         }
 
         /// <summary>
@@ -299,56 +268,46 @@ namespace 游民星空.Core.Http
         public async Task<List<Subscribe>> GetSubscribeHotKey(string type="1")
         {
             string filename = "subscribeHotKey_" + type + ".json";
-            List<Subscribe> subscribes = new List<Subscribe>();
-
+            SubscribeResult subscribeResult = new SubscribeResult();
             if (NetworkManager.Current.Network == 4)  //无网络
             {
-                subscribes = await FileHelper.Current.ReadObjectAsync<List<Subscribe>>(filename);
+                subscribeResult.result = await FileHelper.Current.ReadObjectAsync<List<Subscribe>>(filename);
             }
             else
             {
                 SubscribeSearchPostData postData = new SubscribeSearchPostData { request = new SubscribeSearchRequest { type = type } };
-                SubscribeResult subscribeResult = await PostJson<SubscribeSearchPostData, SubscribeResult>(ServiceUri.Subscribe, postData);
-                if (subscribeResult != null )
+                subscribeResult = await PostJson<SubscribeSearchPostData, SubscribeResult>(ServiceUri.Subscribe, postData);
+                if (subscribeResult != null && subscribeResult.result != null)
                 {
-                    foreach (var item in subscribeResult.result)
-                    {
-                        subscribes.Add(item);
-                    }
+                    await FileHelper.Current.WriteObjectAsync<List<Subscribe>>(subscribeResult.result, filename);
                 }
-                await FileHelper.Current.WriteObjectAsync<List<Subscribe>>(subscribes, filename);
             }
-            return subscribes;
+            return subscribeResult?.result;
         }
 
         /// <summary>
         /// 搜索
         /// </summary>
+        /// <remarks>搜索结果不缓存</remarks>
         /// <param name="searchKey"></param>
         /// <param name="searchType"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
         public async Task<List<Essay>> SearchByKey(string searchKey,SearchTypeEnum searchType,int pageIndex)
         {
-            if(NetworkManager.Current.Network==4) //无网络
+            EssayResult essayResult = new EssayResult();
+            if (NetworkManager.Current.Network == 4) //无网络
             {
-
             }
-            SearchPostData postData = new SearchPostData();
-            postData.request = new SearchRequest { elementsCountPerPage = "20", pageIndex = pageIndex, searchKey = searchKey, searchType = searchType.ToString() };
-
-            List<Essay> essayResults = new List<Essay>();
-
-            EssayResult essay = await PostJson<SearchPostData, EssayResult>(ServiceUri.Search, postData);
-            if(essay!= null && essay.result!=null)
+            else
             {
-                foreach (var item in essay.result)
-                {
-                    essayResults.Add(item);
-                }
+                SearchPostData postData = new SearchPostData();
+                postData.request = new SearchRequest { elementsCountPerPage = "20", pageIndex = pageIndex, searchKey = searchKey, searchType = searchType.ToString() };
+                
+                essayResult = await PostJson<SearchPostData, EssayResult>(ServiceUri.Search, postData);
             }
 
-            return essayResults;
+            return essayResult?.result;
         }
 
         /// <summary>
@@ -363,25 +322,21 @@ namespace 游民星空.Core.Http
             string filename = "subscribeContent_" + sourceId + ".json";
             if (NetworkManager.Current.Network == 4)  //无网络
             {
-                subscribeContent = await FileHelper.Current.ReadObjectAsync<EssayResult>(filename);
+                subscribeContent.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
                 SubscribeContentPostData postData = new SubscribeContentPostData();
                 postData.request = new SubscribeContentRequest { nodeIds = sourceId, pageCount = 10, pageIndex = pageIndex };
                 subscribeContent = await PostJson<SubscribeContentPostData, EssayResult>(ServiceUri.SubscribeContent, postData);
-            }
-            List<Essay> subscribeContentResult = new List<Essay>();
 
-            if (subscribeContent != null && subscribeContent.result != null)
-            {
-                foreach (var item in subscribeContent.result)
+                if (subscribeContent != null && subscribeContent.result != null)
                 {
-                    subscribeContentResult.Add(item);
+                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(subscribeContent.result, filename);
                 }
             }
-            
-            return subscribeContentResult;
+
+            return subscribeContent?.result;
         }
 
         /// <summary>
@@ -408,24 +363,20 @@ namespace 游民星空.Core.Http
             EssayResult essayResult = new EssayResult();
             if (NetworkManager.Current.Network == 4) //无网络
             {
-                essayResult = await FileHelper.Current.ReadObjectAsync<EssayResult>(filename);
+                essayResult.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
                 YaowenPostData postData = new YaowenPostData();
                 postData.request = new YaowenRequest(){ pageIndex = pageIndex };
                 essayResult = await PostJson<YaowenPostData, EssayResult>(ServiceUri.AllChannelList, postData);
-            }
-            List<Essay> essayList = new List<Essay>();
-            if (essayResult != null && essayResult.result!=null)
-            {
-                await FileHelper.Current.WriteObjectAsync<EssayResult>(essayResult, filename);
-                foreach (var item in essayResult.result)
+                if(essayResult!=null && essayResult.result!= null)
                 {
-                    essayList.Add(item);
+                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.result, filename);
                 }
             }
-            return essayList;
+
+            return essayResult?.result;
         }
 
         /// <summary>
@@ -444,8 +395,7 @@ namespace 游民星空.Core.Http
             {
                 AdStartPostData postData = new AdStartPostData();
                 AdStartResult adStartResult = await PostJson<AdStartPostData, AdStartResult>(ServiceUri.AdStart, postData);
-
-
+                
                 if (adStarts != null && adStartResult.result != null)
                 {
                     foreach (var item in adStartResult.result)
@@ -525,10 +475,10 @@ namespace 游民星空.Core.Http
         public async Task<List<Essay>> GetSubscribeTopic(string nodeIds,int pageIndex)
         {
             string filename = "subscribeTopic_" + nodeIds + "_"+pageIndex+ ".json";
-            List<Essay> essays = new List<Essay>();
+            EssayResult essayResult = new EssayResult();
             if (NetworkManager.Current.Network == 4)
             {
-                essays = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
+                essayResult.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
@@ -542,18 +492,13 @@ namespace 游民星空.Core.Http
                     parentNodeId = "dingyue",
                     type = "dingyueTopic"
                 };
-                EssayResult essayResult = await PostJson<SubscribeTopicPostData, EssayResult>(ServiceUri.Subscribe, postData);
-                if (essayResult != null)
+                essayResult = await PostJson<SubscribeTopicPostData, EssayResult>(ServiceUri.Subscribe, postData);
+                if (essayResult != null && essayResult.result != null)
                 {
-                    essays = new List<Essay>();
-                    foreach (var item in essayResult.result)
-                    {
-                        essays.Add(item);
-                    }
+                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.result, filename);
                 }
-                await FileHelper.Current.WriteObjectAsync<List<Essay>>(essays, filename);
             }
-            return essays;
+            return essayResult?.result;
         }
 
         /// <summary>
