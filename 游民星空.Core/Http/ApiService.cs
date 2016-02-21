@@ -143,10 +143,10 @@ namespace 游民星空.Core.Http
             }
             else
             {
-                AllChannelListPostData postData = new AllChannelListPostData();
-                postData.request = new request { contentId = contentId, contentType = contentType };
+                RelatedReadingPostData postData = new RelatedReadingPostData();
+                postData.request = new RelatedReadingRequest{ contentId = contentId, contentType = contentType};
                 postData.deviceId = DeviceInformationHelper.GetDeviceId();
-                readings = await PostJson<AllChannelListPostData, RelatedReadingsResult>(ServiceUri.TwoCorrelation, postData);
+                readings = await PostJson<RelatedReadingPostData, RelatedReadingsResult>(ServiceUri.TwoCorrelation, postData);
                 if (readings != null && readings.result != null)
                 {
                     await FileHelper.Current.WriteObjectAsync<List<RelatedReadings>>(readings.result, filename);

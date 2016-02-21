@@ -99,7 +99,6 @@ namespace 游民星空.Core.ViewModel
             List<Channel> channels = await apiService.GetChannelList();
             foreach (var item in channels)
             {
-                //Channels.Add(item);
                 EssaysAndChannels.Add(new PivotData { Channel = item });
             }
 
@@ -116,19 +115,17 @@ namespace 游民星空.Core.ViewModel
         public async Task LoadMoreEssay(int nodeId,int pageIndex)
         {
             List<Essay> essays = await apiService.GetEssayList(nodeId, pageIndex);
-
+            if (essays == null) return;
             foreach (var item in essays)
             {
                 if (item.type.Equals("huandeng"))
                 {
                     foreach (var c in item.childElements)
                     {
-                        //HeaderEssays.Add(c);
                         EssaysAndChannels.Where(x => x.Channel.nodeId == nodeId).First().HeaderEssays.Add(c);
                     }
                     continue;
                 }
-                //Essays.Add(item);
                 EssaysAndChannels.Where(x => x.Channel.nodeId == nodeId).First().Essays.Add(item);
             }
             

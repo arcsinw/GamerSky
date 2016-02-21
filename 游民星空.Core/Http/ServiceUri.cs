@@ -29,7 +29,7 @@ namespace 游民星空.Core.Http
         /// <summary>
         /// 相关阅读
         /// </summary>
-        public const string TwoCorrelation = "http://appapi2.gamersky.com/v2/TwoArticle";
+        public const string TwoCorrelation = "http://appapi2.gamersky.com/v2/TwoCorrelation";
 
         /// <summary>
         /// 获取有攻略的游戏列表
