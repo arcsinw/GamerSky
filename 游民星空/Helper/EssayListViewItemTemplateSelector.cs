@@ -23,7 +23,7 @@ namespace 游民星空.Helper
         {
             Essay essay = item as Essay;
             if (essay.thumbnailURLs == null || essay.thumbnailURLs.Length==0) return NoPicDt;
-            if (essay.thumbnailURLs.Length <= 1)
+            if (essay.thumbnailURLs.Length == 1)
             {
                 return OnePicDt;
             }

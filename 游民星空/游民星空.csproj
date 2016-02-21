@@ -223,6 +223,7 @@
     <Content Include="Assets\Avatar.png" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="代码规范.txt" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Data\Agreement.txt" />
     <Content Include="Html\gsAppHTMLTemplate_css\gsAppHTMLTemplate.css" />

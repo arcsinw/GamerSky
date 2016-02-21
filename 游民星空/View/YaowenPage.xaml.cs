@@ -120,7 +120,7 @@ namespace 游民星空.View
         private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
             await viewModel.Refresh();
-            pageIndex = 1;
+            pageIndex = 2;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

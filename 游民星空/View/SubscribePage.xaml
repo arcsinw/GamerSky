@@ -104,18 +104,16 @@
                     </GridView>
                 <!--</pr:PullToRefreshBox>-->
             </PivotItem>
-            <PivotItem Header="订阅专题" Padding="0">
+            <PivotItem Header="订阅专题" Padding="0,8,0,0">
                 <ListView>
                     <ListView.Header>
                         <AutoSuggestBox PlaceholderText="搜索" QueryIcon="Find"/>    
                     </ListView.Header>
-                    <ListView.ItemTemplate>
+                    <!--<ListView.ItemTemplate>
                         <DataTemplate>
-                            <ListView>
-                                
-                            </ListView>
+                            
                         </DataTemplate>
-                    </ListView.ItemTemplate>
+                    </ListView.ItemTemplate>-->
                     <ListView.Footer>
                         <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0" Click="Button_Click">
                             <Button.Content>
@@ -133,7 +131,7 @@
         </Pivot>
 
         <!--#region 左边后退键-->
-        <Button x:Name="back"  Click="{x:Bind Back}" 
+        <Button x:Name="back"  Click="{x:Bind Back}" Visibility="Collapsed" 
                     HorizontalAlignment="Left" VerticalAlignment="Top"
                     Style="{ThemeResource BackButtonStyle}" >
             <SymbolIcon Symbol="Back"/>

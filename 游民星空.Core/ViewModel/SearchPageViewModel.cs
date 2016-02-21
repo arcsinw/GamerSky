@@ -196,16 +196,22 @@ namespace 游民星空.Core.ViewModel
                 case SearchTypeEnum.strategy:
                     foreach (var item in essayResults)
                     {
-                        Strategys.Add(item);
+                        if (item.contentType.Equals("strategy"))
+                        {
+                            Strategys.Add(item);
+                        }
                     }
                     StrategysGridViewVisibility = Visibility.Collapsed;
                     break;
-                //case SearchTypeEnum.subscribe:
-                //    foreach (var item in essayResults)
-                //    {
-                //        Subscribes.Add(item);
-                //    }
-                //    break;
+                case SearchTypeEnum.subscribe: //订阅查询是本地查询
+                    var result = from x in HotSubscribes
+                                 where x.sourceName.Contains(key)
+                                 select x;
+                    foreach (var item in result)
+                    {
+                        Subscribes.Add(item);
+                    } 
+                    break;
             }
             IsActive = false;
         }

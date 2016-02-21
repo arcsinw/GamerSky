@@ -32,7 +32,7 @@ namespace 游民星空.View
 
             pageIndexDic = new Dictionary<int, int>();
 
-            //NavigationCacheMode = NavigationCacheMode.Required;
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
 
@@ -76,12 +76,13 @@ namespace 游民星空.View
                 default:
                     searchType = SearchTypeEnum.news;
                     break;
-                    //case 2:
-                    //    searchType = SearchTypeEnum.
+                case 2:
+                    searchType = SearchTypeEnum.subscribe;
+                    break;
             }
             key = keyTextBox.Text;
 
-            await viewModel.Search(key, searchType, pageIndex);
+            await viewModel.Search(key, searchType, pageIndex++);
 
             //记录页码
             if (pageIndexDic.ContainsKey(pivotIndex))
@@ -105,7 +106,7 @@ namespace 游民星空.View
 
 
         /// <summary>
-        /// 点击热门标签
+        /// 热门标签点击事件
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -116,53 +117,16 @@ namespace 游民星空.View
             Search();
         }
 
-        private void ListView_Loaded(object sender, RoutedEventArgs e)
-        {
-            scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
-            if (scrollViewer != null)
-            {
-                scrollViewer.ViewChanged += scrollViewer_ViewChanged;
-            }
-        }
 
         private bool IsDataLoading = false;
-        private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
-        {
-            if (scrollViewer != null)
-            {
-                if (scrollViewer.VerticalOffset < DeviceInformationHelper.GetScreenHeight())
-                {
-                    if (topPop.IsOpen)
-                    {
-                        topPop.IsOpen = false;
-                    }
-                }
-                else if (scrollViewer.VerticalOffset > DeviceInformationHelper.GetScreenHeight())
-                {
-                    if (!topPop.IsOpen)
-                    {
-                        topPop.IsOpen = true;
-                    }
-                }
-                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
-                {
-                    if (!IsDataLoading)  //未加载数据
-                    {
-                        IsDataLoading = true;
-                        await viewModel.Search(key, searchType, pageIndex);
-                        pageIndexDic[pivot.SelectedIndex] = pageIndex;
-                        IsDataLoading = false;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private ScrollViewer scrollViewer;
+        
+        
+        private ScrollViewer newsScrollViewer;
 
         private ScrollViewer strategysScrollViewer;
+
+        private ScrollViewer subscribeScrollViewer;
+
         /// <summary>
         /// 看新闻
         /// </summary>
@@ -175,8 +139,7 @@ namespace 游民星空.View
 
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
-
-
+        
         /// <summary>
         /// 跳转顶部
         /// </summary>
@@ -190,8 +153,145 @@ namespace 游民星空.View
                     newsListView.ScrollIntoViewSmoothly(newsListView.Items[0]);
                     break;
                 case 1:
-                    strategyListView.ScrollIntoViewSmoothly(strategysListView.Items[0]);
+                    strategysListView.ScrollIntoViewSmoothly(strategysListView.Items[0]);
                     break;
+                case 2:
+                    subscribeListView.ScrollIntoViewSmoothly(subscribeListView.Items[0]);
+                    break;
+            }
+        }
+
+        private void newsListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            newsScrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
+            if (newsScrollViewer != null)
+            {
+                newsScrollViewer.ViewChanged += NewsScrollViewer_ViewChanged;
+            }
+        }
+
+        private async void NewsScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (newsScrollViewer != null)
+            {
+                if (newsScrollViewer.VerticalOffset < DeviceInformationHelper.GetScreenHeight())
+                {
+                    if (topPop.IsOpen)
+                    {
+                        topPop.IsOpen = false;
+                    }
+                }
+                else if (newsScrollViewer.VerticalOffset > DeviceInformationHelper.GetScreenHeight())
+                {
+                    if (!topPop.IsOpen)
+                    {
+                        topPop.IsOpen = true;
+                    }
+                }
+                if (newsScrollViewer.VerticalOffset >= newsScrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
+                {
+                    if (!IsDataLoading)  //未加载数据
+                    {
+                        IsDataLoading = true;
+                        await viewModel.Search(key, searchType, pageIndex++);
+                        pageIndexDic[pivot.SelectedIndex] = pageIndex;
+                        IsDataLoading = false;
+                    }
+                }
+            }
+        }
+
+        private void strategysListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            strategysScrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
+            if (strategysScrollViewer != null)
+            {
+                strategysScrollViewer.ViewChanged += StrategysScrollViewer_ViewChanged;
+            }
+        }
+
+        private async void StrategysScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (strategysScrollViewer != null)
+            {
+                if (strategysScrollViewer.VerticalOffset < DeviceInformationHelper.GetScreenHeight())
+                {
+                    if (topPop.IsOpen)
+                    {
+                        topPop.IsOpen = false;
+                    }
+                }
+                else if (strategysScrollViewer.VerticalOffset > DeviceInformationHelper.GetScreenHeight())
+                {
+                    if (!topPop.IsOpen)
+                    {
+                        topPop.IsOpen = true;
+                    }
+                }
+                if (strategysScrollViewer.VerticalOffset >= strategysScrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
+                {
+                    if (!IsDataLoading)  //未加载数据
+                    {
+                        IsDataLoading = true;
+                        await viewModel.Search(key, searchType, pageIndex++);
+                        pageIndexDic[pivot.SelectedIndex] = pageIndex;
+                        IsDataLoading = false;
+                    }
+                }
+            }
+        }
+
+        private void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int selectedIndex = pivot.SelectedIndex;
+            //切换当前页码
+            switch(selectedIndex)
+            {
+                case 0:
+                    if (!pageIndexDic.ContainsKey(selectedIndex))
+                    {
+                        pageIndexDic[selectedIndex] = 1;
+                    }
+                    pageIndex = pageIndexDic[selectedIndex];                   
+                        break;
+                case 1:
+                    if(!pageIndexDic.ContainsKey(selectedIndex))
+                    {
+                        pageIndexDic[selectedIndex] = 1;
+                    }
+                    pageIndex = pageIndexDic[selectedIndex];
+                    break;
+            }
+        }
+
+        private void subscribeListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            subscribeScrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
+            if (subscribeScrollViewer != null)
+            {
+                subscribeScrollViewer.ViewChanged += SubscribeScrollViewer_ViewChanged;
+            }
+        }
+
+        private void SubscribeScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (subscribeScrollViewer != null)
+            {
+                if (subscribeScrollViewer.VerticalOffset < DeviceInformationHelper.GetScreenHeight())
+                {
+                    if (topPop.IsOpen)
+                    {
+                        topPop.IsOpen = false;
+                    }
+                }
+                else if (subscribeScrollViewer.VerticalOffset > DeviceInformationHelper.GetScreenHeight())
+                {
+                    if (!topPop.IsOpen)
+                    {
+                        topPop.IsOpen = true;
+                    }
+                }
+            
             }
         }
     }

@@ -219,7 +219,6 @@
     <Content Include="Html\gsAppHTMLTemplate_js\gsAppHTMLTemplate_Video.js" />
     <Content Include="Html\gsAppHTMLTemplate_js\gsVideo.js" />
     <Content Include="Html\gsAppHTMLTemplate_News.html" />
-    <Content Include="Http\代码规范.txt" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

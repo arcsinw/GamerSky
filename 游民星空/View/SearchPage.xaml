@@ -288,8 +288,8 @@
         <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
         <!--BorderBrush-->
         <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
-        <Thickness x:Key="GridMargin">2,0</Thickness>
-        <Thickness x:Key="GridPadding">5</Thickness>
+        <Thickness x:Key="GridMargin">0</Thickness>
+        <Thickness x:Key="GridPadding">0,4</Thickness>
 
         <!--一张图文章模板，包含左边缩略图，右边标题和评论数量-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
@@ -329,6 +329,43 @@
                 </TextBlock>
             </Grid>
         </DataTemplate>
+        <!--有三张图的文章模板-->
+        <DataTemplate x:Key="ThreePicEssayDataTemplate">
+            <Grid Padding="{StaticResource GridPadding}" BorderThickness="{StaticResource BorderThickness}" BorderBrush="{StaticResource BorderBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding title}" Margin="0,0,0,2"/>
+                <Grid Grid.Row="1" MinHeight="80" VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Stretch="Fill" Margin="0,0,1,0">
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
+                        </Image.Source>
+                    </Image>
+                    <Image Grid.Column="1" Stretch="Fill" Margin="0,0,1,0">
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding thumbnailURLs[1]}"/>
+                        </Image.Source>
+                    </Image>
+                    <Image Grid.Column="2" Stretch="Fill">
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding thumbnailURLs[2]}"/>
+                        </Image.Source>
+                    </Image>
+                </Grid>
+                <TextBlock Grid.Row="2" Margin="0,2,0,0" HorizontalAlignment="Right">
+                    <Run Text="评论"/>
+                    <Run Text="{Binding commentsCount}"/>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
     <Page.DataContext>
@@ -360,22 +397,24 @@
             </Button>
         </Grid>
 
-        <Pivot Grid.Row="1" Background="{ThemeResource PageBackground}" x:Name="pivot">
+        <Pivot Grid.Row="1" Background="{ThemeResource PageBackground}" 
+               x:Name="pivot" SelectionChanged="pivot_SelectionChanged">
             <PivotItem Header="新闻" >
                 <Grid>
                     <ListView ItemsSource="{Binding News}"
-                              x:Name="newsListView"
-                              ShowsScrollingPlaceholders="True"
-                              SelectionMode="None"
-                              IsItemClickEnabled="True"
-                              ItemClick="ListView_ItemClick"
-                              Loaded="ListView_Loaded">
+                            x:Name="newsListView"
+                            ShowsScrollingPlaceholders="True"
+                            SelectionMode="None"
+                            IsItemClickEnabled="True"
+                            ItemClick="ListView_ItemClick"
+                            Loaded="newsListView_Loaded">
                         <ListView.ItemTemplateSelector>
-                                <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
-                                                      NoPicDt="{StaticResource NoPicEssayDataTemplate}"
-                                                                      />
+                            <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+                                                    NoPicDt="{StaticResource NoPicEssayDataTemplate}"
+                                                    ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
+                                                    />
                         </ListView.ItemTemplateSelector>
-                        
+
                         <ListView.ItemContainerTransitions>
                             <TransitionCollection>
                                 <AddDeleteThemeTransition />
@@ -390,7 +429,7 @@
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
-                    
+
                     <GridView ItemsSource="{Binding HotNews}" SelectionMode="None" 
                           IsItemClickEnabled="True" Visibility="{Binding NewsGridViewVisibility}"
                           ItemClick="{x:Bind ItemClick}" >
@@ -414,13 +453,12 @@
                         <GridView.ItemContainerStyle>
                             <Style TargetType="GridViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Margin" Value="4"/>
+                                <Setter Property="Margin" Value="0,4,4,0"/>
                                 <Setter Property="MinHeight" Value="0"/>
                             </Style>
                         </GridView.ItemContainerStyle>
                     </GridView>
-
-                    
+   
                 </Grid>
             </PivotItem>
             <PivotItem Header="攻略">
@@ -431,28 +469,28 @@
                               SelectionMode="None"
                               IsItemClickEnabled="True"
                               ItemClick="ListView_ItemClick"
-                              Loaded="ListView_Loaded">
-                        <ListView.ItemTemplateSelector>
-                            <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+                              Loaded="strategysListView_Loaded">
+                            <ListView.ItemTemplateSelector>
+                                <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                                       NoPicDt="{StaticResource NoPicEssayDataTemplate}"
-                                                                      />
-                        </ListView.ItemTemplateSelector>
-                        <ListView.ItemContainerTransitions>
-                            <TransitionCollection>
-                                <AddDeleteThemeTransition />
-                            </TransitionCollection>
-                        </ListView.ItemContainerTransitions>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Margin" Value="0"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
-
-                    <GridView x:Name="strategyListView" ItemsSource="{Binding HotStrategys}" 
+                                                      />
+                            </ListView.ItemTemplateSelector>
+                            <ListView.ItemContainerTransitions>
+                                <TransitionCollection>
+                                    <AddDeleteThemeTransition />
+                                </TransitionCollection>
+                            </ListView.ItemContainerTransitions>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    
+                    <GridView x:Name="strategyGridView" ItemsSource="{Binding HotStrategys}" 
                           Visibility="{Binding StrategysGridViewVisibility}"
                           SelectionMode="None"
                           IsItemClickEnabled="True"
@@ -472,7 +510,7 @@
                         <GridView.ItemContainerStyle>
                             <Style TargetType="GridViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Margin" Value="4"/>
+                                <Setter Property="Margin" Value="0,4,4,0"/>
                                 <Setter Property="MinHeight" Value="0"/>
                             </Style>
                         </GridView.ItemContainerStyle>
@@ -480,7 +518,8 @@
                 </Grid>
             </PivotItem>
             <PivotItem Header="订阅">
-                <ListView x:Name="subscribeListView" ItemsSource="{Binding HotSubscribes}" 
+                <ListView x:Name="subscribeListView" Loaded="subscribeListView_Loaded" 
+                          ItemsSource="{Binding HotSubscribes}" 
                           IsItemClickEnabled="True" ItemClick="subscribeListView_ItemClick"
                           SelectionMode="None" Padding="0" Margin="0"
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
