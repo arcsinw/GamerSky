@@ -507,7 +507,7 @@
                                         <RowDefinition Height="4*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Image Grid.Row="0" Stretch="Fill">
+                                    <Image Grid.Row="0" Stretch="Fill" >
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding thumbnailUrl}"/>
                                         </Image.Source>
@@ -557,13 +557,13 @@
                                         </Image>
                                         <Grid Grid.Column="1" Margin="5,2">
                                             <TextBlock Text="{Binding title}" VerticalAlignment="Top" TextWrapping="Wrap"/>
-                                            <TextBlock  Margin="4" VerticalAlignment="Bottom">
+                                            <TextBlock   VerticalAlignment="Bottom" Margin="0,40,0,0">
                                                 <Run Text="{Binding favoriteCnt}"/>
                                                 <Run Text="人订阅"/>
                                             </TextBlock>
                                         </Grid>
                                         <Button Grid.Column="3"
-                                                HorizontalAlignment="Center" Content="订阅" Click="Button_Click"/>
+                                                HorizontalAlignment="Center" Content="订阅" Click="Subscribe"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -640,7 +640,7 @@
 
         <Button Style="{ThemeResource BackButtonStyle}"
                 HorizontalAlignment="Right"  VerticalAlignment="Top"
-                Click="Button_Click">
+                Click="{x:Bind Search}">
             <Button.Content>
                 <SymbolIcon  Symbol="Find"/>
             </Button.Content>

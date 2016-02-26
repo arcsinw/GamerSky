@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
@@ -129,5 +130,11 @@ namespace 游民星空.Core.ViewModel
             await LoadAllStrategys();
             IsActive = false;
         }
+
+        public async void Subscribe(Strategy strategy)
+        {
+            VerificationCode code = await apiService.EditSubscribe(SubscribeOperateEnum.add, strategy.specialID.ToString());
+
+        }  
     }
 }

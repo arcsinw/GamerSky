@@ -178,7 +178,6 @@
     <None Include="游民星空_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\gsAppHTMLTemplate_css\gsAppHTMLTemplate.css" />
     <Content Include="Assets\gsAppHTMLTemplate_css\base.css" />
     <Content Include="Assets\gsAppHTMLTemplate_image\gsAppHTMLTemplate_Video_Background%402x.png" />
     <Content Include="Assets\gsAppHTMLTemplate_image\gsAppHTMLTemplate_Video_PlayButton%402x.png" />
@@ -198,7 +197,6 @@
     <Content Include="Assets\gsAppHTMLTemplate_js\gsAppHTMLTemplate_Video.js" />
     <Content Include="Assets\gsAppHTMLTemplate_js\gsVideo.js" />
     <Content Include="Assets\gsAppHTMLTemplate_js\gesture.js" />
-    <Content Include="Assets\HTMLPage1.html" />
     <Content Include="Assets\Launch_title.png" />
     <Content Include="Assets\Login_qq.png" />
     <Content Include="Assets\Login_qq_night.png" />

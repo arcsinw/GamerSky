@@ -19,11 +19,11 @@ namespace 游民星空.Core.ViewModel
 
         public SubscribePageViewModel()
         {
+            apiService = new ApiService();
             SubscribeTopic = new ObservableCollection<Essay>();
 
             SubscribeContent = new ObservableCollection<Essay>();
-
-            apiService = new ApiService();
+            
         }
 
   
@@ -32,7 +32,7 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public async Task LoadSubscribeTopic(string nodeIds,int pageIndex)
         {
-            await apiService.GetSubscribeTopic(nodeIds, pageIndex);
+            var essays = await apiService.GetSubscribeTopic(nodeIds, pageIndex);
         }
 
         /// <summary>

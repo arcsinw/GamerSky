@@ -77,7 +77,7 @@ namespace 游民星空.View
             progress.IsActive = false;
         }
         Essay essayResult;
-        private async void AppBarButton_Click(object sender, RoutedEventArgs e)
+        private async void Edge(object sender, RoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
         }
@@ -85,20 +85,20 @@ namespace 游民星空.View
         private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
         {
             //动态加载js
-            var js = @"var myScript = document.createElement(""script"");
-                            myScript.type = ""text/javascript"";
-                            myScript.src=""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js"";
-                            document.body.appendChild(myScript);";
+            //var js = @"var myScript = document.createElement(""script"");
+            //                myScript.type = ""text/javascript"";
+            //                myScript.src=""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js"";
+            //                document.body.appendChild(myScript);";
             //await sender.InvokeScriptAsync("eval", new[] { js });
 
-            js = @"var myScript = document.createElement(""script"");
-                            myScript.type = ""text/javascript"";
-                            myScript.src=""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js"";
-                            document.body.appendChild(myScript);";
+            //js = @"var myScript = document.createElement(""script"");
+            //                myScript.type = ""text/javascript"";
+            //                myScript.src=""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js"";
+            //                document.body.appendChild(myScript);";
             //await sender.InvokeScriptAsync("eval", new[] { js });
 
             //加载v1 css
-            js = @"var myCss = document.createElement(""link"");
+            var js = @"var myCss = document.createElement(""link"");
                     myCss.rel = ""stylesheet"";
                     myCss.type = ""text/css"";
                     myCss.href = ""ms-appx-web:///Assets/gsAppHTMLTemplate_css/base.css"";
@@ -116,17 +116,17 @@ namespace 游民星空.View
             // await sender.InvokeScriptAsync("eval", new[] { js });
 
             //4、动态加载手势
-            js = @"var myScript = document.createElement(""script"");
-                myScript.type = ""text/javascript"";
-                myScript.src = ""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gesture.js"";
-                document.body.appendChild(myScript);
-                window.external.notify(myScript.src+"""");";
+            //js = @"var myScript = document.createElement(""script"");
+            //    myScript.type = ""text/javascript"";
+            //    myScript.src = ""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gesture.js"";
+            //    document.body.appendChild(myScript);
+            //    window.external.notify(myScript.src+"""");";
             //await sender.InvokeScriptAsync("eval", new[] { js });
 
-            //5、为body添加手势监听
-            js = @"var target = document.getElementsByTagName(""body"")[0];
-           prepareTarget(target, eventListener);";
-            //await sender.InvokeScriptAsync("eval", new[] { js });
+            //为body添加手势监听
+           // js = @"var target = document.getElementsByTagName(""body"")[0];
+           //prepareTarget(target, eventListener);";
+           // await sender.InvokeScriptAsync("eval", new[] { js });
 
             //iframe自适应
             js = @"var iframeTags = document.getElementsByTagName(""iframe"");
@@ -179,6 +179,23 @@ namespace 游民星空.View
             }
         }
 
+        /// <summary>
+        /// 后退
+        /// </summary>
+        public async void Back()
+        {
+            await webView.InvokeScriptAsync("eval", new[] { "history.go(-1)" });
+        }
+
+        public async void Refresh()
+        {
+            await webView.InvokeScriptAsync("eval", new[] { "history.go()" });
+        }
+
+        public async void Forward()
+        {
+            await webView.InvokeScriptAsync("eval", new[] { "history.go(1)" });
+        }
 
         private void webView_Holding(object sender, HoldingRoutedEventArgs e)
         {

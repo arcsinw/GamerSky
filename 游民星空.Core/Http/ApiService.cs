@@ -471,6 +471,7 @@ namespace 游民星空.Core.Http
         /// <summary>
         /// 获取订阅专题
         /// </summary>
+        /// <param name="nodeIds">48,51</param>
         /// <returns></returns>
         public async Task<List<Essay>> GetSubscribeTopic(string nodeIds,int pageIndex)
         {

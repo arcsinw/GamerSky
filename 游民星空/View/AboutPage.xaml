@@ -22,7 +22,7 @@
             <TextBlock Text="关于" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
         <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
-            <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
+            <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Margin="{ThemeResource PhonePagePadding}">
                 <StackPanel Padding="8" >
                     <StackPanel.Resources>
                         <Style TargetType="TextBlock">
@@ -30,7 +30,7 @@
                             <Setter Property="Margin" Value="4"/>
                         </Style>
                     </StackPanel.Resources>
-                    <Image Margin="0,20" Source="ms-appx:///Assets/Square150x150Logo.png" 
+                    <Image Margin="0,16" Source="ms-appx:///Assets/Square150x150Logo.png" 
                            Height="110" Width="110"/>
                     <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Center" />
                     <TextBlock Text="{x:Bind Author}" HorizontalAlignment="Center"/>

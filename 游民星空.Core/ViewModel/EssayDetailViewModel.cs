@@ -319,16 +319,16 @@ namespace 游民星空.Core.ViewModel
                 string title = news.title;
                 string subTitle = news.subTitle;
                 
-                List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
+                //List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
 
-                string relatedReadingsHtml = "";
-                if(relatedReadings!= null)
-                {
-                    foreach (var item in relatedReadings)
-                    {
-                        relatedReadingsHtml += "<a href=\"" + item.contentId + "\"><div class=\"Row\"><div>" + item.title + "</div></div></a>";
-                    }
-                }
+                //string relatedReadingsHtml = "";
+                //if(relatedReadings!= null)
+                //{
+                //    foreach (var item in relatedReadings)
+                //    {
+                //        relatedReadingsHtml += "<a href=\"" + item.contentId + "\"><div class=\"Row\"><div>" + item.title + "</div></div></a>";
+                //    }
+                //}
 
                
                 HtmlString = "<!DOCTYPE html>" +
@@ -351,7 +351,7 @@ namespace 游民星空.Core.ViewModel
                                   "<div class=\"list\" id=\"gsTemplateContent_RelatedReading\">" +
                                         "<div class=\"tit yellow\">相关阅读</div>" +//相关阅读
                                         "<div class=\"txtlist\" id=\"gsTemplateContent_RelatedReadingContent\">" +
-                                            relatedReadingsHtml+
+                                             
                                         "</div>"+
                                   "</div>" +
                                   "<div class=\"list\" id=\"gsTemplateContent_Comments\" >"+

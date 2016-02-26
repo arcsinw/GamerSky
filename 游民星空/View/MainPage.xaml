@@ -69,13 +69,13 @@
         </DataTemplate>
         <!--一张图文章模板-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid Margin="2,0" Padding="5" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+            <Grid Margin="2,0" Padding="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
+                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
                     <!--Source="{Binding Thumbnails[0]}">-->
                     <Image.Source>
                         <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
@@ -84,7 +84,7 @@
 
                 <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
                     <TextBlock Text="{Binding title}" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
                                 <Run Text="{Binding commentsCount}"/>
                                 <Run Text="评论"/>
                     </TextBlock>

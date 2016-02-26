@@ -11,6 +11,10 @@
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}">
 
+    <Page.DataContext>
+        <vm:SubscribePageViewModel x:Name="viewModel"/>
+    </Page.DataContext>
+    
     <Page.Resources>
 
         <ItemsPanelTemplate x:Key="GridViewItemsPanel" x:Name="GridViewItemsPanel">
@@ -31,7 +35,30 @@
         <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
         <!--BorderBrush-->
         <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
+        <!--一张图文章模板-->
+        <DataTemplate x:Key="OnePicEssayDataTemplate">
+            <Grid Margin="2,0" Padding="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
 
+                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
+                    <!--Source="{Binding Thumbnails[0]}">-->
+                    <Image.Source>
+                        <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
+                    </Image.Source>
+                </Image>
+
+                <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
+                    <TextBlock Text="{Binding title}" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
+                                <Run Text="{Binding commentsCount}"/>
+                                <Run Text="评论"/>
+                    </TextBlock>
+                </Grid>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -39,81 +66,31 @@
         <Pivot x:Name="pivot"  Background="{ThemeResource PageBackground}"
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="订阅内容" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
-                <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
-                    <GridView ItemsSource="{Binding FocusStrategys}" Padding="8"
-                          ItemsPanel="{StaticResource GridViewItemsPanel}"
-                          SelectionMode="None"
-                          ShowsScrollingPlaceholders="True"
-                              IsItemClickEnabled="True"
-                              ItemClick="GridView_ItemClick">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup>
-                                <VisualState x:Name="Narrow">
-
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger MinWindowWidth="480"/>
-                                    </VisualState.StateTriggers>
-
-                                    <VisualState.Setters>
-                                        <Setter Target="GridViewItemsPanel.MaximumRowsOrColumns" Value="2"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-
-                                <VisualState x:Name="Medium">
-                                    <VisualState.StateTriggers>
-                                        <AdaptiveTrigger  MinWindowWidth="720"/>
-                                    </VisualState.StateTriggers>
-
-                                    <VisualState.Setters>
-                                        <Setter Target="GridViewItemsPanel.MaximumRowsOrColumns" Value="4"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-
-                        <GridView.Template>
-                            <ControlTemplate>
-                                <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
-                                    <Viewbox Stretch="Uniform" Margin="8" VerticalAlignment="Stretch" 
-                                             ScrollViewer.VerticalScrollMode="Enabled" StretchDirection="Both" >
-                                        <ItemsPresenter  />
-                                    </Viewbox>
-                                </ScrollViewer>
-                            </ControlTemplate>
-                        </GridView.Template>
-
-                        <GridView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="4*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Image Grid.Row="0" Stretch="Fill">
-                                        <Image.Source>
-                                            <BitmapImage UriSource="{Binding thumbnailUrl}"/>
-                                        </Image.Source>
-                                    </Image>
-                                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="{Binding title}" TextWrapping="Wrap"/>
-                                    <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
-                                       Width="30"
-                                       HorizontalAlignment="Right" VerticalAlignment="Top"/>
-                                </Grid>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
-                <!--</pr:PullToRefreshBox>-->
+             
             </PivotItem>
-            <PivotItem Header="订阅专题" Padding="0,8,0,0">
-                <ListView>
+            <PivotItem Header="订阅专题" Margin="0" Padding="0">
+                <ListView Padding="{ThemeResource PhonePagePadding}">
                     <ListView.Header>
                         <AutoSuggestBox PlaceholderText="搜索" QueryIcon="Find"/>    
                     </ListView.Header>
-                    <!--<ListView.ItemTemplate>
+                    <ListView.ItemTemplate>
                         <DataTemplate>
-                            
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <TextBlock />
+                                    <TextBlock />
+                                </Grid>
+                                <ListView ItemsSource="{Binding SubscribeTopic}" Grid.Row="1"
+                                          ItemTemplate="{StaticResource OnePicEssayDataTemplate}">
+                                    
+                                </ListView>
+                            </Grid>
                         </DataTemplate>
-                    </ListView.ItemTemplate>-->
+                    </ListView.ItemTemplate>
                     <ListView.Footer>
                         <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0" Click="Button_Click">
                             <Button.Content>

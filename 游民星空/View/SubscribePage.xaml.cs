@@ -27,9 +27,17 @@ namespace 游民星空.View
             this.InitializeComponent();
         }
 
-        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            switch(pivot.SelectedIndex)
+            {
+                case 0:
+                    await viewModel.LoadSubscribeContent("48", 1);
+                    break;
+                case 1:
+                    await viewModel.LoadSubscribeTopic("48", 1);
+                    break;
+            }
         }
 
         private void PivotItem_SizeChanged(object sender, SizeChangedEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -96,10 +97,24 @@ namespace 游民星空.View
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 订阅一个频道
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Subscribe(object sender, RoutedEventArgs e)
+        {
+            Strategy data = (e.OriginalSource as Button).DataContext as Strategy;
+            if (data != null)
+            {
+                ViewModel.Subscribe(data);
+            }
+        }
+
+        private void Search(object sender, RoutedEventArgs e)
         {
             (Window.Current.Content as Frame)?.Navigate(typeof(SearchPage));
-            //this.Frame.Navigate(typeof(SearchPage));
+            
         }
 
         private void PivotItem_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -114,7 +129,7 @@ namespace 游民星空.View
             }
             catch(Exception ex)
             {
-
+                Debug.WriteLine("StrategyPage.xaml.cs"+ex.Message);
             }
         }
 

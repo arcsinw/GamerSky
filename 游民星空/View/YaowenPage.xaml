@@ -24,23 +24,24 @@
         <Thickness x:Key="GridMargin">2,0</Thickness>
         <Thickness x:Key="GridPadding">5</Thickness>
 
-        <!--一张图文章模板，包含左边缩略图，右边标题和评论数量-->
+        <!--一张图文章模板-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+            <Grid Margin="2,0" Padding="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
+                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
+                    <!--Source="{Binding Thumbnails[0]}">-->
                     <Image.Source>
                         <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
                     </Image.Source>
                 </Image>
 
                 <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
-                    <TextBlock Text="{Binding title}" VerticalAlignment="Top" TextWrapping="Wrap" />
-                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <TextBlock Text="{Binding title}" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
                                 <Run Text="{Binding commentsCount}"/>
                                 <Run Text="评论"/>
                     </TextBlock>
