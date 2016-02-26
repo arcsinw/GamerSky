@@ -40,8 +40,8 @@ a:focus{outline:none;}
 div,ul,li {overflow:hidden;}
 ul {margin:0;padding:0;list-style-type:none;}
 li {list-style-type:none;vertical-align:middle;}
-h1{font-size:24px;}
-.heading {margin:0 10px; padding:4px; top:22px; line-height:28px; color:#333;}
+h1{font-size:20px;}
+.heading {margin:0 10px; padding:0px; top:22px; line-height:28px; color:#333;}
 	.PageColorMode_Day .heading {color:#333;}
 	.PageColorMode_Night .heading {color:#966122;}
 .bar {margin:10px 10px 0; width:auto; height:1px;}
@@ -126,78 +126,7 @@ table {color:#ccc;}
 /*------------------------------------------------ -x68
 	图片容器
 ------------------------------------------------ -x68*/
-.ImgBoxer {display:inline-block; float:none; text-align:center;}
-.ImgBoxer img {float:left;}
-.ImgBoxerStatusBar
-{
-	display:inline;
-	visibility: hidden;
-	float:left;
-	margin:-44px 0px 0px 0px;
-	width:100%;
-	height:44px;
-	line-height:40px;
-	text-align:right;
-}
-.ImgBoxerStatusBar .ImgSetLogo
-{
-	float:right;
-	/*margin:10px 0px 0px 0px;*/
-    margin: 0px;
-	/*width:auto;*/
-    width: 100%;
-	height: 44px;
-	background-image: url(../gsAppHTMLTemplate_image/imgSet_BottomBarBackground@2x.png);
-	background-size: 350px 44px;
-	background-repeat: no-repeat;
-	background-position: center top;
-    /*padding: 0px 10px 0px 10px;*/
-    padding: 0px;
-	line-height: 44px;
-	text-align: center;
-	font-size: 18px;
-	font-weight: bold;
-	color: #fff;
-}
-.ImgBoxerStatusBar .ImgSetLogo .Icon
-{
-    background-image: url(../gsAppHTMLTemplate_image/imgSet_ExpandIcon@2x.png);
-    background-size: 25px 20px;
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-.ImgBoxerStatusBar .ImgSetLogo .Caption
-{
-    font-size: 16px;
-    color: #ffffff;
-}
-.ImgBoxerStatusBar .GIFLogo
-{
-	float:right;
-	margin:7px 0px 0px 0px;
-	width:60px;
-	height:37px;
-	background-image:url(../gsAppHTMLTemplate_image/img_Badge_GIF@2x.png);
-	background-size:100% 100%;
-}
-.ImgSetBoxer {margin:0px 10px 10px 2px; box-shadow:0px 0px 1px #000;}
-.ImgSetBoxer img{width:100%;}
-.ImgSetWhitePage {margin:0px 10px 0px 0px; box-shadow:0px 0px 1px #000;}
-	.PageColorMode_Day .ImgSetWhitePage {background-color:#eee}
-	.PageColorMode_Night .ImgSetWhitePage {background-color:#2c2c2c}
-.GSTemplateImageLoader {display:none;}
-#gsTemplateContent_MainBody {line-height:150%;}
-#gsTemplateContent_MainBody p {display:block;}
-#gsTemplateContent_MainBody img {display:none; visibility:hidden;}
-#gsTemplateContent_MainBody #youkuplayer0 img {display:inherit; visibility:visible;}
 
-#gsTemplateContent_RelatedReading {display:none;}
-#gsTemplateContent_RelatedReadingContent {margin-left:-10px; margin-right:-10px;}
-#gsTemplateContent_RelatedReadingContent .Row {padding:0px;}
-#gsTemplateContent_RelatedReadingContent .Row div {margin:0px 10px 0px 10px; white-space:nowrap; text-overflow:ellipsis;}
-#gsTemplateContent_RelatedReadingContent .Button {text-align:center; color:#888;}
-	.PageColorMode_Day #gsTemplateContent_RelatedReadingContent .Button {color:#888;}
-	.PageColorMode_Night #gsTemplateContent_RelatedReadingContent .Button {color:#5a5a60;}
 /*------------------------------------------------ -x68
 	专栏作者信息
 ------------------------------------------------ -x68*/

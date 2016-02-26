@@ -635,6 +635,7 @@
                 </SemanticZoom>
             </PivotItem>
 
+       
         </Pivot>
 
         <Button Style="{ThemeResource BackButtonStyle}"

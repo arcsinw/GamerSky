@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
@@ -46,6 +48,7 @@ namespace 游民星空.View
         /// <param name="args"></param>
         private void WebView_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
         {
+            //args.Handled = true;
             if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
             {
                
@@ -54,6 +57,7 @@ namespace 游民星空.View
             {
                 webView.Navigate(args.Uri);
             }
+
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -78,20 +82,107 @@ namespace 游民星空.View
             await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
         }
 
-        //private void webView_Loaded(object sender, RoutedEventArgs e)
-        //{
-            
-        //}
+        private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
+        {
+            //动态加载js
+            var js = @"var myScript = document.createElement(""script"");
+                            myScript.type = ""text/javascript"";
+                            myScript.src=""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js"";
+                            document.body.appendChild(myScript);";
+            //await sender.InvokeScriptAsync("eval", new[] { js });
 
-        //private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
-        //{
-        //    News news = await new ApiService().ReadEssay(essayResult.contentId);
-        //    if (news != null)
-        //    {
-        //        await webView.InvokeScriptAsync("setContent", new[] { news.result.mainBody });
-        //        await webView.InvokeScriptAsync("setTitle", new[] { news.result.title });
-        //        await webView.InvokeScriptAsync("setSubTitle", new[] { news.result.subTitle });
-        //    }
-        //}
+            js = @"var myScript = document.createElement(""script"");
+                            myScript.type = ""text/javascript"";
+                            myScript.src=""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js"";
+                            document.body.appendChild(myScript);";
+            //await sender.InvokeScriptAsync("eval", new[] { js });
+
+            //加载v1 css
+            js = @"var myCss = document.createElement(""link"");
+                    myCss.rel = ""stylesheet"";
+                    myCss.type = ""text/css"";
+                    myCss.href = ""ms-appx-web:///Assets/gsAppHTMLTemplate_css/base.css"";
+                    document.body.appendChild(myCss)";
+            await sender.InvokeScriptAsync("eval", new[] { js });
+
+            //3、调用js执行自定义代码（为图片添加点击事件，并通知）
+            // js = @"var imgs = document.getElementsByTagName(""img"");
+            //for (var i = 0, len = imgs.length; i < len; i++) {
+            //    imgs[i].onclick = function (e) {
+            //        var jsonObj = { type: 'image', content1: this.src };
+            //        window.external.notify(JSON.stringify(jsonObj));
+            //    };
+            //}";
+            // await sender.InvokeScriptAsync("eval", new[] { js });
+
+            //4、动态加载手势
+            js = @"var myScript = document.createElement(""script"");
+                myScript.type = ""text/javascript"";
+                myScript.src = ""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gesture.js"";
+                document.body.appendChild(myScript);
+                window.external.notify(myScript.src+"""");";
+            //await sender.InvokeScriptAsync("eval", new[] { js });
+
+            //5、为body添加手势监听
+            js = @"var target = document.getElementsByTagName(""body"")[0];
+           prepareTarget(target, eventListener);";
+            //await sender.InvokeScriptAsync("eval", new[] { js });
+
+            //iframe自适应
+            js = @"var iframeTags = document.getElementsByTagName(""iframe"");
+            for (var iframeTagIndex = 0;
+                iframeTagIndex < iframeTags.length;
+                iframeTagIndex++)
+                    {
+                        var iframeTag = iframeTags[iframeTagIndex];
+                        iframeTag.removeAttribute(""style"");
+                        iframeTag.height = document.body.clientWidth * (9 / 16);
+                        iframeTag.width = document.body.clientWidth;
+                    }
+
+                    var embedTags = document.getElementsByTagName(""embed"");
+                    for (var embedTagIndex = 0;
+                         embedTagIndex < embedTags.length;
+                         embedTagIndex++)
+                    {
+                        var embedTag = embedTags[embedTagIndex];
+                        embedTag.removeAttribute(""style"");
+                        embedTag.height = document.body.clientWidth * (9 / 16);
+                        embedTag.width = document.body.clientWidth;
+                    }";
+            await sender.InvokeScriptAsync("eval", new[] { js });
+        }
+
+        private void webView_ScriptNotify(object sender, NotifyEventArgs e)
+        {
+            var model = Functions.Deserlialize<JSParameter>(e.Value);
+            if (model == null) return;
+            switch (model.type)
+            {
+                case "image":
+                   
+                    break;
+                case "swiperight":
+                    //右滑
+                    if (Frame.CanGoBack)
+                    {
+                        Frame.GoBack();
+                    }
+                    break;
+                case "swipeleft":
+                    //左滑
+                  
+                    break;
+                case "text":
+                   
+                    break;
+            }
+        }
+
+
+        private void webView_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+
+        }
     }
 }

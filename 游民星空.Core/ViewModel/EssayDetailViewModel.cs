@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
@@ -168,7 +169,7 @@ namespace 游民星空.Core.ViewModel
                 string baseCss = "<style>"
                        + "html{-ms-content-zooming:none;font-family:微软雅黑;}"
                        + ".author{font-weight:bold;} .bio{color:gray;}"
-                       + "body{padding:8px;word-break:break-all;} p{margin:10px auto;} a{color:skyblue;}"
+                       + "body{padding:4px;word-break:break-all;} p{margin:10px auto;} a{color:skyblue;}"
                        + "body{line-height:120%; font:normal 100% Helvetica, Arial, sans-serif;}"
                        + "img{height:auto;width:auto;width:100%}"
                        + "h1{ text-align:left; font-size:1em;}" //标题栏
@@ -191,7 +192,7 @@ namespace 游民星空.Core.ViewModel
 	                    ".PageColorMode_Day.bar {background-color:#eaeaea;}"+
 	                    ".PageColorMode_Night.bar {background-color:#2a2e38;}"+
                         ".adnone { display: none;}"+
-                        ".info{margin: 0 10px; padding: 0px 4px; line-height:22px; color: gray; font-size:14px; color:#848484;}"+
+                        ".info{margin: 0 0px; padding: 0px 4px; line-height:22px; color: gray; font-size:14px; color:#848484;}"+
 	                    ".PageColorMode_Day.info {color:#848484;}"+
 	                    ".PageColorMode_Night.info {color:#464950;}"+
                         "</style>";
@@ -305,15 +306,16 @@ namespace 游民星空.Core.ViewModel
                 string head = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset = utf-8\" />"
                             + "<meta name=\"viewport\" content=\"width= device-width, user-scalable = no\" />"
                             + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
-                            + "<meta name=\"msapplication-tap-highlight\" content=\"no\">" //wp点击无高光;
-                            + "<link type=\"text/css\" rel=\"stylesheet\" href=\"../Html/gsAppHTMLTemplate_css/gsAppHTMLTemplate.css\"/>"
-                            +"<script type=\"text/javascript\" src=\"gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>";
+                            + "<meta name=\"msapplication-tap-highlight\" content=\"no\">"; //wp点击无高光;
+                            //+ "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/gsAppHTMLTemplate_css/gsAppHTMLTemplate.css\"/>";
+                            //+ "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>";
 
-                string videoJs = "<script src=\"../Html/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>" +
-                  "<script src=\"../Html/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js\"></script>" +
-                  "<script src=\"../Html/gsAppHTMLTemplate_js/gsVideo.js\"></script>"+
-                  "<link href=\"../Html/gsAppHTMLTemplate_css/gsAppHTMLTemplate.css\" rel=\"stylesheet\" type=\"text/css\"/>";
+                string videoJs = "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>" +
+                  "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js\"></script>" +                 
+                  "<link href=\"ms-appx-web:///Assets/gsAppHTMLTemplate_css/gsAppHTMLTemplate.css\" rel=\"stylesheet\" type=\"text/css\"/>";
+                //"<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsVideo.js\"></script>" +
 
+                
                 string title = news.title;
                 string subTitle = news.subTitle;
                 
@@ -327,15 +329,13 @@ namespace 游民星空.Core.ViewModel
                         relatedReadingsHtml += "<a href=\"" + item.contentId + "\"><div class=\"Row\"><div>" + item.title + "</div></div></a>";
                     }
                 }
-                   
-                // < a href =\"" + relatedReadingURL + "\"><div class=\"Row\"><div>" + relatedReading.title + "</div></div></a>
 
-
+               
                 HtmlString = "<!DOCTYPE html>" +
                     "<html>" +
-                        "<head>" + head + baseCss+listcss+ videoCss+ relatedReadingsCss+ relatedTopicCss+"</head>" +
+                        "<head>" +head+baseCss+ "</head>" +
                         "<body quick-markup_injected=\"true\">"+
-                            "<GSAppHTMLTemplate version=\"1.4.6\"/>"+ 
+                            "<GSAppHTMLTemplate version=\"1.4.6\"/>"+
                              "<div id=\"body\" class=\"fontsizetwo\">"+
                                   "<h1 class=\"heading\" id=\"gsTemplateContent_Title\">" + title + "</h1>" +
                                   "<span class=\"info\" id=\"gsTemplateContent_Subtitle\">" + subTitle + "</span>" +
@@ -359,25 +359,9 @@ namespace 游民星空.Core.ViewModel
                         "</div>" +
                         "</body>" +
                     "</html>";
-                    
-                   // HtmlString = "<!DOCTYPE html><html><head>"+head+videoJs+css+videoCss+"</head>" +
-                   // "<body>" +
-                   //     "<div id=\"body\" class=\"fontsizetwo\">"+
-                   //               "<h1 class=\"heading\" id=\"gsTemplateContent_Title\">" + title + "</h1>" +
-                   //               "<span class=\"info\" id=\"gsTemplateContent_Subtitle\">" + subTitle + "</span>" +
-                   //               "<div class=\"bar\"></div>" +
-                   //               "<div class=\"content\" id=\"gsTemplateContent_MainBody\">" + mainBody + "</div>" +
-                   //               "<div class=\"list\" id=\"gsTemplateContent_RelatedReading\">" +
-                   //                     "<div class=\"tit yellow\">相关阅读</div>" +//相关阅读
-                   //                     "<div class=\"txtlist\" id=\"gsTemplateContent_RelatedReadingContent\">" +"</div>"+
-                   //               "</div>" +
-                   //     "</div>" +
-                   //"</body>" +
-                   //"</html>";
-
+                
             }
-            //IsActive = false;
-
+     
         }
 
     }

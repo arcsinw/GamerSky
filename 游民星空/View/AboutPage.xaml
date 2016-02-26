@@ -34,12 +34,16 @@
                            Height="110" Width="110"/>
                     <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Center" />
                     <TextBlock Text="{x:Bind Author}" HorizontalAlignment="Center"/>
-                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center">
-                        <Run Text="还没写完，侵权就下架"/>
-                    </TextBlock>
+                    <TextBlock Text="还没写完，侵权就下架" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                        
                     <TextBlock HorizontalAlignment="Center" x:Name="qqTextBlock" Tapped="{x:Bind CopyToClipboard}" Text="473967668"  />
-                    <HyperlinkButton Content="评论" NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
+                    <HyperlinkButton Content="评论" FontSize="20" NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
                                      HorizontalAlignment="Center"/>
+                    <!--<TextBlock HorizontalAlignment="Center">
+                        <Run>感谢</Run><LineBreak/>
+                        <Run>PullToRefresh.UWP</Run><LineBreak/>
+                        <Run>AsyncTaskTraceEx</Run>
+                    </TextBlock>-->
                 </StackPanel>
             </ScrollViewer>
         </Grid>

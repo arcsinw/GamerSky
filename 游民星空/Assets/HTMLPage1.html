@@ -1,0 +1,626 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, user-scalable=no' />
+    <title></title>
+    <style type='text/css'>
+        .heading {
+            top: 22px;
+            margin: 0;
+            padding: 4px;
+        }
+
+        .heading_on_night {
+            color: #aa6e16;
+        }
+
+        table {
+            color: #cccccc;
+        }
+
+        h1 {
+            font-size: 20px;
+        }
+
+        .info {
+            color: gray;
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .info_on_night {
+            color: #7c6b4f;
+        }
+
+        .bar {
+            height: 1px;
+            width: auto;
+            background-color: #eaeaea;
+            margin-top: 4px;
+            margin-bottom: 0px;
+        }
+
+        .bar_on_night {
+            background-color: #303037;
+        }
+
+        .night_bg {
+            background-color: #201F25;
+            color: #5F5F69;
+            line-height: 24px;
+            padding: 0px 2px;
+        }
+
+        .fontsizeone {
+            font-size: 15px;
+        }
+
+        .fontsizetwo {
+            font-size: 17px;
+        }
+
+        .fontsizethree {
+            font-size: 20px;
+        }
+        /*游民评测*/
+        /*橙色版本*/
+        .review_Table1 {
+            width: 100%;
+            height: 194px;
+            border: 0;
+            border-collapse: collapse;
+            background: #282a2d;
+        }
+
+            .review_Table1 .review_td1 {
+                width: 100%;
+                height: 25px;
+                background: url(http://img.gamersky.com/webimg08/review_bg.gif);
+                overflow: hidden;
+            }
+
+            .review_Table1 .review_td2 {
+                width: 20%;
+                line-height: 56px;
+                color: #fff;
+                font-size: 40px;
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+                background-color: #171717;
+            }
+
+            .review_Table1 .review_td3 {
+                width: 80%;
+                height: 16px;
+                vertical-align: top;
+                color: #fff;
+                font-size: 16px;
+                font-weight: bold;
+                text-align: left;
+                background-color: #d8602e;
+                padding-left: 8px;
+                padding-top: 8px;
+            }
+
+            .review_Table1 .review_td4 {
+                width: 80%;
+                height: 20px;
+                color: #fff;
+                font-size: 12px;
+                text-align: left;
+                background-color: #d8602e;
+                padding-left: 8px;
+            }
+
+            .review_Table1 .review_td5 {
+                width: 20%;
+                height: auto;
+            }
+
+            .review_Table1 .review_td6 {
+                width: 80%;
+                height: 70px;
+                line-height: 22px;
+                font-size: 14px;
+                font-family: '宋体';
+                color: #ccc;
+                padding: 8px 4px 0 0;
+                text-indent: 2em;
+            }
+
+            .review_Table1 .review_td7 {
+                line-height: 28px;
+                font-size: 28px;
+                font-family: '黑体';
+                font-weight: bold;
+                color: #EC7339;
+                padding-bottom: 5px;
+                text-align: center;
+                writing-mode: tb-rl;
+            }
+
+            .review_Table1 .review_td8 {
+                width: 100%;
+                height: 25px;
+                background: url(http://img.gamersky.com/webimg08/review_bg.gif);
+                overflow: hidden;
+            }
+
+        .review_Table2 {
+            width: 100%;
+            height: auto;
+            border: 0;
+            background-color: #282a2d;
+            border-bottom: 3px solid #c75028;
+        }
+
+            .review_Table2 .review_td1, .review_Table2 .review_td2, .review_Table2 .review_td3, .review_Table2 .review_td4 {
+                width: 50%;
+                color: #ccc;
+                text-align: left;
+                padding-bottom: 4px;
+                height: auto;
+                vertical-align: top;
+            }
+
+            .review_Table2 .review_td1, .review_Table2 .review_td2 {
+                background: url(http://img.gamersky.com/webimg08/review_good.gif) no-repeat center;
+            }
+
+            .review_Table2 .review_td3, .review_Table2 .review_td4 {
+                background: url(http://img.gamersky.com/webimg08/review_bad.gif) no-repeat center;
+            }
+
+            .review_Table2 .review_td1, .review_Table2 .review_td3 {
+                padding-left: 32px;
+                background-position: 8px 0;
+            }
+
+            .review_Table2 .review_td2, .review_Table2 .review_td4 {
+                padding-left: 26px;
+                background-position: 0 0;
+            }
+
+            .review_Table2 .review_td5 {
+                width: auto;
+                height: 14px;
+                background: url(http://img.gamersky.com/webimg08/review_10.jpg) 0 0 no-repeat;
+                overflow: hidden;
+                padding-right: 8px;
+            }
+
+            .review_Table2 .review_td6 {
+                width: 100%;
+                height: 5px;
+            }
+
+
+        /*蓝色版本*/
+
+        .review_blue_Table1 {
+            width: 100%;
+            height: 194px;
+            border: 0;
+            border-collapse: collapse;
+            background: #282a2d;
+        }
+
+            .review_blue_Table1 .review_td1 {
+                width: 100%;
+                height: 25px;
+                background: url(http://img.gamersky.com/webimg08/review_bg.gif);
+                overflow: hidden;
+            }
+
+            .review_blue_Table1 .review_td2 {
+                width: 20%;
+                line-height: 56px;
+                color: #fff;
+                font-size: 40px;
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+                background-color: #171717;
+            }
+
+            .review_blue_Table1 .review_td3 {
+                width: 80%;
+                height: 16px;
+                vertical-align: top;
+                color: #fff;
+                font-size: 16px;
+                font-weight: bold;
+                text-align: left;
+                background-color: #059dc2;
+                padding-left: 8px;
+                padding-top: 8px;
+            }
+
+            .review_blue_Table1 .review_td4 {
+                width: 80%;
+                height: 20px;
+                color: #fff;
+                font-size: 12px;
+                text-align: left;
+                background-color: #059dc2;
+                padding-left: 8px;
+            }
+
+            .review_blue_Table1 .review_td5 {
+                width: 20%;
+                height: auto;
+            }
+
+            .review_blue_Table1 .review_td6 {
+                width: 80%;
+                height: 70px;
+                line-height: 22px;
+                font-size: 14px;
+                font-family: '宋体';
+                color: #ccc;
+                padding: 8px 4px 0 0;
+                text-indent: 2em;
+            }
+
+            .review_blue_Table1 .review_td7 {
+                line-height: 28px;
+                font-size: 28px;
+                font-family: '黑体';
+                font-weight: bold;
+                color: #059dc2;
+                padding-bottom: 5px;
+                text-align: center;
+                writing-mode: tb-rl;
+            }
+
+            .review_blue_Table1 .review_td8 {
+                width: 100%;
+                height: 25px;
+                background: url(http://img.gamersky.com/webimg08/review_bg.gif);
+                overflow: hidden;
+            }
+
+
+        .review_blue_Table2 {
+            width: 100%;
+            height: auto;
+            border: 0;
+            background-color: #282a2d;
+            border-bottom: 3px solid #059dc2;
+        }
+
+            .review_blue_Table2 .review_td1, .review_blue_Table2 .review_td2, .review_blue_Table2 .review_td3, .review_blue_Table2 .review_td4 {
+                width: 50%;
+                color: #ccc;
+                text-align: left;
+                padding-bottom: 4px;
+                height: auto;
+                vertical-align: top;
+            }
+
+            .review_blue_Table2 .review_td1, .review_blue_Table2 .review_td2 {
+                background: url(http://img.gamersky.com/webimg08/review_good.gif) no-repeat center;
+            }
+
+            .review_blue_Table2 .review_td3, .review_blue_Table2 .review_td4 {
+                background: url(http://img.gamersky.com/webimg08/review_bad.gif) no-repeat center;
+            }
+
+            .review_blue_Table2 .review_td1, .review_blue_Table2 .review_td3 {
+                padding-left: 32px;
+                background-position: 8px 0;
+            }
+
+            .review_blue_Table2 .review_td2, .review_blue_Table2 .review_td4 {
+                padding-left: 26px;
+                background-position: 0 0;
+            }
+
+            .review_blue_Table2 .review_td5 {
+                width: auto;
+                height: 14px;
+                background: url(http://img.gamersky.com/webimg08/review_10.jpg) 0 0 no-repeat;
+                overflow: hidden;
+                padding-right: 8px;
+            }
+
+            .review_blue_Table2 .review_td6 {
+                width: 100%;
+                height: 5px;
+            }
+
+        .section {
+            width: 96%;
+            min-width: 300px;
+            padding: 12px 2%;
+            height: auto;
+            background-color: #F4F4F4;
+            overflow: hidden;
+        }
+
+            .section .art {
+                margin-bottom: 8px;
+                width: 100%-10px;
+                height: auto;
+                overflow: hidden;
+            }
+
+                .section .art .head1 {
+                    float: left;
+                    width: 64px;
+                    height: 64px;
+                    margin-right: 10px;
+                    overflow: hidden;
+                    border-radius: 5px;
+                    margin: 0px 6px;
+                }
+
+                    .section .art .head1 a img {
+                        width: 64px;
+                        height: 64px;
+                    }
+
+                .section .art .wubta .head2 .tit {
+                    color: #666;
+                    width: auto;
+                    overflow: hidden;
+                    display: block;
+                    float: left;
+                }
+
+                .section .art .wubta .head2_coed .tit_coed {
+                    width: auto;
+                    height: 20px;
+                    overflow: hidden;
+                    float: left;
+                }
+
+                .section .art .wubta .head2_coed .author_coed, .section .art .wubta .head2 .author {
+                    width: auto;
+                    min-width: 138px;
+                    height: auto;
+                    overflow: hidden;
+                    color: #FD7F41;
+                    display: block;
+                }
+
+                .section .art .wubta .head2_coed .coed {
+                    margin-top: 5px;
+                }
+
+                .section .art .head3 {
+                    width: auto;
+                    min-width: 300px;
+                    height: auto;
+                    overflow: hidden;
+                    font-size: 16px;
+                    color: #333;
+                    border-top: solid 1px #E2E2E2;
+                    padding-top: 10px;
+                    clear: both;
+                    margin-top: 10px;
+                }
+
+            .section .head1 a .mask {
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                z-index: -9999;
+                background: none;
+            }
+
+            .section .art .wubta .head2_coed .more, .section .art .wubta .head2 .more {
+                display: none;
+            }
+
+            .section .art .wubta .head2_coed .wlaut_coed, .section .art .wubta .head2 .wlaut {
+                color: #FD7F41;
+            }
+
+            .section .art .wubta {
+                width: 75%;
+                height: 64px;
+            }
+
+                .section .art .wubta tr {
+                    height: auto;
+                    width: 75%;
+                }
+
+                    .section .art .wubta tr td {
+                        height: auto;
+                    }
+    </style>
+    <script type="text/javascript">
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+                for (var x = 0; x < document.getElementsByTagName("img").length; x++) {
+                    if (document.getElementsByTagName("img")[x].width > document.body.clientWidth) {
+                        document.getElementsByTagName("img")[x].width = document.body.clientWidth;
+                    }
+                }
+                for (var m = 0; m < document.getElementsByTagName("span").length; m++) {
+                    //红色
+                    if (document.getElementsByTagName("span")[m].style.color == "rgb(255, 0, 0)" || document.getElementsByTagName("span")[m].style.color == "#ff0000") {
+                        document.getElementsByTagName("span")[m].style.color = "#d26217";
+                    }
+                    if (document.getElementsByTagName("span")[m].color == "rgb(255, 0, 0)" || document.getElementsByTagName("span")[m].color == "#ff0000") {
+                        document.getElementsByTagName("span")[m].color = "#d26217";
+                    }
+                    //黄色
+                    if (document.getElementsByTagName("span")[m].color == "#ffcc00" || document.getElementsByTagName("span")[m].color == "rgb(255, 204, 0)") {
+                        document.getElementsByTagName("span")[m].color = "#d26217";
+                    }
+                    if (document.getElementsByTagName("span")[m].style.color == "#ffcc00" || document.getElementsByTagName("span")[m].style.color == "rgb(255, 204, 0)") {
+                        document.getElementsByTagName("span")[m].style.color = "#d26217";
+                    }
+                    //翠绿色替换
+                    if (document.getElementsByTagName("span")[m].color == "#00ee00" || document.getElementsByTagName("span")[m].color == "rgb(0, 238, 0)") {
+                        document.getElementsByTagName("span")[m].color = "#228B22";
+                    }
+                    if (document.getElementsByTagName("span")[m].style.color == "#00ee00" || document.getElementsByTagName("span")[m].style.color == "rgb(0, 238, 0)") {
+                        document.getElementsByTagName("span")[m].style.color = "#228B22";
+                    }
+                }
+                for (var t = 0; t < document.getElementsByTagName("strong").length; t++) {
+                    //红色
+                    if (document.getElementsByTagName("strong")[t].style.color == "rgb(255, 0, 0)" || document.getElementsByTagName("strong")[t].style.color == "#ff0000") {
+                        document.getElementsByTagName("strong")[t].style.color = "#d26217";
+                    }
+                    if (document.getElementsByTagName("strong")[t].color == "rgb(255, 0, 0)" || document.getElementsByTagName("strong")[t].color == "#ff0000") {
+                        document.getElementsByTagName("strong")[t].color = "#d26217";
+                    }
+                    //黄色
+                    if (document.getElementsByTagName("strong")[t].color == "#ffcc00" || document.getElementsByTagName("strong")[t].color == "rgb(255, 204, 0)") {
+                        document.getElementsByTagName("strong")[t].color = "#d26217";
+                    }
+                    if (document.getElementsByTagName("strong")[t].style.color == "#ffcc00" || document.getElementsByTagName("strong")[t].style.color == "rgb(255, 204, 0)") {
+                        document.getElementsByTagName("strong")[t].style.color = "#d26217";
+                    }
+
+                    //翠绿色替换
+                    if (document.getElementsByTagName("strong")[t].color == "#00ee00" || document.getElementsByTagName("strong")[t].color == "rgb(0, 238, 0)") {
+                        document.getElementsByTagName("strong")[t].color = "#228B22";
+                    }
+                    if (document.getElementsByTagName("strong")[t].style.color == "#00ee00" || document.getElementsByTagName("strong")[t].style.color == "rgb(0, 238, 0)") {
+                        document.getElementsByTagName("strong")[t].style.color = "#228B22";
+                    }
+                }
+
+                for (var n = 0; n < document.getElementsByTagName("font").length; n++) {
+                    //黄色
+                    if (document.getElementsByTagName("font")[n].style.color == "rgb(255, 204, 0)" || document.getElementsByTagName("font")[n].style.color == "#ffcc00") {
+                        document.getElementsByTagName("font")[n].style.color = "#d26217";
+                    }
+                    if (document.getElementsByTagName("font")[n].color == "rgb(255, 204, 0)" || document.getElementsByTagName("font")[n].color == "#ffcc00") {
+                        document.getElementsByTagName("font")[n].color = "#d26217";
+                    }
+                    //红色
+                    if (document.getElementsByTagName("font")[n].color == "#ff0000" || document.getElementsByTagName("font")[n].color == "rgb(255, 0, 0)") {
+                        document.getElementsByTagName("font")[n].color = "#d26217";
+                    }
+                    if (document.getElementsByTagName("font")[n].style.color == "#ff0000" || document.getElementsByTagName("font")[n].style.color == "rgb(255, 0, 0)") {
+                        document.getElementsByTagName("font")[n].style.color = "#d26217";
+                    }
+                    //翠绿色替换
+                    if (document.getElementsByTagName("font")[n].color == "#00ee00" || document.getElementsByTagName("font")[n].color == "rgb(0, 238, 0)") {
+                        document.getElementsByTagName("font")[n].color = "#228B22";
+                    }
+                    if (document.getElementsByTagName("font")[n].style.color == "#00ee00" || document.getElementsByTagName("font")[n].style.color == "rgb(0, 238, 0)") {
+                        document.getElementsByTagName("font")[n].style.color = "#228B22";
+                    }
+                }
+                var iframeLength = document.getElementsByTagName("iframe").length;
+                var embedLenfth = document.getElementsByTagName("embed").length;
+                if (iframeLength > 0) {
+                    for (var i = 0; i < iframeLength; i++) {
+                        var iframeElements = document.getElementsByTagName("iframe")[i];
+                        iframeElements.removeAttribute("style");
+                        iframeElements.height = document.body.clientWidth * (9 / 16);
+                        iframeElements.width = document.body.clientWidth;
+                    }
+
+                }
+                if (embedLenfth > 0) {
+                    for (var n = 0; n < embedLenfth; n++) {
+                        document.getElementsByTagName("embed")[n].removeAttribute("style");
+                        document.getElementsByTagName("embed")[n].height = document.body.clientWidth * (9 / 16);
+                        document.getElementsByTagName("embed")[n].width = document.body.clientWidth;
+                    }
+
+                }
+            }
+        }
+        //设置夜光
+        function setNight() {
+            document.getElementsByClassName("fontsizetwo")[0].className += " night_bg";
+            document.getElementsByClassName("heading")[0].className += " heading_on_night";
+            document.getElementsByClassName("info")[0].className += " info_on_night";
+            document.getElementsByClassName("bar")[0].className += " bar_on_night";
+        }
+
+        //还原文章颜色
+        function setArticleBgEestore() {
+            for (var m = 0; m < document.getElementsByTagName("span").length; m++) {
+                if (document.getElementsByTagName("span")[m].style.color == "#d26217" || document.getElementsByTagName("span")[m].color == "#d26217" || document.getElementsByTagName("span")[m].style.color == "rgb(210, 98, 23)" || document.getElementsByTagName("span")[m].color == "rgb(210, 98, 23)") {
+                    document.getElementsByTagName("span")[m].style.color = "#907b29";
+                }
+                //翠绿色替换
+                if (document.getElementsByTagName("span")[m].color == "#228B22" || document.getElementsByTagName("span")[m].color == "#228B22" || document.getElementsByTagName("span")[m].style.color == "rgb(34, 139, 34)" || document.getElementsByTagName("span")[m].color == "rgb(34, 139, 34)") {
+                    document.getElementsByTagName("span")[m].color = "#195819";
+                }
+            }
+            for (var t = 0; t < document.getElementsByTagName("strong").length; t++) {
+                if (document.getElementsByTagName("strong")[t].style.color == "#d26217" || document.getElementsByTagName("strong")[t].color == "#d26217" || document.getElementsByTagName("strong")[t].style.color == "rgb(210, 98, 23)" || document.getElementsByTagName("strong")[t].color == "rgb(210, 98, 23)") {
+                    document.getElementsByTagName("strong")[t].style.color = "#907b29";
+                }
+                //翠绿色替换
+                if (document.getElementsByTagName("strong")[t].color == "#228B22" || document.getElementsByTagName("strong")[t].color == "#228B22" || document.getElementsByTagName("strong")[t].style.color == "rgb(34, 139, 34)" || document.getElementsByTagName("strong")[t].color == "rgb(34, 139, 34)") {
+                    document.getElementsByTagName("strong")[t].color = "#195819";
+                }
+            }
+
+            for (var n = 0; n < document.getElementsByTagName("font").length; n++) {
+                if (document.getElementsByTagName("font")[n].style.color == "#d26217" || document.getElementsByTagName("font")[n].color == "#d26217" || document.getElementsByTagName("font")[n].style.color == "rgb(210, 98, 23)" || document.getElementsByTagName("font")[n].color == "rgb(210, 98, 23)") {
+                    document.getElementsByTagName("font")[n].style.color = "#907b29";
+                }
+                //翠绿色替换
+                if (document.getElementsByTagName("font")[n].color == "#228B22" || document.getElementsByTagName("font")[n].color == "#228B22" || document.getElementsByTagName("font")[n].style.color == "rgb(34, 139, 34)" || document.getElementsByTagName("font")[n].color == "rgb(34, 139, 34)") {
+                    document.getElementsByTagName("font")[n].color = "#195819";
+                }
+            }
+        }
+    </script>
+
+</head>
+<body style="line-height: 24px;padding:0px 2px 0px 2px" class="fontsizetwo" quick-markup_injected="true">
+    <h1 class='heading'>《见证者》评测8.5分 智商毅力 缺一不可</h1>
+    <span class='info'>02-23 20:31 来源：游民星空[原创] 作者：暗哨</span>
+    <div class="bar"></div>
+    <p>　　解谜游戏在当代就是这么回事，在这个浮躁得近乎反智的社会里，想要纯粹靠抽象的谜题来撑起一部游戏已经很难，从《传送门》以降，几乎所有成功的解谜游戏都不仅仅是解谜那么简单。在《见证者（The Witness）》之前最近的一个典型例子大概要属《塔洛斯的法则》，在这部作品中，开发者用美丽的画面和一段引人入胜的故事包裹在了纷繁复杂的谜题之外。尽管谜题本身才是游戏的根骨，可正是前两者的魅力，才是吸引许多玩家们通关、乃至于加入进入这个世界的唯一原因。</p>
+    <p align="center">
+        <a target="_blank" href="http://www.gamersky.com/showimage/id_gamersky.shtml?http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_01origin_01_2016223171D5C.jpg"><img class="picact" border="0" alt="游民星空" src="http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_01small_02_2016223171216.jpg"></a><br>
+        简单的向右一划，一场奇妙的冒险就将开始
+    </p>
+    <div class="title1">好货也得会吆喝</div>
+    <p>　　《见证者》的核心机制非常简单，说白了就是连线，从A点到B点。只是连线的方式却可能千差万别，难度区间大概可以从幼教高级遥望门萨俱乐部的门槛。最简单的谜题就是走迷宫，这部分内容大致相当于游戏的教程部分，但随着关卡的推进，连线的方式会变得越来越复杂、越来越富有挑战。这些谜题的设计素质大多非常优秀，不过开发者显然也没有自负到认为精致的谜题本身就足以取悦这个现在的玩家群体。因此，他们也拿出了自己独特的解决方案，那就是这些谜题的展现方式。</p>
+    <p><b>《见证者》宣传片：</b></p>
+    <p align="center"><iframe height="435" src="http://player.youku.com/embed/XMTM5MTMzNTY0OA==" frameborder="0" width="700" ?="" allowfullscreen=""></iframe></p>
+    <p>　　在这个方面，《见证者》和《塔洛斯的法则》有许多相似之处。两者都有着非常漂亮的场景可供我们探索，尽管两者的画面风格差异不小。与侧重于写实的《塔洛斯的法则》相比，《见证者》的画面要更加具有“魔幻感”。两部作品的场景在游戏体验中扮演的角色也不太一样，两者相比之下，《见证者》的场景要比《塔洛斯的法则》拥有更强的功能性。</p>
+    <p align="center">
+        <a target="_blank" href="http://www.gamersky.com/showimage/id_gamersky.shtml?http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_02origin_03_2016223171645.jpg"><img class="picact" border="0" alt="游民星空" src="http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_02small_04_201622317181B.jpg"></a><br>
+        功能暂且不论，反正都挺漂亮的
+    </p>
+    <p>　　具体点儿讲就是，在《塔洛斯的法则》中，供玩家自由行动的场景往往仅仅起到连接区域的“过道”作用，环境中的物件与景色本身大多是为了叙事服务。而在《见证者》中，几乎所有场景都是谜题的一部分，在古典设计中可能会像是菜单一样呈现的谜题们现在有了各种新奇古怪的展现方式，将他们连接在一起的则是玩家们在场景中探索的轨迹，探索与解谜在很多时候都美妙的结合在了一起，这种感觉对于许多玩家来讲都会非常的新鲜。</p>
+    <p align="center">
+        <a target="_blank" href="http://www.gamersky.com/showimage/id_gamersky.shtml?http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_03origin_05_2016223171BC7.jpg"><img class="picact" border="0" alt="游民星空" src="http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_03small_06_2016223171FDC.jpg"></a><br>
+        谜题的规则可能千差万别
+    </p>
+
+    <div class="title1">理解“剧情”，可能比破解谜题更难</div>
+    <p>　　这很可能是《见证者》众多设计中最巧妙的一处，很可能也是最具魅力的一处。在游戏中，“连线”谜题被摆放在各种各样奇怪的地方，通常来说，完成其中一个就会点亮一条“电缆”，将能源输送到下一个地点，触发新的谜题。追踪这些电缆的走向是探索的重要组成部分，由于他们往往巧妙的隐藏在美丽的场景中，这部分内容也远比听上去的要好玩。这些电缆将把我们引导至许多有趣的地方，迎接我们的是摆放方式越来越奇怪的谜题，和越来越让人感到好奇、却一直讳莫如深的谜团。</p>
+    <p align="center">
+        <a target="_blank" href="http://www.gamersky.com/showimage/id_gamersky.shtml?http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_04origin_07_201622317127E.jpg"><img class="picact" border="0" alt="游民星空" src="http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_04small_08_20162231715C2.jpg"></a><br>
+        这里是什么地方、究竟发生过什么事情，随着游戏的推进，许多玩家会越来越对这两个问题所牵引
+    </p>
+    <p>　　用场景讲故事的技法在许多游戏作品都有应用，但很少有作品能将气氛把握得像是《见证者》这样到位，以至于会让我们觉得游戏的一草一木都有他们自己存在的目的。而从事后诸葛亮的角度来看，其中一些场景还真就有着相当的深邃含义保藏其间。《见证者》讲故事的方式比较特别，它所讲述的这个故事可能看起来比《塔洛斯的法则》要更加难懂，如果你也这么觉得，那么很大程度上可能是因为，《见证者》与其说是在讲故事，倒不如说是在讲道理。</p>
+    <p align="center">
+        <a target="_blank" href="http://www.gamersky.com/showimage/id_gamersky.shtml?http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_05origin_09_201622317193B.jpg"><img class="picact" border="0" alt="游民星空" src="http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_05small_10_2016223171CB3.jpg"></a><br>
+        有些场景乍看起来令人费解，但是……
+    </p>
+    <p>　　我们在游戏中能找到许多著名的或没那么著名的哲学语录，他们既与我们即将破解的谜题有关，也是解释整个岛屿来龙去脉的重要文献。不过即便你把这些资料与其他隐藏在游戏场景中的蛛丝马迹都整合在一起，也很难真正搞清楚这里到底发生了啥事儿。游戏在这方面的设计有意的更加偏向于每一个玩家个体自己对世界以及事件的解读，而不是固定的剧本。换句话说，游戏的“剧情”其实更像是一组可能性的合集，每一个玩家都可以在其中加入自己的解释。</p>
+    <div class="title1">有些事情，入坑前你应该先了解一下</div>
+    <p>　　像是《见证者》这样“格调很高”的解谜作品，往往并不特别在乎大众玩家对谜题的接受程度，就像是获奖无数的《塔洛斯的法则》那样，真正能靠自己的智力（或毅力）将其通关的玩家恐怕只占全部玩家的一小部分。《见证者》的谜题难度虽然乍一看没有前者那么宏大，但就像我们在开篇提到的那样，它的谜题、尤其是后半程的谜题可一点儿都不简单。此外，本作的谜题数量也十分惊人，足有六七百，考虑到玩家们一次又一次被谜题卡住所耗费的时间，玩家通关本作怕是最少也要三四十个小时，最多则可能要花掉上百小时，游戏对智力和耐力的考验或许同样严苛。</p>
+    <p>　　此外，Steam的评论区里有玩家指出，如果你患有色盲或者是听力障碍的话，那么你将无法靠自己的力量通关这部游戏（据说中国的色盲/色弱人群总数超过六千万，因此在下觉得这事儿是有必要提一下的）。</p>
+    <p align="center">
+        <a target="_blank" href="http://www.gamersky.com/showimage/id_gamersky.shtml?http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_06origin_11_201622317115F.jpg"><img class="picact" border="0" alt="游民星空" src="http://img1.gamersky.com/image2016/02/20160223_zym_131_1/gamersky_06small_12_2016223171574.jpg"></a><br>
+        据说，有个事儿叫做“蓝绿色盲”
+    </p>
+    <div class="title1">总结</div>
+    <p>　　《见证者》是一部美丽的游戏，也是一部聪明的游戏。它在“解谜”这个正在重新定义自己的领域里留下了属于自己的新鲜足迹，想必会成为许多后来者灵感的源泉。对于喜欢在古怪谜题上绞尽脑汁的玩家来说，《见证者》提供的是一场气韵绵长而又颇具挑战的冒险。但如果你对自己的智商和毅力都不算特别有信心，那么在启程进入这个世界以前，最好先找好详尽的攻略。</p>
+    <script type="text/javascript" src="http://localhost:39590/v1/gethits/719322?tag=&id="></script>
+</body>
+
+</html>

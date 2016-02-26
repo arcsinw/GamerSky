@@ -3524,7 +3524,7 @@ function gsPlayVideoWithVideoIndex(videoIndex)
 }
 function gsCreateLeTvVideoContent(videoId, videoParam)
 {
-    var bodyWidth = document.body.clientWidth-20.0;
+    var bodyWidth = document.body.clientWidth;
     var height = bodyWidth*9.0/16.0;
     var width = bodyWidth;
     var leTv_videosupport_js = "http:\/\/j.gamersky.com\/wap\/js\/leTv_videosupport_2.0_v1.m.js";
@@ -3606,11 +3606,11 @@ function gsVideoInApp(videoType, videoContent, videoParam, videoWidth, videoHeig
         if (videoIndex>-1)
         {
             var videoDefaultWidth
-                = document.body.clientWidth-20.0;
+                = document.body.clientWidth;
             var videoDefaultHeight
                 = videoDefaultWidth
                 * 1080.0/1920.0;
-
+          
             videoHTML
                 = "<table class=\"GSTemplateContent_VideoBoxer\" id=\"videoBoxer_" + videoIndex + "\" style=\"\" border=\"0\" width=\"" + videoDefaultWidth + "\" height=\"" + videoDefaultHeight + "\" cellspacing=\"0\" cellpadding=\"0\">"
                 + "<tr>"

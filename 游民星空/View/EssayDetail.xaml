@@ -11,19 +11,21 @@
 
     <Page.Transitions>
         <TransitionCollection>
-            <NavigationThemeTransition>
-                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    <SlideNavigationTransitionInfo/>
-                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-            </NavigationThemeTransition>
+            <PaneThemeTransition Edge="Right"/>
         </TransitionCollection>
     </Page.Transitions>
 
+    <Page.Resources>
+        <MenuFlyout x:Key="ImageMenuFlyout" Placement="Bottom" >
+            <MenuFlyoutItem Text="保存图片"   DataContext="{Binding }"/>
+        </MenuFlyout>
+    </Page.Resources>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Foreground="{ThemeResource ThemeColorBrush}"  
                           Height="60" Width="60" Background="Transparent"/>
-        <WebView x:Name="webView"  hp:ExtensionHelper.HtmlString="{Binding HtmlString}" 
-                     />
+        <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"  Holding="webView_Holding"
+                   DOMContentLoaded="webView_DOMContentLoaded" ScriptNotify="webView_ScriptNotify" />
      
         <!--      hp:ExtensionHelper.HtmlString="{Binding HtmlString}"-->
         <FlipView x:Name="imageFlipView" Visibility="Collapsed" ItemsSource="{Binding }">
@@ -37,7 +39,7 @@
                 </DataTemplate>
             </FlipView.ItemTemplate>
         </FlipView>
-        <!--Source="ms-appx-web:///Html/gsAppHTMLTemplate_News.html"-->
+        <!--Source="ms-appx-web:///Assets/HTMLPage1.html"  "-->
     </Grid>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">

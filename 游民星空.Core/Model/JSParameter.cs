@@ -15,7 +15,15 @@ namespace 游民星空.Core.Model
         /// theme | pageColorMode | pageFontSize | nullImageMode 
         /// gsTemplateContent_RelatedTopic
         /// </summary>
-        public string name;
-        public string value;
+        //public string name;
+        //public string value;
+
+        public string type { get; set; }
+
+        public string content1 { get; set; }
+
+        public string content2 { get; set; }
+
+        public string content3 { get; set; }
     }
 }

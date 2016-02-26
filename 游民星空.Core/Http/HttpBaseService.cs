@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,7 @@ namespace 游民星空.Core.Http
             }
             catch(Exception e)
             {
+                Debug.Write(e.Message);
                 return null;
             }
         }

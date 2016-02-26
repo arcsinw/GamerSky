@@ -200,27 +200,6 @@
     <Compile Include="ViewModel\YaowenPageViewModel.cs" />
     <EmbeddedResource Include="Properties\游民星空.Core.rd.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Html\gsAppHTMLTemplate_css\gsAppHTMLTemplate.css" />
-    <Content Include="Html\gsAppHTMLTemplate_image\gsAppHTMLTemplate_Video_Background%402x.png" />
-    <Content Include="Html\gsAppHTMLTemplate_image\gsAppHTMLTemplate_Video_PlayButton%402x.png" />
-    <Content Include="Html\gsAppHTMLTemplate_image\icon_Praised_UIMode_Day%402x.png" />
-    <Content Include="Html\gsAppHTMLTemplate_image\icon_Praised_UIMode_Night%402x.png" />
-    <Content Include="Html\gsAppHTMLTemplate_image\icon_Praise_UIMode_Day%402x.png" />
-    <Content Include="Html\gsAppHTMLTemplate_image\icon_Praise_UIMode_Night%402x.png" />
-    <Content Include="Html\gsAppHTMLTemplate_image\imgSet_BottomBarBackground%402x.png" />
-    <Content Include="Html\gsAppHTMLTemplate_image\imgSet_ExpandIcon%402x.png" />
-    <Content Include="Html\gsAppHTMLTemplate_image\img_Badge_GIF%402x.png" />
-    <Content Include="Html\gsAppHTMLTemplate_image\reviewTable_Background.gif" />
-    <Content Include="Html\gsAppHTMLTemplate_image\reviewTable_Background10.jpg" />
-    <Content Include="Html\gsAppHTMLTemplate_image\reviewTable_Bad.gif" />
-    <Content Include="Html\gsAppHTMLTemplate_image\reviewTable_Good.gif" />
-    <Content Include="Html\gsAppHTMLTemplate_image\user_DefaultHeadImage%402x.png" />
-    <Content Include="Html\gsAppHTMLTemplate_js\gsAppHTMLTemplate.js" />
-    <Content Include="Html\gsAppHTMLTemplate_js\gsAppHTMLTemplate_Video.js" />
-    <Content Include="Html\gsAppHTMLTemplate_js\gsVideo.js" />
-    <Content Include="Html\gsAppHTMLTemplate_News.html" />
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

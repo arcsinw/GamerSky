@@ -28,7 +28,8 @@
         <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
         <!--BorderBrush-->
         <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
-
+        <Thickness x:Key="GridPadding" >0</Thickness>
+        <Thickness x:Key="GridMargin">0,4</Thickness>
         <!--有三张图的文章模板-->
         <DataTemplate x:Key="ThreePicEssayDataTemplate">
             <Grid Margin="2,0" Padding="5" BorderThickness="{StaticResource BorderThickness}" BorderBrush="{StaticResource BorderBrush}">
@@ -90,7 +91,22 @@
                 </Grid>
             </Grid>
         </DataTemplate>
-
+        <!--无图模板-->
+        <DataTemplate x:Key="NoPicEssayDataTemplate">
+            <Grid BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}"
+                  Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"   >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding title}" TextWrapping="Wrap"/>
+                <TextBlock  HorizontalAlignment="Right" Grid.Row="1" Margin="5,2" >
+                                <Run Text="{Binding commentsCount}"/>
+                                <Run Text="评论"/>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
+        
         <converter:IndexToColorConverter x:Name="IndexToColorConverter"/>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -122,6 +138,7 @@
                         <ListView.ItemTemplateSelector>
                             <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                                                       ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
+                                                                  NoPicDt="{StaticResource NoPicEssayDataTemplate}"
                                                                       />
                         </ListView.ItemTemplateSelector>
                         <ListView.HeaderTemplate>
