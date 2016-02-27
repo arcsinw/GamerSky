@@ -687,14 +687,14 @@
                     <BitmapImage UriSource="{Binding thumbnailUrl}"/>
                 </Image.Source>
             </Image>
-            <Grid Grid.Column="1" Margin="5,2">
+            <Grid Grid.Column="1" Margin="5,0">
                 <TextBlock Text="{Binding sourceName}" VerticalAlignment="Top"/>
-                <TextBlock  Margin="4" VerticalAlignment="Bottom">
+                <TextBlock  Margin="0,4,0,0" VerticalAlignment="Bottom">
                     <Run Text="{Binding cnt}"/>
                     <Run Text="人订阅"/>
                 </TextBlock>
             </Grid>
-            <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" Click="Button_Click"/>
+            <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" Click="AddSubscribe"/>
         </Grid>
     </DataTemplate>
 
@@ -705,6 +705,8 @@
     </Style>
 
     <!--#endregion-->
+    
+    
     
     <!--日夜间资源字典-->
     <ResourceDictionary.ThemeDictionaries>

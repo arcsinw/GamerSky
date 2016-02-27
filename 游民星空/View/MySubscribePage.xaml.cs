@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Model;
+using 游民星空.Core.ViewModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -53,6 +54,12 @@ namespace 游民星空.View
 
         }
 
+       
+        private void AddSubscribe(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
         public void Back()
         {
             if(Frame.CanGoBack)
@@ -86,9 +93,10 @@ namespace 游民星空.View
                 case 2:
                     if(isMyLoaded)
                     {
+                        ViewModel.LoadMySubscribes();
                         isMyLoaded = true;
                     }
-                    //await ViewModel.LoadMySubscribes();
+                    
                     break;
             }
         }
@@ -98,11 +106,7 @@ namespace 游民星空.View
 
         }
 
-        public void AddSubscribe()
-        {
-
-        }
-
+         
         private async void allPullToRefresh_RefreshInvoked(DependencyObject sender, object args)
         {
             await ViewModel.AllSubscribesRefresh();
@@ -111,6 +115,25 @@ namespace 游民星空.View
         private async void hotPullToRefresh_RefreshInvoked(DependencyObject sender, object args)
         {
             await ViewModel.HotSubscribesRefresh();
+        }
+
+        /// <summary>
+        /// 添加订阅
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var control = e.OriginalSource as FrameworkElement;
+            if (control == null) return;
+            var dataContext = control.DataContext as Subscribe;
+            if (dataContext == null) return;
+            DataShareManager.Current.UpdateSubscribe(dataContext);
+        }
+
+        private void myPullToRefresh_RefreshInvoked(DependencyObject sender, object args)
+        {
+            ViewModel.MySubscribesRefresh();
         }
     }
 }

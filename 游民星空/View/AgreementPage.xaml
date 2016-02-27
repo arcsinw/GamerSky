@@ -24,7 +24,7 @@
         </Grid>
         <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
             <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" >
-                <StackPanel Padding="16">
+                <StackPanel Padding="{ThemeResource PhonePagePadding}">
                     <TextBlock x:Name="textBlock" TextAlignment="Justify" TextWrapping="Wrap"  Loaded="{x:Bind GetAgreement}"/>
                 </StackPanel>
             </ScrollViewer>

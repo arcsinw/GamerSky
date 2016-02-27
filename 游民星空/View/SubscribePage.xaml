@@ -59,6 +59,8 @@
                 </Grid>
             </Grid>
         </DataTemplate>
+
+         
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -66,43 +68,63 @@
         <Pivot x:Name="pivot"  Background="{ThemeResource PageBackground}"
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="订阅内容" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
-             
+                <ListView x:Name="subscribeListView" ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
+                          ItemsSource="{Binding SubscribeContent}"
+                          ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                          IsItemClickEnabled="True"
+                                 ItemClick="ListView_ItemClick"
+                               >
+                     
+                </ListView>
             </PivotItem>
             <PivotItem Header="订阅专题" Margin="0" Padding="0">
-                <ListView Padding="{ThemeResource PhonePagePadding}">
-                    <ListView.Header>
-                        <AutoSuggestBox PlaceholderText="搜索" QueryIcon="Find"/>    
-                    </ListView.Header>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <TextBlock />
-                                    <TextBlock />
+                <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
+                    <ItemsControl Padding="{ThemeResource PhonePagePadding}" 
+                              ScrollViewer.VerticalScrollMode="Enabled"
+                          ItemsSource="{Binding SubscribeTopic}" >
+                        <ItemsControl.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <AddDeleteThemeTransition />
+
+                            </TransitionCollection>
+                        </ItemsControl.ItemContainerTransitions>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Padding="{ThemeResource PhonePagePadding}" BorderBrush="{ThemeResource BorderBrush}"
+                                      BorderThickness="{ThemeResource BorderThickness}" 
+                                       Tapped="Grid_Tapped" >
+                                        <TextBlock Text="{Binding title}" HorizontalAlignment="Left" Foreground="{ThemeResource ThemeColorBrush}"/>
+                                        <TextBlock HorizontalAlignment="Right">
+                                        <Run Text="{Binding readingCount}"/>
+                                        <Run Text="人关注"/>
+                                        </TextBlock>
+                                    </Grid>
+                                    <ListView ItemsSource="{Binding childElements}" Grid.Row="1"
+                                          ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
+                                           ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
+                                    </ListView>
                                 </Grid>
-                                <ListView ItemsSource="{Binding SubscribeTopic}" Grid.Row="1"
-                                          ItemTemplate="{StaticResource OnePicEssayDataTemplate}">
-                                    
-                                </ListView>
-                            </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <!--<ListView.FooterTemplate>
+                        <DataTemplate>
+                            <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0" Click="Button_Click">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <SymbolIcon Symbol="Add" Margin="0,0,4,0"/>
+                                        <TextBlock Text="添加更多订阅" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.Footer>
-                        <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0" Click="Button_Click">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <SymbolIcon Symbol="Add" Margin="0,0,4,0"/>
-                                    <TextBlock Text="添加更多订阅" />
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                    </ListView.Footer>
-                </ListView>
-            
+                    </ListView.FooterTemplate>-->
+                    </ItemsControl>
+                </ScrollViewer>
             </PivotItem>
 
         </Pivot>
@@ -127,9 +149,26 @@
         <!--#region 进度Ring-->
         <Grid>
             <ProgressRing x:Name="progress"  Foreground="{ThemeResource ThemeColorBrush}" 
+                          IsActive="{Binding IsActive}"
                           Height="60" Width="60" Background="Transparent"/>
         </Grid>
         <!--#endregion-->
-        
+
+        <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom"
+               Height="48" x:Name="topPop" Width="48" Margin="16,48" >
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <!--<EdgeUIThemeTransition Edge="Bottom"/>-->
+                    <AddDeleteThemeTransition />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Popup.Child>
+                <Button Height="48" Width="48" Background="{ThemeResource ThemeColorBrush}" 
+                        Click="{x:Bind ScrollToTop}" Style="{ThemeResource RoundButtonStyle}">
+                    <SymbolIcon Symbol="Up" Foreground="White" />
+                </Button>
+            </Popup.Child>
+        </Popup>
+
     </Grid>
 </Page>

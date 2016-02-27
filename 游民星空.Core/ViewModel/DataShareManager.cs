@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Xaml;
+using 游民星空.Core.Helper;
+using 游民星空.Core.Model;
 
 namespace 游民星空.Core.ViewModel
 {
@@ -48,15 +50,28 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
+
+        private List<string> favoriteList;
         /// <summary>
         /// 收藏列表
         /// </summary>
-        private List<string> favoriteList;
         public List<string> FavoriteList
         {
             get
             {
                 return favoriteList;
+            }          
+        }
+
+        private List<Subscribe> subscribeList = new List<Subscribe>();
+        /// <summary>
+        /// 订阅列表
+        /// </summary>
+        public List<Subscribe> SubscribeList
+        {
+            get
+            {
+                return subscribeList;
             }
         }
 
@@ -80,6 +95,7 @@ namespace 游民星空.Core.ViewModel
 
         private void LoadData()
         {
+            var localSettings = ApplicationData.Current.LocalSettings;
             var roamingSettings = ApplicationData.Current.RoamingSettings;
             if(roamingSettings.Values.ContainsKey("APP_THEME"))
             {
@@ -107,6 +123,15 @@ namespace 游民星空.Core.ViewModel
             {
                 isNoImage = false;
             }
+
+            if (localSettings.Values.ContainsKey("SUBSCRIBE_LIST"))
+            {
+                subscribeList = Functions.Deserlialize <List<Subscribe>>(localSettings.Values["SUBSCRIBE_LIST"].ToString());
+            }
+            else
+            {
+                subscribeList = new List<Subscribe>();
+            }
         }
 
         private void OnShareDataChanged()
@@ -116,6 +141,7 @@ namespace 游民星空.Core.ViewModel
                 ShareDataChanged();
             }
         }
+     
         /// <summary>
         /// true 为Dark false 为Light
         /// </summary>
@@ -139,6 +165,22 @@ namespace 游民星空.Core.ViewModel
             isNoImage = _isNoImages;
             var roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
             roamingSettings.Values["NO_IMAGES_MODE"] = isNoImage;
+            OnShareDataChanged();
+        }
+
+        public void UpdateSubscribe(Subscribe subscribe)
+        {
+            bool add = subscribeList.Contains(subscribe) ? false : true;
+            if (add)
+            {
+                subscribeList.Add(subscribe);
+            }
+            else
+            {
+                subscribeList.Remove(subscribe);
+            }
+            var localSettings = ApplicationData.Current.LocalSettings;
+            localSettings.Values["SUBSCRIBE_LIST"] = Functions.JsonDataSerializer<List<Subscribe>>(subscribeList);
             OnShareDataChanged();
         }
 

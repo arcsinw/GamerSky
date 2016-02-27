@@ -82,7 +82,7 @@
                     </Image.Source>
                 </Image>
 
-                <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
+                <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0">
                     <TextBlock Text="{Binding title}" TextWrapping="Wrap" VerticalAlignment="Top"/>
                     <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
                                 <Run Text="{Binding commentsCount}"/>

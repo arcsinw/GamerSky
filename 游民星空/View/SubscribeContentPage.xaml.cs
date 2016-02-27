@@ -33,12 +33,12 @@ namespace 游民星空.View
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             progressRing.IsActive = true;
-            Subscribe subscribeResult = e.Parameter as Subscribe;
-            if (subscribeResult != null)
+            string sourceId = e.Parameter as string;
+            if (sourceId != null)
             {
                 if (viewModel.SubscribeContens.Count == 0)
                 {
-                    await viewModel.LoadData(subscribeResult,pageIndex);
+                    await viewModel.LoadData(sourceId, pageIndex);
                     pageIndex++;
                 }
             }

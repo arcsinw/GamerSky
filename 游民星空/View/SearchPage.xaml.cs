@@ -94,7 +94,21 @@ namespace 游民星空.View
                 pageIndexDic.Add(pivotIndex, pageIndex);
             }
         }
-        
+
+        /// <summary>
+        /// 添加订阅
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddSubscribe(object sender, RoutedEventArgs e)
+        {
+            var control = e.OriginalSource as FrameworkElement;
+            if (control == null) return;
+            var dataContext = control.DataContext as Subscribe;
+            if (dataContext == null) return;
+            DataShareManager.Current.UpdateSubscribe(dataContext);
+        }
+
         private void subscribeListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var result = e.ClickedItem as Subscribe;
@@ -145,7 +159,7 @@ namespace 游民星空.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ScrollToTop(object sender, RoutedEventArgs e)
         {
             switch(pivot.SelectedIndex)
             {

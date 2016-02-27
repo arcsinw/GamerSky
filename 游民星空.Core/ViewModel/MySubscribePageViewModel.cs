@@ -59,6 +59,12 @@ namespace 游民星空.Core.ViewModel
         private void Current_ShareDataChanged()
         {
             AppTheme = DataShareManager.Current.AppTheme;
+            MySubscribes.Clear();
+            foreach (var item in DataShareManager.Current.SubscribeList)
+            {
+                MySubscribes.Add(item);
+            }
+            
         }
 
         private ElementTheme appTheme;
@@ -114,14 +120,14 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public void LoadMySubscribes()
         {
-            //List<Subscribe> allSubscribes = await apiService.GetSubscribeHotKey("1");
-            //if (allSubscribes != null)
-            //{
-            //    foreach (var item in allSubscribes)
-            //    {
-            //        AllSubscribes.Add(item);
-            //    }
-            //}
+            List<Subscribe> allSubscribes = DataShareManager.Current.SubscribeList;
+            if (allSubscribes != null)
+            {
+                foreach (var item in allSubscribes)
+                {
+                    MySubscribes.Add(item);
+                }
+            }
         }
 
         /// <summary>
@@ -144,6 +150,15 @@ namespace 游民星空.Core.ViewModel
             HotSubscribes.Clear();
             await LoadHotSubscribes();
             IsActive = false;
+        }
+
+        /// <summary>
+        /// 刷新我的订阅
+        /// </summary>
+        public void MySubscribesRefresh()
+        {
+            MySubscribes.Clear();
+            LoadMySubscribes();
         }
     }
 }

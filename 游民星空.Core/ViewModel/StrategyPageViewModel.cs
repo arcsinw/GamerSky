@@ -135,6 +135,8 @@ namespace 游民星空.Core.ViewModel
         {
             VerificationCode code = await apiService.EditSubscribe(SubscribeOperateEnum.add, strategy.specialID.ToString());
 
+            //本地存储订阅列表
+            //DataShareManager.Current.UpdateSubscribe(strategy);
         }  
     }
 }

@@ -61,13 +61,13 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
-        private Subscribe subscribe;
-        public SubscribeContentViewModel(Subscribe subscribe)
+        private string sourceId;
+        public SubscribeContentViewModel(string sourceId)
         {
             apiService = new ApiService();
             SubscribeContens = new ObservableCollection<Essay>();
             HeaderSubscribe = new Essay();
-            this.subscribe = subscribe;
+            this.sourceId = sourceId;
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
@@ -83,11 +83,11 @@ namespace 游民星空.Core.ViewModel
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
-        public async Task LoadData(Subscribe subscribe, int pageIndex = 1)
+        public async Task LoadData(string sourceId, int pageIndex = 1)
         {
-            this.subscribe = subscribe;
+            this.sourceId = sourceId;
             IsActive = true;
-            List<Essay> results = await apiService.GetSubscribeContent(subscribe.sourceId, pageIndex);
+            List<Essay> results = await apiService.GetSubscribeContent(sourceId, pageIndex);
             foreach (var item in results)
             {
                 if (item.type.Equals("dingyueTitle"))
@@ -110,14 +110,14 @@ namespace 游民星空.Core.ViewModel
         /// <returns></returns>
         public async Task LoadMoreData(int pageIndex)
         {
-            await LoadData(subscribe, pageIndex);
+            await LoadData(sourceId, pageIndex);
         }
 
         public async Task Refresh()
         {
             IsActive = true;
             SubscribeContens.Clear();
-            await LoadData(subscribe);
+            await LoadData(sourceId);
             IsActive = false;
         }
     }

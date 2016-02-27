@@ -89,7 +89,7 @@ namespace 游民星空.Core.Http
                 }
                 return null;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }

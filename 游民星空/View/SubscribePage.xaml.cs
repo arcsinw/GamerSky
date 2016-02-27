@@ -12,6 +12,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Helper;
+using 游民星空.Core.Model;
+using 游民星空.Core.ViewModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -25,6 +28,8 @@ namespace 游民星空.View
         public SubscribePage()
         {
             this.InitializeComponent();
+
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -32,10 +37,10 @@ namespace 游民星空.View
             switch(pivot.SelectedIndex)
             {
                 case 0:
-                    await viewModel.LoadSubscribeContent("48", 1);
+                    
                     break;
                 case 1:
-                    await viewModel.LoadSubscribeTopic("48", 1);
+                    
                     break;
             }
         }
@@ -52,7 +57,10 @@ namespace 游民星空.View
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
+            Essay essayResult = e.ClickedItem as Essay;
+            if (essayResult == null) return;
 
+            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
 
         private void NavigatoToMySubscribe()
@@ -73,14 +81,67 @@ namespace 游民星空.View
             }
         }
 
-        public void AddSubscribe()
-        {
 
+        private void ScrollToTop(object sender, RoutedEventArgs e)
+        {
+            subscribeListView.ScrollIntoViewSmoothly(subscribeListView.Items[0]);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private ScrollViewer scrollViewer;
+        private void ListView_Loaded(object sender, RoutedEventArgs e)
         {
-            (Window.Current.Content as Frame)?.Navigate(typeof(MySubscribePage));
+            scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
+            if (scrollViewer != null)
+            {
+                scrollViewer.ViewChanged += scrollViewer_ViewChanged;
+            }
+        }
+
+        private bool IsDataLoading = false;
+        private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (scrollViewer != null)
+            {
+                if (scrollViewer.VerticalOffset < DeviceInformationHelper.GetScreenHeight())
+                {
+                    if (topPop.IsOpen)
+                    {
+                        topPop.IsOpen = false;
+                    }
+                }
+                else if (scrollViewer.VerticalOffset > DeviceInformationHelper.GetScreenHeight())
+                {
+                    if (!topPop.IsOpen)
+                    {
+                        topPop.IsOpen = true;
+                    }
+                }
+                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
+                {
+                    if (!IsDataLoading)  //未加载数据
+                    {
+                        IsDataLoading = true;
+
+
+                        //await viewModel.LoadSubscribeContent();
+                         
+                        IsDataLoading = false;
+                    }
+                }
+            }
+        }
+
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var control =  e.OriginalSource as FrameworkElement;
+            if (control != null)
+            {
+                Essay essay = control.DataContext as Essay;
+                if (essay != null)
+                {
+                    (Window.Current.Content as Frame)?.Navigate(typeof(SubscribeContentPage), essay.contentId);
+                }
+            }
         }
     }
 }

@@ -136,6 +136,7 @@
     <Compile Include="Http\ApiService.cs" />
     <Compile Include="IncrementalLoadingCollection\EssayIncrementalCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />
+    <Compile Include="IncrementalLoadingCollection\SubscribeIncrementalCollection.cs" />
     <Compile Include="Model\AdStart.cs" />
     <Compile Include="Model\Channel.cs" />
     <Compile Include="Model\Collect.cs" />

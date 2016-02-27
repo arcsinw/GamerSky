@@ -512,7 +512,7 @@
                                             <BitmapImage UriSource="{Binding thumbnailUrl}"/>
                                         </Image.Source>
                                     </Image>
-                                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="{Binding title}" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding title}" TextWrapping="Wrap"/>
                                     <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
                                        Width="30"
                                        HorizontalAlignment="Right" VerticalAlignment="Top"/>

@@ -487,13 +487,13 @@ namespace 游民星空.Core.Http
                 postData.request = new SubscribeTopicRequest
                 {
                     elementsCountPerPage = "20",
-                    lastUpdateTime = Functions.getUnixTimeStamp().ToString(),
+                    //lastUpdateTime = Functions.getUnixTimeStamp().ToString(),
                     nodeIds = nodeIds,
                     pageIndex = pageIndex,
                     parentNodeId = "dingyue",
                     type = "dingyueTopic"
                 };
-                essayResult = await PostJson<SubscribeTopicPostData, EssayResult>(ServiceUri.Subscribe, postData);
+                essayResult = await PostJson<SubscribeTopicPostData, EssayResult>(ServiceUri.SubscribeTopic, postData);
                 if (essayResult != null && essayResult.result != null)
                 {
                     await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.result, filename);

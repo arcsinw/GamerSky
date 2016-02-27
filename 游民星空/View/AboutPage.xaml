@@ -22,7 +22,7 @@
             <TextBlock Text="关于" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
         <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
-            <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Margin="{ThemeResource PhonePagePadding}">
+            <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" >
                 <StackPanel Padding="8" >
                     <StackPanel.Resources>
                         <Style TargetType="TextBlock">
