@@ -459,8 +459,8 @@
             <PivotItem Header="关注" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <GridView ItemsSource="{Binding FocusStrategys}" Padding="8"
-                          ItemsPanel="{StaticResource GridViewItemsPanel}"
-                          SelectionMode="None"
+                         ItemsPanel="{StaticResource GridViewItemsPanel}"
+                          SelectionMode="None" x:Name="focusGridView"
                           ShowsScrollingPlaceholders="True"
                               IsItemClickEnabled="True"
                               ItemClick="GridView_ItemClick">
@@ -488,7 +488,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-
+                        <!-- ItemsPanel="{StaticResource GridViewItemsPanel}"-->
                         <GridView.Template>
                             <ControlTemplate>
                                 <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">

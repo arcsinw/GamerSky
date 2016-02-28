@@ -15,9 +15,9 @@ namespace 游民星空.Core.ViewModel
     {
         public ObservableCollection<Essay> SubscribeTopic { get; set; }
 
-        //public ObservableCollection<Essay> SubscribeContent { get; set; }
+        public ObservableCollection<Essay> SubscribeContent { get; set; }
 
-        public SubscribeIncrementalCollection SubscribeContent { get; set; }
+        //public SubscribeIncrementalCollection SubscribeContent { get; set; }
 
         private ApiService apiService;
 
@@ -26,10 +26,10 @@ namespace 游民星空.Core.ViewModel
             apiService = new ApiService();
             SubscribeTopic = new ObservableCollection<Essay>();
             
-            //SubscribeContent = new ObservableCollection<Essay>();
-            SubscribeContent = new SubscribeIncrementalCollection();
-            SubscribeContent.OnLoadingMoreStart += SubscribeContent_OnLoadingMoreStart;
-            SubscribeContent.OnLoadingMoreEnd += SubscribeContent_OnLoadingMoreEnd;
+            SubscribeContent = new ObservableCollection<Essay>();
+            //SubscribeContent = new SubscribeIncrementalCollection();
+            //SubscribeContent.OnLoadingMoreStart += SubscribeContent_OnLoadingMoreStart;
+            //SubscribeContent.OnLoadingMoreEnd += SubscribeContent_OnLoadingMoreEnd;
 
 
             AppTheme = DataShareManager.Current.AppTheme;
@@ -85,37 +85,57 @@ namespace 游民星空.Core.ViewModel
         {
             IsActive = true;
             var subscribeList = DataShareManager.Current.SubscribeList;
-            if (subscribeList == null || subscribeList.Count == 0) return;
-            int pageIndex = subscribeList.Count;
-            foreach (var subscribe in subscribeList)
+            if (subscribeList != null)
             {
-                var essays = await apiService.GetSubscribeTopic(subscribe.sourceId, pageIndex);
-                if (essays != null)
+                int pageIndex = subscribeList.Count;
+                foreach (var subscribe in subscribeList)
                 {
-                    foreach (var item in essays)
+                    var essays = await apiService.GetSubscribeTopic(subscribe.sourceId, pageIndex);
+                    if (essays != null)
                     {
-                        SubscribeTopic.Add(item);
+                        foreach (var item in essays)
+                        {
+                            SubscribeTopic.Add(item);
+                        }
                     }
                 }
-            } 
-            
+            }
             IsActive = false;
         }
 
+         
+        private int currentSubscribeIndex = 0; //当前订阅index
+        private int pageIndex = 1;
         /// <summary>
-        /// 加载订阅内容
+        /// 加载订阅内容 由ViewModel保存当前页码
         /// </summary>
-        public async Task LoadSubscribeContent(string sourceId,int pageIndex)
+        public async Task LoadSubscribeContent()
         {
             IsActive = true;
-            var essays = await apiService.GetSubscribeContent(sourceId, pageIndex);
-            if(essays!= null)
+            if(DataShareManager.Current.SubscribeList.Count==0)
+            {
+                IsActive = false;
+                return;
+            } 
+
+            string x = DataShareManager.Current.SubscribeList[currentSubscribeIndex].sourceId;
+            List<Essay> essays = await apiService.GetSubscribeContent(x, pageIndex);
+            if (essays != null)
             {
                 foreach (var item in essays)
                 {
-                    SubscribeContent.Add(item);
+                    if (!item.type.Equals("dingyueTitle"))
+                    {
+                        SubscribeContent.Add(item);
+                    }
                 }
             }
+            if (currentSubscribeIndex == (DataShareManager.Current.SubscribeList.Count - 1))
+            {
+                pageIndex++;
+            }
+            currentSubscribeIndex = ++currentSubscribeIndex % DataShareManager.Current.SubscribeList.Count;
+
             IsActive = false;
         }
 
@@ -124,21 +144,19 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public async Task RefreshSubscribeTopic()
         {
-            IsActive = true;
             SubscribeTopic.Clear();
             await LoadSubscribeTopic();
-            IsActive = false;
         }
 
         /// <summary>
-        /// 加载订阅内容
+        /// 刷新订阅内容
         /// </summary>
-        public void RefreshSubscribeContent()
+        public async Task RefreshSubscribeContent()
         {
-            IsActive = true;
             SubscribeContent.Clear();
-            //await LoadSubscribeContent();
-            IsActive = false;
+            pageIndex = 1;
+            currentSubscribeIndex = 0;
+            await LoadSubscribeContent();
         }
     }
 }

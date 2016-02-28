@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Helper;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
 
@@ -133,6 +134,20 @@ namespace 游民星空.View
             }
         }
 
-    
+        //private void GridView_SizeChanged(object sender, SizeChangedEventArgs e)
+        //{
+        //    var panel = (ItemsWrapGrid)focusGridView.ItemsPanelRoot;
+        //    if(Functions.IsMobile())
+        //    {
+        //        int num = 2;
+        //        panel.ItemWidth = e.NewSize.Width / num;
+        //    }
+        //    else
+        //    {
+        //        int num = (int)e.NewSize.Width / 160;
+        //        panel.ItemWidth = e.NewSize.Width / num;
+        //    }
+        //    panel.ItemHeight = 0.618 * panel.ItemWidth;
+        //}
     }
 }

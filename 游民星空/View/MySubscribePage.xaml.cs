@@ -31,7 +31,7 @@ namespace 游民星空.View
 
         
 
-        private void hotSubscribeListView_ItemClick(object sender, ItemClickEventArgs e)
+        private void SubscribeListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var result = e.ClickedItem as Subscribe;
             if (result != null)
@@ -39,27 +39,10 @@ namespace 游民星空.View
                 this.Frame.Navigate(typeof(SubscribeContentPage), result);
             }
         }
-
-        private void allSubscribeListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var result = e.ClickedItem as Subscribe;
-            if (result != null)
-            {
-                this.Frame.Navigate(typeof(SubscribeContentPage), result);
-            }
-        }
-
-        private void mySubscribeListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-
-        }
-
-       
-        private void AddSubscribe(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
+   
+        /// <summary>
+        /// 后退
+        /// </summary>
         public void Back()
         {
             if(Frame.CanGoBack)
@@ -100,23 +83,7 @@ namespace 游民星空.View
                     break;
             }
         }
-
-        private void PivotItem_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-        }
-
          
-        private async void allPullToRefresh_RefreshInvoked(DependencyObject sender, object args)
-        {
-            await ViewModel.AllSubscribesRefresh();
-        }
-
-        private async void hotPullToRefresh_RefreshInvoked(DependencyObject sender, object args)
-        {
-            await ViewModel.HotSubscribesRefresh();
-        }
-
         /// <summary>
         /// 添加订阅
         /// </summary>
@@ -130,10 +97,26 @@ namespace 游民星空.View
             if (dataContext == null) return;
             DataShareManager.Current.UpdateSubscribe(dataContext);
         }
-
-        private void myPullToRefresh_RefreshInvoked(DependencyObject sender, object args)
+         
+        /// <summary>
+        /// 下拉刷新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
-            ViewModel.MySubscribesRefresh();
+            switch(pivot.SelectedIndex)
+            {
+                case 0:
+                    await ViewModel.HotSubscribesRefresh();
+                    break;
+                case 1:
+                    await ViewModel.AllSubscribesRefresh();
+                    break;
+                case 2:
+                    ViewModel.MySubscribesRefresh();
+                    break;
+            }
         }
     }
 }

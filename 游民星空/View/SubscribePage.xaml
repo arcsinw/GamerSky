@@ -68,15 +68,22 @@
 
         <Pivot x:Name="pivot"  Background="{ThemeResource PageBackground}"
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
-            <PivotItem Header="订阅内容" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
-                <ListView x:Name="subscribeContentListView" ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
+            <PivotItem Header="订阅内容" Margin="0" Padding="0" >
+                <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
+                    <ListView x:Name="subscribeContentListView" ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
                           ItemsSource="{Binding SubscribeContent}"
                           ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
                           IsItemClickEnabled="True"
                           Loaded="subscribeContentListView_Loaded"
                           ItemClick="ListView_ItemClick"
                                >
-                </ListView>
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <AddDeleteThemeTransition/>
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
+                    </ListView>
+                </pr:PullToRefreshBox>
             </PivotItem>
             <PivotItem Header="订阅专题" Margin="0" Padding="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
@@ -158,7 +165,7 @@
 
         <!--#region 滚到到顶部-->
         <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom"
-               Height="48" x:Name="topPop" Width="48" Margin="16,48" >
+               Height="48" x:Name="topPop" Width="48" Margin="16,36" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
                     <!--<EdgeUIThemeTransition Edge="Bottom"/>-->

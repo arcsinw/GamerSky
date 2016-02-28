@@ -33,13 +33,18 @@ namespace 游民星空.View
         }
 
         private bool IsSubscribeTopicLoaded = false;
+        private bool IsSubscribeContentLoaded = false;
 
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch(pivot.SelectedIndex)
             {
                 case 0:
-                    
+                    if(!IsSubscribeContentLoaded)
+                    {
+                        await viewModel.LoadSubscribeContent();
+                        IsSubscribeContentLoaded = true;
+                    }
                     break;
                 case 1:
                     if (!IsSubscribeTopicLoaded)
@@ -51,15 +56,7 @@ namespace 游民星空.View
             }
         }
 
-        private void PivotItem_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-        }
-
-        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-
-        }
+      
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -84,10 +81,10 @@ namespace 游民星空.View
             switch(pivot.SelectedIndex)
             {
                 case 0:
+                    await viewModel.RefreshSubscribeContent();
                     break;
                 case 1:
-                    viewModel.SubscribeTopic.Clear();
-                    await viewModel.LoadSubscribeTopic();
+                    await viewModel.RefreshSubscribeTopic();
                     break;
             }
         }
@@ -109,7 +106,8 @@ namespace 游民星空.View
         private ScrollViewer scrollViewer;
         
         private bool IsDataLoading = false;
-        private void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private int pageIndex = 1;
+        private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             if (scrollViewer != null)
             {
@@ -127,7 +125,17 @@ namespace 游民星空.View
                         topPop.IsOpen = true;
                     }
                 }
-                 
+                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)
+                {
+                    if (!IsDataLoading)  //未加载数据
+                    {
+                        IsDataLoading = true;
+                        progress.IsActive = true;
+                        await viewModel.LoadSubscribeContent();
+                        progress.IsActive = false;
+                        IsDataLoading = false;
+                    }
+                }
             }
         }
 
