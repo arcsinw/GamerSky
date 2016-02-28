@@ -75,6 +75,26 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
+        /// <summary>
+        /// 本地设置
+        /// </summary>
+        private static ApplicationDataContainer settings = Windows.Storage.ApplicationData.Current.LocalSettings;
+
+        private const string SettingKey_IsFirstLaunch = "IsFirstLaunch";
+
+        public bool IsFirstLaunch
+        {
+            get
+            {
+                var value = settings.Values[SettingKey_IsFirstLaunch];
+                return value == null ? true : (bool)value;
+            }
+            set
+            {
+                settings.Values[SettingKey_IsFirstLaunch] = value;
+            }
+        }
+
         private static DataShareManager current;
         public static DataShareManager Current
         {

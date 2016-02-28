@@ -169,7 +169,7 @@ namespace 游民星空.Core.ViewModel
                 string baseCss = "<style>"
                        + "html{-ms-content-zooming:none;font-family:微软雅黑;}"
                        + ".author{font-weight:bold;} .bio{color:gray;}"
-                       + "body{padding:4px;word-break:break-all;} p{margin:10px auto;} a{color:skyblue;}"
+                       + "body{padding:0px;word-break:break-all;} p{margin:10px auto;} a{color:skyblue;}"
                        + "body{line-height:120%; font:normal 100% Helvetica, Arial, sans-serif;}"
                        + "img{height:auto;width:auto;width:100%}"
                        + "h1{ text-align:left; font-size:1em;}" //标题栏

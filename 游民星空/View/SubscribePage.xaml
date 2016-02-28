@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    Margin="0,0,0,50"
     RequestedTheme="{Binding AppTheme}">
 
     <Page.DataContext>
@@ -68,50 +69,50 @@
         <Pivot x:Name="pivot"  Background="{ThemeResource PageBackground}"
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="订阅内容" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
-                <ListView x:Name="subscribeListView" ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
+                <ListView x:Name="subscribeContentListView" ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
                           ItemsSource="{Binding SubscribeContent}"
                           ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
                           IsItemClickEnabled="True"
-                                 ItemClick="ListView_ItemClick"
+                          Loaded="subscribeContentListView_Loaded"
+                          ItemClick="ListView_ItemClick"
                                >
-                     
                 </ListView>
             </PivotItem>
             <PivotItem Header="订阅专题" Margin="0" Padding="0">
-                <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
-                    <ItemsControl Padding="{ThemeResource PhonePagePadding}" 
-                              ScrollViewer.VerticalScrollMode="Enabled"
-                          ItemsSource="{Binding SubscribeTopic}" >
-                        <ItemsControl.ItemContainerTransitions>
-                            <TransitionCollection>
-                                <AddDeleteThemeTransition />
-
-                            </TransitionCollection>
-                        </ItemsControl.ItemContainerTransitions>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0,0,0,8">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Grid Grid.Row="0" Padding="{ThemeResource PhonePagePadding}" BorderBrush="{ThemeResource BorderBrush}"
+                <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
+                    <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
+                        <ItemsControl Padding="{ThemeResource PhonePagePadding}" 
+                          ItemsSource="{Binding SubscribeTopic}">
+                            <ItemsControl.ItemContainerTransitions>
+                                <TransitionCollection>
+                                    <AddDeleteThemeTransition />
+                                </TransitionCollection>
+                            </ItemsControl.ItemContainerTransitions>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,8">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid Grid.Row="0" Padding="{ThemeResource PhonePagePadding}" BorderBrush="{ThemeResource BorderBrush}"
                                       BorderThickness="{ThemeResource BorderThickness}" 
                                        Tapped="Grid_Tapped" >
-                                        <TextBlock Text="{Binding title}" HorizontalAlignment="Left" Foreground="{ThemeResource ThemeColorBrush}"/>
-                                        <TextBlock HorizontalAlignment="Right">
+                                            <TextBlock Text="{Binding title}" HorizontalAlignment="Left" Foreground="{ThemeResource ThemeColorBrush}"/>
+                                            <TextBlock HorizontalAlignment="Right">
                                         <Run Text="{Binding readingCount}"/>
                                         <Run Text="人关注"/>
-                                        </TextBlock>
-                                    </Grid>
-                                    <ListView ItemsSource="{Binding childElements}" Grid.Row="1"
+                                            </TextBlock>
+                                        </Grid>
+                                        <ListView ItemsSource="{Binding childElements}" Grid.Row="1"
+                                          ScrollViewer.VerticalScrollMode="Disabled"
                                           ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
                                            ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
-                                    </ListView>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <!--<ListView.FooterTemplate>
+                                        </ListView>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <!--<ListView.FooterTemplate>
                         <DataTemplate>
                             <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0" Click="Button_Click">
                                 <Button.Content>
@@ -123,8 +124,9 @@
                             </Button>
                         </DataTemplate>
                     </ListView.FooterTemplate>-->
-                    </ItemsControl>
-                </ScrollViewer>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </pr:PullToRefreshBox>
             </PivotItem>
 
         </Pivot>
@@ -154,6 +156,7 @@
         </Grid>
         <!--#endregion-->
 
+        <!--#region 滚到到顶部-->
         <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom"
                Height="48" x:Name="topPop" Width="48" Margin="16,48" >
             <Popup.ChildTransitions>
@@ -169,6 +172,7 @@
                 </Button>
             </Popup.Child>
         </Popup>
-
+        <!--#endregion-->
+        
     </Grid>
 </Page>

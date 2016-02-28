@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.Foundation.Metadata;
+using Windows.Storage;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -144,5 +145,8 @@ namespace 游民星空.Core.Helper
             return author;
         }
 
+        
+        
+         
     }
 }

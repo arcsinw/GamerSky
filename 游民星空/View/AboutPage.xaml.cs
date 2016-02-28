@@ -78,7 +78,7 @@ namespace 游民星空.View
         public async void CopyToClipboard()
         {
             DataPackage dp = new DataPackage();
-            dp.SetText(qqTextBlock.Text);
+            dp.SetText("473967668");
             Clipboard.SetContent(dp);
             await new MessageDialog("已复制到剪贴板").ShowAsync();
         }

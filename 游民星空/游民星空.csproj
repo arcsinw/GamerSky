@@ -127,6 +127,9 @@
     <Compile Include="View\EssayDetail.xaml.cs">
       <DependentUpon>EssayDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FavoritePage.xaml.cs">
+      <DependentUpon>FavoritePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Feedback.xaml.cs">
       <DependentUpon>Feedback.xaml</DependentUpon>
     </Compile>
@@ -284,6 +287,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EssayDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FavoritePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

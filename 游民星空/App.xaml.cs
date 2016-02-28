@@ -211,7 +211,7 @@ namespace 游民星空
         }
 
 
-        private const string TILE_TASK_NAME = "TILETASK";
+        //private const string TILE_TASK_NAME = "TILETASK";
         
         /// <summary>
         /// 注册后台任务

@@ -32,6 +32,8 @@ namespace 游民星空.View
             NavigationCacheMode = NavigationCacheMode.Required;
         }
 
+        private bool IsSubscribeTopicLoaded = false;
+
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch(pivot.SelectedIndex)
@@ -40,8 +42,12 @@ namespace 游民星空.View
                     
                     break;
                 case 1:
-                    
-                    break;
+                    if (!IsSubscribeTopicLoaded)
+                    {
+                        await viewModel.LoadSubscribeTopic();
+                        IsSubscribeTopicLoaded = true;
+                    }
+                   break;
             }
         }
 
@@ -68,9 +74,22 @@ namespace 游民星空.View
             (Window.Current.Content as Frame)?.Navigate(typeof(MySubscribePage));
         }
 
-        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        /// <summary>
+        /// 下拉刷新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
-
+            switch(pivot.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    viewModel.SubscribeTopic.Clear();
+                    await viewModel.LoadSubscribeTopic();
+                    break;
+            }
         }
 
         public void Back()
@@ -84,21 +103,13 @@ namespace 游民星空.View
 
         private void ScrollToTop(object sender, RoutedEventArgs e)
         {
-            subscribeListView.ScrollIntoViewSmoothly(subscribeListView.Items[0]);
+            subscribeContentListView.ScrollIntoViewSmoothly(subscribeContentListView.Items[0]);
         }
 
         private ScrollViewer scrollViewer;
-        private void ListView_Loaded(object sender, RoutedEventArgs e)
-        {
-            scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
-            if (scrollViewer != null)
-            {
-                scrollViewer.ViewChanged += scrollViewer_ViewChanged;
-            }
-        }
-
+        
         private bool IsDataLoading = false;
-        private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             if (scrollViewer != null)
             {
@@ -116,18 +127,7 @@ namespace 游民星空.View
                         topPop.IsOpen = true;
                     }
                 }
-                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
-                {
-                    if (!IsDataLoading)  //未加载数据
-                    {
-                        IsDataLoading = true;
-
-
-                        //await viewModel.LoadSubscribeContent();
-                         
-                        IsDataLoading = false;
-                    }
-                }
+                 
             }
         }
 
@@ -141,6 +141,15 @@ namespace 游民星空.View
                 {
                     (Window.Current.Content as Frame)?.Navigate(typeof(SubscribeContentPage), essay.contentId);
                 }
+            }
+        }
+
+        private void subscribeContentListView_Loaded(object sender, RoutedEventArgs e)
+        {
+            scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
+            if (scrollViewer != null)
+            {
+                scrollViewer.ViewChanged += scrollViewer_ViewChanged;
             }
         }
     }

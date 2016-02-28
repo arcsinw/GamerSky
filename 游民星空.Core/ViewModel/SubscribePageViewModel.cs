@@ -100,7 +100,6 @@ namespace 游民星空.Core.ViewModel
             } 
             
             IsActive = false;
-           
         }
 
         /// <summary>

@@ -160,7 +160,7 @@
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem>
+                        <ListViewItem Tapped="{x:Bind Favorite}">
                             <StackPanel Orientation="Horizontal">
                                 <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Collect.png" Height="24"/>
                                 <TextBlock Text="收藏" Margin="{StaticResource TextBlockMargin}"/>
@@ -327,5 +327,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+
     </Grid>
 </Page>

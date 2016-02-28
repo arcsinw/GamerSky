@@ -92,11 +92,13 @@ namespace 游民星空.Core.ViewModel
         private async void LoadData()
         {
             List<Channel> channels = await apiService.GetChannelList();
-            foreach (var item in channels)
+            if (channels != null)
             {
-                EssaysAndChannels.Add(new PivotData { Channel = item });
+                foreach (var item in channels)
+                {
+                    EssaysAndChannels.Add(new PivotData { Channel = item });
+                }
             }
-
         }
 
         public RelayCommand NavigateToEssayCommand { get; set; }

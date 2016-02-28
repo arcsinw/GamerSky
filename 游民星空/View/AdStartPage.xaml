@@ -26,7 +26,7 @@
             <FlipView.ItemTemplate>
                 <DataTemplate>
                     <Image Holding="Image_Holding" 
-                           
+                           Stretch="Fill"
                            FlyoutBase.AttachedFlyout="{StaticResource ImageMenuFlyout}">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding picAdress}"/>

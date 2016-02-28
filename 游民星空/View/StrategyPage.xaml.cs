@@ -98,7 +98,7 @@ namespace 游民星空.View
         }
 
         /// <summary>
-        /// 订阅一个频道
+        /// 订阅一个游戏攻略
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

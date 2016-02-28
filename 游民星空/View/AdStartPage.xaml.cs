@@ -100,10 +100,12 @@ namespace 游民星空.View
         public async void LoadData()
         {
             List<AdStart> adStart = await apiService.GetStartImage();
-
-            foreach (var item in adStart)
+            if (adStart != null)
             {
-                AdStarts.Add(item);
+                foreach (var item in adStart)
+                {
+                    AdStarts.Add(item);
+                }
             }
         }
 

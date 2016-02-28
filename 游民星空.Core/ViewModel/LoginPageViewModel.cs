@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
@@ -41,6 +43,8 @@ namespace 游民星空.Core.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        
 
         private ApiService apiService;
         public async void Login()
