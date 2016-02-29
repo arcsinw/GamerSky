@@ -34,31 +34,16 @@
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserName]}" Style="{ThemeResource ErrorTextBlock}"/>
                     <PasswordBox PlaceholderText="请输入密码"  Password="{Binding Path=RegisterInfo.UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserPassword]}" Style="{ThemeResource ErrorTextBlock}"/>
-                    <PasswordBox PlaceholderText="请再次输入密码" Password="{Binding Path=RegisterInfo.SureUserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[SureUserPassword]}" Style="{ThemeResource ErrorTextBlock}"/>
+                    <!--<PasswordBox PlaceholderText="请再次输入密码" Password="{Binding Path=RegisterInfo.SureUserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[SureUserPassword]}" Style="{ThemeResource ErrorTextBlock}"/>-->
                     <TextBox PlaceholderText="请输入邮箱" Text="{Binding Path=RegisterInfo.Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[Email]}" Style="{ThemeResource ErrorTextBlock}"/>
                     <TextBox PlaceholderText="请输入密保问题" Text="{Binding Path=RegisterInfo.Question,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[Question]}" Style="{ThemeResource ErrorTextBlock}"/>
                     <TextBox PlaceholderText="请输入密保答案"  Text="{Binding Path=RegisterInfo.Answer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[Answer]}" Style="{ThemeResource ErrorTextBlock}"/>
-                    <Grid Margin="0,8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBox PlaceholderText="请输入验证码" Grid.Row="0" Grid.Column="0"  Text="{Binding Path=RegisterInfo.VerificationCode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="{Binding Path=RegisterInfo.Errors[VerificationCode]}" Grid.Row="1" Style="{ThemeResource ErrorTextBlock}"/>
-                        <Button Content="获取验证码" HorizontalAlignment="Right" Grid.Row="0"
-                                Background="{ThemeResource ThemeColorBrush}" Foreground="White"
-                                Grid.Column="1"/>
-                    </Grid>
-                    <Button Content="注册" IsEnabled="{Binding Path=RegisterInfo.IsValid}" HorizontalAlignment="Stretch" Margin="0,16"
-                            Background="{ThemeResource ThemeColorBrush}" Foreground="White"/>
+                    <Button Content="注册" IsEnabled="{Binding Path=RegisterInfo.IsValid}" HorizontalAlignment="Stretch" Margin="0,0,0,16"
+                            Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind Register}"/>
                     <TextBlock>
                         <Run Text="注册代表同意接受"/>
                         <Hyperlink Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>

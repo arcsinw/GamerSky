@@ -73,15 +73,12 @@ namespace 游民星空.View
                     searchType = SearchTypeEnum.strategy;
                     viewModel.Strategys.Clear();
                     break;
-                default:
-                    searchType = SearchTypeEnum.news;
-                    break;
                 case 2:
                     searchType = SearchTypeEnum.subscribe;
                     break;
             }
             key = keyTextBox.Text;
-
+            pageIndex = 1;
             await viewModel.Search(key, searchType, pageIndex++);
 
             //记录页码

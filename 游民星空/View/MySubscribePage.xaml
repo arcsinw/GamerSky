@@ -92,9 +92,8 @@
         </Button>
         --><!--#endregion-->
 
-        <Grid>
-            <ProgressRing IsActive="{Binding IsActive}"  Foreground="{ThemeResource ThemeColorBrush}" 
-                          Height="60" Width="60" Background="Transparent"/>
-        </Grid>
+         
+        <ProgressRing IsActive="{Binding IsActive}"  Style="{ThemeResource ProgressRingStyle}"/>
+         
     </Grid>
 </Page>

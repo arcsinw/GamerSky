@@ -60,9 +60,18 @@ namespace 游民星空.View
             string userName = userNameTextBlock.Text;
 
             var verificationCode = await apiService.GetVerificationCode(phoneNumber, userName, "", "");  
-            if(verificationCode!= null)
+            if(verificationCode!= null && !verificationCode.errorCode.Equals("0"))
             {
                 UIHelper.ShowMessage(verificationCode.errorMessage);
+            }
+        }
+
+        private async void Register()
+        {
+            var result = await ViewModel.RegisterByPhone();
+            if(result!=null && !result.Equals("0"))
+            {
+                UIHelper.ShowMessage(result.errorMessage);
             }
         }
     }

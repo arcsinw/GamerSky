@@ -427,7 +427,7 @@ namespace 游民星空.Core.Http
         }
 
         /// <summary>
-        /// 通过邮件注册
+        /// 通过邮箱注册
         /// </summary>
         /// <param name="answer">密保问题答案</param>
         /// <param name="password">密码</param>
@@ -437,7 +437,7 @@ namespace 游民星空.Core.Http
         /// <param name="phoneNumber">手机号</param>
         /// <param name="phoneVerificationCode">手机验证码</param>
         /// <returns></returns>
-        public async Task<VerificationCode> RegisterByEmail(string answer,string password,string email,string question,string userName,string phoneNumber="",string phoneVerificationCode="")
+        public async Task<VerificationCode> RegisterByEmail(string answer,string password,string email,string question,string userName)
         {
             EmailRegisterPostData postData = new EmailRegisterPostData();
             postData.request = new EmailRegisterRequest()
@@ -446,9 +446,39 @@ namespace 游民星空.Core.Http
                 confirmpassword = password,
                 email = email,
                 password = password,
+                phoneNumber = "",
+                phoneVerificationCode = "",
+                question = question,
+                userName = userName
+            };
+            VerificationCode verificationCode = await PostJson<EmailRegisterPostData, VerificationCode>(ServiceUri.RegisterByEmail, postData);
+
+            return verificationCode;
+        }
+
+        /// <summary>
+        /// 通过手机号注册
+        /// </summary>
+        /// <param name="answer">密保问题答案</param>
+        /// <param name="password">密码</param>
+        /// <param name="email">邮箱</param>
+        /// <param name="question">密保问题</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="phoneNumber">手机号</param>
+        /// <param name="phoneVerificationCode">手机验证码</param>
+        /// <returns></returns>
+        public async Task<VerificationCode> RegisterByPhone(string password,  string userName, string phoneNumber , string phoneVerificationCode)
+        {
+            EmailRegisterPostData postData = new EmailRegisterPostData();
+            postData.request = new EmailRegisterRequest()
+            {
+                answer = "",
+                confirmpassword = password,
+                email = "",
+                password = password,
                 phoneNumber = phoneNumber,
                 phoneVerificationCode = phoneVerificationCode,
-                question = question,
+                question = "",
                 userName = userName
             };
             VerificationCode verificationCode = await PostJson<EmailRegisterPostData, VerificationCode>(ServiceUri.RegisterByEmail, postData);
@@ -487,7 +517,7 @@ namespace 游民星空.Core.Http
                 postData.request = new SubscribeTopicRequest
                 {
                     elementsCountPerPage = "20",
-                    //lastUpdateTime = Functions.getUnixTimeStamp().ToString(),
+                    lastUpdateTime = Functions.getUnixTimeStamp().ToString(),
                     nodeIds = nodeIds,
                     pageIndex = pageIndex,
                     parentNodeId = "dingyue",

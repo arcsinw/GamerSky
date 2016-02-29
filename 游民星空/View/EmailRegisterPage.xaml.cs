@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -39,5 +40,19 @@ namespace 游民星空.View
         {
             Frame.Navigate(typeof(AgreementPage));
         }
+
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        private async void Register()
+        {
+
+            var verificationCode = await ViewModel.RegisterByEmail();
+            if (verificationCode != null && !verificationCode.errorCode.Equals("0"))
+            {
+                UIHelper.ShowMessage(verificationCode.errorMessage);
+            }
+        }
+         
     }
 }

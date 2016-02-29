@@ -22,8 +22,7 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Foreground="{ThemeResource ThemeColorBrush}"  
-                          Height="60" Width="60" Background="Transparent"/>
+        <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
         <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"  Holding="webView_Holding"
                    DOMContentLoaded="webView_DOMContentLoaded" ScriptNotify="webView_ScriptNotify" />
 

@@ -29,5 +29,9 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
+        
+        <!--#region  ProgressRing-->
+        <ProgressRing x:Name="progressRing"  Style="{ThemeResource ProgressRingStyle}"/>
+        <!--#endregion-->
     </Grid>
 </Page>

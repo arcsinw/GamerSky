@@ -190,7 +190,8 @@ namespace 游民星空.Core.ViewModel
 
         public void UpdateSubscribe(Subscribe subscribe)
         {
-            bool add = subscribeList.Contains(subscribe) ? false : true;
+            bool add = !subscribeList.Any(x => x.sourceId == subscribe.sourceId);
+            //bool add = subscribeList.Contains(subscribe) ? false : true;
             if (add)
             {
                 subscribeList.Add(subscribe);

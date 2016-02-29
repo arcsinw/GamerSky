@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace 游民星空.Core.PostDataModel
 {
+    /// <summary>
+    /// 通过手机或邮箱注册
+    /// </summary>
     public class EmailRegisterPostData : PostDataBase
     {
         public EmailRegisterRequest request;

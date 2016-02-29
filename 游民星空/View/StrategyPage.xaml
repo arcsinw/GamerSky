@@ -647,9 +647,7 @@
             </Button.Content>
         </Button>
 
-        <Grid>
-            <ProgressRing x:Name="progress"  Foreground="{ThemeResource ThemeColorBrush}" 
-                          Height="60" Width="60" Background="Transparent"/>
-        </Grid>
+        <ProgressRing x:Name="progress"  Style="{ThemeResource ProgressRingStyle}"/>
+        
     </Grid>
 </Page>

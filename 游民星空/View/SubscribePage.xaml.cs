@@ -160,5 +160,13 @@ namespace 游民星空.View
                 scrollViewer.ViewChanged += scrollViewer_ViewChanged;
             }
         }
+
+        private void innerTopicListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Essay essayResult = e.ClickedItem as Essay;
+            if (essayResult == null) return;
+
+            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+        }
     }
 }

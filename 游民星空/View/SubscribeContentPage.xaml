@@ -126,10 +126,9 @@
                 </ListView>
             </pr:PullToRefreshBox>
 
-            <Grid>
-                <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Foreground="{ThemeResource ThemeColorBrush}" 
-                          Height="60" Width="60" Background="Transparent"/>
-            </Grid>
+           
+            <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
+    
         </Grid>
 
         <!--标题栏-->
@@ -154,8 +153,7 @@
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <Popup.Child>
-                <Button Height="48" Width="48" Background="{ThemeResource ThemeColorBrush}" 
-                        Click="Button_Click" Style="{ThemeResource RoundButtonStyle}">
+                <Button Click="Button_Click" Style="{ThemeResource ScrollToTopButtonStyle}">
                     <SymbolIcon Symbol="Up" Foreground="White" />
                 </Button>
             </Popup.Child>

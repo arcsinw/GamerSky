@@ -56,17 +56,17 @@ namespace 游民星空.View
                 isNight = true;
             }
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
-            if(DataShareManager.Current.IsFirstLaunch)
-            {
-                UIHelper.ShowMessage(
-                    "1.修复文章标题和评论数的重叠问题\n2.增加尚不完整的订阅功能\n3.左边有侧滑菜单你们知道吗\n4.试用版无限制你们知道吗\n5.关于里有QQ群你们知道吗", 
-                    "新版本更新内容");
-                DataShareManager.Current.IsFirstLaunch = false;
-            }
             
             rootFrame.SourcePageType = typeof(MainPage);
             newsRadioButton.IsChecked = true;
+            
+            if (DataShareManager.Current.IsFirstLaunch)
+            {
+                UIHelper.ShowMessage(
+                    "1.修复文章标题和评论数的重叠问题\n2.增加尚不完整的订阅功能\n3.左边有侧滑菜单你们知道吗\n4.试用版无限制你们知道吗\n5.关于里有QQ群你们知道吗",
+                    "新版本更新内容");
+                DataShareManager.Current.IsFirstLaunch = false;
+            }
 
             DispatcherManager.Current.Dispatcher = Dispatcher;
         }

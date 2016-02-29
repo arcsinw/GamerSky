@@ -72,10 +72,8 @@
             </ScrollViewer>
         </Grid>
 
-        <Grid Grid.Row="0" Grid.RowSpan="2">
-            <ProgressRing x:Name="progressRing"  Foreground="{ThemeResource ThemeColorBrush}" 
-                          Height="60" Width="60" Background="Transparent"/>
-        </Grid>
-
+        
+        <ProgressRing Grid.Row="0" Grid.RowSpan="2" x:Name="progressRing"  Style="{ThemeResource ProgressRingStyle}"/>
+        
     </Grid>
 </Page>

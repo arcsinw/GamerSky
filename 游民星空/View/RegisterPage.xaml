@@ -59,7 +59,7 @@
                                 Grid.Column="1" Click="{x:Bind GetVerificationCode}" IsEnabled="{Binding RegisterInfo.Errors[PhoneNumber]}"/>
                     </Grid>
                     <Button Content="注册" HorizontalAlignment="Stretch" IsEnabled="{Binding Path=RegisterInfo.IsValid}"
-                            Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind ViewModel.RegisterByPhone}"/>
+                            Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind Register}"/>
                     <TextBlock Margin="0,16">
                     <Run Text="注册代表同意接受"/>
                     <Hyperlink Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>

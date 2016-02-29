@@ -111,8 +111,10 @@
                                         <Run Text="人关注"/>
                                             </TextBlock>
                                         </Grid>
-                                        <ListView ItemsSource="{Binding childElements}" Grid.Row="1"
+                                        <ListView x:Name="innerTopicListView" ItemsSource="{Binding childElements}" Grid.Row="1"
                                           ScrollViewer.VerticalScrollMode="Disabled"
+                                                  IsItemClickEnabled="True"
+                                                  ItemClick="innerTopicListView_ItemClick"
                                           ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
                                            ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
                                         </ListView>
@@ -156,11 +158,7 @@
         <!--#endregion-->
         
         <!--#region 进度Ring-->
-        <Grid>
-            <ProgressRing x:Name="progress"  Foreground="{ThemeResource ThemeColorBrush}" 
-                          IsActive="{Binding IsActive}"
-                          Height="60" Width="60" Background="Transparent"/>
-        </Grid>
+            <ProgressRing x:Name="progress"  Style="{ThemeResource ProgressRingStyle}" IsActive="{Binding IsActive}"/>
         <!--#endregion-->
 
         <!--#region 滚到到顶部-->
@@ -173,8 +171,7 @@
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <Popup.Child>
-                <Button Height="48" Width="48" Background="{ThemeResource ThemeColorBrush}" 
-                        Click="{x:Bind ScrollToTop}" Style="{ThemeResource RoundButtonStyle}">
+                <Button Click="{x:Bind ScrollToTop}" Style="{ThemeResource ScrollToTopButtonStyle}">
                     <SymbolIcon Symbol="Up" Foreground="White" />
                 </Button>
             </Popup.Child>
