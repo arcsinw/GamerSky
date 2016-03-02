@@ -80,19 +80,24 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		RESX_ConfirmAddLanguageFile = True
+		RESX_NeutralResourcesLanguage = en-AS
+		RESX_PrefixTranslations = False
+	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://wangx86.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = 游民星空\\游民星空.csproj
-		SccProjectName1 = 游民星空
-		SccLocalPath1 = 游民星空
-		SccProjectUniqueName2 = 游民星空.Core\\游民星空.Core.csproj
-		SccProjectName2 = 游民星空.Core
-		SccLocalPath2 = 游民星空.Core
-		SccProjectUniqueName3 = 游民星空.BackgroundTask\\游民星空.BackgroundTask.csproj
-		SccProjectName3 = 游民星空.BackgroundTask
-		SccLocalPath3 = 游民星空.BackgroundTask
+		SccProjectUniqueName0 = 游民星空\\游民星空.csproj
+		SccProjectName0 = 游民星空
+		SccLocalPath0 = 游民星空
+		SccProjectUniqueName1 = 游民星空.Core\\游民星空.Core.csproj
+		SccProjectName1 = 游民星空.Core
+		SccLocalPath1 = 游民星空.Core
+		SccProjectUniqueName2 = 游民星空.BackgroundTask\\游民星空.BackgroundTask.csproj
+		SccProjectName2 = 游民星空.BackgroundTask
+		SccLocalPath2 = 游民星空.BackgroundTask
+		SccLocalPath3 = .
 	EndGlobalSection
 EndGlobal

@@ -2,6 +2,7 @@
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.Store;
 using Windows.Foundation.Metadata;
 using Windows.Phone.UI.Input;
 using Windows.UI.Core;
@@ -30,10 +31,12 @@ namespace 游民星空
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            
+
+            //licenseInformation = CurrentAppSimulator.LicenseInformation;
+
             this.UnhandledException += OnUnhandledException;
         }
-
+        //LicenseInformation licenseInformation;
 
         private async void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
@@ -211,41 +214,6 @@ namespace 游民星空
         }
 
 
-        //private const string TILE_TASK_NAME = "TILETASK";
-        
-        /// <summary>
-        /// 注册后台任务
-        /// </summary>
-        //public static async void RegisterLiveTileTask()
-        //{
-        //    var status = await BackgroundExecutionManager.RequestAccessAsync();
-        //    if (status == BackgroundAccessStatus.Unspecified || status == BackgroundAccessStatus.Denied)
-        //    {
-        //        return;
-        //    }
-        //    //如果已经注册则先取消注册
-        //    foreach (var t in BackgroundTaskRegistration.AllTasks)
-        //    {
-        //        if (t.Value.Name == TILE_TASK_NAME)
-        //        {
-        //            t.Value.Unregister(true);
-        //        }
-        //    }
-
-        //    var taskBuilder = new BackgroundTaskBuilder { Name = TILE_TASK_NAME, TaskEntryPoint = typeof(LiveTileTask).FullName };
-        //    taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
-
-        //    var updater = TileUpdateManager.CreateTileUpdaterForApplication();
-        //    updater.Clear();
-
-        //    //var secondUpdater = TileUpdateManager.CreateTileUpdaterForSecondaryTile();
-        //    //secondUpdater.Clear();
-
-        //    taskBuilder.SetTrigger(new TimeTrigger(30, false));
-        //    taskBuilder.Register();
-
-        //    //更新动态磁贴
-        //    //await LiveTileHelper.UpdatePrimaryTile();
-        //}
+   
     }
 }

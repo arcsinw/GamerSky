@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -49,11 +50,49 @@ namespace 游民星空.View
             }
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var parameter = e.Parameter as string;
+            if(parameter== null)
+            {
+                titleTextBlock.Text = "协议";
+                GetAgreement();
+            }
+            else if (parameter.Equals("Version"))
+            {
+                titleTextBlock.Text = "更新历史";
+                GetVersionHistory();
+            }
+        }
+
+        /// <summary>
+        /// 获取协议
+        /// </summary>
         public async void GetAgreement()
         {
-            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Data/Agreement.txt"));
-            string text = await FileIO.ReadTextAsync(file);
+            string text = await GetTextFromFile(new Uri ("ms-appx:///Data/Agreement.txt"));
             textBlock.Text = text;
+        }
+
+        /// <summary>
+        /// 获取更新历史
+        /// </summary>
+        public async void GetVersionHistory()
+        {
+            string text = await GetTextFromFile(new Uri("ms-appx:///Data/VersionHistory.txt"));
+            textBlock.Text = text;
+        }
+
+        /// <summary>
+        /// 从文件中获取文本
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        private async Task<string> GetTextFromFile(Uri uri)
+        {
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(uri);
+            string text = await FileIO.ReadTextAsync(file);
+            return text;
         }
 
         private ElementTheme appTheme;

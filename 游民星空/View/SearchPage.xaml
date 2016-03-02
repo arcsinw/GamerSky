@@ -317,7 +317,7 @@
         <!--无图模板-->
         <DataTemplate x:Key="NoPicEssayDataTemplate">
             <Grid BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}"
-                  Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"   >
+                  Margin="{StaticResource GridMargin}" Padding="0,4,5,0"   >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>

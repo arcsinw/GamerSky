@@ -9,6 +9,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.Foundation.Metadata;
 using Windows.Storage;
+using Windows.UI.StartScreen;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -145,8 +146,19 @@ namespace 游民星空.Core.Helper
             return author;
         }
 
-        
-        
+        /// <summary>
+        /// 增加任务栏右键菜单
+        /// </summary>
+        public static async void LoadJumpList()
+        {
+            if(ApiInformation.IsTypePresent("Windows.UI.StartScreen.JumpList"))
+            {
+                JumpList jumpList = await JumpList.LoadCurrentAsync();
+                jumpList.Items.Add(JumpListItem.CreateWithArguments("Search", "搜索"));
+                jumpList.Items.Add(JumpListItem.CreateWithArguments("Yaowen", "要闻"));
+                await jumpList.SaveAsync();
+            }
+        }
          
     }
 }

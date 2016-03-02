@@ -364,6 +364,8 @@
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
+    <MainPackageIdentityName>46918Xsetups.GamerSky.X</MainPackageIdentityName>
+    <MainPackageIdentityName>46918Xsetups.GamerSky.XPro</MainPackageIdentityName>
     <MainPackageIdentityName>46918Xsetups.Out</MainPackageIdentityName>
     <MainPackageIdentityName>46918Xsetups.XarcsinW</MainPackageIdentityName>
     <MainPackageIdentityName>46918Xsetups.7054B88DBBFC</MainPackageIdentityName>
@@ -373,6 +375,7 @@
     <MainPackageIdentityName>46918Xsetups.Bing</MainPackageIdentityName>
     <MainPackageIdentityName>46918Xsetups.Bingbeta</MainPackageIdentityName>
     <MainPackageIdentityName>46918Xsetups.412417B45016C</MainPackageIdentityName>
+    <MainPackageIdentityName>46918Xsetups..XPro</MainPackageIdentityName>
   </AccountPackageIdentityNames>
   <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH5Q5TJ" />
 </StoreAssociation>

@@ -62,11 +62,15 @@
                             Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind Register}"/>
                     <TextBlock Margin="0,16">
                     <Run Text="注册代表同意接受"/>
-                    <Hyperlink Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>
+                    <Hyperlink UnderlineStyle="None" Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>
                     </TextBlock>
                     <Rectangle Height="1" Fill="Gray"  />
-                    
-                    <HyperlinkButton Content="其他方式注册" Click="{x:Bind OtherRegister}" HorizontalAlignment="Right"/>
+
+                    <HyperlinkButton Click="{x:Bind OtherRegister}" HorizontalAlignment="Right">
+                        <HyperlinkButton.Content>
+                            <TextBlock Text="其他方式注册"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

@@ -111,7 +111,12 @@ namespace 游民星空.View
 
         private void Image_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            FlyoutBase.ShowAttachedFlyout((FrameworkElement)sender);
+            var img = sender as FrameworkElement;
+            if (img != null)
+            {
+                MenuFlyout menuFlyout = FlyoutBase.GetAttachedFlyout(sender as FrameworkElement) as MenuFlyout;
+                menuFlyout.ShowAt(img,e.GetPosition(img));
+            }
         }
 
         private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)

@@ -45,7 +45,7 @@ namespace 游民星空.Core.Http
 
             if(channelResult!= null && channelResult.result !=null)
             {
-                channelResult.result.Add(new Channel { isTop = "False", nodeId = 0, nodeName = "头条" });
+                channelResult.result.Insert(0,new Channel { isTop = "False", nodeId = 0, nodeName = "头条" });
             }
 
             return channelResult?.result;

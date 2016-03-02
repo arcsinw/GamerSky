@@ -40,8 +40,16 @@
                             Foreground="White" IsEnabled="{Binding Path=UserLoginInfo.IsValid}"
                             Background="{ThemeResource ThemeColorBrush}"/>
                     <Grid>
-                        <HyperlinkButton Content="忘记密码" Click="{x:Bind ForgetPwd}" HorizontalAlignment="Left"/>
-                        <HyperlinkButton Content="注册新用户" Click="{x:Bind Register}" HorizontalAlignment="Right"/>
+                        <HyperlinkButton Click="{x:Bind ForgetPwd}" HorizontalAlignment="Left">
+                            <HyperlinkButton.Content>
+                                <TextBlock Text="忘记密码"/>
+                            </HyperlinkButton.Content>
+                        </HyperlinkButton>
+                        <HyperlinkButton Click="{x:Bind Register}" HorizontalAlignment="Right">
+                            <HyperlinkButton.Content>
+                                <TextBlock Text="注册新用户"/>
+                            </HyperlinkButton.Content>
+                        </HyperlinkButton>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>

@@ -46,7 +46,15 @@
                                           VerticalAlignment="Center"/>
                         </Grid>    
                     </ListViewItem>
- 
+
+                    <ListViewItem>
+                        <Grid>
+                            <TextBlock Text="透明磁贴" VerticalAlignment="Center"/>
+                            <ToggleSwitch IsOn="{x:Bind viewModel.IsTransparentTileOn,Mode=TwoWay}"  HorizontalAlignment="Right" MinWidth="0"
+                                          VerticalAlignment="Center"/>
+                        </Grid>
+                    </ListViewItem>
+
                     <ListViewItem Visibility="Collapsed">
                         <Grid>
                             <TextBlock Text="要闻推送" VerticalAlignment="Center"/>

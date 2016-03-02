@@ -26,19 +26,26 @@
                 <StackPanel Padding="8" >
                     <StackPanel.Resources>
                         <Style TargetType="TextBlock">
-                            <Setter Property="FontSize" Value="20"/>
+                            <Setter Property="FontSize" Value="18"/>
                             <Setter Property="Margin" Value="4"/>
                         </Style>
                     </StackPanel.Resources>
                     <Image Margin="0,16" Source="ms-appx:///Assets/Square150x150Logo.png" 
-                           Height="110" Width="110"/>
+                           Height="100" Width="100"/>
                     <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Center" />
                     <TextBlock Text="{x:Bind Author}" HorizontalAlignment="Center"/>
-                    <TextBlock Text="还没写完，侵权就下架" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-    
                     <TextBlock HorizontalAlignment="Center" x:Name="qqTextBlock" Tapped="{x:Bind CopyToClipboard}" Text="QQ群：473967668"  />
-                    <HyperlinkButton Content="评论" FontSize="20" NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
-                                     HorizontalAlignment="Center"/>
+                    <HyperlinkButton  NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
+                                     HorizontalAlignment="Center" >
+                        <HyperlinkButton.Content>
+                            <TextBlock Text="评论"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
+                    <HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
+                        <HyperlinkButton.Content>
+                            <TextBlock Text="更新记录"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
                     <!--<TextBlock HorizontalAlignment="Center">
                         <Run>感谢</Run><LineBreak/>
                         <Run>PullToRefresh.UWP</Run><LineBreak/>

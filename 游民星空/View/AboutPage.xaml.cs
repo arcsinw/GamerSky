@@ -72,6 +72,11 @@ namespace 游民星空.View
             }
         }
 
+        public void VersionHistory()
+        {
+            Frame.Navigate(typeof(AgreementPage), "Version");
+        }
+
         /// <summary>
         /// 复制到剪贴板
         /// </summary>

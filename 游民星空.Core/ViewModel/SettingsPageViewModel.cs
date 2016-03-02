@@ -27,7 +27,7 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
-        private bool isLiveTileShow = false;
+         
         /// <summary>
         /// 是否显示动态磁贴
         /// </summary>
@@ -35,12 +35,19 @@ namespace 游民星空.Core.ViewModel
         {
             get
             {
-                return isLiveTileShow;
+                var obj = LocalSettingsHelper.GetValueByKey(IsLiveTileShow_Key);
+                if (obj == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return (bool)obj;
+                }
             }
             set
             {
-                isLiveTileShow = value;
-                if(isLiveTileShow)
+                if(value)
                 {
                     LiveTileHelper.RegisterLiveTileTask();
                     LiveTileHelper.UpdatePrimaryTile();
@@ -49,7 +56,32 @@ namespace 游民星空.Core.ViewModel
                 {
                     LiveTileHelper.UnRegisterLiveTileTask();
                 }
+                LocalSettingsHelper.SaveValueByKey(IsLiveTileShow_Key, value);
                 OnPropertyChanged();
+            }
+        }
+        private const string IsLiveTileShow_Key = "IsLiveTileShow";
+
+
+        /// <summary>
+        /// 是否开启透明磁贴
+        /// </summary>
+        public bool IsTransparentTileOn
+        {
+            get
+            {
+                return LiveTileHelper.IsTileExists();
+            }
+            set
+            {
+                if(value)
+                {
+                    LiveTileHelper.PinSecondaryTile("X");
+                }
+                else
+                {
+                    LiveTileHelper.UnPinSecondaryTile();
+                }
             }
         }
 

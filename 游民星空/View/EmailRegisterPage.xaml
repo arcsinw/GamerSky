@@ -46,7 +46,7 @@
                             Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind Register}"/>
                     <TextBlock>
                         <Run Text="注册代表同意接受"/>
-                        <Hyperlink Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>
+                        <Hyperlink UnderlineStyle="None" Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>
                     </TextBlock>
 
                 </StackPanel>
