@@ -158,6 +158,7 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public async Task GenerateHtmlString()
         {
+            IsActive = true;
             News news = await apiService.ReadEssay(essayResult.contentId);
             if (news != null)
             {
@@ -361,7 +362,7 @@ namespace 游民星空.Core.ViewModel
                     "</html>";
                 
             }
-     
+            IsActive = false;
         }
 
     }

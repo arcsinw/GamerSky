@@ -221,5 +221,10 @@ namespace 游民星空.View
                                         </script></body></html>";
             commentWebView.NavigateToString(html);
         }
+
+        private async void refreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            await viewModel.GenerateHtmlString();
+        }
     }
 }

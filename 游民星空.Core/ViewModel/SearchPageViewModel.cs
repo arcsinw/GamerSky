@@ -157,9 +157,12 @@ namespace 游民星空.Core.ViewModel
             }
 
             List<Subscribe> subscribes = await apiService.GetSubscribeHotKey();
-            foreach (var item in subscribes)
+            if (subscribes != null)
             {
-                HotSubscribes.Add(item);
+                foreach (var item in subscribes)
+                {
+                    HotSubscribes.Add(item);
+                }
             }
 
             IsActive = false;
