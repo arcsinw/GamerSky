@@ -23,7 +23,7 @@ namespace 游民星空.Core.Helper
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public static async Task<SoftwareBitmap> DownLoadImageByUri(string uri)
+        public static async Task<SoftwareBitmap> DownLoadImageByUrl(string uri)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace 游民星空.Core.Helper
                 IRandomAccessStream memStream = new InMemoryRandomAccessStream();
                 await RandomAccessStream.CopyAsync(inputStream, memStream);
                 BitmapDecoder decoder = await BitmapDecoder.CreateAsync(memStream);
-             
+         
                 SoftwareBitmap softBmp = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
                
                 //Debug.WriteLine($"Image Download Success !!! {fileName}");

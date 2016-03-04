@@ -22,9 +22,18 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
-        <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"  Holding="webView_Holding"
+        <Pivot>
+            <PivotItem Header="正文" Margin="0" Padding="0">
+                <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"  Holding="webView_Holding"
                    DOMContentLoaded="webView_DOMContentLoaded" ScriptNotify="webView_ScriptNotify" />
+            </PivotItem>
+            <PivotItem Header="评论">
+                <WebView x:Name="commentWebView" Loaded="commentWebView_Loaded">
+                    
+                </WebView>
+            </PivotItem>
+        </Pivot>
+        <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
 
         <!--      hp:ExtensionHelper.HtmlString="{Binding HtmlString}"-->
         <FlipView x:Name="imageFlipView" Visibility="Collapsed" ItemsSource="{Binding }">

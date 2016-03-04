@@ -14,7 +14,7 @@ namespace 游民星空.Core.ViewModel
     public class EssayDetailViewModel : ViewModelBase
     {
         private ApiService apiService;
-        private Essay essayResult;
+        public Essay essayResult;
 
         public EssayDetailViewModel(Essay essay)
         {

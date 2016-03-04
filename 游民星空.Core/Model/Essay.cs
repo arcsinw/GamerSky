@@ -13,6 +13,7 @@ using Windows.System.Threading;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.Web.Http;
 using 游民星空.Core.Helper;
@@ -52,23 +53,23 @@ namespace 游民星空.Core.Model
                 OnPropertyChanged();
             }
         }
-        //private static SoftwareBitmap defaultBitmap = new SoftwareBitmap { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
-        //#region PlaceHolderImage
-        //private static SoftwareBitmapSource defaultBitmapSource;
 
-        //static EssayResult()
+        //private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
+
+        //private ImageSource[] thumbnail;
+        //public ImageSource[] Thumbnail
         //{
-        //    LoadDefaultBitmap();
-        //}
-
-        ///// <summary>
-        ///// 加载默认图片
-        ///// </summary>
-        //private static async void LoadDefaultBitmap()
-        //{
-
-        //    var defaultBitmap = await ImageDownLoadHelper.ReadFromApplicationUri("ms-appx:///Assets/image_loading.png");
-        //    await defaultBitmapSource.SetBitmapAsync(defaultBitmap);
+        //    get
+        //    {
+        //        if(thumbnail== null)
+        //        {
+        //            return defaultBitmap;
+        //        }
+        //        else
+        //        {
+        //            return thumbnail;
+        //        }
+        //    }
         //}
 
         //private SoftwareBitmapSource[] thumbnails;
@@ -76,14 +77,14 @@ namespace 游民星空.Core.Model
         //{
         //    get
         //    {
-        //        if(thumbnailURLs != null)
+        //        if (thumbnailURLs != null)
         //        {
         //            SetBitmap();
-        //            if(thumbnailURLs.Length==1)
+        //            if (thumbnailURLs.Length == 1)
         //            {
         //                return new SoftwareBitmapSource[1] { defaultBitmapSource };
         //            }
-        //            else if(thumbnailURLs.Length==3)
+        //            else if (thumbnailURLs.Length == 3)
         //            {
         //                return new SoftwareBitmapSource[3] { defaultBitmapSource, defaultBitmapSource, defaultBitmapSource };
         //            }
@@ -92,7 +93,7 @@ namespace 游民星空.Core.Model
         //    }
         //    set
         //    {
-        //          SetBitmap();
+        //        SetBitmap();
         //    }
         //}
 
@@ -110,7 +111,7 @@ namespace 游民星空.Core.Model
         //        }
         //        for (int i = 0; i < thumbnailURLs.Length; i++)
         //        {
-                    
+
         //            var softwareBitmap = await ImageDownLoadHelper.DownLoadImageByUri(thumbnailURLs[i]);
         //            thumbnails[i] = new SoftwareBitmapSource();
         //            await thumbnails[i].SetBitmapAsync(softwareBitmap);

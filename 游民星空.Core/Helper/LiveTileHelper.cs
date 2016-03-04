@@ -59,6 +59,11 @@ namespace 游民星空.Core.Helper
             }
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             updater.Clear();
+            if (SecondaryTile.Exists(TILE_ID))
+            {
+                var secondaryUpdater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(TILE_ID);
+                secondaryUpdater.Clear();
+            }
         }
 
         /// <summary>
@@ -84,6 +89,8 @@ namespace 游民星空.Core.Helper
             </tile>";
 
         public static ApiService apiService = new ApiService();
+
+        private static TileUpdater secondaryUpdater;
         /// <summary>
         /// 更新动态磁贴
         /// </summary>
@@ -101,20 +108,22 @@ namespace 游民星空.Core.Helper
                 updater.EnableNotificationQueueForWide310x150(true);
                 updater.Clear();
 
-                //更新辅助磁贴
-                var secondaryUpdater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(TILE_ID);
-                secondaryUpdater.EnableNotificationQueue(true);  //启用通知队列
-                secondaryUpdater.EnableNotificationQueueForSquare150x150(true);
-                secondaryUpdater.EnableNotificationQueueForSquare310x310(true);
-                secondaryUpdater.EnableNotificationQueueForWide310x150(true);
-                secondaryUpdater.Clear();
-
+                if (SecondaryTile.Exists(TILE_ID))
+                {
+                    //更新辅助磁贴
+                    secondaryUpdater = TileUpdateManager.CreateTileUpdaterForSecondaryTile(TILE_ID);
+                    secondaryUpdater.EnableNotificationQueue(true);  //启用通知队列
+                    secondaryUpdater.EnableNotificationQueueForSquare150x150(true);
+                    secondaryUpdater.EnableNotificationQueueForSquare310x310(true);
+                    secondaryUpdater.EnableNotificationQueueForWide310x150(true);
+                    secondaryUpdater.Clear();
+                }
                 if (essays != null)
                 {
                     foreach (var item in essays)
                     {
                         var doc = new XmlDocument();
-                        var xml = string.Format(TileTemplateXml, item.thumbnailURLs[0], item.title,item.authorName);
+                        var xml = string.Format(TileTemplateXml, item.thumbnailURLs[0], item.title, item.authorName);
                         doc.LoadXml(WebUtility.HtmlDecode(xml), new XmlLoadSettings
                         {
                             ElementContentWhiteSpace = false,
@@ -123,7 +132,10 @@ namespace 游民星空.Core.Helper
                             ResolveExternals = false
                         });
                         updater.Update(new TileNotification(doc));
-                        secondaryUpdater.Update(new TileNotification(doc));
+                        if (SecondaryTile.Exists(TILE_ID))
+                        {
+                            secondaryUpdater.Update(new TileNotification(doc));
+                        }
                     }
                 }
             }
@@ -147,7 +159,7 @@ namespace 游民星空.Core.Helper
                 Uri square71x71Logo = new Uri("ms-appx:///Assets/Square71x71Logo_t.png");
                 Uri square310x310Logo = new Uri("ms-appx:///Assets/Square310x310Logo_t.png");
 
-                SecondaryTile secondaryTile = new SecondaryTile(TILE_ID, "", argument, square150x150Logo, TileSize.Square150x150);
+                SecondaryTile secondaryTile = new SecondaryTile(TILE_ID, " ", argument, square150x150Logo, TileSize.Square150x150);
 
                 //设置磁贴各种格式
                 secondaryTile.VisualElements.Square150x150Logo = square150x150Logo;
@@ -155,9 +167,10 @@ namespace 游民星空.Core.Helper
                 secondaryTile.VisualElements.Wide310x150Logo = square310x150Logo;
                 secondaryTile.VisualElements.Square310x310Logo = square310x310Logo;
 
-                //secondaryTile.VisualElements.ShowNameOnSquare150x150Logo = false;
-                //secondaryTile.VisualElements.ShowNameOnSquare310x310Logo = false;
-                //secondaryTile.VisualElements.ShowNameOnWide310x150Logo = false;
+                secondaryTile.VisualElements.ShowNameOnSquare150x150Logo = false;
+                secondaryTile.VisualElements.ShowNameOnSquare310x310Logo = false;
+                secondaryTile.VisualElements.ShowNameOnWide310x150Logo = false;
+              
 
                 //把磁贴pin到桌面
                 bool result = await secondaryTile.RequestCreateAsync();

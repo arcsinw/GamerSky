@@ -201,5 +201,25 @@ namespace 游民星空.View
         {
 
         }
+
+        private void commentWebView_Loaded(object sender, RoutedEventArgs e)
+        {
+            string html = @"<html>
+                                        <head>
+                                        <meta charset=""utf-8"">
+                                        <title></title>
+                                        </head>
+                                        <body>
+                                        <div id=""SOHUCS"" sid="""+viewModel.essayResult.contentId+ @"""></div>
+                                        <script id=""changyan_mobile_js"" charset=""utf-8"" type=""text/javascript""
+                                            scr=""http://changyan.sohu.com/upload/mobile/v2/wap-js/src/adapter-version.js?1456929528669-0.5822440742160904"">
+                                        </script>
+                                        <script type=""text/javascript"">
+                                            window.changyan.api.config({
+                                                appid:'cyqQwkOU4',
+                                                conf:'C6F9522019500001516610E01850CD20'});
+                                        </script></body></html>";
+            commentWebView.NavigateToString(html);
+        }
     }
 }
