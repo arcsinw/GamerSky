@@ -115,6 +115,17 @@ namespace 游民星空.View
             //}";
             // await sender.InvokeScriptAsync("eval", new[] { js });
 
+            //为<a></a>添加点击事件，并通知
+            js = @"var imgs = document.getElementsByTagName(""a"");
+            for (var i = 0, len = imgs.length; i < len; i++) {
+                imgs[i].onclick = function (e) {
+                    var jsonObj = { type: 'image', content1: this.src };
+                    window.external.notify(JSON.stringify(jsonObj));
+                };
+            }";
+            //await sender.InvokeScriptAsync("eval", new[] { js });
+
+
             //4、动态加载手势
             //js = @"var myScript = document.createElement(""script"");
             //    myScript.type = ""text/javascript"";
@@ -124,9 +135,9 @@ namespace 游民星空.View
             //await sender.InvokeScriptAsync("eval", new[] { js });
 
             //为body添加手势监听
-           // js = @"var target = document.getElementsByTagName(""body"")[0];
-           //prepareTarget(target, eventListener);";
-           // await sender.InvokeScriptAsync("eval", new[] { js });
+            // js = @"var target = document.getElementsByTagName(""body"")[0];
+            //prepareTarget(target, eventListener);";
+            // await sender.InvokeScriptAsync("eval", new[] { js });
 
             //iframe自适应
             js = @"var iframeTags = document.getElementsByTagName(""iframe"");
@@ -224,6 +235,7 @@ namespace 游民星空.View
 
         private async void refreshButton_Click(object sender, RoutedEventArgs e)
         {
+            
             await viewModel.GenerateHtmlString();
         }
     }

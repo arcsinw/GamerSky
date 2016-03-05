@@ -319,19 +319,19 @@ namespace 游民星空.Core.ViewModel
                 
                 string title = news.title;
                 string subTitle = news.subTitle;
-                
-                //List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
 
-                //string relatedReadingsHtml = "";
-                //if(relatedReadings!= null)
-                //{
-                //    foreach (var item in relatedReadings)
-                //    {
-                //        relatedReadingsHtml += "<a href=\"" + item.contentId + "\"><div class=\"Row\"><div>" + item.title + "</div></div></a>";
-                //    }
-                //}
+                List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
 
-               
+                string relatedReadingsHtml = "";
+                if (relatedReadings != null)
+                {
+                    foreach (var item in relatedReadings)
+                    {
+                        relatedReadingsHtml += "<a href=\"" + item.contentId + "\"><div class=\"Row\"><div>" + item.title + "</div></div></a>";
+                    }
+                }
+
+
                 HtmlString = "<!DOCTYPE html>" +
                     "<html>" +
                         "<head>" +head+baseCss+ "</head>" +
@@ -352,11 +352,17 @@ namespace 游民星空.Core.ViewModel
                                   "<div class=\"list\" id=\"gsTemplateContent_RelatedReading\">" +
                                         "<div class=\"tit yellow\">相关阅读</div>" +//相关阅读
                                         "<div class=\"txtlist\" id=\"gsTemplateContent_RelatedReadingContent\">" +
-                                             
-                                        "</div>"+
+                                             relatedReadingsHtml+
+                                        "</div>" +
                                   "</div>" +
                                   "<div class=\"list\" id=\"gsTemplateContent_Comments\" >"+
-                                  "</div>"+
+                                        "<div id=\"SOHUCS\" sid=\""+news.id+"\"></div>"+
+                                        "<script charset=\"utf-8\" type=\"text/javascript\" src=\"http://changyan.sohu.com/upload/changyan.js\"></script>"+
+                                        "<script type=\"text/javascript\">"+
+                                            "window.changyan.api.config{( appid:'cyqQwkOU4',conf:'71ecc58c0840708aa6ba08469bd73873'});</script>"+
+                                        "<div id=\"cyReping\" role=\"cylabs\" data-use=\"reping\"></div>" +
+                                        "<script type=\"text/javascript\" charset=\"utf-8\" src=\"http://changyan.itc.cn/js/??lib/jquery.js,changyan.labs.js?appid=cyqQwkOU4\"></script>" +
+                                "</div>" +
                         "</div>" +
                         "</body>" +
                     "</html>";

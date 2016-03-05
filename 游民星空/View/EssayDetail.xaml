@@ -141,16 +141,36 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot Style="{StaticResource EssayPivotStyle}">
-            <PivotItem Header="正文" Margin="0" Padding="0">
+            <PivotItem Header="正文" Margin="0">
                 <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"  Holding="webView_Holding"
                    DOMContentLoaded="webView_DOMContentLoaded" ScriptNotify="webView_ScriptNotify" />
             </PivotItem>
-            <PivotItem Header="评论">
+            <PivotItem Header="评论" Margin="0">
                 <WebView x:Name="commentWebView" Loaded="commentWebView_Loaded">
                     
                 </WebView>
             </PivotItem>
         </Pivot>
+
+        <Grid Background="Gray" HorizontalAlignment="Stretch"
+              VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox PlaceholderText="我来说两句"/>
+            <Button Grid.Column="1">
+                <Button.Content>
+                    <SymbolIcon Symbol="Like"/>
+                </Button.Content>
+            </Button>
+            
+            <Button Grid.Column="2"/>
+            <Button Grid.Column="3"/>
+          
+        </Grid>
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
 
         <!--#region  顶部右边的调整按钮-->
@@ -277,7 +297,7 @@
         <!--Source="ms-appx-web:///Assets/HTMLPage1.html"  "-->
     </Grid>
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
+        <CommandBar ClosedDisplayMode="Minimal" Visibility="Collapsed">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Back" Label="后退" Visibility="Collapsed" Click="{x:Bind Back}" />
                 <AppBarButton Icon="Refresh" Label="刷新" Visibility="Collapsed" Click="{x:Bind Refresh}"/>

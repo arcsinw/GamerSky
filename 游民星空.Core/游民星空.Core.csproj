@@ -147,6 +147,7 @@
     <Compile Include="Model\KeyedList.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\News.cs" />
+    <Compile Include="Model\OpenPage.cs" />
     <Compile Include="Model\PivotData.cs" />
     <Compile Include="Model\RelatedReadings.cs" />
     <Compile Include="PostDataModel\EditSubscribePostData.cs" />
