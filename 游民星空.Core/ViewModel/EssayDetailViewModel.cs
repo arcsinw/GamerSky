@@ -81,6 +81,23 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
+        private string commentString;
+        /// <summary>
+        /// 评论Html
+        /// </summary>
+        public string CommentString
+        {
+            get
+            {
+                return commentString;
+            }
+            set
+            {
+                commentString = value;
+                OnPropertyChanged();
+            }
+        }
+
         //private ObservableCollection<RelatedReadings> relatedReadings;
         ///// <summary>
         ///// 相关阅读
@@ -154,7 +171,7 @@ namespace 游民星空.Core.ViewModel
         }
 
         /// <summary>
-        /// 生成网页
+        /// 生成新闻内容网页
         /// </summary>
         public async Task GenerateHtmlString()
         {
@@ -307,9 +324,9 @@ namespace 游民星空.Core.ViewModel
                 string head = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset = utf-8\" />"
                             + "<meta name=\"viewport\" content=\"width= device-width, user-scalable = no\" />"
                             + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
-                            + "<meta name=\"msapplication-tap-highlight\" content=\"no\">"; //wp点击无高光;
+                            + "<meta name=\"msapplication-tap-highlight\" content=\"no\">" //wp点击无高光;
                             //+ "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/gsAppHTMLTemplate_css/gsAppHTMLTemplate.css\"/>";
-                            //+ "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>";
+                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>";
 
                 string videoJs = "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>" +
                   "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js\"></script>" +                 
@@ -320,56 +337,73 @@ namespace 游民星空.Core.ViewModel
                 string title = news.title;
                 string subTitle = news.subTitle;
 
-                List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
+                #region 相关阅读
+                //List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
 
-                string relatedReadingsHtml = "";
-                if (relatedReadings != null)
-                {
-                    foreach (var item in relatedReadings)
-                    {
-                        relatedReadingsHtml += "<a href=\"" + item.contentId + "\"><div class=\"Row\"><div>" + item.title + "</div></div></a>";
-                    }
-                }
-
-
+                //string relatedReadingsHtml = 
+                //    "<div class=\"list\" id=\"gsTemplateContent_RelatedReading\">" +
+                //    "<div class=\"tit yellow\">相关阅读</div>" +//相关阅读
+                //           "<div class=\"txtlist\" id=\"gsTemplateContent_RelatedReadingContent\">";
+                //if (relatedReadings != null && relatedReadings.Count == 0)
+                //{
+                //    relatedReadingsHtml = "";
+                //}
+                //if (relatedReadings != null)
+                //{          
+                //    foreach (var item in relatedReadings)
+                //    {
+                //        relatedReadingsHtml += "<a id=\"RelatedReadings\" href=\"" + item.contentId + "\"><div class=\"Row\"><div>" + item.title + "</div></div></a>";
+                //    }
+                //    relatedReadingsHtml += "</div></div>";
+                //}
+                #endregion
+                 
                 HtmlString = "<!DOCTYPE html>" +
                     "<html>" +
-                        "<head>" +head+baseCss+ "</head>" +
-                        "<body quick-markup_injected=\"true\">"+
-                            "<GSAppHTMLTemplate version=\"1.4.6\"/>"+
-                             "<div id=\"body\" class=\"fontsizetwo\">"+
+                        "<head>" + head + baseCss + relatedReadingsCss + "</head>" +
+                        "<body quick-markup_injected=\"true\">" +
+                            "<GSAppHTMLTemplate version=\"1.4.6\"/>" +
+                             "<div id=\"body\" class=\"fontsizetwo\">" +
                                   "<h1 class=\"heading\" id=\"gsTemplateContent_Title\">" + title + "</h1>" +
                                   "<span class=\"info\" id=\"gsTemplateContent_Subtitle\">" + subTitle + "</span>" +
                                   "<div class=\"bar\"></div>" +
                                   "<div class=\"content\" id=\"gsTemplateContent_MainBody\">" + mainBody + "</div>" +
-                                  "<div id=\"gsTemplateContent_AD1\"></div>"+
-                                  "<div class=\"list\" id=\"gsTemplateContent_RelatedTopic\">"+
-                                        "<div class=\"tit red\">相关专题</div>"+
-                                            "<div id=\"gsTemplateContent_RelatedTopicContent\">"+
-                                            "</div>"+
-                                        "</div>"+
-                                  "</div>"+
-                                  "<div class=\"list\" id=\"gsTemplateContent_RelatedReading\">" +
-                                        "<div class=\"tit yellow\">相关阅读</div>" +//相关阅读
-                                        "<div class=\"txtlist\" id=\"gsTemplateContent_RelatedReadingContent\">" +
-                                             relatedReadingsHtml+
+                                  "<div id=\"gsTemplateContent_AD1\"></div>" +
+                                  "<div class=\"list\" id=\"gsTemplateContent_RelatedTopic\">" +
+                                        "<div class=\"tit red\">相关专题</div>" +
+                                            "<div id=\"gsTemplateContent_RelatedTopicContent\">" +
+                                            "</div>" +
                                         "</div>" +
                                   "</div>" +
-                                  "<div class=\"list\" id=\"gsTemplateContent_Comments\" >"+
-                                        "<div id=\"SOHUCS\" sid=\""+news.id+"\"></div>"+
-                                        "<script charset=\"utf-8\" type=\"text/javascript\" src=\"http://changyan.sohu.com/upload/changyan.js\"></script>"+
-                                        "<script type=\"text/javascript\">"+
-                                            "window.changyan.api.config{( appid:'cyqQwkOU4',conf:'71ecc58c0840708aa6ba08469bd73873'});</script>"+
-                                        "<div id=\"cyReping\" role=\"cylabs\" data-use=\"reping\"></div>" +
-                                        "<script type=\"text/javascript\" charset=\"utf-8\" src=\"http://changyan.itc.cn/js/??lib/jquery.js,changyan.labs.js?appid=cyqQwkOU4\"></script>" +
-                                "</div>" +
-                        "</div>" +
-                        "</body>" +
+                                         //relatedReadingsHtml +
+                             "</div>"+
+                        "</body>"+
                     "</html>";
-                
             }
             IsActive = false;
         }
 
+       public void GenerateCommentString()
+        {
+            CommentString ="<!DOCTYPE html><html><body><div id=\"SOHUCS\" sid=\"" + essayResult.contentId + "\"></div>" +
+                            //"<script charset=\"utf-8\" type=\"text/javascript\" src=\"http://changyan.sohu.com/upload/changyan.js\"></script>" +
+                            "<script type=\"text/javascript\">" +
+                        @"(function() {
+                                var expire_time = parseInt((new Date()).getTime() / (5 * 60 * 1000));
+                                var head = document.head || document.getElementsByTagName(""head"")[0] || document.documentElement;
+                                var script_version = document.createElement(""script""), script_cyan = document.createElement(""script"");
+                                script_version.type = script_cyan.type = ""text/javascript"";
+                                script_version.charset = script_cyan.charset = ""utf-8"";
+                                script_version.onload = function() {
+                                    script_cyan.id = 'changyan_mobile_js';
+                                    script_cyan.src = 'http://changyan.itc.cn/upload/mobile/wap-js/changyan_mobile.js?client_id=cyqQwkOU4&'
+                                                    + 'conf=prod_9627c45df543c816a3ddf2d8ea686a99&version=' + cyan_resource_version;
+                                    head.insertBefore(script_cyan, head.firstChild);
+                                };
+                                script_version.src = 'http://changyan.sohu.com/upload/mobile/wap-js/version.js?_=' + expire_time;
+                                head.insertBefore(script_version, head.firstChild);
+                        })();"+
+                "</script></body></html>";
+        }
     }
 }

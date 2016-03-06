@@ -33,7 +33,7 @@ namespace 游民星空.View
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             progressRing.IsActive = true;
-            string sourceId = e.Parameter as string;
+            string sourceId = (e.Parameter as Subscribe)?.sourceId;
             if (sourceId != null)
             {
                 if (viewModel.SubscribeContens.Count == 0)

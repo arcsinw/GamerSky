@@ -18,7 +18,7 @@ namespace 游民星空.Core.Model
         /// <summary>
         /// 通过Url打开页面
         /// </summary>
-        public string pageUrl;
+        public string PageUrl;
         /// <summary>
         /// 打开方式
         /// </summary>

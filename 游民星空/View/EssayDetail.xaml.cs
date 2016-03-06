@@ -48,7 +48,7 @@ namespace 游民星空.View
         /// <param name="args"></param>
         private void WebView_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
         {
-            //args.Handled = true;
+            args.Handled = true;
             if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
             {
                
@@ -68,7 +68,7 @@ namespace 游民星空.View
            if(!essayResult.contentId.Equals("0"))
             {
                 this.DataContext = viewModel = new EssayDetailViewModel(essayResult);
-                await viewModel.GenerateHtmlString();
+                //await viewModel.GenerateHtmlString();
             }
             else
             {
@@ -83,20 +83,7 @@ namespace 游民星空.View
         }
 
         private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
-        {
-            //动态加载js
-            //var js = @"var myScript = document.createElement(""script"");
-            //                myScript.type = ""text/javascript"";
-            //                myScript.src=""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js"";
-            //                document.body.appendChild(myScript);";
-            //await sender.InvokeScriptAsync("eval", new[] { js });
-
-            //js = @"var myScript = document.createElement(""script"");
-            //                myScript.type = ""text/javascript"";
-            //                myScript.src=""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js"";
-            //                document.body.appendChild(myScript);";
-            //await sender.InvokeScriptAsync("eval", new[] { js });
-
+        {  
             //加载v1 css
             var js = @"var myCss = document.createElement(""link"");
                     myCss.rel = ""stylesheet"";
@@ -116,28 +103,34 @@ namespace 游民星空.View
             // await sender.InvokeScriptAsync("eval", new[] { js });
 
             //为<a></a>添加点击事件，并通知
-            js = @"var imgs = document.getElementsByTagName(""a"");
-            for (var i = 0, len = imgs.length; i < len; i++) {
-                imgs[i].onclick = function (e) {
-                    var jsonObj = { type: 'image', content1: this.src };
-                    window.external.notify(JSON.stringify(jsonObj));
-                };
-            }";
+            //js = @" var links = document.getElementsByTagName('a');
+            //    for(var i=0;i<links.length;i++)
+            //    {
+            //        if(links[i].id='RelatedReadings')
+            //        {
+            //            links[i].onclick = function()
+            //            {
+            //                     var jsonObj = { PageId: this.href, PageUrl:' ', OpenMethod:'OpenArticleWithId'};
+            //                    window.external.notify(JSON.stringify(jsonObj));
+            //            };
+            //        }
+            //    }";
+           
             //await sender.InvokeScriptAsync("eval", new[] { js });
 
 
-            //4、动态加载手势
-            //js = @"var myScript = document.createElement(""script"");
-            //    myScript.type = ""text/javascript"";
-            //    myScript.src = ""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gesture.js"";
-            //    document.body.appendChild(myScript);
-            //    window.external.notify(myScript.src+"""");";
+            //动态加载手势
+            js = @"var myScript = document.createElement(""script"");
+                myScript.type = ""text/javascript"";
+                myScript.src = ""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gesture.js"";
+                document.body.appendChild(myScript);
+                window.external.notify(myScript.src+"""");";
             //await sender.InvokeScriptAsync("eval", new[] { js });
 
             //为body添加手势监听
-            // js = @"var target = document.getElementsByTagName(""body"")[0];
-            //prepareTarget(target, eventListener);";
-            // await sender.InvokeScriptAsync("eval", new[] { js });
+             js = @"var target = document.getElementsByTagName(""body"")[0];
+            prepareTarget(target, eventListener);";
+            //await sender.InvokeScriptAsync("eval", new[] { js });
 
             //iframe自适应
             js = @"var iframeTags = document.getElementsByTagName(""iframe"");
@@ -166,6 +159,7 @@ namespace 游民星空.View
 
         private void webView_ScriptNotify(object sender, NotifyEventArgs e)
         {
+            
             var model = Functions.Deserlialize<JSParameter>(e.Value);
             if (model == null) return;
             switch (model.type)
@@ -182,7 +176,7 @@ namespace 游民星空.View
                     break;
                 case "swipeleft":
                     //左滑
-                  
+                   
                     break;
                 case "text":
                    
@@ -213,30 +207,28 @@ namespace 游民星空.View
 
         }
 
-        private void commentWebView_Loaded(object sender, RoutedEventArgs e)
-        {
-            string html = @"<html>
-                                        <head>
-                                        <meta charset=""utf-8"">
-                                        <title></title>
-                                        </head>
-                                        <body>
-                                        <div id=""SOHUCS"" sid="""+viewModel.essayResult.contentId+ @"""></div>
-                                        <script id=""changyan_mobile_js"" charset=""utf-8"" type=""text/javascript""
-                                            scr=""http://changyan.sohu.com/upload/mobile/v2/wap-js/src/adapter-version.js?1456929528669-0.5822440742160904"">
-                                        </script>
-                                        <script type=""text/javascript"">
-                                            window.changyan.api.config({
-                                                appid:'cyqQwkOU4',
-                                                conf:'C6F9522019500001516610E01850CD20'});
-                                        </script></body></html>";
-            commentWebView.NavigateToString(html);
-        }
+       
 
         private async void refreshButton_Click(object sender, RoutedEventArgs e)
         {
             
             await viewModel.GenerateHtmlString();
+        }
+
+        private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (viewModel != null)
+            {
+                switch (pivot.SelectedIndex)
+                {
+                    case 0:
+                        await viewModel.GenerateHtmlString();
+                        break;
+                    case 1:
+                        viewModel.GenerateCommentString();
+                        break;
+                }
+            }
         }
     }
 }

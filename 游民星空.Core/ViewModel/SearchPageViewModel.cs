@@ -186,7 +186,7 @@ namespace 游民星空.Core.ViewModel
         {
             IsActive = true;
             List<Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
-            if (essayResults != null) return;
+            if (essayResults == null) return;
             switch(searchType)
             {
                 case SearchTypeEnum.news:

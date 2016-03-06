@@ -140,20 +140,22 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot Style="{StaticResource EssayPivotStyle}">
-            <PivotItem Header="正文" Margin="0">
+        <Pivot x:Name="pivot" Style="{StaticResource EssayPivotStyle}" SelectionChanged="pivot_SelectionChanged">
+            <PivotItem Header="正文" Margin="0" >
                 <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"  Holding="webView_Holding"
                    DOMContentLoaded="webView_DOMContentLoaded" ScriptNotify="webView_ScriptNotify" />
             </PivotItem>
             <PivotItem Header="评论" Margin="0">
-                <WebView x:Name="commentWebView" Loaded="commentWebView_Loaded">
+                <WebView x:Name="commentWebView"  
+                         hp:ExtensionHelper.HtmlString="{Binding CommentString}"
+                         DOMContentLoaded="webView_DOMContentLoaded">
                     
                 </WebView>
             </PivotItem>
         </Pivot>
 
         <Grid Background="Gray" HorizontalAlignment="Stretch"
-              VerticalAlignment="Bottom">
+              VerticalAlignment="Bottom" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>

@@ -551,7 +551,7 @@
 
         </Pivot>
 
-        <ProgressRing Grid.Row="1" Style="{ThemeResource ProgressRingStyle}"/>
+        <ProgressRing IsActive="{Binding IsActive}" Grid.Row="1" Style="{ThemeResource ProgressRingStyle}"/>
 
         <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom" Grid.Row="0" Grid.RowSpan="2"
                Height="48" x:Name="topPop" Width="48" Margin="16,48" >

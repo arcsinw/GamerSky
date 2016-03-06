@@ -13,8 +13,7 @@
     RequestedTheme="{Binding Path=MVM.AppTheme}"
     d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True,Type=vm:MainPageViewModel}"
     >
-
-    
+ 
     <Page.Resources>
         <vm:MainPageViewModel x:Name="MVM"/>
         <x:String x:Key="ErrorString">Error</x:String>
@@ -133,7 +132,6 @@
                                  IsItemClickEnabled="True"
                                  ItemClick="ListView_ItemClick"
                                  Loaded="ListView_Loaded"
-                                 ContainerContentChanging="essayListView_ContainerContentChanging"
                                  >
                         <ListView.ItemTemplateSelector>
                             <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
@@ -269,6 +267,5 @@
         </Popup>-->
         
     </Grid>
-
-    
+ 
 </Page>

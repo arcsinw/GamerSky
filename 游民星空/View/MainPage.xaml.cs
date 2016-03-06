@@ -22,8 +22,26 @@ namespace 游民星空.View
     public sealed partial class MainPage : Page
     {
         private ApiService apiService;
+        //当前ListView中的ScrollViewer
         private ScrollViewer scrollViewer;
+        // 当前频道Id
+        private int currentChannelId;
+        // 当前PivotItem
+        PivotItem currentItem;
+ 
+        #region pageIndex
+        /// <summary>
+        /// 保存不同频道的页码
+        /// </summary>
+        private Dictionary<int, int> pageIndexDic;
 
+        private int pageIndex = 1;
+        #endregion 
+
+        /// <summary>
+        /// 是否正在加载数据
+        /// </summary>
+        private bool IsDataLoading = false;
         #region OnPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -32,8 +50,7 @@ namespace 游民星空.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-
-
+         
         private bool isActive;
         /// <summary>
         /// ProgressRing is active
@@ -50,9 +67,7 @@ namespace 游民星空.View
                 OnPropertyChanged("IsActive");
             }
         }
-
-        //private DispatcherTimer dt;
-
+         
         public MainPage()
         {
             this.InitializeComponent();
@@ -61,64 +76,39 @@ namespace 游民星空.View
         
             DispatcherManager.Current.Dispatcher = Dispatcher;
             pageIndexDic = new Dictionary<int, int>();
-
-            //dt = new DispatcherTimer() { Interval = TimeSpan.FromSeconds(1000) };
+             
         }
-        /// <summary>
-        /// 当前频道Id
-        /// </summary>
-        private int currentChannelId;
-        /// <summary>
-        /// 当前频道名
-        /// </summary>
-        private string currentChannelName;
-
-        #region pageIndex
-        /// <summary>
-        /// 保存不同频道的页码
-        /// </summary>
-        private Dictionary<int, int> pageIndexDic;
-
-        private int pageIndex = 1;
-        #endregion 
-
-        /// <summary>
-        /// 是否正在加载数据
-        /// </summary>
-        private bool IsDataLoading = false;
-
-
+      
         private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
-            //IsActive = true;
             progressRing.IsActive = true;
             await MVM.Refresh(currentChannelId);
-            //IsActive = false;
             progressRing.IsActive = false;
         }
 
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //IsActive = true;
+            Debug.WriteLine("SelectionChanged");
+            if (currentItem != null)
+            {
+                ListView listView = Functions.FindChildOfType<ListView>(currentItem);
+                scrollViewer = Functions.FindChildOfType<ScrollViewer>(listView);
+                if (scrollViewer != null)
+                {
+                    scrollViewer.ViewChanged += scrollViewer_ViewChanged;
+                }
+            }
             progressRing.IsActive = true;
             int index = essayPivot.SelectedIndex;
             currentChannelId = MVM.EssaysAndChannels[index].Channel.nodeId;
 
             //获取该频道当前页码
-            if(!pageIndexDic.ContainsKey(currentChannelId)) // 频道未加载
+            if (!pageIndexDic.ContainsKey(currentChannelId)) // 频道未加载
             {
                 pageIndexDic.Add(currentChannelId, 1);
                 pageIndex = 1;
                 await MVM.LoadMoreEssay(currentChannelId, pageIndex++);
                 pageIndexDic[currentChannelId] = pageIndex;
-
-                //popup
-                //channelTextBlock.Text = MVM.EssaysAndChannels[index].Channel.nodeName.Trim();
-                //popup.IsOpen = true;
-                //两秒后关闭
-                //dt.Start();
-                //dt.Tick += Dt_Tick;
-                
             }
             else  //频道已加载
             {
@@ -128,12 +118,6 @@ namespace 游民星空.View
             progressRing.IsActive = false;
         }
 
-        //private void Dt_Tick(object sender, object e)
-        //{
-        //    popup.IsOpen = false;
-        //    dt.Stop();
-        //}
-
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             Essay essayResult =  e.ClickedItem as Essay;
@@ -142,10 +126,20 @@ namespace 游民星空.View
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
 
+        /// <summary>
+        /// 获取当前PivotItem
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void essayPivot_PivotItemLoaded(Pivot sender, PivotItemEventArgs args)
+        {
+            Debug.WriteLine("PivotITemLoaded");
+            currentItem = args.Item;
 
+        }
 
         private void ListView_Loaded(object sender, RoutedEventArgs e)
-        {
+        { 
             scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
             if (scrollViewer != null)
             {
@@ -176,11 +170,9 @@ namespace 游民星空.View
                     if (!IsDataLoading)  //未加载数据
                     {
                         IsDataLoading = true;
-                        //IsActive = true;
                         progressRing.IsActive = true;
                         await MVM.LoadMoreEssay(currentChannelId, pageIndex++);
                         pageIndexDic[currentChannelId] = pageIndex;
-                        //IsActive = false;
                         progressRing.IsActive = false;
                         IsDataLoading = false;
                     }
@@ -196,11 +188,6 @@ namespace 游民星空.View
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
 
-        private void essayListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
-        {
-
-        }
-
         /// <summary>
         /// scoll to top
         /// </summary>
@@ -211,11 +198,6 @@ namespace 游民星空.View
             ListView listView = Functions.FindChildOfType<ListView>(currentItem);
             listView.ScrollIntoViewSmoothly(listView.Items[0]);
         }
-        PivotItem currentItem = null;
-
-        private void essayPivot_PivotItemLoaded(Pivot sender, PivotItemEventArgs args)
-        {
-            currentItem = args.Item;
-        }
+         
     }
 }
