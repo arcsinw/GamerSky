@@ -112,11 +112,11 @@
                                             </TextBlock>
                                         </Grid>
                                         <ListView x:Name="innerTopicListView" ItemsSource="{Binding childElements}" Grid.Row="1"
-                                          ScrollViewer.VerticalScrollMode="Disabled"
-                                                  IsItemClickEnabled="True"
-                                                  ItemClick="innerTopicListView_ItemClick"
-                                          ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
-                                           ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
+                                                ScrollViewer.VerticalScrollMode="Disabled"
+                                                IsItemClickEnabled="True"
+                                                ItemClick="innerTopicListView_ItemClick"
+                                                ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
+                                                ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
                                         </ListView>
                                     </Grid>
                                 </DataTemplate>
@@ -137,7 +137,6 @@
                     </ScrollViewer>
                 </pr:PullToRefreshBox>
             </PivotItem>
-
         </Pivot>
 
         <!--#region 左边后退键-->

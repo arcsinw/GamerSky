@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JYAnalyticsUniversal;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
@@ -31,20 +32,61 @@ namespace 游民星空
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-
-            //licenseInformation = CurrentAppSimulator.LicenseInformation;
-
+            this.Resuming += OnResuming;
+#if DEBUG
+            licenseInformation = CurrentAppSimulator.LicenseInformation;
+#else
+            licenseInformation = CurrentApp.LicenseInformation;
+#endif
             this.UnhandledException += OnUnhandledException;
         }
-        //LicenseInformation licenseInformation;
+#region IAPs
+        LicenseInformation licenseInformation;
 
+        /// <summary>
+        /// 某个应用内产品是否有效
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool IsFeatureActive(string id)
+        {
+            return licenseInformation.ProductLicenses[id].IsActive;
+        }
+
+        public async void RemoveAd()
+        {
+            if(!IsFeatureActive(IAPHelper.Remove_Ad))
+            {
+                try
+                {
+                    await CurrentAppSimulator.RequestProductPurchaseAsync(IAPHelper.Remove_Ad,false);
+                }
+                catch(Exception )
+                {
+
+                }
+            }
+            else  //已购买
+            {
+
+            }
+        }
+
+#endregion
+
+        private void OnResuming(object sender, object e)
+        {
+            JYHelper.StartTraceAsync();
+        }
+
+        
         private async void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
             await new MessageDialog("Application Unhandled Exception:\r\n" + e.Exception.Message).ShowAsync();
         }
 
-        #region 处理异步方法里的异常
+#region 处理异步方法里的异常
         /// <summary>
         /// Should be called from OnActivated and OnLaunched
         /// </summary>
@@ -61,14 +103,14 @@ namespace 游民星空
             await new MessageDialog("Synchronization Context Unhandled Exception:\r\n" + GetExceptionDetailMessage(e.Exception), "这真是令人尴尬,,ԾㅂԾ,,")
                 .ShowAsync();
         }
-        #endregion
+#endregion
 
-        #region 获取简短的异常堆栈信息
+#region 获取简短的异常堆栈信息
         private string GetExceptionDetailMessage(Exception e)
         {
             return $"{e.Message}\r\n{e.StackTraceEx()}";
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -130,9 +172,9 @@ namespace 游民星空
             //RegisterLiveTileTask();
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
+            JYHelper.StartTraceAsync();
         }
-
-
+         
         /// <summary>
         /// handle hardware back button press 
         /// </summary>
@@ -187,6 +229,7 @@ namespace 游民星空
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            JYHelper.EndTraceAsync();
             deferral.Complete();
         }
 
@@ -210,7 +253,7 @@ namespace 游民星空
             RegisterExceptionHandlingSynchronizationContext();
 
             base.OnActivated(args);
-
+            JYHelper.StartTraceAsync();
         }
 
 

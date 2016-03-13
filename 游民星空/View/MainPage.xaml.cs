@@ -78,7 +78,19 @@ namespace 游民星空.View
             pageIndexDic = new Dictionary<int, int>();
              
         }
-      
+
+        #region 九幽的数据统计
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            JYHelper.TracePageStart(this.BaseUri.LocalPath);
+        }
+        #endregion
+
         private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
             progressRing.IsActive = true;

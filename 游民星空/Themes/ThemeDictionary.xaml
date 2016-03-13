@@ -383,6 +383,8 @@
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
     </Style>
 
     <!--Navigation Back Button Style-->
@@ -684,6 +686,9 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <!--#region PlaceHolderImage-->
+            <Image Source="{Binding DefaultBitmap}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
+            <!--#endregion-->
             <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                 <Image.Source>
                     <BitmapImage UriSource="{Binding thumbnailUrl}"/>
@@ -704,6 +709,8 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Margin" Value="0,4"/>
         <Setter Property="Padding" Value="0"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
     </Style>
 
     <!--#endregion-->
@@ -742,6 +749,10 @@
             <SolidColorBrush x:Key="PhoneForegroundBrush" Color="Black"/>
             <!--页面背景色-->
             <SolidColorBrush x:Key="PageBackground" Color="WhiteSmoke"/>
+            <!--ListView BorderBrush-->
+            <SolidColorBrush x:Key="ListViewBorderBrush" Color="Gray"/>
+            <!--ListView BorderThickness-->
+            <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
             <!--设置ListViewItem背景色-->
             <SolidColorBrush x:Key="SearchListViewItemBackground" Color="White"/>
         </ResourceDictionary>
@@ -762,6 +773,10 @@
             <SolidColorBrush x:Key="PhoneForegroundBrush" Color="LightGray"/>
             <!--页面背景色-->
             <SolidColorBrush x:Key="PageBackground" Color="#FF4F4F4F"/>
+            <!--ListView BorderBrush-->
+            <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF3C3C3C"/>
+            <!--ListView BorderThickness-->
+            <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
             <!--设置ListViewItem背景色-->
             <SolidColorBrush x:Key="SearchListViewItemBackground" Color="Gray"/>
         </ResourceDictionary>

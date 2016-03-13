@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
+using 游民星空.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -35,6 +37,17 @@ namespace 游民星空.View
             NavigationCacheMode = NavigationCacheMode.Required;
         }
 
+        #region 九幽的数据统计
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            JYHelper.TracePageStart(this.BaseUri.LocalPath);
+        }
+        #endregion
 
         private void Back()
         {
@@ -91,7 +104,7 @@ namespace 游民星空.View
                 pageIndexDic.Add(pivotIndex, pageIndex);
             }
         }
-
+        
         /// <summary>
         /// 添加订阅
         /// </summary>
@@ -111,10 +124,17 @@ namespace 游民星空.View
             var result = e.ClickedItem as Subscribe;
             if (result != null)
             {
-                this.Frame.Navigate(typeof(SubscribeContentPage), result);
+                this.Frame.Navigate(typeof(SubscribeContentPage), result.sourceId);
             }
         }
 
+        protected override void OnKeyDown(KeyRoutedEventArgs e)
+        {
+            if(e.Key == VirtualKey.Enter)
+            {
+                Search();
+            }
+        }
 
         /// <summary>
         /// 热门标签点击事件
@@ -252,25 +272,38 @@ namespace 游民星空.View
             }
         }
 
-        private void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private bool IsSubscribeHotKeyLoaded = false;
+        private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int selectedIndex = pivot.SelectedIndex;
             //切换当前页码
             switch(selectedIndex)
             {
                 case 0:
+                   
                     if (!pageIndexDic.ContainsKey(selectedIndex))
                     {
+                        await viewModel.LoadNewsHotKey();
                         pageIndexDic[selectedIndex] = 1;
                     }
                     pageIndex = pageIndexDic[selectedIndex];                   
-                        break;
+                    break;
                 case 1:
                     if(!pageIndexDic.ContainsKey(selectedIndex))
                     {
+                        await viewModel.LoadStrategyHotKey();
                         pageIndexDic[selectedIndex] = 1;
                     }
                     pageIndex = pageIndexDic[selectedIndex];
+                   
+                    break;
+                case 2:
+                    if (!IsSubscribeHotKeyLoaded)
+                    {
+                        await viewModel.LoadSubscribeHotKey();
+                        IsSubscribeHotKeyLoaded = false;
+                    }
                     break;
             }
         }
@@ -304,6 +337,12 @@ namespace 游民星空.View
                 }
             
             }
+        }
+
+        
+        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        {
+            await viewModel.RefreshSubscribeHotKey();
         }
     }
 }

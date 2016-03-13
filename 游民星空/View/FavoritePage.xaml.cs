@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.ViewModel;
+using 游民星空.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -32,6 +33,18 @@ namespace 游民星空.View
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
+
+        #region 九幽的数据统计
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            JYHelper.TracePageStart(this.BaseUri.LocalPath);
+        }
+        #endregion
 
         public void Back()
         {

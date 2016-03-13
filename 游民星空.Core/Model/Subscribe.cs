@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace 游民星空.Core.Model
 {
@@ -16,5 +17,14 @@ namespace 游民星空.Core.Model
         public string sourceId { get; set; }
         public string sourceName { get; set; }
         public string thumbnailUrl { get; set; }
+
+        private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
+        public static BitmapImage DefaultBitmap
+        {
+            get
+            {
+                return defaultBitmap;
+            }
+        }
     }
 }

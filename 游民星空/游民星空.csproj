@@ -84,6 +84,9 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <Optimize>true</Optimize>
+    <DocumentationFile>bin\x86\Debug\游民星空.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -109,6 +112,7 @@
     <Compile Include="Converter\CountToVisibilityConverter.cs" />
     <Compile Include="Converter\IndexToColorConverter.cs" />
     <Compile Include="Helper\EssayListViewItemTemplateSelector.cs" />
+    <Compile Include="Helper\JYHelper.cs" />
     <Compile Include="Helper\StringWrapPanel.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

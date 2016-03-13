@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:游民星空.Core.Helper"
+    xmlns:jy="using:JiuYouAdUniversal"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}">
 
@@ -148,11 +149,12 @@
             <PivotItem Header="评论" Margin="0">
                 <WebView x:Name="commentWebView"  
                          hp:ExtensionHelper.HtmlString="{Binding CommentString}"
-                         DOMContentLoaded="webView_DOMContentLoaded">
-                    
+                         >
                 </WebView>
             </PivotItem>
         </Pivot>
+        
+        
 
         <Grid Background="Gray" HorizontalAlignment="Stretch"
               VerticalAlignment="Bottom" Visibility="Collapsed">
@@ -178,7 +180,6 @@
         <!--#region  顶部右边的调整按钮-->
         <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Button.Flyout>
-
                 <Flyout>
                     <Flyout.FlyoutPresenterStyle>
                         <Style TargetType="FlyoutPresenter">
@@ -188,7 +189,7 @@
                         </Style>
                     </Flyout.FlyoutPresenterStyle>
                     <Flyout.Content>
-                        <ListView Padding="0" Margin="0"
+                        <ListView Padding="0" Margin="0" SelectionMode="None"
                                   ScrollViewer.VerticalScrollMode="Disabled">
                             <ListView.Resources>
                                 <Style TargetType="StackPanel">
@@ -282,6 +283,12 @@
             </Button.Content>
         </Button>
         <!--#endregion-->
+
+        <!--Ad-->
+        <jy:AdControl HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                      ApplicationKey="2c7fdea4792fb5b5e3031dbf3f99ff15"
+                      AdType="Banner"/>
+
         <!--      hp:ExtensionHelper.HtmlString="{Binding HtmlString}"-->
         <!--#region  显示图片-->
         <FlipView x:Name="imageFlipView" Visibility="Collapsed" ItemsSource="{Binding }">

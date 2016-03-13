@@ -28,10 +28,6 @@
         </Grid>
         <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
             <ListView SelectionMode="None">
-                <ListView.Resources>
-                    <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
-                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="Gray"/>
-                </ListView.Resources>
                 <ListView.Items>
                     <ListViewItem Margin="0,16,0,0">
                         <Grid>
@@ -69,11 +65,16 @@
                     <ListViewItem Tapped="{x:Bind NavigateToAbout}">
                         <TextBlock Text="关于"/>
                     </ListViewItem>
+                   
                     <ListViewItem Tapped="{x:Bind CheckUpdate}">
                         <Grid>
                             <TextBlock Text="检测新版本" VerticalAlignment="Center"/>
                             <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem Tapped="{x:Bind RemoveAd}">
+                        <TextBlock Text="去除广告"/>
                     </ListViewItem>
                 </ListView.Items>
 
@@ -83,8 +84,8 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
                         <Setter Property="Background" Value="{ThemeResource SearchListViewItemBackground}"/>
-                        <Setter Property="BorderBrush" Value="LightGray"/>
-                        <Setter Property="BorderThickness" Value="{StaticResource ListViewBorderThickness}"/>
+                        <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
+                        <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
                     </Style>
                     
                 </ListView.ItemContainerStyle>

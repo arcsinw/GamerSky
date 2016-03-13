@@ -24,9 +24,10 @@
         <Thickness x:Key="GridMargin">2,0</Thickness>
         <Thickness x:Key="GridPadding">5</Thickness>
 
+        <!--BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}"-->
         <!--一张图文章模板-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid Margin="2,0" Padding="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+            <Grid Margin="2,0" Padding="4" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
@@ -50,8 +51,7 @@
         </DataTemplate>
         <!--无图模板-->
         <DataTemplate x:Key="NoPicEssayDataTemplate">
-            <Grid BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}"
-                  Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"   >
+            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"   >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -94,8 +94,7 @@
                                                       NoPicDt="{StaticResource NoPicEssayDataTemplate}"
                                                                       />
                     </ListView.ItemTemplateSelector>
-
-
+ 
                     <ListView.Transitions>
                         <TransitionCollection>
                             <AddDeleteThemeTransition />
@@ -111,6 +110,7 @@
                         <Setter Property="Margin" Value="0"/>
                         <Setter Property="Padding" Value="0"/>
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        
                     </Style>
                 </ListView.ItemContainerStyle>-->
 

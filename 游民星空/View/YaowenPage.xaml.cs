@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Model;
+using 游民星空.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -52,14 +53,10 @@ namespace 游民星空.View
             }
         }
 
-     
-
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        #region 九幽的数据统计
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            Essay essayResult = e.ClickedItem as Essay;
-            if (essayResult == null) return;
-
-            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -69,7 +66,19 @@ namespace 游民星空.View
                 await viewModel.LoadData(pageIndex++);
                 isDataLoaded = true;
             }
+            JYHelper.TracePageStart(this.BaseUri.LocalPath);
         }
+        #endregion
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Essay essayResult = e.ClickedItem as Essay;
+            if (essayResult == null) return;
+
+            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+        }
+
+    
 
         private ScrollViewer scrollViewer;
 

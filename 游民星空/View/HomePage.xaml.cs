@@ -60,19 +60,17 @@ namespace 游民星空.View
             rootFrame.SourcePageType = typeof(MainPage);
             newsRadioButton.IsChecked = true;
             
-            if (DataShareManager.Current.IsFirstLaunch)
+            if (DataShareManager.Current.IsNewVersion)
             {
                 UIHelper.ShowMessage(
-                    "1.修复文章标题和评论数的重叠问题\n2.增加尚不完整的订阅功能\n3.左边有侧滑菜单你们知道吗\n4.试用版无限制你们知道吗\n5.关于里有QQ群你们知道吗",
+                    "1.加了广告！！！不过你看过这个的时候已经晚了( ╯□╰ ) 以前付过费的用户请加群473967668联系我领取激活码去除广告，\n",
                     "新版本更新内容");
-                DataShareManager.Current.IsFirstLaunch = false;
+                //DataShareManager.Current.IsNewVersion = Functions.GetVersion() ;
             }
 
             DispatcherManager.Current.Dispatcher = Dispatcher;
         }
-
-       
-       
+         
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
             var radioButton = sender as RadioButton;
@@ -81,6 +79,7 @@ namespace 游民星空.View
                 switch ((string)radioButton.Tag)
                 {
                     case "0":     // 新闻
+                        
                         rootFrame.Navigate(typeof(MainPage));
                         break;
                     case "1":     //攻略

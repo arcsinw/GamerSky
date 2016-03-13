@@ -385,6 +385,7 @@ namespace 游民星空.Core.ViewModel
 
        public void GenerateCommentString()
         {
+            IsActive = true;
             CommentString ="<!DOCTYPE html><html><body><div id=\"SOHUCS\" sid=\"" + essayResult.contentId + "\"></div>" +
                             //"<script charset=\"utf-8\" type=\"text/javascript\" src=\"http://changyan.sohu.com/upload/changyan.js\"></script>" +
                             "<script type=\"text/javascript\">" +
@@ -404,6 +405,7 @@ namespace 游民星空.Core.ViewModel
                                 head.insertBefore(script_version, head.firstChild);
                         })();"+
                 "</script></body></html>";
+            IsActive = false;
         }
     }
 }

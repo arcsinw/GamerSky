@@ -81,7 +81,11 @@ namespace 游民星空.Core.ViewModel
         private static ApplicationDataContainer settings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
         private const string SettingKey_IsFirstLaunch = "IsFirstLaunch";
+        private const string SettingKey_IsNewVersion = "IsNewVersion";
 
+        /// <summary>
+        /// 是否第一次启动
+        /// </summary>
         public bool IsFirstLaunch
         {
             get
@@ -95,6 +99,29 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
+        /// <summary>
+        /// 是否是新版本
+        /// </summary>
+        public bool IsNewVersion
+        {
+            get
+            {
+                var value = settings.Values[SettingKey_IsNewVersion];
+                string ver = Functions.GetVersion();
+                if (value==null)
+                {
+                    settings.Values[SettingKey_IsNewVersion] = ver;
+
+                    return true;
+                }
+                settings.Values[SettingKey_IsNewVersion] = ver;
+                return (string)value != ver;
+            }
+            set
+            {
+                settings.Values[SettingKey_IsNewVersion] = value;
+            }
+        }
         private static DataShareManager current;
         public static DataShareManager Current
         {

@@ -33,6 +33,18 @@ namespace 游民星空.View
             apiService = new ApiService();
         }
 
+        #region 九幽的数据统计
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            JYHelper.TracePageStart(this.BaseUri.LocalPath);
+        }
+        #endregion
+
         private void OtherRegister()
         {
             this.Frame.Navigate(typeof(EmailRegisterPage));

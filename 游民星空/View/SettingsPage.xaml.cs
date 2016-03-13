@@ -118,5 +118,12 @@ namespace 游民星空.View
             this.Frame.Navigate(typeof(AdStartPage));
         }
 
+        /// <summary>
+        /// 去除广告
+        /// </summary>
+        public async void RemoveAd()
+        {
+            await IAPHelper.BuyProductAsync(IAPHelper.Remove_Ad);
+        }
     }
 }

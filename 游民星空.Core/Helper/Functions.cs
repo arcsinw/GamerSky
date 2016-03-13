@@ -9,6 +9,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.Foundation.Metadata;
 using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.StartScreen;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -159,6 +160,18 @@ namespace 游民星空.Core.Helper
                 await jumpList.SaveAsync();
             }
         }
-         
+
+        /// <summary>
+        /// 显示MessageDialog
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="title"></param>
+        public static async void ShowMessage(string content, string title = "")
+        {
+            await Window.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+            {
+                await new MessageDialog(content, title).ShowAsync();
+            });
+        }
     }
 }

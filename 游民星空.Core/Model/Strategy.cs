@@ -22,6 +22,14 @@ namespace 游民星空.Core.Model
         /// </summary>
         public string thumbnailUrl { get; set; }
 
+        private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
+        public static BitmapImage DefaultBitmap
+        {
+            get
+            {
+                return defaultBitmap;
+            }
+        }
         //private static BitmapImage DefaultBitmapImage = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
 
         //private BitmapImage thumbnail;

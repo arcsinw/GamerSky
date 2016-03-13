@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:hp="using:游民星空.Helper"
+    xmlns:pr="using:PullToRefresh.UWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}">
@@ -165,123 +166,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <Style TargetType="PivotHeaderItem">
-            <Setter Property="FontSize" Value="{ThemeResource PivotHeaderItemFontSize}" />
-            <Setter Property="FontFamily" Value="{ThemeResource PivotHeaderItemFontFamily}" />
-            <Setter Property="FontWeight" Value="{ThemeResource PivotHeaderItemThemeFontWeight}" />
-            <Setter Property="CharacterSpacing" Value="{ThemeResource PivotHeaderItemCharacterSpacing}" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="Gray" />
-            <!-- original value {ThemeResource SystemControlForegroundBaseMediumBrush} -->
-            <Setter Property="Padding" Value="{ThemeResource PivotHeaderItemMargin}" />
-            <Setter Property="Height" Value="48" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="IsTabStop" Value="False" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="PivotHeaderItem">
-                        <Grid x:Name="Grid" Background="{TemplateBinding Background}">
-                            <Grid.Resources>
-                                <Style x:Key="BaseContentPresenterStyle" TargetType="ContentPresenter">
-                                    <Setter Property="FontFamily" Value="Segoe UI" />
-                                    <Setter Property="FontWeight" Value="SemiBold" />
-                                    <Setter Property="FontSize" Value="15" />
-                                    <Setter Property="TextWrapping" Value="Wrap" />
-                                    <Setter Property="LineStackingStrategy" Value="MaxHeight" />
-                                    <Setter Property="TextLineBounds" Value="Full" />
-                                    <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
-                                </Style>
-                                <Style x:Key="BodyContentPresenterStyle" TargetType="ContentPresenter" BasedOn="{StaticResource BaseContentPresenterStyle}">
-                                    <Setter Property="FontFamily" Value="{ThemeResource PivotHeaderItemFontFamily}" />
-                                    <Setter Property="FontWeight" Value="{ThemeResource PivotHeaderItemThemeFontWeight}" />
-                                    <Setter Property="FontSize" Value="{ThemeResource PivotHeaderItemFontSize}" />
-                                </Style>
-                            </Grid.Resources>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="SelectionStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition From="Unselected" To="UnselectedLocked" GeneratedDuration="0:0:0.33" />
-                                        <VisualTransition From="UnselectedLocked" To="Unselected" GeneratedDuration="0:0:0.33" />
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Unselected" />
-                                    <VisualState x:Name="UnselectedLocked">
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="ContentPresenterTranslateTransform" Storyboard.TargetProperty="X" Duration="0" To="{ThemeResource PivotHeaderItemLockedTranslation}" />
-                                            <DoubleAnimation Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="(UIElement.Opacity)" Duration="0" To="0" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Selected">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Black" />
-                                                <!-- original value {ThemeResource SystemControlHighlightAltBaseHighBrush} -->
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="UnselectedPointerOver">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="SelectedPointerOver">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="UnselectedPressed">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="SelectedPressed">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid" Storyboard.TargetProperty="Background">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" FontWeight="{TemplateBinding FontWeight}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                <ContentPresenter.RenderTransform>
-                                    <TranslateTransform x:Name="ContentPresenterTranslateTransform" />
-                                </ContentPresenter.RenderTransform>
-                            </ContentPresenter>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+ 
         <!--BorderMargin-->
         <Thickness x:Key="BorderMargin">0,2</Thickness>
         <!--BorderThickness-->
@@ -293,12 +178,14 @@
 
         <!--一张图文章模板，包含左边缩略图，右边标题和评论数量-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
 
+                <!--默认图片-->
+                <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left"/>
                 <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                     <Image.Source>
                         <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
@@ -316,8 +203,7 @@
         </DataTemplate>
         <!--无图模板-->
         <DataTemplate x:Key="NoPicEssayDataTemplate">
-            <Grid BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}"
-                  Margin="{StaticResource GridMargin}" Padding="0,4,5,0"   >
+            <Grid Margin="{StaticResource GridMargin}" Padding="0,4,5,0"   >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -331,7 +217,7 @@
         </DataTemplate>
         <!--有三张图的文章模板-->
         <DataTemplate x:Key="ThreePicEssayDataTemplate">
-            <Grid Padding="{StaticResource GridPadding}" BorderThickness="{StaticResource BorderThickness}" BorderBrush="{StaticResource BorderBrush}">
+            <Grid Padding="{StaticResource GridPadding}" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="2*"/>
@@ -344,6 +230,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    <!--#region  PlaceHolderImage-->
+                    <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Margin="0,0,1,0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+                    <Image Source="{Binding DefaultBitmap}" Grid.Column="1" Margin="0,0,1,0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+                    <Image Source="{Binding DefaultBitmap}" Grid.Column="2" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+                    <!--#endregion-->
                     <Image Grid.Column="0" Stretch="Fill" Margin="0,0,1,0">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
@@ -374,6 +265,8 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <!--默认图片-->
+                <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left"/>
                 <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                     <Image.Source>
                         <BitmapImage UriSource="{Binding thumbnailUrl}"/>
@@ -420,7 +313,8 @@
         </Grid>
 
         <Pivot Grid.Row="1" Background="{ThemeResource PageBackground}" 
-               x:Name="pivot" SelectionChanged="pivot_SelectionChanged">
+               x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
+               Style="{StaticResource EssayPivotStyle}">
             <PivotItem Header="新闻" >
                 <Grid>
                     <ListView ItemsSource="{Binding News}"
@@ -448,6 +342,8 @@
                                 <Setter Property="Margin" Value="0"/>
                                 <Setter Property="Padding" Value="0"/>
                                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
@@ -508,7 +404,9 @@
                                     <Setter Property="Margin" Value="0"/>
                                     <Setter Property="Padding" Value="0"/>
                                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                </Style>
+                                <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
+                                <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
+                            </Style>
                             </ListView.ItemContainerStyle>
                         </ListView>
                     
@@ -540,13 +438,15 @@
                 </Grid>
             </PivotItem>
             <PivotItem Header="订阅">
-                <ListView x:Name="subscribeListView" Loaded="subscribeListView_Loaded" 
+                <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
+                    <ListView x:Name="subscribeListView" Loaded="subscribeListView_Loaded" 
                           ItemsSource="{Binding HotSubscribes}" 
                           IsItemClickEnabled="True" ItemClick="subscribeListView_ItemClick"
                           SelectionMode="None" Padding="0" Margin="0"
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
-                </ListView>
+                    </ListView>
+                </pr:PullToRefreshBox>
             </PivotItem>
 
         </Pivot>

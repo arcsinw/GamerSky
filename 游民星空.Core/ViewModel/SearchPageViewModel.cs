@@ -137,16 +137,34 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public async void LoadHotkey()
         {
+             
+        }
+
+        /// <summary>
+        /// 加载攻略热点
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoadStrategyHotKey()
+        {
             IsActive = true;
             List<string> strategys = await apiService.GetSearchHotKey(SearchTypeEnum.strategy.ToString());
-            if(strategys!= null)
+            if (strategys != null)
             {
                 foreach (var item in strategys)
                 {
                     HotStrategys.Add(item.Trim());
                 }
             }
+            IsActive = false;
+        }
 
+        /// <summary>
+        /// 加载新闻热点
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoadNewsHotKey()
+        {
+            IsActive = true;
             List<string> hotNews = await apiService.GetSearchHotKey(SearchTypeEnum.news.ToString());
             if (hotNews != null)
             {
@@ -155,7 +173,16 @@ namespace 游民星空.Core.ViewModel
                     HotNews.Add(item.Trim());
                 }
             }
+            IsActive = false;
+        }
 
+        /// <summary>
+        /// 加载订阅热点
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoadSubscribeHotKey()
+        {
+            IsActive = true;
             List<Subscribe> subscribes = await apiService.GetSubscribeHotKey();
             if (subscribes != null)
             {
@@ -164,7 +191,18 @@ namespace 游民星空.Core.ViewModel
                     HotSubscribes.Add(item);
                 }
             }
+            IsActive = false;
+        }
 
+        /// <summary>
+        /// 刷新订阅热点
+        /// </summary>
+        /// <returns></returns>
+        public async Task RefreshSubscribeHotKey()
+        {
+            IsActive = true;
+            HotSubscribes.Clear();
+            await LoadSubscribeHotKey();
             IsActive = false;
         }
 
@@ -185,11 +223,13 @@ namespace 游民星空.Core.ViewModel
         public async Task Search(string key,SearchTypeEnum searchType,int pageIndex=1)
         {
             IsActive = true;
-            List<Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
-            if (essayResults == null) return;
+            //List<Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
+            //if (essayResults == null) return;
             switch(searchType)
             {
                 case SearchTypeEnum.news:
+                    List<Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
+                    if (essayResults == null) return;
                     //News = new EssayIncrementalCollection(key, searchType, pageIndex);
                     foreach (var item in essayResults)
                     {
@@ -198,7 +238,9 @@ namespace 游民星空.Core.ViewModel
                     NewsGridViewVisibility = Visibility.Collapsed;
                     break;
                 case SearchTypeEnum.strategy:
-                    foreach (var item in essayResults)
+                    List<Essay> strategyResult = await apiService.SearchByKey(key, searchType, pageIndex);
+                    if (strategyResult == null) return;
+                    foreach (var item in strategyResult)
                     {
                         if (item.contentType.Equals("strategy"))
                         {
@@ -211,9 +253,10 @@ namespace 游民星空.Core.ViewModel
                     var result = from x in HotSubscribes
                                  where x.sourceName.Contains(key)
                                  select x;
+                    HotSubscribes.Clear();
                     foreach (var item in result)
                     {
-                        Subscribes.Add(item);
+                        HotSubscribes.Add(item);
                     } 
                     break;
             }

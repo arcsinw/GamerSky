@@ -20,6 +20,7 @@ using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
+using 游民星空.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -37,8 +38,7 @@ namespace 游民星空.View
             NavigationCacheMode = NavigationCacheMode.Disabled;
 
             webView.NewWindowRequested += WebView_NewWindowRequested;
-
-          
+             
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace 游民星空.View
 
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             progress.IsActive = true;
             essayResult = e.Parameter as Essay;
@@ -75,6 +75,7 @@ namespace 游民星空.View
                 webView.Navigate(new Uri(essayResult.contentURL));
             }
             progress.IsActive = false;
+            JYHelper.TraceRead();
         }
         Essay essayResult;
         private async void Edge(object sender, RoutedEventArgs e)

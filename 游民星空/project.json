@@ -1,6 +1,8 @@
 ﻿{
   "dependencies": {
     "AsyncStackTraceEx": "1.0.1.1",
+    "JYAdControl": "2.3.6",
+    "JyAnalytics": "1.0.10",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
     "PullToRefresh.UWP": "0.3.3"
   },

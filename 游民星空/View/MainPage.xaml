@@ -30,8 +30,9 @@
         <Thickness x:Key="GridPadding" >0</Thickness>
         <Thickness x:Key="GridMargin">0,4</Thickness>
         <!--有三张图的文章模板-->
-        <DataTemplate x:Key="ThreePicEssayDataTemplate">
-            <Grid Margin="2,0" Padding="5" BorderThickness="{StaticResource BorderThickness}" BorderBrush="{StaticResource BorderBrush}">
+        <!--BorderThickness="{ThemeResource ListViewBorderThickness}" BorderBrush="{ThemeResource ListViewBorderBrush}"-->
+        <DataTemplate x:Key="ThreePicEssayDataTemplate" >
+            <Grid Margin="2,0" Padding="5" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="2*"/>
@@ -44,6 +45,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    <!--#region  PlaceHolderImage-->
+                    <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Margin="0,0,1,0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+                    <Image Source="{Binding DefaultBitmap}" Grid.Column="1" Margin="0,0,1,0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+                    <Image Source="{Binding DefaultBitmap}" Grid.Column="2" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+                    <!--#endregion-->
                     <Image Grid.Column="0" Stretch="Fill" Margin="0,0,1,0">
                         <Image.Source>
                             <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
@@ -68,11 +74,14 @@
         </DataTemplate>
         <!--一张图文章模板-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid Margin="2,0" Padding="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+            <Grid Margin="2,0" Padding="4" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
+
+                <!--默认图片-->
+                <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
 
                 <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
                     <!--Source="{Binding Thumbnails[0]}">-->
@@ -92,8 +101,8 @@
         </DataTemplate>
         <!--无图模板-->
         <DataTemplate x:Key="NoPicEssayDataTemplate">
-            <Grid BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}"
-                  Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"   >
+            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"
+                  >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -133,87 +142,89 @@
                                  ItemClick="ListView_ItemClick"
                                  Loaded="ListView_Loaded"
                                  >
-                        <ListView.ItemTemplateSelector>
-                            <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
-                                                                      ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
-                                                                  NoPicDt="{StaticResource NoPicEssayDataTemplate}"
-                                                                      />
-                        </ListView.ItemTemplateSelector>
-                        <ListView.HeaderTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <FlipView x:Name="headEssay" Height="180" ItemsSource="{Binding HeaderEssays}" 
+                            <ListView.ItemTemplateSelector>
+                                <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+                                                                    ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
+                                                                NoPicDt="{StaticResource NoPicEssayDataTemplate}"
+                                                                    />
+                            </ListView.ItemTemplateSelector>
+                            <ListView.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <FlipView x:Name="headEssay" Height="180" ItemsSource="{Binding HeaderEssays}" 
                                                   Tapped="FlipView_Tapped">
-                                        <FlipView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Image Height="180" Stretch="Fill">
-                                                        <Image.Source>
-                                                            <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
-                                                        </Image.Source>
-                                                    </Image>
-                                                    <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
-                                                        <TextBlock Margin="8,0" Text="{Binding title}" Foreground="White" VerticalAlignment="Bottom"/>
-                                                    </Border>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </FlipView.ItemTemplate>
-                                    </FlipView>
-                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                        <RelativePanel Margin="0,0,8,2">
-                                            <RelativePanel.Resources>
-                                                <Style TargetType="Ellipse">
-                                                    <Setter Property="Margin" Value="4"/>
-                                                </Style>
-                                            </RelativePanel.Resources>
-                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                            <FlipView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Image Height="180" Stretch="Fill">
+                                                            <Image.Source>
+                                                                <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
+                                                            </Image.Source>
+                                                        </Image>
+                                                        <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
+                                                            <TextBlock Margin="8,0" Text="{Binding title}" Foreground="White" VerticalAlignment="Bottom"/>
+                                                        </Border>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </FlipView.ItemTemplate>
+                                        </FlipView>
+                                        <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                            <RelativePanel Margin="0,0,8,2">
+                                                <RelativePanel.Resources>
+                                                    <Style TargetType="Ellipse">
+                                                        <Setter Property="Margin" Value="4"/>
+                                                    </Style>
+                                                </RelativePanel.Resources>
+                                                <Ellipse RelativePanel.AlignBottomWithPanel="True"
                                            RelativePanel.AlignHorizontalCenterWithPanel="True"
                                            Width="6"
                                            Height="6"
                                            Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=0}"
                                            Name="rect11">
-                                            </Ellipse>
-                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                                </Ellipse>
+                                                <Ellipse RelativePanel.AlignBottomWithPanel="True"
                                            RelativePanel.RightOf="rect11"
                                            Width="6"
                                            Height="6"
                                            Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=1}"
                                            Name="rect21">
-                                            </Ellipse>
-                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                                </Ellipse>
+                                                <Ellipse RelativePanel.AlignBottomWithPanel="True"
                                            RelativePanel.RightOf="rect21"
                                            Width="6"
                                            Height="6"
                                            Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=2}"
                                            Name="rect31">
-                                            </Ellipse>
-                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                                </Ellipse>
+                                                <Ellipse RelativePanel.AlignBottomWithPanel="True"
                                            RelativePanel.RightOf="rect31"
                                            Width="6"
                                            Height="6"
                                            Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=3}"
                                            Name="rect41">
-                                            </Ellipse>
-                                        </RelativePanel>
+                                                </Ellipse>
+                                            </RelativePanel>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.HeaderTemplate>
-                        <ListView.ItemContainerTransitions>
-                            <TransitionCollection>
-                                <AddDeleteThemeTransition />
-                         
-                            </TransitionCollection>
-                        </ListView.ItemContainerTransitions>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Margin" Value="0"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
+                                </DataTemplate>
+                            </ListView.HeaderTemplate>
+                            <ListView.ItemContainerTransitions>
+                                <TransitionCollection>
+                                    <AddDeleteThemeTransition />
+
+                                </TransitionCollection>
+                            </ListView.ItemContainerTransitions>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                    <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
+                                    <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
                     </pr:PullToRefreshBox>
                 </DataTemplate>
             </Pivot.ItemTemplate>

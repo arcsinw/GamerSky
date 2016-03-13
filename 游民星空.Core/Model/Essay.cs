@@ -54,7 +54,14 @@ namespace 游民星空.Core.Model
             }
         }
 
-        //private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
+        private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
+        public static BitmapImage DefaultBitmap
+        {
+            get
+            {
+                return defaultBitmap;
+            }
+        } 
 
         //private ImageSource[] thumbnail;
         //public ImageSource[] Thumbnail

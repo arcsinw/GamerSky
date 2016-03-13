@@ -507,6 +507,9 @@
                                         <RowDefinition Height="4*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
+                                    <!--#region PlaceHolderImage-->
+                                    <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill" />
+                                    <!--#endregion-->
                                     <Image Grid.Row="0" Stretch="Fill" >
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding thumbnailUrl}"/>
@@ -544,13 +547,15 @@
                                   ItemClick="ListView_ItemClick">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid  Padding="0,8"
-                                          BorderThickness="{StaticResource BorderThickness}" BorderBrush="{StaticResource BorderBrush}" >
+                                    <Grid  Padding="0,8">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="2*"/>
                                             <ColumnDefinition Width="3*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
+                                        <!--#region PlaceHolderImage-->
+                                        <Image Source="{Binding DefaultBitmap}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
+                                        <!--#endregion-->
                                         <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                                             <Image.Source>
                                                 <BitmapImage UriSource="{Binding thumbnailUrl}"/>
@@ -572,6 +577,8 @@
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                     <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
+                                    <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
                                 </Style>
                             </ListView.ItemContainerStyle>
                             <!--列表头-->

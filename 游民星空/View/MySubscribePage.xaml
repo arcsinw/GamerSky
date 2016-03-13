@@ -22,6 +22,9 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <!--#region PlaceHolderImage-->
+                <Image Source="{Binding DefaultBitmap}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
+                <!--#endregion-->
                 <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                     <Image.Source>
                         <BitmapImage UriSource="{Binding thumbnailUrl}"/>

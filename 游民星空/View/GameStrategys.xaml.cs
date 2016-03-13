@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
+using 游民星空.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -32,16 +33,25 @@ namespace 游民星空.View
             
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        #region 九幽的数据统计
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
+        }
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             progressRing.IsActive = true;
             Strategy strategyResult = e.Parameter as Strategy;
             if (strategyResult != null)
             {
-                await viewModel.LoadData(strategyResult,pageIndex++);
+                await viewModel.LoadData(strategyResult, pageIndex++);
             }
             progressRing.IsActive = false;
+            JYHelper.TracePageStart(this.BaseUri.LocalPath);
         }
+        #endregion
+ 
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
