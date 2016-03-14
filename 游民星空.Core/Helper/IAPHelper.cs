@@ -21,7 +21,7 @@ namespace 游民星空.Core.Helper
 
 #if DEBUG
         public static LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
-#else 
+#else
         public static LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
 #endif
         public static async Task ConfigureSimulatorAsync(string filename)
@@ -30,9 +30,14 @@ namespace 游民星空.Core.Helper
             await CurrentAppSimulator.ReloadSimulatorAsync(proxyFile);
         }
 
+        /// <summary>
+        /// 购买某个应用内产品
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         public static async Task BuyProductAsync(string productId)
         {
-            if(!licenseInformation.ProductLicenses[productId].IsActive)
+            if(!IsProductGot(productId))
             {
                 try
                 {
@@ -51,6 +56,16 @@ namespace 游民星空.Core.Helper
             {
 
             }
+        }
+
+        /// <summary>
+        /// 是否已购买某产品
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        public static bool IsProductGot(string productId)
+        {
+            return licenseInformation.ProductLicenses[productId].IsActive;
         }
     }
 }

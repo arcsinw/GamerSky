@@ -140,7 +140,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot x:Name="pivot" Style="{StaticResource EssayPivotStyle}" SelectionChanged="pivot_SelectionChanged">
             <PivotItem Header="正文" Margin="0" >
                 <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"  Holding="webView_Holding"
@@ -154,8 +154,7 @@
             </PivotItem>
         </Pivot>
         
-        
-
+        <!--模仿安卓的底部工具栏-->
         <Grid Background="Gray" HorizontalAlignment="Stretch"
               VerticalAlignment="Bottom" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
@@ -285,11 +284,14 @@
         <!--#endregion-->
 
         <!--Ad-->
-        <jy:AdControl HorizontalAlignment="Stretch" VerticalAlignment="Top"
+        <!--<jy:AdControl x:Name="adControl" HorizontalAlignment="Stretch" VerticalAlignment="Top"
                       ApplicationKey="2c7fdea4792fb5b5e3031dbf3f99ff15"
-                      AdType="Banner"/>
+                      AdType="Banner" />-->
 
         <!--      hp:ExtensionHelper.HtmlString="{Binding HtmlString}"-->
+        <!--Source="ms-appx-web:///Assets/HTMLPage1.html"  "-->
+
+
         <!--#region  显示图片-->
         <FlipView x:Name="imageFlipView" Visibility="Collapsed" ItemsSource="{Binding }">
             <FlipView.ItemTemplate>
@@ -303,7 +305,7 @@
             </FlipView.ItemTemplate>
         </FlipView>
         <!--#endregion-->
-        <!--Source="ms-appx-web:///Assets/HTMLPage1.html"  "-->
+        
     </Grid>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal" Visibility="Collapsed">

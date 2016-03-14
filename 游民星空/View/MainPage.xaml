@@ -16,11 +16,7 @@
  
     <Page.Resources>
         <vm:MainPageViewModel x:Name="MVM"/>
-        <x:String x:Key="ErrorString">Error</x:String>
-
-        <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="DarkBlue"/>
-        <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="Green"/>
-
+ 
         <!--BorderMargin-->
         <Thickness x:Key="BorderMargin">0,2</Thickness>
         <!--BorderThickness-->

@@ -38,7 +38,7 @@
         <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
         <!--一张图文章模板-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid Margin="2,0" Padding="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+            <Grid Margin="2,0" Padding="4" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
@@ -102,9 +102,7 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0" Padding="{ThemeResource PhonePagePadding}" BorderBrush="{ThemeResource BorderBrush}"
-                                      BorderThickness="{ThemeResource BorderThickness}" 
-                                       Tapped="Grid_Tapped" >
+                                        <Grid Grid.Row="0" Padding="{ThemeResource PhonePagePadding}" Tapped="Grid_Tapped" >
                                             <TextBlock Text="{Binding title}" HorizontalAlignment="Left" Foreground="{ThemeResource ThemeColorBrush}"/>
                                             <TextBlock HorizontalAlignment="Right">
                                         <Run Text="{Binding readingCount}"/>

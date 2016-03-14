@@ -294,7 +294,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--搜索栏-->
+        <!--#region 搜索栏-->
         <Grid Background="{ThemeResource ThemeColorBrush}" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -311,7 +311,8 @@
                 <SymbolIcon Symbol="Find"/>
             </Button>
         </Grid>
-
+        <!--#endregion-->
+        
         <Pivot Grid.Row="1" Background="{ThemeResource PageBackground}" 
                x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
                Style="{StaticResource EssayPivotStyle}">

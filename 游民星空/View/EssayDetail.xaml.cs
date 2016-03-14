@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JiuYouAdUniversal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -39,6 +40,22 @@ namespace 游民星空.View
 
             webView.NewWindowRequested += WebView_NewWindowRequested;
              
+        }
+
+        /// <summary>
+        /// 增加广告
+        /// </summary>
+        public void AddAdControl()
+        {
+            if (!IAPHelper.IsProductGot(IAPHelper.Remove_Ad))
+            {
+                AdControl adControl = new AdControl();
+                adControl.AdType = JiuYouAdUniversal.Models.AdType.Banner;
+                adControl.ApplicationKey = "2c7fdea4792fb5b5e3031dbf3f99ff15";
+                adControl.HorizontalAlignment = HorizontalAlignment.Stretch;
+                adControl.VerticalAlignment = VerticalAlignment.Top;
+                rootGrid.Children.Add(adControl);
+            }
         }
 
         /// <summary>

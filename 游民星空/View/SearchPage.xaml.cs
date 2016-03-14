@@ -281,7 +281,6 @@ namespace 游民星空.View
             switch(selectedIndex)
             {
                 case 0:
-                   
                     if (!pageIndexDic.ContainsKey(selectedIndex))
                     {
                         await viewModel.LoadNewsHotKey();
