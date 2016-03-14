@@ -38,6 +38,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <OutputPath>bin\ARM\Release\</OutputPath>
@@ -86,7 +87,8 @@
     <Prefer32Bit>true</Prefer32Bit>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
     <Optimize>true</Optimize>
-    <DocumentationFile>bin\x86\Debug\游民星空.XML</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -139,6 +141,9 @@
     </Compile>
     <Compile Include="View\FindPasswordPage.xaml.cs">
       <DependentUpon>FindPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GameSale.xaml.cs">
+      <DependentUpon>GameSale.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GameStrategys.xaml.cs">
       <DependentUpon>GameStrategys.xaml</DependentUpon>
@@ -298,6 +303,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FindPasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GameSale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

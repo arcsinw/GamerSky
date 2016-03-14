@@ -463,7 +463,7 @@
                           SelectionMode="None" x:Name="focusGridView"
                           ShowsScrollingPlaceholders="True"
                               IsItemClickEnabled="True"
-                              ItemClick="GridView_ItemClick">
+                              >
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup>
                                 <VisualState x:Name="Narrow">
@@ -544,7 +544,7 @@
                                   SelectionMode="None" 
                                   ShowsScrollingPlaceholders="True"
                                   IsItemClickEnabled="True"
-                                  ItemClick="ListView_ItemClick">
+                                  >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid  Padding="0,8">

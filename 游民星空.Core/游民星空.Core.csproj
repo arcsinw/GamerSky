@@ -119,7 +119,6 @@
     <Compile Include="Helper\ExtensionHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
-    <Compile Include="Helper\IAPHelper.cs" />
     <Compile Include="Helper\ImageDownLoadHelper.cs" />
     <Compile Include="Helper\ListViewBaseExtensions.cs" />
     <Compile Include="Helper\LiveTileHelper.cs" />
@@ -188,6 +187,7 @@
     <Compile Include="ViewModel\DataShareManager.cs" />
     <Compile Include="ViewModel\EmailRegisterPageViewModel.cs" />
     <Compile Include="ViewModel\EssayDetailViewModel.cs" />
+    <Compile Include="ViewModel\GameSaleViewModel.cs" />
     <Compile Include="ViewModel\GameStrategysViewModel.cs" />
     <Compile Include="ViewModel\HomePageViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />

@@ -8,38 +8,58 @@
     mc:Ignorable="d"
     RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot Style="{ThemeResource EssayPivotStyle}" Background="{ThemeResource PageBackground}" >
-            <Pivot.Resources>
-                <Style TargetType="TextBlock">
-                    <Setter Property="FontSize" Value="18"/>
-                    <Setter Property="Margin" Value="4"/>
-                </Style>
-            </Pivot.Resources>
-            <PivotItem Margin="0">
-                <PivotItem.Header>
-                    <TextBlock Text="关于" Margin="48,0,0,0"/>
-                </PivotItem.Header>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="Margin" Value="4"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-                <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
-                    <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" >
-                        <StackPanel>
-                            <Image Margin="0,16" Source="ms-appx:///Assets/Square150x150Logo.png" 
+        <Grid Background="{ThemeResource ThemeColorBrush}">
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
+                    Grid.Column="0">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock Text="设置" Style="{ThemeResource PageTitleStyle}"/>
+        </Grid>
+
+
+
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
+            <Grid.Resources>
+                <Style TargetType="HyperlinkButton">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+            </Grid.Resources>
+            <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" >
+                <StackPanel>
+                    <Image Margin="0,16" Source="ms-appx:///Assets/Square150x150Logo.png" 
                            Height="100" Width="100"/>
-                            <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Center" />
-                            <TextBlock Text="{x:Bind Author}" HorizontalAlignment="Center"/>
-                            <TextBlock HorizontalAlignment="Center" x:Name="qqTextBlock" Tapped="{x:Bind CopyToClipboard}" Text="QQ群：473967668"  />
-                            <HyperlinkButton  NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
+                    <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Center" />
+                    <TextBlock Text="{x:Bind Author}" HorizontalAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Center" x:Name="qqTextBlock" Tapped="{x:Bind CopyToClipboard}" Text="QQ群：473967668"  />
+                    <HyperlinkButton  NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
                                      HorizontalAlignment="Center" >
-                                <HyperlinkButton.Content>
-                                    <TextBlock Text="评论"/>
-                                </HyperlinkButton.Content>
-                            </HyperlinkButton>
-                            <HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
-                                <HyperlinkButton.Content>
-                                    <TextBlock Text="更新记录"/>
-                                </HyperlinkButton.Content>
-                            </HyperlinkButton>
-                            <!--<HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
+                        <HyperlinkButton.Content>
+                            <TextBlock Text="评论"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
+                    <HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
+                        <HyperlinkButton.Content>
+                            <TextBlock Text="更新记录"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
+                    <TextBlock Text="感谢" HorizontalAlignment="Center"/>
+                    <HyperlinkButton Content="ms-uap"  NavigateUri="http://www.cnblogs.com/ms-uap/"/>
+                        <HyperlinkButton Content="AsyncTaskEx"/>
+                        <HyperlinkButton Content="edi.wang" NavigateUri="http://edi.wang"/>
+                        <HyperlinkButton Content="写博客的前辈们" NavigateUri="http://www.cnblogs.com"/>
+                        <HyperlinkButton Content="MSDN大法好" NavigateUri="http://msdn.microsoft.com"/>
+                    <!--<HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
                         <HyperlinkButton.Content>
                             <TextBlock Text="人才招聘"/>
                         </HyperlinkButton.Content>
@@ -49,29 +69,12 @@
                             <TextBlock Text="商务合作"/>
                         </HyperlinkButton.Content>
                     </HyperlinkButton>-->
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
 
-            </PivotItem>
-            <PivotItem Header="感谢" Margin="0">
-                <Grid Background="{ThemeResource PageBackground}">
-                    <ScrollViewer>
-                        <StackPanel Margin="12">
-                            <HyperlinkButton Content="ms-uap" NavigateUri="http://www.cnblogs.com/ms-uap/"/>
-                            <HyperlinkButton Content="AsyncTaskEx"/>
-                            <HyperlinkButton Content="edi.wang" NavigateUri="edi.wang"/>
-                            <HyperlinkButton Content="写博客的前辈们" NavigateUri="www.cnblogs.com"/>
-                            <HyperlinkButton Content="MSDN大法好" NavigateUri="msdn.microsoft.com"/>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-            </PivotItem>
-        </Pivot>
 
-        <Button HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="back"  Click="{x:Bind Back}"
-                    Style="{ThemeResource BackButtonStyle}" Grid.Column="0">
-            <SymbolIcon Symbol="Back"/>
-        </Button>
+                
+       
     </Grid>
 </Page>

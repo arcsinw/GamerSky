@@ -73,9 +73,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem Tapped="{x:Bind RemoveAd}">
-                        <TextBlock Text="去除广告"/>
-                    </ListViewItem>
+                    
                 </ListView.Items>
 
                 <ListView.ItemContainerStyle>

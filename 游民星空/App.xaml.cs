@@ -33,46 +33,46 @@ namespace 游民星空
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             this.Resuming += OnResuming;
-#if DEBUG
-            licenseInformation = CurrentAppSimulator.LicenseInformation;
-#else
-            licenseInformation = CurrentApp.LicenseInformation;
-#endif
+//#if DEBUG
+//            licenseInformation = CurrentAppSimulator.LicenseInformation;
+//#else
+//            licenseInformation = CurrentApp.LicenseInformation;
+//#endif
             this.UnhandledException += OnUnhandledException;
         }
-#region IAPs
-        LicenseInformation licenseInformation;
+//#region IAPs
+//        LicenseInformation licenseInformation;
 
-        /// <summary>
-        /// 某个应用内产品是否有效
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public bool IsFeatureActive(string id)
-        {
-            return licenseInformation.ProductLicenses[id].IsActive;
-        }
+        //        /// <summary>
+        //        /// 某个应用内产品是否有效
+        //        /// </summary>
+        //        /// <param name="id"></param>
+        //        /// <returns></returns>
+        //        public bool IsFeatureActive(string id)
+        //        {
+        //            return licenseInformation.ProductLicenses[id].IsActive;
+        //        }
 
-        public async void RemoveAd()
-        {
-            if(!IsFeatureActive(IAPHelper.Remove_Ad))
-            {
-                try
-                {
-                    await CurrentAppSimulator.RequestProductPurchaseAsync(IAPHelper.Remove_Ad,false);
-                }
-                catch(Exception )
-                {
+        //        public async void RemoveAd()
+        //        {
+        //            if(!IsFeatureActive(IAPHelper.Remove_Ad))
+        //            {
+        //                try
+        //                {
+        //                    await CurrentAppSimulator.RequestProductPurchaseAsync(IAPHelper.Remove_Ad,false);
+        //                }
+        //                catch(Exception )
+        //                {
 
-                }
-            }
-            else  //已购买
-            {
+        //                }
+        //            }
+        //            else  //已购买
+        //            {
 
-            }
-        }
+        //            }
+        //        }
 
-#endregion
+        //#endregion
 
         private void OnResuming(object sender, object e)
         {
@@ -255,8 +255,6 @@ namespace 游民星空
             base.OnActivated(args);
             JYHelper.StartTraceAsync();
         }
-
-
-   
+         
     }
 }

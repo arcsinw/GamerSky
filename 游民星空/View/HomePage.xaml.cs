@@ -63,7 +63,7 @@ namespace 游民星空.View
             if (DataShareManager.Current.IsNewVersion)
             {
                 UIHelper.ShowMessage(
-                    "1.加了广告！！！不过你看过这个的时候已经晚了( ╯□╰ ) 以前付过费的用户请加群473967668联系我领取激活码去除广告，\n",
+                    "1.试用.net native\n",
                     "新版本更新内容");
                 //DataShareManager.Current.IsNewVersion = Functions.GetVersion() ;
             }

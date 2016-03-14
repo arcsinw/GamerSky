@@ -154,26 +154,6 @@
             </PivotItem>
         </Pivot>
         
-        <!--模仿安卓的底部工具栏-->
-        <Grid Background="Gray" HorizontalAlignment="Stretch"
-              VerticalAlignment="Bottom" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBox PlaceholderText="我来说两句"/>
-            <Button Grid.Column="1">
-                <Button.Content>
-                    <SymbolIcon Symbol="Like"/>
-                </Button.Content>
-            </Button>
-            
-            <Button Grid.Column="2"/>
-            <Button Grid.Column="3"/>
-          
-        </Grid>
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
 
         <!--#region  顶部右边的调整按钮-->
@@ -211,7 +191,9 @@
                                         <TextBlock Text="夜间模式" VerticalAlignment="Center" />
                                     </StackPanel>
 
-                                    <CheckBox Grid.Column="1" MinWidth="0" HorizontalAlignment="Right"/>
+                                    <CheckBox Grid.Column="1" MinWidth="0" x:Name="nightCheckBox" 
+                                              Checked="nightCheckBox_Checked" Unchecked="nightCheckBox_Unchecked"
+                                              HorizontalAlignment="Right"/>
                                 </Grid>
                             </ListViewItem>
                             <ListViewItem>
@@ -282,16 +264,10 @@
             </Button.Content>
         </Button>
         <!--#endregion-->
-
-        <!--Ad-->
-        <!--<jy:AdControl x:Name="adControl" HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                      ApplicationKey="2c7fdea4792fb5b5e3031dbf3f99ff15"
-                      AdType="Banner" />-->
-
+        
         <!--      hp:ExtensionHelper.HtmlString="{Binding HtmlString}"-->
         <!--Source="ms-appx-web:///Assets/HTMLPage1.html"  "-->
-
-
+ 
         <!--#region  显示图片-->
         <FlipView x:Name="imageFlipView" Visibility="Collapsed" ItemsSource="{Binding }">
             <FlipView.ItemTemplate>

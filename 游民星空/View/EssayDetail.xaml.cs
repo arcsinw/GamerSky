@@ -1,5 +1,4 @@
-﻿using JiuYouAdUniversal;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -45,18 +44,18 @@ namespace 游民星空.View
         /// <summary>
         /// 增加广告
         /// </summary>
-        public void AddAdControl()
-        {
-            if (!IAPHelper.IsProductGot(IAPHelper.Remove_Ad))
-            {
-                AdControl adControl = new AdControl();
-                adControl.AdType = JiuYouAdUniversal.Models.AdType.Banner;
-                adControl.ApplicationKey = "2c7fdea4792fb5b5e3031dbf3f99ff15";
-                adControl.HorizontalAlignment = HorizontalAlignment.Stretch;
-                adControl.VerticalAlignment = VerticalAlignment.Top;
-                rootGrid.Children.Add(adControl);
-            }
-        }
+        //public void AddAdControl()
+        //{
+        //    if (!IAPHelper.IsProductGot(IAPHelper.Remove_Ad))
+        //    {
+        //        AdControl adControl = new AdControl();
+        //        adControl.AdType = JiuYouAdUniversal.Models.AdType.Banner;
+        //        adControl.ApplicationKey = "2c7fdea4792fb5b5e3031dbf3f99ff15";
+        //        adControl.HorizontalAlignment = HorizontalAlignment.Stretch;
+        //        adControl.VerticalAlignment = VerticalAlignment.Top;
+        //        rootGrid.Children.Add(adControl);
+        //    }
+        //}
 
         /// <summary>
         /// 处理WebView中的新请求
@@ -220,13 +219,24 @@ namespace 游民星空.View
             await webView.InvokeScriptAsync("eval", new[] { "history.go(1)" });
         }
 
+        /// <summary>
+        /// 设置夜间模式
+        /// </summary>
+        public async void NightMode()
+        {
+            await webView.InvokeScriptAsync("eval", new[] { "document.body.style.backgroundColor='#FFFFFF';" });
+        }
+
+        public async void DayMode()
+        {
+            await webView.InvokeScriptAsync("eval", new[] { "document.body.style.backgroundColor='#000000';" });
+        }
+
         private void webView_Holding(object sender, HoldingRoutedEventArgs e)
         {
 
         }
-
-       
-
+         
         private async void refreshButton_Click(object sender, RoutedEventArgs e)
         {
             
@@ -247,6 +257,21 @@ namespace 游民星空.View
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// 夜间模式
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void nightCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            NightMode();
+        }
+
+        private void nightCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
