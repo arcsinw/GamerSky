@@ -38,7 +38,8 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
-    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
+    <EnableGatekeeperAnalysis>true</EnableGatekeeperAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <OutputPath>bin\ARM\Release\</OutputPath>
@@ -114,7 +115,6 @@
     <Compile Include="Converter\CountToVisibilityConverter.cs" />
     <Compile Include="Converter\IndexToColorConverter.cs" />
     <Compile Include="Helper\EssayListViewItemTemplateSelector.cs" />
-    <Compile Include="Helper\JYHelper.cs" />
     <Compile Include="Helper\StringWrapPanel.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

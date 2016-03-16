@@ -39,6 +39,7 @@ namespace 游民星空
 //            licenseInformation = CurrentApp.LicenseInformation;
 //#endif
             this.UnhandledException += OnUnhandledException;
+             
         }
 //#region IAPs
 //        LicenseInformation licenseInformation;
@@ -122,6 +123,7 @@ namespace 游民星空
             ///全局异常处理
             RegisterExceptionHandlingSynchronizationContext();
 
+            
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -168,8 +170,8 @@ namespace 游民星空
             }
 
             //注册动态磁贴任务
-            LiveTileHelper.RegisterLiveTileTask();
-            //RegisterLiveTileTask();
+            //LiveTileHelper.RegisterLiveTileTask();
+          
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
             JYHelper.StartTraceAsync();

@@ -110,7 +110,29 @@
                 </TextBlock>
             </Grid>
         </DataTemplate>
-        
+        <!--专题模板-->
+        <DataTemplate x:Key="TopicDataTemplate">
+            <Grid Margin="0,0,0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Padding="{ThemeResource PhonePagePadding}" Tapped="Grid_Tapped" >
+                    <TextBlock Text="{Binding title}" HorizontalAlignment="Left" Foreground="{ThemeResource ThemeColorBrush}"/>
+                    <TextBlock HorizontalAlignment="Right">
+                                        <Run Text="{Binding readingCount}"/>
+                                        <Run Text="人关注"/>
+                    </TextBlock>
+                </Grid>
+                <ListView x:Name="innerTopicListView" ItemsSource="{Binding childElements}" Grid.Row="1"
+                            ScrollViewer.VerticalScrollMode="Disabled"
+                            IsItemClickEnabled="True"
+                            ItemClick="innerTopicListView_ItemClick"
+                            ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
+                            ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
+                </ListView>
+            </Grid>
+        </DataTemplate>
         <converter:IndexToColorConverter x:Name="IndexToColorConverter"/>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -140,8 +162,9 @@
                                  >
                             <ListView.ItemTemplateSelector>
                                 <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
-                                                                    ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
-                                                                NoPicDt="{StaticResource NoPicEssayDataTemplate}"
+                                            ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
+                                            NoPicDt="{StaticResource NoPicEssayDataTemplate}"
+                                            TopicDt="{StaticResource TopicDataTemplate}"
                                                                     />
                             </ListView.ItemTemplateSelector>
                             <ListView.HeaderTemplate>
@@ -152,6 +175,7 @@
                                             <FlipView.ItemTemplate>
                                                 <DataTemplate>
                                                     <Grid>
+                                                        <Image Source="{Binding DefaultBitmap}" Stretch="Fill"  MinHeight="180"/>
                                                         <Image Height="180" Stretch="Fill">
                                                             <Image.Source>
                                                                 <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>

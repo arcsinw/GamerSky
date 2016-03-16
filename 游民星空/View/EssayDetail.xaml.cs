@@ -266,12 +266,13 @@ namespace 游民星空.View
         /// <param name="e"></param>
         private void nightCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            NightMode();
+            //webView.InvokeScriptAsync("gsSetPageParam", new[] { "name:" });
+            //NightMode();
         }
 
         private void nightCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-
+            DayMode();
         }
     }
 }

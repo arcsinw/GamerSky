@@ -43,7 +43,7 @@
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <FlipView x:Name="pivot" Background="{ThemeResource PageBackground}"  
+        <Pivot x:Name="pivot" Background="{ThemeResource PageBackground}"  
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="热门"  >
                 <pr:PullToRefreshBox  RefreshInvoked="PullToRefreshBox_RefreshInvoked">
@@ -75,7 +75,7 @@
                     </ListView>
                 </pr:PullToRefreshBox>
             </PivotItem>
-        </FlipView>
+        </Pivot>
 
         <!--#region 左边后退键-->
         <Button x:Name="back"  Click="{x:Bind Back}" 

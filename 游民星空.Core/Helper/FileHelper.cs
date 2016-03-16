@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace 游民星空.Core.Helper
             }
             catch(Exception e)
             {
-
+                JYHelper.TraceError(e.Message);
             }
         }
 
@@ -74,10 +75,17 @@ namespace 游民星空.Core.Helper
             }
             catch (Exception e)
             {
+                JYHelper.TraceError(e.Message);
                 return null;
             }
         }
 
+        /// <summary>
+        /// 保存图片
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="filename"></param>
+        /// <returns></returns>
         public async Task SaveImageAsync(WriteableBitmap image,string filename)
         {
             try
@@ -116,9 +124,9 @@ namespace 游民星空.Core.Helper
                     await encoder.FlushAsync();
                 }
             }
-            catch 
+            catch (Exception e)
             {
-
+                JYHelper.TraceError(e.Message);
                 throw;
             }
         }
@@ -203,5 +211,7 @@ namespace 游民星空.Core.Helper
                 return false;
             }
         }
+
+        
     }
 }

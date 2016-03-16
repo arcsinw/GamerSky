@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using 游民星空.Core.Helper;
 using 游民星空.Core.ViewModel;
 using 游民星空.Helper;
 

@@ -120,6 +120,7 @@
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\ImageDownLoadHelper.cs" />
+    <Compile Include="Helper\JYHelper.cs" />
     <Compile Include="Helper\ListViewBaseExtensions.cs" />
     <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\LocalSettingsHelper.cs" />
@@ -202,6 +203,9 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\YaowenPageViewModel.cs" />
     <EmbeddedResource Include="Properties\游民星空.Core.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -132,10 +132,16 @@ namespace 游民星空.View
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Essay essayResult =  e.ClickedItem as Essay;
+            Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
-            
-            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+            if (!essayResult.contentType.Equals("zhuanti"))
+            {
+                (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+            }
+            else
+            {
+                (Window.Current.Content as Frame)?.Navigate(typeof(SubscribeContentPage), essayResult.contentId);
+            }
         }
 
         /// <summary>
@@ -181,6 +187,7 @@ namespace 游民星空.View
                 {
                     if (!IsDataLoading)  //未加载数据
                     {
+                        Debug.WriteLine("IsDataLoading");
                         IsDataLoading = true;
                         progressRing.IsActive = true;
                         await MVM.LoadMoreEssay(currentChannelId, pageIndex++);
@@ -210,6 +217,26 @@ namespace 游民星空.View
             ListView listView = Functions.FindChildOfType<ListView>(currentItem);
             listView.ScrollIntoViewSmoothly(listView.Items[0]);
         }
-         
+
+        private void innerTopicListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Essay essayResult = e.ClickedItem as Essay;
+            if (essayResult == null) return;
+
+            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+        }
+
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var control = e.OriginalSource as FrameworkElement;
+            if (control != null)
+            {
+                Essay essay = control.DataContext as Essay;
+                if (essay != null)
+                {
+                    
+                }
+            }
+        }
     }
 }

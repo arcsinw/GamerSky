@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace 游民星空.Helper
+namespace 游民星空.Core.Helper
 {
     /// <summary>
     /// 九幽信息
@@ -74,6 +74,14 @@ namespace 游民星空.Helper
             TraceEvent(eventId, label);
         }
 
+        /// <summary>
+        /// 统计错误
+        /// </summary>
+        /// <param name="id"></param>
+        public static void TraceError(string id)
+        {
+            TraceError(id);
+        }
 
     }
 }

@@ -1380,6 +1380,7 @@ function gsCommentShowHiddenFloors(showButton)
     showButton.style.display = "none";
 }
 
+//设置页面参数 如日夜间模式，字体
 function gsSetPageParam(param)
 {
     if (typeof(param.name)=="undefined")
