@@ -32,7 +32,7 @@ namespace 游民星空.View
 
             NavigationCacheMode = NavigationCacheMode.Required;
         }
-
+        
         private bool IsSubscribeTopicLoaded = false;
         private bool IsSubscribeContentLoaded = false;
 

@@ -39,7 +39,7 @@ namespace 游民星空
 //            licenseInformation = CurrentApp.LicenseInformation;
 //#endif
             this.UnhandledException += OnUnhandledException;
-             
+            
         }
 //#region IAPs
 //        LicenseInformation licenseInformation;

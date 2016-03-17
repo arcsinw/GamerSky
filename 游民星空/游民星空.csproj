@@ -111,10 +111,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\AdaptiveGridView.cs" />
     <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Converter\CountToVisibilityConverter.cs" />
     <Compile Include="Converter\IndexToColorConverter.cs" />
+    <Compile Include="Helper\AdaptiveGridView.cs" />
     <Compile Include="Helper\EssayListViewItemTemplateSelector.cs" />
+    <Compile Include="Helper\PageBase.cs" />
     <Compile Include="Helper\StringWrapPanel.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

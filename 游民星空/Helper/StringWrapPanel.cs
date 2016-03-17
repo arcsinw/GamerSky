@@ -14,13 +14,10 @@ namespace 游民星空.Helper
         /// <summary>
         /// 计算控件大小
         /// </summary>
-        /// <param name="availableSize"></param>
+        /// <param name="availableSize">可用大小</param>
         /// <returns></returns>
         protected override Size MeasureOverride(Size availableSize)
-        {
-            //屏幕宽度
-            var screenWidth = Window.Current.Bounds.Width;
-
+        { 
             //可用空间大小
             Size usefulSize = new Size(availableSize.Width, double.PositiveInfinity);
 
@@ -55,12 +52,7 @@ namespace 游民星空.Helper
         /// <param name="finalSize"></param>
         /// <returns></returns>
         protected override Size ArrangeOverride(Size finalSize)
-        {
-            //屏幕宽度
-            var screenWidth = Window.Current.Bounds.Width;
-            //可用空间大小
-            Size usefulSize = new Size(screenWidth / 2, double.PositiveInfinity);
-
+        { 
             //记录横坐标
             double x = 0.0;
             double y = 0.0;

@@ -8,6 +8,7 @@
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:converter="using:游民星空.Converter"
+    xmlns:hp="using:游民星空.Helper"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}"
     Margin="0,0,0,50">
@@ -458,11 +459,14 @@
 
             <PivotItem Header="关注" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                <GridView ItemsSource="{Binding FocusStrategys}" Padding="8"
-                         ItemsPanel="{StaticResource GridViewItemsPanel}"
+                    <!-- ItemsPanel="{StaticResource GridViewItemsPanel}"-->
+                    <hp:AdaptiveGridView ItemsSource="{Binding FocusStrategys}" Padding="8"
                           SelectionMode="None" x:Name="focusGridView"
                           ShowsScrollingPlaceholders="True"
-                              IsItemClickEnabled="True"
+                          IsItemClickEnabled="True"
+                          MinItemWidth="200"
+                           
+                          ItemClick="GridView_ItemClick"
                               >
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup>
@@ -489,7 +493,7 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <!-- ItemsPanel="{StaticResource GridViewItemsPanel}"-->
-                        <GridView.Template>
+                        <!--<hp:AdaptiveGridView.Template>
                             <ControlTemplate>
                                 <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
                                     <Viewbox Stretch="Uniform" Margin="8" VerticalAlignment="Stretch" 
@@ -498,9 +502,9 @@
                                     </Viewbox>
                                 </ScrollViewer>
                             </ControlTemplate>
-                        </GridView.Template>
+                        </hp:AdaptiveGridView.Template>-->
 
-                        <GridView.ItemTemplate>
+                        <hp:AdaptiveGridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -522,8 +526,8 @@
                                        HorizontalAlignment="Right" VerticalAlignment="Top"/>
                                 </Grid>
                             </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
+                        </hp:AdaptiveGridView.ItemTemplate>
+                    </hp:AdaptiveGridView>
                 </pr:PullToRefreshBox>
             </PivotItem>
             <PivotItem Header="全部" Margin="0" Padding="0">
@@ -544,6 +548,7 @@
                                   SelectionMode="None" 
                                   ShowsScrollingPlaceholders="True"
                                   IsItemClickEnabled="True"
+                                  ItemClick="ListView_ItemClick"
                                   >
                             <ListView.ItemTemplate>
                                 <DataTemplate>
