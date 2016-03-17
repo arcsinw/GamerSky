@@ -464,8 +464,8 @@
                           SelectionMode="None" x:Name="focusGridView"
                           ShowsScrollingPlaceholders="True"
                           IsItemClickEnabled="True"
-                          MinItemWidth="200"
-                           
+                          MinItemWidth="120"
+                          MinItemHeight="80"
                           ItemClick="GridView_ItemClick"
                               >
                         <VisualStateManager.VisualStateGroups>
