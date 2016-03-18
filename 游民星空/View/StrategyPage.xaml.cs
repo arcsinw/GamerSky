@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,8 +32,12 @@ namespace 游民星空.View
         {
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Required;
+
+
             pageIndexDic = new Dictionary<int, int>();
         }
+
+     
 
         #region 九幽的数据统计
         protected override void OnNavigatedFrom(NavigationEventArgs e)

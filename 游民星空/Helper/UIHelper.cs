@@ -31,6 +31,15 @@ namespace 游民星空.Helper
             }
         }
 
+        /// <summary>
+        /// 隐藏StatusBar
+        /// </summary>
+        public static async void HideStatusBar()
+        {
+            var statusBar = StatusBar.GetForCurrentView();
+            await statusBar.HideAsync();
+        }
+
         public static async void SetStatusBarColor(Color color)
         {
             if (Functions.IsMobile())

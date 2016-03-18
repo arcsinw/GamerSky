@@ -50,6 +50,8 @@ namespace 游民星空.Core.ViewModel
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+
+          
         }
 
         private void Current_ShareDataChanged()
@@ -76,6 +78,7 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public async Task LoadFocusStrategys()
         {
+            await apiService.GetGameList(1);
             IsActive = true;
             List<Strategy> strategys = await apiService.GetStrategys();
             if (strategys != null)

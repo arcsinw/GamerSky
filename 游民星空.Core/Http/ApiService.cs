@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -566,6 +567,35 @@ namespace 游民星空.Core.Http
             postData.request = new EditSubscribeRequest { operate = operate.ToString(), subscribeId = subscribeId };
             VerificationCode result = await PostJson<EditSubscribePostData, VerificationCode>(ServiceUri.EditSubscription, postData);
             return result;
+        }
+
+        /// <summary>
+        /// 获取游戏库中游戏列表
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Game>> GetGameList(int pageIndex)
+        {
+            string filename = "GameList_"+pageIndex+".json";
+            List<Game> gameList = new List<Game>();
+            if (NetworkManager.Current.Network == 4)
+            {
+                gameList = await FileHelper.Current.ReadObjectAsync<List<Game>>(filename);
+            }
+            else
+            {
+                GamePostData postData = new GamePostData();
+                postData.request = new GamePostDataRequest() { pageIndex = pageIndex };
+                var result = await PostJson<GamePostData, GameResult>(ServiceUri.GameList, postData);
+                if(result!= null)
+                {
+                    foreach (var item in result.result)
+                    {
+                        gameList.Add(item);
+                    }
+                    await FileHelper.Current.WriteObjectAsync<List<Game>>(gameList,filename);
+                }
+            }
+            return gameList;
         }
     }
 }

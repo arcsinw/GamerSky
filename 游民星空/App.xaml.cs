@@ -5,6 +5,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Store;
 using Windows.Foundation.Metadata;
+using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
@@ -41,8 +42,11 @@ namespace 游民星空
             this.UnhandledException += OnUnhandledException;
             
         }
-//#region IAPs
-//        LicenseInformation licenseInformation;
+
+        
+
+        //#region IAPs
+        //        LicenseInformation licenseInformation;
 
         //        /// <summary>
         //        /// 某个应用内产品是否有效

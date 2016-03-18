@@ -464,10 +464,10 @@
                           SelectionMode="None" x:Name="focusGridView"
                           ShowsScrollingPlaceholders="True"
                           IsItemClickEnabled="True"
-                          MinItemWidth="120"
-                          MinItemHeight="80"
                           ItemClick="GridView_ItemClick"
-                              >
+                          MinItemHeight="160"
+                          MinItemWidth="240"
+                        >
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup>
                                 <VisualState x:Name="Narrow">
@@ -522,8 +522,7 @@
                                     <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding title}" 
                                                TextTrimming="CharacterEllipsis" TextWrapping="Wrap"/>
                                     <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
-                                       Width="30"
-                                       HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                       Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                                 </Grid>
                             </DataTemplate>
                         </hp:AdaptiveGridView.ItemTemplate>
@@ -647,8 +646,6 @@
                     </SemanticZoom.ZoomedOutView>
                 </SemanticZoom>
             </PivotItem>
-
-       
         </Pivot>
 
         <Button Style="{ThemeResource BackButtonStyle}"

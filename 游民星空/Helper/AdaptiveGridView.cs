@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using 游民星空.Core.Helper;
 
 namespace 游民星空.Helper
 {
@@ -85,10 +86,14 @@ namespace 游民星空.Helper
                 if (MinItemWidth == 0)
                     throw new DivideByZeroException("You need to have a MinItemWidth greater than zero");
 
-                var availableWidth = availableSize.Width - (this.Padding.Right + this.Padding.Left);
+                var availableWidth = availableSize.Width - (this.Padding.Left + this.Padding.Left);
 
                 var numColumns = Math.Floor(availableWidth / MinItemWidth);
                 numColumns = numColumns == 0 ? 1 : numColumns;
+                if(Functions.IsMobile())
+                {
+                    numColumns = 2;
+                }
                 var numRows = Math.Ceiling(this.Items.Count / numColumns);
 
                 var itemWidth = availableWidth / numColumns;

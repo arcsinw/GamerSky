@@ -95,5 +95,10 @@ namespace 游民星空.Core.Http
         /// 订阅专题
         /// </summary>
         public const string SubscribeTopic = "http://appapi2.gamersky.com/v2/AllChannelList";
+
+        /// <summary>
+        /// 游戏库
+        /// </summary>
+        public const string GameList = "http://appapi2.gamersky.com/v2/TwoGameList";
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using Windows.Graphics.Display;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -73,10 +74,30 @@ namespace 游民星空.View
             this.InitializeComponent();
             apiService = new ApiService();
             NavigationCacheMode = NavigationCacheMode.Required;
-        
+            DisplayInformation.GetForCurrentView().OrientationChanged += App_OrientationChanged;
+             
             DispatcherManager.Current.Dispatcher = Dispatcher;
             pageIndexDic = new Dictionary<int, int>();
              
+        }
+
+        /// <summary>
+        /// 方向改变
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void App_OrientationChanged(DisplayInformation sender, object args)
+        {
+            Debug.WriteLine(DisplayInformation.GetForCurrentView().CurrentOrientation);
+            if (DisplayInformation.GetForCurrentView().CurrentOrientation == DisplayOrientations.LandscapeFlipped)
+            {
+                //横向模式
+                UIHelper.HideStatusBar();
+            }
+            else
+            {
+                UIHelper.ShowStatusBar();
+            }
         }
 
         #region 九幽的数据统计

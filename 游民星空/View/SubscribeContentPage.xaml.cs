@@ -93,7 +93,7 @@ namespace 游民星空.View
                         }
                     }
 
-                    titleBarGrid.Opacity = (scrollViewer.VerticalOffset / 180 > 1) ? 1 : scrollViewer.VerticalOffset / 180;
+                    titleBarGrid.Opacity = (scrollViewer.VerticalOffset / 170 > 1) ? 1 : scrollViewer.VerticalOffset / 170;
 
                     if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
                     {
