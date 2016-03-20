@@ -34,6 +34,8 @@ namespace 游民星空
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             this.Resuming += OnResuming;
+
+           
 //#if DEBUG
 //            licenseInformation = CurrentAppSimulator.LicenseInformation;
 //#else

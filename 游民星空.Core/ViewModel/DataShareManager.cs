@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,11 +52,11 @@ namespace 游民星空.Core.ViewModel
         }
 
 
-        private List<string> favoriteList;
+        private List<Essay> favoriteList;
         /// <summary>
-        /// 收藏列表
+        /// 收藏文章列表
         /// </summary>
-        public List<string> FavoriteList
+        public List<Essay> FavoriteList
         {
             get
             {
@@ -82,6 +83,10 @@ namespace 游民星空.Core.ViewModel
 
         private const string SettingKey_IsFirstLaunch = "IsFirstLaunch";
         private const string SettingKey_IsNewVersion = "IsNewVersion";
+        private const string SettingKey_BigFont = "BIG_FONT";
+        private const string SettingKey_NoImageMode = "NO_IMAGES_MODE";
+        private const string RoamingSettingKey_AppTheme = "APP_THEME";
+        private const string SettingKey_SubscribeList = "SUBSCRIBE_LIST";
 
         /// <summary>
         /// 是否第一次启动
@@ -122,6 +127,7 @@ namespace 游民星空.Core.ViewModel
                 settings.Values[SettingKey_IsNewVersion] = value;
             }
         }
+
         private static DataShareManager current;
         public static DataShareManager Current
         {
@@ -140,45 +146,53 @@ namespace 游民星空.Core.ViewModel
             LoadData();
         }
 
-        private void LoadData()
+
+        private async void LoadData()
         {
             var localSettings = ApplicationData.Current.LocalSettings;
             var roamingSettings = ApplicationData.Current.RoamingSettings;
-            if(roamingSettings.Values.ContainsKey("APP_THEME"))
+            if(roamingSettings.Values.ContainsKey(RoamingSettingKey_AppTheme))
             {
-                appTheme = int.Parse(roamingSettings.Values["APP_THEME"].ToString()) == 0 ? ElementTheme.Light : ElementTheme.Dark;
+                appTheme = int.Parse(roamingSettings.Values[RoamingSettingKey_AppTheme].ToString()) == 0 ? ElementTheme.Light : ElementTheme.Dark;
             }
             else
             {
                 appTheme = ElementTheme.Light;
             }
 
-            if (roamingSettings.Values.ContainsKey("BIG_FONT"))
+            if (roamingSettings.Values.ContainsKey(SettingKey_BigFont))
             {
-                isBigFont = bool.Parse(roamingSettings.Values["BIG_FONT"].ToString());
+                isBigFont = bool.Parse(roamingSettings.Values[SettingKey_BigFont].ToString());
             }
             else
             {
                 isBigFont = false;
             }
 
-            if (roamingSettings.Values.ContainsKey("NO_IMAGES_MODE"))
+            if (roamingSettings.Values.ContainsKey(SettingKey_NoImageMode))
             {
-                isNoImage = bool.Parse(roamingSettings.Values["NO_IMAGES_MODE"].ToString());
+                isNoImage = bool.Parse(roamingSettings.Values[SettingKey_NoImageMode].ToString());
             }
             else
             {
                 isNoImage = false;
             }
 
-            if (localSettings.Values.ContainsKey("SUBSCRIBE_LIST"))
+            if (localSettings.Values.ContainsKey(SettingKey_SubscribeList))
             {
-                subscribeList = Functions.Deserlialize <List<Subscribe>>(localSettings.Values["SUBSCRIBE_LIST"].ToString());
+                subscribeList = Functions.Deserlialize <List<Subscribe>>(localSettings.Values[SettingKey_SubscribeList].ToString());
             }
             else
             {
                 subscribeList = new List<Subscribe>();
             }
+
+            //加载收藏列表
+            if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(ApplicationData.Current.LocalFolder.Path + FavoriteList_FileName))
+            {
+                favoriteList = await FileHelper.Current.ReadObjectAsync<List<Essay>>(FavoriteList_FileName, FavoriteList_Folder);
+            }
+         
         }
 
         private void OnShareDataChanged()
@@ -228,7 +242,21 @@ namespace 游民星空.Core.ViewModel
                 subscribeList.Remove(subscribe);
             }
             var localSettings = ApplicationData.Current.LocalSettings;
-            localSettings.Values["SUBSCRIBE_LIST"] = Functions.JsonDataSerializer<List<Subscribe>>(subscribeList);
+            localSettings.Values[SettingKey_SubscribeList] = Functions.JsonDataSerializer<List<Subscribe>>(subscribeList);
+            OnShareDataChanged();
+        }
+        /// <summary>
+        /// 收藏文件夹名
+        /// </summary>
+        private const string FavoriteList_Folder = "favorite_list";
+        /// <summary>
+        /// 存储收藏列表的文件名
+        /// </summary>
+        private const string FavoriteList_FileName = "game_list.json";
+
+        public async void UpdateFavoriteEssayList(List<Game> gameList)
+        {
+            await FileHelper.Current.WriteObjectAsync<List<Game>>(gameList, FavoriteList_FileName, FavoriteList_Folder);
             OnShareDataChanged();
         }
 

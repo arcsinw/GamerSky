@@ -62,7 +62,9 @@ namespace 游民星空.Helper
             applicationView.ShowStandardSystemOverlays();
             //应用标题栏
             ApplicationViewTitleBar titleBar = applicationView.TitleBar;
-            titleBar.BackgroundColor = App.Current.Resources["ThemeColorBrush"] as Color?;
+            titleBar.BackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
+            titleBar.ForegroundColor = Colors.White;
+            titleBar.ButtonBackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
            
         }

@@ -24,6 +24,11 @@ namespace 游民星空.Core.ViewModel
         /// </summary>
         public ObservableCollection<AlphaKeyGroup<Strategy>> AllStrategys { get; set; }
 
+        /// <summary>
+        /// 游戏库中游戏列表
+        /// </summary>
+        public ObservableCollection<Game> Games { get; set; }
+
         private ApiService apiService;
 
         private bool isActive;
@@ -47,6 +52,8 @@ namespace 游民星空.Core.ViewModel
             FocusStrategys = new ObservableCollection<Strategy>();
 
             AllStrategys = new ObservableCollection<AlphaKeyGroup<Strategy>>();
+
+            Games = new ObservableCollection<Game>();
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
@@ -113,6 +120,24 @@ namespace 游民星空.Core.ViewModel
         }
 
         /// <summary>
+        /// 加载游戏库中游戏列表
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoadGameList(int pageIndex)
+        {
+            IsActive = true;
+            var gameList = await apiService.GetGameList(pageIndex);
+            if(gameList!= null)
+            {
+                foreach (var item in gameList)
+                {
+                    Games.Add(item);
+                }
+            }
+            IsActive = false;
+        }
+
+        /// <summary>
         /// 刷新关注攻略
         /// </summary>
         public async Task RefreshFocusStrategy()
@@ -131,6 +156,17 @@ namespace 游民星空.Core.ViewModel
             IsActive = true;
             AllStrategys.Clear();
             await LoadAllStrategys();
+            IsActive = false;
+        }
+
+        /// <summary>
+        /// 刷新游戏库游戏列表
+        /// </summary>
+        public async Task RefreshGameList()
+        {
+            IsActive = true;
+            Games.Clear();
+            await LoadGameList(1);
             IsActive = false;
         }
 

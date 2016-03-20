@@ -132,9 +132,22 @@
         
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="480"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <!--<Setter Property="splitView.DisplayMode" Value="InLine"/>-->
+                        <!--<Setter Property="splitView.IsSwipeablePaneOpen" Value="True" />-->
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <!--<RelativePanel>-->
         <controls:SwipeableSplitView x:Name="splitView" Background="{ThemeResource PageBackground}"
-            DisplayMode="Overlay" OpenPaneLength="240">
+            DisplayMode="Overlay" OpenPaneLength="240" IsSwipeablePaneOpen="True">
             <SplitView.Pane>
                 <ListView ScrollViewer.VerticalScrollMode="Disabled" 
                           GotFocus="{x:Bind ViewModel.GetCacheSize}" 
@@ -317,17 +330,6 @@
         </controls:SwipeableSplitView>
         <!--<Frame RelativePanel.AlignRightWith="splitView" Background="Red" />
         </RelativePanel>-->
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Wide">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="720"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
+        
     </Grid>
 </Page>

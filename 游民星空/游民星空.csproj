@@ -115,6 +115,7 @@
     <Compile Include="Converter\CountToVisibilityConverter.cs" />
     <Compile Include="Converter\IndexToColorConverter.cs" />
     <Compile Include="Helper\AdaptiveGridView.cs" />
+    <Compile Include="Helper\DeviceTypeTrigger.cs" />
     <Compile Include="Helper\EssayListViewItemTemplateSelector.cs" />
     <Compile Include="Helper\PageBase.cs" />
     <Compile Include="Helper\StringWrapPanel.cs" />

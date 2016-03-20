@@ -27,6 +27,14 @@ namespace 游民星空.View
             this.InitializeComponent();
         }
 
-       
+        public void Back()
+        {
+            var frame = Window.Current.Content as Frame;
+            if (frame == null) return;
+            if (frame.CanGoBack)
+            {
+                (Window.Current.Content as Frame)?.GoBack();
+            }
+        }
     }
 }

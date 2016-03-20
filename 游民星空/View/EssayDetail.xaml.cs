@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
@@ -64,7 +65,7 @@ namespace 游民星空.View
         /// <param name="args"></param>
         private void WebView_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
         {
-            args.Handled = true;
+            //args.Handled = true;
             if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
             {
                
@@ -93,6 +94,7 @@ namespace 游民星空.View
             progress.IsActive = false;
             JYHelper.TraceRead();
         }
+ 
         Essay essayResult;
         private async void Edge(object sender, RoutedEventArgs e)
         {

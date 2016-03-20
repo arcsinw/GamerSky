@@ -36,7 +36,7 @@ namespace 游民星空.Core.Helper
         public FileHelper()
         {
             localFolder = ApplicationData.Current.LocalFolder;
-            
+            Initial();
         }
 
         private async void Initial()
@@ -45,11 +45,20 @@ namespace 游民星空.Core.Helper
             await localFolder.CreateFolderAsync("data_cache", CreationCollisionOption.OpenIfExists);
         }
 
-        public async Task WriteObjectAsync<T>(T obj,string filename)
+        
+         
+        /// <summary>
+        /// 读缓存
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public async Task WriteObjectAsync<T>(T obj,string filename,string folderName= "data_cache")
         {
             try
             {
-                var folder = await localFolder.CreateFolderAsync("data_cache", CreationCollisionOption.OpenIfExists);
+                var folder = await localFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
                 using (var data = await folder.OpenStreamForWriteAsync(filename, CreationCollisionOption.ReplaceExisting))
                 {
                     DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
@@ -62,11 +71,17 @@ namespace 游民星空.Core.Helper
             }
         }
 
-        public async Task<T> ReadObjectAsync<T>(string filename) where T :class
+        /// <summary>
+        /// 写缓存
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public async Task<T> ReadObjectAsync<T>(string filename,string folderName= "data_cache") where T :class
         {
             try
             {
-                var folder = await localFolder.CreateFolderAsync("data_cache", CreationCollisionOption.OpenIfExists);
+                var folder = await localFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
                 using (var data = await folder.OpenStreamForReadAsync(filename))
                 {
                     DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
@@ -79,6 +94,7 @@ namespace 游民星空.Core.Helper
                 return null;
             }
         }
+
 
         /// <summary>
         /// 保存图片

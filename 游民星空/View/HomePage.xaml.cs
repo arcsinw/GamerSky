@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -72,7 +73,7 @@ namespace 游民星空.View
         }
          
         private void RadioButton_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             var radioButton = sender as RadioButton;
             if (radioButton != null)
             {

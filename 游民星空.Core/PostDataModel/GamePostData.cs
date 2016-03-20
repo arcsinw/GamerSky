@@ -16,7 +16,7 @@ namespace 游民星空.Core.PostDataModel
     public class GamePostDataRequest
     {
         public string date;
-        public string elementsCountPage = "10";
+        public string elementsCountPerPage = "10";
         public string nodeIds = "hot";
         public int pageIndex;
         public string type;

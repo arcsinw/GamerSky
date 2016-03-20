@@ -37,7 +37,7 @@ namespace 游民星空.View
             pageIndexDic = new Dictionary<int, int>();
         }
 
-     
+        private int pageIndex;  //当前页码
 
         #region 九幽的数据统计
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -59,23 +59,32 @@ namespace 游民星空.View
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             progress.IsActive = true;
-            if (pivot.SelectedIndex == 0)
+            switch(pivot.SelectedIndex)
             {
-                if (!pageIndexDic.ContainsKey(0))
-                {
-                    await ViewModel.LoadFocusStrategys();
-                    pageIndexDic.Add(0, 1);
-                }
-
+                case 0:
+                    if (!pageIndexDic.ContainsKey(0))
+                    {
+                        await ViewModel.LoadFocusStrategys();
+                        pageIndexDic.Add(0, 1);
+                    }
+                    
+                    break;
+                case 1:
+                    if (!pageIndexDic.ContainsKey(1))
+                    {
+                        await ViewModel.LoadAllStrategys();
+                        pageIndexDic.Add(1, 1);
+                    }
+                    break;
+                case 2:
+                    if (!pageIndexDic.ContainsKey(2))
+                    {
+                        pageIndexDic.Add(2, 1);
+                        await ViewModel.LoadGameList(1);
+                    }
+                    break;
             }
-            else
-            {
-                if (!pageIndexDic.ContainsKey(1))
-                {
-                    await ViewModel.LoadAllStrategys();
-                    pageIndexDic.Add(1, 1);
-                }
-            }
+            pageIndex = pageIndexDic[pivot.SelectedIndex] +1;
             progress.IsActive = false;
         }
 
