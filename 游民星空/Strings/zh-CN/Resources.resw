@@ -42,4 +42,37 @@
   <data name="AppName" xml:space="preserve">
     <value>游民星空.X</value>
   </data>
+  <data name="FeedBack" xml:space="preserve">
+    <value>意见反馈</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>更多设置</value>
+  </data>
+  <data name="Collection" xml:space="preserve">
+    <value>收藏</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="ClearCache" xml:space="preserve">
+    <value>清空缓存</value>
+  </data>
+  <data name="Night Mode" xml:space="preserve">
+    <value>夜间模式</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>立即登录</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>新闻</value>
+  </data>
+  <data name="Game" xml:space="preserve">
+    <value>游戏库</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>订阅</value>
+  </data>
+  <data name="PlaceHolderText" xml:space="preserve">
+    <value>请输入搜索内容</value>
+  </data>
 </root>

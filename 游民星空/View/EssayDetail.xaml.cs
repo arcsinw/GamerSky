@@ -144,12 +144,12 @@ namespace 游民星空.View
                 myScript.src = ""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gesture.js"";
                 document.body.appendChild(myScript);
                 window.external.notify(myScript.src+"""");";
-            //await sender.InvokeScriptAsync("eval", new[] { js });
+            await sender.InvokeScriptAsync("eval", new[] { js });
 
             //为body添加手势监听
              js = @"var target = document.getElementsByTagName(""body"")[0];
             prepareTarget(target, eventListener);";
-            //await sender.InvokeScriptAsync("eval", new[] { js });
+            await sender.InvokeScriptAsync("eval", new[] { js });
 
             //iframe自适应
             js = @"var iframeTags = document.getElementsByTagName(""iframe"");

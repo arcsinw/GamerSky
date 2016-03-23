@@ -89,7 +89,9 @@ namespace 游民星空.View
         private void App_OrientationChanged(DisplayInformation sender, object args)
         {
             Debug.WriteLine(DisplayInformation.GetForCurrentView().CurrentOrientation);
-            if (DisplayInformation.GetForCurrentView().CurrentOrientation == DisplayOrientations.LandscapeFlipped)
+            var orientation = DisplayInformation.GetForCurrentView().CurrentOrientation;
+            if (orientation == DisplayOrientations.LandscapeFlipped || 
+                orientation == DisplayOrientations.Landscape) 
             {
                 //横向模式
                 UIHelper.HideStatusBar();

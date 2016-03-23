@@ -229,6 +229,10 @@ namespace 游民星空.Core.ViewModel
             OnShareDataChanged();
         }
 
+        /// <summary>
+        /// 更新订阅列表
+        /// </summary>
+        /// <param name="subscribe"></param>
         public void UpdateSubscribe(Subscribe subscribe)
         {
             bool add = !subscribeList.Any(x => x.sourceId == subscribe.sourceId);
@@ -253,10 +257,22 @@ namespace 游民星空.Core.ViewModel
         /// 存储收藏列表的文件名
         /// </summary>
         private const string FavoriteList_FileName = "game_list.json";
-
-        public async void UpdateFavoriteEssayList(List<Game> gameList)
+        /// <summary>
+        /// 更新收藏列表
+        /// </summary>
+        /// <param name="gameList"></param>
+        public async void UpdateFavoriteEssayList(Essay essay)
         {
-            await FileHelper.Current.WriteObjectAsync<List<Game>>(gameList, FavoriteList_FileName, FavoriteList_Folder);
+            bool add = favoriteList.Contains(essay);
+            if(add)
+            {
+
+            }
+            else
+            {
+
+            }
+            await FileHelper.Current.WriteObjectAsync<List<Essay>>(favoriteList, FavoriteList_FileName, FavoriteList_Folder);
             OnShareDataChanged();
         }
 

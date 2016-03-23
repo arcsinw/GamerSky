@@ -42,4 +42,37 @@
   <data name="AppName" xml:space="preserve">
     <value>GamerSky.X</value>
   </data>
+  <data name="FeedBack" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Collection" xml:space="preserve">
+    <value>Collection</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ClearCache" xml:space="preserve">
+    <value>Clear Cache</value>
+  </data>
+  <data name="Night Mode" xml:space="preserve">
+    <value>Night Mode</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="Game" xml:space="preserve">
+    <value>Game Lib</value>
+  </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>Subscribe</value>
+  </data>
+  <data name="PlaceHolderText" xml:space="preserve">
+    <value>Please input search content</value>
+  </data>
 </root>

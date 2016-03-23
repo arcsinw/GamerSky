@@ -64,7 +64,7 @@ namespace 游民星空.View
             if (DataShareManager.Current.IsNewVersion)
             {
                 UIHelper.ShowMessage(
-                    "1.试用.net native\n2.UI改进\n3.免费啦！\n4.游民官方的安卓版更新了，可以加新功能了",
+                    "",
                     "新版本更新内容");
                 //DataShareManager.Current.IsNewVersion = Functions.GetVersion() ;
             }
