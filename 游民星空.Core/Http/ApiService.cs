@@ -597,5 +597,48 @@ namespace 游民星空.Core.Http
             }
             return gameList;
         }
+
+        /// <summary>
+        /// 获取游戏详情
+        /// </summary>
+        /// <param name="contentId"></param>
+        /// <returns></returns>
+        public async Task<GameDetail> GetGameDetail(string contentId)
+        {
+            GameDetailPostData postData = new GameDetailPostData();
+            postData.request = new GameDetailRequest() { contentId = contentId };
+            var gameDetailResult = await PostJson<GameDetailPostData, GameDetailResult>(ServiceUri.TwoCorrelation,postData);
+            return gameDetailResult.result;
+        }
+
+        /// <summary>
+        /// 获取GameDetail页面中 攻略或新闻
+        /// </summary>
+        /// <returns></returns>
+        public async Task<GameDetailResult> GetGameDetailItem(string contentId, int pageIndex,string contentType)
+        {
+            GameDetailEssayPostData postData = new GameDetailEssayPostData();
+            postData.request = new GameDetailEssayRequest() { contentId = contentId, contentType = contentType, elementsCountPerPage = 10, pageIndex = pageIndex };
+            var gameDetailResult = await PostJson<GameDetailEssayPostData, GameDetailEssayResult>(ServiceUri.TwoCorrelation, postData);
+            return gameDetailResult.result;
+        }
+
+        /// <summary>
+        /// 获取GameDetail页面中 攻略
+        /// </summary>
+        /// <returns></returns>
+        public async Task<GameDetailResult> GetGameStrategy(string contentId,int pageIndex)
+        {
+            return await GetGameDetailItem(contentId, pageIndex, "strategy");
+        }
+
+        /// <summary>
+        /// 获取GameDetail页面中 新闻
+        /// </summary>
+        /// <returns></returns>
+        public async Task<GameDetailResult> GetGameNews(string contentId,int pageIndex)
+        {
+            return await GetGameDetailItem(contentId, pageIndex, "news");
+        }
     }
 }

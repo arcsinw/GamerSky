@@ -27,7 +27,8 @@ namespace 游民星空.Core.Http
         public const string TwoArticle = "http://appapi2.gamersky.com/v2/TwoArticle";
 
         /// <summary>
-        /// 相关阅读
+        /// 相关阅读 
+        /// 游戏详情页 攻略|新闻
         /// </summary>
         public const string TwoCorrelation = "http://appapi2.gamersky.com/v2/TwoCorrelation";
 
@@ -97,8 +98,13 @@ namespace 游民星空.Core.Http
         public const string SubscribeTopic = "http://appapi2.gamersky.com/v2/AllChannelList";
 
         /// <summary>
-        /// 游戏库
+        /// 游戏库游戏列表
         /// </summary>
         public const string GameList = "http://appapi2.gamersky.com/v2/TwoGameList";
+
+        /// <summary>
+        /// 游戏detail
+        /// </summary>
+        public const string GameDetail = "http://appapi2.gamersky.com/v2/TwoGameDetails";
     }
 }

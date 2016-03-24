@@ -145,8 +145,11 @@
     <Compile Include="View\FindPasswordPage.xaml.cs">
       <DependentUpon>FindPasswordPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\GameSale.xaml.cs">
-      <DependentUpon>GameSale.xaml</DependentUpon>
+    <Compile Include="View\GameDetailPage.xaml.cs">
+      <DependentUpon>GameDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GameSalePage.xaml.cs">
+      <DependentUpon>GameSalePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GameStrategys.xaml.cs">
       <DependentUpon>GameStrategys.xaml</DependentUpon>
@@ -309,7 +312,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\GameSale.xaml">
+    <Page Include="View\GameDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GameSalePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
