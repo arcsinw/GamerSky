@@ -19,6 +19,8 @@ namespace 游民星空.Core.Helper
         /// </summary>
         public static string Remove_Ad = "GamerSky.x_RemoveAd";
 
+        public static string Donate = "GamerSky.x_Donate";
+
 #if DEBUG
         public static LicenseInformation licenseInformation = CurrentAppSimulator.LicenseInformation;
 #else

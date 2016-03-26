@@ -14,6 +14,7 @@ namespace 游民星空.Core.ViewModel
 {
     public class StrategyPageViewModel:ViewModelBase
     {
+        #region Properties
         /// <summary>
         /// 关注攻略
         /// </summary>
@@ -45,27 +46,6 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
-        public StrategyPageViewModel()
-        {
-            apiService = new ApiService();
-
-            FocusStrategys = new ObservableCollection<Strategy>();
-
-            AllStrategys = new ObservableCollection<AlphaKeyGroup<Strategy>>();
-
-            Games = new ObservableCollection<Game>();
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
-          
-        }
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
-
         private ElementTheme appTheme;
         public ElementTheme AppTheme
         {
@@ -79,6 +59,33 @@ namespace 游民星空.Core.ViewModel
                 OnPropertyChanged();
             }
         }
+
+      
+        #endregion
+
+        public StrategyPageViewModel()
+        {
+            apiService = new ApiService();
+
+            FocusStrategys = new ObservableCollection<Strategy>();
+
+            AllStrategys = new ObservableCollection<AlphaKeyGroup<Strategy>>();
+
+            Games = new ObservableCollection<Game>();
+
+           
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+
+          
+        }
+
+        private void Current_ShareDataChanged()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+        }
+
+        
 
         /// <summary>
         /// 加载关注攻略

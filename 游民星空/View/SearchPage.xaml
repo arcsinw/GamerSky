@@ -316,7 +316,7 @@
         <Pivot Grid.Row="1" Background="{ThemeResource PageBackground}" 
                x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
                Style="{StaticResource EssayPivotStyle}">
-            <PivotItem Header="新闻" >
+            <PivotItem Header="新闻" Margin="0">
                 <Grid>
                     <ListView ItemsSource="{Binding News}"
                             x:Name="newsListView"
@@ -341,7 +341,7 @@
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                 <Setter Property="Margin" Value="0"/>
-                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Padding" Value="12,4"/>
                                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                                 <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
                                 <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
@@ -351,7 +351,7 @@
 
                     <GridView ItemsSource="{Binding HotNews}" SelectionMode="None" 
                           IsItemClickEnabled="True" Visibility="{Binding NewsGridViewVisibility}"
-                          ItemClick="{x:Bind ItemClick}" >
+                          ItemClick="{x:Bind ItemClick}" Margin="12,0">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <hp:StringWrapPanel/>
@@ -380,7 +380,7 @@
    
                 </Grid>
             </PivotItem>
-            <PivotItem Header="攻略">
+            <PivotItem Header="攻略" Margin="0">
                 <Grid>
                     <ListView ItemsSource="{Binding Strategys}"
                               x:Name="strategysListView"
@@ -403,7 +403,7 @@
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                     <Setter Property="Margin" Value="0"/>
-                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Padding" Value="12,0"/>
                                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
                                 <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
                                 <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
@@ -413,7 +413,7 @@
                     
                     <GridView x:Name="strategyGridView" ItemsSource="{Binding HotStrategys}" 
                           Visibility="{Binding StrategysGridViewVisibility}"
-                          SelectionMode="None"
+                          SelectionMode="None" Margin="12,0"
                           IsItemClickEnabled="True"
                           ItemClick="{x:Bind ItemClick}">
                         <GridView.ItemsPanel>
@@ -438,12 +438,12 @@
                     </GridView>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="订阅">
+            <PivotItem Header="订阅" Margin="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                     <ListView x:Name="subscribeListView" Loaded="subscribeListView_Loaded" 
                           ItemsSource="{Binding HotSubscribes}" 
                           IsItemClickEnabled="True" ItemClick="subscribeListView_ItemClick"
-                          SelectionMode="None" Padding="0" Margin="0"
+                          SelectionMode="None" 
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
                     </ListView>
@@ -455,7 +455,7 @@
         <ProgressRing IsActive="{Binding IsActive}" Grid.Row="1" Style="{ThemeResource ProgressRingStyle}"/>
 
         <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom" Grid.Row="0" Grid.RowSpan="2"
-               Height="48" x:Name="topPop" Width="48" Margin="16,48" >
+               Height="48" x:Name="topPop" Width="48" Margin="16,32" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
                     <AddDeleteThemeTransition />

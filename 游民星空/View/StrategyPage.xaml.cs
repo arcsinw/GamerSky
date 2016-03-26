@@ -161,6 +161,20 @@ namespace 游民星空.View
             }
         }
 
+        /// <summary>
+        /// 游戏库点击
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void gameLibGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var game = e.ClickedItem as Game;
+            if (game != null)
+            {
+                (Window.Current.Content as Frame)?.Navigate(typeof(GameDetailPage), game.contentId);
+            }
+        }
+
         //private void GridView_SizeChanged(object sender, SizeChangedEventArgs e)
         //{
         //    var panel = (ItemsWrapGrid)focusGridView.ItemsPanelRoot;

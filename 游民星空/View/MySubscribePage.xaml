@@ -59,31 +59,31 @@
 
         <Pivot x:Name="pivot" Background="{ThemeResource PageBackground}"  
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
-            <PivotItem Header="热门"  >
+            <PivotItem Header="热门"  Margin="0">
                 <pr:PullToRefreshBox  RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView x:Name="hotSubscribeListView" ItemsSource="{Binding HotSubscribes}" 
                           IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick"
-                          SelectionMode="None" Padding="0" Margin="0"
+                          SelectionMode="None"  
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
                 </ListView>
                 </pr:PullToRefreshBox>
             </PivotItem>
-            <PivotItem Header="全部" >
+            <PivotItem Header="全部" Margin="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                     <ListView x:Name="allSubscribeListView" ItemsSource="{Binding AllSubscribes}" 
                           IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick"
-                          SelectionMode="None" Padding="0" Margin="0"
+                          SelectionMode="None" 
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
                     </ListView>
                 </pr:PullToRefreshBox>
             </PivotItem>
-            <PivotItem Header="我的" >
+            <PivotItem Header="我的" Margin="0">
                 <pr:PullToRefreshBox  RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                     <ListView x:Name="mySubscribeListView" ItemsSource="{Binding MySubscribes}" 
                           IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick"
-                          SelectionMode="None" Padding="0" Margin="0"
+                          SelectionMode="None"  
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
                     </ListView>

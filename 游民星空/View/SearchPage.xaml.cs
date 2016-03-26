@@ -167,7 +167,7 @@ namespace 游民星空.View
         {
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
-
+            var height = DeviceInformationHelper.GetScreenWidth();
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
         

@@ -607,7 +607,7 @@ namespace 游民星空.Core.Http
         {
             GameDetailPostData postData = new GameDetailPostData();
             postData.request = new GameDetailRequest() { contentId = contentId };
-            var gameDetailResult = await PostJson<GameDetailPostData, GameDetailResult>(ServiceUri.TwoCorrelation,postData);
+            var gameDetailResult = await PostJson<GameDetailPostData, GameDetailResult>(ServiceUri.GameDetail,postData);
             return gameDetailResult.result;
         }
 
@@ -615,7 +615,7 @@ namespace 游民星空.Core.Http
         /// 获取GameDetail页面中 攻略或新闻
         /// </summary>
         /// <returns></returns>
-        public async Task<GameDetailResult> GetGameDetailItem(string contentId, int pageIndex,string contentType)
+        public async Task<List<GameDetailEssay>> GetGameDetailItem(string contentId, int pageIndex,string contentType)
         {
             GameDetailEssayPostData postData = new GameDetailEssayPostData();
             postData.request = new GameDetailEssayRequest() { contentId = contentId, contentType = contentType, elementsCountPerPage = 10, pageIndex = pageIndex };
@@ -627,7 +627,7 @@ namespace 游民星空.Core.Http
         /// 获取GameDetail页面中 攻略
         /// </summary>
         /// <returns></returns>
-        public async Task<GameDetailResult> GetGameStrategy(string contentId,int pageIndex)
+        public async Task<List<GameDetailEssay>> GetGameDetailStrategys(string contentId,int pageIndex)
         {
             return await GetGameDetailItem(contentId, pageIndex, "strategy");
         }
@@ -636,7 +636,7 @@ namespace 游民星空.Core.Http
         /// 获取GameDetail页面中 新闻
         /// </summary>
         /// <returns></returns>
-        public async Task<GameDetailResult> GetGameNews(string contentId,int pageIndex)
+        public async Task<List<GameDetailEssay>> GetGameDetailNews(string contentId,int pageIndex)
         {
             return await GetGameDetailItem(contentId, pageIndex, "news");
         }

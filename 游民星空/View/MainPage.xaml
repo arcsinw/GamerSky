@@ -262,21 +262,35 @@
         
         <ProgressRing x:Name="progressRing"  Style="{ThemeResource ProgressRingStyle}"/>
          
+        <!--#region 跳转顶部-->
+                <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom"
+                       Height="48" x:Name="topPop" Width="48" Margin="16,52" >
+                    <Popup.ChildTransitions>
+                        <TransitionCollection>
+                            <!--<EdgeUIThemeTransition Edge="Bottom"/>-->
+                            <AddDeleteThemeTransition />
+                        </TransitionCollection>
+                    </Popup.ChildTransitions>
+                    <Popup.Child>
+                        <Button Click="Button_Click" Style="{ThemeResource ScrollToTopButtonStyle}">
+                            <SymbolIcon Symbol="Up" Foreground="White" />
+                        </Button>
+                    </Popup.Child>
+                </Popup>
+                <!--#endregion-->
 
-        <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom"
-               Height="48" x:Name="topPop" Width="48" Margin="16,52" >
-            <Popup.ChildTransitions>
-                <TransitionCollection>
-                    <!--<EdgeUIThemeTransition Edge="Bottom"/>-->
-                    <AddDeleteThemeTransition />
-                </TransitionCollection>
-            </Popup.ChildTransitions>
-            <Popup.Child>
-                <Button Click="Button_Click" Style="{ThemeResource ScrollToTopButtonStyle}">
-                    <SymbolIcon Symbol="Up" Foreground="White" />
-                </Button>
-            </Popup.Child>
+        <!--#region 退出提示-->
+        <Popup HorizontalOffset="130" VerticalOffset="280" IsOpen="False" IsLightDismissEnabled="False" Name="popTips">
+            <Border BorderThickness="1" CornerRadius="2" Padding="7">
+                <Border.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.8"/>
+                </Border.Background>
+                <TextBlock Foreground="White">
+                    再按一次退出
+                </TextBlock>
+            </Border>
         </Popup>
+        <!--#endregion-->
         
         <!--<Popup Width="Auto" 
                IsLightDismissEnabled="True" x:Name="popup">

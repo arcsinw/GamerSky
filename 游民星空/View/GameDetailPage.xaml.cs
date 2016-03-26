@@ -25,6 +25,49 @@ namespace 游民星空.View
         public GameDetailPage()
         {
             this.InitializeComponent();
+            this.Loaded += GameDetailPage_Loaded;
+        }
+
+        public void Back()
+        {
+            var frame = (Window.Current.Content as Frame);
+            if (frame == null) return;
+            if(frame.CanGoBack)
+            {
+                frame.GoBack();
+            }
+        }
+
+        private void GameDetailPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            viewModel.LoadGameDetail();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var para = e.Parameter as string;
+            if (para != null)
+            {
+                viewModel.contentId = para;
+            }
+        }
+
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch(pivot.SelectedIndex)
+            {
+                case 0:
+                    viewModel.LoadGameNews(1);
+                    break;
+                case 1:
+                    viewModel.LoadGameStrategys(1);
+                    break;
+            }
+        }
+
+        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }

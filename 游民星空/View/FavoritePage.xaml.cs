@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
+using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
 using 游民星空.Helper;
 
@@ -31,8 +33,30 @@ namespace 游民星空.View
         {
             this.InitializeComponent();
 
+            FavoriteEssays = new ObservableCollection<Essay>();
+
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+
+            this.Loaded += FavoritePage_Loaded;
+        }
+
+        private void FavoritePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+            this.Loaded -= FavoritePage_Loaded;
+        }
+
+        public ObservableCollection<Essay> FavoriteEssays { get; set; }
+
+        public void LoadData()
+        {
+            var essays = DataShareManager.Current.FavoriteList;
+            if (essays == null) return;
+            foreach (var item in essays)
+            {
+                FavoriteEssays.Add(item);
+            }
         }
 
         #region 九幽的数据统计

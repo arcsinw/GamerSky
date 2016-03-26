@@ -153,9 +153,9 @@ namespace 游民星空.View
         {
             get
             {
-                if(appTheme.Equals(ElementTheme.Dark))
+                if (appTheme.Equals(ElementTheme.Dark))
                 {
-                    UIHelper.SetStatusBarColor(Colors.Gray);
+                    UIHelper.ShowStatusBar();
                 }
                 else
                 {

@@ -265,7 +265,7 @@
         </Button>
         <!--#endregion-->
         
-        <!--      hp:ExtensionHelper.HtmlString="{Binding HtmlString}"-->
+        <!--hp:ExtensionHelper.HtmlString="{Binding HtmlString}"-->
         <!--Source="ms-appx-web:///Assets/HTMLPage1.html"  "-->
  
         <!--#region  显示图片-->
@@ -281,8 +281,15 @@
             </FlipView.ItemTemplate>
         </FlipView>
         <!--#endregion-->
+
+        <Grid>
+            <TextBox/>
+            <Button/>
+            <Button/>
+        </Grid>
         
     </Grid>
+    
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal" Visibility="Collapsed">
             <CommandBar.PrimaryCommands>

@@ -17,7 +17,8 @@ namespace 游民星空.Helper
     public static class UIHelper
     {
         /// <summary>
-        /// 用于Mobile 显示StatusBar
+        /// Mobile 显示StatusBar
+        /// PC 显示标题栏
         /// </summary>
         public static async void ShowStatusBar()
         {
@@ -28,6 +29,10 @@ namespace 游民星空.Helper
                 statusBar.BackgroundOpacity = 1;
                 statusBar.BackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
                 await statusBar.ShowAsync();
+            }
+            else
+            {
+                ShowView();
             }
         }
 
@@ -47,8 +52,13 @@ namespace 游民星空.Helper
                 var statusBar = StatusBar.GetForCurrentView();
                 statusBar.ForegroundColor = Colors.White;
                 statusBar.BackgroundOpacity = 1;
-                statusBar.BackgroundColor = color;
+                //statusBar.BackgroundColor = color;
+                statusBar.BackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
                 await statusBar.ShowAsync();
+            }
+            else
+            {
+                ShowView();
             }
         }
 

@@ -61,8 +61,8 @@
                     </ScrollViewer>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="License">
-                <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
+            <PivotItem Header="License" Margin="0">
+                <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Padding="12,0">
                     <RichTextBlock>
                         <Paragraph TextIndent="20">The MIT License (MIT)</Paragraph>
                         <Paragraph/>

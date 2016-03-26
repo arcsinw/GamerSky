@@ -60,12 +60,21 @@ namespace 游民星空.Core.Helper
         }
 
         /// <summary>
-        /// 获取屏幕宽度
+        /// 获取屏幕高度
         /// </summary>
         /// <returns></returns>
         public static double GetScreenHeight()
         {
             return ApplicationView.GetForCurrentView().VisibleBounds.Height;
+        }
+
+        /// <summary>
+        /// 获取屏幕宽度
+        /// </summary>
+        /// <returns></returns>
+        public static double GetScreenWidth()
+        {
+            return ApplicationView.GetForCurrentView().VisibleBounds.Width;
         }
     }
 }

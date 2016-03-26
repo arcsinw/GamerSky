@@ -16,6 +16,26 @@ namespace 游民星空.Core.ViewModel
     /// </summary>
     public class DataShareManager
     {
+        #region const Settings Keys and files' name
+        private const string SettingKey_IsFirstLaunch = "IS_FIRST_LAUNCH";
+        private const string SettingKey_IsNewVersion = "IS_NEW_VERSION";
+        private const string SettingKey_BigFont = "FONT_SIZE";
+        private const string SettingKey_NoImageMode = "NO_IMAGES_MODE";
+        private const string RoamingSettingKey_AppTheme = "APP_THEME";
+        private const string SettingKey_SubscribeList = "SUBSCRIBE_LIST";
+        private const string SettingKey_IsStatusBarShow = "IS_STATUSBAR_SHOW";
+
+        /// <summary>
+        /// 收藏文件夹名
+        /// </summary>
+        private const string FavoriteList_Folder = "favorite_list";
+        /// <summary>
+        /// 存储收藏列表的文件名
+        /// </summary>
+        private const string FavoriteList_FileName = "game_list.json";
+        #endregion
+
+        #region Properties
         private ElementTheme appTheme;
         /// <summary>
         /// 日/夜间模式
@@ -27,15 +47,15 @@ namespace 游民星空.Core.ViewModel
                 return appTheme;
             }
         }
-        private bool isBigFont;
+        private int fontSize;
         /// <summary>
         /// 是否大字体
         /// </summary>
-        public bool IsBigFont
+        public int FontSize
         {
             get
             {
-                return isBigFont;
+                return fontSize;
             }
         }
 
@@ -77,18 +97,6 @@ namespace 游民星空.Core.ViewModel
         }
 
         /// <summary>
-        /// 本地设置
-        /// </summary>
-        private static ApplicationDataContainer settings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
-        private const string SettingKey_IsFirstLaunch = "IsFirstLaunch";
-        private const string SettingKey_IsNewVersion = "IsNewVersion";
-        private const string SettingKey_BigFont = "BIG_FONT";
-        private const string SettingKey_NoImageMode = "NO_IMAGES_MODE";
-        private const string RoamingSettingKey_AppTheme = "APP_THEME";
-        private const string SettingKey_SubscribeList = "SUBSCRIBE_LIST";
-
-        /// <summary>
         /// 是否第一次启动
         /// </summary>
         public bool IsFirstLaunch
@@ -113,7 +121,7 @@ namespace 游民星空.Core.ViewModel
             {
                 var value = settings.Values[SettingKey_IsNewVersion];
                 string ver = Functions.GetVersion();
-                if (value==null)
+                if (value == null)
                 {
                     settings.Values[SettingKey_IsNewVersion] = ver;
 
@@ -128,6 +136,13 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
+        #endregion
+
+        /// <summary>
+        /// 本地设置
+        /// </summary>
+        private static ApplicationDataContainer settings = Windows.Storage.ApplicationData.Current.LocalSettings;
+         
         private static DataShareManager current;
         public static DataShareManager Current
         {
@@ -146,7 +161,7 @@ namespace 游民星空.Core.ViewModel
             LoadData();
         }
 
-
+        #region Methods
         private async void LoadData()
         {
             var localSettings = ApplicationData.Current.LocalSettings;
@@ -162,11 +177,11 @@ namespace 游民星空.Core.ViewModel
 
             if (roamingSettings.Values.ContainsKey(SettingKey_BigFont))
             {
-                isBigFont = bool.Parse(roamingSettings.Values[SettingKey_BigFont].ToString());
+                fontSize = int.Parse(roamingSettings.Values[SettingKey_BigFont].ToString());
             }
             else
             {
-                isBigFont = false;
+                fontSize = 20;
             }
 
             if (roamingSettings.Values.ContainsKey(SettingKey_NoImageMode))
@@ -214,11 +229,12 @@ namespace 游民星空.Core.ViewModel
             roamingSettings.Values["APP_THEME"] = ( appTheme == ElementTheme.Light ? 0 : 1);
             OnShareDataChanged();
         }
-        public void UpdateBigFont(bool _isBigFont)
+
+        public void UpdateBigFont(int _fontSize)
         {
-            this.isBigFont = _isBigFont;
+            this.fontSize = _fontSize;
             var roamingSettings = Windows.Storage.ApplicationData.Current.RoamingSettings;
-            roamingSettings.Values["BIG_FONT"] = isBigFont;
+            roamingSettings.Values["BIG_FONT"] = fontSize;
             OnShareDataChanged();
         }
         public void UpdateNoImagesMode(bool _isNoImages)
@@ -249,32 +265,28 @@ namespace 游民星空.Core.ViewModel
             localSettings.Values[SettingKey_SubscribeList] = Functions.JsonDataSerializer<List<Subscribe>>(subscribeList);
             OnShareDataChanged();
         }
-        /// <summary>
-        /// 收藏文件夹名
-        /// </summary>
-        private const string FavoriteList_Folder = "favorite_list";
-        /// <summary>
-        /// 存储收藏列表的文件名
-        /// </summary>
-        private const string FavoriteList_FileName = "game_list.json";
+        
         /// <summary>
         /// 更新收藏列表
         /// </summary>
         /// <param name="gameList"></param>
         public async void UpdateFavoriteEssayList(Essay essay)
         {
-            bool add = favoriteList.Contains(essay);
+            bool add = !favoriteList.Contains(essay);
             if(add)
             {
-
+                favoriteList.Add(essay);
             }
             else
             {
-
+                favoriteList.Remove(essay);
             }
+            //更新本地文件
             await FileHelper.Current.WriteObjectAsync<List<Essay>>(favoriteList, FavoriteList_FileName, FavoriteList_Folder);
             OnShareDataChanged();
         }
+
+        #endregion
 
         public delegate void ShareDataChangedEventHandler();
 

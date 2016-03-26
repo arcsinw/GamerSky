@@ -85,6 +85,21 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
+
+        //public bool IsStatusBarShow
+        //{
+        //   get
+        //    {
+
+        //    }
+        //    set
+        //    {
+        //        if(value)
+        //        {
+                     
+        //        }
+        //    }
+        //}
         public SettingsPageViewModel()
         {
             AppTheme = DataShareManager.Current.AppTheme;
