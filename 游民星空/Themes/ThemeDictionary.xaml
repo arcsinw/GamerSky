@@ -1,10 +1,13 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  >
-    <!--<Color x:Key="ThemeColor">#C93D32</Color>-->
-
-    <!--<Color x:Key="ThemeColor">#DA0208</Color>-->
+    xmlns:converter="using:游民星空.Converter"
+    >
+    
+    <!--#region -->
+    <converter:BoolToStyleConverter x:Key="BoolToStyleConverter"/>
+    <!--#endregion-->
+    
     <!--灰色-->
     <Color x:Key="PhoneControlDisabledColor">#66FFFFFF</Color>
     <!--白色-->
@@ -14,10 +17,19 @@
     <Thickness x:Key="PhonePagePadding">12</Thickness>
     <!--平板和PC设备 页面内边距-->
     <Thickness x:Key="TabletPagePadding">24</Thickness>
-
+    <!--PivotHeader-->
     <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="DarkBlue"/>
     <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="Green"/>
 
+    <Style TargetType="Button" BasedOn="{StaticResource RoundButtonStyle}" x:Key="UnFavoriteButtonStyle">
+        <Setter Property="Content" Value="退订"/>
+    </Style>
+
+    <Style TargetType="Button" BasedOn="{StaticResource RoundButtonStyle}" x:Key="FavoriteButtonStyle">
+        <Setter Property="Background" Value="{ThemeResource ThemeColorBrush}"/>
+        <Setter Property="Content" Value="订阅"/>
+    </Style>
+    
     <Style x:Key="EssayPivotStyle" TargetType="Pivot">
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
@@ -701,7 +713,9 @@
                     <Run Text="人订阅"/>
                 </TextBlock>
             </Grid>
-            <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" Click="AddSubscribe"/>
+            <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" 
+                    Style="{Binding Favorite,Converter={StaticResource BoolToStyleConverter}}"
+                    Click="AddSubscribe"/>
         </Grid>
     </DataTemplate>
 

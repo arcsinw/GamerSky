@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
+using 游民星空.Core.Model;
 
 namespace 游民星空.Converter
 {
     /// <summary>
-    /// 新闻头条幻灯片下方小圆点
+    /// 将订阅状态转换为Button的Style
     /// </summary>
-    public class IndexToColorConverter : IValueConverter
+    public class BoolToStyleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (int.Parse(value.ToString()) == int.Parse(parameter.ToString()))
+       
+            bool favorite = (bool)value;
+            if(favorite)  //已收藏
             {
-                return new SolidColorBrush(Windows.UI.Colors.White);
+                return App.Current.Resources["UnFavoriteButtonStyle"] as Style;
             }
             else
             {
-                return App.Current.Resources["ThemeColorBrush"] as SolidColorBrush;
+                return App.Current.Resources["FavoriteButtonStyle"] as Style;
             }
         }
 

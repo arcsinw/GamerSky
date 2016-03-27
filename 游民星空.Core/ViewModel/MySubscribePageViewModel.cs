@@ -52,6 +52,8 @@ namespace 游民星空.Core.ViewModel
             HotSubscribes = new ObservableCollection<Subscribe>();
             MySubscribes = new ObservableCollection<Subscribe>();
 
+            LoadMySubscribes();
+
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
@@ -92,8 +94,13 @@ namespace 游民星空.Core.ViewModel
             {
                 foreach (var item in allSubscribes)
                 {
+                    if(MySubscribes.Contains(item))
+                    {
+                        item.Favorite = true;
+                    }
                     AllSubscribes.Add(item);
                 }
+               
             }
             IsActive = false;
         }
@@ -109,6 +116,10 @@ namespace 游民星空.Core.ViewModel
             {
                 foreach (var item in hotSubscribes)
                 {
+                    if (MySubscribes.Contains(item))
+                    {
+                        item.Favorite = true;
+                    }
                     HotSubscribes.Add(item);
                 }
             }

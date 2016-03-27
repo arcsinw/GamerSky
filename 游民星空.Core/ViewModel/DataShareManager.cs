@@ -255,10 +255,12 @@ namespace 游民星空.Core.ViewModel
             //bool add = subscribeList.Contains(subscribe) ? false : true;
             if (add)
             {
+                subscribe.Favorite = true;
                 subscribeList.Add(subscribe);
             }
             else
             {
+                subscribe.Favorite = false;
                 subscribeList.Remove(subscribe);
             }
             var localSettings = ApplicationData.Current.LocalSettings;

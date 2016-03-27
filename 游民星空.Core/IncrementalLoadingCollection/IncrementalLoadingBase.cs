@@ -46,5 +46,6 @@ namespace 游民星空.Core.IncrementalLoadingCollection
         /// <param name="count"></param>
         /// <returns></returns>
         protected abstract Task<LoadMoreItemsResult> LoadMoreItemsAsyncCore(CancellationToken cancel, uint count);
+ 
     }
 }

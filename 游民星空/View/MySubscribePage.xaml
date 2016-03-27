@@ -32,13 +32,15 @@
                     </Image.Source>
                 </Image>
                 <Grid Grid.Column="1" Margin="5,0">
-                    <TextBlock Text="{Binding sourceName}" VerticalAlignment="Top"/>
+                    <TextBlock Text="{Binding sourceName}" TextWrapping="Wrap" VerticalAlignment="Top"/>
                     <TextBlock  Margin="0,4,0,0" VerticalAlignment="Bottom">
                     <Run Text="{Binding cnt}"/>
                     <Run Text="人订阅"/>
                     </TextBlock>
                 </Grid>
-                <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" Click="Button_Click"/>
+                <Button Grid.Column="3" HorizontalAlignment="Center" 
+                         Style="{Binding Favorite,Converter={StaticResource BoolToStyleConverter}}"
+                         Click="Button_Click"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>

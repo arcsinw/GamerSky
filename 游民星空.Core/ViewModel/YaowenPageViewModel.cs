@@ -6,13 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using 游民星空.Core.Http;
+using 游民星空.Core.IncrementalLoadingCollection;
 using 游民星空.Core.Model;
 
 namespace 游民星空.Core.ViewModel
 {
     public class YaowenPageViewModel : ViewModelBase
     {
-        public ObservableCollection<Essay> Yaowens { get; set; }
+        //public ObservableCollection<Essay> Yaowens { get; set; }
+
+        private YaowenIncrementalCollection yaowens;
+        public YaowenIncrementalCollection Yaowens
+        {
+            get
+            {
+                return yaowens;
+            }
+            set
+            {
+                yaowens = value;
+                OnPropertyChanged();
+            }
+        }
 
         private ApiService apiService;
 
@@ -32,8 +47,8 @@ namespace 游民星空.Core.ViewModel
         public YaowenPageViewModel()
         {
             apiService = new ApiService();
-            Yaowens = new ObservableCollection<Essay>();
-
+            //Yaowens = new ObservableCollection<Essay>();
+            Yaowens = new YaowenIncrementalCollection();
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
@@ -57,25 +72,26 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
-        public async Task LoadData(int pageIndex = 1)
+        public void Refresh()
         {
             IsActive = true;
-            List<Essay> essays =  await apiService.GetYaowen(pageIndex);
-            if(essays!=null)
-            {
-                foreach (var item in essays)
-                {
-                    Yaowens.Add(item);
-                }
-            }
+            //Yaowens.Clear();
+            YaowenIncrementalCollection s = new YaowenIncrementalCollection();
+            Yaowens = s;
+            s.OnDataLoaded += S_OnDataLoaded;
+            s.OnDataLoading += S_OnDataLoading;
             IsActive = false;
+            //await LoadData();
         }
 
-
-        public async Task Refresh()
+        private void S_OnDataLoading(object sender, EventArgs e)
         {
-            Yaowens.Clear();
-            await LoadData();
+            IsActive = true;
+        }
+
+        private void S_OnDataLoaded(object sender, EventArgs e)
+        {
+            IsActive = false;
         }
     }
 }

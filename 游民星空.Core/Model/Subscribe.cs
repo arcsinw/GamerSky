@@ -10,7 +10,7 @@ namespace 游民星空.Core.Model
     /// <summary>
     /// 订阅热点词返回数据类型
     /// </summary>
-    public class Subscribe
+    public class Subscribe : ModelBase
     {
         public string cnt { get; set; }
         public string isHot { get; set; }
@@ -24,6 +24,23 @@ namespace 游民星空.Core.Model
             get
             {
                 return defaultBitmap;
+            }
+        }
+
+        private bool favorite = false;
+        /// <summary>
+        /// 是否收藏 本地数据
+        /// </summary>
+        public bool Favorite
+        {
+            get
+            {
+                return favorite;
+            }
+            set
+            {
+                favorite = value;
+                OnPropertyChanged();
             }
         }
     }

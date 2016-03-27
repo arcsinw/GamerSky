@@ -33,17 +33,7 @@ namespace 游民星空.View
             
         }
 
-        /// <summary>
-        /// 是否已经加载数据
-        /// </summary>
-        private bool isDataLoaded = false;
-
-        /// <summary>
-        /// 是否正在加载数据
-        /// </summary>
-        private bool IsDataLoading = false;
-
-        private int pageIndex = 1;
+        private ScrollViewer scrollViewer;
 
         private void Back()
         {
@@ -59,13 +49,8 @@ namespace 游民星空.View
             JYHelper.TracePageEnd(this.BaseUri.LocalPath);
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!isDataLoaded)
-            {
-                await viewModel.LoadData(pageIndex++);
-                isDataLoaded = true;
-            }
             JYHelper.TracePageStart(this.BaseUri.LocalPath);
         }
         #endregion
@@ -77,11 +62,7 @@ namespace 游民星空.View
 
             (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
         }
-
-    
-
-        private ScrollViewer scrollViewer;
-
+         
         private void ListView_Loaded(object sender, RoutedEventArgs e)
         {
             scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
@@ -91,7 +72,7 @@ namespace 游民星空.View
             }
         }
 
-        private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             if (scrollViewer != null)
             {
@@ -109,27 +90,12 @@ namespace 游民星空.View
                         topPop.IsOpen = true;
                     }
                 }
-                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
-                {
-                    if (!IsDataLoading)  //未加载数据
-                    {
-                        IsDataLoading = true;
-                        //IsActive = true;
-                        progressRing.IsActive = true;
-                        await viewModel.LoadData(pageIndex++);
-                        //IsActive = false;
-                        progressRing.IsActive = false;
-                        IsDataLoading = false;
-                    }
-                }
             }
         }
-
-
-        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+         
+        private  void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
-            await viewModel.Refresh();
-            pageIndex = 2;
+            viewModel.Refresh();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

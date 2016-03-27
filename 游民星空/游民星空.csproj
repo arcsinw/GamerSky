@@ -113,6 +113,7 @@
     </Compile>
     <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Converter\CountToVisibilityConverter.cs" />
+    <Compile Include="Converter\BoolToStyleConverter.cs" />
     <Compile Include="Converter\IndexToColorConverter.cs" />
     <Compile Include="Helper\AdaptiveGridView.cs" />
     <Compile Include="Helper\DeviceTypeTrigger.cs" />

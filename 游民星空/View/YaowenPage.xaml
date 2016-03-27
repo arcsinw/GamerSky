@@ -92,43 +92,32 @@
         <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView ItemsSource="{Binding Yaowens}"
-                 SelectionMode="None"
-                          x:Name="listView"
-                  Loaded="ListView_Loaded"
-                  ShowsScrollingPlaceholders="True"
-                  ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                  IsItemClickEnabled="True"
-                  ItemClick="ListView_ItemClick">
+                      SelectionMode="None"
+                      x:Name="listView"
+                      Loaded="ListView_Loaded"
+                      ShowsScrollingPlaceholders="True"
+                      ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                      IsItemClickEnabled="True"
+                      ItemClick="ListView_ItemClick">
 
                     <ListView.ItemTemplateSelector>
                         <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                                       NoPicDt="{StaticResource NoPicEssayDataTemplate}"
                                                                       />
                     </ListView.ItemTemplateSelector>
- 
+                
                     <ListView.Transitions>
                         <TransitionCollection>
                             <AddDeleteThemeTransition />
                             <ContentThemeTransition />
                             <EntranceThemeTransition/>
-                            <NavigationThemeTransition/>
+                            
                         </TransitionCollection>
                     </ListView.Transitions>
-
-                    <!--<ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="Margin" Value="0"/>
-                        <Setter Property="Padding" Value="0"/>
-                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                        
-                    </Style>
-                </ListView.ItemContainerStyle>-->
-
+  
                 </ListView>
             </pr:PullToRefreshBox>
-
-           
+ 
             <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Style="{ThemeResource ProgressRingStyle}"/>
              
         </Grid>
@@ -137,7 +126,6 @@
                Height="48" x:Name="topPop" Width="48" Margin="16,32" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
-                    <!--<EdgeUIThemeTransition Edge="Bottom"/>-->
                     <AddDeleteThemeTransition />
                 </TransitionCollection>
             </Popup.ChildTransitions>

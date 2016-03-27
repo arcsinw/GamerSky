@@ -85,14 +85,14 @@ namespace 游民星空.View
                         isAllLoaded = true;
                     }
                     break;
-                case 2:
-                    if(isMyLoaded)
-                    {
-                        ViewModel.LoadMySubscribes();
-                        isMyLoaded = true;
-                    }
+                //case 2:
+                //    if(isMyLoaded)
+                //    {
+                //        ViewModel.LoadMySubscribes();
+                //        isMyLoaded = true;
+                //    }
                     
-                    break;
+                //    break;
             }
         }
          

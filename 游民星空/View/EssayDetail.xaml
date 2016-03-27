@@ -282,10 +282,15 @@
         </FlipView>
         <!--#endregion-->
 
-        <Grid>
-            <TextBox/>
-            <Button/>
-            <Button/>
+        <Grid Height="Auto" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"/>
+            <Button Grid.Column="1"/>
+            <Button Grid.Column="2"/>
         </Grid>
         
     </Grid>
