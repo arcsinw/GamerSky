@@ -95,7 +95,7 @@
                                 </ScrollViewer>
                             </ControlTemplate>
                         </hp:AdaptiveGridView.Template>-->
-                        <hp:AdaptiveGridView.Header>
+                        <!--<hp:AdaptiveGridView.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -104,7 +104,7 @@
                                 <TextBox PlaceholderText="" Grid.Column="0"/>
                                 <Button Content="发售表" Grid.Column="1"/>
                             </Grid>
-                        </hp:AdaptiveGridView.Header>
+                        </hp:AdaptiveGridView.Header>-->
                         <hp:AdaptiveGridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>

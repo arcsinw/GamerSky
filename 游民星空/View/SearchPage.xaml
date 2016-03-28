@@ -279,7 +279,9 @@
                     <Run Text="人订阅"/>
                     </TextBlock>
                 </Grid>
-                <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" Click="AddSubscribe"/>
+                <Button Grid.Column="3" HorizontalAlignment="Center" 
+                         Style="{Binding Favorite,Converter={StaticResource BoolToStyleConverter}}"
+                         Click="AddSubscribe"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>

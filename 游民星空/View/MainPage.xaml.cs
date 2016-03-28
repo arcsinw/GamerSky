@@ -29,7 +29,9 @@ namespace 游民星空.View
         private int currentChannelId;
         // 当前PivotItem
         PivotItem currentItem;
- 
+
+        Dictionary<int, ScrollViewer> scrollViewerDic;
+
         #region pageIndex
         /// <summary>
         /// 保存不同频道的页码
@@ -75,7 +77,9 @@ namespace 游民星空.View
             apiService = new ApiService();
             NavigationCacheMode = NavigationCacheMode.Required;
             DisplayInformation.GetForCurrentView().OrientationChanged += App_OrientationChanged;
-             
+
+            scrollViewerDic = new Dictionary<int, ScrollViewer>();
+
             DispatcherManager.Current.Dispatcher = Dispatcher;
             pageIndexDic = new Dictionary<int, int>();
              
@@ -123,16 +127,23 @@ namespace 游民星空.View
 
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+           
             Debug.WriteLine("SelectionChanged");
-            if (currentItem != null)
-            {
-                ListView listView = Functions.FindChildOfType<ListView>(currentItem);
-                scrollViewer = Functions.FindChildOfType<ScrollViewer>(listView);
-                if (scrollViewer != null)
-                {
-                    scrollViewer.ViewChanged += scrollViewer_ViewChanged;
-                }
-            }
+            //if (currentItem != null)
+            //{
+            //    ListView listView = Functions.FindChildOfType<ListView>(currentItem);
+            //    scrollViewer = Functions.FindChildOfType<ScrollViewer>(listView);
+            //    if (scrollViewer != null)
+            //    {
+
+            //        scrollViewer.ViewChanged += scrollViewer_ViewChanged;
+            //    }
+            //}
+            //scrollViewer = scrollViewerDic[essayPivot.SelectedIndex];
+            //if(scrollViewer!= null)
+            //{
+            //    scrollViewer.ViewChanged += scrollViewer_ViewChanged;
+            //}
             progressRing.IsActive = true;
             int index = essayPivot.SelectedIndex;
             currentChannelId = MVM.EssaysAndChannels[index].Channel.nodeId;
@@ -153,6 +164,7 @@ namespace 游民星空.View
             progressRing.IsActive = false;
         }
 
+       
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             Essay essayResult = e.ClickedItem as Essay;
@@ -184,6 +196,8 @@ namespace 游民星空.View
             scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
             if (scrollViewer != null)
             {
+                scrollViewerDic[essayPivot.SelectedIndex] = scrollViewer;
+                //scrollViewerList[essayPivot.SelectedIndex] = scrollViewer;
                 scrollViewer.ViewChanged += scrollViewer_ViewChanged;
             }
         }
@@ -191,21 +205,7 @@ namespace 游民星空.View
         private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             if (scrollViewer != null)
-            {
-                if (scrollViewer.VerticalOffset < DeviceInformationHelper.GetScreenHeight())
-                {
-                    if (topPop.IsOpen)
-                    {
-                        topPop.IsOpen = false;
-                    }
-                }
-                else if (scrollViewer.VerticalOffset > DeviceInformationHelper.GetScreenHeight())
-                {
-                    if (!topPop.IsOpen)
-                    {
-                        topPop.IsOpen = true;
-                    }
-                }
+            { 
                 if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
                 {
                     if (!IsDataLoading)  //未加载数据
@@ -235,10 +235,13 @@ namespace 游民星空.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void Button_Click(object sender, RoutedEventArgs e)
         {
             ListView listView = Functions.FindChildOfType<ListView>(currentItem);
-            listView.ScrollIntoViewSmoothly(listView.Items[0]);
+            if (listView != null)
+            {
+                listView.ScrollIntoViewSmoothly(listView.Items[0]);
+            }
         }
 
         private void innerTopicListView_ItemClick(object sender, ItemClickEventArgs e)

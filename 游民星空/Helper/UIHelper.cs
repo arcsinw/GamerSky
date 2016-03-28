@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
-using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -27,7 +22,7 @@ namespace 游民星空.Helper
                 var statusBar = StatusBar.GetForCurrentView();
                 statusBar.ForegroundColor = Colors.White;
                 statusBar.BackgroundOpacity = 1;
-                statusBar.BackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
+                statusBar.BackgroundColor = Application.Current.Resources["ThemeColor"] as Color?;
                 await statusBar.ShowAsync();
             }
             else
@@ -52,8 +47,8 @@ namespace 游民星空.Helper
                 var statusBar = StatusBar.GetForCurrentView();
                 statusBar.ForegroundColor = Colors.White;
                 statusBar.BackgroundOpacity = 1;
-                //statusBar.BackgroundColor = color;
-                statusBar.BackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
+                statusBar.BackgroundColor = color;
+                 
                 await statusBar.ShowAsync();
             }
             else
@@ -72,16 +67,16 @@ namespace 游民星空.Helper
             applicationView.ShowStandardSystemOverlays();
             //应用标题栏
             ApplicationViewTitleBar titleBar = applicationView.TitleBar;
-            titleBar.BackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
+            titleBar.BackgroundColor = Application.Current.Resources["ThemeColor"] as Color?;
             titleBar.ForegroundColor = Colors.White;
-            titleBar.ButtonBackgroundColor = App.Current.Resources["ThemeColor"] as Color?;
+            titleBar.ButtonBackgroundColor = Application.Current.Resources["ThemeColor"] as Color?;
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
            
         }
 
         public static async void ShowMessage(string content, string title="")
         {
-            await Window.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+            await Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 await new MessageDialog(content, title).ShowAsync();
             });

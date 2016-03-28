@@ -8,6 +8,7 @@
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:游民星空.Core.ViewModel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    RequestedTheme="{Binding AppTheme}"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -33,12 +34,15 @@
         <vm:GameDetailViewModel x:Name="viewModel"/>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource PageBackground}">
+    <Grid Background="{ThemeResource PageBackground}"
+          ScrollViewer.VerticalScrollMode="Enabled"
+          ScrollViewer.IsVerticalScrollChainingEnabled="True"
+          ScrollViewer.IsScrollInertiaEnabled="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <!--#region 标题栏 游戏详情-->
+        <!--#region 标题栏-->
         <Grid Grid.Row="0" DataContext="{Binding GameDetail}" Visibility="Collapsed">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup>
@@ -62,7 +66,8 @@
             </Grid>
         </Grid>
         <!--#endregion-->
-
+        
+        <!--#region 游戏详情-->
         <Grid Grid.Row="0" DataContext="{Binding GameDetail}" 
                   Background="{Binding backgroundURL}">
             <Grid.ColumnDefinitions>
@@ -74,11 +79,11 @@
                    Stretch="Uniform"
                    Source="{Binding thumbnailURL}"/>
             <Grid Grid.Column="1" >
-                <Grid.Resources>
+                <!--<Grid.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="White"/>
                     </Style>
-                </Grid.Resources>
+                </Grid.Resources>-->
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="{Binding title}" />
                     <TextBlock>
@@ -102,7 +107,8 @@
                 </StackPanel>
             </Grid>
         </Grid>
-
+        <!--#endregion-->
+        
         <!--#region 文章栏-->
         <Pivot Grid.Row="1" Style="{ThemeResource StrategyPivotStyle}"
                SelectionChanged="Pivot_SelectionChanged"

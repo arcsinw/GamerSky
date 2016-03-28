@@ -16,7 +16,7 @@ namespace 游民星空.Core.ViewModel
     /// </summary>
     public class DataShareManager
     {
-        #region const Settings Keys and files' name
+        #region const Settings Keys 
         private const string SettingKey_IsFirstLaunch = "IS_FIRST_LAUNCH";
         private const string SettingKey_IsNewVersion = "IS_NEW_VERSION";
         private const string SettingKey_BigFont = "FONT_SIZE";
@@ -24,15 +24,25 @@ namespace 游民星空.Core.ViewModel
         private const string RoamingSettingKey_AppTheme = "APP_THEME";
         private const string SettingKey_SubscribeList = "SUBSCRIBE_LIST";
         private const string SettingKey_IsStatusBarShow = "IS_STATUSBAR_SHOW";
+        #endregion
 
+        #region Files' name
         /// <summary>
         /// 收藏文件夹名
         /// </summary>
         private const string FavoriteList_Folder = "favorite_list";
         /// <summary>
-        /// 存储收藏列表的文件名
+        /// 文章收藏列表的文件名
         /// </summary>
-        private const string FavoriteList_FileName = "game_list.json";
+        private const string FavoriteList_FileName = "favoriteEssay_List.json";
+        /// <summary>
+        /// 订阅列表的文件名
+        /// </summary>
+        private const string SubscribeList_FileName = "subscribe_List.json";
+        /// <summary>
+        /// 攻略列表的文件名
+        /// </summary>
+        private const string StrategyList_FileName = "strategy_List.json";
         #endregion
 
         #region Properties
@@ -49,7 +59,7 @@ namespace 游民星空.Core.ViewModel
         }
         private int fontSize;
         /// <summary>
-        /// 是否大字体
+        /// 字体大小
         /// </summary>
         public int FontSize
         {
@@ -86,13 +96,29 @@ namespace 游民星空.Core.ViewModel
 
         private List<Subscribe> subscribeList = new List<Subscribe>();
         /// <summary>
-        /// 订阅列表
+        /// 订阅收藏列表
         /// </summary>
         public List<Subscribe> SubscribeList
         {
             get
             {
                 return subscribeList;
+            }
+        }
+
+        private List<Strategy> strategyList;
+        /// <summary>
+        /// 攻略收藏
+        /// </summary>
+        public List<Strategy> StrategyList
+        {
+            get
+            {
+                return strategyList;
+            }
+            set
+            {
+                strategyList = value;
             }
         }
 
@@ -202,12 +228,23 @@ namespace 游民星空.Core.ViewModel
                 subscribeList = new List<Subscribe>();
             }
 
-            //加载收藏列表
+            //加载文章收藏列表
             if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(ApplicationData.Current.LocalFolder.Path + FavoriteList_FileName))
             {
                 favoriteList = await FileHelper.Current.ReadObjectAsync<List<Essay>>(FavoriteList_FileName, FavoriteList_Folder);
             }
-         
+
+            //加载订阅列表
+            if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(ApplicationData.Current.LocalFolder.Path + SubscribeList_FileName))
+            {
+                subscribeList = await FileHelper.Current.ReadObjectAsync<List<Subscribe>>(FavoriteList_FileName, SubscribeList_FileName);
+            }
+
+            //加载攻略列表
+            if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(ApplicationData.Current.LocalFolder.Path + StrategyList_FileName))
+            {
+                subscribeList = await FileHelper.Current.ReadObjectAsync<List<Subscribe>>(FavoriteList_FileName, StrategyList_FileName);
+            }
         }
 
         private void OnShareDataChanged()
@@ -269,7 +306,7 @@ namespace 游民星空.Core.ViewModel
         }
         
         /// <summary>
-        /// 更新收藏列表
+        /// 更新文章收藏列表
         /// </summary>
         /// <param name="gameList"></param>
         public async void UpdateFavoriteEssayList(Essay essay)
@@ -288,6 +325,10 @@ namespace 游民星空.Core.ViewModel
             OnShareDataChanged();
         }
 
+        public async void UpdateStrategyList(Strategy strategy)
+        {
+
+        }
         #endregion
 
         public delegate void ShareDataChangedEventHandler();

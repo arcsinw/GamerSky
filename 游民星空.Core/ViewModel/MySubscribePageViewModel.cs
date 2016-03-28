@@ -53,7 +53,7 @@ namespace 游民星空.Core.ViewModel
             MySubscribes = new ObservableCollection<Subscribe>();
 
             LoadMySubscribes();
-
+            
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
@@ -94,7 +94,7 @@ namespace 游民星空.Core.ViewModel
             {
                 foreach (var item in allSubscribes)
                 {
-                    if(MySubscribes.Contains(item))
+                    if (MySubscribes.Any((x) => x.sourceId == item.sourceId))
                     {
                         item.Favorite = true;
                     }
@@ -116,7 +116,7 @@ namespace 游民星空.Core.ViewModel
             {
                 foreach (var item in hotSubscribes)
                 {
-                    if (MySubscribes.Contains(item))
+                    if (MySubscribes.Any((x)=>x.sourceId == item.sourceId))
                     {
                         item.Favorite = true;
                     }

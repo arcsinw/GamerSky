@@ -80,7 +80,10 @@ namespace 游民星空.View
                 switch ((string)radioButton.Tag)
                 {
                     case "0":     // 新闻
-                        
+                        if(rootFrame.Content is MainPage)
+                        {
+                            (rootFrame.Content as MainPage).Button_Click(null, null);
+                        }
                         rootFrame.Navigate(typeof(MainPage));
                         break;
                     case "1":     //攻略
@@ -155,11 +158,11 @@ namespace 游民星空.View
             {
                 if (appTheme.Equals(ElementTheme.Dark))
                 {
-                    UIHelper.ShowStatusBar();
+                    UIHelper.SetStatusBarColor((Color)App.Current.Resources["DarkThemeColor"]);
                 }
                 else
                 {
-                    UIHelper.ShowStatusBar();
+                    UIHelper.SetStatusBarColor((Color)App.Current.Resources["LightThemeColor"]);
                 }
                 return appTheme;
             }

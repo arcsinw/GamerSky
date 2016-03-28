@@ -30,7 +30,9 @@ namespace 游民星空.Core.Model
         public string authorHeadImageURL { get; set; }
         public string authorName { get; set; }
         public string[] badges { get; set; }
+
         public Essay[] childElements { get; set; }
+        
         public string commentsCount { get; set; }
         public string contentId { get; set; }
         public string contentType { get; set; }

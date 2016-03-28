@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.Foundation.Metadata;
-using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.StartScreen;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
 namespace 游民星空.Core.Helper
@@ -115,6 +110,27 @@ namespace 游民星空.Core.Helper
             return null;
         }
 
+        /// <summary>
+        /// 从root中搜索T并加入results
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="results"></param>
+        /// <param name="root"></param>
+        public static void FindChildOfTypeAndInsert<T>(List<T> results,DependencyObject root) where
+            T :DependencyObject
+        {
+            int count = VisualTreeHelper.GetChildrenCount(root);
+            for(int i=0;i< count;i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(root, i);
+                var typedChild = child as T;
+                if(typedChild != null)
+                {
+                    results.Add(typedChild);
+                }
+                FindChildOfTypeAndInsert<T>(results, child);
+            }
+        }
         /// <summary>
         /// 判断是否Mobile设备
         /// </summary>

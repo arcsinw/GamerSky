@@ -3,6 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="using:游民星空.Converter"
     >
+    <Color x:Key="LightThemeColor">#C93D32</Color>
+    <Color x:Key="DarkThemeColor">#FF5F5F5F</Color>
     
     <!--#region -->
     <converter:BoolToStyleConverter x:Key="BoolToStyleConverter"/>
@@ -21,6 +23,7 @@
     <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="DarkBlue"/>
     <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="Green"/>
 
+    
     <Style TargetType="Button" BasedOn="{StaticResource RoundButtonStyle}" x:Key="UnFavoriteButtonStyle">
         <Setter Property="Content" Value="退订"/>
     </Style>
@@ -28,6 +31,7 @@
     <Style TargetType="Button" BasedOn="{StaticResource RoundButtonStyle}" x:Key="FavoriteButtonStyle">
         <Setter Property="Background" Value="{ThemeResource ThemeColorBrush}"/>
         <Setter Property="Content" Value="订阅"/>
+        <Setter Property="Foreground" Value="White"/>
     </Style>
     
     <Style x:Key="EssayPivotStyle" TargetType="Pivot">
