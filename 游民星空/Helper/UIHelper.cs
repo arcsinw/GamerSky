@@ -53,7 +53,14 @@ namespace 游民星空.Helper
             }
             else
             {
-                ShowView();
+                ApplicationView applicationView = ApplicationView.GetForCurrentView();
+                applicationView.SetPreferredMinSize(new Windows.Foundation.Size(320, 480));
+                applicationView.ShowStandardSystemOverlays();
+                //应用标题栏
+                ApplicationViewTitleBar titleBar = applicationView.TitleBar;
+                titleBar.BackgroundColor = color;
+                titleBar.ForegroundColor = Colors.White;
+                titleBar.ButtonBackgroundColor = color;
             }
         }
 

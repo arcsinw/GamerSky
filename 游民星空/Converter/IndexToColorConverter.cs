@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
@@ -15,13 +16,13 @@ namespace 游民星空.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (int.Parse(value.ToString()) == int.Parse(parameter.ToString()))
+            if (int.Parse(value.ToString()) == int.Parse(parameter.ToString()))  //选中的
             {
                 return new SolidColorBrush(Windows.UI.Colors.White);
             }
             else
             {
-                return App.Current.Resources["ThemeColorBrush"] as SolidColorBrush;
+                return new SolidColorBrush(Colors.Gray);
             }
         }
 

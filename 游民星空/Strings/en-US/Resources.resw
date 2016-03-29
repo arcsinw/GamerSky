@@ -42,37 +42,43 @@
   <data name="AppName" xml:space="preserve">
     <value>GamerSky.X</value>
   </data>
-  <data name="FeedBack" xml:space="preserve">
+  <data name="FeedBack.Text" xml:space="preserve">
     <value>Feedback</value>
   </data>
-  <data name="Settings" xml:space="preserve">
+  <data name="Settings.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="Collection" xml:space="preserve">
+  <data name="Collection.Text" xml:space="preserve">
     <value>Collection</value>
   </data>
-  <data name="Search" xml:space="preserve">
+  <data name="Search.Text" xml:space="preserve">
     <value>Search</value>
   </data>
-  <data name="ClearCache" xml:space="preserve">
+  <data name="ClearCache.Text" xml:space="preserve">
     <value>Clear Cache</value>
   </data>
-  <data name="Night Mode" xml:space="preserve">
+  <data name="NightMode.Text" xml:space="preserve">
     <value>Night Mode</value>
   </data>
-  <data name="Login" xml:space="preserve">
+  <data name="Login.Text" xml:space="preserve">
     <value>Login</value>
   </data>
-  <data name="News" xml:space="preserve">
+  <data name="News.Text" xml:space="preserve">
     <value>News</value>
   </data>
-  <data name="Game" xml:space="preserve">
-    <value>Game Lib</value>
+  <data name="Game.Text" xml:space="preserve">
+    <value>Game Library</value>
   </data>
-  <data name="Subscribe" xml:space="preserve">
+  <data name="Subscribe.Text" xml:space="preserve">
     <value>Subscribe</value>
   </data>
   <data name="PlaceHolderText" xml:space="preserve">
     <value>Please input search content</value>
+  </data>
+  <data name="Yaowen.Text" xml:space="preserve">
+    <value>Hot news</value>
+  </data>
+  <data name="NoPic.Text" xml:space="preserve">
+    <value>No Picture</value>
   </data>
 </root>

@@ -243,7 +243,7 @@ namespace 游民星空.Core.ViewModel
             //加载攻略列表
             if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(ApplicationData.Current.LocalFolder.Path + StrategyList_FileName))
             {
-                subscribeList = await FileHelper.Current.ReadObjectAsync<List<Subscribe>>(FavoriteList_FileName, StrategyList_FileName);
+                strategyList = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(FavoriteList_FileName, StrategyList_FileName);
             }
         }
 
@@ -298,7 +298,8 @@ namespace 游民星空.Core.ViewModel
             else
             {
                 subscribe.Favorite = false;
-                subscribeList.Remove(subscribe);
+                subscribeList.RemoveAll(x => x.sourceId == subscribe.sourceId);
+                //subscribeList.Remove(subscribe);
             }
             var localSettings = ApplicationData.Current.LocalSettings;
             localSettings.Values[SettingKey_SubscribeList] = Functions.JsonDataSerializer<List<Subscribe>>(subscribeList);
@@ -311,7 +312,7 @@ namespace 游民星空.Core.ViewModel
         /// <param name="gameList"></param>
         public async void UpdateFavoriteEssayList(Essay essay)
         {
-            bool add = !favoriteList.Contains(essay);
+            bool add = !favoriteList.Any(x => x.contentId == essay.contentId);
             if(add)
             {
                 favoriteList.Add(essay);
@@ -325,9 +326,24 @@ namespace 游民星空.Core.ViewModel
             OnShareDataChanged();
         }
 
+        /// <summary>
+        /// 更新攻略列表
+        /// </summary>
+        /// <param name="strategy"></param>
         public async void UpdateStrategyList(Strategy strategy)
         {
-
+            bool add = !strategyList.Any(x => x.specialID == strategy.specialID);
+            if (add)
+            {
+                strategyList.Add(strategy);
+            }
+            else
+            {
+                strategyList.Remove(strategy);
+            }
+            //更新本地文件
+            await FileHelper.Current.WriteObjectAsync<List<Strategy>>(strategyList, FavoriteList_FileName, FavoriteList_Folder);
+            OnShareDataChanged();
         }
         #endregion
 

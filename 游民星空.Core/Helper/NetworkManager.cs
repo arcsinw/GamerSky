@@ -131,11 +131,8 @@ namespace 游民星空.Core
                 {
                     return 3;
                 }
-                else if (profile == null)
-                {
-                    return 4;
-                }
-                return 1;
+                
+                return 4;
             }
             catch (Exception)
             {

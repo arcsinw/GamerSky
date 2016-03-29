@@ -121,7 +121,7 @@ namespace 游民星空.View
         private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
             progressRing.IsActive = true;
-            await MVM.Refresh(currentChannelId);
+            await viewModel.Refresh(currentChannelId);
             progressRing.IsActive = false;
         }
 
@@ -146,14 +146,14 @@ namespace 游民星空.View
             //}
             progressRing.IsActive = true;
             int index = essayPivot.SelectedIndex;
-            currentChannelId = MVM.EssaysAndChannels[index].Channel.nodeId;
+            currentChannelId = viewModel.EssaysAndChannels[index].Channel.nodeId;
 
             //获取该频道当前页码
             if (!pageIndexDic.ContainsKey(currentChannelId)) // 频道未加载
             {
                 pageIndexDic.Add(currentChannelId, 1);
                 pageIndex = 1;
-                await MVM.LoadMoreEssay(currentChannelId, pageIndex++);
+                await viewModel.LoadMoreEssay(currentChannelId, pageIndex++);
                 pageIndexDic[currentChannelId] = pageIndex;
             }
             else  //频道已加载
@@ -213,7 +213,7 @@ namespace 游民星空.View
                         Debug.WriteLine("IsDataLoading");
                         IsDataLoading = true;
                         progressRing.IsActive = true;
-                        await MVM.LoadMoreEssay(currentChannelId, pageIndex++);
+                        await viewModel.LoadMoreEssay(currentChannelId, pageIndex++);
                         pageIndexDic[currentChannelId] = pageIndex;
                         progressRing.IsActive = false;
                         IsDataLoading = false;

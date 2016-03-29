@@ -42,37 +42,43 @@
   <data name="AppName" xml:space="preserve">
     <value>游民星空.X</value>
   </data>
-  <data name="FeedBack" xml:space="preserve">
+  <data name="FeedBack.Text" xml:space="preserve">
     <value>意见反馈</value>
   </data>
-  <data name="Settings" xml:space="preserve">
+  <data name="Settings.Text" xml:space="preserve">
     <value>更多设置</value>
   </data>
-  <data name="Collection" xml:space="preserve">
+  <data name="Collection.Text" xml:space="preserve">
     <value>收藏</value>
   </data>
-  <data name="Search" xml:space="preserve">
+  <data name="Search.Text" xml:space="preserve">
     <value>搜索</value>
   </data>
-  <data name="ClearCache" xml:space="preserve">
+  <data name="ClearCache.Text" xml:space="preserve">
     <value>清空缓存</value>
   </data>
-  <data name="Night Mode" xml:space="preserve">
+  <data name="NightMode.Text" xml:space="preserve">
     <value>夜间模式</value>
   </data>
-  <data name="Login" xml:space="preserve">
+  <data name="Login.Text" xml:space="preserve">
     <value>立即登录</value>
   </data>
-  <data name="News" xml:space="preserve">
+  <data name="News.Text" xml:space="preserve">
     <value>新闻</value>
   </data>
-  <data name="Game" xml:space="preserve">
+  <data name="Game.Text" xml:space="preserve">
     <value>游戏库</value>
   </data>
-  <data name="Subscribe" xml:space="preserve">
+  <data name="Subscribe.Text" xml:space="preserve">
     <value>订阅</value>
   </data>
   <data name="PlaceHolderText" xml:space="preserve">
     <value>请输入搜索内容</value>
+  </data>
+  <data name="Yaowen.Text" xml:space="preserve">
+    <value>要闻</value>
+  </data>
+  <data name="NoPic.Text" xml:space="preserve">
+    <value>非WiFi无图</value>
   </data>
 </root>

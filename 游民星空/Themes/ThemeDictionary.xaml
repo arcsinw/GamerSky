@@ -372,7 +372,7 @@
 
     <!--一张图文章模板-->
     <DataTemplate x:Key="OnePicEssayDataTemplate">
-        <Grid Margin="2,0" Padding="5" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+        <Grid Margin="2,0" Padding="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="5*"/>

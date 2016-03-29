@@ -10,12 +10,12 @@
     xmlns:hp="using:游民星空.Helper"
     xmlns:converter="using:游民星空.Converter"
     mc:Ignorable="d"
-    RequestedTheme="{Binding Path=MVM.AppTheme}"
+    RequestedTheme="{Binding Path=viewModel.AppTheme}"
     d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True,Type=vm:MainPageViewModel}"
     >
  
     <Page.Resources>
-        <vm:MainPageViewModel x:Name="MVM"/>
+        <vm:MainPageViewModel x:Name="viewModel"/>
  
         <!--BorderMargin-->
         <Thickness x:Key="BorderMargin">0,2</Thickness>
@@ -26,7 +26,6 @@
         <Thickness x:Key="GridMargin" >2,0</Thickness>
         <Thickness x:Key="GridPadding">4</Thickness>
         <!--有三张图的文章模板-->
-        <!--BorderThickness="{ThemeResource ListViewBorderThickness}" BorderBrush="{ThemeResource ListViewBorderBrush}"-->
         <DataTemplate x:Key="ThreePicEssayDataTemplate" >
             <Grid Margin="2,0" Padding="4" >
                 <Grid.RowDefinitions>
@@ -97,8 +96,7 @@
         </DataTemplate>
         <!--无图模板-->
         <DataTemplate x:Key="NoPicEssayDataTemplate">
-            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"
-                  >
+            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -135,8 +133,9 @@
         </DataTemplate>
         <converter:IndexToColorConverter x:Name="IndexToColorConverter"/>
     </Page.Resources>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot x:Name="essayPivot"  DataContext="{Binding Source={StaticResource MVM}}"
+        <Pivot x:Name="essayPivot"  DataContext="{Binding Source={StaticResource viewModel}}"
                ItemsSource="{Binding EssaysAndChannels}" SelectionChanged="Pivot_SelectionChanged"
                Padding="0" Margin="0" HorizontalContentAlignment="Stretch" 
                Background="{ThemeResource PageBackground}"
