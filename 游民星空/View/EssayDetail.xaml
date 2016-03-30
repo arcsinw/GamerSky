@@ -282,7 +282,7 @@
         </FlipView>
         <!--#endregion-->
 
-        <Grid Height="Auto" VerticalAlignment="Bottom">
+        <Grid Height="Auto" Visibility="Collapsed" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

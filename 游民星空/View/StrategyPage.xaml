@@ -256,7 +256,7 @@
                 </SemanticZoom>
             </PivotItem>
             
-            <PivotItem Header="游戏库" Margin="0" Padding="0">
+            <!--<PivotItem Header="游戏库" Margin="0" Padding="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                     
                     <hp:AdaptiveGridView x:Name="gameLibGridView"
@@ -276,17 +276,17 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <!--#region PlaceHolderImage-->
+                                    --><!--#region PlaceHolderImage-->
                                     <!--<Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill"
                                            VerticalAlignment="Stretch"/>-->
-                                    <!--#endregion-->
+                                    <!--#endregion--><!--
                                     <Image Grid.Row="0" Stretch="Fill"  VerticalAlignment="Stretch">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding thumbnailURL}"/>
                                         </Image.Source>
                                     </Image>
-                                    <!--<Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
-                                       Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>-->
+                                    --><!--<Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
+                                       Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>--><!--
                                     <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding title}" 
                                                TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
                                                VerticalAlignment="Bottom"/>
@@ -302,7 +302,7 @@
                         </hp:AdaptiveGridView.ItemContainerStyle>
                     </hp:AdaptiveGridView>
                 </pr:PullToRefreshBox>
-            </PivotItem>
+            </PivotItem>-->
         </Pivot>
 
         <Button Style="{ThemeResource BackButtonStyle}"

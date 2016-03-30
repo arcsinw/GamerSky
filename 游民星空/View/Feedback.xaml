@@ -196,9 +196,9 @@
                     <TextBox x:Name="subjectTextBox" Header="主题 / Subject"/>
                     <TextBox x:Name="bodyTextBox" Header="内容 / Body" Height="300" 
                              TextWrapping="Wrap"
-                             Style="{StaticResource TextBoxStyle1}"/>
+                             />
                     <Button Content="确定" Margin="0,20" Foreground="White"
-                            Click="Button_Click"
+                            Click="Button_Click" Style="{ThemeResource RoundButtonStyle}"
                             Background="{ThemeResource ThemeColorBrush}"
                             HorizontalContentAlignment="Center" 
                             HorizontalAlignment="Stretch"/>

@@ -188,6 +188,10 @@ namespace 游民星空.Core.ViewModel
             {
                 foreach (var item in subscribes)
                 {
+                    if(DataShareManager.Current.SubscribeList.Any(x=>x.sourceId == item.sourceId))
+                    {
+                        item.Favorite = true;
+                    }
                     HotSubscribes.Add(item);
                 }
             }

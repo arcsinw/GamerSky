@@ -47,6 +47,7 @@
                             <HyperlinkButton Content="写博客的前辈们" NavigateUri="http://www.cnblogs.com"/>
                             <HyperlinkButton Content="MSDN大法好" NavigateUri="http://msdn.microsoft.com"/>
                             <HyperlinkButton Content="LanceMcCarthy" NavigateUri="https://github.com/LanceMcCarthy/"/>
+                            <HyperlinkButton Content="周见智" NavigateUri="http://www.cnblogs.com/xiaozhi_5638"/>
                             <!--<HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
                         <HyperlinkButton.Content>
                             <TextBlock Text="人才招聘"/>

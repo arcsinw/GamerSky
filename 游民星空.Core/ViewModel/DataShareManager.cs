@@ -289,7 +289,7 @@ namespace 游民星空.Core.ViewModel
         public void UpdateSubscribe(Subscribe subscribe)
         {
             bool add = !subscribeList.Any(x => x.sourceId == subscribe.sourceId);
-            //bool add = subscribeList.Contains(subscribe) ? false : true;
+            
             if (add)
             {
                 subscribe.Favorite = true;
@@ -299,7 +299,7 @@ namespace 游民星空.Core.ViewModel
             {
                 subscribe.Favorite = false;
                 subscribeList.RemoveAll(x => x.sourceId == subscribe.sourceId);
-                //subscribeList.Remove(subscribe);
+                 
             }
             var localSettings = ApplicationData.Current.LocalSettings;
             localSettings.Values[SettingKey_SubscribeList] = Functions.JsonDataSerializer<List<Subscribe>>(subscribeList);

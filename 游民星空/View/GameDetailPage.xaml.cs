@@ -65,9 +65,8 @@ namespace 游民星空.View
             }
         }
 
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
+ 
 
-        }
+      
     }
 }

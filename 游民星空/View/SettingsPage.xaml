@@ -192,7 +192,7 @@
                         </Grid>
                     </ListViewItem>
 
-                    <ListViewItem>
+                    <ListViewItem Visibility="Collapsed">
                         <Grid>
                             <TextBlock Text="标题栏" VerticalAlignment="Center"/>
                             <ToggleSwitch IsOn="{x:Bind viewModel.IsTransparentTileOn,Mode=TwoWay}"  HorizontalAlignment="Right" MinWidth="0"

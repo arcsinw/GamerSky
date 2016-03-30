@@ -55,7 +55,7 @@
                     <TextBox PlaceholderText="请输入密保答案"  Text="{Binding Path=RegisterInfo.Answer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[Answer]}" Style="{ThemeResource ErrorTextBlock}"/>
                     <Button Content="注册" IsEnabled="{Binding Path=RegisterInfo.IsValid}" HorizontalAlignment="Stretch" Margin="0,0,0,16"
-                            Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind Register}"/>
+                            Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind Register}" Style="{ThemeResource RoundButtonStyle}"/>
                     <TextBlock>
                         <Run Text="注册代表同意接受"/>
                         <Hyperlink UnderlineStyle="None" Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>

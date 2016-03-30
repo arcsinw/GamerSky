@@ -38,7 +38,7 @@
                     <TextBlock Margin="0,0,0,8" Text="{Binding Path=UserLoginInfo.Errors[UserPassword]}" Foreground="Red"/>
                     <Button Content="登录" HorizontalAlignment="Stretch" Click="{x:Bind ViewModel.Login}"
                             Foreground="White" IsEnabled="{Binding Path=UserLoginInfo.IsValid}"
-                            Background="{ThemeResource ThemeColorBrush}"/>
+                            Background="{ThemeResource ThemeColorBrush}" Style="{ThemeResource RoundButtonStyle}"/>
                     <Grid>
                         <HyperlinkButton Click="{x:Bind ForgetPwd}" HorizontalAlignment="Left">
                             <HyperlinkButton.Content>

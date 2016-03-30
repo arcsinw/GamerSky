@@ -133,7 +133,8 @@
             <PivotItem Header="新闻" Margin="0">
                 <pr:PullToRefreshBox>
                     <ListView ItemsSource="{Binding GameDetailStrategys}"
-                            ItemTemplate="{StaticResource EssayDataTemplate}">
+                            ItemTemplate="{StaticResource EssayDataTemplate}"
+                              >
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

@@ -64,7 +64,7 @@ namespace 游民星空.View
             if (DataShareManager.Current.IsNewVersion)
             {
                 UIHelper.ShowMessage(
-                    "",
+                    "忘了更新了什么了 ( ╯□╰ )",
                     "新版本更新内容");
                 //DataShareManager.Current.IsNewVersion = Functions.GetVersion() ;
             }
