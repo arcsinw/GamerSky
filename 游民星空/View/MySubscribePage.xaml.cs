@@ -65,7 +65,7 @@ namespace 游民星空.View
 
         private bool isHotLoaded = false;
         private bool isAllLoaded = false;
-        private bool isMyLoaded = false;
+        //private bool isMyLoaded = false;
 
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

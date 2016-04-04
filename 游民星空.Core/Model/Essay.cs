@@ -149,5 +149,22 @@ namespace 游民星空.Core.Model
         /// huandeng 则为幻灯片内容
         /// </summary>
         public string type { get; set; }
+
+        private bool isFavorite = false;
+        /// <summary>
+        /// 是否收藏 程序内添加数据
+        /// </summary>
+        public bool IsFavorite
+        {
+            get
+            {
+                return isFavorite;
+            }
+            set
+            {
+                isFavorite = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

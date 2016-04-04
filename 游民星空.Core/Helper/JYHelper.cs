@@ -1,4 +1,5 @@
-﻿using JYAnalyticsUniversal;
+﻿
+using JYAnalyticsUniversal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace 游民星空.Core.Helper
         /// <summary>
         /// AppKey
         /// </summary>
-        public static readonly string AppKey = "2c7fdea4792fb5b5e3031dbf3f99ff15";
+        public const  string AppKey = "2c7fdea4792fb5b5e3031dbf3f99ff15";
 
         /// <summary>
         /// 阅读次数事件Id
@@ -29,22 +30,22 @@ namespace 游民星空.Core.Helper
 
         public async static void StartTraceAsync()
         {
-            await JYAnalytics.StartTrackAsync(AppKey);
+            //await JYAnalytics.StartTrackAsync(AppKey);
         }
 
         public async static void EndTraceAsync()
         {
-            await JYAnalytics.EndTrackAsync();
+            //await JYAnalytics.EndTrackAsync();
         }
 
         public static void TracePageStart(string pageName)
         {
-            JYAnalytics.TrackPageEnd(pageName);
+            //JYAnalytics.TrackPageEnd(pageName);
         }
 
         public static void TracePageEnd(string pageName)
         {
-            JYAnalytics.TrackPageEnd(pageName);
+            //JYAnalytics.TrackPageEnd(pageName);
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace 游民星空.Core.Helper
         /// <param name="eventId">当前统计的事件ID</param>
         public static void TraceEvent(string eventId)
         {
-            JYAnalytics.TrackEvent(eventId);
+            //JYAnalytics.TrackEvent(eventId);
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace 游民星空.Core.Helper
         /// </summary>
         public static void TraceRead()
         {
-            JYAnalytics.TrackEvent(ReadCount_Id);
+            //JYAnalytics.TrackEvent(ReadCount_Id);
         }
 
         /// <summary>
@@ -71,7 +72,7 @@ namespace 游民星空.Core.Helper
         /// <param name="label">当前统计的事件参数</param>
         public static void TraceEvent(string eventId,string label)
         {
-            TraceEvent(eventId, label);
+            //TraceEvent(eventId, label);
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace 游民星空.Core.Helper
         /// <param name="id"></param>
         public static void TraceError(string id)
         {
-            TraceError(id);
+            //TraceError(id);
         }
 
     }

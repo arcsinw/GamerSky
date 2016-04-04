@@ -23,37 +23,30 @@ namespace 游民星空.Core.Model
         public string thumbnailUrl { get; set; }
 
         private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
-        public static BitmapImage DefaultBitmap
+      
+        
+        private BitmapImage thumbnail;
+        public ImageSource Thumbnail
         {
             get
             {
-                return defaultBitmap;
+                if (thumbnail == null)
+                {
+                    DownloadImage(thumbnailUrl);
+                    return defaultBitmap;
+                }
+                else
+                {
+                    return thumbnail;
+                }
             }
         }
-        //private static BitmapImage DefaultBitmapImage = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
 
-        //private BitmapImage thumbnail;
-        //public ImageSource Thumbnail
-        //{
-        //    get
-        //    {
-        //        if (thumbnail == null)
-        //        {
-        //            DownloadImage(thumbnailUrl);
-        //            return DefaultBitmapImage;
-        //        }
-        //        else
-        //        {
-        //            return thumbnail;
-        //        }
-        //    }
-        //}
-
-        //private async void DownloadImage(string url)
-        //{
-        //    SoftwareBitmap softwareBitmap =  await ImageDownLoadHelper.DownLoadImageByUrl(url);
-        //    thumbnail.SetSource(softwareBitmap.)
-        //}
+        private async void DownloadImage(string url)
+        {
+            SoftwareBitmap softwareBitmap = await ImageDownLoadHelper.DownLoadImageByUrl(url);
+            
+        }
         /// <summary>
         /// 标题
         /// </summary>

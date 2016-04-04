@@ -12,7 +12,7 @@
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -88,7 +88,7 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
     <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <DocumentationFile>
     </DocumentationFile>
   </PropertyGroup>
@@ -113,6 +113,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SwipeableSplitView.cs" />
+    <Compile Include="Converter\BoolToIcon.cs" />
     <Compile Include="Converter\CountToVisibilityConverter.cs" />
     <Compile Include="Converter\BoolToStyleConverter.cs" />
     <Compile Include="Converter\IndexToColorConverter.cs" />
@@ -198,6 +199,8 @@
     <None Include="游民星空_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Star.png" />
+    <Content Include="Assets\Star_full.png" />
     <Content Include="Assets\gsAppHTMLTemplate_css\base.css" />
     <Content Include="Assets\gsAppHTMLTemplate_image\gsAppHTMLTemplate_Video_Background%402x.png" />
     <Content Include="Assets\gsAppHTMLTemplate_image\gsAppHTMLTemplate_Video_PlayButton%402x.png" />
@@ -372,11 +375,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
-      <Name>Microsoft Mobile Extension SDK for Universal App Platform</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\游民星空.BackgroundTask\游民星空.BackgroundTask.csproj">
       <Project>{64a1c5ad-0517-4864-9ee3-d7d31fb0e161}</Project>
       <Name>游民星空.BackgroundTask</Name>
@@ -392,6 +390,11 @@
   <ItemGroup>
     <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\zh-CN\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

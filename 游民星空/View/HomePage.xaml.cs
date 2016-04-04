@@ -46,9 +46,17 @@ namespace 游民星空.View
             }
 
             ViewModel = new HomePageViewModel();
+             
+                //DataShareManager.Current.IsNewVersion = Functions.GetVersion() ;
+            
+            DispatcherManager.Current.Dispatcher = Dispatcher;
+            Loaded += HomePage_Loaded;
+        }
 
+        private void HomePage_Loaded(object sender, RoutedEventArgs e)
+        {
             AppTheme = DataShareManager.Current.AppTheme;
-            if(AppTheme == ElementTheme.Light)
+            if (AppTheme == ElementTheme.Light)
             {
                 isNight = false;
             }
@@ -57,21 +65,18 @@ namespace 游民星空.View
                 isNight = true;
             }
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-            
+
             rootFrame.SourcePageType = typeof(MainPage);
             newsRadioButton.IsChecked = true;
-            
+
             if (DataShareManager.Current.IsNewVersion)
             {
                 UIHelper.ShowMessage(
                     "忘了更新了什么了 ( ╯□╰ )",
                     "新版本更新内容");
-                //DataShareManager.Current.IsNewVersion = Functions.GetVersion() ;
             }
-
-            DispatcherManager.Current.Dispatcher = Dispatcher;
         }
-         
+
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         { 
             var radioButton = sender as RadioButton;
@@ -82,7 +87,7 @@ namespace 游民星空.View
                     case "0":     // 新闻
                         if(rootFrame.Content is MainPage)
                         {
-                            (rootFrame.Content as MainPage).Button_Click(null, null);
+                            (rootFrame.Content as MainPage)?.Button_Click(null, null);
                         }
                         rootFrame.Navigate(typeof(MainPage));
                         break;
@@ -233,6 +238,11 @@ namespace 游民星空.View
         {
             splitView.IsSwipeablePaneOpen = false;
             this.Frame.Navigate(typeof(LoginPage));
+        }
+
+        private void adaptiveStates_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+
         }
     }
 }

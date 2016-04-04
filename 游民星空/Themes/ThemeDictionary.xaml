@@ -203,11 +203,13 @@
                                             <CompositeTransform x:Name="PivotLayoutElementTranslateTransform"/>
                                         </Grid.RenderTransform>
                                         <ContentPresenter x:Name="LeftHeaderPresenter" ContentTemplate="{TemplateBinding LeftHeaderTemplate}" Content="{TemplateBinding LeftHeader}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                        <ContentControl x:Name="HeaderClipper" Grid.Column="1" HorizontalContentAlignment="Stretch" UseSystemFocusVisuals="True">
+                                        <!--#region PivotHeader-->
+                                        <ContentControl x:Name="HeaderClipper" Grid.Row="0" Grid.Column="1" HorizontalContentAlignment="Stretch" UseSystemFocusVisuals="True">
                                             <ContentControl.Clip>
                                                 <RectangleGeometry x:Name="HeaderClipperGeometry"/>
                                             </ContentControl.Clip>
-                                            <Grid Background="{ThemeResource PivotHeaderColorBrush}">
+                                           
+                                            <Grid Background="{ThemeResource PivotHeaderColorBrush}" >
                                                 <PivotHeaderPanel x:Name="StaticHeader" Visibility="Collapsed"/>
                                                 <PivotHeaderPanel x:Name="Header">
                                                     <PivotHeaderPanel.RenderTransform>
@@ -219,9 +221,12 @@
                                                 </PivotHeaderPanel>
                                             </Grid>
                                         </ContentControl>
+                                        <!--#endregion-->
+
                                         <Button x:Name="PreviousButton" Background="Transparent" Grid.Column="1" HorizontalAlignment="Left" Height="36" IsTabStop="False" IsEnabled="False" Margin="{ThemeResource PivotNavButtonMargin}" Opacity="0" Template="{StaticResource PreviousTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Top" Width="20"/>
                                         <Button x:Name="NextButton" Background="Transparent" Grid.Column="1" HorizontalAlignment="Right" Height="36" IsTabStop="False" IsEnabled="False" Margin="{ThemeResource PivotNavButtonMargin}" Opacity="0" Template="{StaticResource NextTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Top" Width="20"/>
                                         <ContentPresenter x:Name="RightHeaderPresenter" ContentTemplate="{TemplateBinding RightHeaderTemplate}" Content="{TemplateBinding RightHeader}" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                        <!--#region Pivot的内容-->
                                         <ItemsPresenter x:Name="PivotItemPresenter" Grid.ColumnSpan="3" Grid.Row="1">
                                             <ItemsPresenter.RenderTransform>
                                                 <TransformGroup>
@@ -230,6 +235,7 @@
                                                 </TransformGroup>
                                             </ItemsPresenter.RenderTransform>
                                         </ItemsPresenter>
+                                        <!--#endregion-->
                                     </Grid>
                                 </PivotPanel>
                             </ScrollViewer>

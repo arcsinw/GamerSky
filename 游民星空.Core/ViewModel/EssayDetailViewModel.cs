@@ -14,7 +14,7 @@ namespace 游民星空.Core.ViewModel
     public class EssayDetailViewModel : ViewModelBase
     {
         private ApiService apiService;
-        public Essay essayResult;
+        public Essay essayResult { get; set; }
 
         public EssayDetailViewModel(Essay essay)
         {
@@ -24,8 +24,7 @@ namespace 游民星空.Core.ViewModel
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
-            //GenerateHtmlString();
+             
         }
 
         private void Current_ShareDataChanged()
@@ -189,7 +188,7 @@ namespace 游民星空.Core.ViewModel
                        + ".author{font-weight:bold;} .bio{color:gray;}"
                        + "body{padding:0px;word-break:break-all;} p{margin:10px auto;} a{color:skyblue;}"
                        + "body{line-height:120%; font:normal 100% Helvetica, Arial, sans-serif;}"
-                       + "img{height:auto;width:auto;width:100%}"
+                       + ".picact{height:auto;width:auto;width:100%}"
                        + "h1{ text-align:left; font-size:1em;}" //标题栏
                        +".bar { display:block; border-top: 1px solid #bbb;width:auto;height:auto;fontsize:19px;}" 
                        +".heading {margin: 0; padding: 0; top: 22px; line-height:28px; color:#333;}"
@@ -329,9 +328,9 @@ namespace 游民星空.Core.ViewModel
                             + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>";
 
                 string videoJs = "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>" +
-                  "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js\"></script>" +                 
-                  "<link href=\"ms-appx-web:///Assets/gsAppHTMLTemplate_css/gsAppHTMLTemplate.css\" rel=\"stylesheet\" type=\"text/css\"/>";
-                //"<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsVideo.js\"></script>" +
+                  "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js\"></script>" +
+                  "<link href=\"ms-appx-web:///Assets/gsAppHTMLTemplate_css/gsAppHTMLTemplate.css\" rel=\"stylesheet\" type=\"text/css\"/>" +
+                 "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsVideo.js\"></script>";
 
                 
                 string title = news.title;
@@ -360,7 +359,7 @@ namespace 游民星空.Core.ViewModel
                  
                 HtmlString = "<!DOCTYPE html>" +
                     "<html>" +
-                        "<head>" + head + baseCss + relatedReadingsCss + "</head>" +
+                        "<head>" + head + baseCss + relatedReadingsCss + videoJs+ "</head>" +
                         "<body quick-markup_injected=\"true\">" +
                             "<GSAppHTMLTemplate version=\"1.4.6\"/>" +
                              "<div id=\"body\" class=\"fontsizetwo\">" +

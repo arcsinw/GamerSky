@@ -81,4 +81,40 @@
   <data name="NoPic.Text" xml:space="preserve">
     <value>No Picture</value>
   </data>
+  <data name="Select.Label" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Find.Label" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="About.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="CheckUpdate.Text" xml:space="preserve">
+    <value>Check Update</value>
+  </data>
+  <data name="FontSize.Text" xml:space="preserve">
+    <value>FontSize</value>
+  </data>
+  <data name="LiveTile.Text" xml:space="preserve">
+    <value>Live Tile</value>
+  </data>
+  <data name="TransparentTile.Text" xml:space="preserve">
+    <value>Transparent Tile</value>
+  </data>
+  <data name="SplashScreen.Text" xml:space="preserve">
+    <value>SplashScreen</value>
+  </data>
+  <data name="SubscribeContent.Text" xml:space="preserve">
+    <value>Subscribe Content</value>
+  </data>
+  <data name="SubscribeTopic.Text" xml:space="preserve">
+    <value>Subscribe Topic</value>
+  </data>
+  <data name="UnSubscribe.Content" xml:space="preserve">
+    <value>UnSubscribe</value>
+  </data>
+  <data name="Refresh.Label" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
 </root>

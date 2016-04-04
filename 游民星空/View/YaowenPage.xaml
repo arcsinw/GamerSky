@@ -86,7 +86,7 @@
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
-            <TextBlock Text="要闻" Style="{ThemeResource PageTitleStyle}"/>
+            <TextBlock x:Uid="Yaowen" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">

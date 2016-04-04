@@ -98,11 +98,54 @@ namespace 游民星空.View
             }
         }
 
+        private bool isActive = false;
+        public bool IsActive
+        {
+            get
+            {
+                return isActive;
+            }
+            set
+            {
+                isActive = value;
+                OnPropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName]string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// 下拉刷新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        {
+            IsActive = true;
+            FavoriteEssays.Clear();
+            LoadData();
+            IsActive = false;
+        }
+ 
+
+        private void refreshAppbar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void findAppbar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void selectAppbar_Click(object sender, RoutedEventArgs e)
+        {
+            listView.SelectionMode = ListViewSelectionMode.Multiple;
         }
     }
 }

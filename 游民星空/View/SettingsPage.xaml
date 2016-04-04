@@ -156,7 +156,7 @@
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
-            <TextBlock Text="设置" Style="{ThemeResource PageTitleStyle}"/>
+            <TextBlock x:Uid="Settings" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
         <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
             <ListView SelectionMode="None">
@@ -167,7 +167,7 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBlock Text="字体大小" />
+                            <TextBlock x:Uid="FontSize"/>
                             <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
                                 <RadioButton Content="小" Style="{StaticResource RadioButtonStyle}" Margin="0,0,16,0"/>
                                 <RadioButton Content="中" Style="{StaticResource RadioButtonStyle}" Margin="0,0,16,0"/>
@@ -178,7 +178,7 @@
 
                     <ListViewItem>
                         <Grid>
-                            <TextBlock Text="动态磁贴" VerticalAlignment="Center"/>
+                            <TextBlock x:Uid="LiveTile" VerticalAlignment="Center"/>
                             <ToggleSwitch IsOn="{x:Bind viewModel.IsLiveTileShow,Mode=TwoWay}"  HorizontalAlignment="Right" MinWidth="0"
                                           VerticalAlignment="Center"/>
                         </Grid>    
@@ -186,7 +186,7 @@
 
                     <ListViewItem>
                         <Grid>
-                            <TextBlock Text="透明磁贴" VerticalAlignment="Center"/>
+                            <TextBlock x:Uid="TransparentTile" VerticalAlignment="Center"/>
                             <ToggleSwitch IsOn="{x:Bind viewModel.IsTransparentTileOn,Mode=TwoWay}"  HorizontalAlignment="Right" MinWidth="0"
                                           VerticalAlignment="Center"/>
                         </Grid>
@@ -208,16 +208,16 @@
                     </ListViewItem>
 
                     <ListViewItem Margin="0,16,0,0" Tapped="{x:Bind StartImage}">
-                        <TextBlock Text="封面故事"/>
+                        <TextBlock x:Uid="SplashScreen" />
                     </ListViewItem>
 
                     <ListViewItem Tapped="{x:Bind NavigateToAbout}">
-                        <TextBlock Text="关于"/>
+                        <TextBlock x:Uid="About" />
                     </ListViewItem>
                    
                     <ListViewItem Tapped="{x:Bind CheckUpdate}">
                         <Grid>
-                            <TextBlock Text="检测新版本" VerticalAlignment="Center"/>
+                            <TextBlock x:Uid="CheckUpdate" VerticalAlignment="Center"/>
                             <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                         </Grid>
                     </ListViewItem>

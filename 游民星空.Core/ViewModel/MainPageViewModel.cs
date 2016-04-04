@@ -17,57 +17,23 @@ namespace 游民星空.Core.ViewModel
     public class MainPageViewModel:ViewModelBase
     {
         ApiService apiService = new ApiService();
-        /// <summary>
-        /// 频道 
-        /// </summary>
-        //public ObservableCollection<ChannelResult> Channels { get; set; }
+       
 
-        /// <summary>
-        /// 文章列表
-        /// </summary>
-        //public ObservableCollection<EssayResult> Essays { get; set; }
-
-        private ObservableCollection<PivotData> essayAndChannels;
+         
         /// <summary>
         /// 同时提供频道和文章列表
         /// </summary>
-        public ObservableCollection<PivotData> EssaysAndChannels
-        {
-            get
-            {
-                return essayAndChannels;
-            }
-            set
-            {
-                essayAndChannels = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// 幻灯片上的文章
-        /// </summary>
-        //public ObservableCollection<EssayResult> HeaderEssays { get; set; }
-
-
+        public ObservableCollection<PivotData> EssaysAndChannels { get; set; }
+         
         public MainPageViewModel()
-        {
-            //Channels = new ObservableCollection<ChannelResult>();
-            //Essays = new ObservableCollection<EssayResult>();
-            //EssaysDictionary = new ObservableDictionary<string, List<EssayResult>>();
-            EssaysAndChannels = new ObservableCollection<PivotData>();
-            //HeaderEssays = new ObservableCollection<EssayResult>();
-            NavigateToEssayCommand = new RelayCommand((contentId) =>
-            {
-                (Window.Current.Content as Frame)?.Navigate(typeof(Essay), contentId);
-            });
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
-            
-            LoadData();
-            
+        {  
+                EssaysAndChannels = new ObservableCollection<PivotData>();
+                
+                AppTheme = DataShareManager.Current.AppTheme;
+                DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+             
+                LoadData();
+             
         }
 
         private void Current_ShareDataChanged()
@@ -89,6 +55,9 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
+        /// <summary>
+        /// 加载频道
+        /// </summary>
         private async void LoadData()
         {
             List<Channel> channels = await apiService.GetChannelList();
@@ -100,8 +69,7 @@ namespace 游民星空.Core.ViewModel
                 }
             }
         }
-
-        public RelayCommand NavigateToEssayCommand { get; set; }
+ 
 
         /// <summary>
         /// 加载更多数据
@@ -127,14 +95,7 @@ namespace 游民星空.Core.ViewModel
             }
             
         }
-
-        
-        public void NavigateToEssay(string contentId)
-        {
-           
-        }
-
-       
+         
 
         public async Task Refresh(int channelId)
         {

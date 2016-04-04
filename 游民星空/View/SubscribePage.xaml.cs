@@ -117,7 +117,7 @@ namespace 游民星空.View
         private ScrollViewer scrollViewer;
         
         private bool IsDataLoading = false;
-        private int pageIndex = 1;
+        //private int pageIndex = 1;
         private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             if (scrollViewer != null)

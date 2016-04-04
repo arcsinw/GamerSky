@@ -38,5 +38,13 @@ namespace 游民星空.Core.ViewModel
                 }
             }
         }
+         
+        public static bool IsDesignMode
+        {
+            get
+            {
+                return Windows.ApplicationModel.DesignMode.DesignModeEnabled;
+            }
+        }
     }
 }

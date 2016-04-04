@@ -132,19 +132,7 @@
         
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Narrow">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="480"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <!--<Setter Property="splitView.DisplayMode" Value="InLine"/>-->
-                        <!--<Setter Property="splitView.IsSwipeablePaneOpen" Value="True" />-->
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+         
         <!--<RelativePanel>-->
         <controls:SwipeableSplitView x:Name="splitView" Background="{ThemeResource PageBackground}"
             DisplayMode="Overlay" OpenPaneLength="240" IsSwipeablePaneOpen="True">
@@ -258,7 +246,31 @@
 
             <SplitView.Content>
                 <Grid>
-                    <Frame x:Name="rootFrame"/>
+                    <!--<VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="adaptiveStates"
+                                          CurrentStateChanged="adaptiveStates_CurrentStateChanged">
+                            <VisualState x:Name="Narrow">
+                                <VisualState.StateTriggers>
+                                    <AdaptiveTrigger MinWindowWidth="0"/>
+                                </VisualState.StateTriggers>
+                                <VisualState.Setters>
+                                    <Setter Target="essayFrame.Width" Value="0"/>
+                                    <Setter Target="rootFrame.Width" Value="*"/>
+                                    <Setter Target="essayFrame.(Grid.Column)" Value="0"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>-->
+
+                    <!--<Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>-->
+                    <!--新闻列表Frame-->
+                    <Frame x:Name="rootFrame" />
+
+                    <!--新闻Frame-->
+                    <Frame x:Name="essayFrame"/>
                     <!--下方模块选择栏-->
                     <Grid VerticalAlignment="Bottom" Height="50" 
                           Opacity="0.8"

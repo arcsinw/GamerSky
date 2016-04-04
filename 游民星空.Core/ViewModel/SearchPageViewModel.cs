@@ -126,7 +126,7 @@ namespace 游民星空.Core.ViewModel
             Strategys = new ObservableCollection<Essay>();
             Subscribes = new ObservableCollection<Subscribe>();
 
-            LoadHotkey();
+            //LoadHotkey();
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
@@ -135,10 +135,10 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 加载hot keyword
         /// </summary>
-        public async void LoadHotkey()
-        {
+        //public async void LoadHotkey()
+        //{
              
-        }
+        //}
 
         /// <summary>
         /// 加载攻略热点

@@ -81,4 +81,40 @@
   <data name="NoPic.Text" xml:space="preserve">
     <value>非WiFi无图</value>
   </data>
+  <data name="Select.Label" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="Find.Label" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="About.Text" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="CheckUpdate.Text" xml:space="preserve">
+    <value>检测新版本</value>
+  </data>
+  <data name="FontSize.Text" xml:space="preserve">
+    <value>字体大小</value>
+  </data>
+  <data name="LiveTile.Text" xml:space="preserve">
+    <value>动态磁贴</value>
+  </data>
+  <data name="TransparentTile.Text" xml:space="preserve">
+    <value>透明磁贴</value>
+  </data>
+  <data name="SplashScreen.Text" xml:space="preserve">
+    <value>封面故事</value>
+  </data>
+  <data name="SubscribeContent.Text" xml:space="preserve">
+    <value>订阅内容</value>
+  </data>
+  <data name="SubscribeTopic.Text" xml:space="preserve">
+    <value>订阅专题</value>
+  </data>
+  <data name="UnSubscribe.Content" xml:space="preserve">
+    <value>退订</value>
+  </data>
+  <data name="Refresh.Label" xml:space="preserve">
+    <value>刷新</value>
+  </data>
 </root>

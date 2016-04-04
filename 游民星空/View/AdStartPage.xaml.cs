@@ -171,7 +171,8 @@ namespace 游民星空.View
                         }
                     }catch(Exception ex)
                     {
-
+                        JYHelper.TraceError("AdStartPage.xaml"+ex.Message);
+    
                     }
                 }
             }

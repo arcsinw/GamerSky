@@ -54,7 +54,7 @@ namespace 游民星空.Helper
             else
             {
                 ApplicationView applicationView = ApplicationView.GetForCurrentView();
-                applicationView.SetPreferredMinSize(new Windows.Foundation.Size(320, 480));
+                applicationView.SetPreferredMinSize(new Windows.Foundation.Size(480, 800));
                 applicationView.ShowStandardSystemOverlays();
                 //应用标题栏
                 ApplicationViewTitleBar titleBar = applicationView.TitleBar;

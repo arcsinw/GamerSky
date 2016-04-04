@@ -195,6 +195,10 @@
     <Compile Include="ResultDataModel\StrategyResult.cs" />
     <Compile Include="ResultDataModel\SubscribeContentResult.cs" />
     <Compile Include="ResultDataModel\SubscribeResult.cs" />
+    <Compile Include="Store\CurrentAppProxy.cs" />
+    <Compile Include="Store\InAppPurchaseException.cs" />
+    <Compile Include="Store\InAppPurchases.cs" />
+    <Compile Include="Store\Simulation\CurrentAppSimulatorHelper.cs" />
     <Compile Include="ViewModel\DataShareManager.cs" />
     <Compile Include="ViewModel\EmailRegisterPageViewModel.cs" />
     <Compile Include="ViewModel\EssayDetailViewModel.cs" />
@@ -216,7 +220,7 @@
     <EmbeddedResource Include="Properties\游民星空.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Content Include="Store\Simulation\app-listing.xml" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

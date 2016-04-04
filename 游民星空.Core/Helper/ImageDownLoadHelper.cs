@@ -36,8 +36,9 @@ namespace 游民星空.Core.Helper
                 BitmapDecoder decoder = await BitmapDecoder.CreateAsync(memStream);
          
                 SoftwareBitmap softBmp = await decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied);
-               
-                //Debug.WriteLine($"Image Download Success !!! {fileName}");
+                string fileName = uri;
+                //await WriteToFile(softwareBitmap,)
+                Debug.WriteLine($"Image Download Success !!! {fileName}");
                 return softBmp;
             }
             catch (Exception e)

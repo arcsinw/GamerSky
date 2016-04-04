@@ -22,11 +22,11 @@ namespace 游民星空.Core.ViewModel
         private const string SettingKey_BigFont = "FONT_SIZE";
         private const string SettingKey_NoImageMode = "NO_IMAGES_MODE";
         private const string RoamingSettingKey_AppTheme = "APP_THEME";
-        private const string SettingKey_SubscribeList = "SUBSCRIBE_LIST";
+        private const string SettingKey_SubscribeList = "SUBSCRIBE_LIST";                   //订阅列表
         private const string SettingKey_IsStatusBarShow = "IS_STATUSBAR_SHOW";
         #endregion
 
-        #region Files' name
+        #region Files and folders'  name
         /// <summary>
         /// 收藏文件夹名
         /// </summary>
@@ -82,7 +82,7 @@ namespace 游民星空.Core.ViewModel
         }
 
 
-        private List<Essay> favoriteList;
+        private List<Essay> favoriteList = new List<Essay>();
         /// <summary>
         /// 收藏文章列表
         /// </summary>
@@ -106,7 +106,7 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
-        private List<Strategy> strategyList;
+        private List<Strategy> strategyList = new List<Strategy>();
         /// <summary>
         /// 攻略收藏
         /// </summary>
@@ -219,6 +219,7 @@ namespace 游民星空.Core.ViewModel
                 isNoImage = false;
             }
 
+            //加载订阅列表
             if (localSettings.Values.ContainsKey(SettingKey_SubscribeList))
             {
                 subscribeList = Functions.Deserlialize <List<Subscribe>>(localSettings.Values[SettingKey_SubscribeList].ToString());
@@ -233,13 +234,7 @@ namespace 游民星空.Core.ViewModel
             {
                 favoriteList = await FileHelper.Current.ReadObjectAsync<List<Essay>>(FavoriteList_FileName, FavoriteList_Folder);
             }
-
-            //加载订阅列表
-            if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(ApplicationData.Current.LocalFolder.Path + SubscribeList_FileName))
-            {
-                subscribeList = await FileHelper.Current.ReadObjectAsync<List<Subscribe>>(FavoriteList_FileName, SubscribeList_FileName);
-            }
-
+  
             //加载攻略列表
             if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(ApplicationData.Current.LocalFolder.Path + StrategyList_FileName))
             {
@@ -283,7 +278,7 @@ namespace 游民星空.Core.ViewModel
         }
 
         /// <summary>
-        /// 更新订阅列表
+        /// 更新订阅列表 Subscribe
         /// </summary>
         /// <param name="subscribe"></param>
         public void UpdateSubscribe(Subscribe subscribe)
@@ -307,7 +302,7 @@ namespace 游民星空.Core.ViewModel
         }
         
         /// <summary>
-        /// 更新文章收藏列表
+        /// 更新文章收藏列表 Essay
         /// </summary>
         /// <param name="gameList"></param>
         public async void UpdateFavoriteEssayList(Essay essay)
@@ -315,10 +310,12 @@ namespace 游民星空.Core.ViewModel
             bool add = !favoriteList.Any(x => x.contentId == essay.contentId);
             if(add)
             {
+                essay.IsFavorite = true;
                 favoriteList.Add(essay);
             }
             else
             {
+                essay.IsFavorite = false;
                 favoriteList.Remove(essay);
             }
             //更新本地文件
@@ -327,7 +324,7 @@ namespace 游民星空.Core.ViewModel
         }
 
         /// <summary>
-        /// 更新攻略列表
+        /// 更新攻略列表 Strategy
         /// </summary>
         /// <param name="strategy"></param>
         public async void UpdateStrategyList(Strategy strategy)

@@ -57,7 +57,7 @@
                           ShowsScrollingPlaceholders="True"
                           IsItemClickEnabled="True"
                           ItemClick="GridView_ItemClick"
-                          MinItemHeight="170"
+                          MinItemHeight="160"
                           MinItemWidth="240"
                         >
                         <VisualStateManager.VisualStateGroups>

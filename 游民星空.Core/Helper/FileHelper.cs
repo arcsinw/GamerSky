@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿ 
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -43,12 +43,13 @@ namespace 游民星空.Core.Helper
         {
             await localFolder.CreateFolderAsync("images_cache", CreationCollisionOption.OpenIfExists);
             await localFolder.CreateFolderAsync("data_cache", CreationCollisionOption.OpenIfExists);
+            await localFolder.CreateFolderAsync("favorite_list", CreationCollisionOption.OpenIfExists);
         }
 
         
          
         /// <summary>
-        /// 读缓存
+        /// 写缓存
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
@@ -72,7 +73,7 @@ namespace 游民星空.Core.Helper
         }
 
         /// <summary>
-        /// 写缓存
+        /// 读缓存
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="filename"></param>

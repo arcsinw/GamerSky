@@ -1,27 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
-using 游民星空.Core.Http;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
-using 游民星空.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -40,23 +25,14 @@ namespace 游民星空.View
 
             webView.NewWindowRequested += WebView_NewWindowRequested;
              
+            SizeChanged += EssayDetail_SizeChanged;
         }
 
-        /// <summary>
-        /// 增加广告
-        /// </summary>
-        //public void AddAdControl()
-        //{
-        //    if (!IAPHelper.IsProductGot(IAPHelper.Remove_Ad))
-        //    {
-        //        AdControl adControl = new AdControl();
-        //        adControl.AdType = JiuYouAdUniversal.Models.AdType.Banner;
-        //        adControl.ApplicationKey = "2c7fdea4792fb5b5e3031dbf3f99ff15";
-        //        adControl.HorizontalAlignment = HorizontalAlignment.Stretch;
-        //        adControl.VerticalAlignment = VerticalAlignment.Top;
-        //        rootGrid.Children.Add(adControl);
-        //    }
-        //}
+        private void EssayDetail_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ReSizeVideo();
+        }
+
 
         /// <summary>
         /// 处理WebView中的新请求
@@ -77,15 +53,15 @@ namespace 游民星空.View
 
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             progress.IsActive = true;
             essayResult = e.Parameter as Essay;
             if (essayResult == null) return;
-           if(!essayResult.contentId.Equals("0"))
+            if (!essayResult.contentId.Equals("0"))
             {
                 this.DataContext = viewModel = new EssayDetailViewModel(essayResult);
-                //await viewModel.GenerateHtmlString();
+                await viewModel.GenerateHtmlString();
             }
             else
             {
@@ -94,7 +70,7 @@ namespace 游民星空.View
             progress.IsActive = false;
             JYHelper.TraceRead();
         }
- 
+
         Essay essayResult;
         private async void Edge(object sender, RoutedEventArgs e)
         {
@@ -151,29 +127,48 @@ namespace 游民星空.View
             prepareTarget(target, eventListener);";
             //await sender.InvokeScriptAsync("eval", new[] { js });
 
+           
+
             //iframe自适应
-            js = @"var iframeTags = document.getElementsByTagName(""iframe"");
+            js = @"var iframeTags = document.getElementsByTagName('iframe');
             for (var iframeTagIndex = 0;
                 iframeTagIndex < iframeTags.length;
                 iframeTagIndex++)
                     {
                         var iframeTag = iframeTags[iframeTagIndex];
-                        iframeTag.removeAttribute(""style"");
+                        iframeTag.removeAttribute('style');
                         iframeTag.height = document.body.clientWidth * (9 / 16);
                         iframeTag.width = document.body.clientWidth;
                     }
 
-                    var embedTags = document.getElementsByTagName(""embed"");
+                    var embedTags = document.getElementsByTagName('embed');
                     for (var embedTagIndex = 0;
                          embedTagIndex < embedTags.length;
                          embedTagIndex++)
                     {
                         var embedTag = embedTags[embedTagIndex];
-                        embedTag.removeAttribute(""style"");
+                        embedTag.removeAttribute('style');
                         embedTag.height = document.body.clientWidth * (9 / 16);
                         embedTag.width = document.body.clientWidth;
                     }";
-            await sender.InvokeScriptAsync("eval", new[] { js });
+            //await sender.InvokeScriptAsync("eval", new[] { js });
+        }
+
+        /// <summary>
+        /// 翻译网页
+        /// </summary>
+        private async void Translate()
+        {
+            var js = "javascript:(function(){var s = document.createElement('script'); s.type = 'text/javascript'; s.src = 'http://labs.microsofttranslator.com/bookmarklet/default.aspx?f=js&to=en'; document.body.insertBefore(s, document.body.firstChild);})()";
+            switch (pivot.SelectedIndex)
+            {
+                case 0:
+                    await webView.InvokeScriptAsync("eval", new[] { js });
+                    break;
+                case 1:
+                    await commentWebView.InvokeScriptAsync("eval", new[] { js });
+                    break;
+            }
         }
 
         private void webView_ScriptNotify(object sender, NotifyEventArgs e)
@@ -204,6 +199,44 @@ namespace 游民星空.View
         }
 
         /// <summary>
+        /// 自适应视频窗口大小
+        /// </summary>
+        public async void ReSizeVideo()
+        {
+            //iframe自适应
+            var js = @"var iframeTags = document.getElementsByTagName('iframe');
+             
+            for (var iframeTagIndex = 0;
+                iframeTagIndex <iframeTags.length;
+                iframeTagIndex++)
+                    {
+                        var iframeTag = iframeTags[iframeTagIndex];
+                        iframeTag.removeAttribute('style');
+                        iframeTag.height = document.body.clientWidth * (9 / 16);
+                        iframeTag.width = " + DeviceInformationHelper.GetScreenWidth()+@"
+                    }
+
+                    var embedTags = document.getElementsByTagName('embed');
+                    for (var embedTagIndex = 0;
+                         embedTagIndex < embedTags.length;
+                         embedTagIndex++)
+                    {
+                        var embedTag = embedTags[embedTagIndex];
+                        embedTag.removeAttribute('style');
+                        embedTag.height = document.body.clientWidth * (9 / 16);
+                        embedTag.width = document.body.clientWidth;
+                    }";
+            await webView.InvokeScriptAsync("eval", new[] { js });
+
+            js = @"var iframeTags = document.getElementsByTagName('iframe');
+                        var iframeTag = iframeTags[0];
+                        iframeTag.removeAttribute('style');
+                        iframeTag.height = document.body.clientWidth * (9 / 16);
+                        iframeTag.width = document.body.clientWidth;";
+            //await webView.InvokeScriptAsync("eval", new[] { js });
+        }
+
+        /// <summary>
         /// 后退
         /// </summary>
         public async void Back()
@@ -226,22 +259,21 @@ namespace 游民星空.View
         /// </summary>
         public async void NightMode()
         {
-            await webView.InvokeScriptAsync("eval", new[] { "document.body.style.backgroundColor='#FFFFFF';" });
+            var js = @"var htmlTag= document.getElementsByTagName(""html"")[0];
+            gsSetElementClass(htmlTag, ""PageColorMode_Day"", ""PageColorMode_Night"");
+                   ";
+            await webView.InvokeScriptAsync("eval", new[] { js});
+            //await webView.InvokeScriptAsync("eval", new[] { "document.body.style.backgroundColor='#000000';" });
         }
 
         public async void DayMode()
         {
-            await webView.InvokeScriptAsync("eval", new[] { "document.body.style.backgroundColor='#000000';" });
+            await webView.InvokeScriptAsync("eval", new[] { "document.body.style.backgroundColor='#FFFFFF';" });
         }
-
-        private void webView_Holding(object sender, HoldingRoutedEventArgs e)
-        {
-
-        }
+ 
          
         private async void refreshButton_Click(object sender, RoutedEventArgs e)
         {
-            
             await viewModel.GenerateHtmlString();
         }
 
@@ -249,7 +281,7 @@ namespace 游民星空.View
         {
             if (viewModel != null)
             {
-                switch (pivot.SelectedIndex)
+                switch ( pivot.SelectedIndex)
                 {
                     case 0:
                         await viewModel.GenerateHtmlString();
@@ -268,13 +300,56 @@ namespace 游民星空.View
         /// <param name="e"></param>
         private void nightCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            //webView.InvokeScriptAsync("gsSetPageParam", new[] { "name:" });
-            //NightMode();
+            NightMode();
         }
 
         private void nightCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             DayMode();
+        }
+
+
+
+        private void webView_FrameContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
+        {
+            var uri = args.Uri;
+        }
+
+        private void webView_FrameDOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
+        {
+            viewModel.IsActive = false;
+        }
+
+        /// <summary>
+        /// 翻译成英文
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void translateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            switch(pivot.SelectedIndex)
+            {
+                case 0:
+                    Translate();
+
+                    break;
+                case 1:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 收藏文章
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void likeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = this.DataContext as EssayDetailViewModel;
+            if (vm != null)
+            {
+                DataShareManager.Current.UpdateFavoriteEssayList(vm.essayResult);
+            }
         }
     }
 }

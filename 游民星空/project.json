@@ -2,7 +2,7 @@
   "dependencies": {
     "AsyncStackTraceEx": "1.0.1.1",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "PullToRefresh.UWP": "0.3.3"
+    "PullToRefresh.UWP": "0.3.4"
   },
   "frameworks": {
     "uap10.0": {}
