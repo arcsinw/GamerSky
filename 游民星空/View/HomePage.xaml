@@ -10,6 +10,9 @@
     RequestedTheme="{x:Bind AppTheme,Mode=OneWay}"
     mc:Ignorable="d">
 
+    <Page.DataContext>
+        <vm:HomePageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
     
     <Page.Resources>
         <Style x:Key="TabRadioStyle" TargetType="RadioButton">
@@ -132,8 +135,7 @@
         
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-         
-        <!--<RelativePanel>-->
+          
         <controls:SwipeableSplitView x:Name="splitView" Background="{ThemeResource PageBackground}"
             DisplayMode="Overlay" OpenPaneLength="240" IsSwipeablePaneOpen="True">
             <SplitView.Pane>
@@ -181,14 +183,7 @@
                                 <TextBlock Text="要闻" x:Uid="Yaowen" Margin="{StaticResource TextBlockMargin}"/>
                             </StackPanel>
                         </ListViewItem>
-
-                        <!--<ListViewItem>
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon UriSource="ms-appx:///Assets/Split_Manage.png" Height="24"/>
-                                <TextBlock Text="游戏管理" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>-->
-
+ 
                         <ListViewItem Tapped="{x:Bind ViewModel.ClearCache}">
                             <Grid HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
@@ -270,7 +265,7 @@
                     <Frame x:Name="rootFrame" />
 
                     <!--新闻Frame-->
-                    <Frame x:Name="essayFrame"/>
+                    <!--<Frame x:Name="essayFrame"/>-->
                     <!--下方模块选择栏-->
                     <Grid VerticalAlignment="Bottom" Height="50" 
                           Opacity="0.8"
@@ -340,8 +335,7 @@
                 </Grid>
             </SplitView.Content>
         </controls:SwipeableSplitView>
-        <!--<Frame RelativePanel.AlignRightWith="splitView" Background="Red" />
-        </RelativePanel>-->
+      
         
     </Grid>
 </Page>

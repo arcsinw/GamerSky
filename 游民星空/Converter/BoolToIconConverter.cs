@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Media;
 
 namespace 游民星空.Converter
 {
-    public class BoolToIcon : IValueConverter
+    public class BoolToIconConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         { 

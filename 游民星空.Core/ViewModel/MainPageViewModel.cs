@@ -17,8 +17,7 @@ namespace 游民星空.Core.ViewModel
     public class MainPageViewModel:ViewModelBase
     {
         ApiService apiService = new ApiService();
-       
-
+        
          
         /// <summary>
         /// 同时提供频道和文章列表
@@ -31,9 +30,15 @@ namespace 游民星空.Core.ViewModel
                 
                 AppTheme = DataShareManager.Current.AppTheme;
                 DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-             
+
+            if (IsDesignMode)
+            {
                 LoadData();
-             
+            }
+            else
+            {
+                LoadData();
+            }
         }
 
         private void Current_ShareDataChanged()

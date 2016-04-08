@@ -136,7 +136,8 @@
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
                       ItemsSource="{x:Bind FavoriteEssays}"
-                      x:Name="listView"
+                      x:Name="listView" IsItemClickEnabled="True"
+                          ItemClick="listView_ItemClick"
                           >
                     <ListView.ItemTemplateSelector>
                         <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
@@ -154,9 +155,12 @@
     </Grid>
 
     <Page.BottomAppBar>
+ 
         <CommandBar >
+           
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Uid="Select" x:Name="selectAppbar" Click="selectAppbar_Click">
+               
+                <AppBarButton x:Uid="Select" x:Name="selectAppbar" Click="selectAppbar_Click" >
                     <SymbolIcon Symbol="Bullets" />
                 </AppBarButton>
                 <AppBarButton x:Uid="Find" x:Name="findAppbar" Click="findAppbar_Click">
@@ -168,9 +172,12 @@
                     <SymbolIcon Symbol="Refresh"/>
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
+            
+            
             <CommandBar.SecondaryCommands>
                 
             </CommandBar.SecondaryCommands>
         </CommandBar>
+        
     </Page.BottomAppBar>
 </Page>

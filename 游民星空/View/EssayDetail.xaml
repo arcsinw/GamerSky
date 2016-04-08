@@ -9,7 +9,7 @@
     xmlns:converter="using:游民星空.Converter"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}">
-
+ 
     <Page.Transitions>
         <TransitionCollection>
             <!--<EdgeUIThemeTransition Edge="Right"/>-->
@@ -352,7 +352,8 @@
             </Setter>
         </Style>
 
-        <converter:BoolToIcon x:Key="BoolToIcon"/>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converter:BoolToIconConverter x:Key="BoolToIcon"/>
     </Page.Resources>
 
     <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -377,7 +378,9 @@
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
             <Button x:Name="translateBtn" Click="translateBtn_Click" HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" Background="Transparent">
+                VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" 
+                    Visibility="{Binding IsTranslateVisible,Converter={StaticResource BoolToVisibilityConverter}}"
+                     >
                 <SymbolIcon Symbol="Character" />
             </Button>
 

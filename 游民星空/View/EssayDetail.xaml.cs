@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
+using 游民星空.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -26,6 +27,14 @@ namespace 游民星空.View
             webView.NewWindowRequested += WebView_NewWindowRequested;
              
             SizeChanged += EssayDetail_SizeChanged;
+
+            Loaded += EssayDetail_Loaded;
+        }
+
+        private void EssayDetail_Loaded(object sender, RoutedEventArgs e)
+        {
+            ExperimentHelper.LogTranslateViewd();
+            this.Loaded -= EssayDetail_Loaded;
         }
 
         private void EssayDetail_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -53,7 +62,7 @@ namespace 游民星空.View
 
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             progress.IsActive = true;
             essayResult = e.Parameter as Essay;
@@ -61,7 +70,7 @@ namespace 游民星空.View
             if (!essayResult.contentId.Equals("0"))
             {
                 this.DataContext = viewModel = new EssayDetailViewModel(essayResult);
-                await viewModel.GenerateHtmlString();
+                //await viewModel.GenerateHtmlString();
             }
             else
             {
@@ -80,7 +89,7 @@ namespace 游民星空.View
         private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
         {  
             //加载v1 css
-            var js = @"var myCss = document.createElement(""link"");
+            var js = @"var myCss = document.createElement('link');
                     myCss.rel = ""stylesheet"";
                     myCss.type = ""text/css"";
                     myCss.href = ""ms-appx-web:///Assets/gsAppHTMLTemplate_css/base.css"";
@@ -151,7 +160,7 @@ namespace 游民星空.View
                         embedTag.height = document.body.clientWidth * (9 / 16);
                         embedTag.width = document.body.clientWidth;
                     }";
-            //await sender.InvokeScriptAsync("eval", new[] { js });
+            await sender.InvokeScriptAsync("eval", new[] { js });
         }
 
         /// <summary>
@@ -205,7 +214,6 @@ namespace 游民星空.View
         {
             //iframe自适应
             var js = @"var iframeTags = document.getElementsByTagName('iframe');
-             
             for (var iframeTagIndex = 0;
                 iframeTagIndex <iframeTags.length;
                 iframeTagIndex++)
@@ -213,7 +221,7 @@ namespace 游民星空.View
                         var iframeTag = iframeTags[iframeTagIndex];
                         iframeTag.removeAttribute('style');
                         iframeTag.height = document.body.clientWidth * (9 / 16);
-                        iframeTag.width = " + DeviceInformationHelper.GetScreenWidth()+@"
+                        iframeTag.width = document.body.clientWidth;
                     }
 
                     var embedTags = document.getElementsByTagName('embed');
@@ -246,7 +254,7 @@ namespace 游民星空.View
 
         public async void Refresh()
         {
-            await webView.InvokeScriptAsync("eval", new[] { "history.go()" });
+            await viewModel.GenerateHtmlString();
         }
 
         public async void Forward()
@@ -277,6 +285,8 @@ namespace 游民星空.View
             await viewModel.GenerateHtmlString();
         }
 
+        private bool isEssayLoaded = false;
+
         private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (viewModel != null)
@@ -284,7 +294,11 @@ namespace 游民星空.View
                 switch ( pivot.SelectedIndex)
                 {
                     case 0:
-                        await viewModel.GenerateHtmlString();
+                        if (!isEssayLoaded)
+                        {
+                            await viewModel.GenerateHtmlString();
+                            isEssayLoaded = true;
+                        }
                         break;
                     case 1:
                         viewModel.GenerateCommentString();
@@ -326,16 +340,9 @@ namespace 游民星空.View
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void translateBtn_Click(object sender, RoutedEventArgs e)
-        {
-            switch(pivot.SelectedIndex)
-            {
-                case 0:
-                    Translate();
-
-                    break;
-                case 1:
-                    break;
-            }
+        { 
+            Translate();
+            ExperimentHelper.LogTranslateClick();
         }
 
         /// <summary>

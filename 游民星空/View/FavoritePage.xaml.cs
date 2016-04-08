@@ -126,26 +126,53 @@ namespace 游民星空.View
         /// <param name="args"></param>
         private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
+            Refresh();
+        }
+
+        private void Refresh()
+        {
             IsActive = true;
             FavoriteEssays.Clear();
             LoadData();
             IsActive = false;
         }
- 
 
         private void refreshAppbar_Click(object sender, RoutedEventArgs e)
         {
-
+            Refresh();
         }
 
         private void findAppbar_Click(object sender, RoutedEventArgs e)
         {
 
         }
-
+        bool isMutiple = false;
         private void selectAppbar_Click(object sender, RoutedEventArgs e)
         {
-            listView.SelectionMode = ListViewSelectionMode.Multiple;
+            if (!isMutiple)
+            {
+                listView.SelectionMode = ListViewSelectionMode.Multiple;
+                isMutiple = true;
+            }
+            else
+            {
+                listView.SelectionMode = ListViewSelectionMode.None;
+                isMutiple = false;
+            }
+        }
+
+        private void listView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Essay essayResult = e.ClickedItem as Essay;
+            if (essayResult == null) return;
+            if (!essayResult.contentType.Equals("zhuanti"))
+            {
+                (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+            }
+            else
+            {
+                (Window.Current.Content as Frame)?.Navigate(typeof(SubscribeContentPage), essayResult.contentId);
+            }
         }
     }
 }

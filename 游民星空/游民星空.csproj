@@ -40,7 +40,7 @@
     <Prefer32Bit>true</Prefer32Bit>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
     <EnableGatekeeperAnalysis>false</EnableGatekeeperAnalysis>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <OutputPath>bin\ARM\Release\</OutputPath>
@@ -87,7 +87,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
-    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
     <Optimize>false</Optimize>
     <DocumentationFile>
     </DocumentationFile>
@@ -113,7 +113,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SwipeableSplitView.cs" />
-    <Compile Include="Converter\BoolToIcon.cs" />
+    <Compile Include="Converter\BoolToIconConverter.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\CountToVisibilityConverter.cs" />
     <Compile Include="Converter\BoolToStyleConverter.cs" />
     <Compile Include="Converter\IndexToColorConverter.cs" />
@@ -202,20 +203,6 @@
     <Content Include="Assets\Star.png" />
     <Content Include="Assets\Star_full.png" />
     <Content Include="Assets\gsAppHTMLTemplate_css\base.css" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\gsAppHTMLTemplate_Video_Background%402x.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\gsAppHTMLTemplate_Video_PlayButton%402x.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\icon_Praised_UIMode_Day%402x.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\icon_Praised_UIMode_Night%402x.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\icon_Praise_UIMode_Day%402x.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\icon_Praise_UIMode_Night%402x.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\imgSet_BottomBarBackground%402x.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\imgSet_ExpandIcon%402x.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\img_Badge_GIF%402x.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\reviewTable_Background.gif" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\reviewTable_Background10.jpg" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\reviewTable_Bad.gif" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\reviewTable_Good.gif" />
-    <Content Include="Assets\gsAppHTMLTemplate_image\user_DefaultHeadImage%402x.png" />
     <Content Include="Assets\gsAppHTMLTemplate_js\gsAppHTMLTemplate.js" />
     <Content Include="Assets\gsAppHTMLTemplate_js\gsAppHTMLTemplate_Video.js" />
     <Content Include="Assets\gsAppHTMLTemplate_js\gsVideo.js" />
@@ -392,6 +379,9 @@
     <PRIResource Include="Strings\zh-CN\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
     <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>

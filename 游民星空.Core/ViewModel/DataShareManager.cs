@@ -34,7 +34,7 @@ namespace 游民星空.Core.ViewModel
         /// <summary>
         /// 文章收藏列表的文件名
         /// </summary>
-        private const string FavoriteList_FileName = "favoriteEssay_List.json";
+        private const string EssayList_FileName = "favoriteEssay_List.json";
         /// <summary>
         /// 订阅列表的文件名
         /// </summary>
@@ -230,15 +230,17 @@ namespace 游民星空.Core.ViewModel
             }
 
             //加载文章收藏列表
-            if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(ApplicationData.Current.LocalFolder.Path + FavoriteList_FileName))
+            var folder = await ApplicationData.Current.LocalFolder.GetFolderAsync(FavoriteList_Folder);
+            
+            if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(folder.Path+"\\"+EssayList_FileName))
             {
-                favoriteList = await FileHelper.Current.ReadObjectAsync<List<Essay>>(FavoriteList_FileName, FavoriteList_Folder);
+                favoriteList = await FileHelper.Current.ReadObjectAsync<List<Essay>>(EssayList_FileName, FavoriteList_Folder);
             }
   
             //加载攻略列表
-            if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(ApplicationData.Current.LocalFolder.Path + StrategyList_FileName))
+            if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(folder.Path+"\\" + StrategyList_FileName))
             {
-                strategyList = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(FavoriteList_FileName, StrategyList_FileName);
+                strategyList = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(StrategyList_FileName, FavoriteList_Folder);
             }
         }
 
@@ -319,7 +321,7 @@ namespace 游民星空.Core.ViewModel
                 favoriteList.Remove(essay);
             }
             //更新本地文件
-            await FileHelper.Current.WriteObjectAsync<List<Essay>>(favoriteList, FavoriteList_FileName, FavoriteList_Folder);
+            await FileHelper.Current.WriteObjectAsync<List<Essay>>(favoriteList, EssayList_FileName, FavoriteList_Folder);
             OnShareDataChanged();
         }
 
@@ -339,7 +341,7 @@ namespace 游民星空.Core.ViewModel
                 strategyList.Remove(strategy);
             }
             //更新本地文件
-            await FileHelper.Current.WriteObjectAsync<List<Strategy>>(strategyList, FavoriteList_FileName, FavoriteList_Folder);
+            await FileHelper.Current.WriteObjectAsync<List<Strategy>>(strategyList, EssayList_FileName, FavoriteList_Folder);
             OnShareDataChanged();
         }
         #endregion

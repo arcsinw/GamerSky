@@ -29,32 +29,25 @@ namespace 游民星空.View
     /// </summary>
     public sealed partial class HomePage : Page , INotifyPropertyChanged
     {
-        private HomePageViewModel ViewModel { get; set; }
+        
         public HomePage()
         {
             this.InitializeComponent();
 
             NavigationCacheMode = NavigationCacheMode.Required;
 
-            if (Functions.IsMobile())
-            {
-                UIHelper.ShowStatusBar();
-            }
-            else
-            {
-                UIHelper.ShowView();
-            }
-
-            ViewModel = new HomePageViewModel();
              
-                //DataShareManager.Current.IsNewVersion = Functions.GetVersion() ;
-            
+            UIHelper.ShowStatusBar();
+               
             DispatcherManager.Current.Dispatcher = Dispatcher;
             Loaded += HomePage_Loaded;
         }
 
         private void HomePage_Loaded(object sender, RoutedEventArgs e)
         {
+            rootFrame.SourcePageType = typeof(MainPage);
+            newsRadioButton.IsChecked = true;
+
             AppTheme = DataShareManager.Current.AppTheme;
             if (AppTheme == ElementTheme.Light)
             {
@@ -65,16 +58,14 @@ namespace 游民星空.View
                 isNight = true;
             }
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
-            rootFrame.SourcePageType = typeof(MainPage);
-            newsRadioButton.IsChecked = true;
-
+             
             if (DataShareManager.Current.IsNewVersion)
             {
                 UIHelper.ShowMessage(
                     "忘了更新了什么了 ( ╯□╰ )",
                     "新版本更新内容");
             }
+            this.Loaded -= HomePage_Loaded;
         }
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
@@ -102,11 +93,7 @@ namespace 游民星空.View
                 }
             }
         }
-
-        private void ListViewItem_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
+ 
          
         /// <summary>
         /// 搜索
