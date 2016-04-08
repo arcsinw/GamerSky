@@ -200,11 +200,9 @@
     <None Include="游民星空_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\gs.css" />
     <Content Include="Assets\Star.png" />
     <Content Include="Assets\Star_full.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_css\base.css" />
-    <Content Include="Assets\gsAppHTMLTemplate_js\gsAppHTMLTemplate.js" />
-    <Content Include="Assets\gsAppHTMLTemplate_js\gsAppHTMLTemplate_Video.js" />
     <Content Include="Assets\gsAppHTMLTemplate_js\gsVideo.js" />
     <Content Include="Assets\gsAppHTMLTemplate_js\gesture.js" />
     <Content Include="Assets\Launch_title.png" />

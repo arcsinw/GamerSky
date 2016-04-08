@@ -26,8 +26,7 @@ namespace 游民星空.View
 
             webView.NewWindowRequested += WebView_NewWindowRequested;
              
-            SizeChanged += EssayDetail_SizeChanged;
-
+             
             Loaded += EssayDetail_Loaded;
         }
 
@@ -37,10 +36,7 @@ namespace 游民星空.View
             this.Loaded -= EssayDetail_Loaded;
         }
 
-        private void EssayDetail_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            ReSizeVideo();
-        }
+         
 
 
         /// <summary>

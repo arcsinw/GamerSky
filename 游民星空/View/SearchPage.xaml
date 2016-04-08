@@ -291,13 +291,27 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <hp:DeviceTypeTrigger PlatformType="Desktop"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="back.Visibility" Value="Collapsed"/>
+                        <Setter Target="keyTextBox.Margin" Value="12,8"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!--#region 搜索栏-->
         <Grid Background="{ThemeResource ThemeColorBrush}" Grid.Row="0">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
