@@ -19,6 +19,7 @@ namespace 游民星空.View
     public sealed partial class EssayDetail : Page
     {
         private EssayDetailViewModel viewModel;
+        private bool isDOMLoadCompleted = false;
         public EssayDetail()
         {
             this.InitializeComponent();
@@ -83,7 +84,8 @@ namespace 游民星空.View
         }
 
         private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
-        {  
+        {
+            isDOMLoadCompleted = true;
             //加载v1 css
             var js = @"var myCss = document.createElement('link');
                     myCss.rel = ""stylesheet"";
@@ -263,16 +265,18 @@ namespace 游民星空.View
         /// </summary>
         public async void NightMode()
         {
-            var js = @"var htmlTag= document.getElementsByTagName(""html"")[0];
-            gsSetElementClass(htmlTag, ""PageColorMode_Day"", ""PageColorMode_Night"");
-                   ";
-            await webView.InvokeScriptAsync("eval", new[] { js});
-            //await webView.InvokeScriptAsync("eval", new[] { "document.body.style.backgroundColor='#000000';" });
+            if (isDOMLoadCompleted)
+            {
+                await webView.InvokeScriptAsync("NightMode", new[] { "" });
+            }
         }
 
         public async void DayMode()
         {
-            await webView.InvokeScriptAsync("eval", new[] { "document.body.style.backgroundColor='#FFFFFF';" });
+            if (isDOMLoadCompleted)
+            {
+                await webView.InvokeScriptAsync("DayMode", new[] { "" });
+            }
         }
  
          

@@ -192,17 +192,16 @@ namespace 游民星空.Core.ViewModel
                 OriginUri = news.originURL;
 
                 string mainBody = news.mainBody;
-                 
+
                 string head = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset = utf-8\" />"
                             + "<meta name=\"viewport\" content=\"width= device-width, user-scalable = no\" />"
                             + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
                             + "<meta name=\"msapplication-tap-highlight\" content=\"no\">" //wp点击无高光;
                             + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/css/gs.css\"/>"
-                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>";
+                            + "<script src=\"ms-appx-web:///Assets/js/gs.js\"></script>";
 
                 string videoJs = "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>" +
                   "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js\"></script>" +
-                  "<link href=\"ms-appx-web:///Assets/gsAppHTMLTemplate_css/base.css\" rel=\"stylesheet\" type=\"text/css\"/>" +
                  "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsVideo.js\"></script>";
 
                 string title = news.title;
@@ -231,7 +230,7 @@ namespace 游民星空.Core.ViewModel
                  
                 HtmlString = "<!DOCTYPE html>" +
                     "<html>" +
-                        "<head>" + head + videoJs+ "</head>" +
+                        "<head>" + head + "</head>" +
                         "<body quick-markup_injected=\"true\">" +
                             "<GSAppHTMLTemplate version=\"1.4.6\"/>" +
                              "<div id=\"body\" class=\"fontsizetwo\">" +

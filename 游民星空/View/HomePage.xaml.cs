@@ -35,7 +35,6 @@ namespace 游民星空.View
             this.InitializeComponent();
 
             NavigationCacheMode = NavigationCacheMode.Required;
-
              
             UIHelper.ShowStatusBar();
                
@@ -48,21 +47,21 @@ namespace 游民星空.View
             rootFrame.SourcePageType = typeof(MainPage);
             newsRadioButton.IsChecked = true;
 
-            AppTheme = DataShareManager.Current.AppTheme;
-            if (AppTheme == ElementTheme.Light)
-            {
-                isNight = false;
-            }
-            else
-            {
-                isNight = true;
-            }
+            //AppTheme = DataShareManager.Current.AppTheme;
+            //if (AppTheme == ElementTheme.Light)
+            //{
+            //    isNight = false;
+            //}
+            //else
+            //{
+            //    isNight = true;
+            //}
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
              
             if (DataShareManager.Current.IsNewVersion)
             {
                 UIHelper.ShowMessage(
-                    "忘了更新了什么了 ( ╯□╰ )",
+                    "优化与修复",
                     "新版本更新内容");
             }
             this.Loaded -= HomePage_Loaded;
@@ -129,14 +128,7 @@ namespace 游民星空.View
         //{
         //    return await FileHelper.Current.GetCacheSize();
         //}
-
-        /// <summary>
-        /// 更改日/夜间模式
-        /// </summary>
-        public void ChangeDisplayMode(bool isNight)
-        {
-            DataShareManager.Current.UpdateAPPTheme(isNight);
-        }
+ 
 
         private void Current_ShareDataChanged()
         {
@@ -148,6 +140,7 @@ namespace 游民星空.View
         {
             get
             {
+                appTheme = DataShareManager.Current.AppTheme;
                 if (appTheme.Equals(ElementTheme.Dark))
                 {
                     UIHelper.SetStatusBarColor((Color)App.Current.Resources["DarkThemeColor"]);
@@ -165,8 +158,7 @@ namespace 游民星空.View
             }
         }
 
-        private bool isNight;
-
+        
         #region INotifyPropertyChanged member
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -183,12 +175,11 @@ namespace 游民星空.View
         {
             get
             {
-                return isNight;
+                return DataShareManager.Current.AppTheme == ElementTheme.Dark;
             }
             set
-            {
-                isNight = value;
-                if (isNight) //夜间模式时更改StatusBar颜色
+            { 
+                if (value) //夜间模式时更改StatusBar颜色
                 {
                     UIHelper.SetStatusBarColor(Colors.Gray);
                 }
@@ -196,7 +187,7 @@ namespace 游民星空.View
                 {
                     UIHelper.ShowStatusBar();
                 }
-                ChangeDisplayMode(isNight);
+                DataShareManager.Current.UpdateAPPTheme(value);
                 OnPropertyChanged();
             }
         }

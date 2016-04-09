@@ -201,10 +201,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\gs.css" />
+    <Content Include="Assets\js\gs.js" />
     <Content Include="Assets\Star.png" />
     <Content Include="Assets\Star_full.png" />
-    <Content Include="Assets\gsAppHTMLTemplate_js\gsVideo.js" />
-    <Content Include="Assets\gsAppHTMLTemplate_js\gesture.js" />
+    <Content Include="Assets\js\gsVideo.js" />
+    <Content Include="Assets\js\gesture.js" />
     <Content Include="Assets\Launch_title.png" />
     <Content Include="Assets\Login_qq.png" />
     <Content Include="Assets\Login_qq_night.png" />

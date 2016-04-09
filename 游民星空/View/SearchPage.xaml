@@ -430,7 +430,7 @@
                     <GridView x:Name="strategyGridView" ItemsSource="{Binding HotStrategys}" 
                           Visibility="{Binding StrategysGridViewVisibility}"
                           SelectionMode="None" Margin="12,0"
-                          IsItemClickEnabled="True"
+                          IsItemClickEnabled="True" Background="Gray"
                           ItemClick="{x:Bind ItemClick}">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
