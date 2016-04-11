@@ -1,4 +1,8 @@
-﻿
+﻿String.prototype.replaceAll = function (key, value) {
+    var regExp = new RegExp(key, "gm");//g,全局;m,多次;i,大小写不敏感
+    return this.replace(regExp, value);
+}
+
 function SetElementClass(element, classNameNeedRemoved, classNameNeedAdded) {
     if (element == null) {
         return;

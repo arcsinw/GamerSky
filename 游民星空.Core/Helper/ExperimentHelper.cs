@@ -29,6 +29,7 @@ namespace 游民星空.Core.Helper
         static ExperimentHelper()
         {
             experimentClient = new ExperimentClient(API_KEY);
+            GetExperimentVariation();
         }
          
         /// <summary>
@@ -45,6 +46,7 @@ namespace 游民星空.Core.Helper
         /// </summary>
         private static void CheckVariationUpdate()
         {
+            if (result == null) return;
             if (result.ErrorCode != EngagementErrorCode.Success || result.Variation.NeedsRefresh)
             {
                 UpdateExperimentVariation();

@@ -18,9 +18,7 @@ namespace 游民星空.Core.ViewModel
 
             GetCacheSize();
         }
-
-
-    
+         
 
         /// <summary>
         /// 清空缓存

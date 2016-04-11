@@ -37,7 +37,7 @@
                     Style="{ThemeResource BackButtonStyle}" Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
-            <TextBlock Text="登录" Style="{ThemeResource PageTitleStyle}"/>
+            <TextBlock x:Uid="Login" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">

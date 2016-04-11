@@ -357,6 +357,7 @@
     </Page.Resources>
 
     <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
         <Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}" SelectionChanged="pivot_SelectionChanged">
          
             <PivotItem Header="正文" Margin="0" >
@@ -379,8 +380,9 @@
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
             <Button x:Name="translateBtn" Click="translateBtn_Click" HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" 
-                    Visibility="{Binding IsTranslateVisible,Converter={StaticResource BoolToVisibilityConverter}}"
+                    
                      >
+                <!--Visibility="{Binding IsTranslateVisible,Converter={StaticResource BoolToVisibilityConverter}}"-->
                 <SymbolIcon Symbol="Character" />
             </Button>
 
@@ -499,9 +501,6 @@
             <!--#endregion-->
 
         </StackPanel>
-
-        <!--hp:ExtensionHelper.HtmlString="{Binding HtmlString}"-->
-        <!--Source="ms-appx-web:///Assets/HTMLPage1.html"  "-->
  
         <!--#region  显示图片-->
         <FlipView x:Name="imageFlipView" Visibility="Collapsed" ItemsSource="{Binding }">
@@ -517,17 +516,18 @@
         </FlipView>
         <!--#endregion-->
 
-        <Grid Height="Auto" Visibility="Collapsed" VerticalAlignment="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0"/>
-            <Button Grid.Column="1"/>
-            <Button Grid.Column="2"/>
-        </Grid>
-        
+        <!--<Border Background="Gray" Opacity="0" 
+                CompositeMode="SourceOver" >
+            
+        </Border>-->
+
+        <!--<Popup x:Name="popup" IsOpen="True" Height="800" Width="480">
+            <Popup.Child>
+                <Border Height="900" Width="480" Background="Gray" Opacity="0.6">
+                    
+                </Border>
+            </Popup.Child>
+        </Popup>-->
     </Grid>
  
 </Page>

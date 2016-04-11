@@ -152,11 +152,13 @@ namespace 游民星空.View
             if (!isMutiple)
             {
                 listView.SelectionMode = ListViewSelectionMode.Multiple;
+                listView.IsItemClickEnabled = false;
                 isMutiple = true;
             }
             else
             {
                 listView.SelectionMode = ListViewSelectionMode.None;
+                listView.IsItemClickEnabled = true;
                 isMutiple = false;
             }
         }

@@ -22,7 +22,7 @@ namespace 游民星空.View
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private ApiService apiService;
+         
         //当前ListView中的ScrollViewer
         private ScrollViewer scrollViewer;
         // 当前频道Id
@@ -74,7 +74,7 @@ namespace 游民星空.View
         public MainPage()
         {
             this.InitializeComponent();
-            apiService = new ApiService();
+          
             NavigationCacheMode = NavigationCacheMode.Required;
             DisplayInformation.GetForCurrentView().OrientationChanged += App_OrientationChanged;
 

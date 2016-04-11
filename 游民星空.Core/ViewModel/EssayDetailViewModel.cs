@@ -101,13 +101,14 @@ namespace 游民星空.Core.ViewModel
        /// <summary>
        /// 翻译按钮显示
        /// </summary>
-        public bool IsTranslateVisible
-        {
-            get
-            {
-                return ExperimentHelper.GetBool(ExperimentHelper.TranslateButtonVisibility,false);
-            }
-        }
+        //public bool IsTranslateVisible
+        //{
+        //    get
+        //    {
+        //        return ExperimentHelper.GetBool(ExperimentHelper.TranslateButtonVisibility,false);
+        //    }
+        //}
+
         //private ObservableCollection<RelatedReadings> relatedReadings;
         ///// <summary>
         ///// 相关阅读
@@ -198,11 +199,11 @@ namespace 游民星空.Core.ViewModel
                             + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
                             + "<meta name=\"msapplication-tap-highlight\" content=\"no\">" //wp点击无高光;
                             + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/css/gs.css\"/>"
-                            + "<script src=\"ms-appx-web:///Assets/js/gs.js\"></script>";
+                            + "<script src=\"ms-appx-web:///Assets/js/gs.js\"></script>"
+                            + "<script src=\"ms-appx-web:///Assets/js/gsVideo.js\"></script>";
 
-                string videoJs = "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate.js\"></script>" +
-                  "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsAppHTMLTemplate_Video.js\"></script>" +
-                 "<script src=\"ms-appx-web:///Assets/gsAppHTMLTemplate_js/gsVideo.js\"></script>";
+
+
 
                 string title = news.title;
                 string subTitle = news.subTitle;
@@ -258,7 +259,7 @@ namespace 游民星空.Core.ViewModel
 			                {
                                 iframes[i].removeAttribute('style');
 				                iframes[i].width = winWidth;
-				                iframes[i].height = winWidth * (3/4);
+				                iframes[i].height = winWidth * (9/16);
 			                }
 		                }
 		
@@ -267,9 +268,9 @@ namespace 游民星空.Core.ViewModel
 	                    {
 	                        for (var j = 0;j < embeds.length;j++)
 	                        {
-	                            var embedTag = embedTags[j];
+	                            var embedTag = embedTags[j];aa
 	                            embedTag.removeAttribute('style');
-	                            embedTag.height = winWidth * (3/4);
+	                            embedTag.height = winWidth * (9/16);
 	                            embedTag.width = winWidth;
 	                        }
 		                }
@@ -277,12 +278,12 @@ namespace 游民星空.Core.ViewModel
 		                var player = document.getElementById('youkuplayer_0');
 		                if(player!=null)
 		                {
-                                player.removeAttribute('style');
+                                //player.removeAttribute('style');
 				                player.width = winWidth;
-				                player.height = winWidth *(3/4);
+				                player.height = winWidth *(9/16);
 		                }
                     };
-                    </ script >" +
+                    </script>" +
                 "</html>";
             }
             IsActive = false;

@@ -116,7 +116,6 @@
     <Compile Include="Helper\DeviceInformationHelper.cs" />
     <Compile Include="Helper\DispatcherManager.cs" />
     <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
-    <Compile Include="Helper\ExperimentHelper.cs" />
     <Compile Include="Helper\ExtensionHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />

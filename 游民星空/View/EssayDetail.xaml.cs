@@ -26,20 +26,10 @@ namespace 游民星空.View
             NavigationCacheMode = NavigationCacheMode.Disabled;
 
             webView.NewWindowRequested += WebView_NewWindowRequested;
-             
-             
-            Loaded += EssayDetail_Loaded;
+              
         }
 
-        private void EssayDetail_Loaded(object sender, RoutedEventArgs e)
-        {
-            ExperimentHelper.LogTranslateViewd();
-            this.Loaded -= EssayDetail_Loaded;
-        }
-
-         
-
-
+          
         /// <summary>
         /// 处理WebView中的新请求
         /// </summary>
@@ -86,15 +76,8 @@ namespace 游民星空.View
         private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
         {
             isDOMLoadCompleted = true;
-            //加载v1 css
-            var js = @"var myCss = document.createElement('link');
-                    myCss.rel = ""stylesheet"";
-                    myCss.type = ""text/css"";
-                    myCss.href = ""ms-appx-web:///Assets/gsAppHTMLTemplate_css/base.css"";
-                    document.body.appendChild(myCss)";
-            await sender.InvokeScriptAsync("eval", new[] { js });
-
-            //3、调用js执行自定义代码（为图片添加点击事件，并通知）
+          
+            //调用js执行自定义代码（为图片添加点击事件，并通知）
             // js = @"var imgs = document.getElementsByTagName(""img"");
             //for (var i = 0, len = imgs.length; i < len; i++) {
             //    imgs[i].onclick = function (e) {
@@ -122,7 +105,7 @@ namespace 游民星空.View
 
 
             //动态加载手势
-            js = @"var myScript = document.createElement(""script"");
+            var js = @"var myScript = document.createElement(""script"");
                 myScript.type = ""text/javascript"";
                 myScript.src = ""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gesture.js"";
                 document.body.appendChild(myScript);
@@ -158,7 +141,7 @@ namespace 游民星空.View
                         embedTag.height = document.body.clientWidth * (9 / 16);
                         embedTag.width = document.body.clientWidth;
                     }";
-            await sender.InvokeScriptAsync("eval", new[] { js });
+            //await sender.InvokeScriptAsync("eval", new[] { js });
         }
 
         /// <summary>
@@ -342,7 +325,7 @@ namespace 游民星空.View
         private void translateBtn_Click(object sender, RoutedEventArgs e)
         { 
             Translate();
-            ExperimentHelper.LogTranslateClick();
+            //ExperimentHelper.LogTranslateClick();
         }
 
         /// <summary>

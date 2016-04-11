@@ -5,18 +5,22 @@
     xmlns:local="using:游民星空.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:vm="using:游民星空.Core.ViewModel"
+    xmlns:model="using:游民星空.Core.Model"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:hp="using:游民星空.Helper"
     xmlns:converter="using:游民星空.Converter"
     mc:Ignorable="d"
-    RequestedTheme="{Binding Path=viewModel.AppTheme}"
+    RequestedTheme="{Binding Path=AppTheme}"
     d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True,Type=vm:MainPageViewModel}"
     >
- 
-    <Page.Resources>
+
+    <Page.DataContext>
         <vm:MainPageViewModel x:Name="viewModel"/>
-   
+    </Page.DataContext>
+    
+    <Page.Resources>
+         
         <!--有三张图的文章模板-->
         <DataTemplate x:Key="ThreePicEssayDataTemplate" >
             <Grid Margin="{ThemeResource EssayGridMargin}" Padding="{ThemeResource EssayGridPadding}" >
@@ -127,7 +131,7 @@
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot x:Name="essayPivot"  DataContext="{Binding Source={StaticResource viewModel}}"
+        <Pivot x:Name="essayPivot"  
                ItemsSource="{Binding EssaysAndChannels}" SelectionChanged="Pivot_SelectionChanged"
                Padding="0" Margin="0" HorizontalContentAlignment="Stretch" 
                Background="{ThemeResource PageBackground}"
@@ -140,7 +144,7 @@
             </Pivot.HeaderTemplate>
             <Pivot.ItemTemplate>
                 <DataTemplate>
-                    <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked" >
+                    <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                         <ListView x:Name="essayListView" 
                                  ItemsSource="{Binding Essays}"
                                  ShowsScrollingPlaceholders="True"
@@ -149,7 +153,9 @@
                                  IsItemClickEnabled="True"
                                  ItemClick="ListView_ItemClick"
                                  Loaded="ListView_Loaded"
+                                  
                                  >
+
                             <ListView.ItemTemplateSelector>
                                 <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                             ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
@@ -249,7 +255,7 @@
 
         </Pivot>
 
-        
+
         <ProgressRing x:Name="progressRing"  Style="{ThemeResource ProgressRingStyle}"/>
          
         <!--#region 跳转顶部-->

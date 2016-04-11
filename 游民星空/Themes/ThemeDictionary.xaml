@@ -746,6 +746,7 @@
         <Setter Property="Background" Value="{ThemeResource ThemeColorBrush}"/>
         <Setter Property="Height" Value="48"/>
         <Setter Property="Width" Value="48"/>
+        <Setter Property="Opacity" Value="0.8"/>
     </Style>
     
     <!--ProgressRing样式-->
@@ -800,7 +801,7 @@
             <!--文字颜色-->
             <SolidColorBrush x:Key="PhoneForegroundBrush" Color="LightGray"/>
             <!--页面背景色-->
-            <SolidColorBrush x:Key="PageBackground" Color="#FF252526"/>
+            <SolidColorBrush x:Key="PageBackground" Color="#FF1A1A1B"/>
             <!--ListView BorderBrush-->
             <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF3C3C3C"/>
             <!--ListView BorderThickness-->
