@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -93,6 +94,7 @@ namespace 游民星空.View
 
         private void webView_ScriptNotify(object sender, NotifyEventArgs e)
         {
+            Debug.WriteLine(e.Value);
             //if(e.Value.Contains("forward"))
             //{
             //    if (pivot.Items != null)
@@ -260,15 +262,7 @@ namespace 游民星空.View
 
 
 
-        private void webView_FrameContentLoading(WebView sender, WebViewContentLoadingEventArgs args)
-        {
-            var uri = args.Uri;
-        }
-
-        private void webView_FrameDOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
-        {
-            viewModel.IsActive = false;
-        }
+      
 
         /// <summary>
         /// 翻译成英文
@@ -293,6 +287,11 @@ namespace 游民星空.View
             {
                 DataShareManager.Current.UpdateFavoriteEssayList(vm.essayResult);
             }
+        }
+
+        private void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
+        {
+            isDOMLoadCompleted = true;
         }
     }
 }

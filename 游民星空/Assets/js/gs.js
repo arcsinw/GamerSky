@@ -34,11 +34,21 @@ function SetElementClass(element, classNameNeedRemoved, classNameNeedAdded) {
 function DayMode() {
     var htmlTag = document.getElementsByTagName("html")[0];
     SetElementClass(htmlTag, "PageColorMode_Night", "PageColorMode_Day");
+
+    var imgs = document.getElementsByTagName('img');
+    for (i = 0; i < imgs.length; i++) {
+        imgs[i].style.opacity = 1.0;
+    }
 }
 
 function NightMode() {
     var htmlTag = document.getElementsByTagName("html")[0];
     SetElementClass(htmlTag, "PageColorMode_Day", "PageColorMode_Night");
+
+    var imgs = document.getElementsByTagName('img');
+    for (var i = 0; i < imgs.length; i++) {
+        imgs[i].style.opacity = 0.6;
+    }
 }
 
 //向webview发出通知
@@ -59,6 +69,7 @@ var lastGestureId = 0;
 //速度触发
 var gestureVector = 1.5;
 
+var translateX;
 //手势操作初始化
 function InitGesture(body)
 {
@@ -102,7 +113,8 @@ function gestureListener(event) {
     }
     else if(event.type == "MSInertialStart")
     {
-        if(event.velocityX > 1.5)
+        translateX = event.clientX - gestureStartX;
+        if(event.velocityX > 50)
         {
             SendNotify("gestures : goforward");
         }
@@ -112,7 +124,7 @@ function gestureListener(event) {
             //gestureStartX = event.clientX;
             return;
         }
-        var translateX = event.clientX - gestureStartX;
+        translateX = event.clientX - gestureStartX;
         if (translateX < -60) {
             SendNotify('gestures : goforward');
             gestureStartX = event.clientX;

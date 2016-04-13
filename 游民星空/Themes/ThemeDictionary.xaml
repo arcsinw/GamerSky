@@ -756,6 +756,10 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{ThemeResource ThemeColorBrush}"/>
     </Style>
+
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
+    </Style>
     
     <!--日夜间资源字典-->
     <ResourceDictionary.ThemeDictionaries>

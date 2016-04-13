@@ -20,7 +20,10 @@
     </Page.DataContext>
     
     <Page.Resources>
-         
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
+        </Style>
+        
         <!--有三张图的文章模板-->
         <DataTemplate x:Key="ThreePicEssayDataTemplate" >
             <Grid Margin="{ThemeResource EssayGridMargin}" Padding="{ThemeResource EssayGridPadding}" >
@@ -82,7 +85,7 @@
                 </Image>
 
                 <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0">
-                    <TextBlock Text="{Binding title}" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBlock Text="{Binding title}"  TextWrapping="Wrap" VerticalAlignment="Top"/>
                     <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
                                 <Run Text="{Binding commentsCount}"/>
                                 <Run Text="评论"/>

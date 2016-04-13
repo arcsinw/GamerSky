@@ -205,7 +205,6 @@
     <Content Include="Assets\Star.png" />
     <Content Include="Assets\Star_full.png" />
     <Content Include="Assets\js\gsVideo.js" />
-    <Content Include="Assets\js\gesture.js" />
     <Content Include="Assets\Launch_title.png" />
     <Content Include="Assets\Login_qq.png" />
     <Content Include="Assets\Login_qq_night.png" />
