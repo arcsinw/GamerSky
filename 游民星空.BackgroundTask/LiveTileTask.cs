@@ -12,10 +12,10 @@ namespace 游民星空.BackgroundTask
 {
     public sealed class LiveTileTask : IBackgroundTask
     {
-        public void Run(IBackgroundTaskInstance taskInstance)
+        public async void Run(IBackgroundTaskInstance taskInstance)
         {
             var deferral = taskInstance.GetDeferral();
-            UpdateLiveTile();
+            await LiveTileHelper.UpdatePrimaryTile(); 
             deferral.Complete();
         }
 
@@ -32,7 +32,7 @@ namespace 游民星空.BackgroundTask
         /// </summary>
         private void UpdatePrimaryTile()
         {
-            LiveTileHelper.UpdatePrimaryTile();
+            
             //ToastHelper.ShowToast();
         }
     }

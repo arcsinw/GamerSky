@@ -46,22 +46,13 @@ namespace 游民星空.View
         {
             rootFrame.SourcePageType = typeof(MainPage);
             newsRadioButton.IsChecked = true;
-
-            //AppTheme = DataShareManager.Current.AppTheme;
-            //if (AppTheme == ElementTheme.Light)
-            //{
-            //    isNight = false;
-            //}
-            //else
-            //{
-            //    isNight = true;
-            //}
+ 
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
              
             if (DataShareManager.Current.IsNewVersion)
             {
                 UIHelper.ShowMessage(
-                    "优化与修复",
+                    "手势后退",
                     "新版本更新内容");
             }
             this.Loaded -= HomePage_Loaded;

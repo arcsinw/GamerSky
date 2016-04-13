@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -73,6 +74,7 @@ namespace 游民星空.Core.Helper
             }
             catch (Exception e)
             {
+                Debug.WriteLine("Function.cs Deserlizlize<T>"+e.Message);
                 return result;
             }
             return result;

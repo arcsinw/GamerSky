@@ -94,7 +94,7 @@ namespace 游民星空.Core.Helper
         /// <summary>
         /// 更新动态磁贴
         /// </summary>
-        public static async void UpdatePrimaryTile()
+        public static async Task UpdatePrimaryTile()
         {
             //获取要闻
             List<Essay> essays = await apiService.GetYaowen();

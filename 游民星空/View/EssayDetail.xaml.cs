@@ -73,77 +73,7 @@ namespace 游民星空.View
             await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
         }
 
-        private async void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
-        {
-            isDOMLoadCompleted = true;
-          
-            //调用js执行自定义代码（为图片添加点击事件，并通知）
-            // js = @"var imgs = document.getElementsByTagName(""img"");
-            //for (var i = 0, len = imgs.length; i < len; i++) {
-            //    imgs[i].onclick = function (e) {
-            //        var jsonObj = { type: 'image', content1: this.src };
-            //        window.external.notify(JSON.stringify(jsonObj));
-            //    };
-            //}";
-            // await sender.InvokeScriptAsync("eval", new[] { js });
-
-            //为<a></a>添加点击事件，并通知
-            //js = @" var links = document.getElementsByTagName('a');
-            //    for(var i=0;i<links.length;i++)
-            //    {
-            //        if(links[i].id='RelatedReadings')
-            //        {
-            //            links[i].onclick = function()
-            //            {
-            //                     var jsonObj = { PageId: this.href, PageUrl:' ', OpenMethod:'OpenArticleWithId'};
-            //                    window.external.notify(JSON.stringify(jsonObj));
-            //            };
-            //        }
-            //    }";
-           
-            //await sender.InvokeScriptAsync("eval", new[] { js });
-
-
-            //动态加载手势
-            var js = @"var myScript = document.createElement(""script"");
-                myScript.type = ""text/javascript"";
-                myScript.src = ""ms-appx-web:///Assets/gsAppHTMLTemplate_js/gesture.js"";
-                document.body.appendChild(myScript);
-                window.external.notify(myScript.src+"""");";
-            //await sender.InvokeScriptAsync("eval", new[] { js });
-
-            //为body添加手势监听
-             js = @"var target = document.getElementsByTagName(""body"")[0];
-            prepareTarget(target, eventListener);";
-            //await sender.InvokeScriptAsync("eval", new[] { js });
-
-           
-
-            //iframe自适应
-            js = @"var iframeTags = document.getElementsByTagName('iframe');
-            for (var iframeTagIndex = 0;
-                iframeTagIndex < iframeTags.length;
-                iframeTagIndex++)
-                    {
-                        var iframeTag = iframeTags[iframeTagIndex];
-                        iframeTag.removeAttribute('style');
-                        iframeTag.height = document.body.clientWidth * (9 / 16);
-                        iframeTag.width = document.body.clientWidth;
-                    }
-
-                    var embedTags = document.getElementsByTagName('embed');
-                    for (var embedTagIndex = 0;
-                         embedTagIndex < embedTags.length;
-                         embedTagIndex++)
-                    {
-                        var embedTag = embedTags[embedTagIndex];
-                        embedTag.removeAttribute('style');
-                        embedTag.height = document.body.clientWidth * (9 / 16);
-                        embedTag.width = document.body.clientWidth;
-                    }";
-            //await sender.InvokeScriptAsync("eval", new[] { js });
-        }
-
+       
         /// <summary>
         /// 翻译网页
         /// </summary>
@@ -163,29 +93,50 @@ namespace 游民星空.View
 
         private void webView_ScriptNotify(object sender, NotifyEventArgs e)
         {
-            
-            var model = Functions.Deserlialize<JSParameter>(e.Value);
-            if (model == null) return;
-            switch (model.type)
+            //if(e.Value.Contains("forward"))
+            //{
+            //    if (pivot.Items != null)
+            //    {
+            //        if (pivot.SelectedIndex > 0)
+            //        {
+            //            pivot.SelectedIndex--;
+            //        }
+            //        else
+            //        {
+            //            pivot.SelectedIndex = pivot.Items.Count - 1;
+            //        }
+            //    }
+            //}
+            //else
+            if(e.Value.Contains("back"))
             {
-                case "image":
-                   
-                    break;
-                case "swiperight":
-                    //右滑
-                    if (Frame.CanGoBack)
-                    {
-                        Frame.GoBack();
-                    }
-                    break;
-                case "swipeleft":
-                    //左滑
-                   
-                    break;
-                case "text":
-                   
-                    break;
+                if(Frame.CanGoBack)
+                {
+                    Frame.GoBack();
+                }
             }
+            //var model = Functions.Deserlialize<JSParameter>(e.Value);
+            //if (model == null) return;
+            //switch (model.type)
+            //{
+            //    case "image":
+                   
+            //        break;
+            //    case "swiperight":
+            //        //右滑
+            //        if (Frame.CanGoBack)
+            //        {
+            //            Frame.GoBack();
+            //        }
+            //        break;
+            //    case "swipeleft":
+            //        //左滑
+                   
+            //        break;
+            //    case "text":
+                   
+            //        break;
+            //}
         }
 
         /// <summary>
@@ -265,7 +216,9 @@ namespace 游民星空.View
          
         private async void refreshButton_Click(object sender, RoutedEventArgs e)
         {
+            progress.IsActive = true;
             await viewModel.GenerateHtmlString();
+            progress.IsActive = false;
         }
 
         private bool isEssayLoaded = false;

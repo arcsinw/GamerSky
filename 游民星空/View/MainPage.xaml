@@ -153,9 +153,7 @@
                                  IsItemClickEnabled="True"
                                  ItemClick="ListView_ItemClick"
                                  Loaded="ListView_Loaded"
-                                  
                                  >
-
                             <ListView.ItemTemplateSelector>
                                 <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                             ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"

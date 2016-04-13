@@ -23,8 +23,8 @@ namespace 游民星空.Core.Model
         public string thumbnailUrl { get; set; }
 
         private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
-      
-        
+
+
         private BitmapImage thumbnail;
         public ImageSource Thumbnail
         {
@@ -45,7 +45,7 @@ namespace 游民星空.Core.Model
         private async void DownloadImage(string url)
         {
             SoftwareBitmap softwareBitmap = await ImageDownLoadHelper.DownLoadImageByUrl(url);
-            
+
         }
         /// <summary>
         /// 标题

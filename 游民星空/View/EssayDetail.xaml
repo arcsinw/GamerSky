@@ -357,14 +357,13 @@
     </Page.Resources>
 
     <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
-        <Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}" SelectionChanged="pivot_SelectionChanged">
+ 
+        <Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
+               SelectionChanged="pivot_SelectionChanged">
          
             <PivotItem Header="正文" Margin="0" >
                 <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
-                   DOMContentLoaded="webView_DOMContentLoaded" ScriptNotify="webView_ScriptNotify"
-                       FrameContentLoading="webView_FrameContentLoading"
-                         FrameDOMContentLoaded="webView_FrameDOMContentLoaded"
+                    ScriptNotify="webView_ScriptNotify"
                          />
             </PivotItem>
             <PivotItem Header="评论" Margin="0">
@@ -379,24 +378,14 @@
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
             <Button x:Name="translateBtn" Click="translateBtn_Click" HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" 
-                    
-                     >
-                <!--Visibility="{Binding IsTranslateVisible,Converter={StaticResource BoolToVisibilityConverter}}"-->
+                VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" >
+                
                 <SymbolIcon Symbol="Character" />
             </Button>
 
             <Button x:Name="likeBtn" Click="likeBtn_Click" HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" Background="Transparent"
-                    >
-                <!--<PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="M10.0006294250488,0L13.0900001525879,6.58374786376953 20,7.63938903808594 14.9993705749512,12.7637481689453 16.1806297302246,20 10.0006294250488,16.5837478637695 3.81937026977539,20 5,12.7637481689453 0,7.63938903808594 6.91062927246094,6.58374786376953 10.0006294250488,0z" />-->
-                <!--<PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="M9.99937057495117,3.54877471923828L7.92562484741211,7.96440124511719 3.28937530517578,8.67313385009766 6.64499282836914,12.1112823486328 5.85249900817871,16.9668960571289 9.99937057495117,14.6750259399414 14.1468715667725,16.9668960571289 13.3537483215332,12.1112823486328 16.7093753814697,8.67313385009766 12.0731258392334,7.96440124511719 9.99937057495117,3.54877471923828z M9.99937057495117,0L13.0893707275391,6.58374786376953 20,7.63938903808594 14.9993705749512,12.7637481689453 16.179370880127,20 9.99937057495117,16.5837478637695 3.81937026977539,20 4.99937057495117,12.7637481689453 0,7.63938903808594 6.90937042236328,6.58374786376953 9.99937057495117,0z" />-->
+                VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" Background="Transparent">
                 <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding essayResult.IsFavorite,Converter={StaticResource BoolToIcon}}"/>
-                <!--Content="{Binding essayResult.IsFavorite,Converter={StaticResource BoolToIcon}}"-->
-                <!--<FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE1CE;" />-->
-                <!--<TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE1CE;" />-->
-                <!--<FontIcon FontFamily="Segoe MDL2 Assets" Glyph="{Binding essayResult.IsFavorite,Converter={StaticResource BoolToIcon}}" />-->
-                <!--<BitmapIcon UriSource="{Binding essayResult.IsFavorite,Converter={StaticResource BoolToIcon}}"/>-->
             </Button>
 
             <!--#region  顶部右边的调整按钮-->
@@ -515,19 +504,7 @@
             </FlipView.ItemTemplate>
         </FlipView>
         <!--#endregion-->
-
-        <!--<Border Background="Gray" Opacity="0" 
-                CompositeMode="SourceOver" >
-            
-        </Border>-->
-
-        <!--<Popup x:Name="popup" IsOpen="True" Height="800" Width="480">
-            <Popup.Child>
-                <Border Height="900" Width="480" Background="Gray" Opacity="0.6">
-                    
-                </Border>
-            </Popup.Child>
-        </Popup>-->
+ 
     </Grid>
  
 </Page>

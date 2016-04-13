@@ -18,8 +18,8 @@ namespace 游民星空.Core.IncrementalLoadingCollection
         private ApiService apiService = new ApiService();
 
         #region member
-        private bool isLoading = false;     //是否正在加载
-        private bool hasMoreItems = false;
+        //private bool isLoading = false;     //是否正在加载
+        //private bool hasMoreItems = false;
         private int pageIndex = 1;            //当前页码
         #endregion
 

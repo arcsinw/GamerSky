@@ -201,10 +201,7 @@ namespace 游民星空.Core.ViewModel
                             + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/css/gs.css\"/>"
                             + "<script src=\"ms-appx-web:///Assets/js/gs.js\"></script>"
                             + "<script src=\"ms-appx-web:///Assets/js/gsVideo.js\"></script>";
-
-
-
-
+                 
                 string title = news.title;
                 string subTitle = news.subTitle;
 
@@ -250,6 +247,7 @@ namespace 游民星空.Core.ViewModel
                              "</div>"+
                         "</body>"+
                         "<script type=\"text/javascript\">"+
+                        "var body = document.getElementsByTagName('body')[0]; window.onload = InitGesture(body);" +
                        @"window.onresize = function(){
                         var winWidth = document.body.clientWidth;
 		                var iframes = document.getElementsByTagName('iframe');

@@ -28,12 +28,12 @@ namespace 游民星空.Core.Helper
         /// </summary>
         //public static bool IsTrace = true;
 
-        public async static void StartTraceAsync()
+        public static void StartTraceAsync()
         {
             //await JYAnalytics.StartTrackAsync(AppKey);
         }
 
-        public async static void EndTraceAsync()
+        public static void EndTraceAsync()
         {
             //await JYAnalytics.EndTrackAsync();
         }
