@@ -102,7 +102,7 @@ namespace 游民星空.Core.Helper
             {
                 //更新主磁贴
                 var updater = TileUpdateManager.CreateTileUpdaterForApplication();
-                updater.EnableNotificationQueue(true);  //启用通知队列
+                updater.EnableNotificationQueue(true);  //启用通知队列 最多支持5个通知
                 updater.EnableNotificationQueueForSquare150x150(true);
                 updater.EnableNotificationQueueForSquare310x310(true);
                 updater.EnableNotificationQueueForWide310x150(true);
@@ -120,8 +120,9 @@ namespace 游民星空.Core.Helper
                 }
                 if (essays != null)
                 {
-                    foreach (var item in essays)
+                    for (int i=0; i<5; i++)
                     {
+                        var item = essays[i];
                         var doc = new XmlDocument();
                         var xml = string.Format(TileTemplateXml, item.thumbnailURLs[0], item.title, item.authorName);
                         doc.LoadXml(WebUtility.HtmlDecode(xml), new XmlLoadSettings
@@ -137,6 +138,7 @@ namespace 游民星空.Core.Helper
                             secondaryUpdater.Update(new TileNotification(doc));
                         }
                     }
+              
                 }
             }
             catch (Exception e)
