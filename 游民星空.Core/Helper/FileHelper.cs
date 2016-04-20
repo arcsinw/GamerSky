@@ -1,6 +1,7 @@
-﻿ 
+﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -177,6 +178,7 @@ namespace 游民星空.Core.Helper
             }
             catch (Exception e)
             {
+                Debug.WriteLine("FileHelper DeleteCacheFile:"+e.Message);
             }
         }
 
@@ -202,6 +204,7 @@ namespace 游民星空.Core.Helper
             }
             catch (Exception e)
             {
+                Debug.WriteLine("FileHelper GetCacheSize :" + e.Message);
                 return 0;
             }
         }

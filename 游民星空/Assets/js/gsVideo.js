@@ -68,7 +68,7 @@ function leTvVideo(width, height, uu, vu) {
     document.write(html);
 }
 function gsVideo(videoType, videoContent, videoWidth, videoHeight) {
-  
+    videoWidth = document.body.clientWidth;
     if (location.protocol == "file:") {
         gsVideoInApp(videoType, videoContent, null, videoWidth, videoHeight);
     }

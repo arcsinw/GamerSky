@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -91,6 +92,7 @@ namespace 游民星空.Core.Http
             }
             catch (Exception e)
             {
+                Debug.WriteLine("ApiBaseService PostJson" + e.Message);
                 return null;
             }
         }

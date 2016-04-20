@@ -243,6 +243,7 @@
     <Content Include="Assets\Square71x71Logo.scale-400.png" />
     <Content Include="Assets\Avatar.png" />
     <Content Include="Assets\Square71x71Logo_t.png" />
+    <Content Include="Assets\TouchDemo.html" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Data\VersionHistory.txt" />

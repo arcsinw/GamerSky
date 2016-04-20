@@ -206,31 +206,33 @@ namespace 游民星空.Core.ViewModel
                 string subTitle = news.subTitle;
 
                 #region 相关阅读
-                //List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
+                List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
 
-                //string relatedReadingsHtml = 
-                //    "<div class=\"list\" id=\"gsTemplateContent_RelatedReading\">" +
-                //    "<div class=\"tit yellow\">相关阅读</div>" +//相关阅读
-                //           "<div class=\"txtlist\" id=\"gsTemplateContent_RelatedReadingContent\">";
-                //if (relatedReadings != null && relatedReadings.Count == 0)
-                //{
-                //    relatedReadingsHtml = "";
-                //}
-                //if (relatedReadings != null)
-                //{          
-                //    foreach (var item in relatedReadings)
-                //    {
-                //        relatedReadingsHtml += "<a id=\"RelatedReadings\" href=\"" + item.contentId + "\"><div class=\"Row\"><div>" + item.title + "</div></div></a>";
-                //    }
-                //    relatedReadingsHtml += "</div></div>";
-                //}
+                string relatedReadingsHtml =
+                    "<div class=\"list\" id=\"gsTemplateContent_RelatedReading\">" +
+                    "<div class=\"tit yellow\">相关阅读</div>" +//相关阅读
+                           "<div class=\"txtlist\" id=\"gsTemplateContent_RelatedReadingContent\">";
+                if (relatedReadings != null && relatedReadings.Count == 0)
+                {
+                    relatedReadingsHtml = "";
+                }
+                if (relatedReadings != null)
+                {
+                    foreach (var item in relatedReadings)
+                    {
+                        relatedReadingsHtml += "<a id=\"RelatedReadings\" href=\"" + item.contentId + "\"><div class=\"Row\"><div>" + item.title + "</div></div></a>";
+                    }
+                    relatedReadingsHtml += "</div></div>";
+                }
                 #endregion
-                 
+
                 HtmlString = "<!DOCTYPE html>" +
                     "<html>" +
                         "<head>" + head + "</head>" +
                         "<body quick-markup_injected=\"true\">" +
                             "<GSAppHTMLTemplate version=\"1.4.6\"/>" +
+                            //"<div id=\"ScrollToTop\"><a href=\"#top\">#</a></div>"+
+                            "<div id=\"ScrollToTop\"><a href=\"javascript:scroller(body,100);\">#</a></div>" +
                              "<div id=\"body\" class=\"fontsizetwo\">" +
                                   "<h1 class=\"heading\" id=\"gsTemplateContent_Title\">" + title + "</h1>" +
                                   "<span class=\"info\" id=\"gsTemplateContent_Subtitle\">" + subTitle + "</span>" +
@@ -243,7 +245,7 @@ namespace 游民星空.Core.ViewModel
                                             "</div>" +
                                         "</div>" +
                                   "</div>" +
-                                         //relatedReadingsHtml +
+                                         relatedReadingsHtml +
                              "</div>"+
                         "</body>"+
                         "<script type=\"text/javascript\">"+

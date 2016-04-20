@@ -29,6 +29,7 @@ namespace 游民星空.Core.Http
             }
             catch(Exception e)
             {
+                Debug.WriteLine("HttpBaseService SendGetRequest:" + e.Message);
                 return null;
             }
         }
@@ -71,6 +72,7 @@ namespace 游民星空.Core.Http
             }
             catch(Exception e)
             {
+                Debug.WriteLine("HttpBaseService SendGetRequestAsBytes:" + e.Message);
                 return null;
             }
         }

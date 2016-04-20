@@ -43,6 +43,7 @@ namespace 游民星空.Core.Helper
             }
             catch (Exception e)
             {
+                Debug.WriteLine("ImageDownLoadHelper DownLoadImageByUrl:" + e.Message);
                 return null;
             }
         }

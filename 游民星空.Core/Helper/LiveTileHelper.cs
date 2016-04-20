@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
@@ -143,7 +144,7 @@ namespace 游民星空.Core.Helper
             }
             catch (Exception e)
             {
-
+                Debug.WriteLine("LiveTileHelper UpdatePrimaryTile:" + e.Message);
             }
         }
 

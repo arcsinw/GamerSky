@@ -364,8 +364,10 @@
             <PivotItem Header="正文" Margin="0" >
                 <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
                     ScriptNotify="webView_ScriptNotify"
+                         Source="ms-appx-web:///Assets/TouchDemo.html"
                          DOMContentLoaded="webView_DOMContentLoaded"
                          />
+                <!---->
             </PivotItem>
             <PivotItem Header="评论" Margin="0">
                 <WebView x:Name="commentWebView"  
