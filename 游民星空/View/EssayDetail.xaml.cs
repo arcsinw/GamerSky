@@ -219,6 +219,7 @@ namespace 游民星空.View
         private async void refreshButton_Click(object sender, RoutedEventArgs e)
         {
             progress.IsActive = true;
+            
             await viewModel.GenerateHtmlString();
             progress.IsActive = false;
         }

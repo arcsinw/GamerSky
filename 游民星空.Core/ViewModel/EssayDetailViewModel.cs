@@ -64,11 +64,11 @@ namespace 游民星空.Core.ViewModel
             }
         }
 
-        private string htmlString;
+        private StringBuilder htmlString;
         /// <summary>
         /// HTML正文
         /// </summary>
-        public string HtmlString
+        public StringBuilder HtmlString
         {
             get
             {
@@ -225,14 +225,14 @@ namespace 游民星空.Core.ViewModel
                     relatedReadingsHtml += "</div></div>";
                 }
                 #endregion
-
-                HtmlString = "<!DOCTYPE html>" +
+                 
+                var html = "<!DOCTYPE html>" +
                     "<html>" +
                         "<head>" + head + "</head>" +
                         "<body quick-markup_injected=\"true\">" +
                             "<GSAppHTMLTemplate version=\"1.4.6\"/>" +
-                            //"<div id=\"ScrollToTop\"><a href=\"#top\">#</a></div>"+
-                            "<div id=\"ScrollToTop\"><a href=\"javascript:scroller(body,100);\">#</a></div>" +
+                            //"<div id=\"ScrollToTop\"><a href=\"#top\">#</a></div>" +
+                             //"<div id=\"ScrollToTop\"><a href=\"javascript:scroller(body,100);\">#</a></div>" +
                              "<div id=\"body\" class=\"fontsizetwo\">" +
                                   "<h1 class=\"heading\" id=\"gsTemplateContent_Title\">" + title + "</h1>" +
                                   "<span class=\"info\" id=\"gsTemplateContent_Subtitle\">" + subTitle + "</span>" +
@@ -245,46 +245,54 @@ namespace 游民星空.Core.ViewModel
                                             "</div>" +
                                         "</div>" +
                                   "</div>" +
-                                         relatedReadingsHtml +
+                                         //relatedReadingsHtml +
                              "</div>"+
                         "</body>"+
                         "<script type=\"text/javascript\">"+
+                        @"function resizeVideo(){
+                         var winWidth = document.body.clientWidth;
+			            var iframes = document.getElementsByTagName('iframe');
+			            if (iframes != null) {
+				            for (var i = 0; i < iframes.length; i++) {
+					            iframes[i].removeAttribute('style');
+					            iframes[i].width = winWidth;
+					            iframes[i].height = winWidth * (9 / 16);
+				            }
+			            }
+			            var embeds = document.getElementsByTagName('embed');
+			            if (embeds != null) {
+				            for (var j = 0; j < embeds.length; j++) {
+					            var embedTag = embedTags[j];
+					
+					            embedTag.removeAttribute('style');
+					            embedTag.height = winWidth * (9 / 16);
+					            embedTag.width = winWidth;
+				            }
+			            }
+                        //div
+			            var player = document.getElementById('youkuplayer_0');
+			            if (player != null) {
+				            player.removeAttribute('style');
+				            player.style.width = winWidth + 'px';
+				            player.style.height = winWidth * (9 / 16) + 'px';
+			            }}"+
                         "var body = document.getElementsByTagName('body')[0]; window.onload = InitGesture(body);" +
-                       @"window.onresize = function(){
-                        var winWidth = document.body.clientWidth;
-		                var iframes = document.getElementsByTagName('iframe');
-		                if(iframes!=null)
-		                {
-			                for(var i=0;i<iframes.length;i++)
-			                {
-                                iframes[i].removeAttribute('style');
-				                iframes[i].width = winWidth;
-				                iframes[i].height = winWidth * (9/16);
-			                }
-		                }
-		
-	                    var embeds = document.getElementsByTagName('embed');
-	                    if(embeds!=null)
-	                    {
-	                        for (var j = 0;j < embeds.length;j++)
-	                        {
-	                            var embedTag = embedTags[j];aa
-	                            embedTag.removeAttribute('style');
-	                            embedTag.height = winWidth * (9/16);
-	                            embedTag.width = winWidth;
-	                        }
-		                }
-	    
-		                var player = document.getElementById('youkuplayer_0');
-		                if(player!=null)
-		                {
-                                //player.removeAttribute('style');
-				                player.width = winWidth;
-				                player.height = winWidth *(9/16);
-		                }
+                       @"document.onreadystatechange = function () { resizeVideo(); }
+                        window.onresize = function(){
+                            resizeVideo();
                     };
                     </script>" +
                 "</html>";
+
+                if (HtmlString == null)
+                {
+                    HtmlString = new StringBuilder(html);
+                }
+                else
+                {
+                    HtmlString.Clear();
+                    HtmlString.Append(html);
+                }
             }
             IsActive = false;
         }

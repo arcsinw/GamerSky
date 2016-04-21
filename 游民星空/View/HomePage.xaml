@@ -241,6 +241,7 @@
 
             <SplitView.Content>
                 <Grid>
+                    
                     <!--<VisualStateManager.VisualStateGroups>
                         <VisualStateGroup x:Name="adaptiveStates"
                                           CurrentStateChanged="adaptiveStates_CurrentStateChanged">

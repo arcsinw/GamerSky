@@ -134,6 +134,12 @@
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Image Height="100" Width="100">
+            <Image.Source>
+                <BitmapImage UriSource="ms-appx:///Assets/Square150x150Logo_t.png"/>
+            </Image.Source>
+        </Image>
+
         <Pivot x:Name="essayPivot"  
                ItemsSource="{Binding EssaysAndChannels}" SelectionChanged="Pivot_SelectionChanged"
                Padding="0" Margin="0" HorizontalContentAlignment="Stretch" 
