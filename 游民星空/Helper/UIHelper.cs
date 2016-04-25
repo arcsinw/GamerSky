@@ -6,11 +6,22 @@ using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using 游民星空.Core.Helper;
+using 游民星空.Core.ViewModel;
 
 namespace 游民星空.Helper
 {
     public static class UIHelper
     {
+        public static StatusBar statusBar;
+        public static DispatcherTimer dispatcherTimer;
+
+        static UIHelper()
+        {
+            statusBar = StatusBar.GetForCurrentView();
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
+
+        }
         /// <summary>
         /// Mobile 显示StatusBar
         /// PC 显示标题栏
@@ -18,11 +29,17 @@ namespace 游民星空.Helper
         public static async void ShowStatusBar()
         {
             if (Functions.IsMobile())
-            {
-                var statusBar = StatusBar.GetForCurrentView();
+            { 
                 statusBar.ForegroundColor = Colors.White;
                 statusBar.BackgroundOpacity = 1;
-                statusBar.BackgroundColor = Application.Current.Resources["ThemeColor"] as Color?;
+                if (DataShareManager.Current.AppTheme == ElementTheme.Dark)
+                {
+                    statusBar.BackgroundColor = App.Current.Resources["DarkThemeColor"] as Color?;
+                }
+                else
+                {
+                    statusBar.BackgroundColor = Application.Current.Resources["LightThemeColor"] as Color?;
+                }
                 await statusBar.ShowAsync();
             }
             else
@@ -35,35 +52,10 @@ namespace 游民星空.Helper
         /// 隐藏StatusBar
         /// </summary>
         public static async void HideStatusBar()
-        {
-            var statusBar = StatusBar.GetForCurrentView();
+        { 
             await statusBar.HideAsync();
         }
-
-        public static async void SetStatusBarColor(Color color)
-        {
-            if (Functions.IsMobile())
-            {
-                var statusBar = StatusBar.GetForCurrentView();
-                statusBar.ForegroundColor = Colors.White;
-                statusBar.BackgroundOpacity = 1;
-                statusBar.BackgroundColor = color;
-                 
-                await statusBar.ShowAsync();
-            }
-            else
-            {
-                ApplicationView applicationView = ApplicationView.GetForCurrentView();
-                applicationView.SetPreferredMinSize(new Windows.Foundation.Size(480, 800));
-                applicationView.ShowStandardSystemOverlays();
-                //应用标题栏
-                ApplicationViewTitleBar titleBar = applicationView.TitleBar;
-                titleBar.BackgroundColor = color;
-                titleBar.ForegroundColor = Colors.White;
-                titleBar.ButtonBackgroundColor = color;
-            }
-        }
-
+         
         /// <summary>
         /// 更改标题栏样式 用于PC
         /// </summary>
@@ -81,6 +73,38 @@ namespace 游民星空.Helper
            
         }
 
+        /// <summary>
+        /// show message through StatusBar
+        /// </summary>
+        /// <param name="message"></param>
+        public static async void ShowToast(string message)
+        {
+            if (Functions.IsMobile())
+            {
+                dispatcherTimer.Tick += async(sender, e) =>
+                {
+                    await statusBar.ProgressIndicator.HideAsync();
+                    dispatcherTimer.Stop();
+                };
+                statusBar.ForegroundColor = Colors.White;
+                statusBar.ProgressIndicator.Text = message;
+                statusBar.ProgressIndicator.ProgressValue = 0;
+                await  statusBar.ProgressIndicator.ShowAsync();
+
+                dispatcherTimer.Start();
+            }
+            else
+            {
+                ShowView();
+            }
+        }
+        
+
+        /// <summary>
+        /// show MessageDialog
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="title"></param>
         public static async void ShowMessage(string content, string title="")
         {
             await Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>

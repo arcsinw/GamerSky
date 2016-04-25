@@ -148,6 +148,7 @@
     <Compile Include="Model\Game.cs" />
     <Compile Include="Model\GameDetail.cs" />
     <Compile Include="Model\GameDetailEssay.cs" />
+    <Compile Include="Model\JsImage.cs" />
     <Compile Include="Model\JSParameter.cs" />
     <Compile Include="Model\KeyedList.cs" />
     <Compile Include="Model\ModelBase.cs" />
@@ -223,9 +224,6 @@
     <Content Include="Store\Simulation\app-listing.xml" />
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.Services.Store.Engagement, Version=10.0">
-      <Name>Microsoft Store Engagement SDK</Name>
-    </SDKReference>
     <SDKReference Include="Microsoft.VCLibs, Version=14.0">
       <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
     </SDKReference>

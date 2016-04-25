@@ -57,6 +57,23 @@ function SendNotify(notifyString)
     window.external.notify(notifyString);
 }
 
+//获取所有的图片
+function GetAllPictures()
+{
+    var imgs = document.getElementsByTagName('img');
+    var imgArray = new Array();
+
+    for (var i =0; i<imgs.length; i++)
+    { 
+       var img = new Object();
+        img.src = imgs[i].src;
+        img.alt = imgs[i].alt;
+        imgArray.push(img);
+        
+    }
+    SendNotify(JSON.stringify(imgArray));
+}
+
 
 // 转换为数字
 function intval(v)
@@ -203,10 +220,10 @@ function eventListener(event) {
             gestureStartX = event.clientX;
             return;
         }
-        SendNotify("clientX " + event.clientX + " gestureStartX " + gestureStartX + " translateX " + translateX);
+        //SendNotify("clientX " + event.clientX + " gestureStartX " + gestureStartX + " translateX " + translateX);
         translateX = event.clientX - gestureStartX;
         if (translateX < -100) {
-            //SendNotify('gestures : goforward');
+            SendNotify('gestures : goforward');
             gestureStartX = event.clientX;
             lastGestureId = gestureId;
             myGesture.stop();

@@ -1,4 +1,4 @@
-﻿using JYAnalyticsUniversal;
+﻿
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -158,6 +158,7 @@ namespace 游民星空
                 // 将框架放在当前窗口中
                 Window.Current.Content = rootFrame;
 
+            
                 SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
 
                 if (ApiInformation.IsTypePresent("Windows.Phone.UI.HardwareButtons"))
@@ -190,8 +191,17 @@ namespace 游民星空
         /// <param name="e"></param>
         private void OnBackPressed(object sender, BackPressedEventArgs e)
         {
+            e.Handled = true;
             var frame = (Frame)Window.Current.Content;
-            if (frame.CanGoBack) {
+            //if (frame.Content is EssayDetail)
+            //{
+            //    e.Handled = true;
+            //    var essayDetailPage = (frame.Content as EssayDetail);
+            //    essayDetailPage.CloseImageFlipView();
+            //}
+            //else 
+            if (frame.CanGoBack)
+            {
                 e.Handled = true;
                 frame.GoBack();
             }
@@ -205,7 +215,14 @@ namespace 游民星空
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
             var frame = (Frame)Window.Current.Content;
-            if (frame.CanGoBack) {
+            if (frame.Content is EssayDetail)
+            {
+                e.Handled = true;
+                var essayDetailPage = (frame.Content as EssayDetail);
+                essayDetailPage.CloseImageFlipView();
+            }
+            else if (frame.CanGoBack)
+            {
                 e.Handled = true;
                 frame.GoBack();
             }

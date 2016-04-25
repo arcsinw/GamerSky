@@ -132,20 +132,13 @@ namespace 游民星空.View
             get
             {
                 appTheme = DataShareManager.Current.AppTheme;
-                if (appTheme.Equals(ElementTheme.Dark))
-                {
-                    UIHelper.SetStatusBarColor((Color)App.Current.Resources["DarkThemeColor"]);
-                }
-                else
-                {
-                    UIHelper.SetStatusBarColor((Color)App.Current.Resources["LightThemeColor"]);
-                }
                 return appTheme;
             }
             set
             {
                 appTheme = value;
                 OnPropertyChanged();
+                UIHelper.ShowStatusBar();
             }
         }
 
@@ -169,17 +162,10 @@ namespace 游民星空.View
                 return DataShareManager.Current.AppTheme == ElementTheme.Dark;
             }
             set
-            { 
-                if (value) //夜间模式时更改StatusBar颜色
-                {
-                    UIHelper.SetStatusBarColor(Colors.Gray);
-                }
-                else
-                {
-                    UIHelper.ShowStatusBar();
-                }
+            {
                 DataShareManager.Current.UpdateAPPTheme(value);
                 OnPropertyChanged();
+                UIHelper.ShowStatusBar();
             }
         }
 

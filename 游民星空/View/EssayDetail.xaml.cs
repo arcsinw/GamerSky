@@ -1,11 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Phone.UI.Input;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using Windows.Storage.Provider;
+using Windows.Storage.Streams;
 using Windows.System;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using 游民星空.Core.Helper;
+using 游民星空.Core.Http;
 using 游民星空.Core.Model;
 using 游民星空.Core.ViewModel;
 using 游民星空.Helper;
@@ -20,6 +30,10 @@ namespace 游民星空.View
     public sealed partial class EssayDetail : Page
     {
         private EssayDetailViewModel viewModel;
+        private Essay essayResult;
+        private bool isEssayLoaded = false;
+
+
         private bool isDOMLoadCompleted = false;
         public EssayDetail()
         {
@@ -27,10 +41,26 @@ namespace 游民星空.View
             NavigationCacheMode = NavigationCacheMode.Disabled;
 
             webView.NewWindowRequested += WebView_NewWindowRequested;
-              
+             
         }
-
-          
+    
+        public void CloseImageFlipView()
+        {
+            if (imageFlipView.Visibility == Visibility.Visible)
+            {
+                imageFlipView.Visibility = Visibility.Collapsed;
+                appBar.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                if (Frame.CanGoBack)
+                {
+                    this.Frame.GoBack();
+                }
+            }
+     
+        }
+ 
         /// <summary>
         /// 处理WebView中的新请求
         /// </summary>
@@ -38,10 +68,12 @@ namespace 游民星空.View
         /// <param name="args"></param>
         private void WebView_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
         {
-            //args.Handled = true;
+            args.Handled = true;
             if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
             {
-               
+                GetAllPictures();
+                imageFlipView.Visibility = Visibility.Visible;
+                appBar.Visibility = Visibility.Visible;
             }
             else
             {
@@ -50,8 +82,13 @@ namespace 游民星空.View
 
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private async void GetAllPictures()
         {
+            await webView.InvokeScriptAsync("GetAllPictures", new[] {"" });
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        { 
             progress.IsActive = true;
             essayResult = e.Parameter as Essay;
             if (essayResult == null) return;
@@ -68,7 +105,7 @@ namespace 游民星空.View
             JYHelper.TraceRead();
         }
 
-        Essay essayResult;
+    
         private async void Edge(object sender, RoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
@@ -95,6 +132,11 @@ namespace 游民星空.View
         private void webView_ScriptNotify(object sender, NotifyEventArgs e)
         {
             Debug.WriteLine(e.Value);
+            
+            List<JsImage> imgs = Functions.Deserlialize<List<JsImage>>(e.Value);
+
+            imageFlipView.ItemsSource = imgs;
+
             //if(e.Value.Contains("forward"))
             //{
             //    if (pivot.Items != null)
@@ -224,8 +266,7 @@ namespace 游民星空.View
             progress.IsActive = false;
         }
 
-        private bool isEssayLoaded = false;
-
+        
         private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (viewModel != null)
@@ -261,10 +302,7 @@ namespace 游民星空.View
             DayMode();
         }
 
-
-
-      
-
+         
         /// <summary>
         /// 翻译成英文
         /// </summary>
@@ -293,6 +331,44 @@ namespace 游民星空.View
         private void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
         {
             isDOMLoadCompleted = true;
+        }
+
+        private async void saveAppBar_Click(object sender, RoutedEventArgs e)
+        {
+            var folder = KnownFolders.SavedPictures;
+
+            FileSavePicker savePicker = new FileSavePicker();
+            savePicker.SuggestedFileName = "游民壁纸_" + DateTime.Now.Month + DateTime.Now.Day;
+            savePicker.DefaultFileExtension = ".jpg";
+            savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
+            savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            savePicker.ContinuationData["Op"] = "ImgSave";
+             
+            StorageFile file = await savePicker.PickSaveFileAsync();
+            if (file != null)
+            {
+                CachedFileManager.DeferUpdates(file);
+
+                try
+                {
+                    using (Stream stream = await file.OpenStreamForWriteAsync())
+                    {
+                        IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes((imageFlipView.SelectedItem as JsImage).src);
+                        stream.Write(buffer.ToArray(), 0, (int)buffer.Length);
+                        await stream.FlushAsync();
+                    }
+                    FileUpdateStatus updateStatus = await CachedFileManager.CompleteUpdatesAsync(file);
+                    if (updateStatus == FileUpdateStatus.Complete)
+                    {
+                        UIHelper.ShowToast("图片已保存");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    JYHelper.TraceError("AdStartPage.xaml" + ex.Message);
+
+                }
+            }
         }
     }
 }

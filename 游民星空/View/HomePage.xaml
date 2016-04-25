@@ -215,11 +215,18 @@
                             </Grid>
                         </ListViewItem>
 
-                        <ListViewItem>
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Picmode.png" Height="24"/>
-                                <TextBlock Text="2G/3G无图" x:Uid="NoPic" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
+                        <ListViewItem HorizontalContentAlignment="Stretch">
+                            <Grid HorizontalAlignment="Stretch" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Picmode.png" Height="24"/>
+                                    <TextBlock Text="2G/3G无图" VerticalAlignment="Center" x:Uid="NoPic" Margin="{StaticResource TextBlockMargin}"/>
+                                </StackPanel>
+                                <ToggleSwitch  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
+                            </Grid>
                         </ListViewItem>
 
                         <ListViewItem Tapped="{x:Bind FeedBack}">

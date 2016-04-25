@@ -42,7 +42,7 @@
                             </HyperlinkButton>
                             <TextBlock Text="感谢" HorizontalAlignment="Center"/>
                             <HyperlinkButton Content="ms-uap"  NavigateUri="http://www.cnblogs.com/ms-uap/"/>
-                            <HyperlinkButton Content="AsyncTaskEx"/>
+                            <HyperlinkButton Content="AsyncTaskEx" NavigateUri="https://github.com/ljw1004/async-exception-stacktrace"/>
                             <HyperlinkButton Content="edi.wang" NavigateUri="http://edi.wang"/>
                             <HyperlinkButton Content="写博客的前辈们" NavigateUri="http://www.cnblogs.com"/>
                             <HyperlinkButton Content="MSDN大法好" NavigateUri="http://msdn.microsoft.com"/>

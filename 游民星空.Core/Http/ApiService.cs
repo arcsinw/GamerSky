@@ -397,7 +397,7 @@ namespace 游民星空.Core.Http
                 AdStartPostData postData = new AdStartPostData();
                 AdStartResult adStartResult = await PostJson<AdStartPostData, AdStartResult>(ServiceUri.AdStart, postData);
                 
-                if (adStarts != null && adStartResult.result != null)
+                if (adStarts != null && adStartResult?.result != null)
                 {
                     foreach (var item in adStartResult.result)
                     {

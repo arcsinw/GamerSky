@@ -3,15 +3,6 @@
   "version": 2,
   "targets": {
     "UAP,Version=v10.0": {
-      "JyAnalytics/1.0.10": {
-        "type": "package",
-        "compile": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        },
-        "runtime": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -1889,15 +1880,6 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "JyAnalytics/1.0.10": {
-        "type": "package",
-        "compile": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        },
-        "runtime": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -3641,15 +3623,6 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "JyAnalytics/1.0.10": {
-        "type": "package",
-        "compile": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        },
-        "runtime": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -5350,15 +5323,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "JyAnalytics/1.0.10": {
-        "type": "package",
-        "compile": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        },
-        "runtime": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -7111,15 +7075,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "JyAnalytics/1.0.10": {
-        "type": "package",
-        "compile": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        },
-        "runtime": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -8820,15 +8775,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "JyAnalytics/1.0.10": {
-        "type": "package",
-        "compile": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        },
-        "runtime": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -10581,15 +10527,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "JyAnalytics/1.0.10": {
-        "type": "package",
-        "compile": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        },
-        "runtime": {
-          "lib/netcore451/JYAnalyticsUniversal.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "type": "package",
         "dependencies": {
@@ -12291,22 +12228,6 @@
     }
   },
   "libraries": {
-    "JyAnalytics/1.0.10": {
-      "sha512": "8bEZLDRtYLgBJ0lasekEvxyDUKOhALaWAHvEUj3QSUJ9WtZ/x63h/+gRUKrDcVRF0TG1GVJ09+TCfeJRMjTe/w==",
-      "type": "package",
-      "files": [
-        "JyAnalytics.1.0.10.nupkg.sha512",
-        "JyAnalytics.nuspec",
-        "lib/WP8/JYAnalyticsSdk.dll",
-        "lib/WP8/JYAnalyticsSdk.xml",
-        "lib/netcore451/JYAnalyticsUniversal.dll",
-        "lib/netcore451/JYAnalyticsUniversal.pri",
-        "lib/netcore451/JYAnalyticsUniversal.xml",
-        "lib/wpa81/JYAnalyticsUniversal.dll",
-        "lib/wpa81/JYAnalyticsUniversal.pri",
-        "lib/wpa81/JYAnalyticsUniversal.xml"
-      ]
-    },
     "Microsoft.CSharp/4.0.0": {
       "sha512": "oWqeKUxHXdK6dL2CFjgMcaBISbkk+AqEg+yvJHE4DElNzS4QaTsCflgkkqZwVlWby1Dg9zo9n+iCAMFefFdJ/A==",
       "type": "Package",
@@ -15768,7 +15689,6 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "JyAnalytics >= 1.0.10",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.1.0"
     ],
     "UAP,Version=v10.0": []
