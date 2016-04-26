@@ -61,7 +61,7 @@
     <value>夜间模式</value>
   </data>
   <data name="Login.Text" xml:space="preserve">
-    <value>立即登录</value>
+    <value>登录</value>
   </data>
   <data name="News.Text" xml:space="preserve">
     <value>新闻</value>
@@ -116,5 +116,29 @@
   </data>
   <data name="Refresh.Label" xml:space="preserve">
     <value>刷新</value>
+  </data>
+  <data name="Small.Content" xml:space="preserve">
+    <value>小</value>
+  </data>
+  <data name="Medium.Content" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="Large.Content" xml:space="preserve">
+    <value>大</value>
+  </data>
+  <data name="InputAccount.Text" xml:space="preserve">
+    <value>请输入用户名</value>
+  </data>
+  <data name="Password.Text" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="ForgetPwd.Text" xml:space="preserve">
+    <value>忘记密码</value>
+  </data>
+  <data name="SignUp.Text" xml:space="preserve">
+    <value>注册新用户</value>
+  </data>
+  <data name="OtherWay.Text" xml:space="preserve">
+    <value>其他方式登录</value>
   </data>
 </root>

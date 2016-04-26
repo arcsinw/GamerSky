@@ -493,14 +493,14 @@
 
                 </StackPanel>
 
-        <!--#region  显示图片-->
-        <FlipView x:Name="imageFlipView" Visibility="Collapsed" 
+         <!--#region  显示图片-->
+                <FlipView x:Name="imageFlipView" Visibility="Collapsed" 
                 Background="Black" Opacity="0.9"
                 ItemsSource="{Binding }">
-            <FlipView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <ScrollViewer IsDeferredScrollingEnabled="True" 
+                    <FlipView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <ScrollViewer IsDeferredScrollingEnabled="True" 
                                       ZoomSnapPointsType="Mandatory"
                                       MaxZoomFactor="5"
                                       MinZoomFactor="1"
@@ -508,18 +508,19 @@
                                       ScrollViewer.IsZoomChainingEnabled="True"
                                         ScrollViewer.IsZoomInertiaEnabled="True"
                                       ScrollViewer.ZoomMode="Enabled">
-                            <Image>
-                                <Image.Source>
-                                    <BitmapImage UriSource="{Binding src}"/>
-                                </Image.Source>
-                            </Image>
-                        </ScrollViewer>
-                        <!--<TextBlock Text="{Binding alt}" VerticalAlignment="Bottom"/>-->
-                    </Grid>
-                </DataTemplate>
-            </FlipView.ItemTemplate>
-        </FlipView>
-        <!--#endregion-->
+                                    <Image>
+                                        <Image.Source>
+                                            <BitmapImage UriSource="{Binding src}"/>
+                                        </Image.Source>
+                                    </Image>
+                                </ScrollViewer>
+                            </Grid>
+                        </DataTemplate>
+                    </FlipView.ItemTemplate>
+                </FlipView>
+                <!--#endregion-->
+
+        <TextBlock Text="{Binding ElementName=imageFlipView,Path=SelectedIndex}" VerticalAlignment="Bottom"/>
 
     </Grid>
 

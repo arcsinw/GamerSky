@@ -55,12 +55,12 @@
                     <Grid>
                         <HyperlinkButton Click="{x:Bind ForgetPwd}" HorizontalAlignment="Left">
                             <HyperlinkButton.Content>
-                                <TextBlock Text="忘记密码"/>
+                                <TextBlock x:Uid="ForgetPwd"/>
                             </HyperlinkButton.Content>
                         </HyperlinkButton>
                         <HyperlinkButton Click="{x:Bind Register}" HorizontalAlignment="Right">
                             <HyperlinkButton.Content>
-                                <TextBlock Text="注册新用户"/>
+                                <TextBlock x:Uid="SignUp"/>
                             </HyperlinkButton.Content>
                         </HyperlinkButton>
                     </Grid>
@@ -71,7 +71,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Rectangle Fill="Gray" Height="1" Grid.Column="0"/>
-                        <TextBlock Text="其他方式登录" Margin="0,8" Grid.Column="1"/>
+                        <TextBlock x:Uid="OtherWay" Margin="0,8" Grid.Column="1"/>
                         <Rectangle Fill="Gray" Height="1" Grid.Column="2"/>
                     </Grid>
                     <Grid>
