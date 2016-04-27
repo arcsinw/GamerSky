@@ -493,9 +493,9 @@
 
                 </StackPanel>
 
-         <!--#region  显示图片-->
+                <!--#region  显示图片-->
                 <FlipView x:Name="imageFlipView" Visibility="Collapsed" 
-                Background="Black" Opacity="0.9"
+                Background="Black"
                 ItemsSource="{Binding }">
                     <FlipView.ItemTemplate>
                         <DataTemplate>
@@ -520,7 +520,11 @@
                 </FlipView>
                 <!--#endregion-->
 
-        <TextBlock Text="{Binding ElementName=imageFlipView,Path=SelectedIndex}" VerticalAlignment="Bottom"/>
+                <TextBlock VerticalAlignment="Bottom">
+                    <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex}" />
+                    <Run Text="/"/>
+                    <Run Text="{Binding ElementName=imageFlipView,Path=Items.Count}"/>
+                </TextBlock>
 
     </Grid>
 

@@ -17,7 +17,10 @@ namespace 游民星空.Helper
 
         static UIHelper()
         {
-            statusBar = StatusBar.GetForCurrentView();
+            if (Functions.IsMobile())
+            {
+                statusBar = StatusBar.GetForCurrentView();
+            }
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
 
@@ -29,7 +32,8 @@ namespace 游民星空.Helper
         public static async void ShowStatusBar()
         {
             if (Functions.IsMobile())
-            { 
+            {
+               
                 statusBar.ForegroundColor = Colors.White;
                 statusBar.BackgroundOpacity = 1;
                 if (DataShareManager.Current.AppTheme == ElementTheme.Dark)
@@ -66,9 +70,17 @@ namespace 游民星空.Helper
             applicationView.ShowStandardSystemOverlays();
             //应用标题栏
             ApplicationViewTitleBar titleBar = applicationView.TitleBar;
-            titleBar.BackgroundColor = Application.Current.Resources["ThemeColor"] as Color?;
+            if (DataShareManager.Current.AppTheme == ElementTheme.Dark)
+            {
+                titleBar.ButtonBackgroundColor = Application.Current.Resources["DarkThemeColor"] as Color?;
+                titleBar.BackgroundColor = Application.Current.Resources["DarkThemeColor"] as Color?;
+            }
+            else
+            {
+                titleBar.ButtonBackgroundColor = Application.Current.Resources["LightThemeColor"] as Color?;
+                titleBar.BackgroundColor = Application.Current.Resources["LightThemeColor"] as Color?;
+            }
             titleBar.ForegroundColor = Colors.White;
-            titleBar.ButtonBackgroundColor = Application.Current.Resources["ThemeColor"] as Color?;
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
            
         }

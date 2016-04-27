@@ -36,7 +36,7 @@ namespace 游民星空.View
 
             NavigationCacheMode = NavigationCacheMode.Required;
              
-            UIHelper.ShowStatusBar();
+            
                
             DispatcherManager.Current.Dispatcher = Dispatcher;
             Loaded += HomePage_Loaded;
@@ -46,7 +46,9 @@ namespace 游民星空.View
         {
             rootFrame.SourcePageType = typeof(MainPage);
             newsRadioButton.IsChecked = true;
- 
+
+            UIHelper.ShowStatusBar();
+
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
              
             if (DataShareManager.Current.IsNewVersion)
@@ -194,10 +196,6 @@ namespace 游民星空.View
             splitView.IsSwipeablePaneOpen = false;
             this.Frame.Navigate(typeof(LoginPage));
         }
-
-        private void adaptiveStates_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
-        {
-
-        }
+ 
     }
 }
