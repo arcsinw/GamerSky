@@ -203,6 +203,7 @@
   <ItemGroup>
     <Content Include="Assets\css\gs.css" />
     <Content Include="Assets\js\gs.js" />
+    <Content Include="Assets\hd_picture.png" />
     <Content Include="Assets\Star.png" />
     <Content Include="Assets\Star_full.png" />
     <Content Include="Assets\js\gsVideo.js" />

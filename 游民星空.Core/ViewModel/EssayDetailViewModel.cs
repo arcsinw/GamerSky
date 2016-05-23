@@ -246,8 +246,10 @@ namespace 游民星空.Core.ViewModel
                                         "</div>" +
                                   "</div>" +
                                          //relatedReadingsHtml +
-                             "</div>"+
-                        "</body>"+
+                             "</div>" +
+                                  @"<iframe allowfullscreen mozallowfullscreen webkitallowfullscreen vspace=""0"" hspace=""0"" frameborder=""0"" marginwidth=""0"" marginheight=""0"" allowtransparency=""true"" scrolling=""no""  src=""http://yuntv.letv.com/bcloud.html?uu=cfd9191aeb&vu=79ff602f42&auto_play=0&gpcflag=1&width=100%&height=300&skinnable=0&controls=1"" width=""100%"" height=""300px""></iframe>" +
+
+                        "</body>" +
                         "<script type=\"text/javascript\">"+
                         @"function resizeVideo(){
                          var winWidth = document.body.clientWidth;

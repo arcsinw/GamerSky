@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
@@ -32,6 +34,11 @@ namespace 游民星空.View
         private EssayDetailViewModel viewModel;
         private Essay essayResult;
         private bool isEssayLoaded = false;
+        private ObservableCollection<JsImage> Images { get; set; }= new ObservableCollection<JsImage>();
+        /// <summary>
+        /// 当前点击的图片url
+        /// </summary>
+        private string currentImageUrl;
 
 
         private bool isDOMLoadCompleted = false;
@@ -71,9 +78,23 @@ namespace 游民星空.View
             args.Handled = true;
             if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
             {
+                currentImageUrl = args.Uri.ToString();
+                Debug.WriteLine("ClickImageUrl：" + currentImageUrl);
                 GetAllPictures();
+                
                 imageFlipView.Visibility = Visibility.Visible;
                 appBar.Visibility = Visibility.Visible;
+
+                if (Images != null)
+                {
+                    for (int i = 0; i < Images.Count; i++)
+                    {
+                        if (currentImageUrl.Contains(Images[i].hdsrc))
+                        {
+                            imageFlipView.SelectedIndex = i;
+                        }
+                    }
+                }
             }
             else
             {
@@ -82,10 +103,14 @@ namespace 游民星空.View
 
         }
 
+        /// <summary>
+        /// 使用js获取所有图片
+        /// </summary>
         private async void GetAllPictures()
         {
             await webView.InvokeScriptAsync("GetAllPictures", new[] {"" });
         }
+
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         { 
@@ -106,6 +131,11 @@ namespace 游民星空.View
         }
 
     
+        /// <summary>
+        /// 使用Edge打开网页
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Edge(object sender, RoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
@@ -133,25 +163,17 @@ namespace 游民星空.View
         {
             Debug.WriteLine(e.Value);
             
-            List<JsImage> imgs = Functions.Deserlialize<List<JsImage>>(e.Value);
+            var imgs = Functions.Deserlialize<List<JsImage>>(e.Value);
+            if (imgs != null && Images.Count==0)
+            {
+                foreach (var item in imgs)
+                {
+                    Images.Add(item);
+                }
 
-            imageFlipView.ItemsSource = imgs;
+                countRun.Text = Images.Count.ToString();
 
-            //if(e.Value.Contains("forward"))
-            //{
-            //    if (pivot.Items != null)
-            //    {
-            //        if (pivot.SelectedIndex > 0)
-            //        {
-            //            pivot.SelectedIndex--;
-            //        }
-            //        else
-            //        {
-            //            pivot.SelectedIndex = pivot.Items.Count - 1;
-            //        }
-            //    }
-            //}
-            //else
+            }
             if(e.Value.Contains("back"))
             {
                 if(Frame.CanGoBack)
@@ -159,67 +181,10 @@ namespace 游民星空.View
                     Frame.GoBack();
                 }
             }
-            //var model = Functions.Deserlialize<JSParameter>(e.Value);
-            //if (model == null) return;
-            //switch (model.type)
-            //{
-            //    case "image":
-                   
-            //        break;
-            //    case "swiperight":
-            //        //右滑
-            //        if (Frame.CanGoBack)
-            //        {
-            //            Frame.GoBack();
-            //        }
-            //        break;
-            //    case "swipeleft":
-            //        //左滑
-                   
-            //        break;
-            //    case "text":
-                   
-            //        break;
-            //}
+            
         }
 
-        /// <summary>
-        /// 自适应视频窗口大小
-        /// </summary>
-        public async void ReSizeVideo()
-        {
-            //iframe自适应
-            var js = @"var iframeTags = document.getElementsByTagName('iframe');
-            for (var iframeTagIndex = 0;
-                iframeTagIndex <iframeTags.length;
-                iframeTagIndex++)
-                    {
-                        var iframeTag = iframeTags[iframeTagIndex];
-                        iframeTag.removeAttribute('style');
-                        iframeTag.height = document.body.clientWidth * (9 / 16);
-                        iframeTag.width = document.body.clientWidth;
-                    }
-
-                    var embedTags = document.getElementsByTagName('embed');
-                    for (var embedTagIndex = 0;
-                         embedTagIndex < embedTags.length;
-                         embedTagIndex++)
-                    {
-                        var embedTag = embedTags[embedTagIndex];
-                        embedTag.removeAttribute('style');
-                        embedTag.height = document.body.clientWidth * (9 / 16);
-                        embedTag.width = document.body.clientWidth;
-                    }";
-            await webView.InvokeScriptAsync("eval", new[] { js });
-
-            js = @"var iframeTags = document.getElementsByTagName('iframe');
-                        var iframeTag = iframeTags[0];
-                        iframeTag.removeAttribute('style');
-                        iframeTag.height = document.body.clientWidth * (9 / 16);
-                        iframeTag.width = document.body.clientWidth;";
-            //await webView.InvokeScriptAsync("eval", new[] { js });
-        }
-
+         
         /// <summary>
         /// 后退
         /// </summary>
@@ -249,6 +214,9 @@ namespace 游民星空.View
             }
         }
 
+        /// <summary>
+        /// 日间模式
+        /// </summary>
         public async void DayMode()
         {
             if (isDOMLoadCompleted)
@@ -331,20 +299,25 @@ namespace 游民星空.View
         private void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
         {
             isDOMLoadCompleted = true;
+            GetAllPictures();
         }
 
         private async void saveAppBar_Click(object sender, RoutedEventArgs e)
         {
+            UIHelper.ShowToast("保存中……");
             var folder = KnownFolders.SavedPictures;
 
-            FileSavePicker savePicker = new FileSavePicker();
-            savePicker.SuggestedFileName = "游民壁纸_" + DateTime.Now.Month + DateTime.Now.Day;
-            savePicker.DefaultFileExtension = ".jpg";
-            savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
-            savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            savePicker.ContinuationData["Op"] = "ImgSave";
+            var file = await folder.CreateFileAsync("游民壁纸_" + Functions.getUnixTimeStamp().ToString() + ".jpg");
+
+            //FileSavePicker savePicker = new FileSavePicker();
+            //savePicker.SuggestedFileName = "游民壁纸_" + DateTime.Now.Month + DateTime.Now.Day;
+            //savePicker.DefaultFileExtension = ".jpg";
+            //savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
+            //savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            //savePicker.ContinuationData["Op"] = "ImgSave";
              
-            StorageFile file = await savePicker.PickSaveFileAsync();
+            //StorageFile file = await savePicker.PickSaveFileAsync();
+
             if (file != null)
             {
                 CachedFileManager.DeferUpdates(file);
@@ -369,6 +342,16 @@ namespace 游民星空.View
 
                 }
             }
+        }
+
+        /// <summary>
+        /// 查看高清图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void hdAppBar_Click(object sender, RoutedEventArgs e)
+        {
+             
         }
     }
 }

@@ -63,17 +63,17 @@ function GetAllPictures()
     var imgs = document.getElementsByTagName('img');
     var imgArray = new Array();
 
-    for (var i =0; i<imgs.length; i++)
-    { 
-       var img = new Object();
+    for (var i = 0; i < imgs.length; i++)
+    {
+        var img = new Object();
         img.src = imgs[i].src;
-        img.alt = imgs[i].alt;
+        img.hdsrc = imgs[i].parentNode.href;
+        img.index = i + 1;
         imgArray.push(img);
-        
+
     }
     SendNotify(JSON.stringify(imgArray));
 }
-
 
 // 转换为数字
 function intval(v)

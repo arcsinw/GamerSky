@@ -141,7 +141,7 @@
         </Image>
 
         <Pivot x:Name="essayPivot"  
-               ItemsSource="{Binding EssaysAndChannels}" SelectionChanged="Pivot_SelectionChanged"
+               ItemsSource="{Binding EssaysAndChannels}" 
                Padding="0" Margin="0" HorizontalContentAlignment="Stretch" 
                Background="{ThemeResource PageBackground}"
                PivotItemLoaded="essayPivot_PivotItemLoaded"
@@ -163,6 +163,7 @@
                                  ItemClick="ListView_ItemClick"
                                  Loaded="ListView_Loaded"
                                  >
+           
                             <ListView.ItemTemplateSelector>
                                 <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                             ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
@@ -173,7 +174,7 @@
                             <ListView.HeaderTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <FlipView x:Name="headEssay" Height="180" ItemsSource="{Binding HeaderEssays}" 
+                                        <FlipView x:Name="headEssay" Height="180" ItemsSource="{Binding Essays.HeaderEssays}" 
                                                   Tapped="FlipView_Tapped">
                                             <FlipView.ItemTemplate>
                                                 <DataTemplate>

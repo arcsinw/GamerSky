@@ -494,9 +494,10 @@
                 </StackPanel>
 
                 <!--#region  显示图片-->
-                <FlipView x:Name="imageFlipView" Visibility="Collapsed" 
-                Background="Black"
-                ItemsSource="{Binding }">
+                <FlipView x:Name="imageFlipView" 
+                Background="Black" Visibility="Collapsed" 
+                       
+                ItemsSource="{x:Bind Images,Mode=OneWay}" >
                     <FlipView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -519,11 +520,11 @@
                     </FlipView.ItemTemplate>
                 </FlipView>
                 <!--#endregion-->
-
-                <TextBlock VerticalAlignment="Bottom">
+             
+                <TextBlock VerticalAlignment="Bottom" Margin="12">
                     <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex}" />
                     <Run Text="/"/>
-                    <Run Text="{Binding ElementName=imageFlipView,Path=Items.Count}"/>
+                    <Run x:Name="countRun" />
                 </TextBlock>
 
     </Grid>
@@ -532,6 +533,12 @@
         <CommandBar x:Name="appBar" Visibility="Collapsed">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Save" Label="保存" x:Name="saveAppBar" Click="saveAppBar_Click"/>
+                <AppBarButton Label="HD" x:Name="hdAppBar" Click="hdAppBar_Click" Visibility="Collapsed">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="ms-appx:///Assets/hd_picture.png"/>
+                    </AppBarButton.Icon>
+
+                </AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

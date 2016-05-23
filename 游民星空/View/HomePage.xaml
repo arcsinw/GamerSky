@@ -13,7 +13,7 @@
     <Page.DataContext>
         <vm:HomePageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
-    
+
     <Page.Resources>
         <Style x:Key="TabRadioStyle" TargetType="RadioButton">
             <Setter Property="Background" Value="Transparent"/>
@@ -36,7 +36,7 @@
                                 <ColumnDefinition Width="0"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                     
+
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal"/>
@@ -135,7 +135,7 @@
         
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-          
+
         <controls:SwipeableSplitView x:Name="splitView" Background="{ThemeResource PageBackground}"
             DisplayMode="Overlay" OpenPaneLength="240" IsSwipeablePaneOpen="True">
             <SplitView.Pane>
@@ -183,7 +183,7 @@
                                 <TextBlock Text="要闻" x:Uid="Yaowen" Margin="{StaticResource TextBlockMargin}"/>
                             </StackPanel>
                         </ListViewItem>
- 
+
                         <ListViewItem Tapped="{x:Bind ViewModel.ClearCache}">
                             <Grid HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
@@ -248,7 +248,7 @@
 
             <SplitView.Content>
                 <Grid>
-                    
+
                     <!--<VisualStateManager.VisualStateGroups>
                         <VisualStateGroup x:Name="adaptiveStates"
                                           CurrentStateChanged="adaptiveStates_CurrentStateChanged">
@@ -343,7 +343,7 @@
                 </Grid>
             </SplitView.Content>
         </controls:SwipeableSplitView>
-      
-        
+         
+
     </Grid>
 </Page>

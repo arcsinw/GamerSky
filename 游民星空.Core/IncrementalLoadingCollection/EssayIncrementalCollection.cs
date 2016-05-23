@@ -1,43 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
-using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
 using 游民星空.Core.Model;
 
 namespace 游民星空.Core.IncrementalLoadingCollection
 {
-    /// <summary>
-    /// 文章自增集合
-    /// </summary>
     public class EssayIncrementalCollection : IncrementalLoadingBase<Essay>
     {
-        /// <summary>
-        /// 搜索关键字
-        /// </summary>
-        private string key;
-        /// <summary>
-        /// 搜索类型
-        /// </summary>
-        private SearchTypeEnum searchType;
-        /// <summary>
-        /// 当前页码
-        /// </summary>
-        private int pageIndex;
 
-        private ApiService apiService;
-
-        public EssayIncrementalCollection(string key, SearchTypeEnum searchType, int pageIndex=1)
+        public EssayIncrementalCollection(int nodeId)
         {
-            apiService = new ApiService();
-            this.key = key;
-            this.searchType = searchType;
-            this.pageIndex = pageIndex;
+            this.nodeId = nodeId;
         }
+
+        private int nodeId;
+        private int pageIndex = 1;
+        private ApiService apiService = new ApiService();
+
+        private ObservableCollection<Essay> headerEssays = new ObservableCollection<Essay>();
+        /// <summary>
+        /// 幻灯片
+        /// </summary>
+        public ObservableCollection<Essay> HeaderEssays
+        {
+            get
+            {
+                return headerEssays;
+            }
+            set
+            {
+                headerEssays = value;
+            }
+        }
+
 
         protected override bool HasMoreItemsCore
         {
@@ -50,26 +51,32 @@ namespace 游民星空.Core.IncrementalLoadingCollection
         protected override async Task<LoadMoreItemsResult> LoadMoreItemsAsyncCore(CancellationToken cancel, uint count)
         {
             LoadMoreItemsResult result = new LoadMoreItemsResult();
-            //开始加载
-            this.OnLoadingMoreStart?.Invoke(this, EventArgs.Empty);
-            //如果操作取消则不再加载
+            this.OnDataLoading?.Invoke(this, EventArgs.Empty);
             if (cancel.IsCancellationRequested)
             {
                 result.Count = 0;
             }
             else
             {
-                List<Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex++);
-                if (essayResults != null)
+                var essays = await apiService.GetEssayList(nodeId, pageIndex++);
+                if (essays != null)
                 {
-                    foreach (var item in essayResults)
+                    foreach (var item in essays)
                     {
+                        if (item.type.Equals("huandeng"))
+                        {
+                            foreach (var c in item.childElements)
+                            {
+                                HeaderEssays.Add(c);
+                            }
+                            continue;
+                        }
                         Add(item);
+
                     }
                 }
             }
-            //完成加载
-            this.OnLoadingMoreEnd?.Invoke(this, EventArgs.Empty);
+            this.OnDataLoaded?.Invoke(this, EventArgs.Empty);
             return result;
         }
 
@@ -77,11 +84,11 @@ namespace 游民星空.Core.IncrementalLoadingCollection
         /// <summary>
         /// 开始加载时发生
         /// </summary>
-        public event EventHandler OnLoadingMoreStart;
+        public event EventHandler OnDataLoading;
         /// <summary>
-        /// 加载完成时发生
+        /// 加载完成后发生
         /// </summary>
-        public event EventHandler OnLoadingMoreEnd; 
+        public event EventHandler OnDataLoaded;
         #endregion
     }
 }

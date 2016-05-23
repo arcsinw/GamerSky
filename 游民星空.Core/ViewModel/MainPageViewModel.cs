@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using 游民星空.Core.Helper;
 using 游民星空.Core.Http;
+using 游民星空.Core.IncrementalLoadingCollection;
 using 游民星空.Core.Model;
 using 游民星空.Core.ResultDataModel;
 
@@ -23,13 +24,13 @@ namespace 游民星空.Core.ViewModel
         /// 同时提供频道和文章列表
         /// </summary>
         public ObservableCollection<PivotData> EssaysAndChannels { get; set; }
-         
+
         public MainPageViewModel()
-        {  
-                EssaysAndChannels = new ObservableCollection<PivotData>();
-                
-                AppTheme = DataShareManager.Current.AppTheme;
-                DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+        {
+            EssaysAndChannels = new ObservableCollection<PivotData>();
+
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
 
             if (IsDesignMode)
             {
@@ -70,7 +71,7 @@ namespace 游民星空.Core.ViewModel
             {
                 foreach (var item in channels)
                 {
-                    EssaysAndChannels.Add(new PivotData { Channel = item });
+                    EssaysAndChannels.Add(new PivotData { Channel = item ,Essays = new EssayIncrementalCollection(item.nodeId)});
                 }
             }
         }
@@ -92,11 +93,11 @@ namespace 游民星空.Core.ViewModel
                 {
                     foreach (var c in item.childElements)
                     {
-                        EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(nodeId)).First().HeaderEssays.Add(c);
+                        //EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(nodeId)).First().HeaderEssays.Add(c);
                     }
                     continue;
                 }
-                EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(nodeId)).First().Essays.Add(item);
+                //EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(nodeId)).First().Essays.Add(item);
             }
             
         }
@@ -106,7 +107,7 @@ namespace 游民星空.Core.ViewModel
         {
             //Essays.Clear();
             EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(channelId)).First().Essays.Clear();
-            EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(channelId)).First().HeaderEssays.Clear();
+            //EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(channelId)).First().HeaderEssays.Clear();
             await LoadMoreEssay(channelId, 1);
         }
     }

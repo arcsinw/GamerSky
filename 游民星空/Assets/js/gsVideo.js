@@ -118,7 +118,7 @@ function gsVideo(videoType, videoContent, videoWidth, videoHeight) {
                     document.write(videoContent);
                 }
                 break;
-                /*
+                
                 case "乐视":
                 {
                     if (typeof(videoWidth)=="undefined")
@@ -133,7 +133,7 @@ function gsVideo(videoType, videoContent, videoWidth, videoHeight) {
                     leTvVideo(videoWidth, videoHeight, videoContent, videoParam);
                 }
                     break;
-                    */
+                    
         }
     }
 }

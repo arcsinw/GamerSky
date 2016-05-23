@@ -12,8 +12,7 @@ using 游民星空.Core.Model;
 namespace 游民星空.Core.ViewModel
 {
     public class YaowenPageViewModel : ViewModelBase
-    {
-        //public ObservableCollection<Essay> Yaowens { get; set; }
+    { 
 
         private YaowenIncrementalCollection yaowens;
         public YaowenIncrementalCollection Yaowens
@@ -47,7 +46,7 @@ namespace 游民星空.Core.ViewModel
         public YaowenPageViewModel()
         {
             apiService = new ApiService();
-            //Yaowens = new ObservableCollection<Essay>();
+          
             Yaowens = new YaowenIncrementalCollection();
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
@@ -75,13 +74,13 @@ namespace 游民星空.Core.ViewModel
         public void Refresh()
         {
             IsActive = true;
-            //Yaowens.Clear();
+            
             YaowenIncrementalCollection s = new YaowenIncrementalCollection();
             Yaowens = s;
             s.OnDataLoaded += S_OnDataLoaded;
             s.OnDataLoading += S_OnDataLoading;
             IsActive = false;
-            //await LoadData();
+            
         }
 
         private void S_OnDataLoading(object sender, EventArgs e)
