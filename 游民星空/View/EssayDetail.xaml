@@ -390,7 +390,7 @@
                 <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding essayResult.IsFavorite,Converter={StaticResource BoolToIcon}}"/>
             </Button>
 
-            <!--#region  顶部右边的调整按钮-->
+            <!--#region  底部右边的调整按钮-->
                 <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                     <Button.Flyout>
                         <Flyout>
@@ -461,6 +461,9 @@
                                             <CheckBox Grid.Column="1" MinWidth="0" HorizontalAlignment="Right"/>
                                         </Grid>
                                     </ListViewItem>
+                                    <ListViewItem x:Name="edgeListViewItem" Tapped="edgeListViewItem_Tapped">
+                                        <TextBlock Text="Edge打开"/>
+                                    </ListViewItem>
                                     <ListViewItem>
                                         <Grid HorizontalAlignment="Stretch" >
                                             <Grid.ColumnDefinitions>
@@ -493,40 +496,40 @@
 
                 </StackPanel>
 
-                <!--#region  显示图片-->
-                <FlipView x:Name="imageFlipView" 
-                Background="Black" Visibility="Collapsed" 
+            <!--#region  显示图片-->
+            <FlipView x:Name="imageFlipView" 
+            Background="Black" Visibility="Collapsed" 
                        
-                ItemsSource="{x:Bind Images,Mode=OneWay}" >
-                    <FlipView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <ScrollViewer IsDeferredScrollingEnabled="True" 
-                                      ZoomSnapPointsType="Mandatory"
-                                      MaxZoomFactor="5"
-                                      MinZoomFactor="1"
-                                      
-                                      ScrollViewer.IsZoomChainingEnabled="True"
-                                        ScrollViewer.IsZoomInertiaEnabled="True"
-                                      ScrollViewer.ZoomMode="Enabled">
-                                    <Image>
-                                        <Image.Source>
-                                            <BitmapImage UriSource="{Binding src}"/>
-                                        </Image.Source>
-                                    </Image>
-                                </ScrollViewer>
-                            </Grid>
-                        </DataTemplate>
-                    </FlipView.ItemTemplate>
-                </FlipView>
-                <!--#endregion-->
-             
-                <TextBlock VerticalAlignment="Bottom" Margin="12">
-                    <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex}" />
-                    <Run Text="/"/>
-                    <Run x:Name="countRun" />
-                </TextBlock>
+            ItemsSource="{x:Bind Images,Mode=OneWay}" >
+                <FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <ScrollViewer IsDeferredScrollingEnabled="True" 
+                                    ZoomSnapPointsType="Mandatory"
+                                    MaxZoomFactor="5"
+                                    MinZoomFactor="1"
+                                    ScrollViewer.IsZoomChainingEnabled="True"
+                                    ScrollViewer.IsZoomInertiaEnabled="True"
+                                    ScrollViewer.ZoomMode="Enabled">
+                                <Image>
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding src}"/>
+                                    </Image.Source>
+                                </Image>
+                            </ScrollViewer>
+                        </Grid>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+                
 
+            <TextBlock VerticalAlignment="Bottom" Margin="12"
+                       Visibility="{Binding ElementName=imageFlipView,Path=Visibility}">
+                <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex}" />
+                <Run Text="/"/>
+                <Run x:Name="countRun" />
+            </TextBlock>
+            <!--#endregion-->
     </Grid>
 
     <Page.BottomAppBar>

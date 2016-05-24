@@ -89,7 +89,7 @@ namespace 游民星空.View
                 {
                     for (int i = 0; i < Images.Count; i++)
                     {
-                        if (currentImageUrl.Contains(Images[i].hdsrc))
+                        if (currentImageUrl.Contains(Images[i].hdsrc) || currentImageUrl.Contains(Images[i].src) )
                         {
                             imageFlipView.SelectedIndex = i;
                         }
@@ -129,17 +129,7 @@ namespace 游民星空.View
             progress.IsActive = false;
             JYHelper.TraceRead();
         }
-
-    
-        /// <summary>
-        /// 使用Edge打开网页
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void Edge(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
-        }
+ 
 
        
         /// <summary>
@@ -300,24 +290,32 @@ namespace 游民星空.View
         {
             isDOMLoadCompleted = true;
             GetAllPictures();
+            if(DataShareManager.Current.AppTheme == ElementTheme.Dark)
+            {
+                nightCheckBox.IsChecked = true;
+            }
         }
 
         private async void saveAppBar_Click(object sender, RoutedEventArgs e)
         {
             UIHelper.ShowToast("保存中……");
             var folder = KnownFolders.SavedPictures;
+            StorageFile file;
+            if (Functions.IsMobile())
+            {
+                file = await folder.CreateFileAsync("游民壁纸_" + Functions.getUnixTimeStamp().ToString() + ".jpg");
+            }
+            else
+            {
+                FileSavePicker savePicker = new FileSavePicker();
+                savePicker.SuggestedFileName = "游民壁纸_" + DateTime.Now.Month + DateTime.Now.Day;
+                savePicker.DefaultFileExtension = ".jpg";
+                savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
+                savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+                savePicker.ContinuationData["Op"] = "ImgSave";
 
-            var file = await folder.CreateFileAsync("游民壁纸_" + Functions.getUnixTimeStamp().ToString() + ".jpg");
-
-            //FileSavePicker savePicker = new FileSavePicker();
-            //savePicker.SuggestedFileName = "游民壁纸_" + DateTime.Now.Month + DateTime.Now.Day;
-            //savePicker.DefaultFileExtension = ".jpg";
-            //savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
-            //savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            //savePicker.ContinuationData["Op"] = "ImgSave";
-             
-            //StorageFile file = await savePicker.PickSaveFileAsync();
-
+                file = await savePicker.PickSaveFileAsync();
+            }
             if (file != null)
             {
                 CachedFileManager.DeferUpdates(file);
@@ -352,6 +350,16 @@ namespace 游民星空.View
         private void hdAppBar_Click(object sender, RoutedEventArgs e)
         {
              
+        }
+
+        /// <summary>
+        /// 使用Edge打开网页
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void edgeListViewItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
         }
     }
 }
