@@ -85,9 +85,6 @@ namespace 游民星空.Core
         /// <returns></returns>
         private int GetConnectionGeneration()
         {
-#if DEBUG
-            return 1;
-#endif
             try
             {
                 ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();
@@ -132,7 +129,7 @@ namespace 游民星空.Core
                     return 3;
                 }
                 
-                return 4;
+                return 3;
             }
             catch (Exception)
             {

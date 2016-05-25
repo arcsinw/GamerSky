@@ -144,6 +144,7 @@
                ItemsSource="{Binding EssaysAndChannels}" 
                Padding="0" Margin="0" HorizontalContentAlignment="Stretch" 
                Background="{ThemeResource PageBackground}"
+               SelectionChanged="Pivot_SelectionChanged"
                PivotItemLoaded="essayPivot_PivotItemLoaded"
                Style="{StaticResource EssayPivotStyle}">
             <Pivot.HeaderTemplate>

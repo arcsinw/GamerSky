@@ -107,61 +107,34 @@ namespace 游民星空.View
               
             }
         }
-
-        #region 九幽的数据统计
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            JYHelper.TracePageStart(this.BaseUri.LocalPath);
-        }
-        #endregion
-
-        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+         
+        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
             progressRing.IsActive = true;
-            await viewModel.Refresh(currentChannelId);
+            viewModel.Refresh(currentChannelId);
             progressRing.IsActive = false;
         }
 
-        private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-           
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        { 
             Debug.WriteLine("SelectionChanged");
-            //if (currentItem != null)
-            //{
-            //    ListView listView = Functions.FindChildOfType<ListView>(currentItem);
-            //    scrollViewer = Functions.FindChildOfType<ScrollViewer>(listView);
-            //    if (scrollViewer != null)
-            //    {
-
-            //        scrollViewer.ViewChanged += scrollViewer_ViewChanged;
-            //    }
-            //}
-            //scrollViewer = scrollViewerDic[essayPivot.SelectedIndex];
-            //if(scrollViewer!= null)
-            //{
-            //    scrollViewer.ViewChanged += scrollViewer_ViewChanged;
-            //}
+          
             progressRing.IsActive = true;
             int index = essayPivot.SelectedIndex;
             currentChannelId = viewModel.EssaysAndChannels[index].Channel.nodeId;
 
-            //获取该频道当前页码
-            if (!pageIndexDic.ContainsKey(currentChannelId)) // 频道未加载
-            {
-                pageIndexDic.Add(currentChannelId, 1);
-                pageIndex = 1;
-                await viewModel.LoadMoreEssay(currentChannelId, pageIndex++);
-                pageIndexDic[currentChannelId] = pageIndex;
-            }
-            else  //频道已加载
-            {
-                pageIndex = pageIndexDic[currentChannelId];
-            }
+            ////获取该频道当前页码
+            //if (!pageIndexDic.ContainsKey(currentChannelId)) // 频道未加载
+            //{
+            //    pageIndexDic.Add(currentChannelId, 1);
+            //    pageIndex = 1;
+            //    await viewModel.LoadMoreEssay(currentChannelId, pageIndex++);
+            //    pageIndexDic[currentChannelId] = pageIndex;
+            //}
+            //else  //频道已加载
+            //{
+            //    pageIndex = pageIndexDic[currentChannelId];
+            //}
 
             progressRing.IsActive = false;
         }

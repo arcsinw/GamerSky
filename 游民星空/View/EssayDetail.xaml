@@ -353,7 +353,8 @@
         </Style>
 
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <converter:BoolToIconConverter x:Key="BoolToIcon"/>
+        <converter:BoolToIconConverter x:Key="BoolToIconConverter"/>
+        <converter:AddConverter x:Key="AddConverter"/>
     </Page.Resources>
 
     <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -387,7 +388,7 @@
 
             <Button x:Name="likeBtn" Click="likeBtn_Click" HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" Background="Transparent">
-                <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding essayResult.IsFavorite,Converter={StaticResource BoolToIcon}}"/>
+                <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding essayResult.IsFavorite,Converter={StaticResource BoolToIconConverter}}"/>
             </Button>
 
             <!--#region  底部右边的调整按钮-->
@@ -521,11 +522,11 @@
                     </DataTemplate>
                 </FlipView.ItemTemplate>
             </FlipView>
-                
 
-            <TextBlock VerticalAlignment="Bottom" Margin="12"
+
+                <TextBlock VerticalAlignment="Bottom" Margin="12" Foreground="White"
                        Visibility="{Binding ElementName=imageFlipView,Path=Visibility}">
-                <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex}" />
+                <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex,Converter={StaticResource AddConverter}}" />
                 <Run Text="/"/>
                 <Run x:Name="countRun" />
             </TextBlock>

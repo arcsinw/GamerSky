@@ -103,12 +103,11 @@ namespace 游民星空.Core.ViewModel
         }
          
 
-        public async Task Refresh(int channelId)
-        {
-            //Essays.Clear();
+        public void Refresh(int channelId)
+        { 
             EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(channelId)).First().Essays.Clear();
-            //EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(channelId)).First().HeaderEssays.Clear();
-            await LoadMoreEssay(channelId, 1);
+            EssayIncrementalCollection e = new EssayIncrementalCollection(channelId);
+            EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(channelId)).First().Essays = e;
         }
     }
 }

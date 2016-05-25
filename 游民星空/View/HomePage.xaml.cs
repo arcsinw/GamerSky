@@ -54,7 +54,7 @@ namespace 游民星空.View
             if (DataShareManager.Current.IsNewVersion)
             {
                 UIHelper.ShowMessage(
-                    "手势后退",
+                    "看图片",
                     "新版本更新内容");
             }
             this.Loaded -= HomePage_Loaded;
