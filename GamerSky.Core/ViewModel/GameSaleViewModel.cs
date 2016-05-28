@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GamerSky.Core
+namespace GamerSky.Core.ViewModel
 {
-    public class Class1
+    class GameSaleViewModel
     {
     }
 }
