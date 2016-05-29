@@ -119,15 +119,12 @@
     <Compile Include="Helper\ExtensionHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
-    <Compile Include="Helper\HockeyAppHelper.cs" />
-    <Compile Include="Helper\IAPHelper.cs" />
     <Compile Include="Helper\ImageDownLoadHelper.cs" />
     <Compile Include="Helper\JYHelper.cs" />
     <Compile Include="Helper\ListViewBaseExtensions.cs" />
     <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\LocalSettingsHelper.cs" />
     <Compile Include="Helper\NetworkManager.cs" />
-    <Compile Include="Helper\ObservableDictionary.cs" />
     <Compile Include="Helper\RelayCommand.cs" />
     <Compile Include="Helper\SearchTypeEnum.cs" />
     <Compile Include="Helper\SubscribeEditEnum.cs" />
@@ -158,6 +155,7 @@
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\OpenPage.cs" />
+    <Compile Include="Model\PaneItem.cs" />
     <Compile Include="Model\PivotData.cs" />
     <Compile Include="Model\RelatedReadings.cs" />
     <Compile Include="Model\SearchResult.cs" />

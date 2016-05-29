@@ -1,4 +1,5 @@
 ﻿using GamerSky.Core.Helper;
+using GamerSky.Core.Model;
 using GamerSky.Core.ViewModel;
 using GamerSky.Helper;
 using System;
@@ -41,25 +42,32 @@ namespace GamerSky.View
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            Essay essayResult = e.ClickedItem as Essay;
+            if (essayResult == null) return;
+            if (!essayResult.contentType.Equals("zhuanti"))
+            {
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetail), essayResult);
+            }
+            else
+            {
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essayResult.contentId);
+            }
+             
         }
 
-        private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = essayPivot.SelectedIndex;
             int currentChannelId = ViewModel.EssaysAndChannels[index].Channel.nodeId;
-
-            
-
-            //获取该频道当前页码
-            int pageIndex = 1;
-            await ViewModel.LoadMoreEssay(currentChannelId, pageIndex++);
-               
+             
         }
 
         private void FlipView_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            var essayResult = (sender as FlipView)?.SelectedItem as Essay;
+            if (essayResult == null) return;
 
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetail), essayResult);
         }
 
         public void ScrollToTop()
@@ -85,7 +93,7 @@ namespace GamerSky.View
         public void NavigateToSearchPage()
         {
             Frame.Navigate(typeof(SearchPage));
-            splitView.IsSwipeablePaneOpen = false;
+            //splitView.IsSwipeablePaneOpen = false;
         }
 
         /// <summary>
@@ -94,7 +102,7 @@ namespace GamerSky.View
         public void YaoWen()
         {
             this.Frame.Navigate(typeof(YaowenPage));
-            splitView.IsSwipeablePaneOpen = false;
+            //splitView.IsSwipeablePaneOpen = false;
         }
 
         /// <summary>
@@ -110,18 +118,16 @@ namespace GamerSky.View
             AppTheme = DataShareManager.Current.AppTheme;
         }
 
-        private ElementTheme appTheme;
+        
         public ElementTheme AppTheme
         {
             get
             {
-                appTheme = DataShareManager.Current.AppTheme;
-                return appTheme;
+                return DataShareManager.Current.AppTheme;
             }
             set
             {
-                appTheme = value;
-                OnPropertyChanged();
+                DataShareManager.Current.AppTheme = value;
                 UIHelper.ShowStatusBar();
             }
         }
@@ -138,7 +144,7 @@ namespace GamerSky.View
             set
             {
                 DataShareManager.Current.UpdateAPPTheme(value);
-                OnPropertyChanged();
+                
                 UIHelper.ShowStatusBar();
             }
         }
@@ -149,7 +155,7 @@ namespace GamerSky.View
         public void NavigateToSettings()
         {
             this.Frame.Navigate(typeof(SettingsPage));
-            splitView.IsSwipeablePaneOpen = false;
+            //splitView.IsSwipeablePaneOpen = false;
         }
 
         /// <summary>
@@ -165,11 +171,18 @@ namespace GamerSky.View
         /// </summary>
         public void NavigateToLogin()
         {
-            splitView.IsSwipeablePaneOpen = false;
+            //splitView.IsSwipeablePaneOpen = false;
             this.Frame.Navigate(typeof(LoginPage));
         }
 
+        private void innerTopicListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
 
-    
+        }
+
+        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
     }
 }

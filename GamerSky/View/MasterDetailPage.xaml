@@ -5,7 +5,9 @@
     xmlns:local="using:GamerSky.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:model="using:GamerSky.Core.Model"
+    mc:Ignorable="d"
+    >
 
     <Page.Resources>
         <!--<Style x:Key="PaneButtonStyle" TargetType="Button">
@@ -326,7 +328,7 @@
     
     
     
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource PageBackground}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup" CurrentStateChanged="AdaptiveVisualStateGroup_CurrentStateChanged">
                 <VisualState x:Name="Narrow">
@@ -355,26 +357,34 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="48"/>
             <ColumnDefinition x:Name="MasterColumn" Width="500"/>
-            <ColumnDefinition x:Name="DetailColumn"/>
+            <ColumnDefinition x:Name="DetailColumn" />
         </Grid.ColumnDefinitions>
 
+        <!--#region Pane-->
         <Grid Grid.Column="0">
-            <Button Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Expand" VerticalAlignment="Top">
-                <Button.Content>
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;"/>
-                </Button.Content>
-            </Button>
+            <ListView>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:PaneItem">
+                        <Button>
+                            <BitmapIcon UriSource="{x:Bind Icon}"/>
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
 
-            <Button Content="A" Style="{StaticResource PaneButtonStyle}"/>
-
-            <Button Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings" VerticalAlignment="Bottom">
+            <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings" VerticalAlignment="Bottom"
+                    Click="setting_Click">
                 <Button.Content>
                     <SymbolIcon Symbol="Setting"/>
                 </Button.Content>
             </Button>
         </Grid>
-
-        <Frame x:Name="MasterFrame" Grid.Column="1"/>
-        <Frame x:Name="DetailFrame" Grid.Column="2"/>
+        <!--#endregion-->
+        
+        <Frame x:Name="MasterFrame" x:FieldModifier="Public" Grid.Column="1" 
+               BorderBrush="{ThemeResource ThemeColorBrush}"
+               BorderThickness="0,0,1,0" Navigated="MasterFrame_Navigated"/>
+        <Frame x:Name="DetailFrame" x:FieldModifier="Public" Grid.Column="2" Navigated="DetailFrame_Navigated"/>
     </Grid>
 </Page>

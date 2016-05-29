@@ -112,7 +112,14 @@ namespace GamerSky.View
         /// </summary>
         private async void GetAllPictures()
         {
-            await webView.InvokeScriptAsync("GetAllPictures", new[] {"" });
+            try
+            {
+                await webView.InvokeScriptAsync("GetAllPictures", new[] { "" });
+            }
+            catch
+            {
+
+            }
         }
 
 

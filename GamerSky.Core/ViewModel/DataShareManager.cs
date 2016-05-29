@@ -56,6 +56,10 @@ namespace GamerSky.Core.ViewModel
             {
                 return appTheme;
             }
+            set
+            {
+                appTheme = value;
+            }
         }
         private int fontSize;
         /// <summary>

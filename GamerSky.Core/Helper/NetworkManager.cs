@@ -85,6 +85,9 @@ namespace GamerSky.Core
         /// <returns></returns>
         private int GetConnectionGeneration()
         {
+#if DEBUG
+            return 3;
+#endif
             try
             {
                 ConnectionProfile profile = NetworkInformation.GetInternetConnectionProfile();

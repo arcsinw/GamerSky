@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>GamerSky.X</value>
+  </data>
+  <data name="FeedBack.Text" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="Settings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Collection.Text" xml:space="preserve">
+    <value>Collection</value>
+  </data>
+  <data name="Search.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ClearCache.Text" xml:space="preserve">
+    <value>Clear Cache</value>
+  </data>
+  <data name="NightMode.Text" xml:space="preserve">
+    <value>Night Mode</value>
+  </data>
+  <data name="Login.Text" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="News.Text" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="Game.Text" xml:space="preserve">
+    <value>Game Library</value>
+  </data>
+  <data name="Subscribe.Text" xml:space="preserve">
+    <value>Subscribe</value>
+  </data>
+  <data name="PlaceHolderText" xml:space="preserve">
+    <value>Please input search content</value>
+  </data>
+  <data name="Yaowen.Text" xml:space="preserve">
+    <value>Hot news</value>
+  </data>
+  <data name="NoPic.Text" xml:space="preserve">
+    <value>No Picture</value>
+  </data>
+  <data name="Select.Label" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="Find.Label" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="About.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="CheckUpdate.Text" xml:space="preserve">
+    <value>Check Update</value>
+  </data>
+  <data name="FontSize.Text" xml:space="preserve">
+    <value>FontSize</value>
+  </data>
+  <data name="LiveTile.Text" xml:space="preserve">
+    <value>Live Tile</value>
+  </data>
+  <data name="TransparentTile.Text" xml:space="preserve">
+    <value>Transparent Tile</value>
+  </data>
+  <data name="SplashScreen.Text" xml:space="preserve">
+    <value>SplashScreen</value>
+  </data>
+  <data name="SubscribeContent.Text" xml:space="preserve">
+    <value>Subscribe Content</value>
+  </data>
+  <data name="SubscribeTopic.Text" xml:space="preserve">
+    <value>Subscribe Topic</value>
+  </data>
+  <data name="UnSubscribe.Content" xml:space="preserve">
+    <value>UnSubscribe</value>
+  </data>
+  <data name="Refresh.Label" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Small.Content" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="Medium.Content" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="Large.Content" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="InputAccount.Text" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="Password.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="ForgetPwd.Text" xml:space="preserve">
+    <value>Forget password?</value>
+  </data>
+  <data name="SignUp.Text" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="OtherWay.Text" xml:space="preserve">
+    <value>Other way to login</value>
+  </data>
+</root>

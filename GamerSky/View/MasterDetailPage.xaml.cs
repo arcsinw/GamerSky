@@ -51,12 +51,32 @@ namespace GamerSky.View
 
         private void AdaptiveVisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
-            if(e.NewState == Narrow)
+            UpdateBackKey();
+        }
+
+        private void UpdateBackKey()
+        {
+            if (AdaptiveVisualStateGroup.CurrentState == Narrow)
             {
                 DetailFrame.Visibility = DetailFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
             }
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = DetailFrame.CanGoBack || MasterFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
-            
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = DetailFrame.CanGoBack || MasterFrame.CanGoBack ?
+             AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+        }
+
+        private void MasterFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            UpdateBackKey();
+        }
+
+        private void DetailFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            UpdateBackKey();
+        }
+
+        private void setting_Click(object sender, RoutedEventArgs e)
+        {
+            MasterFrame.Navigate(typeof(SettingsPage));
         }
     }
 }

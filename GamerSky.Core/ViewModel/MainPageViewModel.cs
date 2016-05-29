@@ -24,21 +24,20 @@ namespace GamerSky.Core.ViewModel
         /// 同时提供频道和文章列表
         /// </summary>
         public ObservableCollection<PivotData> EssaysAndChannels { get; set; }
-        
+
         public MainPageViewModel()
-        {  
-                EssaysAndChannels = new ObservableCollection<PivotData>();
-                AppTheme = DataShareManager.Current.AppTheme;
-                DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+        {
+            EssaysAndChannels = new ObservableCollection<PivotData>();
+            AppTheme = DataShareManager.Current.AppTheme;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
 
             if (IsDesignMode)
             {
                 LoadData();
+
             }
-            else
-            {
-                LoadData();
-            }
+            LoadData();
+            GetCacheSize();
         }
 
         private void Current_ShareDataChanged()
@@ -100,14 +99,58 @@ namespace GamerSky.Core.ViewModel
             }
             
         }
-         
 
-        public async Task Refresh(int channelId)
+        /// <summary>
+        /// 清空缓存
+        /// </summary>
+        public async void ClearCache()
         {
-            //Essays.Clear();
-            //EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(channelId)).First().Essays.Clear();
-            //EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(channelId)).First().HeaderEssays.Clear();
-            //await LoadMoreEssay(channelId, 1);
+            CacheSize = "删除缓存中...";
+            await FileHelper.Current.DeleteCacheFile();
+            double cache = await FileHelper.Current.GetCacheSize();
+            CacheSize = GetFormatSize(cache);
         }
+
+        private string cacheSize;
+        public string CacheSize
+        {
+            get
+            {
+                return cacheSize;
+            }
+            set
+            {
+                cacheSize = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public async void GetCacheSize()
+        {
+            double size = await FileHelper.Current.GetCacheSize();
+            CacheSize = GetFormatSize(size);
+        }
+
+        private string GetFormatSize(double size)
+        {
+            if (size < 1024)
+            {
+                return size + "byte";
+            }
+            else if (size < 1024 * 1024)
+            {
+                return Math.Round(size / 1024, 2) + "KB";
+            }
+            else if (size < 1024 * 1024 * 1024)
+            {
+                return Math.Round(size / 1024 / 1024, 2) + "MB";
+            }
+            else
+            {
+                return Math.Round(size / 1024 / 1024 / 2014, 2) + "GB";
+            }
+        }
+
+        
     }
 }

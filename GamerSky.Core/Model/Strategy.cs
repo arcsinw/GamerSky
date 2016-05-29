@@ -21,32 +21,7 @@ namespace GamerSky.Core.Model
         /// 缩略图
         /// </summary>
         public string thumbnailUrl { get; set; }
-
-        private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
-
-
-        private BitmapImage thumbnail;
-        public ImageSource Thumbnail
-        {
-            get
-            {
-                if (thumbnail == null)
-                {
-                    DownloadImage(thumbnailUrl);
-                    return defaultBitmap;
-                }
-                else
-                {
-                    return thumbnail;
-                }
-            }
-        }
-
-        private async void DownloadImage(string url)
-        {
-            SoftwareBitmap softwareBitmap = await ImageDownLoadHelper.DownLoadImageByUrl(url);
-
-        }
+        
         /// <summary>
         /// 标题
         /// </summary>
