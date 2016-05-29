@@ -31,9 +31,7 @@ namespace GamerSky.View
         public StrategyPage()
         {
             this.InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Required;
-
-
+           
             pageIndexDic = new Dictionary<int, int>();
         }
 
@@ -112,7 +110,7 @@ namespace GamerSky.View
             Strategy result =  e.ClickedItem as Strategy;
             if(result!=null)
             {
-                (Window.Current.Content as Frame)?.Navigate(typeof(GameStrategys), result);
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(GameStrategys), result);
             }
         }
 
@@ -121,7 +119,7 @@ namespace GamerSky.View
             Strategy result = e.ClickedItem as Strategy;
             if (result != null)
             {
-                (Window.Current.Content as Frame)?.Navigate(typeof(GameStrategys), result);
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(GameStrategys), result);
             }
         }
 
@@ -141,7 +139,7 @@ namespace GamerSky.View
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            (Window.Current.Content as Frame)?.Navigate(typeof(SearchPage));
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(SearchPage));
             
         }
 
@@ -171,24 +169,8 @@ namespace GamerSky.View
             var game = e.ClickedItem as Game;
             if (game != null)
             {
-                (Window.Current.Content as Frame)?.Navigate(typeof(GameDetailPage), game.contentId);
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(GameDetailPage), game.contentId);
             }
-        }
-
-        //private void GridView_SizeChanged(object sender, SizeChangedEventArgs e)
-        //{
-        //    var panel = (ItemsWrapGrid)focusGridView.ItemsPanelRoot;
-        //    if(Functions.IsMobile())
-        //    {
-        //        int num = 2;
-        //        panel.ItemWidth = e.NewSize.Width / num;
-        //    }
-        //    else
-        //    {
-        //        int num = (int)e.NewSize.Width / 160;
-        //        panel.ItemWidth = e.NewSize.Width / num;
-        //    }
-        //    panel.ItemHeight = 0.618 * panel.ItemWidth;
-        //}
+        } 
     }
 }

@@ -50,7 +50,7 @@ namespace GamerSky.View
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
 
-            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetail), essayResult);
         }
 
         private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)

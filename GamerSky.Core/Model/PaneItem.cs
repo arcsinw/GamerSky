@@ -11,5 +11,7 @@ namespace GamerSky.Core.Model
         public string Icon { get; set; }
 
         public string Title { get; set; }
+
+        public Type SourcePage { get; set; }
     }
 }

@@ -23,8 +23,7 @@
     <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="DarkBlue"/>
     <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="Green"/>
 
-
-    <Style x:Key="LightScrollBarStyle" TargetType="ScrollBar">
+   <Style x:Key="LightScrollBarStyle" TargetType="ScrollBar">
         <Setter Property="MinWidth" Value="12"/>
         <Setter Property="MinHeight" Value="12"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -551,6 +550,7 @@
         </Setter>
     </Style>
 
+   
     <!--无背景色-->
     <Style x:Key="LightButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>

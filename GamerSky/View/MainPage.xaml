@@ -360,7 +360,7 @@
                                  Padding="0" Margin="0"
                                  IsItemClickEnabled="True"
                                  ItemClick="ListView_ItemClick"
-                         Style="{StaticResource LightListViewStyle}"
+                                Style="{StaticResource LightListViewStyle}"
                                  >
 
                         <ListView.ItemTemplateSelector>

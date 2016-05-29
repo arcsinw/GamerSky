@@ -11,7 +11,8 @@
     xmlns:hp="using:GamerSky.Helper"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}"
-    Margin="0,0,0,50">
+    NavigationCacheMode="Required"
+    >
 
     <Page.DataContext>
         <vm:StrategyPageViewModel x:Name="ViewModel"/>

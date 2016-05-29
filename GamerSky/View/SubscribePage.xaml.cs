@@ -29,8 +29,7 @@ namespace GamerSky.View
         public SubscribePage()
         {
             this.InitializeComponent();
-
-            NavigationCacheMode = NavigationCacheMode.Required;
+            
         }
         
         private bool IsSubscribeTopicLoaded = false;
@@ -57,29 +56,19 @@ namespace GamerSky.View
             }
         }
 
-        #region 九幽的数据统计
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            JYHelper.TracePageStart(this.BaseUri.LocalPath);
-        }
-        #endregion
+ 
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
 
-            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetail), essayResult);
         }
 
         private void NavigatoToMySubscribe()
         {
-            (Window.Current.Content as Frame)?.Navigate(typeof(MySubscribePage));
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(MySubscribePage));
         }
 
         /// <summary>
@@ -158,7 +147,7 @@ namespace GamerSky.View
                 Essay essay = control.DataContext as Essay;
                 if (essay != null)
                 {
-                    (Window.Current.Content as Frame)?.Navigate(typeof(SubscribeContentPage), essay.contentId);
+                    MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essay.contentId);
                 }
             }
         }
@@ -177,7 +166,7 @@ namespace GamerSky.View
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
 
-            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetail), essayResult);
         }
     }
 }
