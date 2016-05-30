@@ -20,7 +20,7 @@ namespace GamerSky.Core.Helper
         /// 获取当前Unix timestamp
         /// </summary>
         /// <returns></returns>
-        public static long getUnixTimeStamp()
+        public static long GetUnixTimeStamp()
         {
             return (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
         }

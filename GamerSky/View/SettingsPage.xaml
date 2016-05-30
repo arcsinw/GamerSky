@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:GamerSky.Helper"
     mc:Ignorable="d"
-    RequestedTheme="{x:Bind viewModel.AppTheme,Mode=OneWay}">
+    RequestedTheme="{x:Bind viewModel.AppTheme,Mode=OneWay}"
+    NavigationCacheMode="Required">
 
     <Page.Resources>
         <Style TargetType="TextBlock">

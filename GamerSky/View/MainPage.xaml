@@ -20,14 +20,14 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <selector:EssayDataTemplateSelector x:Name="EssayDataTemplateSelector"/>
-        <converter:IndexToColorConverter x:Name="IndexToColorConverter"/>
+        <selector:EssayDataTemplateSelector x:Key="EssayDataTemplateSelector"/>
+        <converter:IndexToColorConverter x:Key="IndexToColorConverter"/>
 
         <Thickness x:Key="EssayGridMargin">2,0</Thickness>
         <Thickness x:Key="EssayGridPadding">2.0</Thickness>
         <!--有三张图的文章模板-->
         <DataTemplate x:Key="ThreePicEssayDataTemplate" >
-            <Grid Margin="{ThemeResource EssayGridMargin}" Padding="{ThemeResource EssayGridPadding}" >
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="2*"/>
@@ -69,7 +69,7 @@
         </DataTemplate>
         <!--一张图文章模板-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid Margin="{ThemeResource EssayGridMargin}" Padding="{ThemeResource EssayGridPadding}" >
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
@@ -96,7 +96,7 @@
         </DataTemplate>
         <!--无图模板-->
         <DataTemplate x:Key="NoPicEssayDataTemplate">
-            <Grid Margin="{ThemeResource EssayGridMargin}" Padding="{ThemeResource EssayGridPadding}">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -110,7 +110,7 @@
         </DataTemplate>
         <!--专题模板-->
         <DataTemplate x:Key="TopicDataTemplate">
-            <Grid Margin="0,0,0,8">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -344,7 +344,6 @@
                ItemsSource="{Binding EssaysAndChannels}" 
                Padding="0" Margin="0" HorizontalContentAlignment="Stretch" 
                Background="{ThemeResource PageBackground}"
-     
                Style="{StaticResource EssayPivotStyle}">
         <Pivot.HeaderTemplate>
             <DataTemplate>
@@ -353,7 +352,7 @@
         </Pivot.HeaderTemplate>
         <Pivot.ItemTemplate>
             <DataTemplate>
-                <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
+                <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
                     <ListView x:Name="essayListView" 
                                  ItemsSource="{Binding Essays}"
                                  ShowsScrollingPlaceholders="True"
@@ -448,7 +447,7 @@
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
-                </pr:PullToRefreshBox>
+                <!--</pr:PullToRefreshBox>-->
             </DataTemplate>
         </Pivot.ItemTemplate>
         <Pivot.ItemContainerStyle>

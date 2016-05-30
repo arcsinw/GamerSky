@@ -518,7 +518,7 @@ namespace GamerSky.Core.Http
                 postData.request = new SubscribeTopicRequest
                 {
                     elementsCountPerPage = "20",
-                    lastUpdateTime = Functions.getUnixTimeStamp().ToString(),
+                    lastUpdateTime = Functions.GetUnixTimeStamp().ToString(),
                     nodeIds = nodeIds,
                     pageIndex = pageIndex,
                     parentNodeId = "dingyue",

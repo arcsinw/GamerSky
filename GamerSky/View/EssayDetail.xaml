@@ -392,7 +392,7 @@
             </Button>
 
             <!--#region  底部右边的调整按钮-->
-                <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                     <Button.Flyout>
                         <Flyout>
                             <Flyout.FlyoutPresenterStyle>
@@ -404,7 +404,7 @@
                             </Flyout.FlyoutPresenterStyle>
                             <Flyout.Content>
                                 <ListView Padding="0" Margin="0" SelectionMode="None"
-                                  ScrollViewer.VerticalScrollMode="Disabled">
+                                ScrollViewer.VerticalScrollMode="Disabled">
                                     <ListView.Resources>
                                         <Style TargetType="StackPanel">
                                             <Setter Property="Margin" Value="0,0,12,0"/>
@@ -427,8 +427,8 @@
                                             </StackPanel>
 
                                             <CheckBox Grid.Column="1" MinWidth="0" x:Name="nightCheckBox" 
-                                              Checked="nightCheckBox_Checked" Unchecked="nightCheckBox_Unchecked"
-                                              HorizontalAlignment="Right"/>
+                                            Checked="nightCheckBox_Checked" Unchecked="nightCheckBox_Unchecked"
+                                            HorizontalAlignment="Right"/>
                                         </Grid>
                                     </ListViewItem>
                                     <ListViewItem>
@@ -493,44 +493,43 @@
                         <SymbolIcon Symbol="Font"/>
                     </Button.Content>
                 </Button>
-                <!--#endregion-->
+            <!--#endregion-->
 
-                </StackPanel>
+        </StackPanel>
 
-            <!--#region  显示图片-->
-            <FlipView x:Name="imageFlipView" 
+        <!--#region  显示图片-->
+        <FlipView x:Name="imageFlipView" 
             Background="Black" Visibility="Collapsed" 
-                       
             ItemsSource="{x:Bind Images,Mode=OneWay}" >
-                <FlipView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <ScrollViewer IsDeferredScrollingEnabled="True" 
+                    <FlipView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <ScrollViewer IsDeferredScrollingEnabled="True" 
                                     ZoomSnapPointsType="Mandatory"
                                     MaxZoomFactor="5"
                                     MinZoomFactor="1"
                                     ScrollViewer.IsZoomChainingEnabled="True"
                                     ScrollViewer.IsZoomInertiaEnabled="True"
                                     ScrollViewer.ZoomMode="Enabled">
-                                <Image>
-                                    <Image.Source>
-                                        <BitmapImage UriSource="{Binding src}"/>
-                                    </Image.Source>
-                                </Image>
-                            </ScrollViewer>
-                        </Grid>
-                    </DataTemplate>
-                </FlipView.ItemTemplate>
-            </FlipView>
+                                    <Image>
+                                        <Image.Source>
+                                            <BitmapImage UriSource="{Binding src}"/>
+                                        </Image.Source>
+                                    </Image>
+                                </ScrollViewer>
+                            </Grid>
+                        </DataTemplate>
+                    </FlipView.ItemTemplate>
+        </FlipView>
 
 
-                <TextBlock VerticalAlignment="Bottom" Margin="12" Foreground="White"
-                       Visibility="{Binding ElementName=imageFlipView,Path=Visibility}">
-                <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex,Converter={StaticResource AddConverter}}" />
-                <Run Text="/"/>
-                <Run x:Name="countRun" />
-            </TextBlock>
-            <!--#endregion-->
+        <TextBlock VerticalAlignment="Bottom" Margin="12" Foreground="White"
+                Visibility="{Binding ElementName=imageFlipView,Path=Visibility}">
+            <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex,Converter={StaticResource AddConverter}}" />
+            <Run Text="/"/>
+            <Run x:Name="countRun" />
+        </TextBlock>
+                <!--#endregion-->
     </Grid>
 
     <Page.BottomAppBar>

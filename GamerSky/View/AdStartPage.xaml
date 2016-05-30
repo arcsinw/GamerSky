@@ -33,7 +33,7 @@
             </FlipView.ItemTemplate>
 
         </FlipView>
-        <Image Source="ms-appx:///Assets/Launch_title.png" 
+        <Image Source="ms-appx:///Assets/Images/launch_title.png" 
                HorizontalAlignment="Center"
                Margin="36,8" Grid.Row="1"
                VerticalAlignment="Bottom"/>

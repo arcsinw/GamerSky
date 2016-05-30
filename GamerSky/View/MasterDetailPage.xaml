@@ -284,7 +284,8 @@
                         <AdaptiveTrigger MinWindowWidth="700"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        
+                        <Setter Target="DetailFrame.Width" Value="Auto"/>
+                        <Setter Target="MasterColumn.Width" Value="500"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -303,6 +304,11 @@
                       IsItemClickEnabled="True" SelectionMode="Single"
                       ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                       ItemClick="paneListView_ItemClick">
+                <ListView.Header>
+                    <Button Style="{StaticResource PaneButtonStyle}">
+                        <SymbolIcon Symbol="Contact"/>
+                    </Button>
+                </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:PaneItem">
                         <BitmapIcon UriSource="{x:Bind Icon}" ToolTipService.ToolTip="{x:Bind Title,Mode=OneWay}" Height="24" Width="24"/>
@@ -310,10 +316,8 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <StackPanel VerticalAlignment="Bottom">
-                <Button Style="{StaticResource PaneButtonStyle}">
-                    <SymbolIcon Symbol="Contact"/>
-                </Button>
+            <StackPanel VerticalAlignment="Bottom" >
+             
                 <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings"
                     Click="setting_Click">
                     <Button.Content>

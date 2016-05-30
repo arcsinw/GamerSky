@@ -35,9 +35,7 @@ namespace GamerSky.View
         public SettingsPage()
         {
             this.InitializeComponent();
-
-            NavigationCacheMode = NavigationCacheMode.Required;
-
+            
             viewModel = new SettingsPageViewModel();
 
         }
@@ -52,7 +50,7 @@ namespace GamerSky.View
 
         public void NavigateToAbout()
         {
-            Frame.Navigate(typeof(AboutPage));
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(AboutPage));
         }
 
         #region OnPropertyChanged
@@ -115,7 +113,7 @@ namespace GamerSky.View
 
         public void StartImage()
         {
-            this.Frame.Navigate(typeof(AdStartPage));
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(AdStartPage));
         }
 
         /// <summary>

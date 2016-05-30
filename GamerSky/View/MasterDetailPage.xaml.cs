@@ -39,7 +39,16 @@ namespace GamerSky.View
         {
             if (DetailFrame.CanGoBack)
             {
-                DetailFrame.GoBack();
+                var essayDetailPage = (DetailFrame.Content as EssayDetail);
+                if (essayDetailPage != null)
+                {
+                    
+                    essayDetailPage.CloseImageFlipView();
+                }
+                else
+                {
+                    DetailFrame.GoBack();
+                }
             }
             else if (MasterFrame.CanGoBack)
             {
@@ -57,20 +66,27 @@ namespace GamerSky.View
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_gonglue_h.png", Title = GlobalStringLoader.GetString("Game"), SourcePage = typeof(StrategyPage) });
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_dingyue_h.png", Title = GlobalStringLoader.GetString("Subscribe"), SourcePage = typeof(SubscribePage) });
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_news.png", Title = GlobalStringLoader.GetString("Yaowen"), SourcePage = typeof(YaowenPage) });
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_night.png", Title = GlobalStringLoader.GetString("Night") });
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_collect.png", Title = GlobalStringLoader.GetString("Collect"), SourcePage = typeof(FavoritePage) });
             UIHelper.ShowStatusBar();
+            
         }
 
 
         private void AdaptiveVisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
-            UpdateBackKey();
+            UpdateUI();
         }
 
-        private void UpdateBackKey()
+        private void UpdateUI()
         {
             if (AdaptiveVisualStateGroup.CurrentState == Narrow)
             {
                 DetailFrame.Visibility = DetailFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
+            }
+            else if(AdaptiveVisualStateGroup.CurrentState == Default)
+            {
+                DetailFrame.Visibility = Visibility.Visible;
             }
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = DetailFrame.CanGoBack || MasterFrame.CanGoBack ?
              AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
@@ -78,12 +94,12 @@ namespace GamerSky.View
 
         private void MasterFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            UpdateBackKey();
+            UpdateUI();
         }
 
         private void DetailFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            UpdateBackKey();
+            UpdateUI();
         }
 
         private void setting_Click(object sender, RoutedEventArgs e)

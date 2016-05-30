@@ -314,12 +314,12 @@ namespace GamerSky.View
             StorageFile file;
             if (Functions.IsMobile())
             {
-                file = await folder.CreateFileAsync("游民壁纸_" + Functions.getUnixTimeStamp().ToString() + ".jpg");
+                file = await folder.CreateFileAsync("游民壁纸_" + Functions.GetUnixTimeStamp().ToString() + ".jpg");
             }
             else
             {
                 FileSavePicker savePicker = new FileSavePicker();
-                savePicker.SuggestedFileName = "游民壁纸_" + DateTime.Now.Month + DateTime.Now.Day;
+                savePicker.SuggestedFileName = "游民壁纸_" + Functions.GetUnixTimeStamp().ToString(); ;
                 savePicker.DefaultFileExtension = ".jpg";
                 savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
                 savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
