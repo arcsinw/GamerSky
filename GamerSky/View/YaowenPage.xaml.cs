@@ -42,25 +42,13 @@ namespace GamerSky.View
                 Frame.GoBack();
             }
         }
-
-        #region 九幽的数据统计
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            JYHelper.TracePageStart(this.BaseUri.LocalPath);
-        }
-        #endregion
-
+         
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
 
-            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetail), essayResult);
         }
          
         private void ListView_Loaded(object sender, RoutedEventArgs e)

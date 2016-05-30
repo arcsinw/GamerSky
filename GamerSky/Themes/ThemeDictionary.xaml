@@ -505,7 +505,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="LightListViewStyle" TargetType="ListView">
+    <Style TargetType="ListView">
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="TabNavigation" Value="Once"/>
         <Setter Property="IsSwipeEnabled" Value="True"/>

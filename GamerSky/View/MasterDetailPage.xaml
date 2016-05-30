@@ -298,14 +298,14 @@
         </Grid.ColumnDefinitions>
          
         <!--#region Pane-->
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" Background="{ThemeResource PaneBackground}">
             <ListView x:Name="paneListView" ItemsSource="{x:Bind PaneItems}" Padding="0" Margin="0"
-                      IsItemClickEnabled="True"
+                      IsItemClickEnabled="True" SelectionMode="Single"
                       ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                       ItemClick="paneListView_ItemClick">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:PaneItem">
-                        <BitmapIcon UriSource="{x:Bind Icon}" ToolTipService.ToolTip="{x:Bind Title}" Height="24" Width="24"/>
+                        <BitmapIcon UriSource="{x:Bind Icon}" ToolTipService.ToolTip="{x:Bind Title,Mode=OneWay}" Height="24" Width="24"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

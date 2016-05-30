@@ -53,9 +53,10 @@ namespace GamerSky.View
         {
             MasterFrame.Navigate(typeof(MainPage));
             DetailFrame.Navigate(typeof(DefaultPage));
-            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_xinwen_h.png", SourcePage = typeof(MainPage) });
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_xinwen_h.png", Title = GlobalStringLoader.GetString("News") ,SourcePage = typeof(MainPage) });
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_gonglue_h.png", Title = GlobalStringLoader.GetString("Game"), SourcePage = typeof(StrategyPage) });
-            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_dingyue_h.png", Title = GlobalStringLoader.GetString("News"), SourcePage = typeof(SubscribePage) });
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_dingyue_h.png", Title = GlobalStringLoader.GetString("Subscribe"), SourcePage = typeof(SubscribePage) });
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_news.png", Title = GlobalStringLoader.GetString("Yaowen"), SourcePage = typeof(YaowenPage) });
             UIHelper.ShowStatusBar();
         }
 

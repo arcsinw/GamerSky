@@ -19,7 +19,7 @@
     </Page.DataContext>
 
     <Page.Resources>
-        
+
         <ItemsPanelTemplate x:Key="GridViewItemsPanel" x:Name="GridViewItemsPanel">
             <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Horizontal"/>
         </ItemsPanelTemplate>
@@ -28,7 +28,7 @@
             <WrapGrid MaximumRowsOrColumns="4" VerticalAlignment="Top" Orientation="Horizontal"/>
         </ItemsPanelTemplate>
 
-       
+
         <converter:CountToVisibilityConverter x:Key="CountToConverter"/>
         <!--数据集合控件Padding-->
         <Thickness x:Key="ControlPadding">8</Thickness>
@@ -42,6 +42,49 @@
         <JumpListItemBackgroundConverter x:Key="BackgroundConverter" Enabled="{ThemeResource ThemeColorBrush}"
                                          Disabled="Transparent"/>
         <JumpListItemBackgroundConverter x:Key="ForegroundConverter" Enabled="White" Disabled="Black"/>
+        <Style x:Key="LightAdaptiveGridViewStyle" TargetType="hp:AdaptiveGridView">
+            <Setter Property="Padding" Value="0,0,0,10"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="TabNavigation" Value="Once"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled"/>
+            <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="True"/>
+            <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+            <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True"/>
+            <Setter Property="IsSwipeEnabled" Value="True"/>
+            <Setter Property="ItemContainerTransitions">
+                <Setter.Value>
+                    <TransitionCollection>
+                        <AddDeleteThemeTransition/>
+                        <ContentThemeTransition/>
+                        <ReorderThemeTransition/>
+                        <EntranceThemeTransition IsStaggeringEnabled="False"/>
+                    </TransitionCollection>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="hp:AdaptiveGridView">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="ScrollViewer" Style="{StaticResource LightScrollViewerStyle}" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                                <ItemsPresenter FooterTransitions="{TemplateBinding FooterTransitions}" FooterTemplate="{TemplateBinding FooterTemplate}" Footer="{TemplateBinding Footer}" HeaderTemplate="{TemplateBinding HeaderTemplate}" Header="{TemplateBinding Header}" HeaderTransitions="{TemplateBinding HeaderTransitions}" Padding="{TemplateBinding Padding}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -59,7 +102,7 @@
                           IsItemClickEnabled="True"
                           ItemClick="GridView_ItemClick"
                           MinItemHeight="160"
-                          MinItemWidth="240"
+                          MinItemWidth="240" Style="{StaticResource LightAdaptiveGridViewStyle}"
                         >
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup>
@@ -256,7 +299,7 @@
                     </SemanticZoom.ZoomedOutView>
                 </SemanticZoom>
             </PivotItem>
-            
+
             <!--<PivotItem Header="游戏库" Margin="0" Padding="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                     
@@ -277,17 +320,21 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    --><!--#region PlaceHolderImage-->
-                                    <!--<Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill"
+                                    -->
+            <!--#region PlaceHolderImage-->
+            <!--<Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill"
                                            VerticalAlignment="Stretch"/>-->
-                                    <!--#endregion--><!--
+            <!--#endregion-->
+            <!--
                                     <Image Grid.Row="0" Stretch="Fill"  VerticalAlignment="Stretch">
                                         <Image.Source>
                                             <BitmapImage UriSource="{Binding thumbnailURL}"/>
                                         </Image.Source>
                                     </Image>
-                                    --><!--<Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
-                                       Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>--><!--
+                                    -->
+            <!--<Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
+                                       Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>-->
+            <!--
                                     <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding title}" 
                                                TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
                                                VerticalAlignment="Bottom"/>
@@ -315,6 +362,6 @@
         </Button>
 
         <ProgressRing x:Name="progress"  Style="{ThemeResource ProgressRingStyle}"/>
-        
+
     </Grid>
 </Page>

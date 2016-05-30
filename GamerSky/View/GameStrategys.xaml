@@ -75,7 +75,6 @@
                   Loaded="ListView_Loaded"
                   ShowsScrollingPlaceholders="True"
                   ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                  Style="{StaticResource LightListViewStyle}"
                   IsItemClickEnabled="True"
                   ItemClick="ListView_ItemClick">
 

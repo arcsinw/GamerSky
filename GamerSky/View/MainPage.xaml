@@ -12,6 +12,7 @@
     xmlns:converter="using:GamerSky.Converter"
     xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
+    NavigationCacheMode="Required"
     Background="{ThemeResource PageBackground}">
 
     <Page.DataContext>
@@ -360,7 +361,6 @@
                                  Padding="0" Margin="0"
                                  IsItemClickEnabled="True"
                                  ItemClick="ListView_ItemClick"
-                                Style="{StaticResource LightListViewStyle}"
                                  >
 
                         <ListView.ItemTemplateSelector>

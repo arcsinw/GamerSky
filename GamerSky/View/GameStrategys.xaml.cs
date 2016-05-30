@@ -30,14 +30,8 @@ namespace GamerSky.View
         public GameStrategys()
         {
             this.InitializeComponent();
-            
         }
-
-        #region 九幽的数据统计
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
-        }
+ 
 
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -48,9 +42,7 @@ namespace GamerSky.View
                 await viewModel.LoadData(strategyResult, pageIndex++);
             }
             progressRing.IsActive = false;
-            JYHelper.TracePageStart(this.BaseUri.LocalPath);
         }
-        #endregion
  
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
