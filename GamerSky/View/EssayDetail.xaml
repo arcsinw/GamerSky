@@ -7,9 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:GamerSky.Core.Helper"
     xmlns:converter="using:GamerSky.Converter"
+    xmlns:vm="using:GamerSky.Core.ViewModel"    
     mc:Ignorable="d"
+    NavigationCacheMode="Disabled"
     RequestedTheme="{Binding AppTheme}">
 
+    <Page.DataContext>
+        <vm:EssayDetailViewModel x:Name="viewModel"/>
+    </Page.DataContext>
+    
     <Page.Transitions>
         <TransitionCollection>
             <!--<EdgeUIThemeTransition Edge="Right"/>-->
@@ -365,14 +371,12 @@
             <PivotItem Header="正文" Margin="0" >
                 <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
                     ScriptNotify="webView_ScriptNotify"
-                         DOMContentLoaded="webView_DOMContentLoaded"
-                         />
-                <!---->
+                         DOMContentLoaded="webView_DOMContentLoaded">
+                </WebView>
             </PivotItem>
             <PivotItem Header="评论" Margin="0">
                 <WebView x:Name="commentWebView"  
-                         hp:ExtensionHelper.HtmlString="{Binding CommentString}"
-                         >
+                         hp:ExtensionHelper.HtmlString="{Binding CommentString}">
                 </WebView>
             </PivotItem>
         </Pivot>
@@ -529,7 +533,7 @@
             <Run Text="/"/>
             <Run x:Name="countRun" />
         </TextBlock>
-                <!--#endregion-->
+        <!--#endregion-->
     </Grid>
 
     <Page.BottomAppBar>

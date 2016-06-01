@@ -5,13 +5,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Provider;
 using Windows.Storage.Streams;
 using Windows.System;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -31,7 +29,7 @@ namespace GamerSky.View
     /// </summary>
     public sealed partial class EssayDetail : Page
     {
-        private EssayDetailViewModel viewModel;
+       
         private Essay essayResult;
         private bool isEssayLoaded = false;
         private ObservableCollection<JsImage> Images { get; set; }= new ObservableCollection<JsImage>();
@@ -40,73 +38,17 @@ namespace GamerSky.View
         /// </summary>
         private string currentImageUrl;
 
+   
 
         private bool isDOMLoadCompleted = false;
         public EssayDetail()
         {
             this.InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Disabled;
-
-            webView.NewWindowRequested += WebView_NewWindowRequested;
              
-        }
-    
-        public void CloseImageFlipView()
-        {
-            if (imageFlipView.Visibility == Visibility.Visible)
-            {
-                imageFlipView.Visibility = Visibility.Collapsed;
-                appBar.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                if (Frame.CanGoBack)
-                {
-                    this.Frame.GoBack();
-                }
-            }
-     
-        }
- 
-        /// <summary>
-        /// 处理WebView中的新请求
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        private void WebView_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
-        {
-            args.Handled = true;
-            if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
-            {
-                currentImageUrl = args.Uri.ToString();
-                Debug.WriteLine("ClickImageUrl：" + currentImageUrl);
-                GetAllPictures();
-                
-                imageFlipView.Visibility = Visibility.Visible;
-                appBar.Visibility = Visibility.Visible;
-
-                if (Images != null)
-                {
-                    for (int i = 0; i < Images.Count; i++)
-                    {
-                        if(Images[i].hdsrc!=null && currentImageUrl.Contains(Images[i].hdsrc))
-                        {
-                            imageFlipView.SelectedIndex = i;
-                        }
-                        else if (Images[i].src!=null && currentImageUrl.Contains(Images[i].src) )
-                        {
-                            imageFlipView.SelectedIndex = i;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                webView.Navigate(args.Uri);
-            }
-
+            webView.NewWindowRequested += WebView_NewWindowRequested;
         }
 
+        #region Js Methods
         /// <summary>
         /// 使用js获取所有图片
         /// </summary>
@@ -122,27 +64,6 @@ namespace GamerSky.View
             }
         }
 
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        { 
-            progress.IsActive = true;
-            essayResult = e.Parameter as Essay;
-            if (essayResult == null) return;
-            if (!essayResult.contentId.Equals("0"))
-            {
-                this.DataContext = viewModel = new EssayDetailViewModel(essayResult);
-                //await viewModel.GenerateHtmlString();
-            }
-            else
-            {
-                webView.Navigate(new Uri(essayResult.contentURL));
-            }
-            progress.IsActive = false;
-            JYHelper.TraceRead();
-        }
- 
-
-       
         /// <summary>
         /// 翻译网页
         /// </summary>
@@ -160,32 +81,6 @@ namespace GamerSky.View
             }
         }
 
-        private void webView_ScriptNotify(object sender, NotifyEventArgs e)
-        {
-            Debug.WriteLine(e.Value);
-            
-            var imgs = Functions.Deserlialize<List<JsImage>>(e.Value);
-            if (imgs != null && Images.Count==0)
-            {
-                foreach (var item in imgs)
-                {
-                    Images.Add(item);
-                }
-
-                countRun.Text = Images.Count.ToString();
-
-            }
-            if(e.Value.Contains("back"))
-            {
-                if(Frame.CanGoBack)
-                {
-                    Frame.GoBack();
-                }
-            }
-            
-        }
-
-         
         /// <summary>
         /// 后退
         /// </summary>
@@ -194,10 +89,6 @@ namespace GamerSky.View
             await webView.InvokeScriptAsync("eval", new[] { "history.go(-1)" });
         }
 
-        public async void Refresh()
-        {
-            await viewModel.GenerateHtmlString();
-        }
 
         public async void Forward()
         {
@@ -225,32 +116,36 @@ namespace GamerSky.View
                 await webView.InvokeScriptAsync("DayMode", new[] { "" });
             }
         }
- 
-         
+
+        #endregion
+
+
+        #region User input handler
         private async void refreshButton_Click(object sender, RoutedEventArgs e)
         {
             progress.IsActive = true;
-            
-            await viewModel.GenerateHtmlString();
+
+            await viewModel.GenerateHtmlString(essayResult);
             progress.IsActive = false;
         }
 
-        
+
+
         private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (viewModel != null)
             {
-                switch ( pivot.SelectedIndex)
+                switch (pivot.SelectedIndex)
                 {
                     case 0:
                         if (!isEssayLoaded)
                         {
-                            await viewModel.GenerateHtmlString();
+                            await viewModel.GenerateHtmlString(essayResult);
                             isEssayLoaded = true;
                         }
                         break;
                     case 1:
-                        viewModel.GenerateCommentString();
+                        viewModel.GenerateCommentString(essayResult);
                         break;
                 }
             }
@@ -271,16 +166,15 @@ namespace GamerSky.View
             DayMode();
         }
 
-         
         /// <summary>
         /// 翻译成英文
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void translateBtn_Click(object sender, RoutedEventArgs e)
-        { 
+        {
             Translate();
-            //ExperimentHelper.LogTranslateClick();
+
         }
 
         /// <summary>
@@ -290,20 +184,9 @@ namespace GamerSky.View
         /// <param name="e"></param>
         private void likeBtn_Click(object sender, RoutedEventArgs e)
         {
-            var vm = this.DataContext as EssayDetailViewModel;
-            if (vm != null)
+            if (essayResult != null)
             {
-                DataShareManager.Current.UpdateFavoriteEssayList(vm.essayResult);
-            }
-        }
-
-        private void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
-        {
-            isDOMLoadCompleted = true;
-            GetAllPictures();
-            if(DataShareManager.Current.AppTheme == ElementTheme.Dark)
-            {
-                nightCheckBox.IsChecked = true;
+                DataShareManager.Current.UpdateFavoriteEssayList(essayResult);
             }
         }
 
@@ -360,7 +243,7 @@ namespace GamerSky.View
         /// <param name="e"></param>
         private void hdAppBar_Click(object sender, RoutedEventArgs e)
         {
-             
+
         }
 
         /// <summary>
@@ -372,5 +255,119 @@ namespace GamerSky.View
         {
             await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
         }
+        #endregion
+
+        public void CloseImageFlipView()
+        {
+            if (imageFlipView.Visibility == Visibility.Visible)
+            {
+                imageFlipView.Visibility = Visibility.Collapsed;
+                appBar.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                if (Frame.CanGoBack)
+                {
+                    this.Frame.GoBack();
+                }
+            }
+     
+        }
+
+
+        public async void Refresh()
+        {
+            await viewModel.GenerateHtmlString(essayResult);
+        }
+
+        /// <summary>
+        /// 处理WebView中的新请求
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void WebView_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
+        {
+            args.Handled = true;
+            if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
+            {
+                currentImageUrl = args.Uri.ToString();
+                Debug.WriteLine("ClickImageUrl：" + currentImageUrl);
+                GetAllPictures();
+                
+                imageFlipView.Visibility = Visibility.Visible;
+                appBar.Visibility = Visibility.Visible;
+
+                if (Images != null)
+                {
+                    for (int i = 0; i < Images.Count; i++)
+                    {
+                        if(Images[i].hdsrc!=null && currentImageUrl.Contains(Images[i].hdsrc))
+                        {
+                            imageFlipView.SelectedIndex = i;
+                        }
+                        else if (Images[i].src!=null && currentImageUrl.Contains(Images[i].src) )
+                        {
+                            imageFlipView.SelectedIndex = i;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                webView.Navigate(args.Uri);
+            }
+
+        }
+         
+        private void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
+        {
+            isDOMLoadCompleted = true;
+            GetAllPictures();
+            if(DataShareManager.Current.AppTheme == ElementTheme.Dark)
+            {
+                nightCheckBox.IsChecked = true;
+            }
+            
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+         
+            essayResult = e.Parameter as Essay;
+            if (essayResult != null)
+            {
+                if (essayResult.contentId.Equals("0"))
+                {
+                    webView.Navigate(new Uri(essayResult.contentURL));
+                }
+            }
+            
+        }
+         
+        private void webView_ScriptNotify(object sender, NotifyEventArgs e)
+        {
+            Debug.WriteLine(e.Value);
+
+            var imgs = Functions.Deserlialize<List<JsImage>>(e.Value);
+            if (imgs != null && Images.Count == 0)
+            {
+                foreach (var item in imgs)
+                {
+                    Images.Add(item);
+                }
+
+                countRun.Text = Images.Count.ToString();
+
+            }
+            if (e.Value.Contains("back"))
+            {
+                if (Frame.CanGoBack)
+                {
+                    Frame.GoBack();
+                }
+            }
+
+        }
+         
     }
 }

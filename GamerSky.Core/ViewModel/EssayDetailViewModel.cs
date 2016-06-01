@@ -15,24 +15,21 @@ namespace GamerSky.Core.ViewModel
     public class EssayDetailViewModel : ViewModelBase
     {
         private ApiService apiService;
-        public Essay essayResult { get; set; }
-
-        public EssayDetailViewModel(Essay essay)
+        
+        public EssayDetailViewModel()
         {
-            IsActive = true;
             apiService = new ApiService();
-            this.essayResult = essay;
-
+        
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-             
         }
 
         private void Current_ShareDataChanged()
         {
             AppTheme = DataShareManager.Current.AppTheme;
         }
-
+         
+        #region Properties
         private ElementTheme appTheme;
         public ElementTheme AppTheme
         {
@@ -98,34 +95,6 @@ namespace GamerSky.Core.ViewModel
             }
         }
 
-       /// <summary>
-       /// 翻译按钮显示
-       /// </summary>
-        //public bool IsTranslateVisible
-        //{
-        //    get
-        //    {
-        //        return ExperimentHelper.GetBool(ExperimentHelper.TranslateButtonVisibility,false);
-        //    }
-        //}
-
-        //private ObservableCollection<RelatedReadings> relatedReadings;
-        ///// <summary>
-        ///// 相关阅读
-        ///// </summary>
-        //public ObservableCollection<RelatedReadings> RelatedReadings
-        //{
-        //    get
-        //    {
-        //        return relatedReadings;
-        //    }
-        //    set
-        //    {
-        //        relatedReadings = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
         private string originUri;
         public string OriginUri
         {
@@ -167,6 +136,7 @@ namespace GamerSky.Core.ViewModel
                 OnPropertyChanged();
             }
         }
+
         private string subTitle;
         public string SubTitle
         {
@@ -181,13 +151,31 @@ namespace GamerSky.Core.ViewModel
             }
         }
 
+        private ObservableCollection<RelatedReadings> relatedReadings;
+        /// <summary>
+        /// 相关阅读
+        /// </summary>
+        public ObservableCollection<RelatedReadings> RelatedReadings
+        {
+            get
+            {
+                return relatedReadings;
+            }
+            set
+            {
+                relatedReadings = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+         
         /// <summary>
         /// 生成新闻内容网页
         /// </summary>
-        public async Task GenerateHtmlString()
+        public async Task GenerateHtmlString(Essay essay)
         {
             IsActive = true;
-            News news = await apiService.ReadEssay(essayResult.contentId);
+            News news = await apiService.ReadEssay(essay.contentId);
             if (news != null)
             {
                 OriginUri = news.originURL;
@@ -206,7 +194,7 @@ namespace GamerSky.Core.ViewModel
                 string subTitle = news.subTitle;
 
                 #region 相关阅读
-                List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essayResult.contentId, essayResult.contentType);
+                List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essay.contentId, essay.contentType);
 
                 string relatedReadingsHtml =
                     "<div class=\"list\" id=\"gsTemplateContent_RelatedReading\">" +
@@ -297,7 +285,7 @@ namespace GamerSky.Core.ViewModel
             IsActive = false;
         }
 
-       public void GenerateCommentString()
+       public void GenerateCommentString(Essay essayResult)
         {
             IsActive = true;
             CommentString ="<!DOCTYPE html><html><body><div id=\"SOHUCS\" sid=\"" + essayResult.contentId + "\"></div>" +
