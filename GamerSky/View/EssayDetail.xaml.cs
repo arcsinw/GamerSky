@@ -29,23 +29,34 @@ namespace GamerSky.View
     /// </summary>
     public sealed partial class EssayDetail : Page
     {
-       
-        private Essay essayResult;
+        public Essay essayResult { get; set; }
+
         private bool isEssayLoaded = false;
         private ObservableCollection<JsImage> Images { get; set; }= new ObservableCollection<JsImage>();
         /// <summary>
         /// 当前点击的图片url
         /// </summary>
         private string currentImageUrl;
-
-   
-
+         
         private bool isDOMLoadCompleted = false;
         public EssayDetail()
         {
             this.InitializeComponent();
              
             webView.NewWindowRequested += WebView_NewWindowRequested;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+        }
+
+        private void Current_ShareDataChanged()
+        {
+            if(viewModel.AppTheme == ElementTheme.Dark)
+            {
+                NightMode();
+            }
+            else
+            {
+                DayMode();
+            }
         }
 
         #region Js Methods
@@ -102,7 +113,14 @@ namespace GamerSky.View
         {
             if (isDOMLoadCompleted)
             {
-                await webView.InvokeScriptAsync("NightMode", new[] { "" });
+                try
+                {
+                    await webView.InvokeScriptAsync("NightMode", new[] { "" });
+                }
+                catch (Exception e)
+                {
+
+                }
             }
         }
 
@@ -113,7 +131,14 @@ namespace GamerSky.View
         {
             if (isDOMLoadCompleted)
             {
-                await webView.InvokeScriptAsync("DayMode", new[] { "" });
+                try
+                {
+                    await webView.InvokeScriptAsync("DayMode", new[] { "" });
+                }
+                catch (Exception e)
+                {
+
+                }
             }
         }
 
@@ -128,8 +153,7 @@ namespace GamerSky.View
             await viewModel.GenerateHtmlString(essayResult);
             progress.IsActive = false;
         }
-
-
+         
 
         private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -257,6 +281,9 @@ namespace GamerSky.View
         }
         #endregion
 
+       
+
+
         public void CloseImageFlipView()
         {
             if (imageFlipView.Visibility == Visibility.Visible)
@@ -323,16 +350,13 @@ namespace GamerSky.View
         {
             isDOMLoadCompleted = true;
             GetAllPictures();
-            if(DataShareManager.Current.AppTheme == ElementTheme.Dark)
-            {
-                nightCheckBox.IsChecked = true;
-            }
+           
             
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-         
+            this.isEssayLoaded = false;
             essayResult = e.Parameter as Essay;
             if (essayResult != null)
             {
@@ -340,15 +364,30 @@ namespace GamerSky.View
                 {
                     webView.Navigate(new Uri(essayResult.contentURL));
                 }
+                else
+                {
+                    if (pivot.SelectedIndex == 0)
+                    {
+                        await viewModel.GenerateHtmlString(essayResult);
+                    }
+                    else
+                    {
+                        viewModel.GenerateCommentString(essayResult);
+                    }
+                }
             }
-            
         }
-         
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            viewModel.HtmlString = string.Empty;
+        }
+
         private void webView_ScriptNotify(object sender, NotifyEventArgs e)
         {
             Debug.WriteLine(e.Value);
 
-            var imgs = Functions.Deserlialize<List<JsImage>>(e.Value);
+            var imgs = JsonHelper.Deserlialize<List<JsImage>>(e.Value);
             if (imgs != null && Images.Count == 0)
             {
                 foreach (var item in imgs)
@@ -368,6 +407,14 @@ namespace GamerSky.View
             }
 
         }
-         
+
+        private void webView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            if (DataShareManager.Current.AppTheme == ElementTheme.Dark)
+            {
+                nightCheckBox.IsChecked = true;
+                NightMode();
+            }
+        }
     }
 }

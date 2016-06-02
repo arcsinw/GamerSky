@@ -79,13 +79,13 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Ellipse Height="80" Width="80" HorizontalAlignment="Center" Margin="10">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="ms-appx:///Assets/Login_qq.png"/>
+                                    <ImageBrush ImageSource="ms-appx:///Assets/Images/Login_qq.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
 
                             <Ellipse Height="80" Width="80" Margin="10" Tapped="Ellipse_Tapped">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="ms-appx:///Assets/Login_weibo.png"/>
+                                    <ImageBrush ImageSource="ms-appx:///Assets/Images/Login_weibo.png"/>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </StackPanel>
@@ -94,7 +94,6 @@
             </ScrollViewer>
         </Grid>
 
-        
         <ProgressRing Grid.Row="0" Grid.RowSpan="2" x:Name="progressRing"  Style="{ThemeResource ProgressRingStyle}"/>
         
     </Grid>

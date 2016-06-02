@@ -38,7 +38,7 @@ namespace GamerSky.View
 
         public void Agreement()
         {
-            Frame.Navigate(typeof(AgreementPage));
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(AgreementPage));
         }
 
         /// <summary>

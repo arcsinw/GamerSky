@@ -9,7 +9,7 @@
     xmlns:converter="using:GamerSky.Converter"
     xmlns:vm="using:GamerSky.Core.ViewModel"    
     mc:Ignorable="d"
-    NavigationCacheMode="Disabled"
+    NavigationCacheMode="Enabled"
     RequestedTheme="{Binding AppTheme}">
 
     <Page.DataContext>
@@ -370,7 +370,7 @@
 
             <PivotItem Header="正文" Margin="0" >
                 <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
-                    ScriptNotify="webView_ScriptNotify"
+                    ScriptNotify="webView_ScriptNotify" NavigationCompleted="webView_NavigationCompleted"
                          DOMContentLoaded="webView_DOMContentLoaded">
                 </WebView>
             </PivotItem>
@@ -392,7 +392,7 @@
 
             <Button x:Name="likeBtn" Click="likeBtn_Click" HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" Background="Transparent">
-                <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding essayResult.IsFavorite,Converter={StaticResource BoolToIconConverter}}"/>
+                <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding RelativeSource={RelativeSource Self} ,Path=essayResult.IsFavorite,Converter={StaticResource BoolToIconConverter}}"/>
             </Button>
 
             <!--#region  底部右边的调整按钮-->

@@ -62,7 +62,7 @@ namespace GamerSky.Core.Http
         /// <returns></returns>
         protected async Task<JsonObject>PostJson<T> (string uri,T t) where T : class
         {
-            string body = Functions.JsonDataSerializer(t);
+            string body = JsonHelper.Serializer(t);
             try
             {
                 string json = await HttpBaseService.SendPostRequest(uri, body);
@@ -80,13 +80,13 @@ namespace GamerSky.Core.Http
 
         protected async Task<ReturnT> PostJson<SendT,ReturnT>(string uri,SendT sendT) where ReturnT : class
         {
-            string body = Functions.JsonDataSerializer(sendT);
+            string body = JsonHelper.Serializer(sendT);
             try
             {
                 string json = await HttpBaseService.SendPostRequest(uri, body);
                 if (json != null)
                 {
-                    return Functions.Deserlialize<ReturnT>(json);
+                    return JsonHelper.Deserlialize<ReturnT>(json);
                 }
                 return null;
             }

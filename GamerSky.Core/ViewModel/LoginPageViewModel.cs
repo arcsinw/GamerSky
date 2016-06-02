@@ -49,21 +49,21 @@ namespace GamerSky.Core.ViewModel
         private ApiService apiService;
         public async void Login()
         {
-            VerificationCode code = await apiService.Login(UserLoginInfo.UserPassword, UserLoginInfo.UserName);
-            if (code != null)
+            var loginResult = await apiService.Login(UserLoginInfo.UserPassword, UserLoginInfo.UserName);
+            if (loginResult != null)
             {
-                if (code.errorCode.Equals("0")) //成功
+                if (loginResult.errorCode.Equals("0")) //成功
                 {
-                    await Window.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
-                     {
-                         await new MessageDialog(code.errorMessage).ShowAsync();
-                     });
+                    if(loginResult.result !=null)
+                    {
+                        DataShareManager.Current.UpdateUser(loginResult.result);
+                    }
                 }
                 else
                 {
                     await Window.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
                     {
-                        await new MessageDialog(code.errorMessage).ShowAsync();
+                        await new MessageDialog(loginResult.errorMessage).ShowAsync();
                     });
                 }
             }

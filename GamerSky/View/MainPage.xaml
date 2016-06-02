@@ -13,7 +13,7 @@
     xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
     NavigationCacheMode="Required"
-    Background="{ThemeResource PageBackground}">
+    RequestedTheme="{Binding AppTheme}">
 
     <Page.DataContext>
         <vm:MainPageViewModel x:Name="ViewModel"/>

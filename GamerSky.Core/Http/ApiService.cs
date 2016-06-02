@@ -346,12 +346,12 @@ namespace GamerSky.Core.Http
         /// <param name="passWord">用户名</param>
         /// <param name="userName">密码</param>
         /// <returns></returns>
-        public async Task<VerificationCode> Login(string passWord, string userName)
+        public async Task<LoginResult> Login(string passWord, string userName)
         {
             LoginPostData postData = new LoginPostData();
             postData.request = new LoginPostDataRequest { passWord = passWord, userName = userName };
-            var verificationCode = await PostJson<LoginPostData, VerificationCode>(ServiceUri.Login, postData);
-            return verificationCode;
+            var result = await PostJson<LoginPostData, LoginResult>(ServiceUri.Login, postData);
+            return result;
         }
 
         /// <summary>

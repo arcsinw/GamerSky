@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="using:GamerSky.Core.Model"
     mc:Ignorable="d"
+    RequestedTheme="{x:Bind AppTheme,Mode=OneWay}"
     >
 
     <Page.Resources>
@@ -158,9 +159,9 @@
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Stroke">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
+                                            </ObjectAnimationUsingKeyFrames>-->
                                             <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
                                         </Storyboard>
                                     </VisualState>
@@ -180,9 +181,9 @@
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Stroke">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
+                                            </ObjectAnimationUsingKeyFrames>-->
                                             <PointerUpThemeAnimation Storyboard.TargetName="ContentPresenter" />
                                         </Storyboard>
                                     </VisualState>
@@ -202,9 +203,9 @@
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Stroke">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundAccentBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
+                                            </ObjectAnimationUsingKeyFrames>-->
                                             <PointerDownThemeAnimation TargetName="ContentPresenter" />
                                         </Storyboard>
                                     </VisualState>
@@ -304,9 +305,12 @@
                       IsItemClickEnabled="True" SelectionMode="Single"
                       ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                       ItemClick="paneListView_ItemClick">
+                <ListView.Resources>
+                    <BitmapImage x:Key="DefaultAvatar" UriSource="ms-appx:///Assets/Images/drawer_user.png"/>
+                </ListView.Resources>
                 <ListView.Header>
-                    <Button Style="{StaticResource PaneButtonStyle}">
-                        <SymbolIcon Symbol="Contact"/>
+                    <Button x:Name="userBtn" Click="userBtn_Click" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="{x:Bind User.userName,Mode=OneWay}">
+                        <Image Source="{x:Bind User.pic,Mode=OneWay}" Height="48" Width="48"/>
                     </Button>
                 </ListView.Header>
                 <ListView.ItemTemplate>
@@ -314,12 +318,17 @@
                         <BitmapIcon UriSource="{x:Bind Icon}" ToolTipService.ToolTip="{x:Bind Title,Mode=OneWay}" Height="24" Width="24"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
+             
             </ListView>
 
-            <StackPanel VerticalAlignment="Bottom" >
-             
+            <StackPanel VerticalAlignment="Bottom">
+                <Button x:Name="themeBtn" Click="themeBtn_Click" Style="{StaticResource PaneButtonStyle}">
+                    <Button.Content>
+                        <BitmapIcon Height="24" Width="24" UriSource="ms-appx:///Assets/Images/Split_Night.png"/>
+                    </Button.Content>
+                </Button>
                 <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings"
-                    Click="setting_Click">
+                    Click="setting_Click" VerticalAlignment="Bottom">
                     <Button.Content>
                         <SymbolIcon Symbol="Setting"/>
                     </Button.Content>
@@ -331,6 +340,7 @@
         <Frame x:Name="MasterFrame" x:FieldModifier="Public" Grid.Column="1" 
                BorderBrush="{ThemeResource ThemeColorBrush}"
                BorderThickness="0,0,1,0" Navigated="MasterFrame_Navigated"/>
+        
         <Frame x:Name="DetailFrame" x:FieldModifier="Public" Grid.Column="2" Navigated="DetailFrame_Navigated">
             <Frame.ContentTransitions>
                 <TransitionCollection>

@@ -24,6 +24,7 @@ namespace GamerSky.Core.ViewModel
         private const string RoamingSettingKey_AppTheme = "APP_THEME";
         private const string SettingKey_SubscribeList = "SUBSCRIBE_LIST";                   //订阅列表
         private const string SettingKey_IsStatusBarShow = "IS_STATUSBAR_SHOW";
+        private const string SettingKey_User = "USER";
         #endregion
 
         #region Files and folders'  name
@@ -46,6 +47,15 @@ namespace GamerSky.Core.ViewModel
         #endregion
 
         #region Properties
+        private User currentUser;
+        public User CurrentUser
+        {
+            get
+            {
+                return currentUser;
+            }
+        }
+
         private ElementTheme appTheme;
         /// <summary>
         /// 日/夜间模式
@@ -191,7 +201,6 @@ namespace GamerSky.Core.ViewModel
             LoadData();
         }
 
-        #region Methods
         private async void LoadData()
         {
             var localSettings = ApplicationData.Current.LocalSettings;
@@ -223,10 +232,12 @@ namespace GamerSky.Core.ViewModel
                 isNoImage = false;
             }
 
+            //load user
+
             //加载订阅列表
             if (localSettings.Values.ContainsKey(SettingKey_SubscribeList))
             {
-                subscribeList = Functions.Deserlialize <List<Subscribe>>(localSettings.Values[SettingKey_SubscribeList].ToString());
+                subscribeList = JsonHelper.Deserlialize <List<Subscribe>>(localSettings.Values[SettingKey_SubscribeList].ToString());
             }
             else
             {
@@ -255,7 +266,18 @@ namespace GamerSky.Core.ViewModel
                 ShareDataChanged();
             }
         }
-     
+
+        #region Update properties methods
+        public void UpdateUser(User user)
+        {
+            if(user!=null)
+            {
+                this.currentUser = user;
+                //var localSettings = ApplicationData.Current.LocalSettings;
+                //localSettings.Values[SettingKey_User] = JsonHelper.Serializer<User>(user);
+                OnShareDataChanged();
+            }
+        }
         /// <summary>
         /// true 为Dark false 为Light
         /// </summary>
@@ -303,7 +325,7 @@ namespace GamerSky.Core.ViewModel
                  
             }
             var localSettings = ApplicationData.Current.LocalSettings;
-            localSettings.Values[SettingKey_SubscribeList] = Functions.JsonDataSerializer<List<Subscribe>>(subscribeList);
+            localSettings.Values[SettingKey_SubscribeList] = JsonHelper.Serializer<List<Subscribe>>(subscribeList);
             OnShareDataChanged();
         }
         

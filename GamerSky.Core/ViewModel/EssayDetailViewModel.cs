@@ -27,6 +27,7 @@ namespace GamerSky.Core.ViewModel
         private void Current_ShareDataChanged()
         {
             AppTheme = DataShareManager.Current.AppTheme;
+          
         }
          
         #region Properties
@@ -61,11 +62,11 @@ namespace GamerSky.Core.ViewModel
             }
         }
 
-        private StringBuilder htmlString;
+        private string htmlString;
         /// <summary>
         /// HTML正文
         /// </summary>
-        public StringBuilder HtmlString
+        public string HtmlString
         {
             get
             {
@@ -233,8 +234,8 @@ namespace GamerSky.Core.ViewModel
                                             "</div>" +
                                         "</div>" +
                                   "</div>" +
-                                         //relatedReadingsHtml +
-                             "</div>"+
+                                         relatedReadingsHtml +
+                             "</div>" +
                         "</body>"+
                         "<script type=\"text/javascript\">"+
                         @"function resizeVideo(){
@@ -272,15 +273,8 @@ namespace GamerSky.Core.ViewModel
                     </script>" +
                 "</html>";
 
-                if (HtmlString == null)
-                {
-                    HtmlString = new StringBuilder(html);
-                }
-                else
-                {
-                    HtmlString.Clear();
-                    HtmlString.Append(html);
-                }
+                HtmlString = html;
+              
             }
             IsActive = false;
         }
