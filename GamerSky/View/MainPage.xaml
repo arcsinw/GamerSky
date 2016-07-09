@@ -11,6 +11,7 @@
     xmlns:vm="using:GamerSky.Core.ViewModel"
     xmlns:converter="using:GamerSky.Converter"
     xmlns:controls="using:GamerSky.Controls"
+  
     mc:Ignorable="d"
     NavigationCacheMode="Required"
     RequestedTheme="{Binding AppTheme}">
@@ -26,8 +27,8 @@
         <Thickness x:Key="EssayGridMargin">2,0</Thickness>
         <Thickness x:Key="EssayGridPadding">2.0</Thickness>
         <!--有三张图的文章模板-->
-        <DataTemplate x:Key="ThreePicEssayDataTemplate" >
-            <Grid>
+        <DataTemplate x:Key="ThreePicEssayDataTemplate">
+            <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="2*"/>
@@ -69,7 +70,7 @@
         </DataTemplate>
         <!--一张图文章模板-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid>
+            <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
@@ -96,7 +97,7 @@
         </DataTemplate>
         <!--无图模板-->
         <DataTemplate x:Key="NoPicEssayDataTemplate">
-            <Grid>
+            <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -110,7 +111,7 @@
         </DataTemplate>
         <!--专题模板-->
         <DataTemplate x:Key="TopicDataTemplate">
-            <Grid>
+            <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -337,27 +338,150 @@
                 </Setter.Value>
             </Setter>
         </Style>
- 
+        <Style x:Key="TabRadioStyle" TargetType="RadioButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <!--<Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>-->
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid x:Name="rootGrid" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                              Background="{TemplateBinding Background}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="OuterEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="CheckOuterEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAccentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckOuterEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckGlyph">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseHighBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="rootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="OuterEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="CheckOuterEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckOuterEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckGlyph">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightAltBaseMediumBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="rootGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="OuterEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke" Storyboard.TargetName="CheckOuterEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckOuterEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckGlyph">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="CheckGlyph"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="OuterEllipse"/>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="CheckOuterEllipse"/>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ThemeColorBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid" Storyboard.TargetProperty="Background">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource DarkThemeColor}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid x:Name="Grid" Height="32" VerticalAlignment="Top" Visibility="Collapsed">
+                                <Ellipse x:Name="OuterEllipse" Height="20" Stroke="{ThemeResource SystemControlForegroundBaseMediumHighBrush}" StrokeThickness="{ThemeResource RadioButtonBorderThemeThickness}" UseLayoutRounding="False" Width="20"/>
+                                <Ellipse x:Name="CheckOuterEllipse" Fill="{ThemeResource SystemControlHighlightTransparentBrush}" Height="0" Opacity="0" Stroke="{ThemeResource SystemControlHighlightAltAccentBrush}" StrokeThickness="{ThemeResource RadioButtonBorderThemeThickness}" UseLayoutRounding="False" Width="20"/>
+                                <Ellipse x:Name="CheckGlyph" Fill="{ThemeResource SystemControlHighlightAltBaseMediumHighBrush}" Height="0" Opacity="0" UseLayoutRounding="False" Width="10"/>
+                            </Grid>
+                            <ContentPresenter x:Name="ContentPresenter"  AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Grid.Column="0" Grid.ColumnSpan="2" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
-    <Pivot x:Name="essayPivot"  
+    <Grid> 
+        <Pivot x:Name="essayPivot"  
                ItemsSource="{Binding EssaysAndChannels}" 
                Padding="0" Margin="0" HorizontalContentAlignment="Stretch" 
                Background="{ThemeResource PageBackground}"
                Style="{StaticResource EssayPivotStyle}">
-        <Pivot.HeaderTemplate>
-            <DataTemplate>
-                <TextBlock Text="{Binding Channel.nodeName}"/>
-            </DataTemplate>
-        </Pivot.HeaderTemplate>
-        <Pivot.ItemTemplate>
-            <DataTemplate>
-                <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Channel.nodeName}"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <Pivot.ItemTemplate>
+                <DataTemplate>
+                    <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
                     <ListView x:Name="essayListView" 
                                  ItemsSource="{Binding Essays}"
                                  ShowsScrollingPlaceholders="True"
                                  SelectionMode="None"
-                                 Padding="0" Margin="0"
+                                 
                                  IsItemClickEnabled="True"
                                  ItemClick="ListView_ItemClick"
                                  >
@@ -372,13 +496,13 @@
                         <ListView.HeaderTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <FlipView x:Name="headEssay" Height="180" ItemsSource="{Binding Essays.HeaderEssays}" 
+                                    <FlipView x:Name="headEssay" Height="210" ItemsSource="{Binding Essays.HeaderEssays}" 
                                                   Tapped="FlipView_Tapped">
                                         <FlipView.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid>
-                                                    <Image Source="{Binding DefaultBitmap}" Stretch="Fill"  MinHeight="180"/>
-                                                    <Image Height="180" Stretch="Fill">
+                                                    <Image Source="{Binding DefaultBitmap}" Stretch="Fill"  MinHeight="210"/>
+                                                    <Image Height="210" Stretch="Fill">
                                                         <Image.Source>
                                                             <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
                                                         </Image.Source>
@@ -447,133 +571,17 @@
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
-                <!--</pr:PullToRefreshBox>-->
-            </DataTemplate>
-        </Pivot.ItemTemplate>
-        <Pivot.ItemContainerStyle>
-            <Style TargetType="PivotItem">
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            </Style>
-        </Pivot.ItemContainerStyle>
-
-    </Pivot>
-    <!--<controls:SwipeableSplitView x:Name="splitView" Grid.Column="1" 
-                                     DisplayMode="Overlay" OpenPaneLength="240" IsSwipeablePaneOpen="True"
-                                     IsPanSelectorEnabled="True" IsPaneOpen="True">
-            <SplitView.Pane>
-                <ListView ScrollViewer.VerticalScrollMode="Disabled" 
-                          GotFocus="{x:Bind ViewModel.GetCacheSize}" 
-                          SelectionMode="None" Background="{ThemeResource PageBackground}"
-                         >
-                    <ListView.Resources>
-                        <Thickness x:Key="TextBlockMargin">8,0</Thickness>
-                    </ListView.Resources>
-                    <ListView.Items>
-                        <ListViewItem HorizontalContentAlignment="Center" Tapped="{x:Bind NavigateToLogin}"
-                                      Background="{ThemeResource ThemeColorBrush}">
-                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
-                                <Ellipse Height="90" Width="90" HorizontalAlignment="Center">
-                                    <Ellipse.Fill>
-                                        <ImageBrush>
-                                            <ImageBrush.ImageSource>
-                                                <BitmapImage UriSource="ms-appx:///Assets/Avatar.png"/>
-                                            </ImageBrush.ImageSource>
-                                        </ImageBrush>
-                                    </Ellipse.Fill>
-                                </Ellipse>
-                                <TextBlock Text="立即登录" x:Uid="Login" HorizontalAlignment="Center" Foreground="White"/>
-                            </StackPanel>
-                        </ListViewItem>
-
-                        <ListViewItem Tapped="{x:Bind Favorite}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Collect.png" Height="24"/>
-                                <TextBlock Text="收藏" x:Uid="Collection" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
-
-                        <ListViewItem Tapped="{x:Bind NavigateToSearchPage}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Search.png" Height="24"/>
-                                <TextBlock Text="搜索" x:Uid="Search" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
-
-                        <ListViewItem Tapped="{x:Bind YaoWen}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_News.png" Height="24"/>
-                                <TextBlock Text="要闻" x:Uid="Yaowen" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
-
-                        <ListViewItem Tapped="{x:Bind ViewModel.ClearCache}">
-                            <Grid HorizontalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                    <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Cache.png" Height="24"/>
-                                    <TextBlock Text="清空缓存" x:Uid="ClearCache" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
-                                <TextBlock  Grid.Column="1" Text="{x:Bind ViewModel.CacheSize,Mode=OneWay,TargetNullValue=''}" 
-                                            HorizontalAlignment="Right"/>
-                            </Grid>
-                        </ListViewItem>
-
-                        <ListViewItem  HorizontalContentAlignment="Stretch">
-                            <Grid HorizontalAlignment="Stretch" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-
-                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
-                                    <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Night.png" Height="24"/>
-                                    <TextBlock Text="夜间模式" x:Uid="NightMode" VerticalAlignment="Center" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
-
-                                <ToggleSwitch IsOn="{x:Bind IsNight,Mode=TwoWay}"  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </ListViewItem>
-
-                        <ListViewItem HorizontalContentAlignment="Stretch">
-                            <Grid HorizontalAlignment="Stretch" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                    <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Picmode.png" Height="24"/>
-                                    <TextBlock Text="2G/3G无图" VerticalAlignment="Center" x:Uid="NoPic" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
-                                <ToggleSwitch  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </ListViewItem>
-
-                        <ListViewItem Tapped="{x:Bind FeedBack}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Feedback.png" Height="24"/>
-                                <TextBlock Text="意见反馈" x:Uid="FeedBack" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
-
-                        <ListViewItem Tapped="{x:Bind NavigateToSettings}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Split_Setting.png" Height="24"/>
-                                <TextBlock Text="更多设置" x:Uid="Settings" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
-                    </ListView.Items>
-                </ListView>
-            </SplitView.Pane>
-            <SplitView.Content>
-            
-        </SplitView.Content>
-        </controls:SwipeableSplitView>-->
- 
-    
+                    <!--</pr:PullToRefreshBox>-->
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+            <Pivot.ItemContainerStyle>
+                <Style TargetType="PivotItem">
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </Pivot.ItemContainerStyle>
+        </Pivot> 
+    </Grid>
 </Page>

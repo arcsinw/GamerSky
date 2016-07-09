@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="using:GamerSky.Converter"
     >
-    <Color x:Key="LightThemeColor">#C93D32</Color>
+    <Color x:Key="LightThemeColor">#D22222</Color>
     <Color x:Key="DarkThemeColor">#FF333337</Color>
     
     <!--#region -->
@@ -2438,9 +2438,9 @@
         <Setter Property="Foreground" Value="{ThemeResource ThemeColorBrush}"/>
     </Style>
 
-    <Style TargetType="TextBlock">
+    <!--<Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
-    </Style>
+    </Style>-->
     
     <!--日夜间资源字典-->
     <ResourceDictionary.ThemeDictionaries>
@@ -2448,7 +2448,7 @@
             <!--主题色-->
             <Color x:Key="ThemeColor">#D22222</Color>
             <!--主题色Brush-->
-            <SolidColorBrush x:Key="ThemeColorBrush" Color="#C93D32"/>
+            <SolidColorBrush x:Key="ThemeColorBrush" Color="#D22222"/>
             <!--HomePage 底栏背景色-->
             <SolidColorBrush x:Key="BottomBarBackground" Color="LightGray" />
             <!--PivotHeader 背景色-->

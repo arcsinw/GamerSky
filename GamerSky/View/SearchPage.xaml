@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:vm="using:GamerSky.Core.ViewModel"
     xmlns:hp="using:GamerSky.Helper"
+    xmlns:controls="using:GamerSky.Controls"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -370,7 +371,7 @@
                           ItemClick="{x:Bind ItemClick}" Margin="12,0">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <hp:StringWrapPanel/>
+                                <controls:StringWrapPanel/>
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>
@@ -434,7 +435,7 @@
                           ItemClick="{x:Bind ItemClick}">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <hp:StringWrapPanel/>
+                                <controls:StringWrapPanel/>
                             </ItemsPanelTemplate>
                         </GridView.ItemsPanel>
                         <GridView.ItemTemplate>

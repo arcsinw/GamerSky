@@ -169,11 +169,11 @@ namespace GamerSky.View
             if (essayResult == null) return;
             if (!essayResult.contentType.Equals("zhuanti"))
             {
-                (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+               NavigationHelper.DetailFrameNavigate(typeof(EssayDetail), essayResult);
             }
             else
             {
-                (Window.Current.Content as Frame)?.Navigate(typeof(SubscribeContentPage), essayResult.contentId);
+                NavigationHelper.DetailFrameNavigate(typeof(SubscribeContentPage), essayResult.contentId);
             }
         }
     }

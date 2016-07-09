@@ -141,19 +141,19 @@
   <data name="Login.Text" xml:space="preserve">
     <value>登录</value>
   </data>
-  <data name="News" xml:space="preserve">
+  <data name="News.Text" xml:space="preserve">
     <value>新闻</value>
   </data>
-  <data name="Game" xml:space="preserve">
+  <data name="Game.Text" xml:space="preserve">
     <value>游戏库</value>
   </data>
-  <data name="Subscribe" xml:space="preserve">
+  <data name="Subscribe.Text" xml:space="preserve">
     <value>订阅</value>
   </data>
   <data name="PlaceHolderText" xml:space="preserve">
     <value>请输入搜索内容</value>
   </data>
-  <data name="Yaowen" xml:space="preserve">
+  <data name="Yaowen.Text" xml:space="preserve">
     <value>要闻</value>
   </data>
   <data name="NoPic.Text" xml:space="preserve">
@@ -218,5 +218,20 @@
   </data>
   <data name="OtherWay.Text" xml:space="preserve">
     <value>其他方式登录</value>
+  </data>
+  <data name="UYaowen" xml:space="preserve">
+    <value>要闻</value>
+  </data>
+  <data name="UNews" xml:space="preserve">
+    <value>新闻</value>
+  </data>
+  <data name="UGame" xml:space="preserve">
+    <value>游戏库</value>
+  </data>
+  <data name="USubscribe" xml:space="preserve">
+    <value>订阅</value>
+  </data>
+  <data name="UCollection" xml:space="preserve">
+    <value>收藏</value>
   </data>
 </root>

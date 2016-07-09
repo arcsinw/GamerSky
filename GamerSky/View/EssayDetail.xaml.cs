@@ -350,8 +350,6 @@ namespace GamerSky.View
         {
             isDOMLoadCompleted = true;
             GetAllPictures();
-           
-            
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

@@ -9,6 +9,6 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Image Source="ms-appx:///Assets/Images/empty.png" HorizontalAlignment="Center"
-               VerticalAlignment="Center" Height="200" Width="200"/>
+               VerticalAlignment="Center" Height="150" Width="150"/>
     </Grid>
 </Page>

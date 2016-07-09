@@ -52,7 +52,6 @@ namespace GamerSky.View
             {
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essayResult.contentId);
             }
-             
         }
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
