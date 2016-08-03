@@ -81,9 +81,10 @@ namespace GamerSky.View
             }
         }
          
-        private  void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
             viewModel.Refresh();
+            await LiveTileHelper.UpdatePrimaryTile();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerSky", "GamerSky\GamerSky.csproj", "{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}"
 EndProject
@@ -81,15 +81,15 @@ Global
 		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://wangx86.visualstudio.com/defaultcollection
-		SccProjectUniqueName0 = GamerSky\\GamerSky.csproj
-		SccProjectName0 = GamerSky
-		SccLocalPath0 = GamerSky
+		SccLocalPath0 = .
 		SccProjectUniqueName1 = GamerSky.Background\\GamerSky.Background.csproj
 		SccProjectName1 = GamerSky.Background
 		SccLocalPath1 = GamerSky.Background
 		SccProjectUniqueName2 = GamerSky.Core\\GamerSky.Core.csproj
 		SccProjectName2 = GamerSky.Core
 		SccLocalPath2 = GamerSky.Core
-		SccLocalPath3 = .
+		SccProjectUniqueName3 = GamerSky\\GamerSky.csproj
+		SccProjectName3 = GamerSky
+		SccLocalPath3 = GamerSky
 	EndGlobalSection
 EndGlobal

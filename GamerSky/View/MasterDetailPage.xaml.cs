@@ -195,11 +195,11 @@ namespace GamerSky.View
             }
             UIHelper.ShowStatusBar();
         }
-        #endregion
 
         private void userBtn_Click(object sender, RoutedEventArgs e)
         {
             Current.MasterFrame.Navigate(typeof(LoginPage));
         }
+        #endregion
     }
 }

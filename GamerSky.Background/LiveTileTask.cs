@@ -33,7 +33,6 @@ namespace GamerSky.Background
         private void UpdatePrimaryTile()
         {
             
-            //ToastHelper.ShowToast();
         }
     }
 }

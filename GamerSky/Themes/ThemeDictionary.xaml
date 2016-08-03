@@ -2462,7 +2462,7 @@
             <!--页面背景色-->
             <SolidColorBrush x:Key="PageBackground" Color="WhiteSmoke"/>
             <!--ListView BorderBrush-->
-            <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FFA5A5A5"/>
+            <SolidColorBrush x:Key="ListViewBorderBrush" Color="LightGray"/>
             <!--ListView BorderThickness-->
             <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
             <!--设置ListViewItem背景色-->

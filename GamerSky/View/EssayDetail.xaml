@@ -9,7 +9,7 @@
     xmlns:converter="using:GamerSky.Converter"
     xmlns:vm="using:GamerSky.Core.ViewModel"    
     mc:Ignorable="d"
-    NavigationCacheMode="Enabled"
+    NavigationCacheMode="Disabled"
     RequestedTheme="{Binding AppTheme}">
 
     <Page.DataContext>
@@ -517,7 +517,7 @@
                                 <ScrollViewer IsDeferredScrollingEnabled="True" 
                                     ZoomSnapPointsType="Mandatory"
                                     MaxZoomFactor="5"
-                                    MinZoomFactor="1"
+                                    MinZoomFactor="1"                                    
                                     ScrollViewer.IsZoomChainingEnabled="True"
                                     ScrollViewer.IsZoomInertiaEnabled="True"
                                     ScrollViewer.ZoomMode="Enabled">

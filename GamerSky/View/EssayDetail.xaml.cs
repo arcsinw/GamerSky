@@ -240,17 +240,24 @@ namespace GamerSky.View
 
                 try
                 {
-                    using (Stream stream = await file.OpenStreamForWriteAsync())
+                    var selectImg = imageFlipView.SelectedItem as JsImage;
+                    if(selectImg != null)
                     {
-                        IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes((imageFlipView.SelectedItem as JsImage).src);
-                        stream.Write(buffer.ToArray(), 0, (int)buffer.Length);
-                        await stream.FlushAsync();
+                        string url = selectImg.hdsrc.Replace("http://www.gamersky.com/showimage/id_gamersky.shtml?", "");
+                        url = string.IsNullOrEmpty(url) ? selectImg.src : url;
+                        using (Stream stream = await file.OpenStreamForWriteAsync())
+                        {
+                            IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes(url);
+                            stream.Write(buffer.ToArray(), 0, (int)buffer.Length);
+                            await stream.FlushAsync();
+                        }
+                        FileUpdateStatus updateStatus = await CachedFileManager.CompleteUpdatesAsync(file);
+                        if (updateStatus == FileUpdateStatus.Complete)
+                        {
+                            UIHelper.ShowToast("图片已保存");
+                        }
                     }
-                    FileUpdateStatus updateStatus = await CachedFileManager.CompleteUpdatesAsync(file);
-                    if (updateStatus == FileUpdateStatus.Complete)
-                    {
-                        UIHelper.ShowToast("图片已保存");
-                    }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -315,6 +322,9 @@ namespace GamerSky.View
         private void WebView_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
         {
             args.Handled = true;
+
+            Debug.WriteLine(args.Uri);
+
             if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
             {
                 currentImageUrl = args.Uri.ToString();

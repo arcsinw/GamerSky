@@ -57,30 +57,21 @@ namespace GamerSky.View
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             progress.IsActive = true;
-            switch(pivot.SelectedIndex)
+            if(!pageIndexDic.ContainsKey(pivot.SelectedIndex))
             {
-                case 0:
-                    if (!pageIndexDic.ContainsKey(0))
-                    {
+                switch(pivot.SelectedIndex)
+                {
+                    case 0:
                         await ViewModel.LoadFocusStrategys();
-                        pageIndexDic.Add(0, 1);
-                    }
-                    
-                    break;
-                case 1:
-                    if (!pageIndexDic.ContainsKey(1))
-                    {
+                        break;
+                    case 1:
                         await ViewModel.LoadAllStrategys();
-                        pageIndexDic.Add(1, 1);
-                    }
-                    break;
-                case 2:
-                    if (!pageIndexDic.ContainsKey(2))
-                    {
-                        pageIndexDic.Add(2, 1);
-                        await ViewModel.LoadGameList(1);
-                    }
-                    break;
+                        break;
+                    case 2:
+                        //await ViewModel.LoadGameList(pageIndex);
+                        break;
+                }
+                pageIndexDic.Add(pivot.SelectedIndex, 1);
             }
             pageIndex = pageIndexDic[pivot.SelectedIndex] +1;
             progress.IsActive = false;

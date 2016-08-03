@@ -12,9 +12,7 @@ using GamerSky.Core.Model;
 namespace GamerSky.Core.ViewModel
 {
     public class YaowenPageViewModel : ViewModelBase
-    {
-        //public ObservableCollection<Essay> Yaowens { get; set; }
-
+    {  
         private YaowenIncrementalCollection yaowens;
         public YaowenIncrementalCollection Yaowens
         {
@@ -46,8 +44,7 @@ namespace GamerSky.Core.ViewModel
         }
         public YaowenPageViewModel()
         {
-            apiService = new ApiService();
-            //Yaowens = new ObservableCollection<Essay>();
+            apiService = new ApiService(); 
             Yaowens = new YaowenIncrementalCollection();
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
@@ -74,14 +71,12 @@ namespace GamerSky.Core.ViewModel
 
         public void Refresh()
         {
-            IsActive = true;
-            //Yaowens.Clear();
+            IsActive = true; 
             YaowenIncrementalCollection s = new YaowenIncrementalCollection();
             Yaowens = s;
             s.OnDataLoaded += S_OnDataLoaded;
             s.OnDataLoading += S_OnDataLoading;
-            IsActive = false;
-            //await LoadData();
+            IsActive = false; 
         }
 
         private void S_OnDataLoading(object sender, EventArgs e)

@@ -188,6 +188,7 @@ namespace GamerSky.Core.ViewModel
                             + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
                             + "<meta name=\"msapplication-tap-highlight\" content=\"no\">" //wp点击无高光;
                             + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/css/gs.css\"/>"
+                            + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/css/base.cs\"/>"
                             + "<script src=\"ms-appx-web:///Assets/js/gs.js\"></script>"
                             + "<script src=\"ms-appx-web:///Assets/js/gsVideo.js\"></script>";
                  
@@ -203,13 +204,13 @@ namespace GamerSky.Core.ViewModel
                            "<div class=\"txtlist\" id=\"gsTemplateContent_RelatedReadingContent\">";
                 if (relatedReadings != null && relatedReadings.Count == 0)
                 {
-                    relatedReadingsHtml = "";
+                    relatedReadingsHtml += "";
                 }
                 if (relatedReadings != null)
                 {
                     foreach (var item in relatedReadings)
                     {
-                        relatedReadingsHtml += "<a id=\"RelatedReadings\" href=\"" + item.contentId + "\"><div class=\"Row\"><div>" + item.title + "</div></div></a>";
+                        relatedReadingsHtml += "<a id=\"RelatedReadings\" href=\"openPageWithContentId:" + item.contentId + "\"><div class=\"Row\">" + item.title + "</div></a>";
                     }
                     relatedReadingsHtml += "</div></div>";
                 }

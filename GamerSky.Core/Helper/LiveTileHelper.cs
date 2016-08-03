@@ -41,7 +41,7 @@ namespace GamerSky.Core.Helper
             
             var taskBuilder = new BackgroundTaskBuilder { Name = TILE_TASK_NAME, TaskEntryPoint = ENTRY_NAME };
             taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
-            taskBuilder.SetTrigger(new TimeTrigger(60 * 12, false));
+            taskBuilder.SetTrigger(new TimeTrigger(60 * 6, false));
             taskBuilder.Register();
 
         }
@@ -157,10 +157,10 @@ namespace GamerSky.Core.Helper
         {
             if (!SecondaryTile.Exists(TILE_ID))
             {
-                Uri square150x150Logo = new Uri("ms-appx:///Assets/Square150x150Logo_t.png");
+                Uri square150x150Logo = new Uri("ms-appx:///Assets/Square150x150Logo.png");
                 Uri square310x150Logo = new Uri("ms-appx:///Assets/Wide310x150Logo.png");
-                Uri square71x71Logo = new Uri("ms-appx:///Assets/Square71x71Logo_t.png");
-                Uri square310x310Logo = new Uri("ms-appx:///Assets/Square310x310Logo_t.png");
+                Uri square71x71Logo = new Uri("ms-appx:///Assets/Square71x71Logo.png");
+                Uri square310x310Logo = new Uri("ms-appx:///Assets/Square310x310Logo.png");
 
                 SecondaryTile secondaryTile = new SecondaryTile(TILE_ID, " ", argument, square150x150Logo, TileSize.Square150x150);
 

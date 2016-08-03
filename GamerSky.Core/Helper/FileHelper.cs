@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Serialization.Json;
@@ -45,6 +46,7 @@ namespace GamerSky.Core.Helper
             await localFolder.CreateFolderAsync("images_cache", CreationCollisionOption.OpenIfExists);
             await localFolder.CreateFolderAsync("data_cache", CreationCollisionOption.OpenIfExists);
             await localFolder.CreateFolderAsync("favorite_list", CreationCollisionOption.OpenIfExists);
+            //await localFolder.CreateFileAsync("livetile_cache", CreationCollisionOption.OpenIfExists);
         }
 
         
@@ -218,7 +220,9 @@ namespace GamerSky.Core.Helper
         {
             try
             {
+                IsolatedStorageFile.GetUserStoreForApplication().FileExists(localFolder.Path + "");
                 var folder = await localFolder.TryGetItemAsync("images_cache");
+                Debug.WriteLine(folder.Path);
                 if(folder!= null)
                 {
                     var file = await (folder as StorageFolder).TryGetItemAsync(filename);

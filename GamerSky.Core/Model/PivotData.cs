@@ -27,23 +27,6 @@ namespace GamerSky.Core.Model
             }
         }
 
-        //private ObservableCollection<Essay> essays = new ObservableCollection<Essay>();
-        ///// <summary>
-        ///// 新闻列表
-        ///// </summary>
-        //public ObservableCollection<Essay> Essays
-        //{
-        //    get
-        //    {
-        //        return essays;
-        //    }
-        //    set
-        //    {
-        //        essays = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
         private EssayIncrementalCollection essays;
 
         public EssayIncrementalCollection Essays
@@ -58,25 +41,6 @@ namespace GamerSky.Core.Model
                 OnPropertyChanged();
             }
         }
-
-        //private ObservableCollection<Essay> headersEssays = new ObservableCollection<Essay>();
-        ///// <summary>
-        ///// 幻灯片
-        ///// </summary>
-        //public ObservableCollection<Essay> HeaderEssays
-        //{
-        //    get
-        //    {
-        //        return headersEssays;
-        //    }
-        //    set
-        //    {
-        //        headersEssays = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
- 
-      
     }
  
 }

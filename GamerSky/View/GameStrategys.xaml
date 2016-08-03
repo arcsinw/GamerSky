@@ -18,16 +18,12 @@
     <Page.Resources>
         <!--BorderMargin-->
         <Thickness x:Key="BorderMargin">0,2</Thickness>
-        <!--BorderThickness-->
-        <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
-        <!--BorderBrush-->
-        <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
         <Thickness x:Key="GridMargin">2,0</Thickness>
         <Thickness x:Key="GridPadding">5</Thickness>
 
         <!--一张图文章模板-->
         <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid Margin="2,0" Padding="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
+            <Grid Margin="2,0" Padding="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
@@ -51,8 +47,8 @@
         </DataTemplate>
         <!--无图模板-->
         <DataTemplate x:Key="NoPicEssayDataTemplate">
-            <Grid BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}"
-                  Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"   >
+            <Grid 
+                Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"   >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
