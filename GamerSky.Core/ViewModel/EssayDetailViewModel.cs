@@ -280,28 +280,57 @@ namespace GamerSky.Core.ViewModel
             IsActive = false;
         }
 
-       public void GenerateCommentString(Essay essayResult)
+       //public void GenerateCommentString(Essay essayResult)
+       // {
+       //     IsActive = true;
+       //     CommentString ="<!DOCTYPE html><html><body><div id=\"SOHUCS\" sid=\"" + essayResult.contentId + "\"></div>" +
+       //                     //"<script charset=\"utf-8\" type=\"text/javascript\" src=\"http://changyan.sohu.com/upload/changyan.js\"></script>" +
+       //                     "<script type=\"text/javascript\">" +
+       //                 @"(function() {
+       //                         var expire_time = parseInt((new Date()).getTime() / (5 * 60 * 1000));
+       //                         var head = document.head || document.getElementsByTagName(""head"")[0] || document.documentElement;
+       //                         var script_version = document.createElement(""script""), script_cyan = document.createElement(""script"");
+       //                         script_version.type = script_cyan.type = ""text/javascript"";
+       //                         script_version.charset = script_cyan.charset = ""utf-8"";
+       //                         script_version.onload = function() {
+       //                             script_cyan.id = 'changyan_mobile_js';
+       //                             script_cyan.src = 'http://changyan.itc.cn/upload/mobile/wap-js/changyan_mobile.js?client_id=cyqQwkOU4&'
+       //                                             + 'conf=prod_9627c45df543c816a3ddf2d8ea686a99&version=' + cyan_resource_version;
+       //                             head.insertBefore(script_cyan, head.firstChild);
+       //                         };
+       //                         script_version.src = 'http://changyan.sohu.com/upload/mobile/wap-js/version.js?_=' + expire_time;
+       //                         head.insertBefore(script_version, head.firstChild);
+       //                 })();"+
+       //         "</script></body></html>";
+       //     IsActive = false;
+       // }
+
+        public async void GenerateCommentString(Essay essay)
         {
             IsActive = true;
-            CommentString ="<!DOCTYPE html><html><body><div id=\"SOHUCS\" sid=\"" + essayResult.contentId + "\"></div>" +
-                            //"<script charset=\"utf-8\" type=\"text/javascript\" src=\"http://changyan.sohu.com/upload/changyan.js\"></script>" +
-                            "<script type=\"text/javascript\">" +
-                        @"(function() {
-                                var expire_time = parseInt((new Date()).getTime() / (5 * 60 * 1000));
-                                var head = document.head || document.getElementsByTagName(""head"")[0] || document.documentElement;
-                                var script_version = document.createElement(""script""), script_cyan = document.createElement(""script"");
-                                script_version.type = script_cyan.type = ""text/javascript"";
-                                script_version.charset = script_cyan.charset = ""utf-8"";
-                                script_version.onload = function() {
-                                    script_cyan.id = 'changyan_mobile_js';
-                                    script_cyan.src = 'http://changyan.itc.cn/upload/mobile/wap-js/changyan_mobile.js?client_id=cyqQwkOU4&'
-                                                    + 'conf=prod_9627c45df543c816a3ddf2d8ea686a99&version=' + cyan_resource_version;
-                                    head.insertBefore(script_cyan, head.firstChild);
-                                };
-                                script_version.src = 'http://changyan.sohu.com/upload/mobile/wap-js/version.js?_=' + expire_time;
-                                head.insertBefore(script_version, head.firstChild);
-                        })();"+
-                "</script></body></html>";
+            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Html/Comment.html"));
+            CommentString = await FileIO.ReadTextAsync(file);
+            CommentString = CommentString.Replace("{0}", essay.title).Replace("{1}", essay.contentId);
+
+            //    CommentString = $@"<!DOCTYPE html><html><body>
+            //        <script src=""http://ja.gamersky.com/wap/wap.top.v1.js\""></script>
+            //        <script src = ""http://ja.gamersky.com/wap/wap.nav.bottom.v1.js""></script>
+            //        <section class=""ymw-contxt"" style=""display:none""></section>
+            //        <section class=""ymw-comm"">
+            //        <div id = ""SOHUCS"" sid=""{ essay.contentId}""></div>" +
+            //        @"<script type = ""text/javascript"" >
+            //        (function() {
+            //            var doc = document,
+            //                s = doc.createElement('script'),
+            //                h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+            //                s.type = 'text/javascript';
+            //            s.src = 'http://j.gamersky.com/web2015/comment/wapjs/jquery.commentconfig.js?' + new Date().getTime();
+            //                h.insertBefore(s, h.firstChild);
+            //            window.SCS_NO_IFRAME = true;
+            //        })()
+            //        </script>
+            //    <script src = ""http://ja.gamersky.com/wap/wap.comm.bot.v1.js"" ></script>
+            //</section></body></html>";
             IsActive = false;
         }
     }

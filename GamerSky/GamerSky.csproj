@@ -36,7 +36,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
-    <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -207,6 +207,7 @@
   <ItemGroup>
     <Content Include="Assets\css\base.css" />
     <Content Include="Assets\css\gs.css" />
+    <Content Include="Assets\Html\Comment.html" />
     <Content Include="Assets\Images\drawer_collect.png" />
     <Content Include="Assets\Images\drawer_news.png" />
     <Content Include="Assets\Images\drawer_night.png" />
