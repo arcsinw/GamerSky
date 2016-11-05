@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{83A0C09A-0CC8-4238-9165-60C079924BDE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GamerSky.Core</RootNamespace>
+    <AssemblyName>GamerSky.Core</AssemblyName>
+    <DefaultLanguage>zh-CN</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="Data\ChannelList.json" />
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\AlphaKeyGroup.cs" />
+    <Compile Include="Helper\ConnectionHelper.cs" />
+    <Compile Include="Helper\ConnectionType.cs" />
+    <Compile Include="Helper\DeviceInformationHelper.cs" />
+    <Compile Include="Helper\DispatcherManager.cs" />
+    <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
+    <Compile Include="Helper\ExtensionHelper.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\Functions.cs" />
+    <Compile Include="Helper\GlobalStringLoader.cs" />
+    <Compile Include="Helper\ImageDownLoadHelper.cs" />
+    <Compile Include="Helper\JsonHelper.cs" />
+    <Compile Include="Helper\JYHelper.cs" />
+    <Compile Include="Helper\ListViewBaseExtensions.cs" />
+    <Compile Include="Helper\LiveTileHelper.cs" />
+    <Compile Include="Helper\LocalSettingsHelper.cs" />
+    <Compile Include="Helper\NetworkManager.cs" />
+    <Compile Include="Helper\RelayCommand.cs" />
+    <Compile Include="Helper\SearchTypeEnum.cs" />
+    <Compile Include="Helper\SubscribeEditEnum.cs" />
+    <Compile Include="Helper\ToastHelper.cs" />
+    <Compile Include="Helper\VerifiableBase.cs" />
+    <Compile Include="Helper\VerifiableObjectErrors.cs" />
+    <Compile Include="Http\ApiBaseService.cs" />
+    <Compile Include="Http\ApiService.cs" />
+    <Compile Include="Http\HttpBaseService.cs" />
+    <Compile Include="Http\ServiceUri.cs" />
+    <Compile Include="IncrementalLoadingCollection\EssayIncrementalCollection.cs" />
+    <Compile Include="IncrementalLoadingCollection\SearchIncrementalCollection.cs" />
+    <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />
+    <Compile Include="IncrementalLoadingCollection\SubscribeIncrementalCollection.cs" />
+    <Compile Include="IncrementalLoadingCollection\YaowenIncrementalCollection.cs" />
+    <Compile Include="Model\AdStart.cs" />
+    <Compile Include="Model\Channel.cs" />
+    <Compile Include="Model\Collect.cs" />
+    <Compile Include="Model\Essay.cs" />
+    <Compile Include="Model\EssayPageIndex.cs" />
+    <Compile Include="Model\FindPasswordByName.cs" />
+    <Compile Include="Model\Game.cs" />
+    <Compile Include="Model\GameDetail.cs" />
+    <Compile Include="Model\GameDetailEssay.cs" />
+    <Compile Include="Model\JsImage.cs" />
+    <Compile Include="Model\JSParameter.cs" />
+    <Compile Include="Model\KeyedList.cs" />
+    <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\News.cs" />
+    <Compile Include="Model\OpenPage.cs" />
+    <Compile Include="Model\PaneItem.cs" />
+    <Compile Include="Model\PivotData.cs" />
+    <Compile Include="Model\RelatedReadings.cs" />
+    <Compile Include="Model\SearchResult.cs" />
+    <Compile Include="Model\SemanticCollection.cs" />
+    <Compile Include="Model\Strategy.cs" />
+    <Compile Include="Model\Subscribe.cs" />
+    <Compile Include="Model\SubscribeContent.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\UserLoginInfo.cs" />
+    <Compile Include="Model\UserRegisterByEmailInfo.cs" />
+    <Compile Include="Model\UserRegisterByNumberInfo.cs" />
+    <Compile Include="Model\VerificationCode.cs" />
+    <Compile Include="PostDataModel\AdStartPostData.cs" />
+    <Compile Include="PostDataModel\AllChannelListPostData.cs" />
+    <Compile Include="PostDataModel\EditSubscribePostData.cs" />
+    <Compile Include="PostDataModel\EmailRegisterPostData.cs" />
+    <Compile Include="PostDataModel\FindPasswordByNamePostData.cs" />
+    <Compile Include="PostDataModel\GameDetailEssayPostData.cs" />
+    <Compile Include="PostDataModel\GameDetailPostData.cs" />
+    <Compile Include="PostDataModel\GamePostData.cs" />
+    <Compile Include="PostDataModel\LoginPostData.cs" />
+    <Compile Include="PostDataModel\PostDataBase.cs" />
+    <Compile Include="PostDataModel\RelatedReadingPostData.cs" />
+    <Compile Include="PostDataModel\SearchPostData.cs" />
+    <Compile Include="PostDataModel\StrategyPostData.cs" />
+    <Compile Include="PostDataModel\SubscribeContentPostData.cs" />
+    <Compile Include="PostDataModel\SubscribeSearchPostData.cs" />
+    <Compile Include="PostDataModel\SubscribeTopicPostData.cs" />
+    <Compile Include="PostDataModel\VerificationCodePostData.cs" />
+    <Compile Include="PostDataModel\YaowenPostData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultDataModel\AdStartResult.cs" />
+    <Compile Include="ResultDataModel\ChannelResult.cs" />
+    <Compile Include="ResultDataModel\EssayResult.cs" />
+    <Compile Include="ResultDataModel\GameDetailEssayResult.cs" />
+    <Compile Include="ResultDataModel\GameDetailResult.cs" />
+    <Compile Include="ResultDataModel\GameResult.cs" />
+    <Compile Include="ResultDataModel\LoginResult.cs" />
+    <Compile Include="ResultDataModel\NewsResult.cs" />
+    <Compile Include="ResultDataModel\RelatedReadingsResult.cs" />
+    <Compile Include="ResultDataModel\ResultBase.cs" />
+    <Compile Include="ResultDataModel\StrategyResult.cs" />
+    <Compile Include="ResultDataModel\SubscribeContentResult.cs" />
+    <Compile Include="ResultDataModel\SubscribeResult.cs" />
+    <Compile Include="ViewModel\DataShareManager.cs" />
+    <Compile Include="ViewModel\EmailRegisterPageViewModel.cs" />
+    <Compile Include="ViewModel\EssayDetailViewModel.cs" />
+    <Compile Include="ViewModel\GameDetailViewModel.cs" />
+    <Compile Include="ViewModel\GameSaleViewModel.cs" />
+    <Compile Include="ViewModel\GameStrategysViewModel.cs" />
+    <Compile Include="ViewModel\HomePageViewModel.cs" />
+    <Compile Include="ViewModel\LoginPageViewModel.cs" />
+    <Compile Include="ViewModel\MainPageViewModel.cs" />
+    <Compile Include="ViewModel\MySubscribePageViewModel.cs" />
+    <Compile Include="ViewModel\RegisterPageViewModel.cs" />
+    <Compile Include="ViewModel\SearchPageViewModel.cs" />
+    <Compile Include="ViewModel\SettingsPageViewModel.cs" />
+    <Compile Include="ViewModel\StrategyPageViewModel.cs" />
+    <Compile Include="ViewModel\SubscribeContentViewModel.cs" />
+    <Compile Include="ViewModel\SubscribePageViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\YaowenPageViewModel.cs" />
+    <EmbeddedResource Include="Properties\GamerSky.Core.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Share\" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
