@@ -9,7 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerSky.Background", "Game
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerSky.Core", "GamerSky.Core\GamerSky.Core.csproj", "{83A0C09A-0CC8-4238-9165-60C079924BDE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{F9E0EEED-F8AF-4288-8752-BDE899AA3C9F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microsoft.Toolkit.Uwp.Notifications.Shared", "C:\Users\arcsinx\Source\Repos\UWPCommunityToolkit\Notifications\Microsoft.Toolkit.Uwp.Notifications.Shared\Microsoft.Toolkit.Uwp.Notifications.Shared.shproj", "{8BACD7A9-B205-4ADF-BDA9-763B30A66576}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		C:\Users\arcsinx\Source\Repos\UWPCommunityToolkit\Notifications\Microsoft.Toolkit.Uwp.Notifications.Shared\Microsoft.Toolkit.Uwp.Notifications.Shared.projitems*{8bacd7a9-b205-4adf-bda9-763b30a66576}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -77,8 +84,11 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8BACD7A9-B205-4ADF-BDA9-763B30A66576} = {F9E0EEED-F8AF-4288-8752-BDE899AA3C9F}
+	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://wangx86.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
@@ -91,5 +101,13 @@ Global
 		SccProjectUniqueName3 = GamerSky\\GamerSky.csproj
 		SccProjectName3 = GamerSky
 		SccLocalPath3 = GamerSky
+		SccProjectUniqueName4 = C:\\Users\\arcsinx\\Source\\Repos\\UWPCommunityToolkit\\Notifications\\Microsoft.Toolkit.Uwp.Notifications.Shared\\Microsoft.Toolkit.Uwp.Notifications.Shared.shproj
+		SccProjectTopLevelParentUniqueName4 = GamerSky.sln
+		SccProjectName4 = ../Notifications
+		SccLocalPath4 = C:\\Users\\arcsinx\\Source\\Repos\\UWPCommunityToolkit\\Notifications\\Microsoft.Toolkit.Uwp.Notifications.Shared
+		SccProjectUniqueName5 = C:\\Users\\arcsinx\\Source\\Repos\\UWPCommunityToolkit\\Notifications\\Microsoft.Toolkit.Uwp.Notifications.Shared\\Microsoft.Toolkit.Uwp.Notifications.Shared.projitems
+		SccProjectTopLevelParentUniqueName5 = GamerSky.sln
+		SccProjectName5 = ../Notifications
+		SccLocalPath5 = C:\\Users\\arcsinx\\Source\\Repos\\UWPCommunityToolkit\\Notifications\\Microsoft.Toolkit.Uwp.Notifications.Shared
 	EndGlobalSection
 EndGlobal
