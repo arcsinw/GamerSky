@@ -188,9 +188,9 @@ namespace GamerSky.Core.ViewModel
             {
                 foreach (var item in subscribes)
                 {
-                    if(DataShareManager.Current.SubscribeList.Any(x=>x.sourceId == item.sourceId))
+                    if(DataShareManager.Current.SubscribeList.Any(x=>x.SourceId == item.SourceId))
                     {
-                        item.Favorite = true;
+                        item.IsFavorite = true;
                     }
                     HotSubscribes.Add(item);
                 }
@@ -237,7 +237,7 @@ namespace GamerSky.Core.ViewModel
                     if (strategyResult == null) return;
                     foreach (var item in strategyResult)
                     {
-                        if (item.contentType.Equals("strategy"))
+                        if (item.ContentType.Equals("strategy"))
                         {
                             Strategys.Add(item);
                         }
@@ -246,7 +246,7 @@ namespace GamerSky.Core.ViewModel
                     break;
                 case SearchTypeEnum.subscribe: //订阅查询是本地查询
                     var result = from x in HotSubscribes
-                                 where x.sourceName.Contains(key)
+                                 where x.SourceName.Contains(key)
                                  select x;
                     HotSubscribes.Clear();
                     foreach (var item in result)

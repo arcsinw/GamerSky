@@ -86,9 +86,9 @@ namespace GamerSky.Core.ViewModel
             if (essays == null) return;
             foreach (var item in essays)
             {
-                if (item.type.Equals("huandeng"))
+                if (item.Type.Equals("huandeng"))
                 {
-                    foreach (var c in item.childElements)
+                    foreach (var c in item.ChildElements)
                     {
                         //EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(nodeId)).First().HeaderEssays.Add(c);
                     }

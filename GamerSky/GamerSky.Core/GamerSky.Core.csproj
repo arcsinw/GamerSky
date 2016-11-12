@@ -112,6 +112,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DelegateCommand.cs" />
+    <Compile Include="Common\DelegateCommand{T}.cs" />
     <Compile Include="Helper\AlphaKeyGroup.cs" />
     <Compile Include="Helper\ConnectionHelper.cs" />
     <Compile Include="Helper\ConnectionType.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="Http\HttpBaseService.cs" />
     <Compile Include="Http\ServiceUri.cs" />
     <Compile Include="IncrementalLoadingCollection\EssayIncrementalCollection.cs" />
+    <Compile Include="IncrementalLoadingCollection\GameIncrementalCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\SearchIncrementalCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />
     <Compile Include="IncrementalLoadingCollection\SubscribeIncrementalCollection.cs" />

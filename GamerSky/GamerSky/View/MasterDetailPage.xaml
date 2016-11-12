@@ -11,6 +11,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:control="using:GamerSky.Controls"
     xmlns:vm="using:GamerSky.Core.ViewModel"
+    xmlns:converter="using:GamerSky.Converters"
     mc:Ignorable="d"
     RequestedTheme="{x:Bind AppTheme,Mode=OneWay}"
     > 
@@ -99,8 +100,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-        <x:Double x:Key="BorderThemeThickness">0</x:Double>
 
         <Style x:Key="NavMenuItemContainerStyle" TargetType="ListViewItem">
             <Setter Property="MinWidth" Value="{StaticResource SplitViewCompactPaneThemeLength}"/>
@@ -238,7 +237,7 @@
                             </VisualStateManager.VisualStateGroups>
                             <Rectangle x:Name="BorderBackground"
                                    IsHitTestVisible="False"
-                                   StrokeThickness="{ThemeResource BorderThemeThickness}"
+                                   StrokeThickness="0"
                                    Opacity="0"
                                    Control.IsTemplateFocusTarget="True"/>
                             <Rectangle x:Name="FocusBackground"
@@ -266,6 +265,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <converter:ElementThemeToUriSourceConverter x:Key="ElementThemeToUriSourceConverter"/>
     </Page.Resources>
 
 
@@ -287,8 +288,8 @@
                         <Setter Target="MasterColumn.Width" Value="*"/>
                         <Setter Target="PaneColumn.Width" Value="0"/>
                         <Setter Target="moduleGrid.Visibility" Value="Visible"/>
-                        <Setter Target="MasterFrame.BorderThickness" Value="0"/> 
-                     </VisualState.Setters>
+                        <Setter Target="MasterFrame.BorderThickness" Value="0"/>
+                    </VisualState.Setters>
                 </VisualState>
 
                 <VisualState x:Name="Default">
@@ -297,6 +298,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="drawer.CanOpen" Value="False"/>
+                        <Setter Target="drawerContent.Visibility" Value="Visible"/>
                         <Setter Target="DetailFrame.Width" Value="Auto"/>
                         <Setter Target="MasterColumn.Width" Value="500"/>
                         <Setter Target="PaneColumn.Width" Value="48"/>
@@ -312,48 +314,12 @@
             <ColumnDefinition x:Name="DetailColumn" />
         </Grid.ColumnDefinitions>
          
-        <!--#region Pane-->
-        <Grid x:Name="paneGrid" Grid.Column="0" Background="{ThemeResource PaneBackground}">
-            <ListView x:Name="paneListView" ItemsSource="{x:Bind PaneItems}" Padding="0" Margin="0"
-                      IsItemClickEnabled="True" SelectionMode="Single"
-                      ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
-                      ItemClick="paneListView_ItemClick">
-                <ListView.Header>
-                    <Button x:Name="userBtn" Click="userBtn_Click" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="{x:Bind User.userName,Mode=OneWay}">
-                        <Grid>
-                            <BitmapIcon UriSource="ms-appx:///Assets/Images/drawer_user.png" Height="24" Width="24"/>
-                            <Image Source="{x:Bind User.pic,Mode=OneWay}" Height="48" Width="48"/>
-                        </Grid>
-                    </Button>
-                </ListView.Header>
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:PaneItem">
-                        <BitmapIcon UriSource="{x:Bind Icon}" ToolTipService.ToolTip="{x:Bind Title,Mode=OneWay}" Height="24" Width="24"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <StackPanel VerticalAlignment="Bottom">
-                <Button x:Name="themeBtn" Click="themeBtn_Click" Style="{StaticResource PaneButtonStyle}">
-                    <Button.Content>
-                        <BitmapIcon Height="24" Width="24" UriSource="ms-appx:///Assets/Images/drawer_night.png"/>
-                    </Button.Content>
-                </Button>
-                <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings"
-                    Click="setting_Click" VerticalAlignment="Bottom">
-                    <Button.Content>
-                        <SymbolIcon Symbol="Setting"/>
-                    </Button.Content>
-                </Button>
-            </StackPanel>
-        </Grid>
-        <!--#endregion-->
-
         <control:Drawer x:Name="drawer" Grid.Column="1" Background="Black"
                         DrawerMaskerBrush="Black" 
                         DrawerOpenLength="250"
                          >
             <control:Drawer.DrawerContent>
-                <ListView ScrollViewer.VerticalScrollMode="Disabled" 
+                <ListView x:Name="drawerContent" ScrollViewer.VerticalScrollMode="Disabled" 
                           GotFocus="{x:Bind ViewModel.GetCacheSize}" 
                           SelectionMode="None" Background="{ThemeResource PageBackground}"
                          >
@@ -466,6 +432,40 @@
             </control:Drawer.Content>
         </control:Drawer>
 
+        <!--#region Pane-->
+        <Grid x:Name="paneGrid" Grid.Column="0" Background="{ThemeResource PaneBackground}">
+            <ListView x:Name="paneListView" ItemsSource="{x:Bind PaneItems}" Padding="0" Margin="0"
+                      IsItemClickEnabled="True" SelectionMode="Single"
+                      ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
+                      ItemClick="paneListView_ItemClick">
+                <ListView.Header>
+                    <Button x:Name="userBtn" Click="userBtn_Click" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="{x:Bind User.userName,Mode=OneWay}">
+                        <Grid>
+                            <BitmapIcon UriSource="ms-appx:///Assets/Images/drawer_user.png" Height="24" Width="24"/>
+                            <Image Source="{x:Bind User.pic,Mode=OneWay}" Height="48" Width="48"/>
+                        </Grid>
+                    </Button>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:PaneItem">
+                        <BitmapIcon UriSource="{x:Bind Icon}" ToolTipService.ToolTip="{x:Bind Title,Mode=OneWay}" Height="24" Width="24"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel VerticalAlignment="Bottom">
+                <Button x:Name="themeBtn" Click="themeBtn_Click"  Style="{StaticResource PaneButtonStyle}">
+                    <BitmapIcon Height="24" Width="24"  UriSource="{Binding AppTheme,Converter={StaticResource BoolToStyleConverter}}"/>
+                </Button>
+                <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings"
+                    Click="setting_Click" VerticalAlignment="Bottom">
+                    <Button.Content>
+                        <SymbolIcon Symbol="Setting"/>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
+        
         <Grid x:Name="moduleGrid" Grid.Column="1" VerticalAlignment="Bottom" Height="50" 
                     Background="{ThemeResource BottomBarBackground}"
                     Opacity="0.8">
@@ -478,6 +478,8 @@
                     <Setter Property="Height" Value="24"/>
                     <Setter Property="Width" Value="24"/>
                 </Style>
+                
+                    
             </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

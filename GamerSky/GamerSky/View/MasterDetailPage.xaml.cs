@@ -130,7 +130,6 @@ namespace GamerSky.View
         {
             MasterFrame.Navigate(typeof(MainPage));
             DetailFrame.Navigate(typeof(DefaultPage));
-            //PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_user.png", Title = "Login", SourcePage = typeof(LoginPage) });
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_xinwen_h.png", Title = GlobalStringLoader.GetString("UNews") ,SourcePage = typeof(MainPage) });
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_gonglue_h.png", Title = GlobalStringLoader.GetString("UGame"), SourcePage = typeof(StrategyPage) });
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_dingyue_h.png", Title = GlobalStringLoader.GetString("USubscribe"), SourcePage = typeof(SubscribePage) });
@@ -144,7 +143,7 @@ namespace GamerSky.View
 
         private void AdaptiveVisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
-            UpdateUI();
+            UpdateUI(); 
         }
 
         private void UpdateUI()
@@ -156,6 +155,7 @@ namespace GamerSky.View
             else if(AdaptiveVisualStateGroup.CurrentState == Default)
             {
                 DetailFrame.Visibility = Visibility.Visible;
+                
             }
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = DetailFrame.CanGoBack || MasterFrame.CanGoBack ?
              AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;

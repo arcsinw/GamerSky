@@ -591,6 +591,7 @@
                 <Grid>
                     <ListView ItemsSource="{Binding News}"
                             x:Name="newsListView"
+                            Style="{ThemeResource LightListView}"
                             ShowsScrollingPlaceholders="True"
                             SelectionMode="None"
                             IsItemClickEnabled="True"
@@ -645,6 +646,7 @@
                 <Grid>
                     <ListView ItemsSource="{Binding Strategys}"
                               x:Name="strategysListView"
+                              Style="{ThemeResource LightListView}"
                               ShowsScrollingPlaceholders="True"
                               SelectionMode="None"
                               IsItemClickEnabled="True"
@@ -694,6 +696,7 @@
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                     <ListView x:Name="subscribeListView" Loaded="subscribeListView_Loaded" 
                           ItemsSource="{Binding HotSubscribes}" 
+                          Style="{ThemeResource LightListView}"
                           IsItemClickEnabled="True" ItemClick="subscribeListView_ItemClick"
                           SelectionMode="None" 
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"

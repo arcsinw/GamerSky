@@ -20,7 +20,8 @@
     <Grid Background="{ThemeResource PageBackground}">
         <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
             <ListView ItemsSource="{Binding Strategys}"
-                 SelectionMode="None"
+                  SelectionMode="None"
+                  Style="{ThemeResource LightListView}"
                   x:Name="listView"
                   Loaded="ListView_Loaded"
                   ShowsScrollingPlaceholders="True"

@@ -22,6 +22,7 @@ namespace GamerSky.Core.ViewModel
         private const string SettingKey_BigFont = "FONT_SIZE";
         private const string SettingKey_NoImageMode = "NO_IMAGES_MODE";
         private const string RoamingSettingKey_AppTheme = "APP_THEME";
+        private const string SettingKey_GameSubscribeList = "GAME_SUBSCRIBE_LIST"; //游戏关注列表
         private const string SettingKey_SubscribeList = "SUBSCRIBE_LIST";                   //订阅列表
         private const string SettingKey_IsStatusBarShow = "IS_STATUSBAR_SHOW";
         private const string SettingKey_User = "USER";
@@ -311,17 +312,17 @@ namespace GamerSky.Core.ViewModel
         /// <param name="subscribe"></param>
         public void UpdateSubscribe(Subscribe subscribe)
         {
-            bool add = !subscribeList.Any(x => x.sourceId == subscribe.sourceId);
+            bool add = !subscribeList.Any(x => x.SourceId == subscribe.SourceId);
             
             if (add)
             {
-                subscribe.Favorite = true;
+                subscribe.IsFavorite = true;
                 subscribeList.Add(subscribe);
             }
             else
             {
-                subscribe.Favorite = false;
-                subscribeList.RemoveAll(x => x.sourceId == subscribe.sourceId);
+                subscribe.IsFavorite = false;
+                subscribeList.RemoveAll(x => x.SourceId == subscribe.SourceId);
                  
             }
             var localSettings = ApplicationData.Current.LocalSettings;
@@ -335,7 +336,7 @@ namespace GamerSky.Core.ViewModel
         /// <param name="gameList"></param>
         public async void UpdateFavoriteEssayList(Essay essay)
         {
-            bool add = !favoriteList.Any(x => x.contentId == essay.contentId);
+            bool add = !favoriteList.Any(x => x.ContentId == essay.ContentId);
             if(add)
             {
                 essay.IsFavorite = true;
@@ -357,7 +358,7 @@ namespace GamerSky.Core.ViewModel
         /// <param name="strategy"></param>
         public async void UpdateStrategyList(Strategy strategy)
         {
-            bool add = !strategyList.Any(x => x.specialID == strategy.specialID);
+            bool add = !strategyList.Any(x => x.SpecialID == strategy.SpecialID);
             if (add)
             {
                 strategyList.Add(strategy);

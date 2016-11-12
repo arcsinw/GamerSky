@@ -129,7 +129,7 @@ namespace GamerSky.View
             var result = e.ClickedItem as Subscribe;
             if (result != null)
             {
-                NavigationHelper.DetailFrameNavigate(typeof(SubscribeContentPage), result.sourceId);
+                NavigationHelper.DetailFrameNavigate(typeof(SubscribeContentPage), result.SourceId);
             }
         }
 

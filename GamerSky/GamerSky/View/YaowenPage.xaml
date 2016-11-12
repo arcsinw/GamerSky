@@ -47,6 +47,7 @@
                       SelectionMode="None"
                       x:Name="listView"
                       Loaded="ListView_Loaded"
+                      Style="{ThemeResource LightListView}"
                       ShowsScrollingPlaceholders="True"
                       ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
                       ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"

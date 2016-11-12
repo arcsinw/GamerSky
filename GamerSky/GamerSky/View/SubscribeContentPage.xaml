@@ -7,7 +7,7 @@
     xmlns:hp="using:GamerSky.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:GamerSky.Core.ViewModel"
-    xmlns:converter="using:GamerSky.Converter"
+    xmlns:converter="using:GamerSky.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}">
@@ -20,25 +20,25 @@
         <converter:CountToVisibilityConverter x:Key="CountToBoolConverter"/>
     </Page.Resources>
 
-    <Grid Margin="0,-37,0,0" >
+    <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        
+ 
         <!--订阅栏目内文章列表-->
         <Grid Background="{ThemeResource PageBackground}"
               Grid.Row="0" Grid.RowSpan="2" Padding="0,37,0,0">
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView ItemsSource="{Binding SubscribeContens}"
-                 SelectionMode="None"
-                  x:Name="listView"
-                  Loaded="ListView_Loaded"
-                  ShowsScrollingPlaceholders="True"
-                  IsItemClickEnabled="True"
-                  ItemClick="ListView_ItemClick">
+                          Style="{ThemeResource LightListView}"
+                          SelectionMode="None"
+                          x:Name="listView"
+                          Loaded="ListView_Loaded"
+                          ShowsScrollingPlaceholders="True"
+                          IsItemClickEnabled="True"
+                          ItemClick="ListView_ItemClick">   
 
                     <ListView.ItemTemplateSelector>
                         <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"

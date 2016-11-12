@@ -44,13 +44,13 @@ namespace GamerSky.View
         {
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
-            if (!essayResult.contentType.Equals("zhuanti"))
+            if (!essayResult.ContentType.Equals("zhuanti"))
             {
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetail), essayResult);
             }
             else
             {
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essayResult.contentId);
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essayResult.ContentId);
             }
         }
           
@@ -184,6 +184,11 @@ namespace GamerSky.View
             {
                 EssayListviewDic[CurrentPivotIndex] = listView;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

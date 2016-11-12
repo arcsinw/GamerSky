@@ -7,13 +7,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:GamerSky.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
+    xmlns:m="using:GamerSky.Core.Model"
+    xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
     RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">
 
-    <Page.Resources>
-    
-    </Page.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="48"/>
@@ -31,7 +30,7 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
+
         <Grid Background="{ThemeResource ThemeColorBrush}">
             <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
                     Grid.Column="0">
@@ -41,31 +40,88 @@
         </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
-            <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                <ListView ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                      ItemsSource="{x:Bind FavoriteEssays}"
-                      x:Name="listView" IsItemClickEnabled="True"
-                          ItemClick="listView_ItemClick">
-                    <ListView.ItemTemplateSelector>
+            <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
+            <ListView  SelectionMode="None" 
+                           Style="{ThemeResource LightListView}"
+                           ItemsSource="{x:Bind FavoriteEssays}"
+                           x:Name="listView" IsItemClickEnabled="False"
+                          ItemClick="listView_ItemClick"
+                          >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Essay">
+                        <controls:SlidableListItem MouseSlidingEnabled="True" 
+                                    HorizontalAlignment="Stretch"
+                                    LeftIcon="Favorite" 
+                                    RightIcon="Delete" 
+                                    LeftLabel="Set Favourite" 
+                                    RightLabel="Delete"
+                                    LeftBackground="SkyBlue" 
+                                    RightBackground="OrangeRed"
+                                    LeftForeground ="White" 
+                                    RightForeground ="White"
+                                    ActivationWidth="100"
+                                    IsLeftCommandEnabled="True" 
+                                    IsRightCommandEnabled="True" 
+                                    RightCommand="{Binding DeleteItem}"
+                                    RightCommandParameter="{Binding}"
+                                    LeftCommand="{x:Bind ToggleFavorite}"
+                                    IsOffsetLimited="True" 
+                                    IsPointerReleasedOnSwipingHandled="True"
+                                    MinWidth="300">
+
+                            <Grid  Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--默认图片-->
+                                <Image Source="{ThemeResource EssayPlaceHolderImage}" 
+                                       Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+
+                                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding ThumbnailURLs[0]}"/>
+                                    </Image.Source>
+                                </Image>
+
+                                <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0">
+                                    <TextBlock Text="{Binding Title}"  TextWrapping="Wrap" VerticalAlignment="Top"/>
+                                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
+                                <Run Text="{Binding CommentsCount}"/>
+                                <Run Text="评论"/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+                        </controls:SlidableListItem>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <!--<ListView.ItemTemplateSelector>
                         <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                             ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
                                             NoPicDt="{StaticResource NoPicEssayDataTemplate}"/>
 
-                    </ListView.ItemTemplateSelector>
-                </ListView>
-            </pr:PullToRefreshBox>
+                    </ListView.ItemTemplateSelector>-->
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        <Setter Property="Margin" Value="0,1"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <!--</pr:PullToRefreshBox>-->
             <ProgressRing x:Name="progressRing" IsActive="{x:Bind IsActive,Mode=OneWay}"  Style="{ThemeResource ProgressRingStyle}"/>
 
         </Grid>
- 
+
     </Grid>
 
     <Page.BottomAppBar>
- 
+
         <CommandBar Visibility="Collapsed">
-           
+
             <CommandBar.PrimaryCommands>
-               
+
                 <AppBarButton x:Uid="Select" x:Name="selectAppbar" Click="selectAppbar_Click" >
                     <SymbolIcon Symbol="Bullets" />
                 </AppBarButton>
@@ -78,12 +134,12 @@
                     <SymbolIcon Symbol="Refresh"/>
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
-            
-            
+
+
             <CommandBar.SecondaryCommands>
-                
+
             </CommandBar.SecondaryCommands>
         </CommandBar>
-        
+
     </Page.BottomAppBar>
 </Page>

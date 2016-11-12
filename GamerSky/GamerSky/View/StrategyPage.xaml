@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:GamerSky.Core.ViewModel"
-    xmlns:converter="using:GamerSky.Converter"
+    xmlns:converter="using:GamerSky.Converters"
     xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}"
@@ -128,7 +128,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <!-- ItemsPanel="{StaticResource GridViewItemsPanel}"-->
+          
                         <!--<hp:AdaptiveGridView.Template>
                             <ControlTemplate>
                                 <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
@@ -139,7 +139,7 @@
                                 </ScrollViewer>
                             </ControlTemplate>
                         </hp:AdaptiveGridView.Template>-->
-                        <!--<hp:AdaptiveGridView.Header>
+                        <controls:AdaptiveGridView.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -148,7 +148,7 @@
                                 <TextBox PlaceholderText="" Grid.Column="0"/>
                                 <Button Content="发售表" Grid.Column="1"/>
                             </Grid>
-                        </hp:AdaptiveGridView.Header>-->
+                        </controls:AdaptiveGridView.Header>
                         <controls:AdaptiveGridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -157,17 +157,17 @@
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <!--#region PlaceHolderImage-->
-                                    <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill" VerticalAlignment="Stretch" />
+                                    <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="0" Stretch="Fill" VerticalAlignment="Stretch" />
                                     <!--#endregion-->
                                     <Image Grid.Row="0" Stretch="Fill" VerticalAlignment="Stretch">
                                         <Image.Source>
-                                            <BitmapImage UriSource="{Binding thumbnailUrl}"/>
+                                            <BitmapImage UriSource="{Binding ThumbnailUrl}"/>
                                         </Image.Source>
                                     </Image>
                                     <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
                                        Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
-                                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding title}" 
+                                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding Title}" 
                                                TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
                                 </Grid>
                             </DataTemplate>
@@ -198,6 +198,7 @@
                     <SemanticZoom.ZoomedInView>
                         <ListView ItemsSource="{Binding Source={StaticResource CollectionViewSource}}"
                                   SelectionMode="None" 
+                                  Style="{ThemeResource LightListView}"
                                   ShowsScrollingPlaceholders="True"
                                   IsItemClickEnabled="True"
                                   ItemClick="ListView_ItemClick"
@@ -211,17 +212,17 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <!--#region PlaceHolderImage-->
-                                        <Image Source="{Binding DefaultBitmap}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
+                                        <Image Source="{ThemeResource EssayPlaceHolderImage}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
                                         <!--#endregion-->
                                         <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                                             <Image.Source>
-                                                <BitmapImage UriSource="{Binding thumbnailUrl}"/>
+                                                <BitmapImage UriSource="{Binding ThumbnailUrl}"/>
                                             </Image.Source>
                                         </Image>
                                         <Grid Grid.Column="1" Margin="5,2">
-                                            <TextBlock Text="{Binding title}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding Title}" VerticalAlignment="Top" TextWrapping="Wrap"/>
                                             <TextBlock   VerticalAlignment="Bottom" Margin="0,40,0,0">
-                                                <Run Text="{Binding favoriteCnt}"/>
+                                                <Run Text="{Binding FavoriteCnt}"/>
                                                 <Run Text="人订阅"/>
                                             </TextBlock>
                                         </Grid>
@@ -302,7 +303,7 @@
 
             <PivotItem Header="游戏库" Margin="0" Padding="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                    
+
                     <controls:AdaptiveGridView x:Name="gameLibGridView"
                           ItemsSource="{Binding Games}" Padding="8"
                           SelectionMode="None" 
@@ -311,8 +312,8 @@
                           ItemClick="gameLibGridView_ItemClick"
                           MinItemHeight="231"
                           MinItemWidth="150"
+                          Style="{StaticResource LightAdaptiveGridViewStyle}"
                         >
-
                         <controls:AdaptiveGridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -321,19 +322,17 @@
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
 
-                                    <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill"
+                                    <Image Source="{ThemeResource GamePlaceHolderImage}" Grid.Column="0" Stretch="Fill"
                                                VerticalAlignment="Stretch"/>
-
-
                                     <Image Grid.Row="0" Stretch="Fill"  VerticalAlignment="Stretch">
                                         <Image.Source>
-                                            <BitmapImage UriSource="{Binding thumbnailURL}"/>
+                                            <BitmapImage UriSource="{Binding ThumbnailURL}"/>
                                         </Image.Source>
                                     </Image>
-                                    
-            <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
+
+                                    <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
                                        Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>
-            
+
                                     <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding title}" 
                                                TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
                                                VerticalAlignment="Bottom"/>

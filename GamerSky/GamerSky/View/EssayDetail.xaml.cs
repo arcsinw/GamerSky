@@ -329,7 +329,7 @@ namespace GamerSky.View
 
             Debug.WriteLine(args.Uri);
 
-            if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
+            if(args.Uri.Query.EndsWith(".jpg || .png || .gif",StringComparison.CurrentCultureIgnoreCase))
             {
                 currentImageUrl = args.Uri.ToString();
                 Debug.WriteLine("ClickImageUrl：" + currentImageUrl);
@@ -371,9 +371,9 @@ namespace GamerSky.View
             essayResult = e.Parameter as Essay;
             if (essayResult != null)
             {
-                if (essayResult.contentId.Equals("0"))
+                if (essayResult.ContentId.Equals("0"))
                 {
-                    webView.Navigate(new Uri(essayResult.contentURL));
+                    webView.Navigate(new Uri(essayResult.ContentURL));
                 }
                 else
                 {

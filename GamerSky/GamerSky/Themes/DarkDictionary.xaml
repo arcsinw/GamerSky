@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GamerSky.Theme">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <BitmapImage x:Key="EssayPlaceHolderImage" UriSource="ms-appx:///Assets/Images/image_loading_night.png"/>
+            <BitmapImage x:Key="GamePlaceHolderImage" UriSource="ms-appx:///Assets/Images/image_loading_game_lib_night.png"/>
+            <BitmapImage x:Key="SlidePlaceHolderImage" UriSource="ms-appx:///Assets/Images/slide_image_loading_night.png"/> 
+            <BitmapIcon x:Key="DayNightImage" UriSource="ms-appx:///Assets/Images/drawer_night.png" Height="24" Width="24"/>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

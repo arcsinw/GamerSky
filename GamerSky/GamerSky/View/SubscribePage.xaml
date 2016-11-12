@@ -5,7 +5,7 @@
     xmlns:local="using:GamerSky.View"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:GamerSky.Core.ViewModel"
-    xmlns:converter="using:GamerSky.Converter"
+    xmlns:converter="using:GamerSky.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -37,13 +37,14 @@
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="订阅内容" Margin="0" Padding="0" >
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                    <ListView x:Name="subscribeContentListView" ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
-                          ItemsSource="{Binding SubscribeContent}"
-                          ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                          IsItemClickEnabled="True"
-                          Loaded="subscribeContentListView_Loaded"
-                          ItemClick="ListView_ItemClick"
-                               >
+                    <ListView x:Name="subscribeContentListView" 
+                              ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
+                              Style="{ThemeResource LightListView}"
+                              ItemsSource="{Binding SubscribeContent}"
+                              ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                              IsItemClickEnabled="True"
+                              Loaded="subscribeContentListView_Loaded"
+                              ItemClick="ListView_ItemClick">
                         <ListView.ItemContainerTransitions>
                             <TransitionCollection>
                                 <AddDeleteThemeTransition/>
@@ -52,6 +53,7 @@
                     </ListView>
                 </pr:PullToRefreshBox>
             </PivotItem>
+            
             <PivotItem Header="订阅专题" Margin="0" Padding="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                     <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
@@ -70,13 +72,13 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
                                         <Grid Grid.Row="0" Padding="6,12" Tapped="Grid_Tapped" >
-                                            <TextBlock Text="{Binding title}" HorizontalAlignment="Left" Foreground="{ThemeResource ThemeColorBrush}"/>
+                                            <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" Foreground="{ThemeResource ThemeColorBrush}"/>
                                             <TextBlock HorizontalAlignment="Right">
-                                        <Run Text="{Binding readingCount}"/>
+                                        <Run Text="{Binding ReadingCount}"/>
                                         <Run Text="人关注"/>
                                             </TextBlock>
                                         </Grid>
-                                        <ListView x:Name="innerTopicListView" ItemsSource="{Binding childElements}" Grid.Row="1"
+                                        <ListView x:Name="innerTopicListView" ItemsSource="{Binding ChildElements}" Grid.Row="1"
                                                 ScrollViewer.VerticalScrollMode="Disabled"
                                                 IsItemClickEnabled="True"
                                                 ItemClick="innerTopicListView_ItemClick"

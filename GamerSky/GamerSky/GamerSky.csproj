@@ -102,6 +102,20 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Compile Include="Cache\CacheBase.cs" />
+    <Compile Include="Cache\FileCache.cs" />
+    <Compile Include="Cache\ImageCache.cs" />
+    <Compile Include="Cache\InMemoryStorage.cs" />
+    <Compile Include="Cache\InMemoryStorageItem.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.Members.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.Placeholder.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.Source.cs" />
+    <Compile Include="Controls\ImageEx\ImageExFailedEventArgs.cs" />
+    <Compile Include="Controls\ImageEx\ImageExOpenedEventArgs.cs" />
+    <Compile Include="Converters\BoolToObjectConverter.cs" />
+    <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
+    <Compile Include="Converters\ConverterTools.cs" />
     <Compile Include="Extensions\AnimationExtensions.Offset.cs" />
     <None Include="GamerSky_StoreKey.pfx" />
     <None Include="project.json" />
@@ -124,12 +138,12 @@
     <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Controls\SwipeStatus.cs" />
     <Compile Include="Controls\SwipeStatusChangedEventArgs.cs" />
-    <Compile Include="Converter\AddConverter.cs" />
-    <Compile Include="Converter\BoolToIconConverter.cs" />
-    <Compile Include="Converter\BoolToStyleConverter.cs" />
-    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converter\CountToVisibilityConverter.cs" />
-    <Compile Include="Converter\IndexToColorConverter.cs" />
+    <Compile Include="Converters\AddConverter.cs" />
+    <Compile Include="Converters\BoolToIconConverter.cs" />
+    <Compile Include="Converters\BoolToStyleConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\CountToVisibilityConverter.cs" />
+    <Compile Include="Converters\IndexToColorConverter.cs" />
     <Compile Include="Extensions\AnimationExtensions.cs" />
     <Compile Include="Extensions\AnimationTools.cs" />
     <Compile Include="Extensions\VisualTreeExtensions.cs" />
@@ -139,7 +153,12 @@
     <Compile Include="Helper\NavigationHelper.cs" />
     <Compile Include="Helper\PageBase.cs" />
     <Compile Include="Controls\StringWrapPanel.cs" />
+    <Compile Include="Helper\StorageFileHelper.cs" />
+    <Compile Include="Helper\StreamHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
+    <Compile Include="HttpHelper\HttpHelper.cs" />
+    <Compile Include="HttpHelper\HttpHelperRequest.cs" />
+    <Compile Include="HttpHelper\HttpHelperResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateSelector\EssayDataTemplateSelector.cs" />
     <Compile Include="View\AboutPage.xaml.cs">
@@ -220,11 +239,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\BadgeLogo.scale-100.png" />
-    <Content Include="Assets\css\base.css" />
-    <Content Include="Assets\css\gs.css" />
+    <Content Include="Assets\BadgeLogo.scale-150.png" />
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\Css\base.css" />
+    <Content Include="Assets\Css\gs.css" />
     <Content Include="Assets\Html\Comment.html" />
     <Content Include="Assets\Images\drawer_cache.png" />
     <Content Include="Assets\Images\drawer_collect.png" />
+    <Content Include="Assets\Images\drawer_day.png" />
     <Content Include="Assets\Images\drawer_feedback.png" />
     <Content Include="Assets\Images\drawer_picmode.png" />
     <Content Include="Assets\Images\drawer_setting.png" />
@@ -235,7 +257,10 @@
     <Content Include="Assets\Images\icon_dingyue_h.png" />
     <Content Include="Assets\Images\icon_gonglue_h.png" />
     <Content Include="Assets\Images\icon_xinwen_h.png" />
-    <Content Include="Assets\Images\image_loading.png" />
+    <Content Include="Assets\Images\image_loading_day.png" />
+    <Content Include="Assets\Images\image_loading_game_lib_day.png" />
+    <Content Include="Assets\Images\image_loading_game_lib_night.png" />
+    <Content Include="Assets\Images\image_loading_night.png" />
     <Content Include="Assets\Images\launch_title.png" />
     <Content Include="Assets\Images\Login_qq.png" />
     <Content Include="Assets\Images\Login_weibo.png" />
@@ -244,6 +269,8 @@
     <Content Include="Assets\Images\Favorited.png" />
     <Content Include="Assets\Images\drawer_avatar.png" />
     <Content Include="Assets\Images\picture_origin.png" />
+    <Content Include="Assets\Images\slide_image_loading_day.png" />
+    <Content Include="Assets\Images\slide_image_loading_night.png" />
     <Content Include="Assets\js\gesture.js" />
     <Content Include="Assets\js\gs.js" />
     <Content Include="Assets\js\gsVideo.js" />
@@ -280,12 +307,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ImageEx\ImageEx.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\PullToRefreshListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Themes\DarkDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\LightDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
