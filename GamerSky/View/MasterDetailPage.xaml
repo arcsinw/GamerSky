@@ -334,12 +334,12 @@
                                     <Ellipse.Fill>
                                         <ImageBrush>
                                             <ImageBrush.ImageSource>
-                                                <BitmapImage UriSource="ms-appx:///Assets/Images/drawer_avatar.png"/>
+                                                <BitmapImage UriSource="{x:Bind User.Pic,Mode=OneWay}"/>
                                             </ImageBrush.ImageSource>
                                         </ImageBrush>
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                <TextBlock Text="立即登录" x:Uid="Login" HorizontalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="{x:Bind User.UserName,Mode=OneWay}" x:Uid="Login" HorizontalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </ListViewItem>
 
@@ -439,10 +439,11 @@
                       ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                       ItemClick="paneListView_ItemClick">
                 <ListView.Header>
-                    <Button x:Name="userBtn" Click="userBtn_Click" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="{x:Bind User.userName,Mode=OneWay}">
+                    <Button x:Name="userBtn" Click="userBtn_Click" Style="{StaticResource PaneButtonStyle}" 
+                            ToolTipService.ToolTip="{x:Bind User.UserName,Mode=OneWay}">
                         <Grid>
                             <BitmapIcon UriSource="ms-appx:///Assets/Images/drawer_user.png" Height="24" Width="24"/>
-                            <Image Source="{x:Bind User.pic,Mode=OneWay}" Height="48" Width="48"/>
+                            <Image Source="{x:Bind User.Pic,Mode=OneWay}" Height="48" Width="48"/>
                         </Grid>
                     </Button>
                 </ListView.Header>

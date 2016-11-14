@@ -18,14 +18,13 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
-                    <!--Source="{Binding ThumbnailBitmap[0]}"-->
+                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" > 
                     <Image.Source>
                         <BitmapImage UriSource="{Binding ThumbnailUrl}"/>
                     </Image.Source>
                 </Image>
                 <TextBlock Text="{Binding Title}" Grid.Column="1" HorizontalAlignment="Stretch" 
-                                               Margin="5,2" TextWrapping="Wrap"  VerticalAlignment="Top"/>
+                                               Margin="4,2" TextWrapping="Wrap"  VerticalAlignment="Top"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -42,38 +41,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <!--#region 标题栏-->
-        <Grid Grid.Row="0" DataContext="{Binding GameDetail}" Visibility="Collapsed">
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup>
-                    <VisualState x:Name="Desktop">
-                        <VisualState.StateTriggers>
-                            <hp:DeviceTypeTrigger PlatformType="Desktop"/>
-                        </VisualState.StateTriggers>
-                        <VisualState.Setters>
-                            <Setter Target="back.Visibility" Value="Collapsed"/>
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-
-            <!--标题栏-->
-            <Grid MinHeight="48" VerticalAlignment="Top" Background="{ThemeResource ThemeColorBrush}">
-                <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}">
-                    <SymbolIcon Symbol="Back"/>
-                </Button>
-                <TextBlock Text="{Binding Title}" Style="{ThemeResource PageTitleStyle}"/>
-            </Grid>
-        </Grid>
-        <!--#endregion-->
-
+          
         <!--#region 游戏详情-->
-        <Grid Grid.Row="0" DataContext="{Binding GameDetail}" 
-                   >
+        <Grid Grid.Row="0" MaxHeight="200" Padding="48" 
+              DataContext="{Binding GameDetail}" >
             <Grid.Background>
                 <ImageBrush>
                     <ImageBrush.ImageSource>
-                        <BitmapImage UriSource="{Binding BackgroundURL}"/>
+                        <BitmapImage UriSource="{Binding BackgroundURL,Mode=OneWay}"/>
                     </ImageBrush.ImageSource>
                 </ImageBrush>
             </Grid.Background>
@@ -84,15 +59,15 @@
             <Image Grid.Column="0" Margin="12,0"
                    HorizontalAlignment="Stretch" VerticalAlignment="Top"
                    Stretch="Uniform"
-                   Source="{Binding ThumbnailURL}"/>
+                   Source="{Binding ThumbnailURL,Mode=OneWay}"/>
             <Grid Grid.Column="1" >
-                <!--<Grid.Resources>
+                <Grid.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="White"/>
                     </Style>
-                </Grid.Resources>-->
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding Title}" />
+                </Grid.Resources>
+                <StackPanel Orientation="Vertical" >
+                    <TextBlock Text="{Binding Title,Mode=OneWay}" />
                     <TextBlock>
                         <Run Text="发售日期："></Run>
                         <Run Text="{Binding SellTime}"/>
@@ -109,35 +84,59 @@
                         <Run Text="发行商："/>
                         <Run Text="{Binding Developer}"/>
                     </TextBlock>
-                    <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                    <Button Style="{ThemeResource LightButtonStyle}" HorizontalAlignment="Stretch" 
                             Content="关注"/>
                 </StackPanel>
             </Grid>
         </Grid>
         <!--#endregion-->
 
+        <!--#region 标题栏-->
+        <Grid Grid.Row="0" Grid.RowSpan="2" Height="48" VerticalAlignment="Top"  
+              Background="{ThemeResource ThemeColorBrush}"
+              DataContext="{Binding GameDetail}"
+               >
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup>
+                    <VisualState x:Name="Desktop">
+                        <VisualState.StateTriggers>
+                            <hp:DeviceTypeTrigger PlatformType="Desktop"/>
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="back.Visibility" Value="Collapsed"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock Text="{Binding Title}" Style="{ThemeResource PageTitleStyle}"/>
+        </Grid>
+        <!--#endregion-->
+
         <!--#region 文章栏-->
-        <Pivot Grid.Row="1" Style="{ThemeResource StrategyPivotStyle}"
+        <Pivot Grid.Row="1" 
                SelectionChanged="Pivot_SelectionChanged"
                x:Name="pivot">
             <PivotItem Header="策略" Margin="0">
-                <pr:PullToRefreshBox>
+                <!--<pr:PullToRefreshBox>-->
                     <ListView ItemsSource="{Binding GameDetailNews}"
                               ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"> 
                     </ListView>
-                </pr:PullToRefreshBox>
+                <!--</pr:PullToRefreshBox>-->
             </PivotItem>
             <PivotItem Header="新闻" Margin="0">
-                <pr:PullToRefreshBox>
+                <!--<pr:PullToRefreshBox>-->
                     <ListView ItemsSource="{Binding GameDetailStrategys}"
                             ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
                               > 
                     </ListView>
-                </pr:PullToRefreshBox>
+                <!--</pr:PullToRefreshBox>-->
             </PivotItem>
         </Pivot>
         <!--#endregion-->

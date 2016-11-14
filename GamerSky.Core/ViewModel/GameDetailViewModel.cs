@@ -55,14 +55,23 @@ namespace GamerSky.Core.ViewModel
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+
+            if(Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            { 
+                LoadGameDetail();
+                LoadGameNews(1);
+                LoadGameStrategys(1);
+            }
         }
+        
 
         private void Current_ShareDataChanged()
         {
             AppTheme = DataShareManager.Current.AppTheme;
         }
 
-        public string contentId { get; set; }
+        public string contentId { get; set; } = "353478";
+
         public async void LoadGameDetail()
         {
             GameDetail = await apiService.GetGameDetail(contentId);
@@ -90,7 +99,14 @@ namespace GamerSky.Core.ViewModel
         /// <param name="pageIndex"></param>
         public async void LoadGameStrategys(int pageIndex)
         {
-            await apiService.GetGameDetailStrategys(contentId, pageIndex);
+            var result = await apiService.GetGameDetailStrategys(contentId, pageIndex);
+            if(result !=null)
+            {
+                foreach (var item in result)
+                {
+                    GameDetailStrategys.Add(item);
+                }
+            }
         }
 
         public async void RefreshGameNews()

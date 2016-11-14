@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,10 +12,19 @@ namespace GamerSky.Core.Model
     /// </summary>
     public class GameDetailEssay
     {
-        public string adId { get; set; }
-        public string contentId { get; set; }
-        public string contentType { get; set; }
-        public string thumbnailUrl { get; set; }
-        public string title { get; set; }
+        [JsonProperty(PropertyName = "adId")]
+        public string AdId { get; set; }
+
+        [JsonProperty(PropertyName = "contentId")]
+        public string ContentId { get; set; }
+
+        [JsonProperty(PropertyName = "contentType")]
+        public string ContentType { get; set; }
+
+        [JsonProperty(PropertyName = "thumbnailUrl")]
+        public string ThumbnailUrl { get; set; }
+
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
     }
 }
