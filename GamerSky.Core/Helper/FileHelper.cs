@@ -1,4 +1,6 @@
 ﻿
+using GamerSky.Core.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -63,6 +65,7 @@ namespace GamerSky.Core.Helper
             try
             {
                 var folder = await localFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+              
                 using (var data = await folder.OpenStreamForWriteAsync(filename, CreationCollisionOption.ReplaceExisting))
                 {
                     DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
@@ -86,8 +89,10 @@ namespace GamerSky.Core.Helper
             try
             {
                 var folder = await localFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+                var file = await folder.GetFileAsync(filename);
+                   
                 using (var data = await folder.OpenStreamForReadAsync(filename))
-                {
+                { 
                     DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
                     return serializer.ReadObject(data) as T;
                 }

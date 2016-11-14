@@ -51,13 +51,13 @@ namespace GamerSky.Core.IncrementalLoadingCollection
                 //加载数据方式 轮流加载
                 try
                 {
-                    string x = DataShareManager.Current.SubscribeList[currentSubscribeIndex].sourceId;
+                    string x = DataShareManager.Current.SubscribeList[currentSubscribeIndex].SourceId;
                     List<Essay> essays = await apiService.GetSubscribeContent(x, pageIndex);
                     if (essays != null)
                     {
                         foreach (var item in essays)
                         {
-                            if (!item.type.Equals("dingyueTitle"))
+                            if (!item.Type.Equals("dingyueTitle"))
                             {
                                 Add(item);
                             }

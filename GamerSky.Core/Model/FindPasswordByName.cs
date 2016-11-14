@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GamerSky.Core.ResultDataModel;
+using GamerSky.Core.ResultModel;
 
 namespace GamerSky.Core.Model
 {
-    public class FindPasswordByNameResult : ResultBase
+    public class FindPasswordByNameResult : ResultModelBase
     {
         public FindPasswordByName result { get; set; }
     }

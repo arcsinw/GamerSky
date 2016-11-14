@@ -73,7 +73,7 @@ namespace GamerSky.View
                 }
                 pageIndexDic.Add(pivot.SelectedIndex, 1);
             }
-            pageIndex = pageIndexDic[pivot.SelectedIndex] +1;
+            pageIndex = pageIndexDic[pivot.SelectedIndex] ++;
             progress.IsActive = false;
         }
 
@@ -85,13 +85,17 @@ namespace GamerSky.View
         private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
             progress.IsActive = true;
-            if(pivot.SelectedIndex==0)
+            switch (pivot.SelectedIndex)
             {
-                await ViewModel.RefreshFocusStrategy();
-            }
-            else
-            {
-                await ViewModel.RefreshAllStrategy();
+                case 0:
+                    await ViewModel.RefreshFocusStrategy();
+                    break;
+                case 1:
+                    await ViewModel.RefreshAllStrategy();
+                    break;
+                case 2:
+                    ViewModel.RefreshGameList();
+                    break;
             }
             progress.IsActive = false;
         }
@@ -160,7 +164,7 @@ namespace GamerSky.View
             var game = e.ClickedItem as Game;
             if (game != null)
             {
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(GameDetailPage), game.contentId);
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(GameDetailPage), game.ContentId);
             }
         } 
     }

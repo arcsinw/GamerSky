@@ -90,7 +90,7 @@ namespace GamerSky.Core.ViewModel
                 int pageIndex = subscribeList.Count;
                 foreach (var subscribe in subscribeList)
                 {
-                    var essays = await apiService.GetSubscribeTopic(subscribe.sourceId, pageIndex);
+                    var essays = await apiService.GetSubscribeTopic(subscribe.SourceId, pageIndex);
                     if (essays != null)
                     {
                         foreach (var item in essays)
@@ -118,13 +118,13 @@ namespace GamerSky.Core.ViewModel
                 return;
             } 
 
-            string x = DataShareManager.Current.SubscribeList[currentSubscribeIndex].sourceId;
+            string x = DataShareManager.Current.SubscribeList[currentSubscribeIndex].SourceId;
             List<Essay> essays = await apiService.GetSubscribeContent(x, pageIndex);
             if (essays != null)
             {
                 foreach (var item in essays)
                 {
-                    if (!item.type.Equals("dingyueTitle"))
+                    if (item.Type == null || !item.Type.Equals("dingyueTitle"))
                     {
                         SubscribeContent.Add(item);
                     }

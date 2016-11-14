@@ -48,11 +48,11 @@ namespace GamerSky.View
         {
 
             var verificationCode = await ViewModel.RegisterByEmail();
-            if (verificationCode != null && !verificationCode.errorCode.Equals("0"))
+            if (verificationCode != null && !verificationCode.ErrorCode.Equals("0"))
             {
-                UIHelper.ShowMessage(verificationCode.errorMessage);
+                UIHelper.ShowMessage(verificationCode.ErrorMessage);
             }
         }
-         
+
     }
 }

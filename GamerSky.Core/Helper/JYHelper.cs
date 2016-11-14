@@ -11,7 +11,7 @@ namespace GamerSky.Core.Helper
     /// 九幽信息
     /// </summary>
     public class JYHelper
-    {
+    { 
         /// <summary>
         /// AppKey
         /// </summary>

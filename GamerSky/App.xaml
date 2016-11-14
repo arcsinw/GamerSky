@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GamerSky"
+    xmlns:hp="using:GamerSky.Helper"
     RequestedTheme="Light">
 
     <Application.Resources>
@@ -11,9 +12,9 @@
           
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
-                    <!--主题色-->
+                    <!--主题色--><!--
                     <Color x:Key="ThemeColor">#C93D32</Color>
-                    <!--主题色Brush-->
+                    --><!--主题色Brush-->
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="#C93D32"/>
                     <!--HomePage 底栏背景色-->
                     <SolidColorBrush x:Key="BottomBarBackground" Color="LightGray" />
@@ -39,10 +40,10 @@
 
                 <ResourceDictionary x:Key="Dark">
                     <!--主题色-->
-                    <!--<Color x:Key="ThemeColor">#FF5F5F5F</Color>-->
+                    <!--<Color x:Key="ThemeColor">#FF5F5F5F</Color>--><!--
 
                     <Color x:Key="ThemeColor">#FF333337</Color>
-                    <SolidColorBrush x:Key="ThemeColorBrush" Color="#FF333337"/>
+                    <SolidColorBrush x:Key="ThemeColorBrush" Color="#FF333337"/>-->
                     <!--HomePage 底栏背景色-->
                     <SolidColorBrush x:Key="BottomBarBackground" Color="#FF1B1B1C" />
                     <!--PivotHeader 背景色-->
@@ -67,7 +68,139 @@
             </ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ThemeDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/LightDictionary.xaml"/>
+                <ResourceDictionary Source="Themes/DarkDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            
+            
+            <!--有三张图的文章模板-->
+            <DataTemplate x:Key="ThreePicEssayDataTemplate">
+                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding Title}" Margin="0,0,0,2"/>
+                    <Grid Grid.Row="1" MinHeight="80" VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--#region  Images-->
+                        <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="0" Margin="0,0,1,0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+                        <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="1" Margin="0,0,1,0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+                        <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="2" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+                        
+                        <Image Grid.Column="0" Stretch="Fill" Margin="0,0,1,0">
+                            <Image.Source>
+                                <BitmapImage UriSource="{Binding ThumbnailURLs[0]}"/>
+                            </Image.Source>
+                        </Image>
+                        <Image Grid.Column="1" Stretch="Fill" Margin="0,0,1,0">
+                            <Image.Source>
+                                <BitmapImage UriSource="{Binding ThumbnailURLs[1]}"/>
+                            </Image.Source>
+                        </Image>
+                        <Image Grid.Column="2" Stretch="Fill">
+                            <Image.Source>
+                                <BitmapImage UriSource="{Binding ThumbnailURLs[2]}"/>
+                            </Image.Source>
+                        </Image>
+                        <!--#endregion-->
+                    </Grid>
+                    <TextBlock Grid.Row="2" Margin="0,2,0,0" HorizontalAlignment="Right">
+                    <Run Text="评论"/>
+                    <Run Text="{Binding CommentsCount}"/>
+                    </TextBlock>
+                </Grid>
+            </DataTemplate>
+            <!--一张图文章模板-->
+            <DataTemplate x:Key="OnePicEssayDataTemplate">
+                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--默认图片-->
+                    <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+
+                    <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
+                        <Image.Source>
+                            <BitmapImage UriSource="{Binding ThumbnailURLs[0]}"/>
+                        </Image.Source>
+                    </Image>
+
+                    <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0">
+                        <TextBlock Text="{Binding Title}"  TextWrapping="Wrap" VerticalAlignment="Top"/>
+                        <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
+                                <Run Text="{Binding CommentsCount}"/>
+                                <Run Text="评论"/>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+            <!--无图模板-->
+            <DataTemplate x:Key="NoPicEssayDataTemplate">
+                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding Title}" TextWrapping="Wrap"/>
+                    <TextBlock  HorizontalAlignment="Right" Grid.Row="1" Margin="5,2" >
+                                <Run Text="{Binding CommentsCount}"/>
+                                <Run Text="评论"/>
+                    </TextBlock>
+                </Grid>
+            </DataTemplate>
+            
+            <!--专题模板-->
+            <DataTemplate x:Key="TopicDataTemplate">
+                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Padding="{ThemeResource PhonePagePadding}" >
+                        <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" Foreground="{ThemeResource ThemeColorBrush}"/>
+                        <TextBlock HorizontalAlignment="Right">
+                            <Run Text="{Binding ReadingCount}"/>
+                            <Run Text="人关注"/>
+                        </TextBlock>
+                    </Grid>
+                    <ListView x:Name="innerTopicListView" ItemsSource="{Binding ChildElements}" Grid.Row="1"
+                            ScrollViewer.VerticalScrollMode="Disabled"
+                            IsItemClickEnabled="True"
+                            
+                            ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
+                            ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
+                    </ListView>
+                </Grid>
+            </DataTemplate>
+          
+            <!--ListView.ItemsContainerStyle-->
+            <Style x:Key="EssayListViewItemsContainerStyle" TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
+            </Style>
+ 
+            <hp:EssayListViewItemTemplateSelector x:Key="EssayDataTemplateSelector"
+                                                  NoPicDt="{StaticResource NoPicEssayDataTemplate}"
+                                                  OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+                                                  ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
+                                                  TopicDt="{StaticResource TopicDataTemplate}"
+                                                  >
+          
+            </hp:EssayListViewItemTemplateSelector>
+            
             <!--BorderMargin-->
             <Thickness x:Key="EssayBorderMargin">0,2</Thickness>
             <!--BorderThickness-->
@@ -80,6 +213,7 @@
             <Thickness x:Key="PhonePagePadding">12</Thickness>
             <!--平板和PC设备 页面内边距-->
             <Thickness x:Key="TabletPagePadding">24</Thickness>
+            
             <Style x:Key="EssayPivotStyle" TargetType="Pivot">
                 <Setter Property="Margin" Value="0"/>
                 <Setter Property="Padding" Value="0"/>
@@ -255,7 +389,7 @@
                                                         <RectangleGeometry x:Name="HeaderClipperGeometry"/>
                                                     </ContentControl.Clip>
 
-                                                    <Grid Background="{ThemeResource PivotHeaderColorBrush}" >
+                                                    <Grid Background="{ThemeResource ThemeColorBrush}" >
                                                         <PivotHeaderPanel x:Name="StaticHeader" Visibility="Collapsed"/>
                                                         <PivotHeaderPanel x:Name="Header">
                                                             <PivotHeaderPanel.RenderTransform>
@@ -292,15 +426,7 @@
                 </Setter>
             </Style>
 
-            <!--ListView.ItemsContainerStyle-->
-            <Style x:Key="EssayListViewItemsContainerStyle" TargetType="ListViewItem">
-                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
-                <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
-            </Style>
+            
         </ResourceDictionary>
 
        

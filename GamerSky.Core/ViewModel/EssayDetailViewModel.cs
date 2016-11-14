@@ -176,12 +176,12 @@ namespace GamerSky.Core.ViewModel
         public async Task GenerateHtmlString(Essay essay)
         {
             IsActive = true;
-            News news = await apiService.ReadEssay(essay.contentId);
+            News news = await apiService.ReadEssay(essay.ContentId);
             if (news != null)
             {
-                OriginUri = news.originURL;
+                OriginUri = news.OriginURL;
 
-                string mainBody = news.mainBody;
+                string mainBody = news.MainBody;
 
                 string head = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset = utf-8\" />"
                             + "<meta name=\"viewport\" content=\"width= device-width, user-scalable = no\" />"
@@ -192,11 +192,11 @@ namespace GamerSky.Core.ViewModel
                             + "<script src=\"ms-appx-web:///Assets/js/gs.js\"></script>"
                             + "<script src=\"ms-appx-web:///Assets/js/gsVideo.js\"></script>";
                  
-                string title = news.title;
-                string subTitle = news.subTitle;
+                string title = news.Title;
+                string subTitle = news.SubTitle;
 
                 #region 相关阅读
-                List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essay.contentId, essay.contentType);
+                List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essay.ContentId, essay.ContentType);
 
                 string relatedReadingsHtml =
                     "<div class=\"list\" id=\"gsTemplateContent_RelatedReading\">" +
@@ -310,7 +310,7 @@ namespace GamerSky.Core.ViewModel
             IsActive = true;
             var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Html/Comment.html"));
             CommentString = await FileIO.ReadTextAsync(file);
-            CommentString = CommentString.Replace("{0}", essay.title).Replace("{1}", essay.contentId);
+            CommentString = CommentString.Replace("{0}", essay.Title).Replace("{1}", essay.ContentId);
 
             //    CommentString = $@"<!DOCTYPE html><html><body>
             //        <script src=""http://ja.gamersky.com/wap/wap.top.v1.js\""></script>

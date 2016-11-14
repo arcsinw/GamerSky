@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:GamerSky.Core.ViewModel"
-    xmlns:converter="using:GamerSky.Converter"
-    xmlns:hp="using:GamerSky.Helper"
+    xmlns:converter="using:GamerSky.Converters"
+    xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}"
     NavigationCacheMode="Required"
@@ -42,7 +42,7 @@
         <JumpListItemBackgroundConverter x:Key="BackgroundConverter" Enabled="{ThemeResource ThemeColorBrush}"
                                          Disabled="Transparent"/>
         <JumpListItemBackgroundConverter x:Key="ForegroundConverter" Enabled="White" Disabled="Black"/>
-        <Style x:Key="LightAdaptiveGridViewStyle" TargetType="hp:AdaptiveGridView">
+        <Style x:Key="LightAdaptiveGridViewStyle" TargetType="controls:AdaptiveGridView">
             <Setter Property="Padding" Value="0,0,0,10"/>
             <Setter Property="IsTabStop" Value="False"/>
             <Setter Property="TabNavigation" Value="Once"/>
@@ -75,7 +75,7 @@
             </Setter>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="hp:AdaptiveGridView">
+                    <ControlTemplate TargetType="controls:AdaptiveGridView">
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
                             <ScrollViewer x:Name="ScrollViewer" Style="{StaticResource LightScrollViewerStyle}" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
                                 <ItemsPresenter FooterTransitions="{TemplateBinding FooterTransitions}" FooterTemplate="{TemplateBinding FooterTemplate}" Footer="{TemplateBinding Footer}" HeaderTemplate="{TemplateBinding HeaderTemplate}" Header="{TemplateBinding Header}" HeaderTransitions="{TemplateBinding HeaderTransitions}" Padding="{TemplateBinding Padding}"/>
@@ -94,7 +94,7 @@
             <PivotItem Header="关注" Margin="0" Padding="0" SizeChanged="PivotItem_SizeChanged">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                     <!-- ItemsPanel="{StaticResource GridViewItemsPanel}"-->
-                    <hp:AdaptiveGridView ItemsSource="{Binding FocusStrategys}" Padding="8"
+                    <controls:AdaptiveGridView ItemsSource="{Binding FocusStrategys}" Padding="8"
                           HorizontalAlignment="Center"
                           HorizontalContentAlignment="Center"
                           SelectionMode="None" 
@@ -128,7 +128,7 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <!-- ItemsPanel="{StaticResource GridViewItemsPanel}"-->
+          
                         <!--<hp:AdaptiveGridView.Template>
                             <ControlTemplate>
                                 <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
@@ -139,7 +139,7 @@
                                 </ScrollViewer>
                             </ControlTemplate>
                         </hp:AdaptiveGridView.Template>-->
-                        <!--<hp:AdaptiveGridView.Header>
+                        <controls:AdaptiveGridView.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -148,8 +148,8 @@
                                 <TextBox PlaceholderText="" Grid.Column="0"/>
                                 <Button Content="发售表" Grid.Column="1"/>
                             </Grid>
-                        </hp:AdaptiveGridView.Header>-->
-                        <hp:AdaptiveGridView.ItemTemplate>
+                        </controls:AdaptiveGridView.Header>
+                        <controls:AdaptiveGridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -157,28 +157,28 @@
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     <!--#region PlaceHolderImage-->
-                                    <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill" VerticalAlignment="Stretch" />
+                                    <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="0" Stretch="Fill" VerticalAlignment="Stretch" />
                                     <!--#endregion-->
                                     <Image Grid.Row="0" Stretch="Fill" VerticalAlignment="Stretch">
                                         <Image.Source>
-                                            <BitmapImage UriSource="{Binding thumbnailUrl}"/>
+                                            <BitmapImage UriSource="{Binding ThumbnailUrl}"/>
                                         </Image.Source>
                                     </Image>
                                     <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
                                        Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
-                                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding title}" 
+                                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding Title}" 
                                                TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" VerticalAlignment="Bottom"/>
                                 </Grid>
                             </DataTemplate>
-                        </hp:AdaptiveGridView.ItemTemplate>
-                        <hp:AdaptiveGridView.ItemContainerStyle>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                        <controls:AdaptiveGridView.ItemContainerStyle>
                             <Style TargetType="GridViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                 <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                             </Style>
-                        </hp:AdaptiveGridView.ItemContainerStyle>
-                    </hp:AdaptiveGridView>
+                        </controls:AdaptiveGridView.ItemContainerStyle>
+                    </controls:AdaptiveGridView>
                 </pr:PullToRefreshBox>
             </PivotItem>
 
@@ -198,6 +198,7 @@
                     <SemanticZoom.ZoomedInView>
                         <ListView ItemsSource="{Binding Source={StaticResource CollectionViewSource}}"
                                   SelectionMode="None" 
+                                  Style="{ThemeResource LightListView}"
                                   ShowsScrollingPlaceholders="True"
                                   IsItemClickEnabled="True"
                                   ItemClick="ListView_ItemClick"
@@ -211,17 +212,17 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <!--#region PlaceHolderImage-->
-                                        <Image Source="{Binding DefaultBitmap}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
+                                        <Image Source="{ThemeResource EssayPlaceHolderImage}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
                                         <!--#endregion-->
                                         <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                                             <Image.Source>
-                                                <BitmapImage UriSource="{Binding thumbnailUrl}"/>
+                                                <BitmapImage UriSource="{Binding ThumbnailUrl}"/>
                                             </Image.Source>
                                         </Image>
                                         <Grid Grid.Column="1" Margin="5,2">
-                                            <TextBlock Text="{Binding title}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding Title}" VerticalAlignment="Top" TextWrapping="Wrap"/>
                                             <TextBlock   VerticalAlignment="Bottom" Margin="0,40,0,0">
-                                                <Run Text="{Binding favoriteCnt}"/>
+                                                <Run Text="{Binding FavoriteCnt}"/>
                                                 <Run Text="人订阅"/>
                                             </TextBlock>
                                         </Grid>
@@ -300,10 +301,10 @@
                 </SemanticZoom>
             </PivotItem>
 
-            <!--<PivotItem Header="游戏库" Margin="0" Padding="0">
+            <PivotItem Header="游戏库" Margin="0" Padding="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                    
-                    <hp:AdaptiveGridView x:Name="gameLibGridView"
+
+                    <controls:AdaptiveGridView x:Name="gameLibGridView"
                           ItemsSource="{Binding Games}" Padding="8"
                           SelectionMode="None" 
                           ShowsScrollingPlaceholders="True"
@@ -311,46 +312,43 @@
                           ItemClick="gameLibGridView_ItemClick"
                           MinItemHeight="231"
                           MinItemWidth="150"
+                          Style="{StaticResource LightAdaptiveGridViewStyle}"
                         >
-
-                        <hp:AdaptiveGridView.ItemTemplate>
+                        <controls:AdaptiveGridView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    -->
-            <!--#region PlaceHolderImage-->
-            <!--<Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill"
-                                           VerticalAlignment="Stretch"/>-->
-            <!--#endregion-->
-            <!--
+
+                                    <Image Source="{ThemeResource GamePlaceHolderImage}" Grid.Column="0" Stretch="Fill"
+                                               VerticalAlignment="Stretch"/>
                                     <Image Grid.Row="0" Stretch="Fill"  VerticalAlignment="Stretch">
                                         <Image.Source>
-                                            <BitmapImage UriSource="{Binding thumbnailURL}"/>
+                                            <BitmapImage UriSource="{Binding ThumbnailURL}"/>
                                         </Image.Source>
                                     </Image>
-                                    -->
-            <!--<Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
-                                       Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>-->
-            <!--
-                                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding title}" 
+
+                                    <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
+                                       Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+
+                                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding Title}" 
                                                TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
                                                VerticalAlignment="Bottom"/>
                                 </Grid>
                             </DataTemplate>
-                        </hp:AdaptiveGridView.ItemTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
 
-                        <hp:AdaptiveGridView.ItemContainerStyle>
+                        <controls:AdaptiveGridView.ItemContainerStyle>
                             <Style TargetType="GridViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                 <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                             </Style>
-                        </hp:AdaptiveGridView.ItemContainerStyle>
-                    </hp:AdaptiveGridView>
+                        </controls:AdaptiveGridView.ItemContainerStyle>
+                    </controls:AdaptiveGridView>
                 </pr:PullToRefreshBox>
-            </PivotItem>-->
+            </PivotItem>
         </Pivot>
 
         <Button Style="{ThemeResource BackButtonStyle}"

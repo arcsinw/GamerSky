@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GamerSky.Core.Common;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +14,22 @@ namespace GamerSky.Core.Model
     /// </summary>
     public class Subscribe : ModelBase
     {
-        public string cnt { get; set; }
-        public string isHot { get; set; }
-        public string sourceId { get; set; }
-        public string sourceName { get; set; }
-        public string thumbnailUrl { get; set; }
+        [JsonProperty(PropertyName = "cnt")]
+        public string Count { get; set; }
 
-        private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/image_loading.png") };
+        [JsonProperty(PropertyName = "isHot")]
+        public string IsHot { get; set; }
+
+        [JsonProperty(PropertyName = "sourceId")]
+        public string SourceId { get; set; }
+
+        [JsonProperty(PropertyName = "sourceName")]
+        public string SourceName { get; set; }
+
+        [JsonProperty(PropertyName = "thumbnailUrl")]
+        public string ThumbnailUrl { get; set; }
+
+        private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Images/image_loading.png") };
         public static BitmapImage DefaultBitmap
         {
             get
@@ -27,21 +38,24 @@ namespace GamerSky.Core.Model
             }
         }
 
-        private bool favorite = false;
         /// <summary>
         /// 是否收藏 本地数据
         /// </summary>
-        public bool Favorite
+        [JsonProperty(PropertyName = "Favorite")]
+        public bool IsFavorite { get; set; } = false;
+        
+        private DelegateCommand _toggleFavorite = default(DelegateCommand);
+
+        public DelegateCommand ToggleFavorite => _toggleFavorite ?? (_toggleFavorite = new DelegateCommand(ExecuteToggleFavoriteCommand, CanExecuteToggleFavoriteCommand));
+
+        private bool CanExecuteToggleFavoriteCommand()
         {
-            get
-            {
-                return favorite;
-            }
-            set
-            {
-                favorite = value;
-                OnPropertyChanged();
-            }
+            return true;
+        }
+
+        private void ExecuteToggleFavoriteCommand()
+        {
+            IsFavorite = !IsFavorite;
         }
     }
 }

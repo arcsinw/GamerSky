@@ -6,10 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:GamerSky.Core.Helper"
-    xmlns:converter="using:GamerSky.Converter"
+    xmlns:converter="using:GamerSky.Converters"
     xmlns:vm="using:GamerSky.Core.ViewModel"    
     mc:Ignorable="d"
-    NavigationCacheMode="Disabled"
+    NavigationCacheMode="Enabled"
     RequestedTheme="{Binding AppTheme}">
 
     <Page.DataContext>
@@ -546,11 +546,10 @@
         <CommandBar x:Name="appBar" Visibility="Collapsed">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Save" Label="保存" x:Name="saveAppBar" Click="saveAppBar_Click"/>
-                <AppBarButton Label="HD" x:Name="hdAppBar" Click="hdAppBar_Click" Visibility="Collapsed">
+                <AppBarButton Label="HD" x:Name="hdAppBar" Click="hdAppBar_Click">
                     <AppBarButton.Icon>
-                        <BitmapIcon UriSource="ms-appx:///Assets/hd_picture.png"/>
+                        <BitmapIcon UriSource="ms-appx:///Assets/Images/picture_origin.png"/>
                     </AppBarButton.Icon>
-
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>

@@ -94,9 +94,9 @@ namespace GamerSky.Core.ViewModel
             {
                 foreach (var item in allSubscribes)
                 {
-                    if (MySubscribes.Any((x) => x.sourceId == item.sourceId))
+                    if (MySubscribes.Any((x) => x.SourceId == item.SourceId))
                     {
-                        item.Favorite = true;
+                        item.IsFavorite = true;
                     }
                     AllSubscribes.Add(item);
                 }
@@ -116,9 +116,9 @@ namespace GamerSky.Core.ViewModel
             {
                 foreach (var item in hotSubscribes)
                 {
-                    if (MySubscribes.Any((x)=>x.sourceId == item.sourceId))
+                    if (MySubscribes.Any((x)=>x.SourceId == item.SourceId))
                     {
-                        item.Favorite = true;
+                        item.IsFavorite = true;
                     }
                     HotSubscribes.Add(item);
                 }

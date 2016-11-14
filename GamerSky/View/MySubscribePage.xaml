@@ -24,22 +24,22 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <!--#region PlaceHolderImage-->
-                <Image Source="{Binding DefaultBitmap}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
+                <Image Source="{ThemeResource EssayPlaceHolderImage}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
                 <!--#endregion-->
                 <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                     <Image.Source>
-                        <BitmapImage UriSource="{Binding thumbnailUrl}"/>
+                        <BitmapImage UriSource="{Binding ThumbnailUrl}"/>
                     </Image.Source>
                 </Image>
                 <Grid Grid.Column="1" Margin="5,0">
-                    <TextBlock Text="{Binding sourceName}" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBlock Text="{Binding SourceName}" TextWrapping="Wrap" VerticalAlignment="Top"/>
                     <TextBlock  Margin="0,4,0,0" VerticalAlignment="Bottom">
-                    <Run Text="{Binding cnt}"/>
+                    <Run Text="{Binding Count}"/>
                     <Run Text="人订阅"/>
                     </TextBlock>
                 </Grid>
                 <Button Grid.Column="3" HorizontalAlignment="Center" 
-                         Style="{Binding Favorite,Converter={StaticResource BoolToStyleConverter}}"
+                         Style="{Binding IsFavorite,Converter={StaticResource BoolToStyleConverter}}"
                          Click="Button_Click"/>
             </Grid>
         </DataTemplate>
@@ -64,8 +64,8 @@
             <PivotItem Header="热门"  Margin="0">
                 <pr:PullToRefreshBox  RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView x:Name="hotSubscribeListView" ItemsSource="{Binding HotSubscribes}" 
-                          IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick"
-                          SelectionMode="None"  
+                          IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick" 
+                          Style="{ThemeResource LightListView}"
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
                 </ListView>
@@ -74,8 +74,8 @@
             <PivotItem Header="全部" Margin="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                     <ListView x:Name="allSubscribeListView" ItemsSource="{Binding AllSubscribes}" 
-                          IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick"
-                          SelectionMode="None" 
+                          IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick" 
+                          Style="{ThemeResource LightListView}" 
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
                     </ListView>
@@ -84,8 +84,8 @@
             <PivotItem Header="我的" Margin="0">
                 <pr:PullToRefreshBox  RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                     <ListView x:Name="mySubscribeListView" ItemsSource="{Binding MySubscribes}" 
-                          IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick"
-                          SelectionMode="None"  
+                          IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick" 
+                          Style="{ThemeResource LightListView}"
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
                     </ListView>

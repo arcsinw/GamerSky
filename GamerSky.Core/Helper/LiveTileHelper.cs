@@ -125,7 +125,7 @@ namespace GamerSky.Core.Helper
                     {
                         var item = essays[i];
                         var doc = new XmlDocument();
-                        var xml = string.Format(TileTemplateXml, item.thumbnailURLs[0], item.title, item.authorName);
+                        var xml = string.Format(TileTemplateXml, item.ThumbnailURLs[0], item.Title, item.AuthorName);
                         doc.LoadXml(WebUtility.HtmlDecode(xml), new XmlLoadSettings
                         {
                             ElementContentWhiteSpace = false,

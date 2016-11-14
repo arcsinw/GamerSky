@@ -37,8 +37,7 @@ namespace GamerSky.View
         /// 当前点击的图片url
         /// </summary>
         private string currentImageUrl;
-         
-        private bool isDOMLoadCompleted = false;
+          
         public EssayDetail()
         {
             this.InitializeComponent();
@@ -110,36 +109,30 @@ namespace GamerSky.View
         /// 设置夜间模式
         /// </summary>
         public async void NightMode()
-        {
-            if (isDOMLoadCompleted)
+        { 
+            try
             {
-                try
-                {
-                    await webView.InvokeScriptAsync("NightMode", new[] { "" });
-                }
-                catch (Exception e)
-                {
-
-                }
+                await webView.InvokeScriptAsync("NightMode", new[] { "" });
             }
+            catch
+            {
+
+            } 
         }
 
         /// <summary>
         /// 日间模式
         /// </summary>
         public async void DayMode()
-        {
-            if (isDOMLoadCompleted)
+        { 
+            try
             {
-                try
-                {
-                    await webView.InvokeScriptAsync("DayMode", new[] { "" });
-                }
-                catch (Exception e)
-                {
-
-                }
+                await webView.InvokeScriptAsync("DayMode", new[] { "" });
             }
+            catch 
+            {
+
+            } 
         }
 
         #endregion
@@ -336,7 +329,7 @@ namespace GamerSky.View
 
             Debug.WriteLine(args.Uri);
 
-            if(args.Uri.Query.EndsWith(".jpg",StringComparison.CurrentCultureIgnoreCase))
+            if(args.Uri.Query.EndsWith(".jpg || .png || .gif",StringComparison.CurrentCultureIgnoreCase))
             {
                 currentImageUrl = args.Uri.ToString();
                 Debug.WriteLine("ClickImageUrl：" + currentImageUrl);
@@ -368,8 +361,7 @@ namespace GamerSky.View
         }
          
         private void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
-        {
-            isDOMLoadCompleted = true;
+        { 
             GetAllPictures();
         }
 
@@ -379,9 +371,9 @@ namespace GamerSky.View
             essayResult = e.Parameter as Essay;
             if (essayResult != null)
             {
-                if (essayResult.contentId.Equals("0"))
+                if (essayResult.ContentId.Equals("0"))
                 {
-                    webView.Navigate(new Uri(essayResult.contentURL));
+                    webView.Navigate(new Uri(essayResult.ContentURL));
                 }
                 else
                 {

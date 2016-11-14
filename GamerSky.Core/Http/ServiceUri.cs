@@ -73,6 +73,12 @@ namespace GamerSky.Core.Http
         public const string Login = "http://appapi2.gamersky.com/v2/login";
 
         /// <summary>
+        /// Add a comment
+        /// {0} CommentPostData
+        /// </summary>
+        public const string AddComment = "http://cm.gamersky.com/appapi/AddComment?jsondata={0}";
+       
+        /// <summary>
         /// 对订阅进行操作
         /// </summary>
         public const string EditSubscription = "http://appapi2.gamersky.com/v2/Editsubscription";

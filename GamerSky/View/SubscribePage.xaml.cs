@@ -147,7 +147,7 @@ namespace GamerSky.View
                 Essay essay = control.DataContext as Essay;
                 if (essay != null)
                 {
-                    MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essay.contentId);
+                    MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essay.ContentId);
                 }
             }
         }

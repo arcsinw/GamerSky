@@ -15,10 +15,26 @@ namespace GamerSky.Core.PostDataModel
     }
     public class GamePostDataRequest
     {
-        public string date;
+        public string date { get; set; }
         public string elementsCountPerPage = "10";
-        public string nodeIds = "hot";
+        /// <summary>
+        /// PC 1751
+        /// PS4 1758
+        /// PS3 1759
+        /// XBOX One 1760
+        /// XBOX 360 1752
+        /// </summary>
+        public string nodeIds { get; set; } = "hot";
         public int pageIndex;
         public string type;
+    }
+
+    public enum NodeType
+    {
+        PC = 1751,
+        PS4 = 1758,
+        PS3 = 1759,
+        X1 = 1760,
+        X360 = 1752
     }
 }

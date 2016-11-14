@@ -52,18 +52,18 @@ namespace GamerSky.Core.ViewModel
             var loginResult = await apiService.Login(UserLoginInfo.UserPassword, UserLoginInfo.UserName);
             if (loginResult != null)
             {
-                if (loginResult.errorCode.Equals("0")) //成功
+                if (loginResult.ErrorCode.Equals("0")) //成功
                 {
-                    if(loginResult.result !=null)
+                    if(loginResult.Result !=null)
                     {
-                        DataShareManager.Current.UpdateUser(loginResult.result);
+                        DataShareManager.Current.UpdateUser(loginResult.Result);
                     }
                 }
                 else
                 {
                     await Window.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
                     {
-                        await new MessageDialog(loginResult.errorMessage).ShowAsync();
+                        await new MessageDialog(loginResult.ErrorMessage).ShowAsync();
                     });
                 }
             }

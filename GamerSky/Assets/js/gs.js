@@ -52,19 +52,16 @@ function NightMode() {
 }
 
 //向webview发出通知
-function SendNotify(notifyString)
-{
+function SendNotify(notifyString) {
     window.external.notify(notifyString);
 }
 
 //获取所有的图片
-function GetAllPictures()
-{
+function GetAllPictures() {
     var imgs = document.getElementsByTagName('img');
     var imgArray = new Array();
 
-    for (var i = 0; i < imgs.length; i++)
-    {
+    for (var i = 0; i < imgs.length; i++) {
         var img = new Object();
         img.src = imgs[i].src;
         img.hdsrc = imgs[i].parentNode.href;
@@ -76,34 +73,31 @@ function GetAllPictures()
 }
 
 // 转换为数字
-function intval(v)
-{
+function intval(v) {
     v = parseInt(v);
     return isNaN(v) ? 0 : v;
 }
 
 // 获取元素信息
-function getPos(e)
-{
+function getPos(e) {
     var l = 0;
-    var t  = 0;
+    var t = 0;
     var w = intval(e.style.width);
     var h = intval(e.style.height);
     var wb = e.offsetWidth;
     var hb = e.offsetHeight;
-    while (e.offsetParent){
-        l += e.offsetLeft + (e.currentStyle?intval(e.currentStyle.borderLeftWidth):0);
-        t += e.offsetTop  + (e.currentStyle?intval(e.currentStyle.borderTopWidth):0);
+    while (e.offsetParent) {
+        l += e.offsetLeft + (e.currentStyle ? intval(e.currentStyle.borderLeftWidth) : 0);
+        t += e.offsetTop + (e.currentStyle ? intval(e.currentStyle.borderTopWidth) : 0);
         e = e.offsetParent;
     }
-    l += e.offsetLeft + (e.currentStyle?intval(e.currentStyle.borderLeftWidth):0);
-    t  += e.offsetTop  + (e.currentStyle?intval(e.currentStyle.borderTopWidth):0);
-    return {x:l, y:t, w:w, h:h, wb:wb, hb:hb};
+    l += e.offsetLeft + (e.currentStyle ? intval(e.currentStyle.borderLeftWidth) : 0);
+    t += e.offsetTop + (e.currentStyle ? intval(e.currentStyle.borderTopWidth) : 0);
+    return { x: l, y: t, w: w, h: h, wb: wb, hb: hb };
 }
 
 // 获取滚动条信息
-function getScroll()
-{
+function getScroll() {
     var t, l, w, h;
 
     if (document.documentElement && document.documentElement.scrollTop) {
@@ -121,33 +115,32 @@ function getScroll()
 }
 
 // 锚点(Anchor)间平滑跳转
-function scroller(el, duration)
-{
-    if(typeof el != 'object') { el = document.getElementById(el); }
+function scroller(el, duration) {
+    if (typeof el != 'object') { el = document.getElementById(el); }
 
-    if(!el) return;
+    if (!el) return;
 
     var z = this;
     z.el = el;
     z.p = getPos(el);
     z.s = getScroll();
-    z.clear = function(){window.clearInterval(z.timer);z.timer=null};
-    z.t=(new Date).getTime();
+    z.clear = function () { window.clearInterval(z.timer); z.timer = null };
+    z.t = (new Date).getTime();
 
-    z.step = function(){
+    z.step = function () {
         var t = (new Date).getTime();
         var p = (t - z.t) / duration;
         if (t >= duration + z.t) {
             z.clear();
-            window.setTimeout(function(){z.scroll(z.p.y, z.p.x)},13);
+            window.setTimeout(function () { z.scroll(z.p.y, z.p.x) }, 13);
         } else {
-            st = ((-Math.cos(p*Math.PI)/2) + 0.5) * (z.p.y-z.s.t) + z.s.t;
-            sl = ((-Math.cos(p*Math.PI)/2) + 0.5) * (z.p.x-z.s.l) + z.s.l;
+            st = ((-Math.cos(p * Math.PI) / 2) + 0.5) * (z.p.y - z.s.t) + z.s.t;
+            sl = ((-Math.cos(p * Math.PI) / 2) + 0.5) * (z.p.x - z.s.l) + z.s.l;
             z.scroll(st, sl);
         }
     };
-    z.scroll = function (t, l){window.scrollTo(l, t)};
-    z.timer = window.setInterval(function(){z.step();},13);
+    z.scroll = function (t, l) { window.scrollTo(l, t) };
+    z.timer = window.setInterval(function () { z.step(); }, 13);
 }
 
 
@@ -165,16 +158,14 @@ var gestureVector = 1.5;
 
 var translateX;
 //手势操作初始化
-function InitGesture(body)
-{
+function InitGesture(body) {
     //var body = document.getElementsByTagName('body')[0];
     AddEvent(body, eventListener);
-	 
+
 }
 
 //为targetId指定的element添加手势事件
-function AddEvent(target,eventListener)
-{
+function AddEvent(target, eventListener) {
     target.addEventListener("MSGestureStart", eventListener, false);
     target.addEventListener("MSGestureEnd", eventListener, false);
     target.addEventListener("MSGestureChange", eventListener, false);
@@ -201,20 +192,20 @@ function onPointDown(e) {
 //事件处理
 function eventListener(event) {
     var myGesture = event.gestureObject;
-   
+
     if (event.type == 'MSGestureStart') {
         gestureStartX = event.clientX;
     }
-    //else if(event.type == "MSInertialStart")
-    //{
-    //    SendNotify("MSInertialStart");
-    //    translateX = event.clientX - gestureStartX;
-    //    SendNotify("clientX " + clientX + "gestureStartX " + gestureStartX + "translateX "+translateX);
-    //    if(event.velocityX > 50)
-    //    {
-    //        SendNotify("gestures : goforward");
-    //    }
-    //}
+        //else if(event.type == "MSInertialStart")
+        //{
+        //    SendNotify("MSInertialStart");
+        //    translateX = event.clientX - gestureStartX;
+        //    SendNotify("clientX " + clientX + "gestureStartX " + gestureStartX + "translateX "+translateX);
+        //    if(event.velocityX > 50)
+        //    {
+        //        SendNotify("gestures : goforward");
+        //    }
+        //}
     else if (event.type == 'MSGestureChange') {
         if (gestureStartX == 'undefined') {
             gestureStartX = event.clientX;

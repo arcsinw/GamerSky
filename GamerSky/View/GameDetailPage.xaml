@@ -21,15 +21,15 @@
                 <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                     <!--Source="{Binding ThumbnailBitmap[0]}"-->
                     <Image.Source>
-                        <BitmapImage UriSource="{Binding thumbnailUrl}"/>
+                        <BitmapImage UriSource="{Binding ThumbnailUrl}"/>
                     </Image.Source>
                 </Image>
-                <TextBlock Text="{Binding title}" Grid.Column="1" HorizontalAlignment="Stretch" 
+                <TextBlock Text="{Binding Title}" Grid.Column="1" HorizontalAlignment="Stretch" 
                                                Margin="5,2" TextWrapping="Wrap"  VerticalAlignment="Top"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>
-    
+
     <Page.DataContext>
         <vm:GameDetailViewModel x:Name="viewModel"/>
     </Page.DataContext>
@@ -56,20 +56,27 @@
                     </VisualState>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-         
+
             <!--标题栏-->
             <Grid MinHeight="48" VerticalAlignment="Top" Background="{ThemeResource ThemeColorBrush}">
                 <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}">
                     <SymbolIcon Symbol="Back"/>
                 </Button>
-                <TextBlock Text="{Binding title}" Style="{ThemeResource PageTitleStyle}"/>
+                <TextBlock Text="{Binding Title}" Style="{ThemeResource PageTitleStyle}"/>
             </Grid>
         </Grid>
         <!--#endregion-->
-        
+
         <!--#region 游戏详情-->
         <Grid Grid.Row="0" DataContext="{Binding GameDetail}" 
-                  Background="{Binding backgroundURL}">
+                   >
+            <Grid.Background>
+                <ImageBrush>
+                    <ImageBrush.ImageSource>
+                        <BitmapImage UriSource="{Binding BackgroundURL}"/>
+                    </ImageBrush.ImageSource>
+                </ImageBrush>
+            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="2*"/>
@@ -77,7 +84,7 @@
             <Image Grid.Column="0" Margin="12,0"
                    HorizontalAlignment="Stretch" VerticalAlignment="Top"
                    Stretch="Uniform"
-                   Source="{Binding thumbnailURL}"/>
+                   Source="{Binding ThumbnailURL}"/>
             <Grid Grid.Column="1" >
                 <!--<Grid.Resources>
                     <Style TargetType="TextBlock">
@@ -85,22 +92,22 @@
                     </Style>
                 </Grid.Resources>-->
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="{Binding title}" />
+                    <TextBlock Text="{Binding Title}" />
                     <TextBlock>
                         <Run Text="发售日期："></Run>
-                        <Run Text="{Binding sellTime}"/>
+                        <Run Text="{Binding SellTime}"/>
                     </TextBlock>
                     <TextBlock>
                         <Run Text="平台："/>
-                        <Run Text="{Binding platform}"/>
+                        <Run Text="{Binding Platform}"/>
                     </TextBlock>
                     <TextBlock>
                         <Run Text="游戏类型："/>
-                        <Run Text="{Binding gameType}"/>
+                        <Run Text="{Binding GameType}"/>
                     </TextBlock>
                     <TextBlock>
                         <Run Text="发行商："/>
-                        <Run Text="{Binding developer}"/>
+                        <Run Text="{Binding Developer}"/>
                     </TextBlock>
                     <Button HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                             Content="关注"/>
@@ -108,7 +115,7 @@
             </Grid>
         </Grid>
         <!--#endregion-->
-        
+
         <!--#region 文章栏-->
         <Pivot Grid.Row="1" Style="{ThemeResource StrategyPivotStyle}"
                SelectionChanged="Pivot_SelectionChanged"
@@ -116,17 +123,9 @@
             <PivotItem Header="策略" Margin="0">
                 <pr:PullToRefreshBox>
                     <ListView ItemsSource="{Binding GameDetailNews}"
-                              ItemTemplate="{StaticResource EssayDataTemplate}">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Margin" Value="0"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
+                              ItemTemplate="{StaticResource EssayDataTemplate}"
+                              Style="{ThemeResource LightListView}"
+                              ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"> 
                     </ListView>
                 </pr:PullToRefreshBox>
             </PivotItem>
@@ -134,17 +133,9 @@
                 <pr:PullToRefreshBox>
                     <ListView ItemsSource="{Binding GameDetailStrategys}"
                             ItemTemplate="{StaticResource EssayDataTemplate}"
-                              >
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Margin" Value="0"/>
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
-                                <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
+                              Style="{ThemeResource LightListView}"
+                              ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                              > 
                     </ListView>
                 </pr:PullToRefreshBox>
             </PivotItem>

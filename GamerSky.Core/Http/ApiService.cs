@@ -11,7 +11,9 @@ using GamerSky.Core.Helper;
 using GamerSky.Core.Http;
 using GamerSky.Core.Model;
 using GamerSky.Core.PostDataModel;
-using GamerSky.Core.ResultDataModel;
+using GamerSky.Core.ResultModel;
+using GamerSky.Core.PostModel;
+using System.Net;
 
 namespace GamerSky.Core.Http
 {
@@ -27,9 +29,9 @@ namespace GamerSky.Core.Http
         {
             string filename = "channelList.json";
             ChannelResult channelResult = new ChannelResult();
-            if (NetworkManager.Current.Network == 4) //无网络
+            if (!ConnectionHelper.IsInternetAvailable) //无网络
             {
-                channelResult.result = await FileHelper.Current.ReadObjectAsync<List<Channel>>(filename);
+                channelResult.Result = await FileHelper.Current.ReadObjectAsync<List<Channel>>(filename);
             }
             else
             {
@@ -38,18 +40,18 @@ namespace GamerSky.Core.Http
                 postData.deviceId = DeviceInformationHelper.GetDeviceId();
                 postData.request = new request() { type = "0" };
                 channelResult = await PostJson<AllChannelListPostData, ChannelResult>(ServiceUri.AllChannel, postData);
-                if (channelResult !=null && channelResult.result!=null)
+                if (channelResult !=null && channelResult.Result!=null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Channel>>(channelResult.result, filename);
+                    await FileHelper.Current.WriteObjectAsync<List<Channel>>(channelResult.Result, filename);
                 }
             }
 
-            if(channelResult!= null && channelResult.result !=null)
+            if(channelResult!= null && channelResult.Result !=null)
             {
-                channelResult.result.Insert(0,new Channel { isTop = "False", nodeId = 0, nodeName = "头条" });
+                channelResult.Result.Insert(0,new Channel { isTop = "False", nodeId = 0, nodeName = "头条" });
             }
 
-            return channelResult?.result;
+            return channelResult?.Result;
         }
         
         /// <summary>
@@ -62,9 +64,9 @@ namespace GamerSky.Core.Http
         {
             string filename = "essayList_"+nodeId+"_"+pageIndex+".json";
             EssayResult essayResult = new EssayResult();
-            if (NetworkManager.Current.Network == 4) //无网络
+            if (!ConnectionHelper.IsInternetAvailable) //无网络
             {
-                essayResult.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
+                essayResult.Result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
@@ -79,13 +81,13 @@ namespace GamerSky.Core.Http
                     type = "null",
                 };
                 essayResult = await PostJson<AllChannelListPostData, EssayResult>(ServiceUri.AllChannelList, postData);
-                if (essayResult != null && essayResult.result!=null)
+                if (essayResult != null && essayResult.Result!=null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.result, filename);
+                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.Result, filename);
                 }
             }
             
-            return essayResult?.result;
+            return essayResult?.Result;
         }
 
         ///// <summary>
@@ -109,9 +111,9 @@ namespace GamerSky.Core.Http
         {
             string filename = "news_" + contentId + ".json";
             NewsResult newsResult = new NewsResult();
-            if (NetworkManager.Current.Network == 4)  //无网络
+            if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
-                newsResult.result = await FileHelper.Current.ReadObjectAsync<News>(filename);
+                newsResult.Result = await FileHelper.Current.ReadObjectAsync<News>(filename);
             }
             else
             {
@@ -119,14 +121,14 @@ namespace GamerSky.Core.Http
                 postData.request = new request { contentId = contentId,pageIndex =1 };
                 postData.deviceId = DeviceInformationHelper.GetDeviceId();
                 newsResult = await PostJson<AllChannelListPostData, NewsResult>(ServiceUri.TwoArticle, postData);
-                if (newsResult != null && newsResult.result != null)
+                if (newsResult != null && newsResult.Result != null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<News>(newsResult.result, filename);
+                    await FileHelper.Current.WriteObjectAsync<News>(newsResult.Result, filename);
                 }
 
             }
 
-            return newsResult?.result;
+            return newsResult?.Result;
         }
 
         /// <summary>
@@ -138,9 +140,9 @@ namespace GamerSky.Core.Http
         {
             string filename = "relatedReadings_" + contentId + ".json";
             RelatedReadingsResult readings = new RelatedReadingsResult();
-            if (NetworkManager.Current.Network == 4)  //无网络
+            if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
-                readings.result = await FileHelper.Current.ReadObjectAsync<List<RelatedReadings>>(filename);
+                readings.Result = await FileHelper.Current.ReadObjectAsync<List<RelatedReadings>>(filename);
             }
             else
             {
@@ -148,13 +150,13 @@ namespace GamerSky.Core.Http
                 postData.request = new RelatedReadingRequest{ contentId = contentId, contentType = contentType};
                 postData.deviceId = DeviceInformationHelper.GetDeviceId();
                 readings = await PostJson<RelatedReadingPostData, RelatedReadingsResult>(ServiceUri.TwoCorrelation, postData);
-                if (readings != null && readings.result != null)
+                if (readings != null && readings.Result != null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<RelatedReadings>>(readings.result, filename);
+                    await FileHelper.Current.WriteObjectAsync<List<RelatedReadings>>(readings.Result, filename);
                 }
             }
   
-            return readings?.result;
+            return readings?.Result;
         }
 
         /// <summary>
@@ -165,22 +167,22 @@ namespace GamerSky.Core.Http
         {
             string filename = "focusStrategys.json";
             StrategyResult strategyResult = new StrategyResult();
-            if (NetworkManager.Current.Network == 4)  //无网络
+            if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
-                strategyResult.result = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(filename);
+                strategyResult.Result = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(filename);
             }
             else
             {
                 StrategyPostData postData = new StrategyPostData();
                 postData.request = new StrategyRequest { pageIndex = 1, pageCount = pageCount, type = type };
                 strategyResult = await PostJson<StrategyPostData, StrategyResult>(ServiceUri.Strategy, postData);
-                if (strategyResult != null && strategyResult.result != null)
+                if (strategyResult != null && strategyResult.Result != null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Strategy>>(strategyResult.result, filename);
+                    await FileHelper.Current.WriteObjectAsync<List<Strategy>>(strategyResult.Result, filename);
                 }
             }
 
-            return strategyResult?.result;
+            return strategyResult?.Result;
         }
 
         /// <summary>
@@ -191,7 +193,7 @@ namespace GamerSky.Core.Http
         {
             string filename = "allStrategys.json";
             List<Strategy> allStrategys = new List<Strategy>();
-            if (NetworkManager.Current.Network == 4)  //无网络
+            if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
                 allStrategys = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(filename);
             }
@@ -216,22 +218,22 @@ namespace GamerSky.Core.Http
         {
             EssayResult essayResult = new EssayResult();
             string filename = "gameStrategys_" + specialID + ".json";
-            if (NetworkManager.Current.Network == 4)  //无网络
+            if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
-                essayResult.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
+                essayResult.Result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
                 AllChannelListPostData postData = new AllChannelListPostData();
                 postData.request = new request { elementsCountPerPage = 20, nodeIds = specialID, pageIndex = pageIndex, parentNodeId = "strategy" };
                 essayResult = await PostJson<AllChannelListPostData, EssayResult>(ServiceUri.GameStrategys, postData);
-                if (essayResult != null && essayResult.result != null)
+                if (essayResult != null && essayResult.Result != null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.result, filename);
+                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.Result, filename);
                 }
             }
 
-            return essayResult?.result ;
+            return essayResult?.Result ;
         }
 
 
@@ -244,7 +246,7 @@ namespace GamerSky.Core.Http
         {
             string filename = "searchHotKey_"+searchType+".json";
             SearchResult searchResult = new SearchResult();
-            if (NetworkManager.Current.Network == 4)  //无网络
+            if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
                 searchResult.result = await FileHelper.Current.ReadObjectAsync<List<string>>(filename);
             }
@@ -270,20 +272,20 @@ namespace GamerSky.Core.Http
         {
             string filename = "subscribeHotKey_" + type + ".json";
             SubscribeResult subscribeResult = new SubscribeResult();
-            if (NetworkManager.Current.Network == 4)  //无网络
+            if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
-                subscribeResult.result = await FileHelper.Current.ReadObjectAsync<List<Subscribe>>(filename);
+                subscribeResult.Result = await FileHelper.Current.ReadObjectAsync<List<Subscribe>>(filename);
             }
             else
             {
                 SubscribeSearchPostData postData = new SubscribeSearchPostData { request = new SubscribeSearchRequest { type = type } };
                 subscribeResult = await PostJson<SubscribeSearchPostData, SubscribeResult>(ServiceUri.Subscribe, postData);
-                if (subscribeResult != null && subscribeResult.result != null)
+                if (subscribeResult != null && subscribeResult.Result != null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Subscribe>>(subscribeResult.result, filename);
+                    await FileHelper.Current.WriteObjectAsync<List<Subscribe>>(subscribeResult.Result, filename);
                 }
             }
-            return subscribeResult?.result;
+            return subscribeResult?.Result;
         }
 
         /// <summary>
@@ -297,7 +299,7 @@ namespace GamerSky.Core.Http
         public async Task<List<Essay>> SearchByKey(string searchKey,SearchTypeEnum searchType,int pageIndex)
         {
             EssayResult essayResult = new EssayResult();
-            if (NetworkManager.Current.Network == 4) //无网络
+            if (!ConnectionHelper.IsInternetAvailable) //无网络
             {
             }
             else
@@ -308,7 +310,7 @@ namespace GamerSky.Core.Http
                 essayResult = await PostJson<SearchPostData, EssayResult>(ServiceUri.Search, postData);
             }
 
-            return essayResult?.result;
+            return essayResult?.Result;
         }
 
         /// <summary>
@@ -321,9 +323,9 @@ namespace GamerSky.Core.Http
         {
             EssayResult subscribeContent = new EssayResult();
             string filename = "subscribeContent_" + sourceId + ".json";
-            if (NetworkManager.Current.Network == 4)  //无网络
+            if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
-                subscribeContent.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
+                subscribeContent.Result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
@@ -331,13 +333,13 @@ namespace GamerSky.Core.Http
                 postData.request = new SubscribeContentRequest { nodeIds = sourceId, pageCount = 10, pageIndex = pageIndex };
                 subscribeContent = await PostJson<SubscribeContentPostData, EssayResult>(ServiceUri.SubscribeContent, postData);
 
-                if (subscribeContent != null && subscribeContent.result != null)
+                if (subscribeContent != null && subscribeContent.Result != null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(subscribeContent.result, filename);
+                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(subscribeContent.Result, filename);
                 }
             }
 
-            return subscribeContent?.result;
+            return subscribeContent?.Result;
         }
 
         /// <summary>
@@ -355,6 +357,33 @@ namespace GamerSky.Core.Http
         }
 
         /// <summary>
+        /// Add a comment
+        /// </summary>
+        /// <param name="loginToken"></param>
+        /// <param name="topicId"></param>
+        /// <param name="topicUrl"></param>
+        /// <param name="topicTitle"></param>
+        /// <param name="content"></param>
+        /// <param name="replyId"></param>
+        /// <returns></returns>
+        public async Task<CommentResult> AddComment(string loginToken,string topicId,
+            string topicUrl,string topicTitle,string content,string replyId)
+        {
+            CommentPostData postData = new CommentPostData
+            {
+                LoginToken = loginToken,
+                TopicId = topicId,
+                TopicTitle = topicTitle,
+                TopicUrl = topicUrl,
+                Content = content,
+                ReplyId = replyId
+            };
+
+            var result = await GetJson<CommentResult>(string.Format(ServiceUri.AddComment, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
+            return result;
+        }
+
+        /// <summary>
         /// 获取要闻
         /// </summary>
         /// <returns></returns>
@@ -362,22 +391,22 @@ namespace GamerSky.Core.Http
         {
             string filename = "yaowen.json";
             EssayResult essayResult = new EssayResult();
-            if (NetworkManager.Current.Network == 4) //无网络
+            if (!ConnectionHelper.IsInternetAvailable) //无网络
             {
-                essayResult.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
+                essayResult.Result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
                 YaowenPostData postData = new YaowenPostData();
                 postData.request = new YaowenRequest(){ pageIndex = pageIndex };
                 essayResult = await PostJson<YaowenPostData, EssayResult>(ServiceUri.AllChannelList, postData);
-                if(essayResult!=null && essayResult.result!= null)
+                if(essayResult!=null && essayResult.Result!= null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.result, filename);
+                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.Result, filename);
                 }
             }
 
-            return essayResult?.result;
+            return essayResult?.Result;
         }
 
         /// <summary>
@@ -388,7 +417,7 @@ namespace GamerSky.Core.Http
         {
             string filename = "adStart" + ".json";
             List<AdStart> adStarts = new List<AdStart>();
-            if (NetworkManager.Current.Network == 4)
+            if (!ConnectionHelper.IsInternetAvailable)
             {
                 adStarts = await FileHelper.Current.ReadObjectAsync<List<AdStart>>(filename);
             }
@@ -397,9 +426,9 @@ namespace GamerSky.Core.Http
                 AdStartPostData postData = new AdStartPostData();
                 AdStartResult adStartResult = await PostJson<AdStartPostData, AdStartResult>(ServiceUri.AdStart, postData);
                 
-                if (adStarts != null && adStartResult?.result != null)
+                if (adStarts != null && adStartResult?.Result != null)
                 {
-                    foreach (var item in adStartResult.result)
+                    foreach (var item in adStartResult.Result)
                     {
                         adStarts.Add(item);
                     }
@@ -508,9 +537,9 @@ namespace GamerSky.Core.Http
         {
             string filename = "subscribeTopic_" + nodeIds + "_"+pageIndex+ ".json";
             EssayResult essayResult = new EssayResult();
-            if (NetworkManager.Current.Network == 4)
+            if (!ConnectionHelper.IsInternetAvailable)
             {
-                essayResult.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
+                essayResult.Result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
@@ -525,12 +554,12 @@ namespace GamerSky.Core.Http
                     type = "dingyueTopic"
                 };
                 essayResult = await PostJson<SubscribeTopicPostData, EssayResult>(ServiceUri.SubscribeTopic, postData);
-                if (essayResult != null && essayResult.result != null)
+                if (essayResult != null && essayResult.Result != null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.result, filename);
+                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.Result, filename);
                 }
             }
-            return essayResult?.result;
+            return essayResult?.Result;
         }
 
         /// <summary>
@@ -542,7 +571,7 @@ namespace GamerSky.Core.Http
         //{
         //    string filename = "subscribeContent_" + nodeIds + "_" + pageIndex + ".json";
         //    EssayResult essayResult = new EssayResult();
-        //    if (NetworkManager.Current.Network == 4)
+        //    if (!ConnectionHelper.IsInternetAvailable)
         //    {
         //        essayResult.result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
         //    }
@@ -577,7 +606,7 @@ namespace GamerSky.Core.Http
         {
             string filename = "GameList_"+pageIndex+".json";
             List<Game> gameList = new List<Game>();
-            if (NetworkManager.Current.Network == 4)
+            if (!ConnectionHelper.IsInternetAvailable)
             {
                 gameList = await FileHelper.Current.ReadObjectAsync<List<Game>>(filename);
             }
@@ -588,11 +617,42 @@ namespace GamerSky.Core.Http
                 var result = await PostJson<GamePostData, GameResult>(ServiceUri.GameList, postData);
                 if(result!= null)
                 {
-                    foreach (var item in result.result)
+                    foreach (var item in result.Result)
                     {
                         gameList.Add(item);
                     }
                     await FileHelper.Current.WriteObjectAsync<List<Game>>(gameList,filename);
+                }
+            }
+            return gameList;
+        }
+
+        /// <summary>
+        /// 游戏发售表
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="nodeIds"></param>
+        /// <returns></returns>
+        public async Task<List<Game>> GetGameReleaseList(int pageIndex,string nodeIds)
+        {
+            string filename = "GameReleaseList_" + pageIndex + ".json";
+            List<Game> gameList = new List<Game>();
+            if (!ConnectionHelper.IsInternetAvailable)
+            {
+                gameList = await FileHelper.Current.ReadObjectAsync<List<Game>>(filename);
+            }
+            else
+            {
+                GamePostData postData = new GamePostData();
+                postData.request = new GamePostDataRequest() { pageIndex = pageIndex ,nodeIds = nodeIds};
+                var result = await PostJson<GamePostData, GameResult>(ServiceUri.GameList, postData);
+                if (result != null)
+                {
+                    foreach (var item in result.Result)
+                    {
+                        gameList.Add(item);
+                    }
+                    await FileHelper.Current.WriteObjectAsync(gameList, filename);
                 }
             }
             return gameList;
@@ -608,7 +668,7 @@ namespace GamerSky.Core.Http
             GameDetailPostData postData = new GameDetailPostData();
             postData.request = new GameDetailRequest() { contentId = contentId };
             var gameDetailResult = await PostJson<GameDetailPostData, GameDetailResult>(ServiceUri.GameDetail,postData);
-            return gameDetailResult.result;
+            return gameDetailResult.Result;
         }
 
         /// <summary>
@@ -620,7 +680,7 @@ namespace GamerSky.Core.Http
             GameDetailEssayPostData postData = new GameDetailEssayPostData();
             postData.request = new GameDetailEssayRequest() { contentId = contentId, contentType = contentType, elementsCountPerPage = 10, pageIndex = pageIndex };
             var gameDetailResult = await PostJson<GameDetailEssayPostData, GameDetailEssayResult>(ServiceUri.TwoCorrelation, postData);
-            return gameDetailResult.result;
+            return gameDetailResult.Result;
         }
 
         /// <summary>
@@ -640,5 +700,7 @@ namespace GamerSky.Core.Http
         {
             return await GetGameDetailItem(contentId, pageIndex, "news");
         }
+
+
     }
 }

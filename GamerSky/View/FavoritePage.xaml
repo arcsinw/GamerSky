@@ -7,106 +7,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:GamerSky.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
+    xmlns:m="using:GamerSky.Core.Model"
+    xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
     RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">
 
-    <Page.Resources>
-        <!--BorderMargin-->
-        <Thickness x:Key="BorderMargin">0,2</Thickness>
-        <!--BorderThickness-->
-        <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
-        <!--BorderBrush-->
-        <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
-        <Thickness x:Key="GridPadding" >0</Thickness>
-        <Thickness x:Key="GridMargin">0,4</Thickness>
-        <!--有三张图的文章模板-->
-        <!--BorderThickness="{ThemeResource ListViewBorderThickness}" BorderBrush="{ThemeResource ListViewBorderBrush}"-->
-        <DataTemplate x:Key="ThreePicEssayDataTemplate" >
-            <Grid Margin="2,0" Padding="5" >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding title}" Margin="0,0,0,2"/>
-                <Grid Grid.Row="1" MinHeight="80" VerticalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <!--#region  PlaceHolderImage-->
-                    <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Margin="0,0,1,0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
-                    <Image Source="{Binding DefaultBitmap}" Grid.Column="1" Margin="0,0,1,0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
-                    <Image Source="{Binding DefaultBitmap}" Grid.Column="2" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
-                    <!--#endregion-->
-                    <Image Grid.Column="0" Stretch="Fill" Margin="0,0,1,0">
-                        <Image.Source>
-                            <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
-                        </Image.Source>
-                    </Image>
-                    <Image Grid.Column="1" Stretch="Fill" Margin="0,0,1,0">
-                        <Image.Source>
-                            <BitmapImage UriSource="{Binding thumbnailURLs[1]}"/>
-                        </Image.Source>
-                    </Image>
-                    <Image Grid.Column="2" Stretch="Fill">
-                        <Image.Source>
-                            <BitmapImage UriSource="{Binding thumbnailURLs[2]}"/>
-                        </Image.Source>
-                    </Image>
-                </Grid>
-                <TextBlock Grid.Row="2" Margin="0,2,0,0" HorizontalAlignment="Right">
-                    <Run Text="评论"/>
-                    <Run Text="{Binding commentsCount}"/>
-                </TextBlock>
-            </Grid>
-        </DataTemplate>
-        <!--一张图文章模板-->
-        <DataTemplate x:Key="OnePicEssayDataTemplate">
-            <Grid Margin="2,0" Padding="4" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
 
-                <!--默认图片-->
-                <Image Source="{Binding DefaultBitmap}" Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
-
-                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
-                    <!--Source="{Binding Thumbnails[0]}">-->
-                    <Image.Source>
-                        <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
-                    </Image.Source>
-                </Image>
-
-                <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0">
-                    <TextBlock Text="{Binding title}" TextWrapping="Wrap" VerticalAlignment="Top"/>
-                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
-                                <Run Text="{Binding commentsCount}"/>
-                                <Run Text="评论"/>
-                    </TextBlock>
-                </Grid>
-            </Grid>
-        </DataTemplate>
-        <!--无图模板-->
-        <DataTemplate x:Key="NoPicEssayDataTemplate">
-            <Grid Margin="{StaticResource GridMargin}" Padding="{StaticResource GridPadding}"
-                  >
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding title}" TextWrapping="Wrap"/>
-                <TextBlock  HorizontalAlignment="Right" Grid.Row="1" Margin="5,2" >
-                                <Run Text="{Binding commentsCount}"/>
-                                <Run Text="评论"/>
-                </TextBlock>
-            </Grid>
-        </DataTemplate>
-    </Page.Resources>
-    
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="48"/>
             <RowDefinition Height="*"/>
@@ -123,6 +30,7 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+
         <Grid Background="{ThemeResource ThemeColorBrush}">
             <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
                     Grid.Column="0">
@@ -131,34 +39,89 @@
             <TextBlock x:Uid="Collection" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
 
-        <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
-            <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                <ListView ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                      ItemsSource="{x:Bind FavoriteEssays}"
-                      x:Name="listView" IsItemClickEnabled="True"
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
+            <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
+            <ListView  SelectionMode="None" 
+                           Style="{ThemeResource LightListView}"
+                           ItemsSource="{x:Bind FavoriteEssays}"
+                           x:Name="listView" IsItemClickEnabled="False"
                           ItemClick="listView_ItemClick"
                           >
-                    <ListView.ItemTemplateSelector>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Essay">
+                        <controls:SlidableListItem MouseSlidingEnabled="True" 
+                                    HorizontalAlignment="Stretch"
+                                    LeftIcon="Favorite" 
+                                    RightIcon="Delete" 
+                                    LeftLabel="Set Favourite" 
+                                    RightLabel="Delete"
+                                    LeftBackground="SkyBlue" 
+                                    RightBackground="OrangeRed"
+                                    LeftForeground ="White" 
+                                    RightForeground ="White"
+                                    ActivationWidth="100"
+                                    IsLeftCommandEnabled="True" 
+                                    IsRightCommandEnabled="True" 
+                                    RightCommand="{Binding DeleteItem}"
+                                    RightCommandParameter="{Binding}"
+                                    LeftCommand="{x:Bind ToggleFavorite}"
+                                    IsOffsetLimited="True" 
+                                    IsPointerReleasedOnSwipingHandled="True"
+                                    MinWidth="300">
+
+                            <Grid  Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--默认图片-->
+                                <Image Source="{ThemeResource EssayPlaceHolderImage}" 
+                                       Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+
+                                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{Binding ThumbnailURLs[0]}"/>
+                                    </Image.Source>
+                                </Image>
+
+                                <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0">
+                                    <TextBlock Text="{Binding Title}"  TextWrapping="Wrap" VerticalAlignment="Top"/>
+                                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
+                                <Run Text="{Binding CommentsCount}"/>
+                                <Run Text="评论"/>
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+                        </controls:SlidableListItem>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <!--<ListView.ItemTemplateSelector>
                         <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                             ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
-                                            NoPicDt="{StaticResource NoPicEssayDataTemplate}"
-                        />
-                    </ListView.ItemTemplateSelector>
-                </ListView>
-            </pr:PullToRefreshBox>
+                                            NoPicDt="{StaticResource NoPicEssayDataTemplate}"/>
 
+                    </ListView.ItemTemplateSelector>-->
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                        <Setter Property="Margin" Value="0,1"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <!--</pr:PullToRefreshBox>-->
             <ProgressRing x:Name="progressRing" IsActive="{x:Bind IsActive,Mode=OneWay}"  Style="{ThemeResource ProgressRingStyle}"/>
 
         </Grid>
- 
+
     </Grid>
 
     <Page.BottomAppBar>
- 
+
         <CommandBar Visibility="Collapsed">
-           
+
             <CommandBar.PrimaryCommands>
-               
+
                 <AppBarButton x:Uid="Select" x:Name="selectAppbar" Click="selectAppbar_Click" >
                     <SymbolIcon Symbol="Bullets" />
                 </AppBarButton>
@@ -171,12 +134,12 @@
                     <SymbolIcon Symbol="Refresh"/>
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
-            
-            
+
+
             <CommandBar.SecondaryCommands>
-                
+
             </CommandBar.SecondaryCommands>
         </CommandBar>
-        
+
     </Page.BottomAppBar>
 </Page>

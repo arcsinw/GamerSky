@@ -36,18 +36,23 @@ namespace GamerSky.View
 
             NavigationCacheMode = NavigationCacheMode.Required;
         }
-
-        #region 九幽的数据统计
+         
         protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
+        { 
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            JYHelper.TracePageStart(this.BaseUri.LocalPath);
+            this.KeyDown += SearchPage_KeyDown;
         }
-        #endregion
+
+        private void SearchPage_KeyDown(object sender, KeyRoutedEventArgs e)
+    {
+            if (e.Key == VirtualKey.Enter)
+            {
+                Search();
+            }
+        }
 
         private void Back()
         {
@@ -90,7 +95,7 @@ namespace GamerSky.View
                     searchType = SearchTypeEnum.subscribe;
                     break;
             }
-            key = keyTextBox.Text;
+            key = searchBox.Text;
             pageIndex = 1;
             await viewModel.Search(key, searchType, pageIndex++);
 
@@ -124,7 +129,7 @@ namespace GamerSky.View
             var result = e.ClickedItem as Subscribe;
             if (result != null)
             {
-                this.Frame.Navigate(typeof(SubscribeContentPage), result.sourceId);
+                NavigationHelper.DetailFrameNavigate(typeof(SubscribeContentPage), result.SourceId);
             }
         }
 
@@ -143,7 +148,7 @@ namespace GamerSky.View
         /// <param name="e"></param>
         private void ItemClick(object sender, ItemClickEventArgs e)
         {
-            keyTextBox.Text = (string)(e.ClickedItem);
+            searchBox.Text = (string)(e.ClickedItem);
 
             Search();
         }
@@ -168,7 +173,7 @@ namespace GamerSky.View
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
             var height = DeviceInformationHelper.GetScreenWidth();
-            (Window.Current.Content as Frame)?.Navigate(typeof(EssayDetail), essayResult);
+            NavigationHelper.DetailFrameNavigate(typeof(EssayDetail), essayResult);
         }
         
         /// <summary>

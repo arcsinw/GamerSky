@@ -16,14 +16,14 @@ namespace GamerSky.Core.Http
 {
     public class ApiBaseService
     {
-        protected async Task<JsonObject> GetJson(string url)
+        protected async Task<T> GetJson<T>(string url) where T:class
         {
             try
             {
                 string json = await HttpBaseService.SendGetRequest(url);
                 if (json != null)
                 {
-                    return JsonObject.Parse(json);
+                    return JsonHelper.Deserlialize<T>(json);
                 }
                 else
                 {

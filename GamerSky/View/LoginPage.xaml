@@ -14,7 +14,7 @@
     <Page.DataContext>
         <vm:LoginPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -44,8 +44,9 @@
         <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
             <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
                 <StackPanel Padding="16">
-                    
-                    <TextBox PlaceholderText="请输入用户名" Text="{Binding Path=UserLoginInfo.UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <TextBox PlaceholderText="请输入用户名"  
+                             Text="{Binding Path=UserLoginInfo.UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Margin="0,0,0,8" Text="{Binding Path=UserLoginInfo.Errors[UserName]}" Foreground="Red"/>
                     <PasswordBox PlaceholderText="请输入密码" Password="{Binding Path=UserLoginInfo.UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                                  />
@@ -95,6 +96,7 @@
         </Grid>
 
         <ProgressRing Grid.Row="0" Grid.RowSpan="2" x:Name="progressRing"  Style="{ThemeResource ProgressRingStyle}"/>
-        
+
     </Grid>
 </Page>
+

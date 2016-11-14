@@ -19,6 +19,7 @@ using GamerSky.Core.Helper;
 using GamerSky.Core.Model;
 using GamerSky.Core.ViewModel;
 using GamerSky.Helper;
+using GamerSky.Core.Common;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -40,6 +41,23 @@ namespace GamerSky.View
 
             this.Loaded += FavoritePage_Loaded;
         }
+
+
+        private bool CanExecuteDeleteItemCommand(Essay item)
+        {
+            return true;
+        }
+
+        private void ExecuteDeleteItemCommand(Essay item)
+        {
+            FavoriteEssays.Remove(item);
+        }
+
+        private DelegateCommand<Essay> _deleteItem = default(DelegateCommand<Essay>);
+
+        public DelegateCommand<Essay> DeleteItem => _deleteItem ?? (_deleteItem = new DelegateCommand<Essay>(ExecuteDeleteItemCommand, CanExecuteDeleteItemCommand));
+
+
 
         private void FavoritePage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -167,13 +185,13 @@ namespace GamerSky.View
         {
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
-            if (!essayResult.contentType.Equals("zhuanti"))
+            if (!essayResult.ContentType.Equals("zhuanti"))
             {
                NavigationHelper.DetailFrameNavigate(typeof(EssayDetail), essayResult);
             }
             else
             {
-                NavigationHelper.DetailFrameNavigate(typeof(SubscribeContentPage), essayResult.contentId);
+                NavigationHelper.DetailFrameNavigate(typeof(SubscribeContentPage), essayResult.ContentId);
             }
         }
     }

@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 using GamerSky.Core.Helper;
 using GamerSky.Core.Http;
 using GamerSky.Core.Model;
-using GamerSky.Core.ResultDataModel;
+using GamerSky.Core.ResultModel;
 using GamerSky.Core.IncrementalLoadingCollection;
 
 namespace GamerSky.Core.ViewModel
@@ -34,7 +34,6 @@ namespace GamerSky.Core.ViewModel
             if (IsDesignMode)
             {
                 LoadData();
-
             }
             LoadData();
             GetCacheSize();
@@ -87,9 +86,9 @@ namespace GamerSky.Core.ViewModel
             if (essays == null) return;
             foreach (var item in essays)
             {
-                if (item.type.Equals("huandeng"))
+                if (item.Type.Equals("huandeng"))
                 {
-                    foreach (var c in item.childElements)
+                    foreach (var c in item.ChildElements)
                     {
                         //EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(nodeId)).First().HeaderEssays.Add(c);
                     }
@@ -98,6 +97,18 @@ namespace GamerSky.Core.ViewModel
                 EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(nodeId)).First().Essays.Add(item);
             }
             
+        }
+
+        public void RefreshEssays(int index)
+        {
+            if(index<0 || index > EssaysAndChannels.Count)
+            {
+                return;
+            }
+
+            EssaysAndChannels[index].Essays.Clear();
+            EssayIncrementalCollection e = new EssayIncrementalCollection(EssaysAndChannels[index].Channel.nodeId);
+            EssaysAndChannels[index].Essays = e;
         }
 
         /// <summary>

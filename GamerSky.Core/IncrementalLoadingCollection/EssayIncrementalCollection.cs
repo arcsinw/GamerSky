@@ -63,16 +63,15 @@ namespace GamerSky.Core.IncrementalLoadingCollection
                 {
                     foreach (var item in essays)
                     {
-                        if (item.type.Equals("huandeng"))
+                        if (item.Type.Equals("huandeng"))
                         {
-                            foreach (var c in item.childElements)
+                            foreach (var c in item.ChildElements)
                             {
                                 HeaderEssays.Add(c);
                             }
                             continue;
                         }
                         Add(item);
-                       
                     }
                 }
             }

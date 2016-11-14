@@ -188,9 +188,9 @@ namespace GamerSky.Core.ViewModel
             {
                 foreach (var item in subscribes)
                 {
-                    if(DataShareManager.Current.SubscribeList.Any(x=>x.sourceId == item.sourceId))
+                    if(DataShareManager.Current.SubscribeList.Any(x=>x.SourceId == item.SourceId))
                     {
-                        item.Favorite = true;
+                        item.IsFavorite = true;
                     }
                     HotSubscribes.Add(item);
                 }
@@ -209,14 +209,7 @@ namespace GamerSky.Core.ViewModel
             await LoadSubscribeHotKey();
             IsActive = false;
         }
-
-        /// <summary>
-        /// 加载搜索结果
-        /// </summary>
-        public void LoadSearchResult()
-        {
-
-        }
+         
         /// <summary>
         /// 按关键字搜索
         /// </summary>
@@ -226,9 +219,7 @@ namespace GamerSky.Core.ViewModel
         /// <returns></returns>
         public async Task Search(string key,SearchTypeEnum searchType,int pageIndex=1)
         {
-            IsActive = true;
-            //List<Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
-            //if (essayResults == null) return;
+            IsActive = true; 
             switch(searchType)
             {
                 case SearchTypeEnum.news:
@@ -246,7 +237,7 @@ namespace GamerSky.Core.ViewModel
                     if (strategyResult == null) return;
                     foreach (var item in strategyResult)
                     {
-                        if (item.contentType.Equals("strategy"))
+                        if (item.ContentType.Equals("strategy"))
                         {
                             Strategys.Add(item);
                         }
@@ -255,7 +246,7 @@ namespace GamerSky.Core.ViewModel
                     break;
                 case SearchTypeEnum.subscribe: //订阅查询是本地查询
                     var result = from x in HotSubscribes
-                                 where x.sourceName.Contains(key)
+                                 where x.SourceName.Contains(key)
                                  select x;
                     HotSubscribes.Clear();
                     foreach (var item in result)

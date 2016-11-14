@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converter="using:GamerSky.Converter"
+    xmlns:converter="using:GamerSky.Converters"
     >
     <Color x:Key="LightThemeColor">#D22222</Color>
     <Color x:Key="DarkThemeColor">#FF333337</Color>
@@ -19,11 +19,8 @@
     <Thickness x:Key="PhonePagePadding">12</Thickness>
     <!--平板和PC设备 页面内边距-->
     <Thickness x:Key="TabletPagePadding">24</Thickness>
-    <!--PivotHeader-->
-    <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="DarkBlue"/>
-    <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="Green"/>
 
-   <Style x:Key="LightScrollBarStyle" TargetType="ScrollBar">
+    <Style x:Key="LightScrollBarStyle" TargetType="ScrollBar">
         <Setter Property="MinWidth" Value="12"/>
         <Setter Property="MinHeight" Value="12"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -505,7 +502,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="ListView">
+    <Style TargetType="ListView" x:Key="LightListView">
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="TabNavigation" Value="Once"/>
         <Setter Property="IsSwipeEnabled" Value="True"/>
@@ -1391,6 +1388,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="White"/>
     </Style>
+    
     <!--PivotHeaderItem-->
     <Style TargetType="PivotHeaderItem">
         <Setter Property="FontSize" Value="{ThemeResource PivotHeaderItemFontSize}" />
@@ -1507,39 +1505,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-    <!--BorderMargin-->
-    <Thickness x:Key="EssayBorderMargin">0,2</Thickness>
-    <!--BorderThickness-->
-    <Thickness x:Key="EssayBorderThickness">0,0,0,1</Thickness>
-    <!--BorderBrush-->
-    <SolidColorBrush x:Key="EssayBorderBrush" Color="LightGray"/>
-    <Thickness x:Key="EssayGridMargin" >2,0</Thickness>
-    <Thickness x:Key="EssayGridPadding">4</Thickness>
-
-    <!--一张图文章模板-->
-    <DataTemplate x:Key="OnePicEssayDataTemplate">
-        <Grid Margin="2,0" Padding="4" BorderBrush="{StaticResource BorderBrush}" BorderThickness="{StaticResource BorderThickness}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="5*"/>
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
-                <!--Source="{Binding ThumbnailBitmap[0]}"-->
-                <Image.Source>
-                    <BitmapImage UriSource="{Binding thumbnailURLs[0]}"/>
-                </Image.Source>
-            </Image>
-            <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,2">
-                <TextBlock Text="{Binding title}" TextWrapping="Wrap"  VerticalAlignment="Top"/>
-                <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                <Run Text="{Binding commentsCount}"/>
-                                <Run Text="评论"/>
-                </TextBlock>
-            </Grid>
-        </Grid>
-    </DataTemplate>
-
+ 
+     
     <!--ListView.ItemsContainerStyle-->
     <Style x:Key="EssayListViewItemsContainerStyle" TargetType="ListViewItem">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -1865,7 +1832,7 @@
                                             <ContentControl.Clip>
                                                 <RectangleGeometry x:Name="HeaderClipperGeometry"/>
                                             </ContentControl.Clip>
-                                            <Grid Background="{ThemeResource ThemeColorBrush}">
+                                            <Grid Background="{ThemeResource PivotHeaderColorBrush}">
                                                 <PivotHeaderPanel x:Name="StaticHeader" Visibility="Collapsed" HorizontalAlignment="Center"/>
                                                 <PivotHeaderPanel x:Name="Header">
                                                     <PivotHeaderPanel.RenderTransform>
@@ -2438,9 +2405,6 @@
         <Setter Property="Foreground" Value="{ThemeResource ThemeColorBrush}"/>
     </Style>
 
-    <!--<Style TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
-    </Style>-->
     
     <!--日夜间资源字典-->
     <ResourceDictionary.ThemeDictionaries>
@@ -2460,7 +2424,7 @@
             <!--文字颜色-->
             <SolidColorBrush x:Key="PhoneForegroundBrush" Color="Black"/>
             <!--页面背景色-->
-            <SolidColorBrush x:Key="PageBackground" Color="WhiteSmoke"/>
+            <SolidColorBrush x:Key="PageBackgroundBrush" Color="WhiteSmoke"/>
             <!--ListView BorderBrush-->
             <SolidColorBrush x:Key="ListViewBorderBrush" Color="LightGray"/>
             <!--ListView BorderThickness-->
@@ -2470,8 +2434,6 @@
         </ResourceDictionary>
 
         <ResourceDictionary x:Key="Dark">
-            <!--主题色-->
-            <!--<Color x:Key="ThemeColor">#FF5F5F5F</Color>-->
 
             <Color x:Key="ThemeColor">#FF333337</Color>
             <SolidColorBrush x:Key="ThemeColorBrush" Color="#FF333337"/>
@@ -2486,7 +2448,7 @@
             <!--文字颜色-->
             <SolidColorBrush x:Key="PhoneForegroundBrush" Color="LightGray"/>
             <!--页面背景色-->
-            <SolidColorBrush x:Key="PageBackground" Color="#FF1A1A1B"/>
+            <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FF1A1A1B"/>
             <!--ListView BorderBrush-->
             <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF3C3C3C"/>
             <!--ListView BorderThickness-->

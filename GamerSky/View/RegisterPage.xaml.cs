@@ -34,7 +34,7 @@ namespace GamerSky.View
             apiService = new ApiService();
         }
 
-       
+
 
         private void OtherRegister()
         {
@@ -43,7 +43,7 @@ namespace GamerSky.View
 
         private void Back()
         {
-            if(Frame.CanGoBack)
+            if (Frame.CanGoBack)
             {
                 Frame.GoBack();
             }
@@ -62,19 +62,19 @@ namespace GamerSky.View
             string phoneNumber = phoneNumberTextBlock.Text;
             string userName = userNameTextBlock.Text;
 
-            var verificationCode = await apiService.GetVerificationCode(phoneNumber, userName, "");  
-            if(verificationCode!= null && !verificationCode.errorCode.Equals("0"))
+            var verificationCode = await apiService.GetVerificationCode(phoneNumber, userName, "");
+            if (verificationCode != null && !verificationCode.ErrorCode.Equals("0"))
             {
-                UIHelper.ShowMessage(verificationCode.errorMessage);
+                UIHelper.ShowMessage(verificationCode.ErrorMessage);
             }
         }
 
         private async void Register()
         {
             var result = await ViewModel.RegisterByPhone();
-            if(result!=null && !result.Equals("0"))
+            if (result != null && !result.Equals("0"))
             {
-                UIHelper.ShowMessage(result.errorMessage);
+                UIHelper.ShowMessage(result.ErrorMessage);
             }
         }
     }

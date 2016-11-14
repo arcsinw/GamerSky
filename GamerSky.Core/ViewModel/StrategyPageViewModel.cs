@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Controls;
 using GamerSky.Core.Helper;
 using GamerSky.Core.Http;
 using GamerSky.Core.Model;
+using GamerSky.Core.IncrementalLoadingCollection;
 
 namespace GamerSky.Core.ViewModel
 {
@@ -28,7 +29,7 @@ namespace GamerSky.Core.ViewModel
         /// <summary>
         /// 游戏库中游戏列表
         /// </summary>
-        public ObservableCollection<Game> Games { get; set; }
+        public GameIncrementalCollection Games { get; set; }
 
         private ApiService apiService;
 
@@ -71,9 +72,8 @@ namespace GamerSky.Core.ViewModel
 
             AllStrategys = new ObservableCollection<AlphaKeyGroup<Strategy>>();
 
-            Games = new ObservableCollection<Game>();
-
-           
+            Games = new GameIncrementalCollection();
+            
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
 
@@ -116,7 +116,7 @@ namespace GamerSky.Core.ViewModel
             {
                 //按拼音分组
                 List<AlphaKeyGroup<Strategy>> groupData = AlphaKeyGroup<Strategy>.CreateGroups(
-                    strategys, (Strategy s) => s.title, true);
+                    strategys, (Strategy s) => s.Title, true);
 
                 foreach (var item in groupData)
                 {
@@ -169,17 +169,29 @@ namespace GamerSky.Core.ViewModel
         /// <summary>
         /// 刷新游戏库游戏列表
         /// </summary>
-        public async Task RefreshGameList()
+        public void RefreshGameList()
         {
             IsActive = true;
-            Games.Clear();
-            await LoadGameList(1);
+            GameIncrementalCollection g = new GameIncrementalCollection();
+            Games = g;
+            g.OnDataLoaded += OnDataLoaded;
+            g.OnDataLoading += OnDataLoading;
+            IsActive = false;
+        }
+
+        private void OnDataLoading(object sender, EventArgs e)
+        {
+            IsActive = true;
+        }
+
+        private void OnDataLoaded(object sender, EventArgs e)
+        {
             IsActive = false;
         }
 
         public async void Subscribe(Strategy strategy)
         {
-            VerificationCode code = await apiService.EditSubscribe(SubscribeOperateEnum.add, strategy.specialID.ToString());
+            VerificationCode code = await apiService.EditSubscribe(SubscribeOperateEnum.add, strategy.SpecialID.ToString());
 
             //本地存储订阅列表
             //DataShareManager.Current.UpdateSubscribe(strategy);

@@ -7,6 +7,7 @@ using Windows.Graphics.Imaging;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using GamerSky.Core.Helper;
+using Newtonsoft.Json;
 
 namespace GamerSky.Core.Model
 {
@@ -15,17 +16,23 @@ namespace GamerSky.Core.Model
     /// </summary>
     public class Strategy
     {
-        public string favoriteCnt { get; set; }
-        public int specialID { get; set; }
+        [JsonProperty(PropertyName = "favoriteCnt")]
+        public string FavoriteCnt { get; set; }
+
+        [JsonProperty(PropertyName = "specialID")]
+        public int SpecialID { get; set; }
+
         /// <summary>
         /// 缩略图
         /// </summary>
-        public string thumbnailUrl { get; set; }
+        [JsonProperty(PropertyName = "thumbnailUrl")]
+        public string ThumbnailUrl { get; set; }
         
         /// <summary>
         /// 标题
         /// </summary>
-        public string title { get; set; }
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
     }
     
 }

@@ -27,40 +27,33 @@ namespace GamerSky.View
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private int CurrentChannelId { get; set; }
 
-        private PivotItem currentItem;
+        private int CurrentPivotIndex { get; set; }
+        
+        private PivotItem CurrentPivotItem { get; set; }
+
+        private Dictionary<int, ListView> EssayListviewDic { get; set; } = new Dictionary<int, ListView>();
 
         public MainPage()
         {
             this.InitializeComponent();
         }
-        
-        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
-        {
-
-        }
-
+         
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
-            if (!essayResult.contentType.Equals("zhuanti"))
+            if (!essayResult.ContentType.Equals("zhuanti"))
             {
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetail), essayResult);
             }
             else
             {
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essayResult.contentId);
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essayResult.ContentId);
             }
         }
-
-        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            int index = essayPivot.SelectedIndex;
-            int currentChannelId = ViewModel.EssaysAndChannels[index].Channel.nodeId;
-             
-        }
-
+          
         private void FlipView_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var essayResult = (sender as FlipView)?.SelectedItem as Essay;
@@ -71,28 +64,24 @@ namespace GamerSky.View
 
         public void ScrollToTop()
         {
-            if (currentItem != null)
-            {
-                ListView listView = Functions.FindChildOfType<ListView>(currentItem);
-                if (listView != null)
-                {
-                    listView.ScrollIntoViewSmoothly(listView.Items[0]);
-                }
+            if (EssayListviewDic[CurrentPivotIndex] != null)
+            { 
+                EssayListviewDic[CurrentPivotIndex]?.ScrollIntoViewSmoothly(EssayListviewDic[CurrentPivotIndex].Items[0]); 
             }
         }
 
         private void essayPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            CurrentPivotIndex = essayPivot.SelectedIndex;
         }
 
+        #region Pane functions
         /// <summary>
         /// 搜索
         /// </summary>
         public void NavigateToSearchPage()
         {
-            Frame.Navigate(typeof(SearchPage));
-            //splitView.IsSwipeablePaneOpen = false;
+            NavigationHelper.MasterFrameNavigate(typeof(SearchPage));
         }
 
         /// <summary>
@@ -100,8 +89,7 @@ namespace GamerSky.View
         /// </summary>
         public void YaoWen()
         {
-            this.Frame.Navigate(typeof(YaowenPage));
-            //splitView.IsSwipeablePaneOpen = false;
+            NavigationHelper.MasterFrameNavigate(typeof(YaowenPage));
         }
 
         /// <summary>
@@ -109,7 +97,7 @@ namespace GamerSky.View
         /// </summary>
         public void Favorite()
         {
-            (Window.Current.Content as Frame)?.Navigate(typeof(FavoritePage));
+            NavigationHelper.MasterFrameNavigate(typeof(FavoritePage));
         }
 
         private void Current_ShareDataChanged()
@@ -117,7 +105,7 @@ namespace GamerSky.View
             AppTheme = DataShareManager.Current.AppTheme;
         }
 
-        
+
         public ElementTheme AppTheme
         {
             get
@@ -143,7 +131,7 @@ namespace GamerSky.View
             set
             {
                 DataShareManager.Current.UpdateAPPTheme(value);
-                
+
                 UIHelper.ShowStatusBar();
             }
         }
@@ -153,8 +141,7 @@ namespace GamerSky.View
         /// </summary>
         public void NavigateToSettings()
         {
-            this.Frame.Navigate(typeof(SettingsPage));
-            //splitView.IsSwipeablePaneOpen = false;
+            NavigationHelper.MasterFrameNavigate(typeof(SettingsPage));
         }
 
         /// <summary>
@@ -162,7 +149,7 @@ namespace GamerSky.View
         /// </summary>
         public void FeedBack()
         {
-            this.Frame.Navigate(typeof(Feedback));
+            NavigationHelper.MasterFrameNavigate(typeof(Feedback));
         }
 
         /// <summary>
@@ -170,16 +157,36 @@ namespace GamerSky.View
         /// </summary>
         public void NavigateToLogin()
         {
-            //splitView.IsSwipeablePaneOpen = false;
-            this.Frame.Navigate(typeof(LoginPage));
-        }
-
+            NavigationHelper.MasterFrameNavigate(typeof(LoginPage));
+        } 
+        #endregion
+        
         private void innerTopicListView_ItemClick(object sender, ItemClickEventArgs e)
         {
 
         }
 
         private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void PullToRefreshListView_RefreshRequested(object sender, EventArgs e)
+        {
+            ViewModel.RefreshEssays(CurrentPivotIndex);
+        }
+
+        private void essayPivot_PivotItemLoaded(Pivot sender, PivotItemEventArgs args)
+        {
+            CurrentPivotItem = args.Item;
+            ListView listView = Functions.FindChildOfType<ListView>(CurrentPivotItem);
+            if (listView != null)
+            {
+                EssayListviewDic[CurrentPivotIndex] = listView;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }

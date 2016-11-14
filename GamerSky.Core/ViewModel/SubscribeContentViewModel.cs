@@ -88,16 +88,19 @@ namespace GamerSky.Core.ViewModel
             this.sourceId = sourceId;
             IsActive = true;
             List<Essay> results = await apiService.GetSubscribeContent(sourceId, pageIndex);
-            foreach (var item in results)
+            if (results != null)
             {
-                if (item.type.Equals("dingyueTitle"))
+                foreach (var item in results)
                 {
-                    HeaderSubscribe.title = item.title;
-                    HeaderSubscribe.thumbnailURLs = item.thumbnailURLs;
-                }
-                else
-                {
-                    SubscribeContens.Add(item);
+                    if (item.Type.Equals("dingyueTitle"))
+                    {
+                        HeaderSubscribe.Title = item.Title;
+                        HeaderSubscribe.ThumbnailURLs = item.ThumbnailURLs;
+                    }
+                    else
+                    {
+                        SubscribeContens.Add(item);
+                    }
                 }
             }
             IsActive = false;

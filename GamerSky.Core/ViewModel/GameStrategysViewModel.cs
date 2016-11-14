@@ -87,7 +87,7 @@ namespace GamerSky.Core.ViewModel
         {
             this.strategyResult = strategyResult;
             IsActive = true;
-            List<Essay> results = await apiService.GetGameStrategys(strategyResult.specialID,pageIndex);
+            List<Essay> results = await apiService.GetGameStrategys(strategyResult.SpecialID,pageIndex);
             foreach(var item in results)
             {
                 Strategys.Add(item);

@@ -37,7 +37,7 @@ namespace GamerSky.Core.Helper
                 foreach (var item in essays)
                 {
                     XmlDocument doc = new XmlDocument();
-                    string.Format(toastXml, item.title);
+                    string.Format(toastXml, item.Title);
                     doc.LoadXml(toastXml);
                     ToastNotification notification = new ToastNotification(doc);
                     ToastNotifier notifier = ToastNotificationManager.CreateToastNotifier();

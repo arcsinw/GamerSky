@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GamerSky.Core.ResultDataModel;
+using GamerSky.Core.ResultModel;
 
 namespace GamerSky.Core.Model
 {
