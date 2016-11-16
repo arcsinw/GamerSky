@@ -633,7 +633,7 @@ namespace GamerSky.Core.Http
         /// <param name="pageIndex"></param>
         /// <param name="nodeIds"></param>
         /// <returns></returns>
-        public async Task<List<Game>> GetGameReleaseList(int pageIndex,string nodeIds)
+        public async Task<List<Game>> GetGameReleaseList(int pageIndex,GameNodeIdEnum nodeId)
         {
             string filename = "GameReleaseList_" + pageIndex + ".json";
             List<Game> gameList = new List<Game>();
@@ -644,7 +644,7 @@ namespace GamerSky.Core.Http
             else
             {
                 GamePostData postData = new GamePostData();
-                postData.request = new GamePostDataRequest() { pageIndex = pageIndex ,nodeIds = nodeIds};
+                postData.request = new GamePostDataRequest() { pageIndex = pageIndex ,nodeIds = nodeId.ToString()};
                 var result = await PostJson<GamePostData, GameResult>(ServiceUri.GameList, postData);
                 if (result != null)
                 {
@@ -665,10 +665,20 @@ namespace GamerSky.Core.Http
         /// <returns></returns>
         public async Task<GameDetail> GetGameDetail(string contentId)
         {
-            GameDetailPostData postData = new GameDetailPostData();
-            postData.request = new GameDetailRequest() { contentId = contentId };
-            var gameDetailResult = await PostJson<GameDetailPostData, GameDetailResult>(ServiceUri.GameDetail,postData);
-            return gameDetailResult.Result;
+            GameDetail gameDetail = new GameDetail();
+            string fileName = "GameDetail_" + contentId + ".json";
+            if (!ConnectionHelper.IsInternetAvailable)
+            {
+                gameDetail = await FileHelper.Current.ReadObjectAsync<GameDetail>(fileName);
+            }
+            else
+            {
+                GameDetailPostData postData = new GameDetailPostData();
+                postData.request = new GameDetailRequest() { contentId = contentId };
+                var gameDetailResult = await PostJson<GameDetailPostData, GameDetailResult>(ServiceUri.GameDetail, postData);
+                gameDetail = gameDetailResult?.Result;
+            }
+            return gameDetail;
         }
 
         /// <summary>
@@ -677,10 +687,18 @@ namespace GamerSky.Core.Http
         /// <returns></returns>
         public async Task<List<GameDetailEssay>> GetGameDetailItem(string contentId, int pageIndex,string contentType)
         {
-            GameDetailEssayPostData postData = new GameDetailEssayPostData();
-            postData.request = new GameDetailEssayRequest() { contentId = contentId, contentType = contentType, elementsCountPerPage = 10, pageIndex = pageIndex };
-            var gameDetailResult = await PostJson<GameDetailEssayPostData, GameDetailEssayResult>(ServiceUri.TwoCorrelation, postData);
-            return gameDetailResult.Result;
+            List<GameDetailEssay> essay = new List<GameDetailEssay>();
+            if (!ConnectionHelper.IsInternetAvailable)
+            { 
+            }
+            else
+            {
+                GameDetailEssayPostData postData = new GameDetailEssayPostData();
+                postData.request = new GameDetailEssayRequest() { contentId = contentId, contentType = contentType, elementsCountPerPage = 10, pageIndex = pageIndex };
+                var gameDetailResult = await PostJson<GameDetailEssayPostData, GameDetailEssayResult>(ServiceUri.TwoCorrelation, postData);
+                essay = gameDetailResult?.Result;
+            }
+            return essay;
         }
 
         /// <summary>
@@ -689,18 +707,33 @@ namespace GamerSky.Core.Http
         /// <returns></returns>
         public async Task<List<GameDetailEssay>> GetGameDetailStrategys(string contentId,int pageIndex)
         {
-            return await GetGameDetailItem(contentId, pageIndex, "strategy");
+            List<GameDetailEssay> essays = new List<GameDetailEssay>();
+            if (!ConnectionHelper.IsInternetAvailable)
+            {
+            }
+            else
+            {
+                essays =  await GetGameDetailItem(contentId, pageIndex, "strategy");
+            }
+            return essays;
         }
 
         /// <summary>
         /// 获取GameDetail页面中 新闻
         /// </summary>
         /// <returns></returns>
-        public async Task<List<GameDetailEssay>> GetGameDetailNews(string contentId,int pageIndex)
+        public async Task<List<GameDetailEssay>> GetGameDetailNews(string contentId, int pageIndex)
         {
-            return await GetGameDetailItem(contentId, pageIndex, "news");
+            List<GameDetailEssay> essays = new List<GameDetailEssay>();
+            if (!ConnectionHelper.IsInternetAvailable)
+            {
+            }
+            else
+            {
+                essays = await GetGameDetailItem(contentId, pageIndex, "news");
+            }
+            return essays;
         }
-
 
     }
 }

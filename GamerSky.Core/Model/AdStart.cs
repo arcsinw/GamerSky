@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,14 +12,31 @@ namespace GamerSky.Core.Model
     /// </summary>
     public class AdStart
     {
-        public string adId { get; set; }
-        public string articleId { get; set; }
-        public string coordinates { get; set; }
-        public string delayTimeInSeconds { get; set; }
-        public string effecttime { get; set; }
-        public string failuretime { get; set; }
-        public string link { get; set; }
-        public string linktype { get; set; }
-        public string  picAdress { get; set; }
+        [JsonProperty(PropertyName = "adId")]
+        public string AdId { get; set; }
+
+        [JsonProperty(PropertyName = "articleId")]
+        public string ArticleId { get; set; }
+
+        [JsonProperty(PropertyName = "coordinates")]
+        public string Coordinates { get; set; }
+
+        [JsonProperty(PropertyName = "delayTimeInSeconds")]
+        public string DelayTimeInSeconds { get; set; }
+
+        [JsonProperty(PropertyName = "effecttime")]
+        public string Effecttime { get; set; }
+
+        [JsonProperty(PropertyName = "failuretime")]
+        public string Failuretime { get; set; }
+
+        [JsonProperty(PropertyName = "link")]
+        public string Link { get; set; }
+
+        [JsonProperty(PropertyName = "linktype")]
+        public string Linktype { get; set; }
+
+        [JsonProperty(PropertyName = "picAdress")]
+        public string  PicAdress { get; set; }
     }
 }

@@ -15,11 +15,12 @@ namespace GamerSky.Core.ViewModel
     public class EssayDetailViewModel : ViewModelBase
     {
         private ApiService apiService;
-        
+        private StringBuilder tempHtml = new StringBuilder();
+        public Essay EssayResult { get; set; }
+
         public EssayDetailViewModel()
         {
             apiService = new ApiService();
-        
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
@@ -27,8 +28,8 @@ namespace GamerSky.Core.ViewModel
         private void Current_ShareDataChanged()
         {
             AppTheme = DataShareManager.Current.AppTheme;
-          
         }
+         
          
         #region Properties
         private ElementTheme appTheme;
@@ -151,25 +152,17 @@ namespace GamerSky.Core.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        private ObservableCollection<RelatedReadings> relatedReadings;
+         
         /// <summary>
         /// 相关阅读
         /// </summary>
-        public ObservableCollection<RelatedReadings> RelatedReadings
-        {
-            get
-            {
-                return relatedReadings;
-            }
-            set
-            {
-                relatedReadings = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<RelatedReadings> RelatedReadings { get; set; }
+
         #endregion
-         
+
+
+        #region GenerateContent
+
         /// <summary>
         /// 生成新闻内容网页
         /// </summary>
@@ -187,11 +180,10 @@ namespace GamerSky.Core.ViewModel
                             + "<meta name=\"viewport\" content=\"width= device-width, user-scalable = no\" />"
                             + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
                             + "<meta name=\"msapplication-tap-highlight\" content=\"no\">" //wp点击无高光;
-                            + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/css/gs.css\"/>"
-                            + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/css/base.cs\"/>"
+                             + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gs.css\"/>"
                             + "<script src=\"ms-appx-web:///Assets/js/gs.js\"></script>"
                             + "<script src=\"ms-appx-web:///Assets/js/gsVideo.js\"></script>";
-                 
+
                 string title = news.Title;
                 string subTitle = news.SubTitle;
 
@@ -199,9 +191,9 @@ namespace GamerSky.Core.ViewModel
                 List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essay.ContentId, essay.ContentType);
 
                 string relatedReadingsHtml =
-                    "<div class=\"list\" id=\"gsTemplateContent_RelatedReading\">" +
-                    "<div class=\"tit yellow\">相关阅读</div>" +//相关阅读
-                           "<div class=\"txtlist\" id=\"gsTemplateContent_RelatedReadingContent\">";
+                    @"<div class=""list"" id=""gsTemplateContent_RelatedReading"">
+                    <div class=""tit yellow"" style=""border-left:5px solid #FFC600"">相关阅读</div>
+                           <div class=""txtlist"" id=""gsTemplateContent_RelatedReadingContent"">";
                 if (relatedReadings != null && relatedReadings.Count == 0)
                 {
                     relatedReadingsHtml += "";
@@ -210,18 +202,19 @@ namespace GamerSky.Core.ViewModel
                 {
                     foreach (var item in relatedReadings)
                     {
-                        relatedReadingsHtml += "<a id=\"RelatedReadings\" href=\"openPageWithContentId:" + item.contentId + "\"><div class=\"Row\">" + item.title + "</div></a>";
+                        relatedReadingsHtml += "<a class=\"Row\" href=\"openPageWithContentId:" + item.contentId + "\"><div>" + item.title + "</div></a>";
                     }
                     relatedReadingsHtml += "</div></div>";
                 }
                 #endregion
-                 
-                var html = "<!DOCTYPE html>" +
+
+                tempHtml.Clear();
+                tempHtml.Append("<!DOCTYPE html>" +
                     "<html>" +
                         "<head>" + head + "</head>" +
                         "<body quick-markup_injected=\"true\">" +
                             "<GSAppHTMLTemplate version=\"1.4.6\"/>" +
-                            //"<div id=\"ScrollToTop\"><a href=\"#top\">#</a></div>" +
+                             //"<div id=\"ScrollToTop\"><a href=\"#top\">#</a></div>" +
                              //"<div id=\"ScrollToTop\"><a href=\"javascript:scroller(body,100);\">#</a></div>" +
                              "<div id=\"body\" class=\"fontsizetwo\">" +
                                   "<h1 class=\"heading\" id=\"gsTemplateContent_Title\">" + title + "</h1>" +
@@ -230,15 +223,15 @@ namespace GamerSky.Core.ViewModel
                                   "<div class=\"content\" id=\"gsTemplateContent_MainBody\">" + mainBody + "</div>" +
                                   "<div id=\"gsTemplateContent_AD1\"></div>" +
                                   "<div class=\"list\" id=\"gsTemplateContent_RelatedTopic\">" +
-                                        "<div class=\"tit red\">相关专题</div>" +
+                                        "<div class=\"tit red\" style=\"border-left:5px solid #f22f09;\">相关专题</div>" +
                                             "<div id=\"gsTemplateContent_RelatedTopicContent\">" +
                                             "</div>" +
                                         "</div>" +
                                   "</div>" +
                                          relatedReadingsHtml +
                              "</div>" +
-                        "</body>"+
-                        "<script type=\"text/javascript\">"+
+                        "</body>" +
+                        "<script type=\"text/javascript\">" +
                         @"function resizeVideo(){
                          var winWidth = document.body.clientWidth;
 			            var iframes = document.getElementsByTagName('iframe');
@@ -265,46 +258,24 @@ namespace GamerSky.Core.ViewModel
 				            player.removeAttribute('style');
 				            player.style.width = winWidth + 'px';
 				            player.style.height = winWidth * (9 / 16) + 'px';
-			            }}"+
+			            }}" +
                         "var body = document.getElementsByTagName('body')[0]; window.onload = InitGesture(body);" +
                        @"document.onreadystatechange = function () { resizeVideo(); }
                         window.onresize = function(){
                             resizeVideo();
                     };
                     </script>" +
-                "</html>";
+                "</html>");
 
-                HtmlString = html;
-              
+                HtmlString = tempHtml.ToString() ; 
             }
             IsActive = false;
         }
 
-       //public void GenerateCommentString(Essay essayResult)
-       // {
-       //     IsActive = true;
-       //     CommentString ="<!DOCTYPE html><html><body><div id=\"SOHUCS\" sid=\"" + essayResult.contentId + "\"></div>" +
-       //                     //"<script charset=\"utf-8\" type=\"text/javascript\" src=\"http://changyan.sohu.com/upload/changyan.js\"></script>" +
-       //                     "<script type=\"text/javascript\">" +
-       //                 @"(function() {
-       //                         var expire_time = parseInt((new Date()).getTime() / (5 * 60 * 1000));
-       //                         var head = document.head || document.getElementsByTagName(""head"")[0] || document.documentElement;
-       //                         var script_version = document.createElement(""script""), script_cyan = document.createElement(""script"");
-       //                         script_version.type = script_cyan.type = ""text/javascript"";
-       //                         script_version.charset = script_cyan.charset = ""utf-8"";
-       //                         script_version.onload = function() {
-       //                             script_cyan.id = 'changyan_mobile_js';
-       //                             script_cyan.src = 'http://changyan.itc.cn/upload/mobile/wap-js/changyan_mobile.js?client_id=cyqQwkOU4&'
-       //                                             + 'conf=prod_9627c45df543c816a3ddf2d8ea686a99&version=' + cyan_resource_version;
-       //                             head.insertBefore(script_cyan, head.firstChild);
-       //                         };
-       //                         script_version.src = 'http://changyan.sohu.com/upload/mobile/wap-js/version.js?_=' + expire_time;
-       //                         head.insertBefore(script_version, head.firstChild);
-       //                 })();"+
-       //         "</script></body></html>";
-       //     IsActive = false;
-       // }
-
+        /// <summary>
+        /// 生成评论网页
+        /// </summary>
+        /// <param name="essay"></param>
         public async void GenerateCommentString(Essay essay)
         {
             IsActive = true;
@@ -312,26 +283,8 @@ namespace GamerSky.Core.ViewModel
             CommentString = await FileIO.ReadTextAsync(file);
             CommentString = CommentString.Replace("{0}", essay.Title).Replace("{1}", essay.ContentId);
 
-            //    CommentString = $@"<!DOCTYPE html><html><body>
-            //        <script src=""http://ja.gamersky.com/wap/wap.top.v1.js\""></script>
-            //        <script src = ""http://ja.gamersky.com/wap/wap.nav.bottom.v1.js""></script>
-            //        <section class=""ymw-contxt"" style=""display:none""></section>
-            //        <section class=""ymw-comm"">
-            //        <div id = ""SOHUCS"" sid=""{ essay.contentId}""></div>" +
-            //        @"<script type = ""text/javascript"" >
-            //        (function() {
-            //            var doc = document,
-            //                s = doc.createElement('script'),
-            //                h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
-            //                s.type = 'text/javascript';
-            //            s.src = 'http://j.gamersky.com/web2015/comment/wapjs/jquery.commentconfig.js?' + new Date().getTime();
-            //                h.insertBefore(s, h.firstChild);
-            //            window.SCS_NO_IFRAME = true;
-            //        })()
-            //        </script>
-            //    <script src = ""http://ja.gamersky.com/wap/wap.comm.bot.v1.js"" ></script>
-            //</section></body></html>";
             IsActive = false;
-        }
+        } 
+        #endregion
     }
 }

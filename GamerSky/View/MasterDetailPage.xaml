@@ -331,10 +331,13 @@
                                       Background="{ThemeResource ThemeColorBrush}">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
                                 <Ellipse Height="90" Width="90" HorizontalAlignment="Center">
+                                    <Ellipse.Resources>
+                                        <x:String x:Key="Uri">ms-appx:///Assets/Images/drawer_avatar.png</x:String>
+                                    </Ellipse.Resources>
                                     <Ellipse.Fill>
                                         <ImageBrush>
                                             <ImageBrush.ImageSource>
-                                                <BitmapImage UriSource="{x:Bind User.Pic,Mode=OneWay}"/>
+                                                <BitmapImage UriSource="{x:Bind User.Pic,Mode=OneWay,TargetNullValue={StaticResource Uri}}"/>
                                             </ImageBrush.ImageSource>
                                         </ImageBrush>
                                     </Ellipse.Fill>

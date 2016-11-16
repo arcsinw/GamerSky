@@ -16,14 +16,21 @@
 html
 {
 	/*-ms-content-zoom : none;*/
-	font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+	font-family: "Arial","Microsoft YaHei","黑体","宋体";
 }
 body
 {
-	overflow-x: hidden;
-	background-color: #f7f7f7;
-	text-align: justify;
-	word-break: break-word;
+	overflow-x:hidden;
+    margin:0;
+    padding:8px;
+    background-color:#f7f7f7;
+    color:#333;	
+    text-align:justify;
+	word-break:break-all;
+    -webkit-tap-highlight-color:transparent;
+	/*禁止选中内容, 禁止弹出内容菜单*/
+    -webkit-touch-callout:none;
+	-webkit-user-select:none;
 }
 .PageColorMode_Day body
 {
@@ -41,39 +48,39 @@ body
 	line-height: 28px;
 	color: #333;
 }
-.PageColorMode_Day .heading
-{
-	color: #333;
-}
-.PageColorMode_Night .heading
-{
-	color: #966122;
-}
+	.PageColorMode_Day .heading
+	{
+		color: #333;
+	}
+	.PageColorMode_Night .heading
+	{
+		color: #966122;
+	}
 .info
 {
-	margin: 0;
-	padding: 0 4px;
+	margin: 6px 0px;
 	line-height: 22px;
 	color: gray;
 	font-size: 16px;
 	color: #848484;
 }
+	.PageColorMode_Day .info {color:#848484;}
+	.PageColorMode_Night .info {color:#464950;}
 .bar
 {
-	display: block;
-	border-top: 1px solid #bbb;
-	width: auto;
-	height: auto;
-	font-size: 19px;
-}
-.PageColorMode_Day .bar
-{
 	background-color: #eaeaea;
+	margin : 10px 0px 10px 0px; 
+	width : auto;
+	height : 1px;
 }
-.PageColorMode_Night .bar
-{
-	background-color: #2a2e38;
-}
+	.PageColorMode_Day .bar
+	{
+		background-color: #eaeaea;
+	}
+	.PageColorMode_Night .bar
+	{
+		background-color: #2a2e38;
+	}
 p
 {
 	margin: 10px auto;
@@ -105,6 +112,39 @@ a
 	 
 }*/ 
 
+
+/*----------------------------
+	表格样式
+-------------------------------*/
+table {color : #ccc;}
+.table2 {margin:0 auto; width:98%; border:1.00px solid #555; border-collapse:collapse; background-color:#333; cursor:default;}
+.table2 td {padding:4px; border:1.00px solid #555;}
+.tr2 {text-align:center; background-color:#000}
+
+
+/*----------------------------
+	相关阅读
+-------------------------------*/
+#gsTemplateContent_RelatedReadingContent {margin-left:-10px; margin-right:-10px;}
+#gsTemplateContent_RelatedReadingContent .Row {padding:0px;}
+#gsTemplateContent_RelatedReadingContent .Row div {margin:0px 10px 0px 10px; white-space:nowrap; text-overflow:ellipsis;}
+
+.list {display:block; width:auto; height:auto; border-radius:2px; border:1.00px solid #e0e0e0; border-top:7px solid #ddd; border-bottom:1px solid #bbb; padding:10px 10px 0 10px;  background:#f7f7f7;}
+	.PageColorMode_Day .list {border:1.00px solid #e0e0e0; border-top:7px solid #ddd; border-bottom:1px solid #bbb; background:#f7f7f7;}
+	.PageColorMode_Night .list {border:1.00px solid #1d1c21; border-top:7px solid #0e0e0e; border-bottom:1px solid #040404; background:#17181a;}
+.list .tit {margin:0 0 10px -10px; padding-left:5px; width:auto; height:20px; line-height:20px; font-weight:bold;}
+	.PageColorMode_Day .list .tit {color:#333;}
+	.PageColorMode_Night .list .tit {color:#576476;}
+.list .txtlist {display:block; width:auto; height:auto;}
+.list .txtlist a {display:block;}
+.list .txtlist .Row {display:block; width:100%; height:40px; line-height:40px; font-size:14px; white-space:nowrap; text-overflow:ellipsis;}
+.PageColorMode_Day .list .txtlist .Row {border-top:1.00px solid #e0e0e0; color:#333;}
+.PageColorMode_Night .list .txtlist .Row {border-top:1.00px solid #2a2e38; color:#576476;}
+.list .more {display:block; border-top:1.00px solid #2a2e38; width:100%; font-size:14px; height:40px; line-height:40px; text-align:center; color:#5f5f69;}
+.PageColorMode_Day .list .more {border-top:1.00px solid #e0e0e0; color:#333;}
+.PageColorMode_Night .list .more {border-top:1.00px solid #2a2e38; color:#5f5f69;}
+.list .more a {display:block;}
+
 #ScrollToTop
 {
     position:fixed;
@@ -123,7 +163,41 @@ a
     height:40px;
 }
 
+/*------------------------------------------------ -x68
+	视频
+------------------------------------------------ -x68*/
+.GSTemplateContent_VideoBoxer
+{
+	background-color:#000;
+	background-position:center center;
+	background-repeat:no-repeat;
+}
+.GSTemplateContent_VideoBoxer .PlayButtonBackground
+{
+	float:none;
+	border-radius:40px;
+	width:80px;
+	height:80px;
+	background-position:center center;
+	background-repeat:no-repeat;
+	-webkit-filter:blur(4px);
+}
+.GSTemplateContent_VideoBoxer .PlayButton
+{
+	float:none;
+	margin-top:-80px;
+	border-radius:40px;
+	width:80px;
+	height:80px;
+	background-repeat:no-repeat;
+	background-position:center center;
+	background-size:80px 80px;
+	background-image:url(../gsAppHTMLTemplate_image/gsAppHTMLTemplate_Video_PlayButton@2x.png);
+	-webkit-filter:hue-rotate(0deg);
+}
+/**
 div,ul,li{overflow: hidden;}
 #gsTemplateContent_MainBody {line-height:150%;}
 #gsTemplateContent_MainBody p {display:block;}
 #gsTemplateContent_MainBody #youkuplayer0 img {display:inherit; visibility:visible;}
+**/

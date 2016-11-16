@@ -76,8 +76,7 @@ namespace GamerSky.Core.ViewModel
             
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
-          
+            
         }
 
         private void Current_ShareDataChanged()
@@ -172,6 +171,7 @@ namespace GamerSky.Core.ViewModel
         public void RefreshGameList()
         {
             IsActive = true;
+            Games.Clear();
             GameIncrementalCollection g = new GameIncrementalCollection();
             Games = g;
             g.OnDataLoaded += OnDataLoaded;

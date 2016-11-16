@@ -56,6 +56,14 @@ function SendNotify(notifyString) {
     window.external.notify(notifyString);
 }
 
+
+function RelationReadingClick() {
+    var relatedReadingUrl =
+                         "openPage:{\"pageID\":\"" + relatedReadingPageID + "\","
+                        + "\"pageURL\":\"" + relatedReadingPageURL + "\","
+                        + "\"openMethod\":\"default\"}";
+}
+
 //获取所有的图片
 function GetAllPictures() {
     var imgs = document.getElementsByTagName('img');

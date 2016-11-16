@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GamerSky.Core.ViewModel
 {
-    class GameSaleViewModel
+    public class GameSaleViewModel : ViewModelBase
     {
+
     }
 }

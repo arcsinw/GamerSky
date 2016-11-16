@@ -160,7 +160,7 @@ namespace GamerSky.View
                     {
                         using (Stream stream = await file.OpenStreamForWriteAsync())
                         {
-                            IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes(adStart.picAdress);
+                            IBuffer buffer = await HttpBaseService.SendGetRequestAsBytes(adStart.PicAdress);
                             stream.Write(buffer.ToArray(), 0, (int)buffer.Length);
                             await stream.FlushAsync();
                         }

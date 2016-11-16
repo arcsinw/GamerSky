@@ -392,13 +392,10 @@
 
             <Button x:Name="likeBtn" Click="likeBtn_Click" HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" Background="Transparent">
+ 
+                     <!--<BitmapImage UriSource="{x:Bind essayResult.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToIconConverter}}"/>-->
 
-                <Image>
-                    <Image.Source>
-                        <BitmapImage UriSource="{x:Bind essayResult.IsFavorite,Converter={StaticResource BoolToIconConverter},Mode=OneWay}"/>
-                    </Image.Source>
-                </Image> 
-                <!--<PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding RelativeSource={RelativeSource Self} ,Path=essayResult.IsFavorite,Converter={StaticResource BoolToIconConverter}}"/>-->
+                <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding EssayResult.IsFavorite,Converter={StaticResource BoolToIconConverter}}"/>
             </Button>
 
             <!--#region  底部右边的调整按钮-->

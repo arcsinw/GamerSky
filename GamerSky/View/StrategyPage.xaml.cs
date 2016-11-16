@@ -28,32 +28,22 @@ namespace GamerSky.View
     /// </summary>
     public sealed partial class StrategyPage : Page
     {
-        public StrategyPage()
-        {
-            this.InitializeComponent();
-           
-            pageIndexDic = new Dictionary<int, int>();
-        }
+
+        #region Properties
 
         private int pageIndex;  //当前页码
-
-        #region 九幽的数据统计
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            JYHelper.TracePageStart(this.BaseUri.LocalPath);
-        }
-        #endregion
 
         /// <summary>
         /// 保存不同频道的页码
         /// </summary>
-        private Dictionary<int, int> pageIndexDic;
+        private Dictionary<int, int> pageIndexDic = new Dictionary<int, int>(); 
+        #endregion
 
+        public StrategyPage()
+        {
+            this.InitializeComponent(); 
+        }
+         
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             progress.IsActive = true;

@@ -1,11 +1,5 @@
 ﻿using GamerSky.Core.Common;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace GamerSky.Core.Model
 {
@@ -29,21 +23,25 @@ namespace GamerSky.Core.Model
         [JsonProperty(PropertyName = "thumbnailUrl")]
         public string ThumbnailUrl { get; set; }
 
-        private static BitmapImage defaultBitmap = new BitmapImage { UriSource = new Uri("ms-appx:///Assets/Images/image_loading.png") };
-        public static BitmapImage DefaultBitmap
-        {
-            get
-            {
-                return defaultBitmap;
-            }
-        }
 
+        private bool isFavorite = false;
         /// <summary>
         /// 是否收藏 本地数据
         /// </summary>
         [JsonProperty(PropertyName = "Favorite")]
-        public bool IsFavorite { get; set; } = false;
-        
+        public bool IsFavorite
+        {
+            get
+            {
+                return isFavorite;
+            }
+            set
+            {
+                isFavorite = value;
+                OnPropertyChanged();
+            }
+        }  
+
         private DelegateCommand _toggleFavorite = default(DelegateCommand);
 
         public DelegateCommand ToggleFavorite => _toggleFavorite ?? (_toggleFavorite = new DelegateCommand(ExecuteToggleFavoriteCommand, CanExecuteToggleFavoriteCommand));

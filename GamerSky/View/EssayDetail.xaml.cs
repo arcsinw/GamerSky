@@ -28,7 +28,7 @@ namespace GamerSky.View
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
     public sealed partial class EssayDetail : Page
-    {
+    { 
         public Essay essayResult { get; set; }
 
         private bool isEssayLoaded = false;
@@ -368,7 +368,7 @@ namespace GamerSky.View
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             this.isEssayLoaded = false;
-            essayResult = e.Parameter as Essay;
+            essayResult = e.Parameter as Essay; 
             if (essayResult != null)
             {
                 if (essayResult.ContentId.Equals("0"))
