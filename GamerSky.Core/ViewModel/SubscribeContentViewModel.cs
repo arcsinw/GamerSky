@@ -17,11 +17,22 @@ namespace GamerSky.Core.ViewModel
         /// </summary>
         public ObservableCollection<Essay> SubscribeContens { get; set; }
 
-
+        private Essay headerSubscribe = new Essay();
         /// <summary>
         /// 订阅图片的标题
         /// </summary>
-        public Essay HeaderSubscribe { get; set; }
+        public Essay HeaderSubscribe
+        {
+            get
+            {
+                return headerSubscribe;
+            }
+            set
+            {
+                headerSubscribe = value;
+                OnPropertyChanged();
+            }
+        }
 
         private ApiService apiService;
 

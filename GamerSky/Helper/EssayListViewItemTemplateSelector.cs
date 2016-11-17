@@ -22,11 +22,18 @@ namespace GamerSky.Helper
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
             Essay essay = item as Essay;
-            if(essay.ContentType.Equals("zhuanti"))
+            if(essay==null)
+            {
+                return null;
+            }
+            if (essay.ContentType.Equals("zhuanti"))
             {
                 return TopicDt;
             }
-            if (essay.ThumbnailURLs == null || essay.ThumbnailURLs.Length==0) return NoPicDt;
+            if (essay.ThumbnailURLs == null || essay.ThumbnailURLs.Length == 0)
+            {
+                return NoPicDt;
+            }
             if (essay.ThumbnailURLs.Length == 1)
             {
                 return OnePicDt;

@@ -16,11 +16,25 @@ namespace GamerSky.Core.ViewModel
     {
         private ApiService apiService;
         private StringBuilder tempHtml = new StringBuilder();
-        public Essay EssayResult { get; set; }
+
+        private Essay essayResult = new Essay();
+        public Essay EssayResult
+        {
+            get
+            {
+                return essayResult;
+            }
+            set
+            {
+                essayResult = value;
+                OnPropertyChanged();
+            }
+        }
 
         public EssayDetailViewModel()
         {
             apiService = new ApiService();
+            EssayResult = new Essay();
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
@@ -172,6 +186,7 @@ namespace GamerSky.Core.ViewModel
             News news = await apiService.ReadEssay(essay.ContentId);
             if (news != null)
             {
+                EssayResult = essay;
                 OriginUri = news.OriginURL;
 
                 string mainBody = news.MainBody;
@@ -279,6 +294,7 @@ namespace GamerSky.Core.ViewModel
         public async void GenerateCommentString(Essay essay)
         {
             IsActive = true;
+            EssayResult = essay;
             var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Html/Comment.html"));
             CommentString = await FileIO.ReadTextAsync(file);
             CommentString = CommentString.Replace("{0}", essay.Title).Replace("{1}", essay.ContentId);

@@ -90,12 +90,13 @@ namespace GamerSky.Core.Helper
             {
                 var folder = await localFolder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
                 var file = await folder.GetFileAsync(filename);
-                   
-                using (var data = await folder.OpenStreamForReadAsync(filename))
-                { 
-                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
-                    return serializer.ReadObject(data) as T;
-                }
+                string json = await FileIO.ReadTextAsync(file);
+                return JsonHelper.Deserlialize<T>(json);
+                //using (var data = await folder.OpenStreamForReadAsync(filename))
+                //{ 
+                //    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
+                //    return serializer.ReadObject(data) as T;
+                //}
             }
             catch (Exception e)
             {

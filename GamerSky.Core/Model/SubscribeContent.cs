@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,18 +12,36 @@ namespace GamerSky.Core.Model
     /// </summary>
     public class SubscribeContent
     {
-        public int commentCount { get; set; }
-        public contentDetailUrls[] contentDetailUrls { get; set; }
-        public string generalId { get; set; }
-        public string origin { get; set; }
-        public string publicTime { get; set; }
-        public string thumbnailUrl { get; set; }
-        public string title { get; set; }
+        [JsonProperty(PropertyName = "commentCount")]
+        public int CommentCount { get; set; }
+
+        [JsonProperty(PropertyName = "contentDetailUrls")]
+        public contentDetailUrls[] ContentDetailUrls { get; set; }
+
+        [JsonProperty(PropertyName = "generalId")]
+        public string GeneralId { get; set; }
+
+        [JsonProperty(PropertyName = "origin")]
+        public string Origin { get; set; }
+
+        [JsonProperty(PropertyName = "publicTime")]
+        public string PublicTime { get; set; }
+
+        [JsonProperty(PropertyName = "thumbnailUrl")]
+        public string ThumbnailUrl { get; set; }
+
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
     }
     public class contentDetailUrls
     {
-        public string contentDetailUrl { get; set; }
-        public int pageIndex { get; set; }
-        public string subTitle { get; set; }
+        [JsonProperty(PropertyName = "contentDetailUrl")]
+        public string ContentDetailUrl { get; set; }
+
+        [JsonProperty(PropertyName = "pageIndex")]
+        public int PageIndex { get; set; }
+
+        [JsonProperty(PropertyName = "subTitle")]
+        public string SubTitle { get; set; }
     }
 }

@@ -21,7 +21,18 @@
     </Page.Resources>
 
     <Grid>
-
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <hp:DeviceTypeTrigger PlatformType="Desktop"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="back.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -29,7 +40,7 @@
  
         <!--订阅栏目内文章列表-->
         <Grid Background="{ThemeResource PageBackground}"
-              Grid.Row="0" Grid.RowSpan="2" Padding="0,37,0,0">
+              Grid.Row="0" Grid.RowSpan="2" >
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView ItemsSource="{Binding SubscribeContens}"
                           Style="{ThemeResource LightListView}"
@@ -38,61 +49,37 @@
                           Loaded="ListView_Loaded"
                           ShowsScrollingPlaceholders="True"
                           IsItemClickEnabled="True"
-                          ItemClick="ListView_ItemClick">   
-
-                    <ListView.ItemTemplateSelector>
-                        <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
-                                                      NoPicDt="{StaticResource NoPicEssayDataTemplate}"
-                                                                      />
-                    </ListView.ItemTemplateSelector>
-
+                          ItemClick="ListView_ItemClick"
+                          ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                          ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}">    
                     <ListView.Header>
                         <Grid>
                             <Image Height="200" Stretch="Fill">
                                 <Image.Source>
-                                    <BitmapImage UriSource="{Binding HeaderSubscribe.thumbnailURLs[0]}"/>
+                                    <BitmapImage UriSource="{Binding HeaderSubscribe.ThumbnailURLs[0]}"/>
                                 </Image.Source>
                             </Image>
                             <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
-                                <TextBlock Margin="7,0" Text="{Binding HeaderSubscribe.title}" Foreground="White" VerticalAlignment="Bottom"/>
+                                <TextBlock Margin="7,0" Text="{Binding HeaderSubscribe.Title}" Foreground="White" VerticalAlignment="Bottom"/>
                             </Border>
                         </Grid>
-                    </ListView.Header>
-            
-                    <ListView.Transitions>
-                        <TransitionCollection>
-                            <AddDeleteThemeTransition />
-                            <ContentThemeTransition />
-                            <EntranceThemeTransition/>
-                            <NavigationThemeTransition/>
-                        </TransitionCollection>
-                    </ListView.Transitions>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Margin" Value="0"/>
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
+                    </ListView.Header> 
                 </ListView>
             </pr:PullToRefreshBox>
-
-           
+ 
             <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
     
         </Grid>
 
         <!--标题栏-->
-        <Grid Background="{ThemeResource ThemeColorBrush}" 
-              Opacity="0" Visibility="{Binding ElementName=titleBarGrid,Path=Opacity,Converter={StaticResource CountToBoolConverter},ConverterParameter={Binding ElementName=titleBarGrid,Path=Opacity}}"
+        <Grid Background="{ThemeResource ThemeColorBrush}" Height="48"
+              Opacity="0" Visibility="{Binding ElementName=titleBarGrid,Path=Opacity,Converter={StaticResource CountToBoolConverter}}"
               x:Name="titleBarGrid" Grid.Row="0">
-            <Button x:Name="back" Width="48" Height="48" Background="Transparent" 
-                    Foreground="White" Click="back_Click"
+            <Button x:Name="back"  Click="back_Click" Style="{ThemeResource BackButtonStyle}"
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
-            <TextBlock Text="{Binding HeaderSubscribe.title}" Style="{ThemeResource PageTitleStyle}"/>
+            <TextBlock Text="{Binding HeaderSubscribe.Title}" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
 
 

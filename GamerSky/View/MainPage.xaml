@@ -10,6 +10,7 @@
     xmlns:vm="using:GamerSky.Core.ViewModel"
     xmlns:converter="using:GamerSky.Converters"
     xmlns:controls="using:GamerSky.Controls"
+    xmlns:pr="using:PullToRefresh.UWP"
     mc:Ignorable="d"
     NavigationCacheMode="Required"
     RequestedTheme="{Binding AppTheme}">
@@ -375,6 +376,7 @@
                         SelectionMode="None"
                         ItemClick="ListView_ItemClick"
                         ShowsScrollingPlaceholders="True">-->
+                    <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                         <ListView x:Name="essayListView" 
                                  ItemsSource="{Binding Essays}"
                                  ShowsScrollingPlaceholders="True"
@@ -452,12 +454,13 @@
                                     </Grid>
                                 </DataTemplate>
                             </ListView.HeaderTemplate>
-                        <ListView.ItemContainerTransitions>
-                            <TransitionCollection>
-                                <AddDeleteThemeTransition />
-                            </TransitionCollection>
-                        </ListView.ItemContainerTransitions>
-                    </ListView>
+                            <ListView.ItemContainerTransitions>
+                                <TransitionCollection>
+                                    <AddDeleteThemeTransition />
+                                </TransitionCollection>
+                            </ListView.ItemContainerTransitions>
+                        </ListView>
+                    </pr:PullToRefreshBox>
                     <!--</controls:PullToRefreshListView>-->
                 </DataTemplate>
             </Pivot.ItemTemplate>

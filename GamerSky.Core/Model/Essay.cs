@@ -59,11 +59,23 @@ namespace GamerSky.Core.Model
             }
         }
 
+        private string title;
         /// <summary>
         /// 标题
         /// </summary>
         [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+                OnPropertyChanged();
+            }
+        }
         
         /// <summary>
         /// huandeng 则为幻灯片内容
@@ -71,10 +83,22 @@ namespace GamerSky.Core.Model
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
 
+        private bool isFavorite = false;
         /// <summary>
         /// 是否收藏 本地数据
         /// </summary>
-        public bool IsFavorite { get; set; } = false;
+        public bool IsFavorite
+        {
+            get
+            {
+                return isFavorite;
+            }
+            set
+            {
+                isFavorite = value;
+                OnPropertyChanged();
+            }
+        }
 
         private DelegateCommand _toggleFavorite = default(DelegateCommand);
 

@@ -365,7 +365,7 @@
 
     <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
+        <!--<Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
                SelectionChanged="pivot_SelectionChanged">
 
             <PivotItem Header="正文" Margin="0" >
@@ -379,14 +379,32 @@
                          hp:ExtensionHelper.HtmlString="{Binding CommentString}">
                 </WebView>
             </PivotItem>
-        </Pivot>
+        </Pivot>-->
+
+        <FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged">
+            <FlipViewItem>
+                <Grid>
+                    <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
+                    ScriptNotify="webView_ScriptNotify" NavigationCompleted="webView_NavigationCompleted"
+                         DOMContentLoaded="webView_DOMContentLoaded">
+                    </WebView>
+                </Grid>
+            </FlipViewItem>
+
+            <FlipViewItem>
+                <Grid>
+                    <WebView x:Name="commentWebView"  
+                         hp:ExtensionHelper.HtmlString="{Binding CommentString}">
+                    </WebView>
+                </Grid>
+            </FlipViewItem>
+        </FlipView>
         
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
-            <Button x:Name="translateBtn" Click="translateBtn_Click" HorizontalAlignment="Right" 
+            <Button x:Name="translateBtn" Visibility="Collapsed" Click="translateBtn_Click" HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" >
-                
                 <SymbolIcon Symbol="Character" />
             </Button>
 

@@ -28,27 +28,27 @@ namespace GamerSky.View
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
     public sealed partial class EssayDetail : Page
-    { 
+    {
         public Essay essayResult { get; set; }
 
         private bool isEssayLoaded = false;
-        private ObservableCollection<JsImage> Images { get; set; }= new ObservableCollection<JsImage>();
+        private ObservableCollection<JsImage> Images { get; set; } = new ObservableCollection<JsImage>();
         /// <summary>
         /// 当前点击的图片url
         /// </summary>
         private string currentImageUrl;
-          
+
         public EssayDetail()
         {
             this.InitializeComponent();
-             
+
             webView.NewWindowRequested += WebView_NewWindowRequested;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
         private void Current_ShareDataChanged()
         {
-            if(viewModel.AppTheme == ElementTheme.Dark)
+            if (viewModel.AppTheme == ElementTheme.Dark)
             {
                 NightMode();
             }
@@ -109,7 +109,7 @@ namespace GamerSky.View
         /// 设置夜间模式
         /// </summary>
         public async void NightMode()
-        { 
+        {
             try
             {
                 await webView.InvokeScriptAsync("NightMode", new[] { "" });
@@ -117,22 +117,22 @@ namespace GamerSky.View
             catch
             {
 
-            } 
+            }
         }
 
         /// <summary>
         /// 日间模式
         /// </summary>
         public async void DayMode()
-        { 
+        {
             try
             {
                 await webView.InvokeScriptAsync("DayMode", new[] { "" });
             }
-            catch 
+            catch
             {
 
-            } 
+            }
         }
 
         #endregion
@@ -157,11 +157,11 @@ namespace GamerSky.View
             }
             progress.IsActive = false;
         }
-         
+
 
         private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (viewModel != null)
+            if (essayResult != null)
             {
                 switch (pivot.SelectedIndex)
                 {
@@ -245,7 +245,7 @@ namespace GamerSky.View
                 try
                 {
                     var selectImg = imageFlipView.SelectedItem as JsImage;
-                    if(selectImg != null)
+                    if (selectImg != null)
                     {
                         string url = selectImg.hdsrc.Replace("http://www.gamersky.com/showimage/id_gamersky.shtml?", "");
                         url = string.IsNullOrEmpty(url) ? selectImg.src : url;
@@ -261,7 +261,7 @@ namespace GamerSky.View
                             UIHelper.ShowToast("图片已保存");
                         }
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -292,7 +292,7 @@ namespace GamerSky.View
         }
         #endregion
 
-       
+
 
 
         public void CloseImageFlipView()
@@ -309,7 +309,7 @@ namespace GamerSky.View
                     this.Frame.GoBack();
                 }
             }
-     
+
         }
 
 
@@ -329,7 +329,9 @@ namespace GamerSky.View
 
             Debug.WriteLine(args.Uri);
 
-            if(args.Uri.Query.EndsWith(".jpg || .png || .gif",StringComparison.CurrentCultureIgnoreCase))
+            if (args.Uri.Query.EndsWith(".jpg", StringComparison.CurrentCultureIgnoreCase) ||
+                args.Uri.Query.EndsWith(".png", StringComparison.CurrentCultureIgnoreCase) ||
+                args.Uri.Query.EndsWith(".gif", StringComparison.CurrentCultureIgnoreCase))
             {
                 currentImageUrl = args.Uri.ToString();
                 Debug.WriteLine("ClickImageUrl：" + currentImageUrl);
@@ -376,7 +378,7 @@ namespace GamerSky.View
                     webView.Navigate(new Uri(essayResult.ContentURL));
                 }
                 else
-                {
+                { 
                     if (pivot.SelectedIndex == 0)
                     {
                         await viewModel.GenerateHtmlString(essayResult);
@@ -386,7 +388,7 @@ namespace GamerSky.View
                         viewModel.GenerateCommentString(essayResult);
                     }
                 }
-            }
+            } 
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)

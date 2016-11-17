@@ -57,11 +57,11 @@ function SendNotify(notifyString) {
 }
 
 
-function RelationReadingClick() {
+function RelationReadingClick(contentId) {
     var relatedReadingUrl =
-                         "openPage:{\"pageID\":\"" + relatedReadingPageID + "\","
+                         "openPage:{\"pageID\":\"" + contentId + "\","
                         + "\"pageURL\":\"" + relatedReadingPageURL + "\","
-                        + "\"openMethod\":\"default\"}";
+                        + "\"openMethod\":\"ContentID\"}";
 }
 
 //获取所有的图片

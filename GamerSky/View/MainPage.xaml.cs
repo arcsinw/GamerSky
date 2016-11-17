@@ -190,5 +190,10 @@ namespace GamerSky.View
         {
 
         }
+
+        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        {
+            ViewModel.RefreshEssays(CurrentPivotIndex);
+        }
     }
 }
