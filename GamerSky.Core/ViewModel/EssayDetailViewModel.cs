@@ -31,6 +31,8 @@ namespace GamerSky.Core.ViewModel
             }
         }
 
+        public ObservableCollection<string> HtmlCollection { get; set; } = new ObservableCollection<string>();
+
         public EssayDetailViewModel()
         {
             apiService = new ApiService();
@@ -90,7 +92,7 @@ namespace GamerSky.Core.ViewModel
             set
             {
                 htmlString = value;
-                OnPropertyChanged();
+                OnPropertyChanged(); 
             }
         }
 
@@ -107,7 +109,7 @@ namespace GamerSky.Core.ViewModel
             set
             {
                 commentString = value;
-                OnPropertyChanged();
+                OnPropertyChanged(); 
             }
         }
 

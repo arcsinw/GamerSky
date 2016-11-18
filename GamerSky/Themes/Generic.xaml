@@ -6,8 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    
-    
+
+
     <Style TargetType="local:Drawer">
         <Setter Property="Template">
             <Setter.Value>
@@ -37,7 +37,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <Style TargetType="local:SwipeableSplitView">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -491,7 +491,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-  
+
     <Style TargetType="FlipView">
         <Setter Property="Background" Value="{ThemeResource SystemControlPageBackgroundListLowBrush}" />
         <Setter Property="BorderThickness" Value="0" />

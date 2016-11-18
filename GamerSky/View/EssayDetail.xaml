@@ -8,6 +8,7 @@
     xmlns:hp="using:GamerSky.Core.Helper"
     xmlns:converter="using:GamerSky.Converters"
     xmlns:vm="using:GamerSky.Core.ViewModel"    
+    xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
     NavigationCacheMode="Enabled"
     RequestedTheme="{Binding AppTheme}">
@@ -381,25 +382,33 @@
             </PivotItem>
         </Pivot>-->
 
-        <FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged">
+        <FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
+                  UseTouchAnimationsForAllNavigation="True">
+            <!--<FlipView.ItemTemplate>
+                <DataTemplate>
+                    <controls:FlipViewArticle/>
+                </DataTemplate>
+            </FlipView.ItemTemplate>-->
             <FlipViewItem>
-                <Grid>
-                    <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
+                <controls:ArticlePresenter Html="{Binding HtmlString}"/>
+                <!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
                     ScriptNotify="webView_ScriptNotify" NavigationCompleted="webView_NavigationCompleted"
                          DOMContentLoaded="webView_DOMContentLoaded">
-                    </WebView>
-                </Grid>
+                    </WebView>--> 
             </FlipViewItem>
 
             <FlipViewItem>
-                <Grid>
-                    <WebView x:Name="commentWebView"  
+                <controls:ArticlePresenter Html="{Binding CommentString}"/>
+                <!--<WebView x:Name="commentWebView"  
                          hp:ExtensionHelper.HtmlString="{Binding CommentString}">
-                    </WebView>
-                </Grid>
+                    </WebView>--> 
             </FlipViewItem>
         </FlipView>
+
+        <WebView x:Name="webView" Visibility="Collapsed"/>
+        <WebView x:Name="commentWebView" Visibility="Collapsed"/>
         
+
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">

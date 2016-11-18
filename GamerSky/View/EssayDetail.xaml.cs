@@ -364,6 +364,7 @@ namespace GamerSky.View
          
         private void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
         { 
+            Images.Clear();
             GetAllPictures();
         }
 
