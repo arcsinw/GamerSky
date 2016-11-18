@@ -366,7 +366,7 @@
 
     <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <!--<Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
+        <Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
                SelectionChanged="pivot_SelectionChanged">
 
             <PivotItem Header="正文" Margin="0" >
@@ -380,33 +380,48 @@
                          hp:ExtensionHelper.HtmlString="{Binding CommentString}">
                 </WebView>
             </PivotItem>
-        </Pivot>-->
+        </Pivot>
 
-        <FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
+        <!--<FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
                   UseTouchAnimationsForAllNavigation="True">
-            <!--<FlipView.ItemTemplate>
+            --><!--<FlipView.ItemTemplate>
                 <DataTemplate>
                     <controls:FlipViewArticle/>
                 </DataTemplate>
-            </FlipView.ItemTemplate>-->
+            </FlipView.ItemTemplate>--><!--
             <FlipViewItem>
                 <controls:ArticlePresenter Html="{Binding HtmlString}"/>
-                <!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
+                --><!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
                     ScriptNotify="webView_ScriptNotify" NavigationCompleted="webView_NavigationCompleted"
                          DOMContentLoaded="webView_DOMContentLoaded">
-                    </WebView>--> 
+                    </WebView>--><!-- 
             </FlipViewItem>
+
+            <FlipViewItem>
+                <Grid>
+                    <WebView hp:ExtensionHelper.HtmlString="{Binding CommentString}"/>
+                </Grid>
+            </FlipViewItem>
+
+            <FlipViewItem>
+                <controls:ArticlePresenter Html="{Binding HtmlString}"/>
+                --><!--<WebView x:Name="commentWebView"  
+                         hp:ExtensionHelper.HtmlString="{Binding CommentString}">
+                    </WebView>--><!-- 
+            </FlipViewItem>
+
 
             <FlipViewItem>
                 <controls:ArticlePresenter Html="{Binding CommentString}"/>
-                <!--<WebView x:Name="commentWebView"  
+                --><!--<WebView x:Name="commentWebView"  
                          hp:ExtensionHelper.HtmlString="{Binding CommentString}">
-                    </WebView>--> 
+                    </WebView>--><!--
             </FlipViewItem>
-        </FlipView>
+        </FlipView>-->
+        
 
-        <WebView x:Name="webView" Visibility="Collapsed"/>
-        <WebView x:Name="commentWebView" Visibility="Collapsed"/>
+        <!--<WebView x:Name="webView" Visibility="Collapsed"/>
+        <WebView x:Name="commentWebView" Visibility="Collapsed"/>-->
         
 
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>

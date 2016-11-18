@@ -18,7 +18,7 @@ namespace GamerSky.Core.ViewModel
 
         public LoginPageViewModel()
         {
-            UserLoginInfo = new UserLoginInfo() { UserName = "arxchg", UserPassword = "qwertyx" };
+            UserLoginInfo = new UserLoginInfo();// { UserName = "arxchg", UserPassword = "qwertyx" };
             apiService = new ApiService();
 
             AppTheme = DataShareManager.Current.AppTheme;
