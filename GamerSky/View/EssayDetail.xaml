@@ -19,7 +19,6 @@
     
     <Page.Transitions>
         <TransitionCollection>
-            <!--<EdgeUIThemeTransition Edge="Right"/>-->
             <PaneThemeTransition Edge="Right"/>
         </TransitionCollection>
     </Page.Transitions>
@@ -582,10 +581,10 @@
     </Grid>
 
     <Page.BottomAppBar>
-        <CommandBar x:Name="appBar" Visibility="Collapsed">
+        <CommandBar x:Name="appBar" >
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Save" Label="保存" x:Name="saveAppBar" Click="saveAppBar_Click"/>
-                <AppBarButton Label="HD" x:Name="hdAppBar" Click="hdAppBar_Click">
+                <AppBarButton Label="HD" Visibility="Collapsed" x:Name="hdAppBar" Click="hdAppBar_Click">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="ms-appx:///Assets/Images/picture_origin.png"/>
                     </AppBarButton.Icon>
