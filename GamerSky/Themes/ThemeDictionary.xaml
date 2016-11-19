@@ -1862,35 +1862,7 @@
     </Style>
 
     <converter:BoolToStyleConverter x:Key="BoolToStyleConverter"/>
-    <!--#region 订阅列表模板  图 上下两行文字（订阅名和订阅人数） 订阅按钮-->
-     <DataTemplate x:Key="SubscribeListViewDataTemplate">
-        <Grid  >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <!--#region PlaceHolderImage-->
-            <Image Source="{ThemeResource EssayPlaceHolderImage}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
-            <!--#endregion-->
-            <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
-                <Image.Source>
-                    <BitmapImage UriSource="{Binding ThumbnailUrl}"/>
-                </Image.Source>
-            </Image>
-            <Grid Grid.Column="1" Margin="5,0">
-                <TextBlock Text="{Binding SourceName}" VerticalAlignment="Top"/>
-                <TextBlock  Margin="0,4,0,0" VerticalAlignment="Bottom">
-                    <Run Text="{Binding Count}"/>
-                    <Run Text="人订阅"/>
-                </TextBlock>
-            </Grid>
-            <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" 
-                    Style="{Binding IsFavorite,Converter={StaticResource BoolToStyleConverter}}"
-                    />
-        </Grid>
-    </DataTemplate>
-
+     
     <Style TargetType="ListViewItem" x:Key="SubscribeListViewItemsContainerStyle">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Margin" Value="0"/>

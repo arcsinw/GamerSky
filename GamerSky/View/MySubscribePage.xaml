@@ -17,9 +17,9 @@
 
     <Page.Resources>
         <DataTemplate x:Key="SubscribeListViewDataTemplate">
-            <Grid>
+            <Grid MaxHeight="100">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="180"/>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>

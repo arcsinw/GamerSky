@@ -3,7 +3,7 @@
   <Identity Name="46918Xsetups..X" Publisher="CN=6C0637F1-510E-45BC-90C0-3F7555214A61" Version="0.6.7.0" />
   <mp:PhoneIdentity PhoneProductId="f562ba66-7a4c-42f7-a77e-b8b6cad767ad" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>游民星空.X</DisplayName>
+    <DisplayName>ms-resource:AppName</DisplayName>
     <PublisherDisplayName>Xsetups</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

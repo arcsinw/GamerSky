@@ -41,6 +41,21 @@ namespace GamerSky.Controls
             AssignHtml(eventArgs.NewValue, articlePresenter);
         }
 
+
+        public NavigateTypeEnum NavigationType { get; set; } = NavigateTypeEnum.String;
+
+        //public NavigateTypeEnum NavigateType
+        //{
+        //    get { return (NavigateTypeEnum)GetValue(NavigateTypeProperty); }
+        //    set { SetValue(NavigateTypeProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for NavigateType.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty NavigateTypeProperty =
+        //    DependencyProperty.Register("NavigateType", typeof(NavigateTypeEnum), typeof(ArticlePresenter), new PropertyMetadata(NavigateTypeEnum.String));
+
+
+
         private void InitializeUserControl()
         {
             GridContainer = InitializeLayout();
@@ -101,8 +116,23 @@ namespace GamerSky.Controls
         {
             if (newValue != null)
             {
-                articlePresenter.WebView?.NavigateToString(newValue.ToString());
+                switch(articlePresenter.NavigationType)
+                {
+                    case NavigateTypeEnum.Uri:
+                        articlePresenter.WebView?.Navigate(new Uri(newValue.ToString()));
+                        break;
+                    case NavigateTypeEnum.String:
+                    default:
+                        articlePresenter.WebView?.NavigateToString(newValue.ToString());
+                        break;
+                } 
             }
         }
+    }
+
+    public enum NavigateTypeEnum
+    {
+        String,
+        Uri,
     }
 }

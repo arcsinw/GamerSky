@@ -232,7 +232,7 @@ namespace GamerSky.Controls
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
+           
             PaneRoot = GetTemplateChild("PaneRoot") as Grid;
             _overlayRoot = GetTemplateChild("OverlayRoot") as Grid;
             PanArea = GetTemplateChild("PanArea") as Rectangle;

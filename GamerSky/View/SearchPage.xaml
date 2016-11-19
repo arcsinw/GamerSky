@@ -700,12 +700,11 @@
                           ItemsSource="{Binding HotSubscribes}" 
                           Style="{ThemeResource LightListView}"
                           IsItemClickEnabled="True" ItemClick="subscribeListView_ItemClick"
-                          SelectionMode="None" 
-                          
+                          SelectionMode="None"  
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:Subscribe">
-                                <Grid  >
+                                <Grid  MaxHeight="100">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="2*"/>

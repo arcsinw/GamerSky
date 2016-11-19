@@ -76,7 +76,9 @@
             
             <!--有三张图的文章模板-->
             <DataTemplate x:Key="ThreePicEssayDataTemplate">
-                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
+                <Grid Margin="{StaticResource EssayGridMargin}" 
+                      Padding="{StaticResource EssayGridPadding}"
+                      MaxHeight="100">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="2*"/>
@@ -119,9 +121,10 @@
             </DataTemplate>
             <!--一张图文章模板-->
             <DataTemplate x:Key="OnePicEssayDataTemplate">
-                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
+                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}"
+                      MaxHeight="100">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="180"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
@@ -145,7 +148,9 @@
             </DataTemplate>
             <!--无图模板-->
             <DataTemplate x:Key="NoPicEssayDataTemplate">
-                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
+                <Grid Margin="{StaticResource EssayGridMargin}" 
+                      Padding="{StaticResource EssayGridPadding}"
+                      MaxHeight="100">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>

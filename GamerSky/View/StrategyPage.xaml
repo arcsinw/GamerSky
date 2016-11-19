@@ -13,13 +13,14 @@
     RequestedTheme="{Binding AppTheme}"
     NavigationCacheMode="Required"
     >
+    
+    
 
     <Page.DataContext>
         <vm:StrategyPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
     <Page.Resources>
-
         <ItemsPanelTemplate x:Key="GridViewItemsPanel" x:Name="GridViewItemsPanel">
             <ItemsWrapGrid MaximumRowsOrColumns="2" Orientation="Horizontal"/>
         </ItemsPanelTemplate>
@@ -30,18 +31,11 @@
 
 
         <converter:CountToVisibilityConverter x:Key="CountToConverter"/>
-        <!--数据集合控件Padding-->
-        <Thickness x:Key="ControlPadding">8</Thickness>
-        <!--BorderMargin-->
-        <Thickness x:Key="BorderMargin">0,2</Thickness>
-        <!--BorderThickness-->
-        <Thickness x:Key="BorderThickness">0,0,0,1</Thickness>
-        <!--BorderBrush-->
-        <SolidColorBrush x:Key="BorderBrush" Color="LightGray"/>
 
         <JumpListItemBackgroundConverter x:Key="BackgroundConverter" Enabled="{ThemeResource ThemeColorBrush}"
                                          Disabled="Transparent"/>
-        <JumpListItemBackgroundConverter x:Key="ForegroundConverter" Enabled="White" Disabled="Black"/>
+        <JumpListItemForegroundConverter x:Key="ForegroundConverter" Enabled="White" Disabled="Black"/>
+         
         <Style x:Key="LightAdaptiveGridViewStyle" TargetType="controls:AdaptiveGridView">
             <Setter Property="Padding" Value="0,0,0,10"/>
             <Setter Property="IsTabStop" Value="False"/>
