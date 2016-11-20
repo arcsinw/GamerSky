@@ -59,7 +59,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
-        <Pivot x:Name="pivot" Background="{ThemeResource PageBackground}"  
+        <Pivot x:Name="pivot" Background="{ThemeResource PageBackgroundBrush}"  
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="热门"  Margin="0">
                 <pr:PullToRefreshBox  RefreshInvoked="PullToRefreshBox_RefreshInvoked">

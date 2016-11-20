@@ -17,7 +17,7 @@
 
 
     <!--某款游戏的攻略列表页-->
-    <Grid Background="{ThemeResource PageBackground}">
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
         <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
             <ListView ItemsSource="{Binding Strategys}"
                   SelectionMode="None"

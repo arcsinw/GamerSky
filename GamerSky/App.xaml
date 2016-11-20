@@ -9,13 +9,14 @@
     <Application.Resources>
 
         <ResourceDictionary>
-          
+
+            <!--日夜间资源字典-->
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
-                    <!--主题色--><!--
-                    <Color x:Key="ThemeColor">#C93D32</Color>
-                    --><!--主题色Brush-->
-                    <SolidColorBrush x:Key="ThemeColorBrush" Color="#C93D32"/>
+                    <!--主题色-->
+                    <Color x:Key="ThemeColor">#D22222</Color>
+                    <!--主题色Brush-->
+                    <SolidColorBrush x:Key="ThemeColorBrush" Color="#D22222"/>
                     <!--HomePage 底栏背景色-->
                     <SolidColorBrush x:Key="BottomBarBackground" Color="LightGray" />
                     <!--PivotHeader 背景色-->
@@ -27,11 +28,11 @@
                     <!--文字颜色-->
                     <SolidColorBrush x:Key="PhoneForegroundBrush" Color="Black"/>
                     <!--页面背景色-->
-                    <SolidColorBrush x:Key="PageBackground" Color="White"/>
+                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="WhiteSmoke"/>
                     <!--Pane背景色-->
-                    <SolidColorBrush x:Key="PaneBackground" Color="White"/>
+                    <SolidColorBrush x:Key="PaneBackgroundBrush" Color="White"/>
                     <!--ListView BorderBrush-->
-                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="Gray"/>
+                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="LightGray"/>
                     <!--ListView BorderThickness-->
                     <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
                     <!--设置ListViewItem背景色-->
@@ -39,11 +40,9 @@
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Dark">
-                    <!--主题色-->
-                    <!--<Color x:Key="ThemeColor">#FF5F5F5F</Color>--><!--
 
                     <Color x:Key="ThemeColor">#FF333337</Color>
-                    <SolidColorBrush x:Key="ThemeColorBrush" Color="#FF333337"/>-->
+                    <SolidColorBrush x:Key="ThemeColorBrush" Color="#FF333337"/>
                     <!--HomePage 底栏背景色-->
                     <SolidColorBrush x:Key="BottomBarBackground" Color="#FF1B1B1C" />
                     <!--PivotHeader 背景色-->
@@ -55,9 +54,9 @@
                     <!--文字颜色-->
                     <SolidColorBrush x:Key="PhoneForegroundBrush" Color="LightGray"/>
                     <!--页面背景色-->
-                    <SolidColorBrush x:Key="PageBackground" Color="#FF1A1A1B"/>
+                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FF1A1A1B"/>
                     <!--Pane背景色-->
-                    <SolidColorBrush x:Key="PaneBackground" Color="#FF5F5F5F"/>
+                    <SolidColorBrush x:Key="PaneBackgroundBrush" Color="#FF5F5F5F"/>
                     <!--ListView BorderBrush-->
                     <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF3C3C3C"/>
                     <!--ListView BorderThickness-->
@@ -66,6 +65,8 @@
                     <SolidColorBrush x:Key="SearchListViewItemBackground" Color="#FF252526"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
+            
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ThemeDictionary.xaml"/>
                 <ResourceDictionary Source="Themes/LightDictionary.xaml"/>
@@ -162,7 +163,6 @@
                     </TextBlock>
                 </Grid>
             </DataTemplate>
-            
             <!--专题模板-->
             <DataTemplate x:Key="TopicDataTemplate">
                 <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">

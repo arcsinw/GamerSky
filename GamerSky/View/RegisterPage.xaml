@@ -40,7 +40,7 @@
             <TextBlock Text="手机注册" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
 
-        <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
             <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
                 <StackPanel Padding="16" >
                     <StackPanel.Resources>

@@ -274,7 +274,7 @@
         <vm:MainPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid x:Name="rootGrid" Background="{ThemeResource PageBackground}">
+    <Grid x:Name="rootGrid" Background="{ThemeResource PageBackgroundBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup" CurrentStateChanged="AdaptiveVisualStateGroup_CurrentStateChanged">
                 <VisualState x:Name="Narrow">
@@ -321,7 +321,7 @@
             <control:Drawer.DrawerContent>
                 <ListView x:Name="drawerContent" ScrollViewer.VerticalScrollMode="Disabled" 
                           GotFocus="{x:Bind ViewModel.GetCacheSize}" 
-                          SelectionMode="None" Background="{ThemeResource PageBackground}"
+                          SelectionMode="None" Background="{ThemeResource PageBackgroundBrush}"
                          >
                     <ListView.Resources>
                         <Thickness x:Key="TextBlockMargin">8,0</Thickness>
@@ -436,7 +436,7 @@
         </control:Drawer>
 
         <!--#region Pane-->
-        <Grid x:Name="paneGrid" Grid.Column="0" Background="{ThemeResource PaneBackground}">
+        <Grid x:Name="paneGrid" Grid.Column="0" Background="{ThemeResource PaneBackgroundBrush}">
             <ListView x:Name="paneListView" ItemsSource="{x:Bind PaneItems}" Padding="0" Margin="0"
                       IsItemClickEnabled="True" SelectionMode="Single"
                       ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"

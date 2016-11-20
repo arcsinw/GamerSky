@@ -159,7 +159,7 @@
             </Button>
             <TextBlock x:Uid="Settings" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
-        <Grid Grid.Row="1" Background="{ThemeResource PageBackground}">
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
             <ListView SelectionMode="None">
                 <ListView.Items>
                     <ListViewItem Margin="0,16,0,0">

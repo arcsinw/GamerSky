@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="GamerSky.View.EssayDetail"
+    x:Class="GamerSky.View.EssayDetailPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GamerSky.View"
@@ -365,7 +365,7 @@
 
     <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <!--<Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
+        <Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
                SelectionChanged="pivot_SelectionChanged">
 
             <PivotItem Header="正文" Margin="0" >
@@ -379,27 +379,27 @@
                          hp:ExtensionHelper.HtmlString="{Binding CommentString}">
                 </WebView>
             </PivotItem>
-        </Pivot>-->
+        </Pivot>
 
-        <FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
+        <!--<FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
                   UseTouchAnimationsForAllNavigation="True">
          
             <FlipViewItem>
                 <controls:ArticlePresenter Html="{Binding HtmlString}"/>
-                <!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
+                --><!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
                     ScriptNotify="webView_ScriptNotify" NavigationCompleted="webView_NavigationCompleted"
                          DOMContentLoaded="webView_DOMContentLoaded">
-                    </WebView>--> 
+                    </WebView>--><!-- 
             </FlipViewItem> 
  
             <FlipViewItem>
                 <controls:ArticlePresenter  Html="{Binding CommentString}"/> 
             </FlipViewItem>
-        </FlipView>
+        </FlipView>-->
         
 
-        <WebView x:Name="webView" Visibility="Collapsed"/>
-        <WebView x:Name="commentWebView" Visibility="Collapsed"/>
+        <!--<WebView x:Name="webView" Visibility="Collapsed"/>
+        <WebView x:Name="commentWebView" Visibility="Collapsed"/>-->
         
 
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>

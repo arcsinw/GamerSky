@@ -10,7 +10,7 @@
     DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
     RequestedTheme="{Binding AppTheme}">
 
-    <Grid Background="{ThemeResource PageBackground}">
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="*"/>

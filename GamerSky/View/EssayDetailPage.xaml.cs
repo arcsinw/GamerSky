@@ -27,7 +27,7 @@ namespace GamerSky.View
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class EssayDetail : Page
+    public sealed partial class EssayDetailPage : Page
     {
         public Essay essayResult { get; set; }
 
@@ -38,7 +38,7 @@ namespace GamerSky.View
         /// </summary>
         private string currentImageUrl;
 
-        public EssayDetail()
+        public EssayDetailPage()
         {
             this.InitializeComponent();
 

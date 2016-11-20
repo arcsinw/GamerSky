@@ -33,7 +33,7 @@
         <vm:GameDetailViewModel x:Name="viewModel"/>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource PageBackground}"
+    <Grid Background="{ThemeResource PageBackgroundBrush}"
           ScrollViewer.VerticalScrollMode="Enabled"
           ScrollViewer.IsVerticalScrollChainingEnabled="True"
           ScrollViewer.IsScrollInertiaEnabled="True">

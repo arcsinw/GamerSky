@@ -586,7 +586,7 @@
         </Grid>
         <!--#endregion-->
 
-        <Pivot Grid.Row="1" Background="{ThemeResource PageBackground}" 
+        <Pivot Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}" 
                x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
                Style="{StaticResource EssayPivotStyle}">
             <PivotItem Header="新闻" Margin="0">

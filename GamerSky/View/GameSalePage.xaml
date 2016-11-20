@@ -44,7 +44,7 @@
             </Button>
         </Grid>
         <Pivot Grid.Row="1" Style="{ThemeResource EssayPivotStyle}"
-               Background="{ThemeResource PageBackground}">
+               Background="{ThemeResource PageBackgroundBrush}">
             <PivotItem Header="PC">
                 <PivotItem.Resources>
                     <CollectionViewSource x:Key="CollectionViewSource" IsSourceGrouped="True" 

@@ -48,7 +48,7 @@ namespace GamerSky.View
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
 
-            MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetail), essayResult);
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetailPage), essayResult);
         }
          
         private void ListView_Loaded(object sender, RoutedEventArgs e)

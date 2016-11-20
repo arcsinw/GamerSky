@@ -107,7 +107,7 @@ namespace GamerSky.View
             e.Handled = true;
             if (DetailFrame.CanGoBack)
             {
-                var essayDetailPage = (DetailFrame.Content as EssayDetail);
+                var essayDetailPage = (DetailFrame.Content as EssayDetailPage);
                 if (essayDetailPage != null)
                 {
                     

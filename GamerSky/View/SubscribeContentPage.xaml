@@ -39,7 +39,7 @@
         </Grid.RowDefinitions>
  
         <!--订阅栏目内文章列表-->
-        <Grid Background="{ThemeResource PageBackground}"
+        <Grid Background="{ThemeResource PageBackgroundBrush}"
               Grid.Row="0" Grid.RowSpan="2" >
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView ItemsSource="{Binding SubscribeContens}"

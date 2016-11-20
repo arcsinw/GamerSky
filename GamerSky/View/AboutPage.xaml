@@ -10,7 +10,7 @@
     RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">
 
     <Grid>
-        <Pivot Background="{ThemeResource PageBackground}" Style="{ThemeResource StrategyPivotStyle}">
+        <Pivot Background="{ThemeResource PageBackgroundBrush}" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="关于" Margin="0">
                 <Grid>
                     <Grid.Resources>

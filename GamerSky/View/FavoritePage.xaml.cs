@@ -183,7 +183,7 @@ namespace GamerSky.View
             if (essayResult == null) return;
             if (!essayResult.ContentType.Equals("zhuanti"))
             {
-               NavigationHelper.DetailFrameNavigate(typeof(EssayDetail), essayResult);
+               NavigationHelper.DetailFrameNavigate(typeof(EssayDetailPage), essayResult);
             }
             else
             {

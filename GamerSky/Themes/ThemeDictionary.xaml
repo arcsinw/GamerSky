@@ -2375,57 +2375,7 @@
     </Style>
 
     
-    <!--日夜间资源字典-->
-    <ResourceDictionary.ThemeDictionaries>
-        <ResourceDictionary x:Key="Light">
-            <!--主题色-->
-            <Color x:Key="ThemeColor">#D22222</Color>
-            <!--主题色Brush-->
-            <SolidColorBrush x:Key="ThemeColorBrush" Color="#D22222"/>
-            <!--HomePage 底栏背景色-->
-            <SolidColorBrush x:Key="BottomBarBackground" Color="LightGray" />
-            <!--PivotHeader 背景色-->
-            <SolidColorBrush x:Key="PivotHeaderColorBrush" Color="{ThemeResource ThemeColor}"></SolidColorBrush>
-            <!--PivotHeader 选中的颜色 黑色-->
-            <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="White" />
-            <!--PivotHeader 未选中的颜色 灰色-->
-            <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="#CCCCCC" />
-            <!--文字颜色-->
-            <SolidColorBrush x:Key="PhoneForegroundBrush" Color="Black"/>
-            <!--页面背景色-->
-            <SolidColorBrush x:Key="PageBackgroundBrush" Color="WhiteSmoke"/>
-            <!--ListView BorderBrush-->
-            <SolidColorBrush x:Key="ListViewBorderBrush" Color="LightGray"/>
-            <!--ListView BorderThickness-->
-            <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
-            <!--设置ListViewItem背景色-->
-            <SolidColorBrush x:Key="SearchListViewItemBackground" Color="White"/>
-        </ResourceDictionary>
-
-        <ResourceDictionary x:Key="Dark">
-
-            <Color x:Key="ThemeColor">#FF333337</Color>
-            <SolidColorBrush x:Key="ThemeColorBrush" Color="#FF333337"/>
-            <!--HomePage 底栏背景色-->
-            <SolidColorBrush x:Key="BottomBarBackground" Color="#FF1B1B1C" />
-            <!--PivotHeader 背景色-->
-            <SolidColorBrush x:Key="PivotHeaderColorBrush" Color="{ThemeResource ThemeColor}"></SolidColorBrush>
-            <!--PivotHeader 选中的颜色 白色-->
-            <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="White" />
-            <!--PivotHeader 未选中的颜色 灰色-->
-            <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="#CCCCCC" />
-            <!--文字颜色-->
-            <SolidColorBrush x:Key="PhoneForegroundBrush" Color="LightGray"/>
-            <!--页面背景色-->
-            <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FF1A1A1B"/>
-            <!--ListView BorderBrush-->
-            <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF3C3C3C"/>
-            <!--ListView BorderThickness-->
-            <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
-            <!--设置ListViewItem背景色-->
-            <SolidColorBrush x:Key="SearchListViewItemBackground" Color="#FF252526"/>
-        </ResourceDictionary>
-    </ResourceDictionary.ThemeDictionaries>
+    
     
 
 
