@@ -8,6 +8,7 @@
     xmlns:model="using:GamerSky.Core.Model"
     xmlns:hp="using:GamerSky.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
+    xmlns:control="using:GamerSky.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}">
@@ -43,9 +44,9 @@
 
         <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                <ListView ItemsSource="{Binding Yaowens}"
+            <ListView ItemsSource="{Binding Yaowens}"
                       SelectionMode="None"
-                      x:Name="listView"
+                      x:Name="listView" 
                       Loaded="ListView_Loaded"
                       Style="{ThemeResource LightListView}"
                       ShowsScrollingPlaceholders="True"
@@ -53,21 +54,20 @@
                       ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"
                       IsItemClickEnabled="True"
                       ItemClick="ListView_ItemClick"
-                      > 
+                      >
                     <ListView.Transitions>
-                        <TransitionCollection> 
-                            <ContentThemeTransition /> 
+                        <TransitionCollection>
+                            <ContentThemeTransition />
                         </TransitionCollection>
-                    </ListView.Transitions> 
-                </ListView>
+                    </ListView.Transitions>
+                </ListView> 
             </pr:PullToRefreshBox>
  
-            <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Style="{ThemeResource ProgressRingStyle}"/>
-             
+            <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Style="{ThemeResource ProgressRingStyle}"/> 
         </Grid>
 
-        <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"
-               Height="48" x:Name="topPop" Width="48" Margin="16,32" >
+        <Popup Grid.Row="0" Grid.RowSpan="2" Style="{ThemeResource ScrollToTopPopupStyle}"
+                x:Name="topPop" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
                     <AddDeleteThemeTransition />

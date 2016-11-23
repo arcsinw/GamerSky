@@ -53,7 +53,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
         /// <summary>
         /// Gets or sets a value indicating The zero-based index of the current items page.
         /// </summary>
-        protected int CurrentPageIndex { get; set; }
+        protected int CurrentPageIndex { get; set; } = 1;
 
         private readonly Action _onStartLoading;
         private readonly Action _onEndLoading;

@@ -9,13 +9,14 @@
     xmlns:converter="using:GamerSky.Converters"
     xmlns:vm="using:GamerSky.Core.ViewModel"    
     xmlns:controls="using:GamerSky.Controls"
+    xmlns:m="using:GamerSky.Core.Model"
     mc:Ignorable="d"
     NavigationCacheMode="Enabled"
-    RequestedTheme="{Binding AppTheme}">
+    RequestedTheme="{Binding AppTheme}" >
 
-    <Page.DataContext>
+    <!--<Page.DataContext>
         <vm:EssayDetailViewModel x:Name="viewModel"/>
-    </Page.DataContext>
+    </Page.DataContext>-->
     
     <Page.Transitions>
         <TransitionCollection>
@@ -357,10 +358,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
+        <converter:DateTimeToTimeSpanConverter x:Key="DateTimeToTimeSpanConverter"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converter:BoolToIconConverter x:Key="BoolToIconConverter"/>
         <converter:AddConverter x:Key="AddConverter"/>
+     
+        <x:String x:Key="DefaultAvatar">ms-appx:///Assets/Images/members.png</x:String>
     </Page.Resources>
 
     <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -374,10 +377,74 @@
                          DOMContentLoaded="webView_DOMContentLoaded">
                 </WebView>
             </PivotItem>
+            
             <PivotItem Header="评论" Margin="0">
-                <WebView x:Name="commentWebView"  
+                <ListView ItemsSource="{Binding CommentsCollection}"
+                          Style="{ThemeResource LightListView}"
+                          SelectionMode="None"
+                          ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="m:Comment">
+                            <Grid Padding="0,0,12,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions> 
+                                
+                                <!--Avatar-->
+                                <Ellipse Grid.Row="0" Grid.Column="0" 
+                                         Width="40" Height="40">
+                                    <Ellipse.Fill>
+                                        <ImageBrush>
+                                            <ImageBrush.ImageSource>
+                                                <BitmapImage UriSource="{Binding ImgUrl,TargetNullValue={StaticResource DefaultAvatar}}"/>
+                                            </ImageBrush.ImageSource>
+                                        </ImageBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+
+                                <Grid Grid.Row="0" Grid.Column="1" Margin="8,0">
+                                    <TextBlock>
+                                        <Run Foreground="Blue" Text="{x:Bind NickName }"/>
+                                        <LineBreak/>
+                                        <Run Text="{x:Bind IpLocation}"/>
+                                        <Run Text="{Binding CreateTime,Converter={StaticResource DateTimeToTimeSpanConverter}}"/>
+                                    </TextBlock>
+
+                                    <StackPanel HorizontalAlignment="Right">
+                                        <Button ></Button>
+                                        <Button Content="回复"/>
+                                    </StackPanel>
+                                </Grid> 
+                                
+                                <Grid Grid.Row="1" Grid.Column="1" Margin="8,0">
+                                    <StackPanel>
+                                        <ItemsControl Margin="0,8" ItemsSource="{Binding Comments}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid BorderBrush="Blue" CornerRadius="4" BorderThickness="1" Margin="0,0,0,8">
+                                                        <StackPanel>
+                                                            <TextBlock Text="{Binding NickName}" Foreground="Blue"/>
+                                                            <TextBlock Text="{Binding Content}" TextWrapping="Wrap"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!--<WebView x:Name="commentWebView"  
                          hp:ExtensionHelper.HtmlString="{Binding CommentString}">
-                </WebView>
+                </WebView>-->
             </PivotItem>
         </Pivot>
 
@@ -398,10 +465,9 @@
         </FlipView>-->
         
 
-        <!--<WebView x:Name="webView" Visibility="Collapsed"/>
-        <WebView x:Name="commentWebView" Visibility="Collapsed"/>-->
-        
-
+        <!--<WebView x:Name="webView" Visibility="Collapsed"/>-->
+        <WebView x:Name="commentWebView" Visibility="Collapsed"/>
+         
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
@@ -412,10 +478,7 @@
 
             <Button x:Name="likeBtn" Click="likeBtn_Click" HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" Background="Transparent">
- 
-                     <!--<BitmapImage UriSource="{x:Bind essayResult.IsFavorite,Mode=OneWay,Converter={StaticResource BoolToIconConverter}}"/>-->
-
-                <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding EssayResult.IsFavorite,Converter={StaticResource BoolToIconConverter}}"/>
+                <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Data="{Binding Essay.IsFavorite,Converter={StaticResource BoolToIconConverter}}"/>
             </Button>
 
             <!--#region  底部右边的调整按钮-->
@@ -557,8 +620,7 @@
             <Run x:Name="countRun" />
         </TextBlock>
         <!--#endregion-->
-    </Grid>
-
+    </Grid> 
     <Page.BottomAppBar>
         <CommandBar x:Name="appBar" Visibility="Collapsed">
             <CommandBar.PrimaryCommands>

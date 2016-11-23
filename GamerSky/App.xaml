@@ -65,21 +65,18 @@
                     <SolidColorBrush x:Key="SearchListViewItemBackground" Color="#FF252526"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
-            
-            
+             
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ThemeDictionary.xaml"/>
                 <ResourceDictionary Source="Themes/LightDictionary.xaml"/>
                 <ResourceDictionary Source="Themes/DarkDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            
-            
+ 
             <!--有三张图的文章模板-->
             <DataTemplate x:Key="ThreePicEssayDataTemplate">
                 <Grid Margin="{StaticResource EssayGridMargin}" 
                       Padding="{StaticResource EssayGridPadding}"
-                      MaxHeight="100">
+                      >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="2*"/>

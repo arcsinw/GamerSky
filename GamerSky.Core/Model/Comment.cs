@@ -1,12 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿ 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GamerSky.Core.Model
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptOut)]
     public class Comment
     {
         [JsonProperty(PropertyName="comment_id")]
@@ -19,13 +23,13 @@ namespace GamerSky.Core.Model
         public string Content { get; set; }
 
         [JsonProperty(PropertyName = "create_time")]
-        [JsonConverter(typeof(DateTime))]
-        public DateTime CreateTime { get; set; }
+        public string CreateTime { get; set; }
 
         [JsonProperty(PropertyName = "from")]
         public string From { get; set; }
 
         [JsonProperty(PropertyName = "img_url")]
+        [DefaultValue("ms-appx:///Assets/Images/drawer_avatar.png")] 
         public string ImgUrl { get; set; }
 
         [JsonProperty(PropertyName = "ip_location")]

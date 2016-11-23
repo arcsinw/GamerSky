@@ -9,36 +9,50 @@ using Windows.UI.Xaml;
 using GamerSky.Core.Helper;
 using GamerSky.Core.Http;
 using GamerSky.Core.Model;
+using GamerSky.Core.DataSource;
+using GamerSky.Core.IncrementalLoadingCollection;
+using System.Diagnostics;
+using Windows.ApplicationModel;
 
 namespace GamerSky.Core.ViewModel
 {
     public class EssayDetailViewModel : ViewModelBase
     {
-        private ApiService apiService;
+        private ApiService apiService = new ApiService();
         private StringBuilder tempHtml = new StringBuilder();
 
-        private Essay essayResult = new Essay();
-        public Essay EssayResult
+        private Essay essay = new Essay();
+        public Essay Essay
         {
             get
             {
-                return essayResult;
+                return essay;
             }
             set
             {
-                essayResult = value;
+                essay = value;
                 OnPropertyChanged();
             }
         }
 
         public ObservableCollection<string> HtmlCollection { get; set; } = new ObservableCollection<string>();
 
-        public EssayDetailViewModel()
-        {
-            apiService = new ApiService();
-            EssayResult = new Essay();
+        //public IncrementalLoadingCollection<EssayCommentsSource, Comment> CommentsCollection { get; set; }
+
+        public EssayCommentsCollection CommentsCollection { get; set; }
+
+        public EssayDetailViewModel(Essay essay)
+        {  
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+            CommentsCollection = new EssayCommentsCollection(essay.ContentId);
+
+            Essay = essay;
+            //if(DesignMode.DesignModeEnabled)
+            //{ 
+            //        CommentsCollection = new IncrementalLoadingCollection<EssayCommentsSource, Comment>
+            //     (new EssayCommentsSource("836890") { }, 20, () => { }, () => { }, (e) => { Debug.WriteLine("Loading comment error" + e.Message); });
+            //}
         }
 
         private void Current_ShareDataChanged()
@@ -46,6 +60,15 @@ namespace GamerSky.Core.ViewModel
             AppTheme = DataShareManager.Current.AppTheme;
         }
          
+      
+        public void RefreshComments()
+        {
+            CommentsCollection.Clear();
+            CommentsCollection = new EssayCommentsCollection(essay.ContentId);
+            //var c = new IncrementalLoadingCollection<EssayCommentsSource, Comment>
+            //     (new EssayCommentsSource(Essay.ContentId) { }, 20, () => { }, () => { }, (e) => { Debug.WriteLine("Loading comment error" + e.Message); });
+            
+        }
          
         #region Properties
         private ElementTheme appTheme;
@@ -182,13 +205,12 @@ namespace GamerSky.Core.ViewModel
         /// <summary>
         /// 生成新闻内容网页
         /// </summary>
-        public async Task GenerateHtmlString(Essay essay)
+        public async Task GenerateHtmlString()
         {
             IsActive = true;
-            News news = await apiService.ReadEssay(essay.ContentId);
+            News news = await apiService.ReadEssay(Essay.ContentId);
             if (news != null)
-            {
-                EssayResult = essay;
+            { 
                 OriginUri = news.OriginURL;
 
                 string mainBody = news.MainBody;
@@ -293,13 +315,12 @@ namespace GamerSky.Core.ViewModel
         /// 生成评论网页
         /// </summary>
         /// <param name="essay"></param>
-        public async void GenerateCommentString(Essay essay)
+        public async void GenerateCommentString()
         {
-            IsActive = true;
-            EssayResult = essay;
+            IsActive = true; 
             var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Html/Comment.html"));
             CommentString = await FileIO.ReadTextAsync(file);
-            CommentString = CommentString.Replace("{0}", essay.Title).Replace("{1}", essay.ContentId);
+            CommentString = CommentString.Replace("{0}", Essay.Title).Replace("{1}", Essay.ContentId);
 
             IsActive = false;
         } 

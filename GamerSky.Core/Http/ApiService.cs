@@ -131,6 +131,26 @@ namespace GamerSky.Core.Http
             return newsResult?.Result;
         }
 
+        public async Task<List<Comment>> GetAllComments(string contentId,int pageIndex)
+        {
+            List<Comment> comments = new List<Comment>();
+            if(ConnectionHelper.IsInternetAvailable)
+            {
+                GetAllCommentPostData postData = new GetAllCommentPostData()
+                {
+                    pageIndex = pageIndex,
+                    pageSize = 20,
+                    topicId = contentId
+                };
+                var result = await GetJson<AllCommentsResult>(string.Format(ServiceUri.AllComments, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
+                if(result!=null)
+                {
+                    comments = result.Result.Result;
+                }
+            }
+            return comments;
+        }
+
         /// <summary>
         /// 获取相关阅读
         /// </summary>

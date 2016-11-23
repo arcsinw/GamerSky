@@ -10,6 +10,6 @@ namespace GamerSky.Core.PostDataModel
     {
         public string topicId { get; set; }
         public int pageIndex { get; set; }
-        public string pageSize { get; set; } = "20";
+        public int pageSize { get; set; } = 20;
     }
 }

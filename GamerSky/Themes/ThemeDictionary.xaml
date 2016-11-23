@@ -2365,6 +2365,14 @@
         <Setter Property="Width" Value="48"/>
         <Setter Property="Opacity" Value="0.8"/>
     </Style>
+
+    <Style x:Key="ScrollToTopPopupStyle" TargetType="Popup">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="16,32"/>
+        <Setter Property="Width" Value="48"/>
+        <Setter Property="Height" Value="48"/>
+    </Style>
     
     <!--ProgressRing样式-->
     <Style x:Key="ProgressRingStyle" TargetType="ProgressRing">
@@ -2373,12 +2381,7 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="{ThemeResource ThemeColorBrush}"/>
     </Style>
-
-    
-    
-    
-
-
+ 
 </ResourceDictionary>
 
     

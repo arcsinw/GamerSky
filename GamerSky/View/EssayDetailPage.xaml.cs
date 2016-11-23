@@ -29,14 +29,21 @@ namespace GamerSky.View
     /// </summary>
     public sealed partial class EssayDetailPage : Page
     {
+        #region Properties
         public Essay essayResult { get; set; }
 
+        public EssayDetailViewModel viewModel { get; set; }
+
+        private bool isCommentLoaded = true;
         private bool isEssayLoaded = false;
+
         private ObservableCollection<JsImage> Images { get; set; } = new ObservableCollection<JsImage>();
         /// <summary>
         /// 当前点击的图片url
         /// </summary>
-        private string currentImageUrl;
+        private string currentImageUrl { get; set; }
+
+        #endregion
 
         public EssayDetailPage()
         {
@@ -139,43 +146,17 @@ namespace GamerSky.View
 
 
         #region User input handler
-        private async void refreshButton_Click(object sender, RoutedEventArgs e)
+        private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
-            progress.IsActive = true;
-            switch (pivot.SelectedIndex)
-            {
-                case 0:
-                    if (!isEssayLoaded)
-                    {
-                        await viewModel.GenerateHtmlString(essayResult);
-                        isEssayLoaded = true;
-                    }
-                    break;
-                case 1:
-                    viewModel.GenerateCommentString(essayResult);
-                    break;
-            }
-            progress.IsActive = false;
+            Refresh();
         }
 
 
-        private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (essayResult != null)
             {
-                switch (pivot.SelectedIndex)
-                {
-                    case 0:
-                        if (!isEssayLoaded)
-                        {
-                            await viewModel.GenerateHtmlString(essayResult);
-                            isEssayLoaded = true;
-                        }
-                        break;
-                    case 1:
-                        viewModel.GenerateCommentString(essayResult);
-                        break;
-                }
+                Refresh();
             }
         }
 
@@ -201,8 +182,7 @@ namespace GamerSky.View
         /// <param name="e"></param>
         private void translateBtn_Click(object sender, RoutedEventArgs e)
         {
-            Translate();
-
+            Translate(); 
         }
 
         /// <summary>
@@ -291,10 +271,7 @@ namespace GamerSky.View
             await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
         }
         #endregion
-
-
-
-
+         
         public void CloseImageFlipView()
         {
             if (imageFlipView.Visibility == Visibility.Visible)
@@ -310,14 +287,52 @@ namespace GamerSky.View
                 }
             }
 
-        }
-
+        } 
 
         public async void Refresh()
         {
-            await viewModel.GenerateHtmlString(essayResult);
+            switch (pivot.SelectedIndex)
+            {
+                case 0:
+                    if (!isEssayLoaded)
+                    {
+                        await viewModel.GenerateHtmlString();
+                        isEssayLoaded = true;
+                    }
+                    break;
+                case 1:
+                    if (!isCommentLoaded)
+                    {
+                        //viewModel.GenerateCommentString();
+                        viewModel.RefreshComments();
+                        isCommentLoaded = true;
+                    }
+                    break;
+            }
+        }
+         
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.essayResult = e.Parameter as Essay;
+
+            if (essayResult != null)
+            {
+                DataContext = viewModel = new EssayDetailViewModel(essayResult);
+                isCommentLoaded = false;
+                isEssayLoaded = false;
+                if (essayResult.ContentId.Equals("0"))
+                {
+                    webView.Navigate(new Uri(essayResult.ContentURL));
+                }
+                else
+                {
+                    Refresh();
+                }
+            }
         }
 
+
+        #region Webview's event
         /// <summary>
         /// 处理WebView中的新请求
         /// </summary>
@@ -367,36 +382,7 @@ namespace GamerSky.View
             Images.Clear();
             GetAllPictures();
         }
-
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            this.isEssayLoaded = false;
-            essayResult = e.Parameter as Essay; 
-            if (essayResult != null)
-            {
-                if (essayResult.ContentId.Equals("0"))
-                {
-                    webView.Navigate(new Uri(essayResult.ContentURL));
-                }
-                else
-                { 
-                    if (pivot.SelectedIndex == 0)
-                    {
-                        await viewModel.GenerateHtmlString(essayResult);
-                    }
-                    else
-                    {
-                        viewModel.GenerateCommentString(essayResult);
-                    }
-                }
-            } 
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            viewModel.HtmlString = string.Empty;
-        }
-
+          
         private void webView_ScriptNotify(object sender, NotifyEventArgs e)
         {
             Debug.WriteLine(e.Value);
@@ -430,5 +416,6 @@ namespace GamerSky.View
                 NightMode();
             }
         }
+        #endregion
     }
 }
