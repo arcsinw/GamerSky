@@ -160,16 +160,7 @@ namespace GamerSky.View
             NavigationHelper.MasterFrameNavigate(typeof(LoginPage));
         } 
         #endregion
-        
-        private void innerTopicListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-
-        }
-
-        private void Grid_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-
-        }
+      
 
         private void PullToRefreshListView_RefreshRequested(object sender, EventArgs e)
         {

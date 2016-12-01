@@ -124,24 +124,12 @@ namespace GamerSky.View
 
         private void Search(object sender, RoutedEventArgs e)
         {
-            MasterDetailPage.Current.DetailFrame.Navigate(typeof(SearchPage));
-            
-        }
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(SearchPage)); 
+        } 
 
-        private void PivotItem_SizeChanged(object sender, SizeChangedEventArgs e)
+        public void NavigateToGameSalePage()
         {
-            try
-            {
-                var pivotItem = sender as PivotItem;
-                if(pivotItem.ActualHeight>=320 && pivotItem.ActualHeight<=720)
-                {
-
-                }
-            }
-            catch(Exception ex)
-            {
-                Debug.WriteLine("StrategyPage.xaml.cs"+ex.Message);
-            }
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(GameSalePage));
         }
 
         /// <summary>

@@ -22,8 +22,8 @@ namespace GamerSky.Core.Model
         [JsonProperty(PropertyName = "content")]
         public string Content { get; set; }
 
-        [JsonProperty(PropertyName = "create_time")]
-        public string CreateTime { get; set; }
+        [JsonProperty(PropertyName = "create_time")] 
+        public long CreateTime { get; set; }
 
         [JsonProperty(PropertyName = "from")]
         public string From { get; set; }

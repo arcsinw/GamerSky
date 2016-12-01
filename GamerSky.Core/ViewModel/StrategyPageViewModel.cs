@@ -10,6 +10,7 @@ using GamerSky.Core.Helper;
 using GamerSky.Core.Http;
 using GamerSky.Core.Model;
 using GamerSky.Core.IncrementalLoadingCollection;
+using GamerSky.Core.Common;
 
 namespace GamerSky.Core.ViewModel
 {
@@ -60,8 +61,7 @@ namespace GamerSky.Core.ViewModel
                 OnPropertyChanged();
             }
         }
-
-      
+         
         #endregion
 
         public StrategyPageViewModel()
@@ -73,7 +73,7 @@ namespace GamerSky.Core.ViewModel
             AllStrategys = new ObservableCollection<AlphaKeyGroup<Strategy>>();
 
             Games = new GameIncrementalCollection();
-            
+             
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
             

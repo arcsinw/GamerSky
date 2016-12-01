@@ -474,15 +474,15 @@
             </Pivot.ItemContainerStyle>
         </Pivot>
 
-        <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"
-               Height="48" x:Name="topPop" Width="48" Margin="16,32" >
+        <Popup Grid.Row="0" Grid.RowSpan="2" Style="{ThemeResource ScrollToTopPopupStyle}"
+              x:Name="topPop">
             <Popup.ChildTransitions>
                 <TransitionCollection>
                     <AddDeleteThemeTransition />
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <Popup.Child>
-                <Button Click="Button_Click" Style="{ThemeResource ScrollToTopButtonStyle}">
+                <Button Click="{x:Bind ScrollToTop}" Style="{ThemeResource ScrollToTopButtonStyle}">
                     <SymbolIcon Symbol="Up" Foreground="White" />
                 </Button>
             </Popup.Child>

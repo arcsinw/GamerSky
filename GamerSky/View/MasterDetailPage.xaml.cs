@@ -35,13 +35,7 @@ namespace GamerSky.View
         {
             this.InitializeComponent();
             Current = this;
-            SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            User = DataShareManager.Current.CurrentUser;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
-            DisplayInformation.GetForCurrentView().OrientationChanged += MasterDetailPage_OrientationChanged;
+            
         }
 
         private void MasterDetailPage_OrientationChanged(DisplayInformation sender, object args)
@@ -134,10 +128,16 @@ namespace GamerSky.View
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_gonglue_h.png", Title = GlobalStringLoader.GetString("UGame"), SourcePage = typeof(StrategyPage) });
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_dingyue_h.png", Title = GlobalStringLoader.GetString("USubscribe"), SourcePage = typeof(SubscribePage) });
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_news.png", Title = GlobalStringLoader.GetString("UYaowen"), SourcePage = typeof(YaowenPage) });
-            //PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_night.png", Title = GlobalStringLoader.GetString("Night") });
+       
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_collect.png", Title = GlobalStringLoader.GetString("UCollection"), SourcePage = typeof(FavoritePage) });
             UIHelper.ShowStatusBar();
-            
+              
+            AppTheme = DataShareManager.Current.AppTheme;
+            User = DataShareManager.Current.CurrentUser;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+             
+            SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
+            DisplayInformation.GetForCurrentView().OrientationChanged += MasterDetailPage_OrientationChanged;
         }
 
 

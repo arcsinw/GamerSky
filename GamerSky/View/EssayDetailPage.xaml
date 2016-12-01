@@ -12,12 +12,9 @@
     xmlns:m="using:GamerSky.Core.Model"
     mc:Ignorable="d"
     NavigationCacheMode="Enabled"
-    RequestedTheme="{Binding AppTheme}" >
-
-    <!--<Page.DataContext>
-        <vm:EssayDetailViewModel x:Name="viewModel"/>
-    </Page.DataContext>-->
-    
+    RequestedTheme="{Binding AppTheme}" 
+    >
+  
     <Page.Transitions>
         <TransitionCollection>
             <PaneThemeTransition Edge="Right"/>
@@ -26,7 +23,7 @@
 
     <Page.Resources>
         <MenuFlyout x:Key="ImageMenuFlyout" Placement="Bottom" >
-            <MenuFlyoutItem Text="保存图片"   DataContext="{Binding }"/>
+            <MenuFlyoutItem Text="保存图片"   DataContext="{Binding ''}"/>
         </MenuFlyout>
 
         <Style x:Key="RadioButtonStyle"  TargetType="RadioButton">
@@ -362,14 +359,16 @@
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <converter:BoolToIconConverter x:Key="BoolToIconConverter"/>
         <converter:AddConverter x:Key="AddConverter"/>
-     
+
         <x:String x:Key="DefaultAvatar">ms-appx:///Assets/Images/members.png</x:String>
     </Page.Resources>
 
+
     <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
-               SelectionChanged="pivot_SelectionChanged">
+        <!--<Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
+               SelectionChanged="pivot_SelectionChanged"
+               SelectedIndex="1">
 
             <PivotItem Header="正文" Margin="0" >
                 <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
@@ -377,8 +376,92 @@
                          DOMContentLoaded="webView_DOMContentLoaded">
                 </WebView>
             </PivotItem>
-            
+
             <PivotItem Header="评论" Margin="0">
+                <ListView ItemsSource="{x:Bind CommentsCollection}"
+                          Style="{ThemeResource LightListView}"
+                          SelectionMode="None"
+                          ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="m:Comment">
+                            <Grid Padding="0,0,12,12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                --><!--Avatar--><!--
+                                <Ellipse Grid.Row="0" Grid.Column="0" 
+                                         Width="40" Height="40">
+                                    <Ellipse.Fill>
+                                        <ImageBrush>
+                                            <ImageBrush.ImageSource>
+                                                <BitmapImage UriSource="{Binding ImgUrl,TargetNullValue={StaticResource DefaultAvatar}}"/>
+                                            </ImageBrush.ImageSource>
+                                        </ImageBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+
+                                <Grid Grid.Row="0" Grid.Column="1" Margin="8,0">
+                                    <TextBlock>
+                                        <Run Foreground="Blue" Text="{x:Bind NickName}"/>
+                                        <LineBreak/>
+                                        <Run Text="{x:Bind IpLocation}"/>
+                                        <Run Text="{Binding CreateTime,Converter={StaticResource DateTimeToTimeSpanConverter}}"/>
+                                    </TextBlock>
+
+                                    <StackPanel HorizontalAlignment="Right">
+                                        <Button ></Button>
+                                        <Button Content="回复"/>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.Column="1" Margin="8,0">
+                                    <StackPanel>
+                                        <ItemsControl Margin="0,8" ItemsSource="{x:Bind Comments}"
+                                                     >
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate x:DataType="m:Comment">
+                                                    <Grid BorderBrush="Blue" CornerRadius="4" 
+                                                          HorizontalAlignment="Stretch"
+                                                          BorderThickness="1" Margin="0,0,0,8">
+                                                        <StackPanel>
+                                                            <TextBlock Text="{x:Bind NickName}" Foreground="Blue"/>
+                                                            <TextBlock Text="{x:Bind Content}" TextWrapping="Wrap"/>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                --><!--<WebView x:Name="commentWebView"  
+                         hp:ExtensionHelper.HtmlString="{Binding CommentString}">
+                </WebView>--><!--
+            </PivotItem>
+        </Pivot>-->
+
+        <FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
+                  UseTouchAnimationsForAllNavigation="True" >
+         
+            <FlipViewItem>
+                <controls:ArticlePresenter Html="{Binding HtmlString}"/>
+                <!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
+                    ScriptNotify="webView_ScriptNotify" NavigationCompleted="webView_NavigationCompleted"
+                         DOMContentLoaded="webView_DOMContentLoaded">
+                </WebView>-->
+            </FlipViewItem> 
+ 
+            <FlipViewItem>
                 <ListView ItemsSource="{Binding CommentsCollection}"
                           Style="{ThemeResource LightListView}"
                           SelectionMode="None"
@@ -394,7 +477,6 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions> 
-                                
                                 <!--Avatar-->
                                 <Ellipse Grid.Row="0" Grid.Column="0" 
                                          Width="40" Height="40">
@@ -415,25 +497,27 @@
                                         <Run Text="{Binding CreateTime,Converter={StaticResource DateTimeToTimeSpanConverter}}"/>
                                     </TextBlock>
 
-                                    <StackPanel HorizontalAlignment="Right">
-                                        <Button ></Button>
-                                        <Button Content="回复"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Style="{ThemeResource LightButtonStyle}"/>
+                                        <Button Content="回复" Style="{ThemeResource LightButtonStyle}"/>
                                     </StackPanel>
-                                </Grid> 
-                                
+                                </Grid>
+
                                 <Grid Grid.Row="1" Grid.Column="1" Margin="8,0">
                                     <StackPanel>
-                                        <ItemsControl Margin="0,8" ItemsSource="{Binding Comments}">
+                                        <ItemsControl Margin="0,8" ItemsSource="{x:Bind Comments}">
                                             <ItemsControl.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid BorderBrush="Blue" CornerRadius="4" BorderThickness="1" Margin="0,0,0,8">
+                                                <DataTemplate x:DataType="m:Comment">
+                                                    <Grid BorderBrush="Blue" CornerRadius="4" 
+                                                          HorizontalAlignment="Stretch" Padding="4"
+                                                          BorderThickness="1" Margin="0,0,0,8">
                                                         <StackPanel>
-                                                            <TextBlock Text="{Binding NickName}" Foreground="Blue"/>
-                                                            <TextBlock Text="{Binding Content}" TextWrapping="Wrap"/>
+                                                            <TextBlock Text="{x:Bind NickName}" Foreground="Blue"/>
+                                                            <TextBlock Text="{x:Bind Content}" TextWrapping="Wrap"/>
                                                         </StackPanel>
                                                     </Grid>
                                                 </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
+                                            </ItemsControl.ItemTemplate> 
                                         </ItemsControl>
                                         <TextBlock Text="{Binding Content}" TextWrapping="Wrap"/>
                                     </StackPanel>
@@ -442,32 +526,13 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <!--<WebView x:Name="commentWebView"  
-                         hp:ExtensionHelper.HtmlString="{Binding CommentString}">
-                </WebView>-->
-            </PivotItem>
-        </Pivot>
-
-        <!--<FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
-                  UseTouchAnimationsForAllNavigation="True">
-         
-            <FlipViewItem>
-                <controls:ArticlePresenter Html="{Binding HtmlString}"/>
-                --><!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
-                    ScriptNotify="webView_ScriptNotify" NavigationCompleted="webView_NavigationCompleted"
-                         DOMContentLoaded="webView_DOMContentLoaded">
-                    </WebView>--><!-- 
-            </FlipViewItem> 
- 
-            <FlipViewItem>
-                <controls:ArticlePresenter  Html="{Binding CommentString}"/> 
             </FlipViewItem>
-        </FlipView>-->
-        
+        </FlipView>
 
-        <!--<WebView x:Name="webView" Visibility="Collapsed"/>-->
+
+        <WebView x:Name="webView" Visibility="Collapsed"/>
         <WebView x:Name="commentWebView" Visibility="Collapsed"/>
-         
+
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
 
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
@@ -483,106 +548,106 @@
 
             <!--#region  底部右边的调整按钮-->
             <Button Style="{ThemeResource BackButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Button.Flyout>
-                        <Flyout>
-                            <Flyout.FlyoutPresenterStyle>
-                                <Style TargetType="FlyoutPresenter">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                    <Setter Property="Padding" Value="0"/>
-                                </Style>
-                            </Flyout.FlyoutPresenterStyle>
-                            <Flyout.Content>
-                                <ListView Padding="0" Margin="0" SelectionMode="None"
+                <Button.Flyout>
+                    <Flyout>
+                        <Flyout.FlyoutPresenterStyle>
+                            <Style TargetType="FlyoutPresenter">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Padding" Value="0"/>
+                            </Style>
+                        </Flyout.FlyoutPresenterStyle>
+                        <Flyout.Content>
+                            <ListView Padding="0" Margin="0" SelectionMode="None"
                                 ScrollViewer.VerticalScrollMode="Disabled">
-                                    <ListView.Resources>
-                                        <Style TargetType="StackPanel">
-                                            <Setter Property="Margin" Value="0,0,12,0"/>
-                                        </Style>
-                                    </ListView.Resources>
-                                    <ListView.ItemContainerStyle>
-                                        <Style TargetType="ListViewItem">
-                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        </Style>
-                                    </ListView.ItemContainerStyle>
-                                    <ListViewItem>
-                                        <Grid HorizontalAlignment="Stretch" >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+                                <ListView.Resources>
+                                    <Style TargetType="StackPanel">
+                                        <Setter Property="Margin" Value="0,0,12,0"/>
+                                    </Style>
+                                </ListView.Resources>
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListViewItem>
+                                    <Grid HorizontalAlignment="Stretch" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
 
-                                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
-                                                <TextBlock Text="夜间模式" VerticalAlignment="Center" />
-                                            </StackPanel>
+                                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
+                                            <TextBlock Text="夜间模式" VerticalAlignment="Center" />
+                                        </StackPanel>
 
-                                            <CheckBox Grid.Column="1" MinWidth="0" x:Name="nightCheckBox" 
+                                        <CheckBox Grid.Column="1" MinWidth="0" x:Name="nightCheckBox" 
                                             Checked="nightCheckBox_Checked" Unchecked="nightCheckBox_Unchecked"
                                             HorizontalAlignment="Right"/>
-                                        </Grid>
-                                    </ListViewItem>
-                                    <ListViewItem>
-                                        <Grid HorizontalAlignment="Stretch" >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+                                    </Grid>
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <Grid HorizontalAlignment="Stretch" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
 
-                                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
-                                                <TextBlock Text="字体" VerticalAlignment="Center" />
-                                            </StackPanel>
+                                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
+                                            <TextBlock Text="字体" VerticalAlignment="Center" />
+                                        </StackPanel>
 
-                                            <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
-                                                <RadioButton Content="小" Style="{StaticResource RadioButtonStyle}" Margin="0,0,8,0"/>
-                                                <RadioButton Content="中" Style="{StaticResource RadioButtonStyle}" Margin="0,0,8,0"/>
-                                                <RadioButton Content="大" Style="{StaticResource RadioButtonStyle}" Margin="0,0,8,0"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </ListViewItem>
-                                    <ListViewItem>
-                                        <Grid HorizontalAlignment="Stretch" >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <RadioButton Content="小" Style="{StaticResource RadioButtonStyle}" Margin="0,0,8,0"/>
+                                            <RadioButton Content="中" Style="{StaticResource RadioButtonStyle}" Margin="0,0,8,0"/>
+                                            <RadioButton Content="大" Style="{StaticResource RadioButtonStyle}" Margin="0,0,8,0"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <Grid HorizontalAlignment="Stretch" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
 
-                                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
-                                                <TextBlock Text="非WiFi无图" VerticalAlignment="Center" />
-                                            </StackPanel>
-                                            <CheckBox Grid.Column="1" MinWidth="0" HorizontalAlignment="Right"/>
-                                        </Grid>
-                                    </ListViewItem>
-                                    <ListViewItem x:Name="edgeListViewItem" Tapped="edgeListViewItem_Tapped">
-                                        <TextBlock Text="Edge打开"/>
-                                    </ListViewItem>
-                                    <ListViewItem>
-                                        <Grid HorizontalAlignment="Stretch" >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
+                                            <TextBlock Text="非WiFi无图" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                        <CheckBox Grid.Column="1" MinWidth="0" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </ListViewItem>
+                                <ListViewItem x:Name="edgeListViewItem" Tapped="edgeListViewItem_Tapped">
+                                    <TextBlock Text="Edge打开"/>
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <Grid HorizontalAlignment="Stretch" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
 
-                                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
-                                                <TextBlock Text="刷新页面" VerticalAlignment="Center" />
-                                            </StackPanel>
+                                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
+                                            <TextBlock Text="刷新页面" VerticalAlignment="Center" />
+                                        </StackPanel>
 
-                                            <Button Grid.Column="1" HorizontalAlignment="Right" x:Name="refreshButton" Click="refreshButton_Click" Background="Transparent">
-                                                <Button.Content>
-                                                    <SymbolIcon Symbol="Refresh"/>
-                                                </Button.Content>
-                                            </Button>
-                                        </Grid>
-                                    </ListViewItem>
-                                </ListView>
+                                        <Button Grid.Column="1" HorizontalAlignment="Right" x:Name="refreshButton" Click="refreshButton_Click" Background="Transparent">
+                                            <Button.Content>
+                                                <SymbolIcon Symbol="Refresh"/>
+                                            </Button.Content>
+                                        </Button>
+                                    </Grid>
+                                </ListViewItem>
+                            </ListView>
 
-                            </Flyout.Content>
-                        </Flyout>
+                        </Flyout.Content>
+                    </Flyout>
 
-                    </Button.Flyout>
-                    <Button.Content>
-                        <SymbolIcon Symbol="Font"/>
-                    </Button.Content>
-                </Button>
+                </Button.Flyout>
+                <Button.Content>
+                    <SymbolIcon Symbol="Font"/>
+                </Button.Content>
+            </Button>
             <!--#endregion-->
 
         </StackPanel>
@@ -591,25 +656,25 @@
         <FlipView x:Name="imageFlipView" 
             Background="Black" Visibility="Collapsed" 
             ItemsSource="{x:Bind Images,Mode=OneWay}" >
-                    <FlipView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <ScrollViewer IsDeferredScrollingEnabled="True" 
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <ScrollViewer IsDeferredScrollingEnabled="True" 
                                     ZoomSnapPointsType="Mandatory"
                                     MaxZoomFactor="5"
                                     MinZoomFactor="1"                                    
                                     ScrollViewer.IsZoomChainingEnabled="True"
                                     ScrollViewer.IsZoomInertiaEnabled="True"
                                     ScrollViewer.ZoomMode="Enabled">
-                                    <Image>
-                                        <Image.Source>
-                                            <BitmapImage UriSource="{Binding src}"/>
-                                        </Image.Source>
-                                    </Image>
-                                </ScrollViewer>
-                            </Grid>
-                        </DataTemplate>
-                    </FlipView.ItemTemplate>
+                            <Image>
+                                <Image.Source>
+                                    <BitmapImage UriSource="{Binding src}"/>
+                                </Image.Source>
+                            </Image>
+                        </ScrollViewer>
+                    </Grid>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
         </FlipView>
 
 
@@ -620,7 +685,8 @@
             <Run x:Name="countRun" />
         </TextBlock>
         <!--#endregion-->
-    </Grid> 
+    </Grid>
+    
     <Page.BottomAppBar>
         <CommandBar x:Name="appBar" Visibility="Collapsed">
             <CommandBar.PrimaryCommands>

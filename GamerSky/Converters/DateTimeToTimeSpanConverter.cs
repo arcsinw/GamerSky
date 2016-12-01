@@ -16,31 +16,32 @@ namespace GamerSky.Converters
         {
             DateTime createTime = DateTimeHelper.UnixTimeStampToDateTime((long)value);
             TimeSpan time =  DateTime.Now - createTime;
+            string timePast = string.Empty;
             if(time.TotalDays > 30)
             {
-                return "几个月前";
+                timePast = "几个月前";
             }
             else if(time.TotalDays > 7)
             {
-                return "几周前";
+                timePast = (int)(time.TotalDays % 7) +"周前";
             }
-            else if(time.TotalDays > 0)
+            else if(time.TotalDays > 1)
             {
-                return time.TotalDays + "天前";
+                timePast = (int)time.TotalDays + "天前";
             }
             else if(time.TotalHours > 1)
             {
-                return time.TotalHours + "小时前";
+                timePast = (int)time.TotalHours + "小时前";
             }
             else if(time.TotalMinutes > 0)
             {
-                return time.TotalMinutes + "分钟前";
+                timePast = (int)time.TotalMinutes   + "分钟前";
             }
             else if(time.TotalSeconds > 0)
             {
-                return time.TotalSeconds + "秒前";
+                timePast = (int)time.TotalSeconds  + "秒前";
             }
-            return "";
+            return timePast;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -47,12 +47,15 @@ namespace GamerSky.Core.ViewModel
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
             CommentsCollection = new EssayCommentsCollection(essay.ContentId);
 
-            Essay = essay;
-            //if(DesignMode.DesignModeEnabled)
-            //{ 
-            //        CommentsCollection = new IncrementalLoadingCollection<EssayCommentsSource, Comment>
-            //     (new EssayCommentsSource("836890") { }, 20, () => { }, () => { }, (e) => { Debug.WriteLine("Loading comment error" + e.Message); });
-            //}
+            Essay = essay; 
+        }
+
+        public EssayDetailViewModel()
+        {
+            if(DesignMode.DesignModeEnabled)
+            {
+                CommentsCollection = new EssayCommentsCollection("836890");
+            }
         }
 
         private void Current_ShareDataChanged()
@@ -66,8 +69,7 @@ namespace GamerSky.Core.ViewModel
             CommentsCollection.Clear();
             CommentsCollection = new EssayCommentsCollection(essay.ContentId);
             //var c = new IncrementalLoadingCollection<EssayCommentsSource, Comment>
-            //     (new EssayCommentsSource(Essay.ContentId) { }, 20, () => { }, () => { }, (e) => { Debug.WriteLine("Loading comment error" + e.Message); });
-            
+            //     (new EssayCommentsSource(Essay.ContentId) { }, 20, () => { }, () => { }, (e) => { Debug.WriteLine("Loading comment error" + e.Message); }); 
         }
          
         #region Properties

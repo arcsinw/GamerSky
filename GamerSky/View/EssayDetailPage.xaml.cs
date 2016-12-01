@@ -19,6 +19,7 @@ using GamerSky.Core.Http;
 using GamerSky.Core.Model;
 using GamerSky.Core.ViewModel;
 using GamerSky.Helper;
+using GamerSky.Core.IncrementalLoadingCollection;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -33,10 +34,7 @@ namespace GamerSky.View
         public Essay essayResult { get; set; }
 
         public EssayDetailViewModel viewModel { get; set; }
-
-        private bool isCommentLoaded = true;
-        private bool isEssayLoaded = false;
-
+          
         private ObservableCollection<JsImage> Images { get; set; } = new ObservableCollection<JsImage>();
         /// <summary>
         /// 当前点击的图片url
@@ -45,6 +43,8 @@ namespace GamerSky.View
 
         #endregion
 
+        public EssayCommentsCollection CommentsCollection { get; set; } = new EssayCommentsCollection("838261");
+        
         public EssayDetailPage()
         {
             this.InitializeComponent();
@@ -214,14 +214,12 @@ namespace GamerSky.View
                 savePicker.DefaultFileExtension = ".jpg";
                 savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
                 savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-                savePicker.ContinuationData["Op"] = "ImgSave";
-
+                savePicker.ContinuationData["Op"] = "ImgSave"; 
                 file = await savePicker.PickSaveFileAsync();
             }
             if (file != null)
             {
                 CachedFileManager.DeferUpdates(file);
-
                 try
                 {
                     var selectImg = imageFlipView.SelectedItem as JsImage;
@@ -287,26 +285,17 @@ namespace GamerSky.View
                 }
             }
 
-        } 
+        }
 
         public async void Refresh()
         {
             switch (pivot.SelectedIndex)
             {
                 case 0:
-                    if (!isEssayLoaded)
-                    {
-                        await viewModel.GenerateHtmlString();
-                        isEssayLoaded = true;
-                    }
+                    await viewModel.GenerateHtmlString(); 
                     break;
                 case 1:
-                    if (!isCommentLoaded)
-                    {
-                        //viewModel.GenerateCommentString();
-                        viewModel.RefreshComments();
-                        isCommentLoaded = true;
-                    }
+                    viewModel.RefreshComments(); 
                     break;
             }
         }
@@ -317,9 +306,7 @@ namespace GamerSky.View
 
             if (essayResult != null)
             {
-                DataContext = viewModel = new EssayDetailViewModel(essayResult);
-                isCommentLoaded = false;
-                isEssayLoaded = false;
+                DataContext = viewModel = new EssayDetailViewModel(essayResult);  
                 if (essayResult.ContentId.Equals("0"))
                 {
                     webView.Navigate(new Uri(essayResult.ContentURL));
