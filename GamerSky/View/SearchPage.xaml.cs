@@ -30,10 +30,7 @@ namespace GamerSky.View
         public SearchPage()
         {
             this.InitializeComponent();
-
-
-            pageIndexDic = new Dictionary<int, int>();
-
+             
             NavigationCacheMode = NavigationCacheMode.Required;
         }
          
@@ -66,7 +63,7 @@ namespace GamerSky.View
         /// <summary>
         /// 保存不同频道的页码  pivotIndex,pageIndex
         /// </summary>
-        private Dictionary<int, int> pageIndexDic;
+        private Dictionary<int, int> pageIndexDic = new Dictionary<int, int>();
 
         private int pageIndex = 1;
         #endregion 
@@ -276,40 +273,33 @@ namespace GamerSky.View
                 }
             }
         }
+         
 
 
-        private bool IsSubscribeHotKeyLoaded = false;
         private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int selectedIndex = pivot.SelectedIndex;
-            //切换当前页码
-            switch(selectedIndex)
+
+            if(!pageIndexDic.ContainsKey(selectedIndex))
             {
-                case 0:
-                    if (!pageIndexDic.ContainsKey(selectedIndex))
-                    {
+                switch(selectedIndex)
+                {
+                    case 0:
                         await viewModel.LoadNewsHotKey();
-                        pageIndexDic[selectedIndex] = 1;
-                    }
-                    pageIndex = pageIndexDic[selectedIndex];                   
-                    break;
-                case 1:
-                    if(!pageIndexDic.ContainsKey(selectedIndex))
-                    {
+                        break;
+                    case 1:
                         await viewModel.LoadStrategyHotKey();
-                        pageIndexDic[selectedIndex] = 1;
-                    }
-                    pageIndex = pageIndexDic[selectedIndex];
-                   
-                    break;
-                case 2:
-                    if (!IsSubscribeHotKeyLoaded)
-                    {
+                        break;
+                    case 2:
                         await viewModel.LoadSubscribeHotKey();
-                        IsSubscribeHotKeyLoaded = false;
-                    }
-                    break;
+                        break;
+                }
+                pageIndexDic.Add(selectedIndex, 1);
             }
+            else
+            {
+                pageIndex = pageIndexDic[selectedIndex];
+            } 
         }
 
         private void subscribeListView_Loaded(object sender, RoutedEventArgs e)

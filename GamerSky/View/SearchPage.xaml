@@ -160,7 +160,7 @@
                             </VisualStateManager.VisualStateGroups>
                             <Border x:Name="BackgroundElement" CornerRadius="5" Background="{TemplateBinding Background}" Grid.ColumnSpan="2" Margin="{TemplateBinding BorderThickness}" Opacity="{ThemeResource TextControlBackgroundRestOpacity}" Grid.Row="1" Grid.RowSpan="1"/>
                             <Border x:Name="BorderElement" CornerRadius="5" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="1"/>
-                            <ContentPresenter x:Name="HeaderContentPresenter" Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" FontWeight="Normal" Margin="0,0,0,8" Grid.Row="0" Visibility="Collapsed" x:DeferLoadStrategy="Lazy"/>
+                            <ContentPresenter x:Name="HeaderContentPresenter" VerticalAlignment="Center" Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" FontWeight="Normal" Margin="0,0,0,8" Grid.Row="0" Visibility="Collapsed" x:DeferLoadStrategy="Lazy"/>
                             <ScrollViewer x:Name="ContentElement" VerticalAlignment="Center" AutomationProperties.AccessibilityView="Raw" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsTabStop="False" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="Disabled"/>
                             <ContentControl x:Name="PlaceholderTextContentPresenter" VerticalAlignment="Center" Grid.ColumnSpan="2" Content="{TemplateBinding PlaceholderText}" Foreground="{ThemeResource SystemControlPageTextBaseMediumBrush}" IsHitTestVisible="False" IsTabStop="False" Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" Grid.Row="1"/>
                             <Button x:Name="DeleteButton" BorderThickness="{TemplateBinding BorderThickness}" Grid.Column="1" FontSize="{TemplateBinding FontSize}" IsTabStop="False" Margin="{ThemeResource HelperButtonThemePadding}" MinWidth="34" Grid.Row="1" Style="{StaticResource DeleteButtonStyle}" Visibility="Collapsed" VerticalAlignment="Stretch"/>
@@ -545,7 +545,11 @@
             </Setter>
         </Style>
 
-        
+        <DataTemplate x:Key="HotKeyGridViewDataTemplate">
+            <Border BorderBrush="Gray" CornerRadius="2" BorderThickness="1" Padding="4">
+                <TextBlock Text="{Binding }" HorizontalAlignment="Center" />
+            </Border>
+        </DataTemplate>        
     </Page.Resources>
 
     <Page.DataContext>
@@ -615,19 +619,13 @@
 
                     <GridView ItemsSource="{Binding HotNews}" SelectionMode="None" 
                           IsItemClickEnabled="True" Visibility="{Binding NewsGridViewVisibility}"
-                          ItemClick="{x:Bind ItemClick}" Margin="12,0">
+                          ItemClick="{x:Bind ItemClick}" Margin="12,0"
+                              ItemTemplate="{StaticResource HotKeyGridViewDataTemplate}">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <controls:StringWrapPanel/>
                             </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
-                        <GridView.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderBrush="Gray" BorderThickness="1" Padding="4">
-                                    <TextBlock Text="{Binding }" HorizontalAlignment="Center" />
-                                </Border>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
+                        </GridView.ItemsPanel> 
                         <GridView.Transitions>
                             <TransitionCollection>
                                 <AddDeleteThemeTransition/>
@@ -671,19 +669,13 @@
                           Visibility="{Binding StrategysGridViewVisibility}"
                           SelectionMode="None" Margin="12,0"
                           IsItemClickEnabled="True" Background="Transparent"
-                          ItemClick="{x:Bind ItemClick}">
+                          ItemClick="{x:Bind ItemClick}"
+                              ItemTemplate="{StaticResource HotKeyGridViewDataTemplate}">
                         <GridView.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <controls:StringWrapPanel/>
                             </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
-                        <GridView.ItemTemplate>
-                            <DataTemplate>
-                                <Border BorderThickness="1" BorderBrush="Gray" Padding="4">
-                                    <TextBlock Text="{Binding }" HorizontalAlignment="Center"/>
-                                </Border>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
+                        </GridView.ItemsPanel> 
                         <GridView.ItemContainerStyle>
                             <Style TargetType="GridViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -706,7 +698,7 @@
                             <DataTemplate x:DataType="m:Subscribe">
                                 <Grid  MaxHeight="100">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="180"/>
                                         <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>

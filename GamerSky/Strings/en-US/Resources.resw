@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppName" xml:space="preserve">
-    <value>GamerSky.X</value>
+    <value>GamerSky</value>
   </data>
   <data name="FeedBack.Text" xml:space="preserve">
     <value>Feedback</value>
@@ -216,7 +216,7 @@
   <data name="SignUp.Text" xml:space="preserve">
     <value>Sign up</value>
   </data>
-  <data name="OtherWay.Text" xml:space="preserve">
+  <data name="OtherWayLogin.Text" xml:space="preserve">
     <value>Other way to login</value>
   </data>
   <data name="UYaowen" xml:space="preserve">
@@ -233,5 +233,23 @@
   </data>
   <data name="UCollection" xml:space="preserve">
     <value>Collection</value>
+  </data>
+  <data name="Thank.Text" xml:space="preserve">
+    <value>Thank</value>
+  </data>
+  <data name="UpdateHistory.Text" xml:space="preserve">
+    <value>Update history</value>
+  </data>
+  <data name="Rate.Text" xml:space="preserve">
+    <value>Rate it</value>
+  </data>
+  <data name="Agreement.Text" xml:space="preserve">
+    <value>Agreement</value>
+  </data>
+  <data name="OtherWayRegister.Text" xml:space="preserve">
+    <value>Other way to register</value>
+  </data>
+  <data name="RegisterMeansAccept.Text" xml:space="preserve">
+    <value>Register mean accept</value>
   </data>
 </root>

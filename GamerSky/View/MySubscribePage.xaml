@@ -34,7 +34,7 @@
                 <Grid Grid.Column="1" Margin="5,0">
                     <TextBlock Text="{Binding SourceName}" TextWrapping="Wrap" VerticalAlignment="Top"/>
                     <TextBlock  Margin="0,4,0,0" VerticalAlignment="Bottom">
-                    <Run Text="{Binding Count}"/>
+                    <Run Text="{Binding ReadingCount}"/>
                     <Run Text="人订阅"/>
                     </TextBlock>
                 </Grid>

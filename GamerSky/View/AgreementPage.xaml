@@ -34,7 +34,7 @@
                     Click="{x:Bind Back}" Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
-            <TextBlock x:Name="titleTextBlock" Text="协议" Style="{ThemeResource PageTitleStyle}"/>
+            <TextBlock x:Name="titleTextBlock" x:Uid="Agreement" Text="协议" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
         
         <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">

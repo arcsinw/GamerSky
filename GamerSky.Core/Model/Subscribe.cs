@@ -4,12 +4,12 @@ using Newtonsoft.Json;
 namespace GamerSky.Core.Model
 {
     /// <summary>
-    /// 订阅热点词返回数据类型
+    /// 订阅热点词返回值
     /// </summary>
     public class Subscribe : ModelBase
     {
         [JsonProperty(PropertyName = "cnt")]
-        public string Count { get; set; }
+        public string ReadingCount { get; set; }
 
         [JsonProperty(PropertyName = "isHot")]
         public string IsHot { get; set; }

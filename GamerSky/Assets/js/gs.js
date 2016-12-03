@@ -80,6 +80,17 @@ function GetAllPictures() {
     SendNotify(JSON.stringify(imgArray));
 }
 
+
+function translatePage()
+{
+    $.getScript("http://www.microsofttranslator.com/ajax/v2/toolkit.ashx?mode=manual&toolbar=thin", function() {
+		$("#translatorbtn").click(function(){
+			translatePage();
+		});
+	});
+	function translatePage(){Microsoft.Translator.translate(document.body,"zh-CHS", "en");}
+}
+
 // 转换为数字
 function intval(v) {
     v = parseInt(v);

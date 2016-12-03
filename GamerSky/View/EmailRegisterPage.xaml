@@ -43,17 +43,21 @@
         <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
             <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
                 <StackPanel Padding="16" >
-                    <TextBox PlaceholderText="请输入用户名" Text="{Binding Path=RegisterInfo.UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox PlaceholderText="请输入用户名" Style="{StaticResource LightTextBoxStyle}" 
+                             Text="{Binding Path=RegisterInfo.UserName,Mode=TwoWay}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserName]}" Style="{ThemeResource ErrorTextBlock}"/>
                     <PasswordBox PlaceholderText="请输入密码"  Password="{Binding Path=RegisterInfo.UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserPassword]}" Style="{ThemeResource ErrorTextBlock}"/>
                     <!--<PasswordBox PlaceholderText="请再次输入密码" Password="{Binding Path=RegisterInfo.SureUserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[SureUserPassword]}" Style="{ThemeResource ErrorTextBlock}"/>-->
-                    <TextBox PlaceholderText="请输入邮箱" Text="{Binding Path=RegisterInfo.Email,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox PlaceholderText="请输入邮箱" Style="{StaticResource LightTextBoxStyle}" 
+                             Text="{Binding Path=RegisterInfo.Email,Mode=TwoWay}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[Email]}" Style="{ThemeResource ErrorTextBlock}"/>
-                    <TextBox PlaceholderText="请输入密保问题" Text="{Binding Path=RegisterInfo.Question,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox PlaceholderText="请输入密保问题" Style="{StaticResource LightTextBoxStyle}" 
+                             Text="{Binding Path=RegisterInfo.Question,Mode=TwoWay}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[Question]}" Style="{ThemeResource ErrorTextBlock}"/>
-                    <TextBox PlaceholderText="请输入密保答案"  Text="{Binding Path=RegisterInfo.Answer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox PlaceholderText="请输入密保答案" Style="{StaticResource LightTextBoxStyle}" 
+                             Text="{Binding Path=RegisterInfo.Answer,Mode=TwoWay}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[Answer]}" Style="{ThemeResource ErrorTextBlock}"/>
                     <Button Content="注册" IsEnabled="{Binding Path=RegisterInfo.IsValid}" HorizontalAlignment="Stretch" Margin="0,0,0,16"
                             Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind Register}" Style="{ThemeResource RoundButtonStyle}"/>

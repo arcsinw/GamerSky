@@ -38,7 +38,11 @@ namespace GamerSky.Core.ViewModel
                 }
             }
         }
-         
+        
+        
+        ///<Summary>
+        /// Indicate wether is in design mode
+        /// </Summary> 
         public static bool IsDesignMode
         {
             get
@@ -46,5 +50,14 @@ namespace GamerSky.Core.ViewModel
                 return Windows.ApplicationModel.DesignMode.DesignModeEnabled;
             }
         }
+
+        public bool IsDesktop
+        {
+            get
+            {
+                return DeviceInformationHelper.IsDesktop();
+            }
+        }
+
     }
 }

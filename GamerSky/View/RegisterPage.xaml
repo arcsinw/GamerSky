@@ -48,9 +48,11 @@
                             <Setter Property="Foreground" Value="Red"/>
                         </Style>
                     </StackPanel.Resources>
-                    <TextBox PlaceholderText="请输入手机号" x:Name="phoneNumberTextBlock" Text="{Binding Path=RegisterInfo.PhoneNumber,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox PlaceholderText="请输入手机号" x:Name="phoneNumberTextBlock" Style="{StaticResource LightTextBoxStyle}"
+                             Text="{Binding Path=RegisterInfo.PhoneNumber,Mode=TwoWay}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[PhoneNumber]}" Style="{StaticResource ErrorTextBlock}"/>
-                    <TextBox PlaceholderText="请输入用户名" x:Name="userNameTextBlock" Margin="0,8" Text="{Binding Path=RegisterInfo.UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox PlaceholderText="请输入用户名" x:Name="userNameTextBlock" Style="{StaticResource LightTextBoxStyle}" 
+                             Margin="0,8" Text="{Binding Path=RegisterInfo.UserName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserName]}" Style="{StaticResource ErrorTextBlock}"/>
                     <PasswordBox PlaceholderText="请输入密码" Password="{Binding Path=RegisterInfo.UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserPassword]}" Style="{StaticResource ErrorTextBlock}"/>
@@ -63,7 +65,8 @@
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBox PlaceholderText="请输入验证码" Grid.Row="0" Text="{Binding Path=RegisterInfo.VerificationCode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" />
+                        <TextBox PlaceholderText="请输入验证码" Grid.Row="0" Style="{StaticResource LightTextBoxStyle}" 
+                                 Text="{Binding Path=RegisterInfo.VerificationCode,Mode=TwoWay}" Grid.Column="0" />
                         <TextBlock Text="{Binding Path=RegisterInfo.Errors[VerificationCode]}" 
                                    Grid.Row="1"
                                    Style="{StaticResource ErrorTextBlock}"/>
@@ -75,14 +78,14 @@
                             Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind Register}"
                             Style="{ThemeResource RoundButtonStyle}" />
                     <TextBlock Margin="0,16">
-                    <Run Text="注册代表同意接受"/>
+                    <Run x:Uid="RegisterMeansAccept"/>
                     <Hyperlink UnderlineStyle="None" Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>
                     </TextBlock>
                     <Rectangle Height="1" Fill="Gray"  />
 
                     <HyperlinkButton Click="{x:Bind OtherRegister}" HorizontalAlignment="Right">
                         <HyperlinkButton.Content>
-                            <TextBlock Text="其他方式注册"/>
+                            <TextBlock x:Uid="OtherWayRegister"/>
                         </HyperlinkButton.Content>
                     </HyperlinkButton>
                 </StackPanel>

@@ -131,12 +131,12 @@
                             </ControlTemplate>
                         </hp:AdaptiveGridView.Template>-->
                         <controls:AdaptiveGridView.Header>
-                            <Grid>
+                            <Grid Margin="0,0,0,8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBox PlaceholderText="搜索" Grid.Column="0"/>
+                                <TextBox PlaceholderText="搜索" Style="{StaticResource LightTextBoxStyle}" Grid.Column="0"/>
                                 <Button Style="{ThemeResource LightButtonStyle}" Click="{x:Bind NavigateToGameSalePage}" Content="发售表" Grid.Column="1"/>
                             </Grid>
                         </controls:AdaptiveGridView.Header>

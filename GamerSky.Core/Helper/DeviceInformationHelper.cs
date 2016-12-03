@@ -68,6 +68,11 @@ namespace GamerSky.Core.Helper
             return ApplicationView.GetForCurrentView().VisibleBounds.Height;
         }
 
+        public static bool IsDesktop()
+        {
+            return easDeviceInfo.OperatingSystem == "Desktop";
+        }
+
         /// <summary>
         /// 获取屏幕宽度
         /// </summary>

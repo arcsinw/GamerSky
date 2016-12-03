@@ -216,7 +216,7 @@
   <data name="SignUp.Text" xml:space="preserve">
     <value>注册新用户</value>
   </data>
-  <data name="OtherWay.Text" xml:space="preserve">
+  <data name="OtherWayLogin.Text" xml:space="preserve">
     <value>其他方式登录</value>
   </data>
   <data name="UYaowen" xml:space="preserve">
@@ -233,5 +233,23 @@
   </data>
   <data name="UCollection" xml:space="preserve">
     <value>收藏</value>
+  </data>
+  <data name="Thank.Text" xml:space="preserve">
+    <value>感谢</value>
+  </data>
+  <data name="UpdateHistory.Text" xml:space="preserve">
+    <value>更新历史</value>
+  </data>
+  <data name="Rate.Text" xml:space="preserve">
+    <value>评论</value>
+  </data>
+  <data name="Agreement.Text" xml:space="preserve">
+    <value>协议</value>
+  </data>
+  <data name="OtherWayRegister.Text" xml:space="preserve">
+    <value>其他方式注册</value>
+  </data>
+  <data name="RegisterMeansAccept.Text" xml:space="preserve">
+    <value>注册代表同意接受</value>
   </data>
 </root>
