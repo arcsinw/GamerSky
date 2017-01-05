@@ -364,7 +364,7 @@
     </Page.Resources>
 
 
-    <Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="rootGrid" Background="{ThemeResource PageBackgroundBrush}">
 
         <!--<Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
                SelectionChanged="pivot_SelectionChanged"
@@ -491,7 +491,7 @@
 
                                 <Grid Grid.Row="0" Grid.Column="1" Margin="8,0">
                                     <TextBlock>
-                                        <Run Foreground="Blue" Text="{x:Bind NickName }"/>
+                                        <Run Foreground="{ThemeResource ThemeColorBrush}" Text="{x:Bind NickName }"/>
                                         <LineBreak/>
                                         <Run Text="{x:Bind IpLocation}"/>
                                         <Run Text="{Binding CreateTime,Converter={StaticResource DateTimeToTimeSpanConverter}}"/>
@@ -510,9 +510,9 @@
                                                 <DataTemplate x:DataType="m:Comment">
                                                     <Grid BorderBrush="Blue" CornerRadius="4" 
                                                           HorizontalAlignment="Stretch" Padding="4"
-                                                          BorderThickness="1" Margin="0,0,0,8">
+                                                          BorderThickness="1">
                                                         <StackPanel>
-                                                            <TextBlock Text="{x:Bind NickName}" Foreground="Blue"/>
+                                                            <TextBlock Text="{x:Bind NickName}" Foreground="{ThemeResource ThemeColorBrush}"/>
                                                             <TextBlock Text="{x:Bind Content}" TextWrapping="Wrap"/>
                                                         </StackPanel>
                                                     </Grid>

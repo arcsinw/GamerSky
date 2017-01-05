@@ -84,6 +84,11 @@ namespace GamerSky.Core.Http
         public const string AllComments = "http://cm.gamersky.com/appapi/GetAllComment?jsondata={0}";
 
         /// <summary>
+        /// 获取所有评论回复
+        /// </summary>
+        public const string GetAllReply = "http://cm.gamersky.com/appapi/GetUserComment?jsondata={0}";
+
+        /// <summary>
         /// 对订阅进行操作
         /// </summary>
         public const string EditSubscription = "http://appapi2.gamersky.com/v2/Editsubscription";

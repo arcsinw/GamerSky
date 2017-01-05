@@ -221,11 +221,13 @@ namespace GamerSky.Core.ViewModel
                             + "<meta name=\"viewport\" content=\"width= device-width, user-scalable = no\" />"
                             + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
                             + "<meta name=\"msapplication-tap-highlight\" content=\"no\">" //wp点击无高光;
-                             + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gs.css\"/>"
-                            + "<script src=\"ms-appx-web:///Assets/js/gs.js\"></script>"
-                            + "<script src=\"ms-appx-web:///Assets/js/gsVideo.js\"></script>";
+                            + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gs.css\"/>"
+                            + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gsAppHTMLTemplate.css\"/>"
+                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/js/gsAppHTMLTemplate.js\"></script>"
+                            +"<script src=\"ms-appx-web:///Assets/js/gs.js\"></script>";
+                            //+ "<script src=\"http://j.gamersky.com/g/gsVideo.js\"></script>";
 
-                string title = news.Title;
+                string title = news.Title;  
                 string subTitle = news.SubTitle;
 
                 #region 相关阅读

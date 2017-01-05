@@ -31,7 +31,7 @@ namespace GamerSky.View
     public sealed partial class EssayDetailPage : Page
     {
         #region Properties
-        public Essay essayResult { get; set; }
+        public Essay EssayResult { get; set; }
 
         public EssayDetailViewModel viewModel { get; set; }
           
@@ -39,7 +39,11 @@ namespace GamerSky.View
         /// <summary>
         /// 当前点击的图片url
         /// </summary>
-        private string currentImageUrl { get; set; }
+        private string CurrentImageUrl { get; set; } 
+
+        public bool IsEssayLoaded { get; set; } = false;
+
+        public bool IsCommentLoaded { get; set; } = false;
 
         #endregion
 
@@ -152,11 +156,27 @@ namespace GamerSky.View
         }
 
 
-        private void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (essayResult != null)
+            if (EssayResult != null)
             {
-                Refresh();
+                switch (pivot.SelectedIndex)
+                {
+                    case 0:
+                        if (!IsEssayLoaded)
+                        {
+                            await viewModel.GenerateHtmlString();
+                        }
+                        IsEssayLoaded = true;
+                        break;
+                    case 1:
+                        if (!IsCommentLoaded)
+                        {
+                            viewModel.RefreshComments();
+                        }
+                        IsCommentLoaded = true;
+                        break;
+                }
             }
         }
 
@@ -192,15 +212,15 @@ namespace GamerSky.View
         /// <param name="e"></param>
         private void likeBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (essayResult != null)
+            if (EssayResult != null)
             {
-                DataShareManager.Current.UpdateFavoriteEssayList(essayResult);
+                DataShareManager.Current.UpdateFavoriteEssayList(EssayResult);
             }
         }
 
         private async void saveAppBar_Click(object sender, RoutedEventArgs e)
         {
-            UIHelper.ShowToast("保存中……");
+            UIHelper.ShowToast(GlobalStringLoader.GetString("Saving"));
             var folder = KnownFolders.SavedPictures;
             StorageFile file;
             if (Functions.IsMobile())
@@ -236,15 +256,14 @@ namespace GamerSky.View
                         FileUpdateStatus updateStatus = await CachedFileManager.CompleteUpdatesAsync(file);
                         if (updateStatus == FileUpdateStatus.Complete)
                         {
-                            UIHelper.ShowToast("图片已保存");
+                            UIHelper.ShowToast(GlobalStringLoader.GetString("PictureSaved"));
                         }
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    JYHelper.TraceError("AdStartPage.xaml" + ex.Message);
-
+                    JYHelper.TraceError("AdStartPage.xaml" + ex.Message); 
                 }
             }
         }
@@ -302,14 +321,14 @@ namespace GamerSky.View
          
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.essayResult = e.Parameter as Essay;
+            EssayResult = e.Parameter as Essay;
 
-            if (essayResult != null)
+            if (EssayResult != null)
             {
-                DataContext = viewModel = new EssayDetailViewModel(essayResult);  
-                if (essayResult.ContentId.Equals("0"))
+                DataContext = viewModel = new EssayDetailViewModel(EssayResult);  
+                if (EssayResult.ContentId.Equals("0"))
                 {
-                    webView.Navigate(new Uri(essayResult.ContentURL));
+                    webView.Navigate(new Uri(EssayResult.ContentURL));
                 }
                 else
                 {
@@ -335,8 +354,8 @@ namespace GamerSky.View
                 args.Uri.Query.EndsWith(".png", StringComparison.CurrentCultureIgnoreCase) ||
                 args.Uri.Query.EndsWith(".gif", StringComparison.CurrentCultureIgnoreCase))
             {
-                currentImageUrl = args.Uri.ToString();
-                Debug.WriteLine("ClickImageUrl：" + currentImageUrl);
+                CurrentImageUrl = args.Uri.ToString();
+                Debug.WriteLine("ClickImageUrl：" + CurrentImageUrl);
                 GetAllPictures();
                 
                 imageFlipView.Visibility = Visibility.Visible;
@@ -346,11 +365,11 @@ namespace GamerSky.View
                 {
                     for (int i = 0; i < Images.Count; i++)
                     {
-                        if(Images[i].hdsrc!=null && currentImageUrl.Contains(Images[i].hdsrc))
+                        if(Images[i].hdsrc!=null && CurrentImageUrl.Contains(Images[i].hdsrc))
                         {
                             imageFlipView.SelectedIndex = i;
                         }
-                        else if (Images[i].src!=null && currentImageUrl.Contains(Images[i].src) )
+                        else if (Images[i].src!=null && CurrentImageUrl.Contains(Images[i].src) )
                         {
                             imageFlipView.SelectedIndex = i;
                         }
@@ -392,7 +411,6 @@ namespace GamerSky.View
                     Frame.GoBack();
                 }
             }
-
         }
 
         private void webView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)

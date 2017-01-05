@@ -81,7 +81,7 @@ namespace GamerSky.Helper
                 titleBar.BackgroundColor = Application.Current.Resources["LightThemeColor"] as Color?;
             }
             titleBar.ForegroundColor = Colors.White;
-            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            //var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
            
         }
 

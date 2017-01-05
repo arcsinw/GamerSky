@@ -19,6 +19,16 @@ namespace GamerSky.Core.Http
 {
     public class ApiService : ApiBaseService
     {
+        private static ApiService _apiService = new ApiService();
+
+        public static ApiService Instance
+        {
+            get
+            {
+                return _apiService;
+            }
+        }
+
         private string LocalFolder = ApplicationData.Current.LocalFolder.Path;
 
         /// <summary>
@@ -29,29 +39,28 @@ namespace GamerSky.Core.Http
         {
             string filename = "channelList.json";
             ChannelResult channelResult = new ChannelResult();
-            if (!ConnectionHelper.IsInternetAvailable) //无网络
-            {
-                channelResult.Result = await FileHelper.Current.ReadObjectAsync<List<Channel>>(filename);
-            }
-            else
-            {
-                AllChannelListPostData postData = new AllChannelListPostData();
+            channelResult.Result = await FileHelper.Current.ReadObjectAsync<List<Channel>>(filename);
+            
 
-                postData.deviceId = DeviceInformationHelper.GetDeviceId();
-                postData.request = new request() { type = "0" };
-                channelResult = await PostJson<AllChannelListPostData, ChannelResult>(ServiceUri.AllChannel, postData);
-                if (channelResult !=null && channelResult.Result!=null)
+            if (channelResult.Result == null)
+            {
+                if (ConnectionHelper.IsInternetAvailable)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Channel>>(channelResult.Result, filename);
+                    AllChannelListPostData postData = new AllChannelListPostData();
+
+                    postData.deviceId = DeviceInformationHelper.GetDeviceId();
+                    postData.request = new request() { type = "0" };
+                    channelResult = await PostJson<AllChannelListPostData, ChannelResult>(ServiceUri.AllChannel, postData);
+                    if (channelResult != null && channelResult.Result != null)
+                    {
+                        await FileHelper.Current.WriteObjectAsync(channelResult.Result, filename);
+                    }
                 }
+                    
             }
+            channelResult.Result.Insert(0,new Channel { isTop = "False", nodeId = 0, nodeName = "头条" });
 
-            if(channelResult!= null && channelResult.Result !=null)
-            {
-                channelResult.Result.Insert(0,new Channel { isTop = "False", nodeId = 0, nodeName = "头条" });
-            }
-
-            return channelResult?.Result;
+            return channelResult.Result;  
         }
         
         /// <summary>
@@ -131,6 +140,12 @@ namespace GamerSky.Core.Http
             return newsResult?.Result;
         }
 
+        /// <summary>
+        /// 获取某文章所有评论
+        /// </summary>
+        /// <param name="contentId"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
         public async Task<List<Comment>> GetAllComments(string contentId,int pageIndex)
         {
             List<Comment> comments = new List<Comment>();
@@ -401,6 +416,17 @@ namespace GamerSky.Core.Http
 
             var result = await GetJson<CommentResult>(string.Format(ServiceUri.AddComment, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
             return result;
+        }
+
+        /// <summary>
+        /// 获取评论回复
+        /// </summary>
+        public async Task<List<Comment>> GetAllReply(string userId,int pageIndex)
+        {
+            string jsonData = "{\"userId\":" + userId + ",\"pageIndex\":"+pageIndex + ",\"pageSize\":20}";
+            string url = string.Format(ServiceUri.GetAllReply, jsonData);
+            GetAllReplyResult result = await GetJson<GetAllReplyResult>(url);
+            return result?.Result.Comments;
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using GamerSky.View;
+﻿using GamerSky.Core.Helper;
+using GamerSky.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +9,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.StartScreen;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -32,6 +34,15 @@ namespace GamerSky
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            
+        }
+
+
+        public async void CreateJumpList()
+        {
+            JumpList jumpList = await JumpList.LoadCurrentAsync();
+            jumpList.Items.Add(JumpListItem.CreateWithArguments("HotNews", "News"));
+            await jumpList.SaveAsync();
         }
 
         /// <summary>

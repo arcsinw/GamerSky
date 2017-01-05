@@ -29,10 +29,9 @@ body
     color:#333;	
     text-align:justify;
 	word-break:break-all;
-    -webkit-tap-highlight-color:transparent;
-	/*禁止选中内容, 禁止弹出内容菜单*/
+	/*禁止选中内容, 禁止弹出内容菜单
     -webkit-touch-callout:none;
-	-webkit-user-select:none;
+	-webkit-user-select:none;*/
 }
 .PageColorMode_Day body
 {

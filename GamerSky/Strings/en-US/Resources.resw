@@ -252,4 +252,13 @@
   <data name="RegisterMeansAccept.Text" xml:space="preserve">
     <value>Register mean accept</value>
   </data>
+  <data name="Saving" xml:space="preserve">
+    <value>Saving...</value>
+  </data>
+  <data name="PictureSaved" xml:space="preserve">
+    <value>Picture save success</value>
+  </data>
+  <data name="CommentReply.Text" xml:space="preserve">
+    <value>Comment reply</value>
+  </data>
 </root>

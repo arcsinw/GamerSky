@@ -32,9 +32,7 @@
                     <!--Pane背景色-->
                     <SolidColorBrush x:Key="PaneBackgroundBrush" Color="White"/>
                     <!--ListView BorderBrush-->
-                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="LightGray"/>
-                    <!--ListView BorderThickness-->
-                    <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
+                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="LightGray"/> 
                     <!--设置ListViewItem背景色-->
                     <SolidColorBrush x:Key="SearchListViewItemBackground" Color="White"/>
                 </ResourceDictionary>
@@ -58,9 +56,7 @@
                     <!--Pane背景色-->
                     <SolidColorBrush x:Key="PaneBackgroundBrush" Color="#FF5F5F5F"/>
                     <!--ListView BorderBrush-->
-                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF3C3C3C"/>
-                    <!--ListView BorderThickness-->
-                    <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
+                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF3C3C3C"/> 
                     <!--设置ListViewItem背景色-->
                     <SolidColorBrush x:Key="SearchListViewItemBackground" Color="#FF252526"/>
                 </ResourceDictionary>
@@ -75,8 +71,7 @@
             <!--有三张图的文章模板-->
             <DataTemplate x:Key="ThreePicEssayDataTemplate">
                 <Grid Margin="{StaticResource EssayGridMargin}" 
-                      Padding="{StaticResource EssayGridPadding}"
-                      >
+                      Padding="{StaticResource EssayGridPadding}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="2*"/>
@@ -120,9 +115,9 @@
             <!--一张图文章模板-->
             <DataTemplate x:Key="OnePicEssayDataTemplate">
                 <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}"
-                      MaxHeight="100">
+                      >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="2*" MaxWidth="180"/>
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
@@ -336,6 +331,8 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <Thickness x:Key="ListViewBorderThickness">1,0,1,1</Thickness>
 
             <!--ListView.ItemsContainerStyle-->
             <Style x:Key="EssayListViewItemsContainerStyle" TargetType="ListViewItem">

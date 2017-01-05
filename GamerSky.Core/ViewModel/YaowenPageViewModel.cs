@@ -25,9 +25,7 @@ namespace GamerSky.Core.ViewModel
                 yaowens = value;
                 OnPropertyChanged();
             }
-        }
-
-        private ApiService apiService;
+        } 
 
         private bool isActive;
         public bool IsActive
@@ -43,8 +41,7 @@ namespace GamerSky.Core.ViewModel
             }
         }
         public YaowenPageViewModel()
-        {
-            apiService = new ApiService(); 
+        { 
             Yaowens = new YaowenIncrementalCollection();
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;

@@ -181,6 +181,12 @@ namespace GamerSky.View
             NavigationHelper.MasterFrameNavigate(typeof(SearchPage));
         }
 
+        public void NavigateToReplyPage()
+        {
+            drawer.DrawerOpened = false;
+            NavigationHelper.MasterFrameNavigate(typeof(ReplyPage));
+        }
+
         /// <summary>
         /// 要闻
         /// </summary>

@@ -10,9 +10,7 @@ namespace GamerSky.Core.Helper
     public class GlobalStringLoader
     {
         private static ResourceLoader loader ;
-
-        
-
+         
         static GlobalStringLoader()
         {
             loader = ResourceLoader.GetForCurrentView();

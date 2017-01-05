@@ -1,15 +1,21 @@
-﻿using System;
+﻿using GamerSky.Core.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using GamerSky.Core.Helper;
-
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Documents;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 namespace GamerSky.Core.ViewModel
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : DependencyObject, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -39,6 +45,10 @@ namespace GamerSky.Core.ViewModel
             }
         }
         
+        public ViewModelBase()
+        {
+            IsDesktop = DeviceInformationHelper.IsDesktop();
+        }
         
         ///<Summary>
         /// Indicate wether is in design mode
@@ -50,14 +60,25 @@ namespace GamerSky.Core.ViewModel
                 return Windows.ApplicationModel.DesignMode.DesignModeEnabled;
             }
         }
+         
 
         public bool IsDesktop
         {
-            get
-            {
-                return DeviceInformationHelper.IsDesktop();
-            }
+            get { return (bool)GetValue(IsDesktopProperty); }
+            set { SetValue(IsDesktopProperty, value); }
         }
 
+        // Using a DependencyProperty as the backing store for IsDesktop.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsDesktopProperty =
+            DependencyProperty.Register("IsDesktop", typeof(bool), typeof(ViewModelBase), new PropertyMetadata(false));
+
+         
+        //public static bool IsDesktop
+        //{
+        //    get
+        //    {
+        //        return DeviceInformationHelper.IsDesktop();
+        //    }
+        //} 
     }
 }

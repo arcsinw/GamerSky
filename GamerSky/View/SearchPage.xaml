@@ -713,13 +713,13 @@
                                     <Grid Grid.Column="1" Margin="5,0">
                                         <TextBlock Text="{x:Bind SourceName}" VerticalAlignment="Top"/>
                                         <TextBlock  Margin="0,4,0,0" VerticalAlignment="Bottom">
-                    <Run Text="{x:Bind Count}"/>
-                    <Run Text="人订阅"/>
+                                        <Run Text="{x:Bind ReadingCount}"/>
+                                        <Run Text="人订阅"/>   
                                         </TextBlock>
                                     </Grid>
                                     <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" 
-                    Style="{Binding IsFavorite,Converter={StaticResource BoolToStyleConverter}}"
-                    Command="{x:Bind ToggleFavorite}"/>
+                                        Style="{Binding IsFavorite,Converter={StaticResource BoolToStyleConverter}}"
+                                        Command="{x:Bind ToggleFavorite}"/> 
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>

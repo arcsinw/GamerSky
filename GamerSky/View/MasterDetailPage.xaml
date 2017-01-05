@@ -330,18 +330,26 @@
                         <ListViewItem HorizontalContentAlignment="Center" Tapped="{x:Bind NavigateToLogin}"
                                       Background="{ThemeResource ThemeColorBrush}">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
-                                <Ellipse Height="90" Width="90" HorizontalAlignment="Center">
-                                    <Ellipse.Resources>
-                                        <x:String x:Key="Uri">ms-appx:///Assets/Images/drawer_avatar.png</x:String>
-                                    </Ellipse.Resources>
-                                    <Ellipse.Fill>
-                                        <ImageBrush>
-                                            <ImageBrush.ImageSource>
-                                                <BitmapImage UriSource="{x:Bind User.Pic,Mode=OneWay,TargetNullValue={StaticResource Uri}}"/>
-                                            </ImageBrush.ImageSource>
-                                        </ImageBrush>
-                                    </Ellipse.Fill>
-                                </Ellipse>
+                                <Grid Height="90" Width="90" HorizontalAlignment="Center">
+                                    <Ellipse Height="90" Width="90" HorizontalAlignment="Center">
+                                        <Ellipse.Resources>
+                                            <x:String x:Key="Uri">ms-appx:///Assets/Images/drawer_avatar.png</x:String>
+                                        </Ellipse.Resources>
+                                        <Ellipse.Fill>
+                                            <ImageBrush>
+                                                <ImageBrush.ImageSource>
+                                                    <BitmapImage UriSource="{x:Bind User.Pic,Mode=OneWay,TargetNullValue={StaticResource Uri}}"/>
+                                                </ImageBrush.ImageSource>
+                                            </ImageBrush>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <Ellipse>
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="ms-appx:///Assets/Images/drawer_avatar.png"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
                                 <TextBlock Text="{x:Bind User.UserName,Mode=OneWay}" x:Uid="Login" HorizontalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </ListViewItem>
@@ -364,6 +372,13 @@
                             <StackPanel Orientation="Horizontal">
                                 <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_news.png" Height="24"/>
                                 <TextBlock Text="要闻" x:Uid="Yaowen" Margin="{StaticResource TextBlockMargin}"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+                        <ListViewItem Tapped="{x:Bind NavigateToReplyPage}">
+                            <StackPanel Orientation="Horizontal">
+                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_news.png" Height="24"/>
+                                <TextBlock  x:Uid="CommentReply" Margin="{StaticResource TextBlockMargin}"/>
                             </StackPanel>
                         </ListViewItem>
 
