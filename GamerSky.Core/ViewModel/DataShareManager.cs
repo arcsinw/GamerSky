@@ -55,6 +55,10 @@ namespace GamerSky.Core.ViewModel
             {
                 return currentUser;
             }
+            set
+            {
+                CurrentUser = value;
+            }
         }
 
         private ElementTheme appTheme;

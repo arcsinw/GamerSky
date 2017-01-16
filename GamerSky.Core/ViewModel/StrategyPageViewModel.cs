@@ -31,8 +31,7 @@ namespace GamerSky.Core.ViewModel
         /// 游戏库中游戏列表
         /// </summary>
         public GameIncrementalCollection Games { get; set; }
-
-        private ApiService apiService;
+         
 
         private bool isActive;
         public bool IsActive
@@ -65,8 +64,7 @@ namespace GamerSky.Core.ViewModel
         #endregion
 
         public StrategyPageViewModel()
-        {
-            apiService = new ApiService();
+        { 
 
             FocusStrategys = new ObservableCollection<Strategy>();
 
@@ -91,9 +89,9 @@ namespace GamerSky.Core.ViewModel
         /// </summary>
         public async Task LoadFocusStrategys()
         {
-            await apiService.GetGameList(1);
+            await ApiService.Instance.GetGameList(1);
             IsActive = true;
-            List<Strategy> strategys = await apiService.GetStrategys();
+            List<Strategy> strategys = await ApiService.Instance.GetStrategys();
             if (strategys != null)
             {
                 foreach (var item in strategys)
@@ -110,7 +108,7 @@ namespace GamerSky.Core.ViewModel
         public async Task LoadAllStrategys()
         {
             IsActive = true;
-            List<Strategy> strategys = await apiService.GetAllStrategys();
+            List<Strategy> strategys = await ApiService.Instance.GetAllStrategys();
             if (strategys != null)
             {
                 //按拼音分组
@@ -132,7 +130,7 @@ namespace GamerSky.Core.ViewModel
         public async Task LoadGameList(int pageIndex)
         {
             IsActive = true;
-            var gameList = await apiService.GetGameList(pageIndex);
+            var gameList = await ApiService.Instance.GetGameList(pageIndex);
             if(gameList!= null)
             {
                 foreach (var item in gameList)
@@ -191,7 +189,7 @@ namespace GamerSky.Core.ViewModel
 
         public async void Subscribe(Strategy strategy)
         {
-            VerificationCode code = await apiService.EditSubscribe(SubscribeOperateEnum.add, strategy.SpecialID.ToString());
+            VerificationCode code = await ApiService.Instance.EditSubscribe(SubscribeOperateEnum.add, strategy.SpecialID.ToString());
 
             //本地存储订阅列表
             //DataShareManager.Current.UpdateSubscribe(strategy);

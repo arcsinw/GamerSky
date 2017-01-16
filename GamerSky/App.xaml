@@ -6,10 +6,8 @@
     xmlns:hp="using:GamerSky.Helper"
     RequestedTheme="Light">
 
-    <Application.Resources>
-
-        <ResourceDictionary>
-
+    <Application.Resources> 
+        <ResourceDictionary> 
             <!--日夜间资源字典-->
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
@@ -114,8 +112,7 @@
             </DataTemplate>
             <!--一张图文章模板-->
             <DataTemplate x:Key="OnePicEssayDataTemplate">
-                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}"
-                      >
+                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*" MaxWidth="180"/>
                         <ColumnDefinition Width="5*"/>
@@ -179,22 +176,7 @@
                 </Grid>
             </DataTemplate>
 
-            <Style x:Key="LightTextBoxStyle" TargetType="TextBox">
-                <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
-                <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>
-                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-                <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAltHighBrush}"/>
-                <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}"/>
-                <Setter Property="SelectionHighlightColor" Value="{ThemeResource SystemControlHighlightAccentBrush}"/>
-                <Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}"/>
-                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
-                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
-                <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto"/>
-                <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
-                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
-                <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
-                <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}"/>
+            <Style x:Key="LightTextBoxStyle" TargetType="TextBox"> 
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="TextBox">
@@ -576,12 +558,8 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-            </Style>
-
-            
-        </ResourceDictionary>
-
-       
+            </Style> 
+        </ResourceDictionary> 
     </Application.Resources>
      
 </Application>

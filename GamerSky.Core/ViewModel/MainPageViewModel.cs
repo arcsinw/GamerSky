@@ -16,10 +16,7 @@ using GamerSky.Core.IncrementalLoadingCollection;
 namespace GamerSky.Core.ViewModel
 {
     public class MainPageViewModel:ViewModelBase
-    {
-        ApiService apiService = new ApiService();
-        
-         
+    {  
         /// <summary>
         /// 同时提供频道和文章列表
         /// </summary>
@@ -63,7 +60,7 @@ namespace GamerSky.Core.ViewModel
         /// </summary>
         private async void LoadData()
         {
-            List<Channel> channels = await apiService.GetChannelList();
+            List<Channel> channels = await ApiService.Instance.GetChannelList();
             if (channels != null)
             {
                 foreach (var item in channels)
@@ -82,7 +79,7 @@ namespace GamerSky.Core.ViewModel
         /// <returns></returns>
         public async Task LoadMoreEssay(int nodeId,int pageIndex)
         {
-            List<Essay> essays = await apiService.GetEssayList(nodeId, pageIndex);
+            List<Essay> essays = await ApiService.Instance.GetEssayList(nodeId, pageIndex);
             if (essays == null) return;
             foreach (var item in essays)
             {

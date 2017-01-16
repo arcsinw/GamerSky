@@ -54,7 +54,7 @@
                           ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}">    
                     <ListView.Header>
                         <Grid>
-                            <Image Height="200" Stretch="Fill">
+                            <Image Height="250" Stretch="Fill">
                                 <Image.Source>
                                     <BitmapImage UriSource="{Binding HeaderSubscribe.ThumbnailURLs[0]}"/>
                                 </Image.Source>

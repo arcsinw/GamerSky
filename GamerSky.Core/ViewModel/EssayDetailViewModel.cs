@@ -1,24 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Xaml;
-using GamerSky.Core.Helper;
 using GamerSky.Core.Http;
 using GamerSky.Core.Model;
-using GamerSky.Core.DataSource;
 using GamerSky.Core.IncrementalLoadingCollection;
-using System.Diagnostics;
 using Windows.ApplicationModel;
 
 namespace GamerSky.Core.ViewModel
 {
     public class EssayDetailViewModel : ViewModelBase
-    {
-        private ApiService apiService = new ApiService();
+    { 
         private StringBuilder tempHtml = new StringBuilder();
 
         private Essay essay = new Essay();
@@ -34,10 +29,8 @@ namespace GamerSky.Core.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        public ObservableCollection<string> HtmlCollection { get; set; } = new ObservableCollection<string>();
-
-        //public IncrementalLoadingCollection<EssayCommentsSource, Comment> CommentsCollection { get; set; }
+        
+         
 
         public EssayCommentsCollection CommentsCollection { get; set; }
 
@@ -68,8 +61,8 @@ namespace GamerSky.Core.ViewModel
         {
             CommentsCollection.Clear();
             CommentsCollection = new EssayCommentsCollection(essay.ContentId);
-            //var c = new IncrementalLoadingCollection<EssayCommentsSource, Comment>
-            //     (new EssayCommentsSource(Essay.ContentId) { }, 20, () => { }, () => { }, (e) => { Debug.WriteLine("Loading comment error" + e.Message); }); 
+            CommentString = string.Empty;
+            GenerateCommentString();
         }
          
         #region Properties
@@ -210,7 +203,7 @@ namespace GamerSky.Core.ViewModel
         public async Task GenerateHtmlString()
         {
             IsActive = true;
-            News news = await apiService.ReadEssay(Essay.ContentId);
+            News news = await ApiService.Instance.ReadEssay(Essay.ContentId);
             if (news != null)
             { 
                 OriginUri = news.OriginURL;
@@ -222,16 +215,18 @@ namespace GamerSky.Core.ViewModel
                             + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
                             + "<meta name=\"msapplication-tap-highlight\" content=\"no\">" //wp点击无高光;
                             + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gs.css\"/>"
-                            + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gsAppHTMLTemplate.css\"/>"
-                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/js/gsAppHTMLTemplate.js\"></script>"
-                            +"<script src=\"ms-appx-web:///Assets/js/gs.js\"></script>";
+                            //+ "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gsAppHTMLTemplate.css\"/>"
+                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gsAppHTMLTemplate.js\"></script>"
+                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/jquery.min.js\"></script>"
+                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/jquery.lazyload.js\"></script>"
+                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gs.js\"></script>";
                             //+ "<script src=\"http://j.gamersky.com/g/gsVideo.js\"></script>";
 
                 string title = news.Title;  
                 string subTitle = news.SubTitle;
 
                 #region 相关阅读
-                List<RelatedReadings> relatedReadings = await apiService.GetRelatedReadings(essay.ContentId, essay.ContentType);
+                List<RelatedReadings> relatedReadings = await ApiService.Instance.GetRelatedReadings(essay.ContentId, essay.ContentType);
 
                 string relatedReadingsHtml =
                     @"<div class=""list"" id=""gsTemplateContent_RelatedReading"">
@@ -255,7 +250,7 @@ namespace GamerSky.Core.ViewModel
                 tempHtml.Append("<!DOCTYPE html>" +
                     "<html>" +
                         "<head>" + head + "</head>" +
-                        "<body quick-markup_injected=\"true\">" +
+                        "<body quick-markup_injected=\"true\" onload=\"onLoad()\">" +
                             "<GSAppHTMLTemplate version=\"1.4.6\"/>" +
                              //"<div id=\"ScrollToTop\"><a href=\"#top\">#</a></div>" +
                              //"<div id=\"ScrollToTop\"><a href=\"javascript:scroller(body,100);\">#</a></div>" +
@@ -302,7 +297,7 @@ namespace GamerSky.Core.ViewModel
 				            player.style.width = winWidth + 'px';
 				            player.style.height = winWidth * (9 / 16) + 'px';
 			            }}" +
-                        "var body = document.getElementsByTagName('body')[0]; window.onload = InitGesture(body);" +
+                        "var body = document.getElementsByTagName('body')[0]; " +
                        @"document.onreadystatechange = function () { resizeVideo(); }
                         window.onresize = function(){
                             resizeVideo();

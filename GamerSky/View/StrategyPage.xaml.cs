@@ -52,16 +52,19 @@ namespace GamerSky.View
                 switch(pivot.SelectedIndex)
                 {
                     case 0:
+                        pageIndexDic.Add(pivot.SelectedIndex, 1);
                         await ViewModel.LoadFocusStrategys();
                         break;
                     case 1:
+                        pageIndexDic.Add(pivot.SelectedIndex, 1);
                         await ViewModel.LoadAllStrategys();
                         break;
                     case 2:
+                        pageIndexDic.Add(pivot.SelectedIndex, 1);
                         //await ViewModel.LoadGameList(pageIndex);
                         break;
                 }
-                pageIndexDic.Add(pivot.SelectedIndex, 1);
+                
             }
             pageIndex = pageIndexDic[pivot.SelectedIndex] ++;
             progress.IsActive = false;

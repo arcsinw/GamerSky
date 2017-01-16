@@ -13,7 +13,7 @@ namespace GamerSky.Core.Model
         public string LoginToken { get; set; }
 
         [JsonProperty(PropertyName = "pic")]
-        public string Pic { get; set; } = "ms-appx:///Assets/Images/drawer_avatar.png";
+        public string Pic { get; set; }
 
         [JsonProperty(PropertyName = "userId")]
         public string UserId { get; set; }

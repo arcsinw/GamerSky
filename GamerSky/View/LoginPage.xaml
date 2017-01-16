@@ -166,7 +166,7 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <!--<VisualStateManager.VisualStateGroups>
+        <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Desktop">
                     <VisualState.StateTriggers>
@@ -177,14 +177,14 @@
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>-->
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid Background="{ThemeResource ThemeColorBrush}">
-            <Button x:Name="back"  Click="{x:Bind Back}" Visibility="{Binding IsDesktop}"
+            <Button x:Name="back"  Click="{x:Bind Back}"
                     Style="{ThemeResource BackButtonStyle}" Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
@@ -208,12 +208,12 @@
                     <Grid>
                         <HyperlinkButton Click="{x:Bind ForgetPwd}" HorizontalAlignment="Left">
                             <HyperlinkButton.Content>
-                                <TextBlock x:Uid="ForgetPwd"/>
+                                <TextBlock x:Uid="ForgetPwd" Foreground="{ThemeResource ThemeColorBrush}"/>
                             </HyperlinkButton.Content>
                         </HyperlinkButton>
                         <HyperlinkButton Click="{x:Bind Register}" HorizontalAlignment="Right">
                             <HyperlinkButton.Content>
-                                <TextBlock x:Uid="SignUp"/>
+                                <TextBlock x:Uid="SignUp" Foreground="{ThemeResource ThemeColorBrush}"/>
                             </HyperlinkButton.Content>
                         </HyperlinkButton>
                     </Grid>

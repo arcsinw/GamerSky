@@ -112,17 +112,14 @@ function gsAppVideoIsFirstVideoPlaying()
     }
     return "no";
 }
-function getVideoAndImageSrc()
-{
-    var videoSrc = gsAppVideoGetFirstVideoSrc();
-    var imgSrc = gsAppVideoGetFirstVideoPosterImgURL();
-    if (videoSrc != null && videoSrc.length > 0 && imgSrc != null && imgSrc.length > 0)
-    {
-        _video.setVideoAndImage(videoSrc, imgSrc);
-        _video.stop();
-    }
-    else
-    {
-        setTimeout("getVideoAndImageSrc()", 200);
-    }
+
+function getVideoAndImageSrc(){
+	var videoSrc = gsAppVideoGetFirstVideoSrc();
+	var imgSrc = gsAppVideoGetFirstVideoPosterImgURL();
+	if(videoSrc != null && videoSrc.length > 0 && imgSrc != null && imgSrc.length > 0){
+		_video.setVideoAndImage(videoSrc,imgSrc);
+		_video.stop();
+	}else{
+		setTimeout("getVideoAndImageSrc()",200);
+	}
 }

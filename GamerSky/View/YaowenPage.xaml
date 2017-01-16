@@ -43,25 +43,34 @@
         </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
-            <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-            <ListView ItemsSource="{Binding Yaowens}"
-                      SelectionMode="None"
-                      x:Name="listView" 
+            <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
+            <!--<control:PullToRefreshListView ItemsSource="{Binding Yaowens}"
+                      SelectionMode="None" IsPullToRefreshWithMouseEnabled="True"
+                      x:Name="listView" RefreshRequested="listView_RefreshRequested"
                       Loaded="ListView_Loaded"
-                      Style="{ThemeResource LightListView}"
-                      ShowsScrollingPlaceholders="True"
-                      ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                      ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"
+                      OverscrollLimit="0.4" PullThreshold="100"
+                      
                       IsItemClickEnabled="True"
                       ItemClick="ListView_ItemClick"
-                      >
-                    <ListView.Transitions>
-                        <TransitionCollection>
-                            <ContentThemeTransition />
-                        </TransitionCollection>
-                    </ListView.Transitions>
-                </ListView> 
-            </pr:PullToRefreshBox>
+                      Style="{ThemeResource LightListView}"
+                      >-->
+            <control:PullToRefreshListView ItemsSource="{Binding Yaowens}"  
+                                           ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"
+                                           ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                                           IsPullToRefreshWithMouseEnabled="True" 
+                                           RefreshRequested="listView_RefreshRequested"
+                                           SelectionMode="None"
+                                           IsItemClickEnabled="True"
+                                           ItemClick="listView_ItemClick"
+                                           >
+                <control:PullToRefreshListView.RefreshIndicatorContent>
+                    <TextBlock Text="Refresh" HorizontalAlignment="Center"/>
+                </control:PullToRefreshListView.RefreshIndicatorContent>
+                <control:PullToRefreshListView.ReleaseToRefreshContent>
+                    <TextBlock x:Uid="ReleaseToRefresh" HorizontalAlignment="Center"/>
+                </control:PullToRefreshListView.ReleaseToRefreshContent>
+            </control:PullToRefreshListView>
+            <!--</pr:PullToRefreshBox>-->
  
             <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Style="{ThemeResource ProgressRingStyle}"/> 
         </Grid>

@@ -19,8 +19,7 @@ namespace GamerSky.Core.ViewModel
         public ObservableCollection<Essay> Strategys { get; set; }
 
        //public GameStrategysIncrementalLoadingCollection IncreStrategys { get; set; }
-
-        private ApiService apiService;
+        
 
         /// <summary>
         /// ProgressRing IsActive
@@ -52,8 +51,7 @@ namespace GamerSky.Core.ViewModel
         //}
 
         public GameStrategysViewModel()
-        {
-            apiService = new ApiService();
+        { 
             Strategys = new ObservableCollection<Essay>();
             //IncreStrategys = new GameStrategysIncrementalLoadingCollection();
 
@@ -87,7 +85,7 @@ namespace GamerSky.Core.ViewModel
         {
             this.strategyResult = strategyResult;
             IsActive = true;
-            List<Essay> results = await apiService.GetGameStrategys(strategyResult.SpecialID,pageIndex);
+            List<Essay> results = await ApiService.Instance.GetGameStrategys(strategyResult.SpecialID,pageIndex);
             foreach(var item in results)
             {
                 Strategys.Add(item);

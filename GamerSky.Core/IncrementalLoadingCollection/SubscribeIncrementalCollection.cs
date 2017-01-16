@@ -15,8 +15,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
     /// 订阅内容自增集合
     /// </summary>
     public class SubscribeIncrementalCollection : IncrementalLoadingBase<Essay>
-    {
-        private ApiService apiService = new ApiService();
+    { 
 
         private int pageIndex = 1;
         private int currentSubscribeIndex = 0; //当前订阅index
@@ -52,7 +51,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
                 try
                 {
                     string x = DataShareManager.Current.SubscribeList[currentSubscribeIndex].SourceId;
-                    List<Essay> essays = await apiService.GetSubscribeContent(x, pageIndex);
+                    List<Essay> essays = await ApiService.Instance.GetSubscribeContent(x, pageIndex);
                     if (essays != null)
                     {
                         foreach (var item in essays)

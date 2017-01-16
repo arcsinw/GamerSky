@@ -319,9 +319,10 @@
                         DrawerOpenLength="250"
                          >
             <control:Drawer.DrawerContent>
-                <ListView x:Name="drawerContent" ScrollViewer.VerticalScrollMode="Disabled" 
+                <ListView x:Name="drawerContent"  
                           GotFocus="{x:Bind ViewModel.GetCacheSize}" 
-                          SelectionMode="None" Background="{ThemeResource PageBackgroundBrush}"
+                          SelectionMode="None" 
+                          Background="{ThemeResource PageBackgroundBrush}"
                          >
                     <ListView.Resources>
                         <Thickness x:Key="TextBlockMargin">8,0</Thickness>
@@ -331,24 +332,18 @@
                                       Background="{ThemeResource ThemeColorBrush}">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
                                 <Grid Height="90" Width="90" HorizontalAlignment="Center">
-                                    <Ellipse Height="90" Width="90" HorizontalAlignment="Center">
-                                        <Ellipse.Resources>
-                                            <x:String x:Key="Uri">ms-appx:///Assets/Images/drawer_avatar.png</x:String>
-                                        </Ellipse.Resources>
-                                        <Ellipse.Fill>
-                                            <ImageBrush>
-                                                <ImageBrush.ImageSource>
-                                                    <BitmapImage UriSource="{x:Bind User.Pic,Mode=OneWay,TargetNullValue={StaticResource Uri}}"/>
-                                                </ImageBrush.ImageSource>
-                                            </ImageBrush>
-                                        </Ellipse.Fill>
-                                    </Ellipse>
-
-                                    <Ellipse>
-                                        <Ellipse.Fill>
+                                  
+                                    <Border Height="90" Width="90">
+                                        <Border.Background>
                                             <ImageBrush ImageSource="ms-appx:///Assets/Images/drawer_avatar.png"/>
-                                        </Ellipse.Fill>
-                                    </Ellipse>
+                                        </Border.Background>
+                                    </Border>
+
+                                    <Border Height="90" Width="90" CornerRadius="90">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{x:Bind User.Pic,Mode=OneWay}"/>
+                                        </Border.Background>
+                                    </Border>
                                 </Grid>
                                 <TextBlock Text="{x:Bind User.UserName,Mode=OneWay}" x:Uid="Login" HorizontalAlignment="Center" Foreground="White"/>
                             </StackPanel>
@@ -377,7 +372,7 @@
 
                         <ListViewItem Tapped="{x:Bind NavigateToReplyPage}">
                             <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_news.png" Height="24"/>
+                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_comment_reply.png" Height="26"/>
                                 <TextBlock  x:Uid="CommentReply" Margin="{StaticResource TextBlockMargin}"/>
                             </StackPanel>
                         </ListViewItem>
@@ -445,20 +440,26 @@
             </control:Drawer.DrawerContent>
             <control:Drawer.Content>
                 <Frame x:Name="MasterFrame" Grid.Column="1" x:FieldModifier="Public"  
-            BorderBrush="{ThemeResource ThemeColorBrush}"
-            BorderThickness="0,0,1,0" Navigated="MasterFrame_Navigated"/>
+                    BorderBrush="{ThemeResource ThemeColorBrush}"
+                    BorderThickness="0,0,1,0" Navigated="MasterFrame_Navigated"/>   
             </control:Drawer.Content>
         </control:Drawer>
 
         <!--#region Pane-->
         <Grid x:Name="paneGrid" Grid.Column="0" Background="{ThemeResource PaneBackgroundBrush}">
+
             <ListView x:Name="paneListView" ItemsSource="{x:Bind PaneItems}" Padding="0" Margin="0"
                       IsItemClickEnabled="True" SelectionMode="Single"
                       ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
-                      ItemClick="paneListView_ItemClick">
+                        ItemClick="paneListView_ItemClick">
                 <ListView.Header>
-                    <Button x:Name="userBtn" Click="userBtn_Click" Style="{StaticResource PaneButtonStyle}" 
+                    <Button x:Name="userBtn" Style="{StaticResource PaneButtonStyle}" 
                             ToolTipService.ToolTip="{x:Bind User.UserName,Mode=OneWay}">
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <action:NavigationAction SourcePage="GamerSky.View.LoginPage" NavigationType="Master"/>
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
                         <Grid>
                             <BitmapIcon UriSource="ms-appx:///Assets/Images/drawer_user.png" Height="24" Width="24"/>
                             <Image Source="{x:Bind User.Pic,Mode=OneWay}" Height="48" Width="48"/>
@@ -467,16 +468,20 @@
                 </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:PaneItem">
-                        <BitmapIcon UriSource="{x:Bind Icon}" ToolTipService.ToolTip="{x:Bind Title,Mode=OneWay}" Height="24" Width="24"/>
+                        <BitmapIcon UriSource="{x:Bind Icon}" ToolTipService.ToolTip="{x:Bind Title,Mode=OneWay}" Height="26" Width="26"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
             <StackPanel VerticalAlignment="Bottom">
                 <Button x:Name="themeBtn" Click="themeBtn_Click"  Style="{StaticResource PaneButtonStyle}">
-                    <BitmapIcon Height="24" Width="24"  UriSource="{Binding AppTheme,Converter={StaticResource ElementThemeToUriSourceConverter}}"/>
+                    <BitmapIcon Height="26" Width="26"  UriSource="{Binding AppTheme,Converter={StaticResource ElementThemeToUriSourceConverter}}"/>
                 </Button>
-                <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings"
-                    Click="setting_Click" VerticalAlignment="Bottom">
+                <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings" VerticalAlignment="Bottom">
+                    <i:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <action:NavigationAction SourcePage="GamerSky.View.SettingsPage" NavigationType="Master"/>
+                        </core:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
                     <Button.Content>
                         <SymbolIcon Symbol="Setting"/>
                     </Button.Content>
@@ -497,8 +502,6 @@
                     <Setter Property="Height" Value="24"/>
                     <Setter Property="Width" Value="24"/>
                 </Style>
-                
-                    
             </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

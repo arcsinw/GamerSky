@@ -20,11 +20,10 @@ namespace GamerSky.Core.DataSource
         {
 
         }
-        private string contentId { get; set; }
-        private  ApiService apiService = new ApiService();
+        private string contentId { get; set; } 
         public async Task<IEnumerable<Comment>> GetPagedItemsAsync(int pageIndex, int pageSize = 20, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await apiService.GetAllComments(contentId, pageIndex);
+            return await ApiService.Instance.GetAllComments(contentId, pageIndex);
         }
     }
 }

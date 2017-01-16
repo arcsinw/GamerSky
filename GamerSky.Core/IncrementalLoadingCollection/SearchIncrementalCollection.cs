@@ -28,12 +28,10 @@ namespace GamerSky.Core.IncrementalLoadingCollection
         /// 当前页码
         /// </summary>
         private int pageIndex;
-
-        private ApiService apiService;
+         
 
         public SearchIncrementalCollection(string key, SearchTypeEnum searchType, int pageIndex=1)
-        {
-            apiService = new ApiService();
+        { 
             this.key = key;
             this.searchType = searchType;
             this.pageIndex = pageIndex;
@@ -59,7 +57,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
             }
             else
             {
-                List<Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex++);
+                List<Essay> essayResults = await ApiService.Instance.SearchByKey(key, searchType, pageIndex++);
                 if (essayResults != null)
                 {
                     foreach (var item in essayResults)

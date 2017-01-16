@@ -366,9 +366,8 @@
 
     <Grid x:Name="rootGrid" Background="{ThemeResource PageBackgroundBrush}">
 
-        <!--<Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
-               SelectionChanged="pivot_SelectionChanged"
-               SelectedIndex="1">
+       <Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
+               SelectionChanged="pivot_SelectionChanged">
 
             <PivotItem Header="正文" Margin="0" >
                 <WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
@@ -378,13 +377,13 @@
             </PivotItem>
 
             <PivotItem Header="评论" Margin="0">
-                <ListView ItemsSource="{x:Bind CommentsCollection}"
+                <ListView ItemsSource="{x:Bind  ViewModel.CommentsCollection}"
                           Style="{ThemeResource LightListView}"
                           SelectionMode="None"
                           ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Comment">
-                            <Grid Padding="0,0,12,12">
+                            <Grid Padding="0,8,12,12">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="48"/>
                                     <ColumnDefinition Width="*"/>
@@ -394,7 +393,7 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
 
-                                --><!--Avatar--><!--
+                                <!--Avatar-->
                                 <Ellipse Grid.Row="0" Grid.Column="0" 
                                          Width="40" Height="40">
                                     <Ellipse.Fill>
@@ -444,21 +443,23 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                --><!--<WebView x:Name="commentWebView"  
+                <!--<WebView x:Name="commentWebView" 
+                         NavigationStarting="commentWebView_NavigationStarting"
+                         NavigationCompleted="commentWebView_NavigationCompleted"
                          hp:ExtensionHelper.HtmlString="{Binding CommentString}">
-                </WebView>--><!--
+                </WebView>-->
             </PivotItem>
-        </Pivot>-->
+        </Pivot>
 
-        <FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
+        <!--<FlipView x:Name="pivot" SelectionChanged="pivot_SelectionChanged"
                   UseTouchAnimationsForAllNavigation="True" >
          
             <FlipViewItem>
                 <controls:ArticlePresenter Html="{Binding HtmlString}"/>
-                <!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
+                --><!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
                     ScriptNotify="webView_ScriptNotify" NavigationCompleted="webView_NavigationCompleted"
                          DOMContentLoaded="webView_DOMContentLoaded">
-                </WebView>-->
+                </WebView>--><!--
             </FlipViewItem> 
  
             <FlipViewItem>
@@ -477,7 +478,7 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions> 
-                                <!--Avatar-->
+                                --><!--Avatar--><!--
                                 <Ellipse Grid.Row="0" Grid.Column="0" 
                                          Width="40" Height="40">
                                     <Ellipse.Fill>
@@ -527,10 +528,10 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </FlipViewItem>
-        </FlipView>
+        </FlipView>-->
 
 
-        <WebView x:Name="webView" Visibility="Collapsed"/>
+        <!--<WebView x:Name="webView" Visibility="Collapsed"/>-->
         <WebView x:Name="commentWebView" Visibility="Collapsed"/>
 
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>

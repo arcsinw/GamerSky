@@ -20,8 +20,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
         }
 
         private int nodeId;
-        private int pageIndex = 1;
-        private ApiService apiService = new ApiService();
+        private int pageIndex = 1; 
          
         private ObservableCollection<Essay> headerEssays = new ObservableCollection<Essay>();
         /// <summary>
@@ -58,7 +57,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
             }
             else
             {
-                var essays = await apiService.GetEssayList(nodeId, pageIndex++);
+                var essays = await ApiService.Instance.GetEssayList(nodeId, pageIndex++);
                 if (essays != null)
                 {
                     foreach (var item in essays)

@@ -108,16 +108,13 @@ namespace GamerSky.Core.ViewModel
         }
 
         #endregion
-
-        private ApiService apiService;
-
+         
         private void Current_ShareDataChanged()
         {
             AppTheme = DataShareManager.Current.AppTheme;
         }
         public SearchPageViewModel()
-        {
-            apiService = new ApiService();
+        { 
             HotSubscribes = new ObservableCollection<Subscribe>();
             HotStrategys = new ObservableCollection<string>();
             HotNews = new ObservableCollection<string>();
@@ -147,7 +144,7 @@ namespace GamerSky.Core.ViewModel
         public async Task LoadStrategyHotKey()
         {
             IsActive = true;
-            List<string> strategys = await apiService.GetSearchHotKey(SearchTypeEnum.strategy.ToString());
+            List<string> strategys = await ApiService.Instance.GetSearchHotKey(SearchTypeEnum.strategy.ToString());
             if (strategys != null)
             {
                 foreach (var item in strategys)
@@ -165,7 +162,7 @@ namespace GamerSky.Core.ViewModel
         public async Task LoadNewsHotKey()
         {
             IsActive = true;
-            List<string> hotNews = await apiService.GetSearchHotKey(SearchTypeEnum.news.ToString());
+            List<string> hotNews = await ApiService.Instance.GetSearchHotKey(SearchTypeEnum.news.ToString());
             if (hotNews != null)
             {
                 foreach (var item in hotNews)
@@ -183,7 +180,7 @@ namespace GamerSky.Core.ViewModel
         public async Task LoadSubscribeHotKey()
         {
             IsActive = true;
-            List<Subscribe> subscribes = await apiService.GetSubscribeHotKey();
+            List<Subscribe> subscribes = await ApiService.Instance.GetSubscribeHotKey();
             if (subscribes != null)
             {
                 foreach (var item in subscribes)
@@ -223,7 +220,7 @@ namespace GamerSky.Core.ViewModel
             switch(searchType)
             {
                 case SearchTypeEnum.news:
-                    List<Essay> essayResults = await apiService.SearchByKey(key, searchType, pageIndex);
+                    List<Essay> essayResults = await ApiService.Instance.SearchByKey(key, searchType, pageIndex);
                     if (essayResults == null) return;
                     //News = new EssayIncrementalCollection(key, searchType, pageIndex);
                     foreach (var item in essayResults)
@@ -233,7 +230,7 @@ namespace GamerSky.Core.ViewModel
                     NewsGridViewVisibility = Visibility.Collapsed;
                     break;
                 case SearchTypeEnum.strategy:
-                    List<Essay> strategyResult = await apiService.SearchByKey(key, searchType, pageIndex);
+                    List<Essay> strategyResult = await ApiService.Instance.SearchByKey(key, searchType, pageIndex);
                     if (strategyResult == null) return;
                     foreach (var item in strategyResult)
                     {

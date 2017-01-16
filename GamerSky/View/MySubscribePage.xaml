@@ -8,6 +8,7 @@
     xmlns:hp="using:GamerSky.Helper"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:m="using:GamerSky.Core.Model"
     mc:Ignorable="d"
     RequestedTheme="{Binding AppTheme}">
 
@@ -16,31 +17,59 @@
     </Page.DataContext>
 
     <Page.Resources>
-        <DataTemplate x:Key="SubscribeListViewDataTemplate">
-            <Grid MaxHeight="100">
+        <DataTemplate x:Key="SubscribeListViewDataTemplate" x:DataType="m:Subscribe">
+            <Grid  MaxHeight="85">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="3*" MaxWidth="180"/>
+                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <!--#region PlaceHolderImage-->
                 <Image Source="{ThemeResource EssayPlaceHolderImage}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
                 <!--#endregion-->
                 <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
                     <Image.Source>
-                        <BitmapImage UriSource="{Binding ThumbnailUrl}"/>
+                        <BitmapImage UriSource="{x:Bind ThumbnailUrl,Mode=OneWay}"/>
                     </Image.Source>
                 </Image>
                 <Grid Grid.Column="1" Margin="5,0">
-                    <TextBlock Text="{Binding SourceName}" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBlock Text="{x:Bind SourceName}" VerticalAlignment="Top" TextWrapping="Wrap"/>
                     <TextBlock  Margin="0,4,0,0" VerticalAlignment="Bottom">
-                    <Run Text="{Binding ReadingCount}"/>
-                    <Run Text="人订阅"/>
+                                        <Run Text="{x:Bind ReadingCount}"/>
+                                        <Run Text="人订阅"/>
                     </TextBlock>
                 </Grid>
-                <Button Grid.Column="3" HorizontalAlignment="Center" 
-                         Style="{Binding IsFavorite,Converter={StaticResource BoolToStyleConverter}}"
-                         Click="Button_Click"/>
+                <Button Grid.Column="3" HorizontalAlignment="Right" Content="订阅" Click="Subscribe_Click"
+                                        Style="{Binding IsFavorite,Converter={StaticResource BoolToStyleConverter}}">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Subscribed">
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseLowBrush}"/>
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="ContentPresenter">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="退订"/>
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </VisualState>
+                            <VisualState x:Name="UnSubscribe">
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Content" Storyboard.TargetName="ContentPresenter">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="订阅"/>
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ThemeColorBrush}"/>
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                        <DiscreteObjectKeyFrame KeyTime="0" Value="White"/>
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+                <!--Command="{x:Bind ToggleFavorite}"/>-->
             </Grid>
         </DataTemplate>
     </Page.Resources>

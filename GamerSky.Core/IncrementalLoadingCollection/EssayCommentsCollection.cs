@@ -19,12 +19,10 @@ namespace GamerSky.Core.IncrementalLoadingCollection
         /// </summary>
         private int pageIndex;
 
-        private string contentId { get; set; }
-        private ApiService apiService;
+        private string contentId { get; set; } 
        
         public EssayCommentsCollection(string contentId, int pageIndex = 1)
-        {
-            apiService = new ApiService();
+        { 
             this.contentId = contentId; 
             this.pageIndex = pageIndex;
         }
@@ -51,7 +49,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
             }
             else
             {
-                List<Comment> essayResults = await apiService.GetAllComments(contentId, pageIndex++);
+                List<Comment> essayResults = await ApiService.Instance.GetAllComments(contentId, pageIndex++);
                 if (essayResults != null && essayResults.Count !=0)
                 {
                     foreach (var item in essayResults)

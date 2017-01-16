@@ -21,6 +21,11 @@ namespace GamerSky.Core.Http
     {
         private static ApiService _apiService = new ApiService();
 
+        private ApiService()
+        {
+
+        }
+
         public static ApiService Instance
         {
             get

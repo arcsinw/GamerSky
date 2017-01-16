@@ -14,25 +14,10 @@
     RequestedTheme="{Binding AppTheme}">
 
     <Page.Resources>
-        <Style x:Key="SearchTextBoxStyle" TargetType="TextBox">
-            <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
-            <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>
-            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAltHighBrush}"/>
-            <!--<Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}"/>-->
+        <Style x:Key="SearchTextBoxStyle" TargetType="TextBox">  
             <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="SelectionHighlightColor" Value="{ThemeResource SystemControlHighlightAccentBrush}"/>
-            <!--<Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}"/>-->
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
-            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto"/>
-            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
-            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
-            <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/> 
+            <Setter Property="BorderThickness" Value="0"/>  
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -170,22 +155,8 @@
             </Setter>
         </Style>
 
-        <Style TargetType="TextBox" x:Key="AutoSuggestBoxTextBoxStyle">
-            <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}" />
-            <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}" />
-            <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
-            <Setter Property="Background" Value="{ThemeResource SystemControlBackgroundAltHighBrush}" />
-            <!--<Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundChromeDisabledLowBrush}" />-->
-            <Setter Property="SelectionHighlightColor" Value="{ThemeResource SystemControlHighlightAccentBrush}" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
-            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
-            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto" />
-            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
-            <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
-            <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}"/>
+        <Style TargetType="TextBox" x:Key="AutoSuggestBoxTextBoxStyle"> 
+            <Setter Property="BorderThickness" Value="0" /> 
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -696,11 +667,11 @@
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:Subscribe">
-                                <Grid  MaxHeight="100">
+                                <Grid  MaxHeight="85">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="180"/>
+                                        <ColumnDefinition Width="3*" MaxWidth="180"/>
+                                        <ColumnDefinition Width="3*"/>
                                         <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <!--#region PlaceHolderImage-->
                                     <Image Source="{ThemeResource EssayPlaceHolderImage}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
@@ -711,13 +682,13 @@
                                         </Image.Source>
                                     </Image>
                                     <Grid Grid.Column="1" Margin="5,0">
-                                        <TextBlock Text="{x:Bind SourceName}" VerticalAlignment="Top"/>
+                                        <TextBlock Text="{x:Bind SourceName}" VerticalAlignment="Top" TextWrapping="Wrap"/>
                                         <TextBlock  Margin="0,4,0,0" VerticalAlignment="Bottom">
                                         <Run Text="{x:Bind ReadingCount}"/>
                                         <Run Text="人订阅"/>   
                                         </TextBlock>
                                     </Grid>
-                                    <Button Grid.Column="3" HorizontalAlignment="Center" Content="订阅" 
+                                    <Button Grid.Column="3" HorizontalAlignment="Right" Content="订阅" 
                                         Style="{Binding IsFavorite,Converter={StaticResource BoolToStyleConverter}}"
                                         Command="{x:Bind ToggleFavorite}"/> 
                                 </Grid>

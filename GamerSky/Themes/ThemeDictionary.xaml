@@ -781,7 +781,17 @@
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
-                                <VisualState x:Name="Unchecked"/>
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>  
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Grid" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightTransparentBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
                                 <VisualState x:Name="Indeterminate"/>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>

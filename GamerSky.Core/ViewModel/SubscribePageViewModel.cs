@@ -18,12 +18,10 @@ namespace GamerSky.Core.ViewModel
         public ObservableCollection<Essay> SubscribeContent { get; set; }
 
         //public SubscribeIncrementalCollection SubscribeContent { get; set; }
-
-        private ApiService apiService;
+         
 
         public SubscribePageViewModel()
-        {
-            apiService = new ApiService();
+        { 
             SubscribeTopic = new ObservableCollection<Essay>();
             
             SubscribeContent = new ObservableCollection<Essay>();
@@ -90,7 +88,7 @@ namespace GamerSky.Core.ViewModel
                 int pageIndex = subscribeList.Count;
                 foreach (var subscribe in subscribeList)
                 {
-                    var essays = await apiService.GetSubscribeTopic(subscribe.SourceId, pageIndex);
+                    var essays = await ApiService.Instance.GetSubscribeTopic(subscribe.SourceId, pageIndex);
                     if (essays != null)
                     {
                         foreach (var item in essays)
@@ -119,7 +117,7 @@ namespace GamerSky.Core.ViewModel
             } 
 
             string x = DataShareManager.Current.SubscribeList[currentSubscribeIndex].SourceId;
-            List<Essay> essays = await apiService.GetSubscribeContent(x, pageIndex);
+            List<Essay> essays = await ApiService.Instance.GetSubscribeContent(x, pageIndex);
             if (essays != null)
             {
                 foreach (var item in essays)

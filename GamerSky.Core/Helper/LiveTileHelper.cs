@@ -88,8 +88,7 @@ namespace GamerSky.Core.Helper
                     </binding>
                 </visual>
             </tile>";
-
-        public static ApiService apiService = new ApiService();
+         
 
         private static TileUpdater secondaryUpdater;
         /// <summary>
@@ -98,7 +97,7 @@ namespace GamerSky.Core.Helper
         public static async Task UpdatePrimaryTile()
         {
             //获取要闻
-            List<Essay> essays = await apiService.GetYaowen();
+            List<Essay> essays = await ApiService.Instance.GetYaowen();
             try
             {
                 //更新主磁贴
@@ -157,10 +156,10 @@ namespace GamerSky.Core.Helper
         {
             if (!SecondaryTile.Exists(TILE_ID))
             {
-                Uri square150x150Logo = new Uri("ms-appx:///Assets/Square150x150Logo.png");
+                Uri square150x150Logo = new Uri("ms-appx:///Assets/Square150x150Logo_T.png");
                 Uri square310x150Logo = new Uri("ms-appx:///Assets/Wide310x150Logo.png");
-                Uri square71x71Logo = new Uri("ms-appx:///Assets/Square71x71Logo.png");
-                Uri square310x310Logo = new Uri("ms-appx:///Assets/Square310x310Logo.png");
+                Uri square71x71Logo = new Uri("ms-appx:///Assets/Square71x71Logo_T.png");
+                Uri square310x310Logo = new Uri("ms-appx:///Assets/Square310x310Logo_T.png");
 
                 SecondaryTile secondaryTile = new SecondaryTile(TILE_ID, " ", argument, square150x150Logo, TileSize.Square150x150);
 

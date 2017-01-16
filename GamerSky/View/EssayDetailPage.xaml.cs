@@ -33,7 +33,7 @@ namespace GamerSky.View
         #region Properties
         public Essay EssayResult { get; set; }
 
-        public EssayDetailViewModel viewModel { get; set; }
+        public EssayDetailViewModel ViewModel { get; set; }
           
         private ObservableCollection<JsImage> Images { get; set; } = new ObservableCollection<JsImage>();
         /// <summary>
@@ -41,14 +41,20 @@ namespace GamerSky.View
         /// </summary>
         private string CurrentImageUrl { get; set; } 
 
+        /// <summary>
+        /// 新闻是否已加载
+        /// </summary>
         public bool IsEssayLoaded { get; set; } = false;
 
+        /// <summary>
+        /// 评论是否已加载
+        /// </summary>
         public bool IsCommentLoaded { get; set; } = false;
 
         #endregion
 
-        public EssayCommentsCollection CommentsCollection { get; set; } = new EssayCommentsCollection("838261");
-        
+        public EssayCommentsCollection CommentsCollection { get; set; }
+
         public EssayDetailPage()
         {
             this.InitializeComponent();
@@ -59,13 +65,13 @@ namespace GamerSky.View
 
         private void Current_ShareDataChanged()
         {
-            if (viewModel.AppTheme == ElementTheme.Dark)
-            {
-                NightMode();
+            if (ViewModel.AppTheme == ElementTheme.Dark)
+            { 
+                DayMode();
             }
             else
             {
-                DayMode();
+                NightMode();
             }
         }
 
@@ -165,14 +171,16 @@ namespace GamerSky.View
                     case 0:
                         if (!IsEssayLoaded)
                         {
-                            await viewModel.GenerateHtmlString();
+                            await ViewModel.GenerateHtmlString();
                         }
                         IsEssayLoaded = true;
                         break;
                     case 1:
                         if (!IsCommentLoaded)
                         {
-                            viewModel.RefreshComments();
+                            ViewModel.RefreshComments();
+                            ViewModel.GenerateCommentString();
+                            CommentsCollection = new EssayCommentsCollection(EssayResult.ContentId);
                         }
                         IsCommentLoaded = true;
                         break;
@@ -232,7 +240,7 @@ namespace GamerSky.View
                 FileSavePicker savePicker = new FileSavePicker();
                 savePicker.SuggestedFileName = "游民壁纸_" + Functions.GetUnixTimeStamp().ToString(); ;
                 savePicker.DefaultFileExtension = ".jpg";
-                savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png" });
+                savePicker.FileTypeChoices.Add("Picture", new List<string>() { ".jpg", ".png", ".gif" });
                 savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
                 savePicker.ContinuationData["Op"] = "ImgSave"; 
                 file = await savePicker.PickSaveFileAsync();
@@ -285,7 +293,7 @@ namespace GamerSky.View
         /// <param name="e"></param>
         private async void edgeListViewItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri(viewModel.OriginUri));
+            await Launcher.LaunchUriAsync(new Uri(ViewModel.OriginUri));
         }
         #endregion
          
@@ -297,9 +305,9 @@ namespace GamerSky.View
                 appBar.Visibility = Visibility.Collapsed;
             }
             else
-            {
+            { 
                 if (Frame.CanGoBack)
-                {
+                { 
                     this.Frame.GoBack();
                 }
             }
@@ -311,10 +319,10 @@ namespace GamerSky.View
             switch (pivot.SelectedIndex)
             {
                 case 0:
-                    await viewModel.GenerateHtmlString(); 
+                    await ViewModel.GenerateHtmlString(); 
                     break;
                 case 1:
-                    viewModel.RefreshComments(); 
+                    ViewModel.RefreshComments(); 
                     break;
             }
         }
@@ -325,16 +333,26 @@ namespace GamerSky.View
 
             if (EssayResult != null)
             {
-                DataContext = viewModel = new EssayDetailViewModel(EssayResult);  
+                IsEssayLoaded = false;
+                IsCommentLoaded = false;
+                DataContext = ViewModel = new EssayDetailViewModel(EssayResult);  
                 if (EssayResult.ContentId.Equals("0"))
                 {
                     webView.Navigate(new Uri(EssayResult.ContentURL));
                 }
-                else
-                {
-                    Refresh();
-                }
+
+                pivot_SelectionChanged(pivot, null);
+                //else
+                //{
+                //    Refresh();
+                //}
             }
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            DataContext = null;
         }
 
 
@@ -422,5 +440,15 @@ namespace GamerSky.View
             }
         }
         #endregion
+
+        private void commentWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        {
+            progress.IsActive = true;
+        }
+
+        private void commentWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            progress.IsActive = false;
+        }
     }
 }

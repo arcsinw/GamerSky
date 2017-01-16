@@ -11,8 +11,7 @@ using GamerSky.Core.Model;
 namespace GamerSky.Core.ViewModel
 {
     public class GameDetailViewModel : ViewModelBase
-    {
-        private ApiService apiService;
+    { 
         private GameDetail gameDetail;
         public GameDetail GameDetail
         {
@@ -47,8 +46,7 @@ namespace GamerSky.Core.ViewModel
 
 
         public GameDetailViewModel()
-        {
-            apiService = new ApiService();
+        { 
             GameDetail = new GameDetail();
             GameDetailNews = new ObservableCollection<GameDetailEssay>();
             GameDetailStrategys = new ObservableCollection<GameDetailEssay>();
@@ -74,7 +72,7 @@ namespace GamerSky.Core.ViewModel
 
         public async void LoadGameDetail()
         {
-            GameDetail = await apiService.GetGameDetail(contentId);
+            GameDetail = await ApiService.Instance.GetGameDetail(contentId);
         }
 
         /// <summary>
@@ -83,7 +81,7 @@ namespace GamerSky.Core.ViewModel
         /// <param name="pageIndex"></param>
         public async void LoadGameNews(int pageIndex)
         {
-            var result =await apiService.GetGameDetailNews(contentId, pageIndex);
+            var result =await ApiService.Instance.GetGameDetailNews(contentId, pageIndex);
             if(result!= null)
             {
                 foreach (var item in result)
@@ -99,7 +97,7 @@ namespace GamerSky.Core.ViewModel
         /// <param name="pageIndex"></param>
         public async void LoadGameStrategys(int pageIndex)
         {
-            var result = await apiService.GetGameDetailStrategys(contentId, pageIndex);
+            var result = await ApiService.Instance.GetGameDetailStrategys(contentId, pageIndex);
             if(result !=null)
             {
                 foreach (var item in result)
@@ -111,12 +109,12 @@ namespace GamerSky.Core.ViewModel
 
         public async void RefreshGameNews()
         {
-            await apiService.GetGameDetailNews(contentId, 1);
+            await ApiService.Instance.GetGameDetailNews(contentId, 1);
         }
 
         public async void RefreshStrategys()
         {
-            await apiService.GetGameDetailStrategys(contentId, 1);
+            await ApiService.Instance.GetGameDetailStrategys(contentId, 1);
         }
     }
 }

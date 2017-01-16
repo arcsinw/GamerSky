@@ -18,8 +18,8 @@ namespace GamerSky.Core.ViewModel
 
         public LoginPageViewModel()
         {
-            UserLoginInfo = new UserLoginInfo() { UserName = "arxchg", UserPassword = "qwertyx" };
-            apiService = new ApiService();
+            UserLoginInfo = new UserLoginInfo();// { UserName = "arxchg", UserPassword = "qwertyx" };
+             
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
@@ -44,12 +44,10 @@ namespace GamerSky.Core.ViewModel
             }
         }
 
-        
-
-        private ApiService apiService;
+         
         public async void Login()
         {
-            var loginResult = await apiService.Login(UserLoginInfo.UserPassword, UserLoginInfo.UserName);
+            var loginResult = await ApiService.Instance.Login(UserLoginInfo.UserPassword, UserLoginInfo.UserName);
             if (loginResult != null)
             {
                 if (loginResult.ErrorCode.Equals("0")) //成功

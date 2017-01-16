@@ -24,14 +24,10 @@ namespace GamerSky.View
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
     public sealed partial class RegisterPage : Page
-    {
-
-        private ApiService apiService;
+    { 
         public RegisterPage()
         {
-            this.InitializeComponent();
-
-            apiService = new ApiService();
+            this.InitializeComponent(); 
         }
 
 
@@ -62,7 +58,7 @@ namespace GamerSky.View
             string phoneNumber = phoneNumberTextBlock.Text;
             string userName = userNameTextBlock.Text;
 
-            var verificationCode = await apiService.GetVerificationCode(phoneNumber, userName, "");
+            var verificationCode = await ApiService.Instance.GetVerificationCode(phoneNumber, userName, "");
             if (verificationCode != null && !verificationCode.ErrorCode.Equals("0"))
             {
                 UIHelper.ShowMessage(verificationCode.ErrorMessage);

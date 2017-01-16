@@ -26,8 +26,7 @@ namespace GamerSky.Core.ViewModel
         /// 我的订阅
         /// </summary>
         public ObservableCollection<Subscribe> MySubscribes { get; set; }
-
-        private ApiService apiService;
+         
 
         private bool isActive = true;
         /// <summary>
@@ -46,8 +45,7 @@ namespace GamerSky.Core.ViewModel
             }
         }
         public MySubscribePageViewModel()
-        {
-            apiService = new ApiService();
+        { 
             AllSubscribes = new ObservableCollection<Subscribe>();
             HotSubscribes = new ObservableCollection<Subscribe>();
             MySubscribes = new ObservableCollection<Subscribe>();
@@ -89,7 +87,7 @@ namespace GamerSky.Core.ViewModel
         public async Task LoadAllSubscribes()
         {
             IsActive = true;
-            List<Subscribe> allSubscribes = await apiService.GetSubscribeHotKey("1");
+            List<Subscribe> allSubscribes = await ApiService.Instance.GetSubscribeHotKey("1");
             if (allSubscribes != null)
             {
                 foreach (var item in allSubscribes)
@@ -111,7 +109,7 @@ namespace GamerSky.Core.ViewModel
         public async Task LoadHotSubscribes()
         {
             IsActive = true;
-            List<Subscribe> hotSubscribes = await apiService.GetSubscribeHotKey("0");
+            List<Subscribe> hotSubscribes = await ApiService.Instance.GetSubscribeHotKey("0");
             if (hotSubscribes != null)
             {
                 foreach (var item in hotSubscribes)

@@ -11,13 +11,12 @@ using GamerSky.Core.Http;
 namespace GamerSky.Core.DataSource
 {
     public class GameReleaseDataSource : IIncrementalSource<Game>
-    {
-        private static ApiService apiService = new ApiService();
+    { 
 
         public async Task<IEnumerable<Game>> GetPagedItemsAsync(int pageIndex, int pageSize = 20, CancellationToken cancellationToken = default(CancellationToken))
         {
             List<Game> gameDetailEssays = null;
-            gameDetailEssays = await apiService.GetGameReleaseList(pageIndex, GameNodeIdEnum.PC);
+            gameDetailEssays = await ApiService.Instance.GetGameReleaseList(pageIndex, GameNodeIdEnum.PC);
             return gameDetailEssays;
         }
     }

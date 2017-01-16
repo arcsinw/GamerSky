@@ -26,12 +26,11 @@ namespace GamerSky.Core.Helper
                     <actions>
                     </actions>
                 </toast>";
-
-        private static ApiService apiService = new ApiService();
+         
         public static async void ShowToast()
         {
             //获取要闻
-            List<Essay> essays = await apiService.GetYaowen();
+            List<Essay> essays = await ApiService.Instance.GetYaowen();
             if(essays!= null)
             {
                 foreach (var item in essays)

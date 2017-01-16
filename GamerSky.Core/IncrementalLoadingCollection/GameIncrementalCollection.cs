@@ -11,8 +11,7 @@ using GamerSky.Core.Http;
 namespace GamerSky.Core.IncrementalLoadingCollection
 {
     public class GameIncrementalCollection : IncrementalLoadingBase<Game>
-    {
-        private ApiService apiService = new ApiService();
+    { 
         private int pageIndex = 1;
 
         private bool hasMoreItems = true;
@@ -35,7 +34,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
             }
             else
             {
-                List<Game> games = await apiService.GetGameList(pageIndex++);
+                List<Game> games = await ApiService.Instance.GetGameList(pageIndex++);
                 if (games != null && games.Count !=0)
                 {
                     result.Count = (uint)games.Count;

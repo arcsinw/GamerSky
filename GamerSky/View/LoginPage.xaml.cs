@@ -44,7 +44,7 @@ namespace GamerSky.View
         /// </summary>
         public void ForgetPwd()
         {
-            this.Frame.Navigate(typeof(FindPasswordPage));
+            NavigationHelper.DetailFrameNavigate(typeof(FindPasswordPage));
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace GamerSky.View
         /// </summary>
         public void Register()
         {
-            this.Frame.Navigate(typeof(RegisterPage));
+            NavigationHelper.DetailFrameNavigate(typeof(RegisterPage));
         }
 
         private void Ellipse_Tapped(object sender, TappedRoutedEventArgs e)

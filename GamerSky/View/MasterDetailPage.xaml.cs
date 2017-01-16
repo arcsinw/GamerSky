@@ -2,23 +2,13 @@
 using GamerSky.Core.Model;
 using GamerSky.Core.ViewModel;
 using GamerSky.Helper;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上有介绍
@@ -38,23 +28,6 @@ namespace GamerSky.View
             
         }
 
-        private void MasterDetailPage_OrientationChanged(DisplayInformation sender, object args)
-        {
-            if(sender.CurrentOrientation == DisplayOrientations.Portrait || sender.CurrentOrientation == DisplayOrientations.PortraitFlipped)
-            {
-                VisualStateManager.GoToState(this, "Narrow", true);
-            }
-            else
-            {
-                VisualStateManager.GoToState(this, "Default", true);
-            }
-        }
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-            User = DataShareManager.Current.CurrentUser;
-        }
 
         #region Properties
         private ElementTheme appTheme;
@@ -95,55 +68,23 @@ namespace GamerSky.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-         
-        private void MasterDetailPage_BackRequested(object sender, BackRequestedEventArgs e)
+          
+        #region UI
+
+        private void MasterDetailPage_OrientationChanged(DisplayInformation sender, object args)
         {
-            e.Handled = true;
-            if (DetailFrame.CanGoBack)
+            if (sender.CurrentOrientation == DisplayOrientations.Portrait || sender.CurrentOrientation == DisplayOrientations.PortraitFlipped)
             {
-                var essayDetailPage = (DetailFrame.Content as EssayDetailPage);
-                if (essayDetailPage != null)
-                {
-                    
-                    essayDetailPage.CloseImageFlipView();
-                }
-                else
-                {
-                    DetailFrame.GoBack();
-                }
+                VisualStateManager.GoToState(this, "Narrow", true);
             }
-            else if (MasterFrame.CanGoBack)
+            else
             {
-                MasterFrame.GoBack();
+                VisualStateManager.GoToState(this, "Default", true);
             }
         }
-
-        public List<PaneItem> PaneItems { get; set; } = new List<PaneItem>();
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            MasterFrame.Navigate(typeof(MainPage));
-            DetailFrame.Navigate(typeof(DefaultPage));
-            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_xinwen_h.png", Title = GlobalStringLoader.GetString("UNews") ,SourcePage = typeof(MainPage) });
-            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_gonglue_h.png", Title = GlobalStringLoader.GetString("UGame"), SourcePage = typeof(StrategyPage) });
-            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_dingyue_h.png", Title = GlobalStringLoader.GetString("USubscribe"), SourcePage = typeof(SubscribePage) });
-            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_news.png", Title = GlobalStringLoader.GetString("UYaowen"), SourcePage = typeof(YaowenPage) });
-       
-            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_collect.png", Title = GlobalStringLoader.GetString("UCollection"), SourcePage = typeof(FavoritePage) });
-            UIHelper.ShowStatusBar();
-              
-            AppTheme = DataShareManager.Current.AppTheme;
-            User = DataShareManager.Current.CurrentUser;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-             
-            SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
-            DisplayInformation.GetForCurrentView().OrientationChanged += MasterDetailPage_OrientationChanged;
-        }
-
-
         private void AdaptiveVisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
-            UpdateUI(); 
+            UpdateUI();
         }
 
         private void UpdateUI()
@@ -152,10 +93,10 @@ namespace GamerSky.View
             {
                 DetailFrame.Visibility = DetailFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
             }
-            else if(AdaptiveVisualStateGroup.CurrentState == Default)
+            else if (AdaptiveVisualStateGroup.CurrentState == Default)
             {
                 DetailFrame.Visibility = Visibility.Visible;
-                
+
             }
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = DetailFrame.CanGoBack || MasterFrame.CanGoBack ?
              AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
@@ -163,15 +104,31 @@ namespace GamerSky.View
 
         private void MasterFrame_Navigated(object sender, NavigationEventArgs e)
         {
+            if (e.SourcePageType != typeof(MainPage) &&
+                e.SourcePageType != typeof(SubscribePage) &&
+                e.SourcePageType != typeof(StrategyPage))
+            {
+                moduleGrid.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                moduleGrid.Visibility = Visibility.Visible;
+            }
             UpdateUI();
         }
 
         private void DetailFrame_Navigated(object sender, NavigationEventArgs e)
         {
+            while(DetailFrame.BackStackDepth > 1)
+            {
+                DetailFrame.BackStack.RemoveAt(1);
+            }
             UpdateUI();
         }
 
-        #region Pane functions
+        #endregion
+        
+        #region Drawer functions
         /// <summary>
         /// 搜索
         /// </summary>
@@ -251,11 +208,61 @@ namespace GamerSky.View
         }
         #endregion
 
-        #region Click handler
-        private void setting_Click(object sender, RoutedEventArgs e)
+         
+        private void MasterDetailPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            MasterFrame.Navigate(typeof(SettingsPage));
+            e.Handled = true;
+            if (DetailFrame.CanGoBack)
+            { 
+                var essayDetailPage = (DetailFrame.Content as EssayDetailPage);
+                if (essayDetailPage != null)
+                { 
+                    essayDetailPage.CloseImageFlipView();
+                }
+                else
+                {
+                    DetailFrame.GoBack();
+                }
+            }
+            else if (MasterFrame.CanGoBack)
+            {
+                MasterFrame.GoBack();
+            }
+            else
+            {
+                Application.Current.Exit();
+            }
         }
+
+        public List<PaneItem> PaneItems { get; set; } = new List<PaneItem>();
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        { 
+            DetailFrame.Navigate(typeof(DefaultPage));
+            MasterFrame.Navigate(typeof(MainPage));
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_xinwen_h.png", Title = GlobalStringLoader.GetString("UNews"), SourcePage = typeof(MainPage) });
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_gonglue_h.png", Title = GlobalStringLoader.GetString("UGame"), SourcePage = typeof(StrategyPage) });
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/icon_dingyue_h.png", Title = GlobalStringLoader.GetString("USubscribe"), SourcePage = typeof(SubscribePage) });
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_news.png", Title = GlobalStringLoader.GetString("UYaowen"), SourcePage = typeof(YaowenPage) });
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_comment_reply.png", Title = GlobalStringLoader.GetString("UCommentReply"), SourcePage = typeof(ReplyPage) });
+            PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_collect.png", Title = GlobalStringLoader.GetString("UCollection"), SourcePage = typeof(FavoritePage) });
+            UIHelper.ShowStatusBar();
+
+            AppTheme = DataShareManager.Current.AppTheme;
+            User = DataShareManager.Current.CurrentUser;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+
+            SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
+            DisplayInformation.GetForCurrentView().OrientationChanged += MasterDetailPage_OrientationChanged;
+        }
+
+
+        private void Current_ShareDataChanged()
+        {
+            AppTheme = DataShareManager.Current.AppTheme;
+            User = DataShareManager.Current.CurrentUser;
+        }
+
 
         private void paneListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -275,11 +282,6 @@ namespace GamerSky.View
             }
             UIHelper.ShowStatusBar();
         }
-
-        private void userBtn_Click(object sender, RoutedEventArgs e)
-        {
-            Current.MasterFrame.Navigate(typeof(LoginPage));
-        }
-        #endregion
+          
     }
 }

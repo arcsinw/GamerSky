@@ -261,4 +261,10 @@
   <data name="CommentReply.Text" xml:space="preserve">
     <value>Comment reply</value>
   </data>
+  <data name="UCommentReply" xml:space="preserve">
+    <value>Comment reply</value>
+  </data>
+  <data name="ReleaseToRefresh.Text" xml:space="preserve">
+    <value>Release to refresh</value>
+  </data>
 </root>

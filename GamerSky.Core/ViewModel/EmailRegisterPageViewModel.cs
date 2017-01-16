@@ -12,15 +12,12 @@ namespace GamerSky.Core.ViewModel
     public class EmailRegisterPageViewModel : ViewModelBase
     {
         public UserRegisterByEmailInfo RegisterInfo { get; set; }
-
-        private ApiService apiService;
+         
 
         public EmailRegisterPageViewModel()
         {
             RegisterInfo = new UserRegisterByEmailInfo();
-
-            apiService = new ApiService();
-
+              
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
 
@@ -51,7 +48,7 @@ namespace GamerSky.Core.ViewModel
         /// <returns></returns>
         public async Task<VerificationCode> RegisterByEmail()
         {
-            var result = await apiService.RegisterByEmail(RegisterInfo.Answer, RegisterInfo.UserPassword, RegisterInfo.Email, RegisterInfo.Question, RegisterInfo.UserName);
+            var result = await ApiService.Instance.RegisterByEmail(RegisterInfo.Answer, RegisterInfo.UserPassword, RegisterInfo.Email, RegisterInfo.Question, RegisterInfo.UserName);
             return result;
         }
     }

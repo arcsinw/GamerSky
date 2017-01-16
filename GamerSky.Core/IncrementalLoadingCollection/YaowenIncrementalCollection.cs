@@ -14,8 +14,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
     /// 要闻自增集合
     /// </summary>
     public class YaowenIncrementalCollection : IncrementalLoadingBase<Essay>
-    {
-        private ApiService apiService = new ApiService();
+    { 
 
         #region member
         //private bool isLoading = false;     //是否正在加载
@@ -43,7 +42,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
             }
             else
             {
-                List<Essay> essays = await apiService.GetYaowen(pageIndex++);
+                List<Essay> essays = await ApiService.Instance.GetYaowen(pageIndex++);
                 if (essays != null)
                 {
                     foreach (var item in essays)

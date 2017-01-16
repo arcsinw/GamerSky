@@ -101,7 +101,7 @@ namespace GamerSky.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Subscribe_Click(object sender, RoutedEventArgs e)
         {
             var control = e.OriginalSource as FrameworkElement;
             if (control == null) return;

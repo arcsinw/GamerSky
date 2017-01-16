@@ -43,7 +43,7 @@ namespace GamerSky.View
             }
         }
          
-        private void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        private void listView_ItemClick(object sender, ItemClickEventArgs e)
         {
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
@@ -51,7 +51,7 @@ namespace GamerSky.View
             MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetailPage), essayResult);
         }
          
-        private void ListView_Loaded(object sender, RoutedEventArgs e)
+        private void listView_Loaded(object sender, RoutedEventArgs e)
         {
             scrollViewer = Functions.FindChildOfType<ScrollViewer>(sender as ListView);
             if (scrollViewer != null)
@@ -89,7 +89,13 @@ namespace GamerSky.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            listView.ScrollIntoViewSmoothly(listView.Items[0]);
+            //listView.ScrollIntoViewSmoothly(listView.Items[0]);
+        }
+
+        private async void listView_RefreshRequested(object sender, EventArgs e)
+        {
+            viewModel.Refresh();
+            await LiveTileHelper.UpdatePrimaryTile();
         }
     }
 }

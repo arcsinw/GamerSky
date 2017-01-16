@@ -66,7 +66,7 @@ namespace GamerSky.Helper
         public static  void ShowView()
         {
             ApplicationView applicationView = ApplicationView.GetForCurrentView();
-           
+            applicationView.SetPreferredMinSize(new Windows.Foundation.Size(1366, 768));
             applicationView.ShowStandardSystemOverlays();
             //应用标题栏
             ApplicationViewTitleBar titleBar = applicationView.TitleBar;

@@ -13,13 +13,11 @@ namespace GamerSky.Core.ViewModel
     public class RegisterPageViewModel : ViewModelBase
     {
         public UserRegisterByNumberInfo RegisterInfo { get; set; }
-
-        private ApiService apiService;
+         
         public RegisterPageViewModel()
         {
             RegisterInfo = new UserRegisterByNumberInfo();
-
-            apiService = new ApiService();
+             
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
@@ -57,7 +55,8 @@ namespace GamerSky.Core.ViewModel
                 password = RegisterInfo.UserPassword,
                 confirmpassword = RegisterInfo.UserPassword,
                 phoneVerificationCode = RegisterInfo.VerificationCode };
-            var result =  await apiService.RegisterByPhone(RegisterInfo.UserPassword, RegisterInfo.UserName, RegisterInfo.PhoneNumber, RegisterInfo.VerificationCode);
+
+            var result =  await ApiService.Instance.RegisterByPhone(RegisterInfo.UserPassword, RegisterInfo.UserName, RegisterInfo.PhoneNumber, RegisterInfo.VerificationCode);
             return result;
         }
     }

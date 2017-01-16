@@ -97,8 +97,7 @@
         </Button>-->
         </Pivot>
         
-        <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
-                    VerticalAlignment="Top">
+        <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}" VerticalAlignment="Top">
             <SymbolIcon Symbol="Back"/>
         </Button>
         <VisualStateManager.VisualStateGroups>

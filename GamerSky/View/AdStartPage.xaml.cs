@@ -39,27 +39,14 @@ namespace GamerSky.View
         public AdStartPage()
         {
             this.InitializeComponent();
-
-            apiService = new ApiService();
+             
 
             AdStarts = new ObservableCollection<AdStart>();
             LoadData();
 
             AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-        }
-
-        #region 九幽的数据统计
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            JYHelper.TracePageEnd("AdStartPage");
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            JYHelper.TracePageStart("AdStartPage");
-        }
-        #endregion
+        } 
 
         private void Current_ShareDataChanged()
         {
@@ -79,8 +66,7 @@ namespace GamerSky.View
                 OnPropertyChanged();
             }
         }
-
-        private ApiService apiService;
+         
 
         #region INotifyPropertyChanged Member
 
@@ -112,7 +98,7 @@ namespace GamerSky.View
 
         public async void LoadData()
         {
-            List<AdStart> adStart = await apiService.GetStartImage();
+            List<AdStart> adStart = await ApiService.Instance.GetStartImage();
             if (adStart != null)
             {
                 foreach (var item in adStart)

@@ -79,13 +79,13 @@
                             Style="{ThemeResource RoundButtonStyle}" />
                     <TextBlock Margin="0,16">
                     <Run x:Uid="RegisterMeansAccept"/>
-                    <Hyperlink UnderlineStyle="None" Click="{x:Bind Agreement}">"服务条款和声明"</Hyperlink>
+                    <Hyperlink UnderlineStyle="None" Click="{x:Bind Agreement}" Foreground="{ThemeResource ThemeColorBrush}">"服务条款和声明"</Hyperlink>
                     </TextBlock>
                     <Rectangle Height="1" Fill="Gray"  />
 
                     <HyperlinkButton Click="{x:Bind OtherRegister}" HorizontalAlignment="Right">
                         <HyperlinkButton.Content>
-                            <TextBlock x:Uid="OtherWayRegister"/>
+                            <TextBlock x:Uid="OtherWayRegister" Foreground="{ThemeResource ThemeColorBrush}"/>
                         </HyperlinkButton.Content>
                     </HyperlinkButton>
                 </StackPanel>

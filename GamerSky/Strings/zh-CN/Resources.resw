@@ -261,4 +261,10 @@
   <data name="CommentReply.Text" xml:space="preserve">
     <value>评论回复</value>
   </data>
+  <data name="UCommentReply" xml:space="preserve">
+    <value>评论回复</value>
+  </data>
+  <data name="ReleaseToRefresh.Text" xml:space="preserve">
+    <value>松开以刷新</value>
+  </data>
 </root>
