@@ -1,12 +1,12 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no" />
     <title></title>
-    <link type="text/css" rel="stylesheet" href="ms-appx-web:///Assets/Css/gsAppHTMLTemplate.css?version=1.6.7" />
-    <script type="text/javascript" src="ms-appx-web:///Assets/js/gsAppHTMLTemplate.js?version=1.6.7"></script>
-    <script type="text/javascript" src="ms-appx-web:///Assets/js/gs.js"></script>
+    <link type="text/css" rel="stylesheet" href="gs.css" />
+    <script type="text/javascript" src="gs.js"></script>
+    <script type="text/javascript" src="gsAppHTMLTemplate.js"></script>
 </head>
 <body>
 <div id="body" class="fontsizetwo">
@@ -36,7 +36,7 @@
 	</div>
 </div>
 
-<div class="list" id="gsTemplateContent_Comments" onclick="gsSendMessageToSuperWebView(&quot;openPage:{\&quot;pageID\&quot;:\&quot;0\&quot;,\&quot;pageURL\&quot;:\&quot;comments.app.gamersky\&quot;, \&quot;openMethod\&quot;:\&quot;withContentURL\&quot;}&quot;);">
+<div class="list" id="gsTemplateContent_Comments" >
 </div>
 
 <div class="ad2" id="gsTemplateContent_AD2">
@@ -193,3 +193,37 @@
 </script>
 </body>
 </html>
+<script type="text/javascript">
+    function resizeVideo() {
+        var winWidth = document.body.clientWidth;
+        var iframes = document.getElementsByTagName('iframe');
+        if (iframes != null) {
+            for (var i = 0; i < iframes.length; i++) {
+                iframes[i].removeAttribute('style');
+                iframes[i].width = winWidth;
+                iframes[i].height = winWidth * (9 / 16);
+            }
+        }
+        var embeds = document.getElementsByTagName('embed');
+        if (embeds != null) {
+            for (var j = 0; j < embeds.length; j++) {
+                var embedTag = embedTags[j];
+
+                embedTag.removeAttribute('style');
+                embedTag.height = winWidth * (9 / 16);
+                embedTag.width = winWidth;
+            }
+        }
+        //div
+        var player = document.getElementById('youkuplayer_0');
+        if (player != null) {
+            player.removeAttribute('style');
+            player.style.width = winWidth + 'px';
+            player.style.height = winWidth * (9 / 16) + 'px';
+        }
+    } var body = document.getElementsByTagName('body')[0];
+    document.onreadystatechange = function () { resizeVideo(); }
+    window.onresize = function () {
+        resizeVideo();
+    };
+</script>

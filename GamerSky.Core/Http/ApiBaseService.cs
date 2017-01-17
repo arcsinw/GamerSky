@@ -60,7 +60,7 @@ namespace GamerSky.Core.Http
         /// <param name="uri"></param>
         /// <param name="t"></param>
         /// <returns></returns>
-        protected async Task<JsonObject>PostJson<T> (string uri,T t) where T : class
+        public async Task<JsonObject>PostJson<T> (string uri,T t) where T : class
         {
             string body = JsonHelper.Serializer(t);
             try
@@ -78,7 +78,7 @@ namespace GamerSky.Core.Http
             }
         }
 
-        protected async Task<ReturnT> PostJson<SendT,ReturnT>(string uri,SendT sendT) where ReturnT : class
+        public async Task<ReturnT> PostJson<SendT,ReturnT>(string uri,SendT sendT) where ReturnT : class
         {
             string body = JsonHelper.Serializer(sendT);
             try

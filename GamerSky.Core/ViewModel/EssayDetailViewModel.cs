@@ -29,7 +29,6 @@ namespace GamerSky.Core.ViewModel
                 OnPropertyChanged();
             }
         }
-        
          
 
         public EssayCommentsCollection CommentsCollection { get; set; }
@@ -197,118 +196,129 @@ namespace GamerSky.Core.ViewModel
 
         #region GenerateContent
 
+        public async Task GenerateHtmlString()
+        {
+            News news = await ApiService.Instance.ReadEssay(Essay.ContentId);
+            if(news!=null)
+            {
+                
+            }
+             
+        }
+
         /// <summary>
         /// 生成新闻内容网页
         /// </summary>
-        public async Task GenerateHtmlString()
-        {
-            IsActive = true;
-            News news = await ApiService.Instance.ReadEssay(Essay.ContentId);
-            if (news != null)
-            { 
-                OriginUri = news.OriginURL;
+        //public async Task GenerateHtmlString()
+        //{
+        //    IsActive = true;
+        //    News news = await ApiService.Instance.ReadEssay(Essay.ContentId);
+        //    if (news != null)
+        //    { 
+        //        OriginUri = news.OriginURL;
 
-                string mainBody = news.MainBody;
+        //        string mainBody = news.MainBody;
 
-                string head = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset = utf-8\" />"
-                            + "<meta name=\"viewport\" content=\"width= device-width, user-scalable = no\" />"
-                            + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
-                            + "<meta name=\"msapplication-tap-highlight\" content=\"no\">" //wp点击无高光;
-                            + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gs.css\"/>"
-                            //+ "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gsAppHTMLTemplate.css\"/>"
-                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gsAppHTMLTemplate.js\"></script>"
-                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/jquery.min.js\"></script>"
-                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/jquery.lazyload.js\"></script>"
-                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gs.js\"></script>";
-                            //+ "<script src=\"http://j.gamersky.com/g/gsVideo.js\"></script>";
+        //        string head = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset = utf-8\" />"
+        //                    + "<meta name=\"viewport\" content=\"width= device-width, user-scalable = no\" />"
+        //                    + "<meta name=\"format-detection\" content=\"telephone=no,email=no\">" //忽略电话号码和邮箱
+        //                    + "<meta name=\"msapplication-tap-highlight\" content=\"no\">" //wp点击无高光;
+        //                    + "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gs.css\"/>"
+        //                    //+ "<link type=\"text/css\" rel=\"stylesheet\" href=\"ms-appx-web:///Assets/Css/gsAppHTMLTemplate.css\"/>"
+        //                    + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gsAppHTMLTemplate.js\"></script>"
+        //                    + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/jquery.min.js\"></script>"
+        //                    + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/jquery.lazyload.js\"></script>"
+        //                    + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gs.js\"></script>";
+        //                    //+ "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gsVideo.js\"></script>";
+        //                    //+ "<script src=\"http://j.gamersky.com/g/gsVideo.js\"></script>";
 
-                string title = news.Title;  
-                string subTitle = news.SubTitle;
+        //        string title = news.Title;  
+        //        string subTitle = news.SubTitle;
 
-                #region 相关阅读
-                List<RelatedReadings> relatedReadings = await ApiService.Instance.GetRelatedReadings(essay.ContentId, essay.ContentType);
+        //        #region 相关阅读
+        //        List<RelatedReadings> relatedReadings = await ApiService.Instance.GetRelatedReadings(essay.ContentId, essay.ContentType);
 
-                string relatedReadingsHtml =
-                    @"<div class=""list"" id=""gsTemplateContent_RelatedReading"">
-                    <div class=""tit yellow"" style=""border-left:5px solid #FFC600"">相关阅读</div>
-                           <div class=""txtlist"" id=""gsTemplateContent_RelatedReadingContent"">";
-                if (relatedReadings != null && relatedReadings.Count == 0)
-                {
-                    relatedReadingsHtml += "";
-                }
-                if (relatedReadings != null)
-                {
-                    foreach (var item in relatedReadings)
-                    {
-                        relatedReadingsHtml += "<a class=\"Row\" href=\"openPageWithContentId:" + item.contentId + "\"><div>" + item.title + "</div></a>";
-                    }
-                    relatedReadingsHtml += "</div></div>";
-                }
-                #endregion
+        //        string relatedReadingsHtml =
+        //            @"<div class=""list"" id=""gsTemplateContent_RelatedReading"">
+        //            <div class=""tit yellow"" style=""border-left:5px solid #FFC600"">相关阅读</div>
+        //                   <div class=""txtlist"" id=""gsTemplateContent_RelatedReadingContent"">";
+        //        if (relatedReadings != null && relatedReadings.Count == 0)
+        //        {
+        //            relatedReadingsHtml += "";
+        //        }
+        //        if (relatedReadings != null)
+        //        {
+        //            foreach (var item in relatedReadings)
+        //            {
+        //                relatedReadingsHtml += "<a class=\"Row\" href=\"openPageWithContentId:" + item.contentId + "\"><div>" + item.title + "</div></a>";
+        //            }
+        //            relatedReadingsHtml += "</div></div>";
+        //        }
+        //        #endregion
 
-                tempHtml.Clear();
-                tempHtml.Append("<!DOCTYPE html>" +
-                    "<html>" +
-                        "<head>" + head + "</head>" +
-                        "<body quick-markup_injected=\"true\" onload=\"onLoad()\">" +
-                            "<GSAppHTMLTemplate version=\"1.4.6\"/>" +
-                             //"<div id=\"ScrollToTop\"><a href=\"#top\">#</a></div>" +
-                             //"<div id=\"ScrollToTop\"><a href=\"javascript:scroller(body,100);\">#</a></div>" +
-                             "<div id=\"body\" class=\"fontsizetwo\">" +
-                                  "<h1 class=\"heading\" id=\"gsTemplateContent_Title\">" + title + "</h1>" +
-                                  "<span class=\"info\" id=\"gsTemplateContent_Subtitle\">" + subTitle + "</span>" +
-                                  "<div class=\"bar\"></div>" +
-                                  "<div class=\"content\" id=\"gsTemplateContent_MainBody\">" + mainBody + "</div>" +
-                                  "<div id=\"gsTemplateContent_AD1\"></div>" +
-                                  "<div class=\"list\" id=\"gsTemplateContent_RelatedTopic\">" +
-                                        "<div class=\"tit red\" style=\"border-left:5px solid #f22f09;\">相关专题</div>" +
-                                            "<div id=\"gsTemplateContent_RelatedTopicContent\">" +
-                                            "</div>" +
-                                        "</div>" +
-                                  "</div>" +
-                                         relatedReadingsHtml +
-                             "</div>" +
-                        "</body>" +
-                        "<script type=\"text/javascript\">" +
-                        @"function resizeVideo(){
-                         var winWidth = document.body.clientWidth;
-			            var iframes = document.getElementsByTagName('iframe');
-			            if (iframes != null) {
-				            for (var i = 0; i < iframes.length; i++) {
-					            iframes[i].removeAttribute('style');
-					            iframes[i].width = winWidth;
-					            iframes[i].height = winWidth * (9 / 16);
-				            }
-			            }
-			            var embeds = document.getElementsByTagName('embed');
-			            if (embeds != null) {
-				            for (var j = 0; j < embeds.length; j++) {
-					            var embedTag = embedTags[j];
+        //        tempHtml.Clear();
+        //        tempHtml.Append("<!DOCTYPE html>" +
+        //            "<html>" +
+        //                "<head>" + head + "</head>" +
+        //                "<body quick-markup_injected=\"true\" onload=\"onLoad()\">" +
+        //                    "<GSAppHTMLTemplate version=\"1.4.6\"/>" +
+        //                     //"<div id=\"ScrollToTop\"><a href=\"#top\">#</a></div>" +
+        //                     //"<div id=\"ScrollToTop\"><a href=\"javascript:scroller(body,100);\">#</a></div>" +
+        //                     "<div id=\"body\" class=\"fontsizetwo\">" +
+        //                          "<h1 class=\"heading\" id=\"gsTemplateContent_Title\">" + title + "</h1>" +
+        //                          "<span class=\"info\" id=\"gsTemplateContent_Subtitle\">" + subTitle + "</span>" +
+        //                          "<div class=\"bar\"></div>" +
+        //                          "<div class=\"content\" id=\"gsTemplateContent_MainBody\">" + mainBody + "</div>" +
+        //                          "<div id=\"gsTemplateContent_AD1\"></div>" +
+        //                          "<div class=\"list\" id=\"gsTemplateContent_RelatedTopic\">" +
+        //                                "<div class=\"tit red\" style=\"border-left:5px solid #f22f09;\">相关专题</div>" +
+        //                                    "<div id=\"gsTemplateContent_RelatedTopicContent\">" +
+        //                                    "</div>" +
+        //                                "</div>" +
+        //                          "</div>" +
+        //                                 relatedReadingsHtml +
+        //                     "</div>" +
+        //                "</body>" +
+        //                "<script type=\"text/javascript\">" +
+        //                @"function resizeVideo(){
+        //                 var winWidth = document.body.clientWidth;
+			     //       var iframes = document.getElementsByTagName('iframe');
+			     //       if (iframes != null) {
+				    //        for (var i = 0; i < iframes.length; i++) {
+					   //         iframes[i].removeAttribute('style');
+					   //         iframes[i].width = winWidth;
+					   //         iframes[i].height = winWidth * (9 / 16);
+				    //        }
+			     //       }
+			     //       var embeds = document.getElementsByTagName('embed');
+			     //       if (embeds != null) {
+				    //        for (var j = 0; j < embeds.length; j++) {
+					   //         var embedTag = embedTags[j];
 					
-					            embedTag.removeAttribute('style');
-					            embedTag.height = winWidth * (9 / 16);
-					            embedTag.width = winWidth;
-				            }
-			            }
-                        //div
-			            var player = document.getElementById('youkuplayer_0');
-			            if (player != null) {
-				            player.removeAttribute('style');
-				            player.style.width = winWidth + 'px';
-				            player.style.height = winWidth * (9 / 16) + 'px';
-			            }}" +
-                        "var body = document.getElementsByTagName('body')[0]; " +
-                       @"document.onreadystatechange = function () { resizeVideo(); }
-                        window.onresize = function(){
-                            resizeVideo();
-                    };
-                    </script>" +
-                "</html>");
+					   //         embedTag.removeAttribute('style');
+					   //         embedTag.height = winWidth * (9 / 16);
+					   //         embedTag.width = winWidth;
+				    //        }
+			     //       }
+        //                //div
+			     //       var player = document.getElementById('youkuplayer_0');
+			     //       if (player != null) {
+				    //        player.removeAttribute('style');
+				    //        player.style.width = winWidth + 'px';
+				    //        player.style.height = winWidth * (9 / 16) + 'px';
+			     //       }}" +
+        //                "var body = document.getElementsByTagName('body')[0]; " +
+        //               @"document.onreadystatechange = function () { resizeVideo(); }
+        //                window.onresize = function(){
+        //                    resizeVideo();
+        //            };
+        //            </script>" +
+        //        "</html>");
 
-                HtmlString = tempHtml.ToString() ; 
-            }
-            IsActive = false;
-        }
+        //        HtmlString = tempHtml.ToString() ; 
+        //    }
+        //    IsActive = false;
+        //}
 
         /// <summary>
         /// 生成评论网页

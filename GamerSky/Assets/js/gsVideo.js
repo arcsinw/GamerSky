@@ -167,6 +167,7 @@ function gsGetHeightFromVideoContent(videoContent) {
 //   函数gsVideo都会从中提取"优酷视频Id",然后拼写成合作代码进行播放.
 function gsVideo(videoType, videoContent, videoWidth, videoHeight) {
     var isWap = location.host == "wap.gamersky.com";
+    window.external.notify(isWap);
     if (location.protocol == "file:") {
         gsVideoInApp(videoType, videoContent, null, videoWidth, videoHeight);
     }

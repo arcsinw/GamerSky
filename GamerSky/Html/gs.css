@@ -18,7 +18,7 @@
 html
 {
 	/*-ms-content-zoom : none;*/
-	font-family: "Arial","Microsoft YaHei";
+	font-family: "Arial","Microsoft YaHei","榛戜綋","瀹嬩綋";
 }
 body
 { 
@@ -28,7 +28,7 @@ body
     color:#333;	
     text-align:justify;
 	word-break:break-all;
-	/*禁止选中内容, 禁止弹出内容菜单
+	/*绂佹閫変腑鍐呭, 绂佹寮瑰嚭鍐呭鑿滃崟
     -webkit-touch-callout:none;
 	-webkit-user-select:none;*/
 }
@@ -115,7 +115,7 @@ a
 
 
 /*----------------------------
-	表格样式
+	琛ㄦ牸鏍峰紡
 -------------------------------*/
 table {color : #ccc;}
 .table2 {margin:0 auto; width:98%; border:1.00px solid #555; border-collapse:collapse; background-color:#333; cursor:default;}
@@ -124,7 +124,7 @@ table {color : #ccc;}
 
 
 /*----------------------------
-	相关阅读
+	鐩稿叧闃呰
 -------------------------------*/
 #gsTemplateContent_RelatedReadingContent {margin-left:-10px; margin-right:-10px;}
 #gsTemplateContent_RelatedReadingContent .Row {padding:0px;}
@@ -165,7 +165,7 @@ table {color : #ccc;}
 }
 
 /*------------------------------------------------ -x68
-	视频
+	瑙嗛
 ------------------------------------------------ -x68*/
 .GSTemplateContent_VideoBoxer
 {

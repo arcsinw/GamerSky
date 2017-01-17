@@ -133,6 +133,7 @@ namespace GamerSky.Core.Helper
                 FindChildOfTypeAndInsert<T>(results, child);
             }
         }
+
         /// <summary>
         /// 判断是否Mobile设备
         /// </summary>
