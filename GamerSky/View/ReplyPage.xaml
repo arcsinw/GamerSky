@@ -1,0 +1,119 @@
+﻿<Page
+    x:Class="GamerSky.View.ReplyPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GamerSky.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hp="using:GamerSky.Helper"
+    xmlns:m="using:GamerSky.Core.Model"
+    xmlns:converter="using:GamerSky.Converters"
+    xmlns:vm="using:GamerSky.Core.ViewModel"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:ReplyViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
+    <Page.Resources>
+        <converter:DateTimeToTimeSpanConverter x:Key="DateTimeToTimeSpanConverter"/>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converter:BoolToIconConverter x:Key="BoolToIconConverter"/>
+        <converter:AddConverter x:Key="AddConverter"/>
+
+        <x:String x:Key="DefaultAvatar">ms-appx:///Assets/Images/members.png</x:String>
+    </Page.Resources>
+    
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <hp:DeviceTypeTrigger PlatformType="Desktop"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="back.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid Background="{ThemeResource ThemeColorBrush}">
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
+                    Grid.Column="0">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock x:Uid="CommentReply" Style="{ThemeResource PageTitleStyle}"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ListView ItemsSource="{Binding Comments}"
+                          Style="{ThemeResource LightListView}"
+                          SelectionMode="None"
+                          ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="m:Comment">
+                        <Grid Padding="0,0,12,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <!--Avatar-->
+                            <Ellipse Grid.Row="0" Grid.Column="0" 
+                                         Width="40" Height="40">
+                                <Ellipse.Fill>
+                                    <ImageBrush>
+                                        <ImageBrush.ImageSource>
+                                            <BitmapImage UriSource="{Binding ImgUrl,TargetNullValue={StaticResource DefaultAvatar}}"/>
+                                        </ImageBrush.ImageSource>
+                                    </ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Grid Grid.Row="0" Grid.Column="1" Margin="8,0">
+                                <TextBlock>
+                                        <Run Foreground="{ThemeResource ThemeColorBrush}" Text="{x:Bind NickName }"/>
+                                        <LineBreak/>
+                                        <Run Text="{x:Bind IpLocation}"/>
+                                        <Run Text="{Binding CreateTime,Converter={StaticResource DateTimeToTimeSpanConverter}}"/>
+                                </TextBlock>
+
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Style="{ThemeResource LightButtonStyle}"/>
+                                    <Button Content="回复" Style="{ThemeResource LightButtonStyle}"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Grid.Row="1" Grid.Column="1" Margin="8,0">
+                                <StackPanel>
+                                    <ItemsControl Margin="0,8" ItemsSource="{x:Bind Comments}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="m:Comment">
+                                                <Grid BorderBrush="Blue" CornerRadius="4" 
+                                                          HorizontalAlignment="Stretch" Padding="4"
+                                                          BorderThickness="1">
+                                                    <StackPanel>
+                                                        <TextBlock Text="{x:Bind NickName}" Foreground="{ThemeResource ThemeColorBrush}"/>
+                                                        <TextBlock Text="{x:Bind Content}" TextWrapping="Wrap"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <TextBlock Text="{Binding Content}" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

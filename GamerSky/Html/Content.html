@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset = utf-8" />
+    <meta name="viewport" content="width= device-width, user-scalable = no" />
+    <meta name="format-detection" content="telephone=no,email=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link type="text/css" rel="stylesheet" href="gs.css" />
+    <script type="text/javascript" src="gs.js"></script>
+    <script type="text/javascript" src="gsAppHTMLTemplate.js"></script>
+</head>
+<body quick-markup_injected="true" onload="onLoad()">
+    <GSAppHTMLTemplate version="1.4.6" />
+    <div id="body" class="fontsizetwo">
+        <h1 class="heading" id="gsTemplateContent_Title">游民晨播报：仁王新演示 忍者龙剑传新作还要耐心等</h1><span class="info" id="gsTemplateContent_Subtitle">01-17 07:01  来源:游民星空[原创] 作者:FoxJR</span><div class="bar"></div><div class="content" id="gsTemplateContent_MainBody">
+            <p>　　各位早安，外媒发布了两段《仁王》新演示；《忍者龙剑传》新作还要耐心等待；一起来看看今天游戏圈有哪些事情发生吧。</p>
+            <p align="center"><a target="_blank" href="http://www.gamersky.com/showimage/id_gamersky.shtml?http://img1.gamersky.com/image2015/12/20151217zl_2/gamersky_01origin_01_20151217718A9C.jpg"><img class="picact" alt="游民星空" border="0" src="http://img1.gamersky.com/image2015/12/20151217zl_2/gamersky_01small_02_20151217718ED8.jpg"></a></p>
+            <div class="title1">重点关注：</div>
+            <p><b>1.《仁王》新演示</b></p>
+            <p>　　《仁王》就在昨晚已经正式确认制作完成，开始进场压盘。今天外媒IGN和Gamepot为我们带来了两段游戏的全新演示。更多新闻详情敬请关注我们稍后带来的报道。</p>
+            <p align="center">
+                <script type="text/javascript" src="http://j.gamersky.com/g/gsVideo.js"></script>
+                <script type="text/javascript">
+                    gsVideo("优酷", "<iframe width=\"550\" height=\"350\" src='http://player.youku.com/embed/XMjQ3MzM3MTU1Ng==' frameborder=0 'allowfullscreen'></iframe>");
+                </script>
+            </p>
+            <p align="center">
+                <script type="text/javascript" src="http://j.gamersky.com/g/gsVideo.js"></script>
+                <script type="text/javascript">
+                    gsVideo("优酷", "<iframe width=\"550\" height=\"350\" src='http://player.youku.com/embed/XMjQ3MzM3MjY5Ng==' frameborder=0 'allowfullscreen'></iframe>");
+                </script>
+            </p>
+            <p><b>2.《忍者龙剑传》新作还要耐心等待</b></p>
+            <p>　　在接受外媒USGAMER采访时，Team Ninja表示，或许可以把《仁王》称作开启《忍龙》新章节的大门，不过现在这个系列还需要再低调一段时间，直到我们重新将其带回玩家们的视野。当时间合适时，我们会将忍龙带回来的。更多新闻详情敬请关注我们稍后带来的报道。</p>
+            <p align="center"><a target="_blank" href="http://www.gamersky.com/showimage/id_gamersky.shtml?http://img1.gamersky.com/image2017/01/20170117_zl_91_1/gamersky_01origin_01_20171176574D7.jpg"><img class="picact" alt="游民星空" border="0" src="http://img1.gamersky.com/image2017/01/20170117_zl_91_1/gamersky_01small_02_20171176576F5.jpg"></a></p>
+            <div class="title1">一句话新闻：</div>
+            <p>　　《暗黑地牢》“休闲”模式将于2月上线，在该模式下游戏时长将从80小时缩短至40小时左右。</p>
+            <p>　　今天的播报就到这里，明早我们再见~。</p>
+        </div><div id="gsTemplateContent_AD1"></div><div class="list" id="gsTemplateContent_RelatedTopic"><div class="tit red" style="border-left:5px solid #f22f09;">相关专题</div><div id="gsTemplateContent_RelatedTopicContent"></div></div>
+    </div>
+    <div class="list" id="gsTemplateContent_RelatedReading">
+        <div class="tit yellow" style="border-left:5px solid #FFC600">相关阅读</div>
+        <div class="txtlist" id="gsTemplateContent_RelatedReadingContent"></div>
+    </div>
+    
+</body>
+
+</html>
+<script type="text/javascript">
+    function resizeVideo() {
+        var winWidth = document.body.clientWidth;
+        var iframes = document.getElementsByTagName('iframe');
+        if (iframes != null) {
+            for (var i = 0; i < iframes.length; i++) {
+                iframes[i].removeAttribute('style');
+                iframes[i].width = winWidth;
+                iframes[i].height = winWidth * (9 / 16);
+            }
+        }
+        var embeds = document.getElementsByTagName('embed');
+        if (embeds != null) {
+            for (var j = 0; j < embeds.length; j++) {
+                var embedTag = embedTags[j];
+
+                embedTag.removeAttribute('style');
+                embedTag.height = winWidth * (9 / 16);
+                embedTag.width = winWidth;
+            }
+        }
+        //div
+        var player = document.getElementById('youkuplayer_0');
+        if (player != null) {
+            player.removeAttribute('style');
+            player.style.width = winWidth + 'px';
+            player.style.height = winWidth * (9 / 16) + 'px';
+        }
+    } var body = document.getElementsByTagName('body')[0];
+    document.onreadystatechange = function () { resizeVideo(); }
+    window.onresize = function () {
+        resizeVideo();
+    };
+</script>

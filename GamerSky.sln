@@ -1,0 +1,113 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerSky", "GamerSky\GamerSky.csproj", "{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerSky.Background", "GamerSky.Background\GamerSky.Background.csproj", "{D2630736-06DC-4D3F-84A3-EC71AF1B4856}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerSky.Core", "GamerSky.Core\GamerSky.Core.csproj", "{83A0C09A-0CC8-4238-9165-60C079924BDE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{F9E0EEED-F8AF-4288-8752-BDE899AA3C9F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microsoft.Toolkit.Uwp.Notifications.Shared", "C:\Users\arcsinx\Source\Repos\UWPCommunityToolkit\Notifications\Microsoft.Toolkit.Uwp.Notifications.Shared\Microsoft.Toolkit.Uwp.Notifications.Shared.shproj", "{8BACD7A9-B205-4ADF-BDA9-763B30A66576}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		C:\Users\arcsinx\Source\Repos\UWPCommunityToolkit\Notifications\Microsoft.Toolkit.Uwp.Notifications.Shared\Microsoft.Toolkit.Uwp.Notifications.Shared.projitems*{8bacd7a9-b205-4adf-bda9-763b30a66576}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Debug|ARM.Build.0 = Debug|ARM
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Debug|ARM.Deploy.0 = Debug|ARM
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Debug|x64.ActiveCfg = Debug|x64
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Debug|x64.Build.0 = Debug|x64
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Debug|x64.Deploy.0 = Debug|x64
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Debug|x86.ActiveCfg = Debug|x86
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Debug|x86.Build.0 = Debug|x86
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Debug|x86.Deploy.0 = Debug|x86
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Release|Any CPU.ActiveCfg = Release|x86
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Release|ARM.ActiveCfg = Release|ARM
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Release|ARM.Build.0 = Release|ARM
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Release|ARM.Deploy.0 = Release|ARM
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Release|x64.ActiveCfg = Release|x64
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Release|x64.Build.0 = Release|x64
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Release|x64.Deploy.0 = Release|x64
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Release|x86.ActiveCfg = Release|x86
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Release|x86.Build.0 = Release|x86
+		{2F2179CB-AD69-4A42-B1FD-8A3BF7297CE1}.Release|x86.Deploy.0 = Release|x86
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Debug|ARM.ActiveCfg = Debug|ARM
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Debug|ARM.Build.0 = Debug|ARM
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Debug|x64.ActiveCfg = Debug|x64
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Debug|x64.Build.0 = Debug|x64
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Debug|x86.ActiveCfg = Debug|x86
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Debug|x86.Build.0 = Debug|x86
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Release|ARM.ActiveCfg = Release|ARM
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Release|ARM.Build.0 = Release|ARM
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Release|x64.ActiveCfg = Release|x64
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Release|x64.Build.0 = Release|x64
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Release|x86.ActiveCfg = Release|x86
+		{D2630736-06DC-4D3F-84A3-EC71AF1B4856}.Release|x86.Build.0 = Release|x86
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Debug|ARM.Build.0 = Debug|ARM
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Debug|x64.ActiveCfg = Debug|x64
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Debug|x64.Build.0 = Debug|x64
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Debug|x86.ActiveCfg = Debug|x86
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Debug|x86.Build.0 = Debug|x86
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Release|ARM.ActiveCfg = Release|ARM
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Release|ARM.Build.0 = Release|ARM
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Release|x64.ActiveCfg = Release|x64
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Release|x64.Build.0 = Release|x64
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Release|x86.ActiveCfg = Release|x86
+		{83A0C09A-0CC8-4238-9165-60C079924BDE}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8BACD7A9-B205-4ADF-BDA9-763B30A66576} = {F9E0EEED-F8AF-4288-8752-BDE899AA3C9F}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://wangx86.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = GamerSky.Background\\GamerSky.Background.csproj
+		SccProjectName1 = GamerSky.Background
+		SccLocalPath1 = GamerSky.Background
+		SccProjectUniqueName2 = GamerSky.Core\\GamerSky.Core.csproj
+		SccProjectName2 = GamerSky.Core
+		SccLocalPath2 = GamerSky.Core
+		SccProjectUniqueName3 = GamerSky\\GamerSky.csproj
+		SccProjectName3 = GamerSky
+		SccLocalPath3 = GamerSky
+		SccProjectUniqueName4 = C:\\Users\\arcsinx\\Source\\Repos\\UWPCommunityToolkit\\Notifications\\Microsoft.Toolkit.Uwp.Notifications.Shared\\Microsoft.Toolkit.Uwp.Notifications.Shared.shproj
+		SccProjectTopLevelParentUniqueName4 = GamerSky.sln
+		SccProjectName4 = ../Notifications
+		SccLocalPath4 = C:\\Users\\arcsinx\\Source\\Repos\\UWPCommunityToolkit\\Notifications\\Microsoft.Toolkit.Uwp.Notifications.Shared
+		SccProjectUniqueName5 = C:\\Users\\arcsinx\\Source\\Repos\\UWPCommunityToolkit\\Notifications\\Microsoft.Toolkit.Uwp.Notifications.Shared\\Microsoft.Toolkit.Uwp.Notifications.Shared.projitems
+		SccProjectTopLevelParentUniqueName5 = GamerSky.sln
+		SccProjectName5 = ../Notifications
+		SccLocalPath5 = C:\\Users\\arcsinx\\Source\\Repos\\UWPCommunityToolkit\\Notifications\\Microsoft.Toolkit.Uwp.Notifications.Shared
+	EndGlobalSection
+EndGlobal
