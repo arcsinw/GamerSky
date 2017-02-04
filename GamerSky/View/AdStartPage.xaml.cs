@@ -6,8 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Provider;
@@ -16,16 +14,11 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 using GamerSky.Core.Helper;
 using GamerSky.Core.Http;
 using GamerSky.Core.Model;
 using GamerSky.Core.ViewModel;
-using GamerSky.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -78,23 +71,11 @@ namespace GamerSky.View
         } 
 
         #endregion
-
-        private ObservableCollection<AdStart> adStarts;
+         
         /// <summary>
         /// 启动图
         /// </summary>
-        public ObservableCollection<AdStart> AdStarts
-        {
-            get
-            {
-                return adStarts;
-            }
-            set
-            {
-                adStarts = value;
-                OnPropertyChanged();
-            }
-        }
+        public ObservableCollection<AdStart> AdStarts { get; set; }
 
         public async void LoadData()
         {

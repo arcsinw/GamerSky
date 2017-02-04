@@ -657,9 +657,11 @@
         </StackPanel>
 
         <!--#region  显示图片-->
-        <FlipView x:Name="imageFlipView" 
-            Background="Black" Visibility="Collapsed" 
+        <FlipView x:Name="imageFlipView" Visibility="Collapsed" 
             ItemsSource="{x:Bind Images,Mode=OneWay}" >
+            <FlipView.Background>
+                <SolidColorBrush Color="Black" Opacity="0.8"/>
+            </FlipView.Background>
             <FlipView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

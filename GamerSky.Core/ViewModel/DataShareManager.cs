@@ -8,6 +8,7 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using GamerSky.Core.Helper;
 using GamerSky.Core.Model;
+using System.Collections.ObjectModel;
 
 namespace GamerSky.Core.ViewModel
 {
@@ -76,6 +77,7 @@ namespace GamerSky.Core.ViewModel
                 appTheme = value;
             }
         }
+
         private int fontSize;
         /// <summary>
         /// 字体大小
@@ -101,45 +103,20 @@ namespace GamerSky.Core.ViewModel
         }
 
 
-        private List<Essay> favoriteList = new List<Essay>();
         /// <summary>
         /// 收藏文章列表
         /// </summary>
-        public List<Essay> FavoriteList
-        {
-            get
-            {
-                return favoriteList;
-            }          
-        }
+        public ObservableCollection<Essay> FavoriteList { get; set; } = new ObservableCollection<Essay>();
 
-        private List<Subscribe> subscribeList = new List<Subscribe>();
         /// <summary>
         /// 订阅收藏列表
         /// </summary>
-        public List<Subscribe> SubscribeList
-        {
-            get
-            {
-                return subscribeList;
-            }
-        }
+        public ObservableCollection<Subscribe> SubscribeList { get; set; } = new ObservableCollection<Subscribe>();
 
-        private List<Strategy> strategyList = new List<Strategy>();
         /// <summary>
         /// 攻略收藏
         /// </summary>
-        public List<Strategy> StrategyList
-        {
-            get
-            {
-                return strategyList;
-            }
-            set
-            {
-                strategyList = value;
-            }
-        }
+        public ObservableCollection<Strategy> StrategyList { get; set; } = new ObservableCollection<Strategy>();
 
         /// <summary>
         /// 是否第一次启动
@@ -212,7 +189,7 @@ namespace GamerSky.Core.ViewModel
             var roamingSettings = ApplicationData.Current.RoamingSettings;
             if(roamingSettings.Values.ContainsKey(RoamingSettingKey_AppTheme))
             {
-                appTheme = int.Parse(roamingSettings.Values[RoamingSettingKey_AppTheme].ToString()) == 0 ? ElementTheme.Light : ElementTheme.Dark;
+                appTheme = roamingSettings.Values[RoamingSettingKey_AppTheme].ToString().Equals("0") ? ElementTheme.Light : ElementTheme.Dark;
             }
             else
             {
@@ -242,11 +219,11 @@ namespace GamerSky.Core.ViewModel
             //加载订阅列表
             if (localSettings.Values.ContainsKey(SettingKey_SubscribeList))
             {
-                subscribeList = JsonHelper.Deserlialize <List<Subscribe>>(localSettings.Values[SettingKey_SubscribeList].ToString());
-            }
-            else
-            {
-                subscribeList = new List<Subscribe>();
+                var result = JsonHelper.Deserlialize<List<Subscribe>>(localSettings.Values[SettingKey_SubscribeList].ToString());
+                if (result != null)
+                {
+                    result.ForEach(x => SubscribeList.Add(x));
+                }
             }
 
             //加载文章收藏列表
@@ -254,22 +231,27 @@ namespace GamerSky.Core.ViewModel
             
             if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(folder.Path+"\\"+EssayList_FileName))
             {
-                favoriteList = await FileHelper.Current.ReadObjectAsync<List<Essay>>(EssayList_FileName, FavoriteList_Folder);
+                var result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(EssayList_FileName, FavoriteList_Folder);
+                if (result != null)
+                {
+                    result.ForEach(x => FavoriteList.Add(x));
+                }
             }
   
             //加载攻略列表
             if (IsolatedStorageFile.GetUserStoreForApplication().FileExists(folder.Path+"\\" + StrategyList_FileName))
             {
-                strategyList = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(StrategyList_FileName, FavoriteList_Folder);
+                var result = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(StrategyList_FileName, FavoriteList_Folder);
+                if (result != null)
+                {
+                    result.ForEach(x => StrategyList.Add(x));
+                }
             }
         }
 
         private void OnShareDataChanged()
         {
-            if(ShareDataChanged!=null)
-            {
-                ShareDataChanged();
-            }
+            ShareDataChanged?.Invoke();
         }
 
         #region Update properties methods
@@ -295,7 +277,7 @@ namespace GamerSky.Core.ViewModel
             OnShareDataChanged();
         }
 
-        public void UpdateBigFont(int _fontSize)
+        public void UpdateFontSize(int _fontSize)
         {
             this.fontSize = _fontSize;
             var roamingSettings = ApplicationData.Current.RoamingSettings;
@@ -316,21 +298,22 @@ namespace GamerSky.Core.ViewModel
         /// <param name="subscribe"></param>
         public void UpdateSubscribe(Subscribe subscribe)
         {
-            bool add = !subscribeList.Any(x => x.SourceId == subscribe.SourceId);
+            bool add = !SubscribeList.Any(x => x.SourceId == subscribe.SourceId);
             
             if (add)
             {
                 subscribe.IsFavorite = true;
-                subscribeList.Add(subscribe);
+                SubscribeList.Add(subscribe);
             }
             else
             {
                 subscribe.IsFavorite = false;
-                subscribeList.RemoveAll(x => x.SourceId == subscribe.SourceId);
-                 
+                var result = from x in SubscribeList where x.SourceId.Equals(subscribe.SourceId) select x;
+                SubscribeList.Remove(result.First());
+                //SubscribeList.Remove(x => (x.SourceId == subscribe.SourceId)); 
             }
             var localSettings = ApplicationData.Current.LocalSettings;
-            localSettings.Values[SettingKey_SubscribeList] = JsonHelper.Serializer<List<Subscribe>>(subscribeList);
+            localSettings.Values[SettingKey_SubscribeList] = JsonHelper.Serializer(SubscribeList);
             OnShareDataChanged();
         }
         
@@ -340,19 +323,19 @@ namespace GamerSky.Core.ViewModel
         /// <param name="gameList"></param>
         public async void UpdateFavoriteEssayList(Essay essay)
         {
-            bool add = !favoriteList.Any(x => x.ContentId == essay.ContentId);
+            bool add = !FavoriteList.Any(x => x.ContentId == essay.ContentId);
             if(add)
             {
                 essay.IsFavorite = true;
-                favoriteList.Add(essay);
+                FavoriteList.Add(essay);
             }
             else
             {
                 essay.IsFavorite = false;
-                favoriteList.Remove(essay);
+                FavoriteList.Remove(essay);
             }
             //更新本地文件
-            await FileHelper.Current.WriteObjectAsync(favoriteList, EssayList_FileName, FavoriteList_Folder);
+            await FileHelper.Current.WriteObjectAsync(FavoriteList, EssayList_FileName, FavoriteList_Folder);
             OnShareDataChanged();
         }
 
@@ -362,17 +345,17 @@ namespace GamerSky.Core.ViewModel
         /// <param name="strategy"></param>
         public async void UpdateStrategyList(Strategy strategy)
         {
-            bool add = !strategyList.Any(x => x.SpecialID == strategy.SpecialID);
+            bool add = !StrategyList.Any(x => x.SpecialID == strategy.SpecialID);
             if (add)
             {
-                strategyList.Add(strategy);
+                StrategyList.Add(strategy);
             }
             else
             {
-                strategyList.Remove(strategy);
+                StrategyList.Remove(strategy);
             }
             //更新本地文件
-            await FileHelper.Current.WriteObjectAsync(strategyList, EssayList_FileName, FavoriteList_Folder);
+            await FileHelper.Current.WriteObjectAsync(StrategyList, EssayList_FileName, FavoriteList_Folder);
             OnShareDataChanged();
         }
         #endregion

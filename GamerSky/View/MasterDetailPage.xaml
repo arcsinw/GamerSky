@@ -267,12 +267,10 @@
         </Style>
 
         <converter:ElementThemeToUriSourceConverter x:Key="ElementThemeToUriSourceConverter"/>
+        <converter:ElementThemeToBoolConverter x:Key="ElementThemeToBoolConverter"/>
     </Page.Resources>
 
-
-    <Page.DataContext>
-        <vm:MainPageViewModel x:Name="ViewModel"/>
-    </Page.DataContext>
+ 
 
     <Grid x:Name="rootGrid" Background="{ThemeResource PageBackgroundBrush}">
         <VisualStateManager.VisualStateGroups>
@@ -314,16 +312,15 @@
             <ColumnDefinition x:Name="DetailColumn" />
         </Grid.ColumnDefinitions>
          
-        <control:Drawer x:Name="drawer" Grid.Column="1" Background="Black"
-                        DrawerMaskerBrush="Black" 
-                        DrawerOpenLength="250"
-                         >
+        <control:Drawer x:Name="drawer" Grid.Column="1"  DrawerOpenLength="250">
+            <control:Drawer.DrawerMaskerBrush>
+                <SolidColorBrush Color="Black" Opacity="0.8"/>
+            </control:Drawer.DrawerMaskerBrush>
             <control:Drawer.DrawerContent>
                 <ListView x:Name="drawerContent"  
-                          GotFocus="{x:Bind ViewModel.GetCacheSize}" 
+                          GotFocus="{x:Bind GetCacheSize}" 
                           SelectionMode="None" 
-                          Background="{ThemeResource PageBackgroundBrush}"
-                         >
+                          Background="{ThemeResource PageBackgroundBrush}">
                     <ListView.Resources>
                         <Thickness x:Key="TextBlockMargin">8,0</Thickness>
                     </ListView.Resources>
@@ -377,7 +374,7 @@
                             </StackPanel>
                         </ListViewItem>
 
-                        <ListViewItem Tapped="{x:Bind ViewModel.ClearCache}">
+                        <ListViewItem Tapped="{x:Bind ClearCache}">
                             <Grid HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -387,7 +384,7 @@
                                     <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_cache.png" Height="24"/>
                                     <TextBlock Text="清空缓存" x:Uid="ClearCache" Margin="{StaticResource TextBlockMargin}"/>
                                 </StackPanel>
-                                <TextBlock  Grid.Column="1" Text="{x:Bind ViewModel.CacheSize,Mode=OneWay,TargetNullValue=''}" 
+                                <TextBlock  Grid.Column="1" Text="{x:Bind CacheSize,Mode=OneWay,TargetNullValue=''}" 
                                             HorizontalAlignment="Right"/>
                             </Grid>
                         </ListViewItem>
@@ -418,7 +415,7 @@
                                     <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_picmode.png" Height="24"/>
                                     <TextBlock Text="2G/3G无图" VerticalAlignment="Center" x:Uid="NoPic" Margin="{StaticResource TextBlockMargin}"/>
                                 </StackPanel>
-                                <ToggleSwitch  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
+                                <ToggleSwitch IsOn="{x:Bind IsNoImgMode,Mode=OneWay}"  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
                             </Grid>
                         </ListViewItem>
 
@@ -474,7 +471,7 @@
             </ListView>
             <StackPanel VerticalAlignment="Bottom">
                 <Button x:Name="themeBtn" Click="themeBtn_Click"  Style="{StaticResource PaneButtonStyle}">
-                    <BitmapIcon Height="26" Width="26"  UriSource="{Binding AppTheme,Converter={StaticResource ElementThemeToUriSourceConverter}}"/>
+                    <BitmapIcon Height="26" Width="26"  UriSource="{x:Bind AppTheme,Mode=OneWay,Converter={StaticResource ElementThemeToUriSourceConverter}}"/>
                 </Button>
                 <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings" VerticalAlignment="Bottom">
                     <i:Interaction.Behaviors>

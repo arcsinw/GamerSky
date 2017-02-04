@@ -13,6 +13,8 @@
                 <ResourceDictionary x:Key="Light">
                     <!--主题色-->
                     <Color x:Key="ThemeColor">#D22222</Color>
+                    <!--页面背景色-->
+                    <Color x:Key="PageBackgroundColor">WhiteSmoke</Color>
                     <!--主题色Brush-->
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="#D22222"/>
                     <!--HomePage 底栏背景色-->
@@ -38,6 +40,8 @@
                 <ResourceDictionary x:Key="Dark">
 
                     <Color x:Key="ThemeColor">#FF333337</Color>
+                    <!--页面背景色-->
+                    <Color x:Key="PageBackgroundColor">FF1A1A1B</Color>
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="#FF333337"/>
                     <!--HomePage 底栏背景色-->
                     <SolidColorBrush x:Key="BottomBarBackground" Color="#FF1B1B1C" />
@@ -313,6 +317,8 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <x:String x:Key="DefaultAvatar">ms-appx:///Assets/Images/members.png</x:String>
 
             <Thickness x:Key="ListViewBorderThickness">1,0,1,1</Thickness>
 

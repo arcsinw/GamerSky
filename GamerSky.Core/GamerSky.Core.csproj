@@ -230,6 +230,7 @@
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\MySubscribePageViewModel.cs" />
+    <Compile Include="ViewModel\ReadEssayViewModel.cs" />
     <Compile Include="ViewModel\RegisterPageViewModel.cs" />
     <Compile Include="ViewModel\ReplyViewModel.cs" />
     <Compile Include="ViewModel\SearchPageViewModel.cs" />

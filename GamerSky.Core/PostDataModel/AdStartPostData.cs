@@ -11,6 +11,6 @@ namespace GamerSky.Core.PostDataModel
     /// </summary>
     public class AdStartPostData : PostDataBase
     {
-        public string request;
+        public string request = "";
     }
 }

@@ -33,9 +33,9 @@ namespace GamerSky.View
             FavoriteEssays = new ObservableCollection<Essay>();
 
             AppTheme = DataShareManager.Current.AppTheme;
+            FavoriteEssays = DataShareManager.Current.FavoriteList;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
-            this.Loaded += FavoritePage_Loaded;
+            
         }
 
 
@@ -52,26 +52,9 @@ namespace GamerSky.View
         private DelegateCommand<Essay> _deleteItem = default(DelegateCommand<Essay>);
 
         public DelegateCommand<Essay> DeleteItem => _deleteItem ?? (_deleteItem = new DelegateCommand<Essay>(ExecuteDeleteItemCommand, CanExecuteDeleteItemCommand));
-
-
-
-        private void FavoritePage_Loaded(object sender, RoutedEventArgs e)
-        {
-            LoadData();
-            this.Loaded -= FavoritePage_Loaded;
-        }
-
+         
         public ObservableCollection<Essay> FavoriteEssays { get; set; }
-
-        public void LoadData()
-        {
-            var essays = DataShareManager.Current.FavoriteList;
-            if (essays == null) return;
-            foreach (var item in essays)
-            {
-                FavoriteEssays.Add(item);
-            }
-        }
+         
 
         #region 九幽的数据统计
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -96,6 +79,7 @@ namespace GamerSky.View
         private void Current_ShareDataChanged()
         {
             AppTheme = DataShareManager.Current.AppTheme;
+            FavoriteEssays = DataShareManager.Current.FavoriteList;
         }
 
         private ElementTheme appTheme;
@@ -147,7 +131,6 @@ namespace GamerSky.View
         {
             IsActive = true;
             FavoriteEssays.Clear();
-            LoadData();
             IsActive = false;
         }
 
@@ -183,7 +166,7 @@ namespace GamerSky.View
             if (essayResult == null) return;
             if (!essayResult.ContentType.Equals("zhuanti"))
             {
-               NavigationHelper.DetailFrameNavigate(typeof(EssayDetailPage), essayResult);
+               NavigationHelper.DetailFrameNavigate(typeof(ReadEssayPage), essayResult);
             }
             else
             {

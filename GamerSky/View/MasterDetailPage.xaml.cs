@@ -2,6 +2,7 @@
 using GamerSky.Core.Model;
 using GamerSky.Core.ViewModel;
 using GamerSky.Helper;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -43,7 +44,16 @@ namespace GamerSky.View
                 OnPropertyChanged();
             }
         }
-       
+
+        private bool _isNoImg;
+
+        public bool IsNoImgMode
+        {
+            get { return _isNoImg; }
+            set { _isNoImg = value; }
+        }
+
+
         private User user;
         public User User
         {
@@ -119,10 +129,10 @@ namespace GamerSky.View
 
         private void DetailFrame_Navigated(object sender, NavigationEventArgs e)
         {
-            while(DetailFrame.BackStackDepth > 1)
-            {
-                DetailFrame.BackStack.RemoveAt(1);
-            }
+            //while(DetailFrame.BackStackDepth > 1)
+            //{
+            //    DetailFrame.BackStack.RemoveAt(1);
+            //}
             UpdateUI();
         }
 
@@ -206,9 +216,60 @@ namespace GamerSky.View
             drawer.DrawerOpened = false;
             NavigationHelper.MasterFrameNavigate(typeof(LoginPage));
         }
+
+        /// <summary>
+        /// 清空缓存
+        /// </summary>
+        public async void ClearCache()
+        {
+            CacheSize = "删除缓存中...";
+            await FileHelper.Current.DeleteCacheFile();
+            double cache = await FileHelper.Current.GetCacheSize();
+            CacheSize = GetFormatSize(cache);
+        }
+
+        private string cacheSize;
+        public string CacheSize
+        {
+            get
+            {
+                return cacheSize;
+            }
+            set
+            {
+                cacheSize = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public async void GetCacheSize()
+        {
+            double size = await FileHelper.Current.GetCacheSize();
+            CacheSize = GetFormatSize(size);
+        }
+
+        private string GetFormatSize(double size)
+        {
+            if (size < 1024)
+            {
+                return size + "byte";
+            }
+            else if (size < 1024 * 1024)
+            {
+                return Math.Round(size / 1024, 2) + "KB";
+            }
+            else if (size < 1024 * 1024 * 1024)
+            {
+                return Math.Round(size / 1024 / 1024, 2) + "MB";
+            }
+            else
+            {
+                return Math.Round(size / 1024 / 1024 / 2014, 2) + "GB";
+            }
+        }
         #endregion
 
-         
+
         private void MasterDetailPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
             e.Handled = true;
@@ -250,6 +311,7 @@ namespace GamerSky.View
 
             AppTheme = DataShareManager.Current.AppTheme;
             User = DataShareManager.Current.CurrentUser;
+            IsNoImgMode = DataShareManager.Current.IsNoImage;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
 
             SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
@@ -261,6 +323,7 @@ namespace GamerSky.View
         {
             AppTheme = DataShareManager.Current.AppTheme;
             User = DataShareManager.Current.CurrentUser;
+            IsNoImgMode = DataShareManager.Current.IsNoImage;
         }
 
 

@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Data;
 using GamerSky.Core.Http;
 using GamerSky.Core.Model;
 using GamerSky.Core.ViewModel;
+using System.Collections.ObjectModel;
 
 namespace GamerSky.Core.IncrementalLoadingCollection
 {
@@ -40,7 +41,7 @@ namespace GamerSky.Core.IncrementalLoadingCollection
             }
             else
             {
-                List<Subscribe> subscribeList = DataShareManager.Current.SubscribeList;
+                ObservableCollection<Subscribe> subscribeList = DataShareManager.Current.SubscribeList;
                 if (subscribeList == null || subscribeList.Count == 0)
                 {
                     //完成加载

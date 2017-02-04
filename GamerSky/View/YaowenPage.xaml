@@ -61,14 +61,11 @@
                                            RefreshRequested="listView_RefreshRequested"
                                            SelectionMode="None"
                                            IsItemClickEnabled="True"
-                                           ItemClick="PullToRefreshListView_ItemClick"
+                                           ItemClick="PullToRefreshListView_ItemClick"  
                                            >
                 <control:PullToRefreshListView.RefreshIndicatorContent>
-                    <TextBlock Text="Refresh" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Pull down to Refresh" HorizontalAlignment="Center"/>
                 </control:PullToRefreshListView.RefreshIndicatorContent>
-                <control:PullToRefreshListView.ReleaseToRefreshContent>
-                    <TextBlock x:Uid="ReleaseToRefresh" HorizontalAlignment="Center"/>
-                </control:PullToRefreshListView.ReleaseToRefreshContent>
             </control:PullToRefreshListView>
             <!--</pr:PullToRefreshBox>-->
  

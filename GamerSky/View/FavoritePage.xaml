@@ -43,12 +43,18 @@
             <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                 <ListView  SelectionMode="None" 
                                Style="{ThemeResource LightListView}"
-                               ItemsSource="{x:Bind FavoriteEssays}"
+                               ItemsSource="{x:Bind FavoriteEssays,Mode=OneWay}"
                                x:Name="listView" IsItemClickEnabled="True" 
-                              ItemClick="listView_ItemClick"
-                           ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                          ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"
+                               ItemClick="listView_ItemClick"
+                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                               ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"
                               >
+                    <ListView.Transitions>
+                        <TransitionCollection>
+                            <AddDeleteThemeTransition/>
+                        </TransitionCollection>
+                        
+                    </ListView.Transitions>
                     <!--<ListView.ItemTemplate>
                         <DataTemplate x:DataType="m:Essay">
                             <controls:SlidableListItem MouseSlidingEnabled="True" 

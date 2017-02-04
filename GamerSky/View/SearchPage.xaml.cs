@@ -170,7 +170,7 @@ namespace GamerSky.View
             Essay essayResult = e.ClickedItem as Essay;
             if (essayResult == null) return;
             var height = DeviceInformationHelper.GetScreenWidth();
-            NavigationHelper.DetailFrameNavigate(typeof(EssayDetailPage), essayResult);
+            NavigationHelper.DetailFrameNavigate(typeof(ReadEssayPage), essayResult);
         }
         
         /// <summary>

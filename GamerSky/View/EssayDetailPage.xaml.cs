@@ -170,7 +170,7 @@ namespace GamerSky.View
         #region User input handler
         private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
-            Refresh();
+            
         }
 
 
@@ -327,20 +327,7 @@ namespace GamerSky.View
 
         }
 
-        public async void Refresh()
-        {
-            ViewModel.HtmlString = "TEST" + new Random().Next().ToString(); 
-            //switch (pivot.SelectedIndex)
-            //{
-            //    case 0:
-            //        await ViewModel.GenerateHtmlString();
-            //        //await GenerateEssayHtml();
-            //        break;
-            //    case 1:
-            //        ViewModel.RefreshComments(); 
-            //        break;
-            //}
-        }
+         
          
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -352,7 +339,6 @@ namespace GamerSky.View
                 IsCommentLoaded = false;
 
                 ViewModel.Essay = EssayResult;
-                Refresh(); 
                 //DataContext = ViewModel = new EssayDetailViewModel(EssayResult);  
                 if (EssayResult.ContentId.Equals("0"))
                 {

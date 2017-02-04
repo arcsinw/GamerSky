@@ -129,7 +129,7 @@ namespace GamerSky.Core.ViewModel
         /// </summary>
         public void LoadMySubscribes()
         {
-            List<Subscribe> allSubscribes = DataShareManager.Current.SubscribeList;
+            ObservableCollection<Subscribe> allSubscribes = DataShareManager.Current.SubscribeList;
             if (allSubscribes != null)
             {
                 foreach (var item in allSubscribes)

@@ -34,8 +34,8 @@ namespace GamerSky.View
             if (essayResult == null) return;
             if (!essayResult.ContentType.Equals("zhuanti"))
             {
-                MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetailPage), essayResult);
-                //MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essayResult);
+                //MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetailPage), essayResult);
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essayResult);
             }
             else
             {
@@ -48,7 +48,7 @@ namespace GamerSky.View
             var essayResult = (sender as FlipView)?.SelectedItem as Essay;
             if (essayResult == null) return;
 
-            MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetailPage), essayResult);
+            MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essayResult);
         }
 
         public void ScrollToTop()

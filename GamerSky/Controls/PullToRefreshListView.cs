@@ -1,13 +1,22 @@
-﻿using GamerSky.Extensions;
+﻿// ******************************************************************
+// Copyright (c) Microsoft. All rights reserved.
+// This code is licensed under the MIT License (MIT).
+// THE CODE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+// THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
+// ******************************************************************
+
+using GamerSky.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
@@ -51,6 +60,18 @@ namespace GamerSky.Controls
             DependencyProperty.Register(nameof(RefreshIndicatorContent), typeof(object), typeof(PullToRefreshListView), new PropertyMetadata(null));
 
         /// <summary>
+        /// Identifies the <see cref="PullToRefreshLabel"/> property.
+        /// </summary>
+        public static readonly DependencyProperty PullToRefreshLabelProperty =
+            DependencyProperty.Register(nameof(PullToRefreshLabel), typeof(object), typeof(PullToRefreshListView), new PropertyMetadata("Pull To Refresh", OnPullToRefreshLabelChanged));
+
+        /// <summary>
+        /// Identifies the <see cref="ReleaseToRefreshLabel"/> property.
+        /// </summary>
+        public static readonly DependencyProperty ReleaseToRefreshLabelProperty =
+            DependencyProperty.Register(nameof(ReleaseToRefreshLabel), typeof(object), typeof(PullToRefreshListView), new PropertyMetadata("Release to Refresh", OnReleaseToRefreshLabelChanged));
+
+        /// <summary>
         /// Identifies the <see cref="PullToRefreshContent"/> property.
         /// </summary>
         public static readonly DependencyProperty PullToRefreshContentProperty =
@@ -66,7 +87,7 @@ namespace GamerSky.Controls
         /// IsPullToRefreshWithMouseEnabled Dependency Property
         /// </summary>
         public static readonly DependencyProperty IsPullToRefreshWithMouseEnabledProperty =
-            DependencyProperty.Register(nameof(IsPullToRefreshWithMouseEnabled), typeof(bool), typeof(PullToRefreshListView), new PropertyMetadata(true));
+            DependencyProperty.Register(nameof(IsPullToRefreshWithMouseEnabled), typeof(bool), typeof(PullToRefreshListView), new PropertyMetadata(false));
 
         private const string PartRoot = "Root";
         private const string PartScroller = "ScrollViewer";
@@ -82,10 +103,11 @@ namespace GamerSky.Controls
         private CompositeTransform _refreshIndicatorTransform;
         private ScrollViewer _scroller;
         private CompositeTransform _contentTransform;
+        private CompositeTransform _headerTransform;
         private ItemsPresenter _scrollerContent;
-        [Obsolete]
         private TextBlock _defaultIndicatorContent;
         private ContentPresenter _pullAndReleaseIndicatorContent;
+        private ScrollBar _scrollerVerticalScrollBar;
         private double _lastOffset = 0.0;
         private double _pullDistance = 0.0;
         private DateTime _lastRefreshActivation = default(DateTime);
@@ -133,6 +155,7 @@ namespace GamerSky.Controls
         {
             if (_scroller != null)
             {
+                _scroller.Loaded -= Scroller_Loaded;
                 _scroller.DirectManipulationCompleted -= Scroller_DirectManipulationCompleted;
                 _scroller.DirectManipulationStarted -= Scroller_DirectManipulationStarted;
             }
@@ -142,7 +165,12 @@ namespace GamerSky.Controls
                 _refreshIndicatorBorder.SizeChanged -= RefreshIndicatorBorder_SizeChanged;
             }
 
-#pragma warning disable CS0612 // Type or member is obsolete
+            if (_root != null)
+            {
+                _root.ManipulationStarted -= Scroller_ManipulationStarted;
+                _root.ManipulationCompleted -= Scroller_ManipulationCompleted;
+            }
+
             _root = GetTemplateChild(PartRoot) as Border;
             _scroller = GetTemplateChild(PartScroller) as ScrollViewer;
             _scrollerContent = GetTemplateChild(PartScrollerContent) as ItemsPresenter;
@@ -158,11 +186,14 @@ namespace GamerSky.Controls
                 _refreshIndicatorTransform != null &&
                 (_defaultIndicatorContent != null || _pullAndReleaseIndicatorContent != null))
             {
-                // TODO: if _defaultIndicatorContent is removed check for _pullAndReleaseIndicatorContent only)
-                _root.ManipulationMode = ManipulationModes.TranslateY;
-                _root.ManipulationDelta += Scroller_ManipulationDelta;
-                _root.ManipulationStarted += Scroller_ManipulationStarted;
-                _root.ManipulationCompleted += Scroller_ManipulationCompleted;
+                _scroller.Loaded += Scroller_Loaded;
+
+                if (IsPullToRefreshWithMouseEnabled)
+                {
+                    _root.ManipulationMode = ManipulationModes.TranslateY;
+                    _root.ManipulationStarted += Scroller_ManipulationStarted;
+                    _root.ManipulationCompleted += Scroller_ManipulationCompleted;
+                }
 
                 _scroller.DirectManipulationCompleted += Scroller_DirectManipulationCompleted;
                 _scroller.DirectManipulationStarted += Scroller_DirectManipulationStarted;
@@ -181,12 +212,29 @@ namespace GamerSky.Controls
 
                 _overscrollMultiplier = OverscrollLimit * 8;
             }
-#pragma warning restore CS0612 // Type or member is obsolete
+
             base.OnApplyTemplate();
+        }
+
+        private void Scroller_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            // Other input are already managed by the scroll viewer
+            if (e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse
+                && IsPullToRefreshWithMouseEnabled
+                && _scroller.VerticalOffset < 1)
+            {
+                _root.ManipulationDelta += Scroller_ManipulationDelta;
+                DisplayPullToRefreshContent();
+                CompositionTarget.Rendering -= CompositionTarget_Rendering;
+                CompositionTarget.Rendering += CompositionTarget_Rendering;
+                _isManipulatingWithMouse = true;
+            }
         }
 
         private void Scroller_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {
+            _root.ManipulationDelta -= Scroller_ManipulationDelta;
+
             if (!IsPullToRefreshWithMouseEnabled)
             {
                 return;
@@ -195,22 +243,9 @@ namespace GamerSky.Controls
             OnManipulationCompleted();
         }
 
-        private void Scroller_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            // Other input are already managed by the scroll viewer
-            if (e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Mouse
-                && IsPullToRefreshWithMouseEnabled)
-            {
-                DisplayPullToRefreshContent();
-                CompositionTarget.Rendering -= CompositionTarget_Rendering;
-                CompositionTarget.Rendering += CompositionTarget_Rendering;
-                _isManipulatingWithMouse = true;
-            }
-        }
-
         private void Scroller_ManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
         {
-            if (!IsPullToRefreshWithMouseEnabled)
+            if (!IsPullToRefreshWithMouseEnabled || _contentTransform == null)
             {
                 return;
             }
@@ -242,6 +277,11 @@ namespace GamerSky.Controls
 
             var maxTranslation = 150;
             _contentTransform.TranslateY = easing * maxTranslation;
+
+            if (_headerTransform != null)
+            {
+                _headerTransform.TranslateY = _contentTransform.TranslateY;
+            }
         }
 
         private void RefreshIndicatorBorder_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -254,9 +294,8 @@ namespace GamerSky.Controls
             // sometimes the value gets stuck at 0.something, so checking if less than 1
             if (_scroller.VerticalOffset < 1)
             {
-                DisplayPullToRefreshContent();
-
                 OnManipulationCompleted();
+                DisplayPullToRefreshContent();
                 CompositionTarget.Rendering += CompositionTarget_Rendering;
             }
         }
@@ -267,7 +306,12 @@ namespace GamerSky.Controls
         private void DisplayPullToRefreshContent()
         {
             if (RefreshIndicatorContent == null)
-            { 
+            {
+                if (_defaultIndicatorContent != null)
+                {
+                    _defaultIndicatorContent.Text = PullToRefreshLabel;
+                }
+
                 if (_pullAndReleaseIndicatorContent != null)
                 {
                     _pullAndReleaseIndicatorContent.Content = PullToRefreshContent;
@@ -290,6 +334,11 @@ namespace GamerSky.Controls
             if (_contentTransform != null)
             {
                 _contentTransform.TranslateY = 0;
+
+                if (_headerTransform != null)
+                {
+                    _headerTransform.TranslateY = 0;
+                }
             }
 
             if (_refreshActivated)
@@ -305,8 +354,10 @@ namespace GamerSky.Controls
             _pullDistance = 0;
             _refreshActivated = false;
             _lastRefreshActivation = default(DateTime);
+            _isManipulatingWithMouse = false;
 
             PullProgressChanged?.Invoke(this, new RefreshProgressEventArgs { PullProgress = 0 });
+            _pullAndReleaseIndicatorContent.Content = null;
         }
 
         private void CompositionTarget_Rendering(object sender, object e)
@@ -319,6 +370,11 @@ namespace GamerSky.Controls
                 if (_contentTransform != null)
                 {
                     _contentTransform.TranslateY = 0;
+
+                    if (_headerTransform != null)
+                    {
+                        _headerTransform.TranslateY = 0;
+                    }
                 }
 
                 _refreshActivated = false;
@@ -332,7 +388,17 @@ namespace GamerSky.Controls
 
             if (_contentTransform == null)
             {
-                var itemScrollPanel = _scrollerContent.FindDescendant<Panel>();
+                if (_headerTransform == null && Header != null)
+                {
+                    var headerContent = _scrollerContent.FindDescendant<ContentControl>();
+                    if (headerContent != null)
+                    {
+                        _headerTransform = new CompositeTransform();
+                        headerContent.RenderTransform = _headerTransform;
+                    }
+                }
+
+                var itemScrollPanel = _scrollerContent.FindDescendant<ItemsStackPanel>();
                 if (itemScrollPanel == null)
                 {
                     return;
@@ -367,6 +433,11 @@ namespace GamerSky.Controls
                 if (!_isManipulatingWithMouse)
                 {
                     _contentTransform.TranslateY = _pullDistance - offset;
+
+                    if (_headerTransform != null)
+                    {
+                        _headerTransform.TranslateY = _contentTransform.TranslateY;
+                    }
                 }
 
                 _refreshIndicatorTransform.TranslateY = _pullDistance - offset
@@ -377,6 +448,11 @@ namespace GamerSky.Controls
                 if (!_isManipulatingWithMouse)
                 {
                     _contentTransform.TranslateY = 0;
+
+                    if (_headerTransform != null)
+                    {
+                        _headerTransform.TranslateY = _contentTransform.TranslateY;
+                    }
                 }
 
                 _refreshIndicatorTransform.TranslateY = -_refreshIndicatorBorder.ActualHeight;
@@ -389,7 +465,12 @@ namespace GamerSky.Controls
                 _refreshActivated = true;
                 pullProgress = 1.0;
                 if (RefreshIndicatorContent == null)
-                { 
+                {
+                    if (_defaultIndicatorContent != null)
+                    {
+                        _defaultIndicatorContent.Text = ReleaseToRefreshLabel;
+                    }
+
                     if (_pullAndReleaseIndicatorContent != null)
                     {
                         _pullAndReleaseIndicatorContent.Content = ReleaseToRefreshContent;
@@ -407,7 +488,12 @@ namespace GamerSky.Controls
                     _lastRefreshActivation = default(DateTime);
                     pullProgress = _pullDistance / PullThreshold;
                     if (RefreshIndicatorContent == null)
-                    {  
+                    {
+                        if (_defaultIndicatorContent != null)
+                        {
+                            _defaultIndicatorContent.Text = PullToRefreshLabel;
+                        }
+
                         if (_pullAndReleaseIndicatorContent != null)
                         {
                             _pullAndReleaseIndicatorContent.Content = PullToRefreshContent;
@@ -425,6 +511,26 @@ namespace GamerSky.Controls
             }
 
             PullProgressChanged?.Invoke(this, new RefreshProgressEventArgs { PullProgress = pullProgress });
+        }
+
+        private void Scroller_Loaded(object sender, RoutedEventArgs e)
+        {
+            _scrollerVerticalScrollBar = _scroller.FindDescendantByName("VerticalScrollBar") as ScrollBar;
+            _scrollerVerticalScrollBar.PointerEntered += ScrollerVerticalScrollBar_PointerEntered;
+            _scrollerVerticalScrollBar.PointerExited += ScrollerVerticalScrollBar_PointerExited;
+        }
+
+        private void ScrollerVerticalScrollBar_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            if (IsPullToRefreshWithMouseEnabled)
+            {
+                _root.ManipulationMode = ManipulationModes.TranslateY;
+            }
+        }
+
+        private void ScrollerVerticalScrollBar_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            _root.ManipulationMode = ManipulationModes.System;
         }
 
         /// <summary>
@@ -458,7 +564,7 @@ namespace GamerSky.Controls
 
         private static void OnReleaseToRefreshLabelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            d.SetValue(ReleaseToRefreshContentProperty, e.NewValue);
+            d.SetValue(ReleaseToRefreshLabelProperty, e.NewValue);
         }
 
         /// <summary>
@@ -491,7 +597,6 @@ namespace GamerSky.Controls
 
             set
             {
-#pragma warning disable CS0612 // Type or member is obsolete
                 if (_defaultIndicatorContent != null && _pullAndReleaseIndicatorContent != null)
                 {
                     _defaultIndicatorContent.Visibility = Visibility.Collapsed;
@@ -500,7 +605,6 @@ namespace GamerSky.Controls
                 {
                     _defaultIndicatorContent.Visibility = value == null ? Visibility.Visible : Visibility.Collapsed;
                 }
-#pragma warning restore CS0612 // Type or member is obsolete
 
                 if (_pullAndReleaseIndicatorContent != null)
                 {
@@ -511,7 +615,25 @@ namespace GamerSky.Controls
             }
         }
 
-   
+        /// <summary>
+        /// Gets or sets the label that will be shown when the user pulls down to refresh.
+        /// Note: This label will only show up if <see cref="RefreshIndicatorContent" /> is null
+        /// </summary>
+        public string PullToRefreshLabel
+        {
+            get { return (string)GetValue(PullToRefreshLabelProperty); }
+            set { SetValue(PullToRefreshLabelProperty, value); }
+        }
+
+        /// <summary>
+        /// Gets or sets the label that will be shown when the user needs to release to refresh.
+        /// Note: This label will only show up if <see cref="RefreshIndicatorContent" /> is null
+        /// </summary>
+        public string ReleaseToRefreshLabel
+        {
+            get { return (string)GetValue(ReleaseToRefreshLabelProperty); }
+            set { SetValue(ReleaseToRefreshLabelProperty, value); }
+        }
 
         /// <summary>
         /// Gets or sets the content that will be shown when the user pulls down to refresh.
@@ -521,7 +643,7 @@ namespace GamerSky.Controls
         /// </remarks>
         public object PullToRefreshContent
         {
-            get { return (string)GetValue(PullToRefreshContentProperty); }
+            get { return (object)GetValue(PullToRefreshContentProperty); }
             set { SetValue(PullToRefreshContentProperty, value); }
         }
 
@@ -533,7 +655,7 @@ namespace GamerSky.Controls
         /// </remarks>
         public object ReleaseToRefreshContent
         {
-            get { return (string)GetValue(ReleaseToRefreshContentProperty); }
+            get { return (object)GetValue(ReleaseToRefreshContentProperty); }
             set { SetValue(ReleaseToRefreshContentProperty, value); }
         }
 
@@ -542,8 +664,31 @@ namespace GamerSky.Controls
         /// </summary>
         public bool IsPullToRefreshWithMouseEnabled
         {
-            get { return (bool)GetValue(IsPullToRefreshWithMouseEnabledProperty); }
-            set { SetValue(IsPullToRefreshWithMouseEnabledProperty, value); }
+            get
+            {
+                return (bool)GetValue(IsPullToRefreshWithMouseEnabledProperty);
+            }
+
+            set
+            {
+                if (_root != null)
+                {
+                    if (value)
+                    {
+                        _root.ManipulationMode = ManipulationModes.TranslateY;
+                        _root.ManipulationStarted += Scroller_ManipulationStarted;
+                        _root.ManipulationCompleted += Scroller_ManipulationCompleted;
+                    }
+                    else
+                    {
+                        _root.ManipulationMode = ManipulationModes.System;
+                        _root.ManipulationStarted -= Scroller_ManipulationStarted;
+                        _root.ManipulationCompleted -= Scroller_ManipulationCompleted;
+                    }
+                }
+
+                SetValue(IsPullToRefreshWithMouseEnabledProperty, value);
+            }
         }
     }
 }

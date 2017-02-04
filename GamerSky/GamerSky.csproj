@@ -103,6 +103,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Compile Include="Converters\BoolToElementThemeConverter.cs" />
+    <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Extensions\ExtensionHelper.cs" />
     <Compile Include="Helper\HtmlStreamUriResolver.cs" />
     <Compile Include="Cache\CacheBase.cs" />
@@ -271,6 +273,14 @@
     <Content Include="Assets\Images\drawer_night.png" />
     <Content Include="Assets\Images\drawer_search.png" />
     <Content Include="Assets\Images\empty.png" />
+    <Content Include="Assets\Images\empty_collect.png" />
+    <Content Include="Assets\Images\empty_collect_night.png" />
+    <Content Include="Assets\Images\empty_comment.png" />
+    <Content Include="Assets\Images\empty_comment_night.png" />
+    <Content Include="Assets\Images\empty_content.png" />
+    <Content Include="Assets\Images\empty_content_night.png" />
+    <Content Include="Assets\Images\empty_subscription.png" />
+    <Content Include="Assets\Images\empty_subscription_night.png" />
     <Content Include="Assets\Images\icon_dingyue_h.png" />
     <Content Include="Assets\Images\icon_gonglue_h.png" />
     <Content Include="Assets\Images\icon_xinwen_h.png" />
@@ -287,6 +297,7 @@
     <Content Include="Assets\Images\members.png" />
     <Content Include="Assets\Images\member_guest.png" />
     <Content Include="Assets\Images\picture_origin.png" />
+    <Content Include="Assets\Images\Share.png" />
     <Content Include="Assets\Images\slide_image_loading_day.png" />
     <Content Include="Assets\Images\slide_image_loading_night.png" />
     <Content Include="Assets\Images\UnFavorited.png" />
@@ -335,11 +346,6 @@
     <Content Include="Data\Agreement.txt" />
     <Content Include="Data\VersionHistory.txt" />
     <None Include="Package.StoreAssociation.xml" />
-    <Content Include="Html\Content.html" />
-    <Content Include="Html\gs.css" />
-    <Content Include="Html\gs.js" />
-    <Content Include="Html\gsAppHTMLTemplate.css" />
-    <Content Include="Html\gsAppHTMLTemplate.js" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

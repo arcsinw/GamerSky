@@ -17,9 +17,7 @@ function setBody(body)
 {
     document.getElementById("gsTemplateContent_MainBody").innerHTML = body;
 }
-
-
-  
+ 
 function SetElementClass(element, classNameNeedRemoved, classNameNeedAdded) {
     if (element == null) {
         return;
@@ -74,6 +72,13 @@ function SendNotify(notifyString) {
 } 
  
 
+//通过Id打开新闻
+function OpenEssayById(id)
+{
+    console.log("DFD");
+    SendNotify(id); 
+}
+
 //获取所有的图片
 function GetAllPictures() {
     var imgs = document.getElementsByTagName('img');
@@ -83,14 +88,51 @@ function GetAllPictures() {
         var img = new Object();
         img.src = imgs[i].src;
         img.hdsrc = imgs[i].parentNode.href;
-        img.index = i + 1;
-        imgArray.push(img);
-         
-        
+        img.index = i;
+        imgArray.push(img); 
     }
-    SendNotify(JSON.stringify(imgArray));
+    return JSON.stringify(imgArray);
+    //SendNotify(JSON.stringify(imgArray));
 }
 
+//无图模式
+function NoImageMode() {
+    var imgs = document.getElementsByTagName("img");
+    for (var index = 0; i < imgs.length; i++) {
+        imgs[index].setAttribute("src", "");
+    }
+    $("img").attr("src", "");
+}
+ 
+
+function ChangeFontSize(para) {
+    switch (para) {
+        case "min":
+            {
+                gsSetElementClass(htmlTag, "PageFontSize_Middle", "");
+                gsSetElementClass(htmlTag, "PageFontSize_Max", "PageFontSize_Min");
+            }
+            break;
+        case "middle":
+            {
+                gsSetElementClass(htmlTag, "PageFontSize_Min", "");
+                gsSetElementClass(htmlTag, "PageFontSize_Max", "PageFontSize_Middle");
+            }
+            break;
+        case "max":
+            {
+                gsSetElementClass(htmlTag, "PageFontSize_Min", "");
+                gsSetElementClass(htmlTag, "PageFontSize_Middle", "PageFontSize_Max");
+            }
+            break;
+    }
+}
+
+function SetFontSize(fontSize)
+{
+    var a = document.getElementsByClassName("content")[0];
+    a.style.fontSize = fontSize + 'pt';
+}
 
 function translatePage()
 {
@@ -133,8 +175,7 @@ function gestureInit() {
 }
 
 function onLoad() {
-    gestureInit();
-
+    gestureInit(); 
 }
 
 function gesturePrepareTarget(targetId, eventListener) {

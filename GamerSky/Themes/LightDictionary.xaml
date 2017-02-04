@@ -8,7 +8,8 @@
             <BitmapImage x:Key="GamePlaceHolderImage" UriSource="ms-appx:///Assets/Images/image_loading_game_lib_day.png"/>
             <BitmapImage x:Key="SlidePlaceHolderImage" UriSource="ms-appx:///Assets/Images/slide_image_loading_day.png"/>
             <BitmapIcon x:Key="DayNightImage" UriSource="ms-appx:///Assets/Images/drawer_day.png" Height="24" Width="24"/>
- 
+            <BitmapImage x:Key="EmptySubscribePlaceHolderImage" UriSource="ms-appx:///Assets/Images/empty_collect.png" DecodePixelHeight="80" DecodePixelWidth="80"/>
+            <BitmapImage x:Key="DefaultUserAvatarImage" UriSource="ms-appx:///Assets/Images/member_guest.png"/>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

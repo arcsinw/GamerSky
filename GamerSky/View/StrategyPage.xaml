@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pr="using:PullToRefresh.UWP"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:vm="using:GamerSky.Core.ViewModel"
     xmlns:converter="using:GamerSky.Converters"
     xmlns:controls="using:GamerSky.Controls"
@@ -91,8 +92,8 @@
                           ShowsScrollingPlaceholders="True"
                           IsItemClickEnabled="True"
                           ItemClick="GridView_ItemClick"
-                          MinItemHeight="160"
-                          MinItemWidth="240" Style="{StaticResource LightAdaptiveGridViewStyle}"
+                          MinItemHeight="140"
+                          MinItemWidth="210" Style="{StaticResource LightAdaptiveGridViewStyle}"
                         >
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup>
@@ -291,7 +292,7 @@
                 </SemanticZoom>
             </PivotItem>
 
-            <!--<PivotItem Header="游戏库"  Margin="0" Padding="0">
+            <PivotItem Header="游戏库"  Margin="0" Padding="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
 
                     <controls:AdaptiveGridView x:Name="gameLibGridView"
@@ -338,7 +339,7 @@
                         </controls:AdaptiveGridView.ItemContainerStyle>
                     </controls:AdaptiveGridView>
                 </pr:PullToRefreshBox>
-            </PivotItem>-->
+            </PivotItem>
         </Pivot>
 
         <Button Style="{ThemeResource BackButtonStyle}"

@@ -17,6 +17,6 @@ namespace GamerSky.Core.Model
         /// </summary>
         public string hdsrc { get; set; }
 
-        public string index { get; set; }
+        public int index { get; set; }
     }
 }

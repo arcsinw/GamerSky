@@ -7,6 +7,7 @@
     xmlns:hp="using:GamerSky.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:GamerSky.Core.ViewModel"
+    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     RequestedTheme="{Binding AppTheme}"
     mc:Ignorable="d">
@@ -27,7 +28,9 @@
                     <Image.Source>
                         <BitmapImage UriSource="{Binding ThumbnailURLs[0]}"/>
                     </Image.Source>
-                </Image> 
+                </Image>
+
+                <TextBlock Grid.Column="1" Text="{Binding Title}"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -123,21 +126,21 @@
                x:Name="pivot">
             <PivotItem Header="策略" Margin="0">
                 <!--<pr:PullToRefreshBox>-->
-                    <ListView ItemsSource="{Binding GameDetailNews}"
+                    <toolkit:PullToRefreshListView ItemsSource="{Binding GameDetailNews}"
                               ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"> 
-                    </ListView>
+                    </toolkit:PullToRefreshListView>
                 <!--</pr:PullToRefreshBox>-->
             </PivotItem>
             <PivotItem Header="新闻" Margin="0">
                 <!--<pr:PullToRefreshBox>-->
-                    <ListView ItemsSource="{Binding GameDetailStrategys}"
+                    <toolkit:PullToRefreshListView ItemsSource="{Binding GameDetailStrategys}"
                              ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
                               > 
-                    </ListView>
+                    </toolkit:PullToRefreshListView>
                 <!--</pr:PullToRefreshBox>-->
             </PivotItem>
         </Pivot>

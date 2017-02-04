@@ -24,7 +24,7 @@ body
 { 
 	overflow-x:hidden;
     margin:12px;
-    background-color:#f7f7f7;
+    /*background-color:#f7f7f7;*/
     color:#333;	
     text-align:justify;
 	word-break:break-all;
@@ -167,7 +167,7 @@ table {color : #ccc;}
 /*------------------------------------------------ -x68
 	สำฦต
 ------------------------------------------------ -x68*/
-.GSTemplateContent_VideoBoxer
+/*.GSTemplateContent_VideoBoxer
 {
 	background-color:#000;
 	background-position:center center;
@@ -195,7 +195,7 @@ table {color : #ccc;}
 	background-size:80px 80px;
 	background-image:url(../gsAppHTMLTemplate_image/gsAppHTMLTemplate_Video_PlayButton@2x.png);
 	-webkit-filter:hue-rotate(0deg);
-}
+}*/
 /**
 div,ul,li{overflow: hidden;}
 #gsTemplateContent_MainBody {line-height:150%;}

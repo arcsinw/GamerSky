@@ -27,6 +27,8 @@ namespace GamerSky.Core.IncrementalLoadingCollection
             this.pageIndex = pageIndex;
         }
 
+
+
         public bool hasMoreItems { get; set; } = true;
         protected override bool HasMoreItemsCore
         {

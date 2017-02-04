@@ -267,4 +267,10 @@
   <data name="ReleaseToRefresh.Text" xml:space="preserve">
     <value>Release to refresh</value>
   </data>
+  <data name="Save.Label" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Share.Label" xml:space="preserve">
+    <value>Share</value>
+  </data>
 </root>

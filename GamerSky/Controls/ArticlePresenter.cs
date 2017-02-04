@@ -1,32 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-
+using Windows.UI.Xaml.Navigation;
 
 namespace GamerSky.Controls
 {
     internal class ArticlePresenter : UserControl
-    { 
-        private Grid GridContainer { get; set; }
-        private WebView WebView { get; set; }
-
-        public ArticlePresenter()
-        {
-            InitializeUserControl();
-            Loaded += ArticlePresenter_Loaded;
-            Unloaded += ArticlePresenter_Unloaded;
-        }
-
-
+    {
+        #region Events
+        public event TypedEventHandler<WebView, System.Object> ContainsFullScreenElementChanged;
+        public event TypedEventHandler<WebView, WebViewContentLoadingEventArgs> ContentLoading;
+        public event TypedEventHandler<WebView, WebViewDOMContentLoadedEventArgs> DOMContentLoaded;
+        public event TypedEventHandler<WebView, WebViewContentLoadingEventArgs> FrameContentLoading;
+        public event TypedEventHandler<WebView, WebViewDOMContentLoadedEventArgs> FrameDOMContentLoaded;
+        public event TypedEventHandler<WebView, WebViewNavigationCompletedEventArgs> FrameNavigationCompleted;
+        public event TypedEventHandler<WebView, WebViewNavigationStartingEventArgs> FrameNavigationStarting;
+        public event LoadCompletedEventHandler LoadCompleted;
+        public event TypedEventHandler<WebView, WebViewLongRunningScriptDetectedEventArgs> LongRunningScriptDetected;
+        public event TypedEventHandler<WebView, WebViewNavigationCompletedEventArgs> NavigationCompleted;
+        public event WebViewNavigationFailedEventHandler NavigationFailed;
+        public event TypedEventHandler<WebView, WebViewNavigationStartingEventArgs> NavigationStarting;
+        public event TypedEventHandler<WebView, WebViewNewWindowRequestedEventArgs> NewWindowRequested;
+        public event TypedEventHandler<WebView, WebViewPermissionRequestedEventArgs> PermissionRequested;
+        public event NotifyEventHandler ScriptNotify;
+        public event TypedEventHandler<WebView, System.Object> UnsafeContentWarningDisplaying;
+        public event TypedEventHandler<WebView, WebViewUnsupportedUriSchemeIdentifiedEventArgs> UnsupportedUriSchemeIdentified;
+        public event TypedEventHandler<WebView, WebViewUnviewableContentIdentifiedEventArgs> UnviewableContentIdentified;
+        #endregion
+         
+        #region Properties
         public static readonly DependencyProperty HtmlProperty = DependencyProperty.Register("Html", typeof(string), typeof(ArticlePresenter), new PropertyMetadata(default(string), HtmlChangedCallback));
 
         public string Html
@@ -44,6 +51,99 @@ namespace GamerSky.Controls
 
         public NavigateTypeEnum NavigationType { get; set; } = NavigateTypeEnum.String;
 
+
+         
+
+
+        #endregion
+
+        #region Deal with WebView
+        private WebView InitializeWebView()
+        {
+            var webView = new WebView(WebViewExecutionMode.SameThread) { DefaultBackgroundColor = Colors.Transparent };
+            webView.NavigationStarting += WebView_NavigationStarting;
+            webView.NavigationCompleted += WebView_NavigationCompleted;
+            webView.ScriptNotify += WebView_ScriptNotify;
+            webView.UnsupportedUriSchemeIdentified += WebView_UnsupportedUriSchemeIdentified;
+            webView.NewWindowRequested += WebView_NewWindowRequested;
+
+            // webView.NavigationCompleted += ((sender, e) => ReadingWebViewNavigationCompleted?.Invoke(this, new ReadingWebViewNavigationCompletedEventArgs(e)));
+
+            return webView;
+        }
+
+        private void WebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            NavigationCompleted?.Invoke(sender, args);
+            Debug.WriteLine("NavigationCompleted");
+        }
+
+        private void WebView_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
+        {
+            NewWindowRequested?.Invoke(sender, args);
+            Debug.WriteLine("NewWindowRequest : " + args.Uri);
+        }
+
+        private void WebView_UnsupportedUriSchemeIdentified(WebView sender, WebViewUnsupportedUriSchemeIdentifiedEventArgs args)
+        {
+            UnsupportedUriSchemeIdentified?.Invoke(sender, args);
+            Debug.WriteLine("Unsupported Uri Clicked");
+        }
+
+        private void WebView_ScriptNotify(object sender, NotifyEventArgs e)
+        {
+            ScriptNotify?.Invoke(sender, e);
+            Debug.WriteLine("Script Fired");
+        }
+
+        private void WebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        {
+            NavigationStarting?.Invoke(sender, args);
+            Debug.WriteLine("Webpage Navigating.");
+        }
+        #endregion
+
+        #region Public methods
+
+        /// <summary>
+        /// Invoke js
+        /// </summary>
+        /// <param name="funcName">function name of js</param>
+        /// <param name="args">arguments of js </param>
+        public async Task<string> InvokeScriptAsync(string funcName, IEnumerable<string> args)
+        {
+            try
+            {
+                return await WebView?.InvokeScriptAsync(funcName, args);
+            }
+            catch (Exception ex)
+            {
+                string errorText = string.Empty;
+                switch (ex.HResult)
+                {
+                    case unchecked((int)0x80020006):
+                        errorText = "There is no function called doSomething";
+                        break;
+                    case unchecked((int)0x80020101):
+                        errorText = "A JavaScript error or exception occured while executing the function doSomething";
+                        break;
+
+                    case unchecked((int)0x800a138a):
+                        errorText = "doSomething is not a function";
+                        break;
+                    default:
+                        // Some other error occurred.
+                        errorText = ex.Message;
+                        break;
+                }
+                Debug.WriteLine(errorText);
+                return string.Empty;
+            }
+        }
+
+
+        #endregion 
+
         //public NavigateTypeEnum NavigateType
         //{
         //    get { return (NavigateTypeEnum)GetValue(NavigateTypeProperty); }
@@ -55,6 +155,15 @@ namespace GamerSky.Controls
         //    DependencyProperty.Register("NavigateType", typeof(NavigateTypeEnum), typeof(ArticlePresenter), new PropertyMetadata(NavigateTypeEnum.String));
 
 
+        private Grid GridContainer { get; set; }
+        private WebView WebView { get; set; }
+
+        public ArticlePresenter()
+        {
+            InitializeUserControl();
+            Loaded += ArticlePresenter_Loaded;
+            Unloaded += ArticlePresenter_Unloaded;
+        }
 
         private void InitializeUserControl()
         {
@@ -66,34 +175,7 @@ namespace GamerSky.Controls
 
             Content = GridContainer;
         }
-
-        private WebView InitializeWebView()
-        {
-            var webView = new WebView(WebViewExecutionMode.SameThread) { DefaultBackgroundColor = Colors.Transparent };
-            webView.NavigationStarting += WebView_NavigationStarting;
-            webView.ScriptNotify += WebView_ScriptNotify;
-            webView.UnsupportedUriSchemeIdentified += WebView_UnsupportedUriSchemeIdentified;
-            // webView.NavigationCompleted += ((sender, e) => ReadingWebViewNavigationCompleted?.Invoke(this, new ReadingWebViewNavigationCompletedEventArgs(e)));
-
-            return webView;
-        }
-
-
-        private void WebView_UnsupportedUriSchemeIdentified(WebView sender, WebViewUnsupportedUriSchemeIdentifiedEventArgs args)
-        {
-            Debug.WriteLine("Unsupported Uri Clicked");
-        }
-
-        private void WebView_ScriptNotify(object sender, NotifyEventArgs e)
-        {
-            Debug.WriteLine("Script Fired");
-        }
-
-        private void WebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
-        {
-            Debug.WriteLine("Webpage Navigating.");
-        }
-
+         
         private Grid InitializeLayout()
         {
             var grid = new Grid();
@@ -116,7 +198,7 @@ namespace GamerSky.Controls
         {
             if (newValue != null)
             {
-                switch(articlePresenter.NavigationType)
+                switch (articlePresenter.NavigationType)
                 {
                     case NavigateTypeEnum.Uri:
                         articlePresenter.WebView?.Navigate(new Uri(newValue.ToString()));
@@ -125,9 +207,9 @@ namespace GamerSky.Controls
                     default:
                         articlePresenter.WebView?.NavigateToString(newValue.ToString());
                         break;
-                } 
+                }
             }
-        }
+        }     
     }
 
     public enum NavigateTypeEnum

@@ -1,7 +1,9 @@
-﻿using GamerSky.View;
+﻿using GamerSky.Core.Helper;
+using GamerSky.View;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Popups;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -22,10 +24,40 @@ namespace GamerSky
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            
+            UnhandledException += OnUnhandledException;
+        }
+        #region Handle unhandled exception
+
+        private async void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            await new MessageDialog("Application Unhandled Exception:\r\n" + GetExceptionDetailMessage(e.Exception), "(╯‵□′)╯︵┻━┻").ShowAsync();
         }
 
+        /// <summary>
+        /// Should be called from OnActivated and OnLaunched
+        /// </summary>
+        private void RegisterExceptionHandlingSynchronizationContext()
+        {
+            ExceptionHandlingSynchronizationContext
+                .Register()
+                .UnhandledException += SynchronizationContext_UnhandledException;
+        }
 
+        private async void SynchronizationContext_UnhandledException(object sender, Core.Helper.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            await new MessageDialog("Synchronization Context Unhandled Exception:\r\n" + GetExceptionDetailMessage(e.Exception), "(╯‵□′)╯︵┻━┻")
+                .ShowAsync();
+        }
+
+        // https://github.com/ljw1004/async-exception-stacktrace
+        private string GetExceptionDetailMessage(Exception ex)
+        {
+            return $"{ex.Message}\r\n{ex.StackTraceEx()}";
+        }
+
+        #endregion
         public async void CreateJumpList()
         {
             JumpList jumpList = await JumpList.LoadCurrentAsync();
@@ -41,21 +73,21 @@ namespace GamerSky
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
-            
+
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态
             if (rootFrame == null)
             {
                 // 创建要充当导航上下文的框架，并导航到第一页
                 rootFrame = new Frame();
-                
+
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: 从之前挂起的应用程序加载状态
                 }
-                
+
                 // 将框架放在当前窗口中
                 Window.Current.Content = rootFrame;
             }
@@ -69,6 +101,8 @@ namespace GamerSky
             }
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
+            RegisterExceptionHandlingSynchronizationContext();
+
         }
 
         /// <summary>
@@ -93,6 +127,11 @@ namespace GamerSky
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: 保存应用程序状态并停止任何后台活动
             deferral.Complete();
+        }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            RegisterExceptionHandlingSynchronizationContext();
         }
     }
 }

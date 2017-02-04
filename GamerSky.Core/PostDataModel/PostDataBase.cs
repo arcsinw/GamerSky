@@ -9,7 +9,7 @@ namespace GamerSky.Core.PostDataModel
 {
     public class PostDataBase
     {
-        public string appVersion = "2.0.7";
+        public string appVersion = "2.4.1";
         public string deviceId = DeviceInformationHelper.GetDeviceId();
         public string deviceType = "NOKIA N1";
         public string osVersion = "5.0.0";
