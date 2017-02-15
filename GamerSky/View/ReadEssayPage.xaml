@@ -13,6 +13,12 @@
     RequestedTheme="{Binding AppTheme}"
     mc:Ignorable="d">
 
+    <Page.Transitions>
+        <TransitionCollection>
+            <PaneThemeTransition Edge="Right"/>
+        </TransitionCollection>
+    </Page.Transitions>
+    
     <Page.Resources>
         <converter:DateTimeToTimeSpanConverter x:Key="DateTimeToTimeSpanConverter"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -286,7 +292,13 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource PageBackgroundBrush}">
-        <FlipView x:Name="flipView" SelectionChanged="flipView_SelectionChanged">
+        <FlipView x:Name="flipView"   SelectionChanged="flipView_SelectionChanged">
+            <FlipView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </FlipView.ItemsPanel>
+            
             <FlipView.Items>
                 <FlipViewItem>
                     <controls:ArticlePresenter x:Name="articlePresenter" Html="{Binding ContentHtml}" 
@@ -297,13 +309,11 @@
                 </FlipViewItem>
 
                 <FlipViewItem>
-                    <ListView ItemsSource="{Binding Comments}"
-                                                   
-                                                   SelectionMode="None"
+                    <ListView ItemsSource="{Binding Comments}" SelectionMode="None"
                                                    ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:Comment">
-                                <Grid Padding="0,0,12,12">
+                                <Grid Padding="8">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="48"/>
                                         <ColumnDefinition Width="*"/>
@@ -314,8 +324,7 @@
                                     </Grid.RowDefinitions>
 
                                     <!--Avatar-->
-                                    <Ellipse Grid.Row="0" Grid.Column="0" 
-                                         Width="40" Height="40">
+                                    <Ellipse Grid.Row="0" Grid.Column="0" Width="40" Height="40">
                                         <Ellipse.Fill>
                                             <ImageBrush>
                                                 <ImageBrush.ImageSource>
@@ -340,13 +349,11 @@
                                     </Grid>
 
                                     <Grid Grid.Row="1" Grid.Column="1" Margin="8,0">
-                                        <StackPanel>
-                                            <ItemsControl Margin="0,8" ItemsSource="{x:Bind Comments}">
+                                        <StackPanel  Padding="4">
+                                            <ItemsControl Margin="0,8" ItemsSource="{x:Bind Comments}" BorderBrush="{ThemeResource ThemeColorBrush}" BorderThickness="1">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate x:DataType="m:Comment">
-                                                        <Grid BorderBrush="{ThemeResource ThemeColorBrush}" CornerRadius="4" 
-                                                          HorizontalAlignment="Stretch" Padding="4"
-                                                          BorderThickness="1">
+                                                        <Grid HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ThemeColorBrush}" >
                                                             <StackPanel>
                                                                 <TextBlock Text="{x:Bind NickName}" Foreground="{ThemeResource ThemeColorBrush}"/>
                                                                 <TextBlock Text="{x:Bind Content}" TextWrapping="Wrap"/>
@@ -528,7 +535,7 @@
         <CommandBar x:Name="commandBar" Visibility="Collapsed">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Save" x:Uid="Save" Click="saveAppBar_Click"/>
-                <AppBarButton Label="HD">
+                <AppBarButton Label="HD" >
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="ms-appx:///Assets/Images/picture_origin.png"/>
                     </AppBarButton.Icon>

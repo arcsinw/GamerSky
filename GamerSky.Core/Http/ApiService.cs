@@ -104,17 +104,6 @@ namespace GamerSky.Core.Http
             return essayResult?.Result;
         }
 
-        ///// <summary>
-        ///// 加载更多文章
-        ///// </summary>
-        ///// <param name="nodeId">频道ID</param>
-        ///// <param name="pageIndex">页码</param>
-        ///// <returns></returns>
-        //public async Task<List<EssayResult>> LoadMoreEssay(int nodeId, int pageIndex)
-        //{
-        //    return await GetEssayList(nodeId, pageIndex);
-        //}\\
-
         /// <summary>
         /// 阅读文章
         /// 适用于新闻 和 攻略
@@ -172,11 +161,37 @@ namespace GamerSky.Core.Http
         }
 
         /// <summary>
+        /// 获取热门评论
+        /// </summary>
+        /// <param name="contentId"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        public async Task<List<Comment>> GetHotComments(string contentId, int pageIndex)
+        {
+            List<Comment> comments = new List<Comment>();
+            if (ConnectionHelper.IsInternetAvailable)
+            {
+                GetAllCommentPostData postData = new GetAllCommentPostData()
+                {
+                    pageIndex = pageIndex,
+                    pageSize = 20,
+                    topicId = contentId
+                };
+                var result = await GetJson<AllCommentsResult>(string.Format(ServiceUri.HotComments, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
+                if (result != null)
+                {
+                    comments = result.Result.Result;
+                }
+            }
+            return comments;
+        }
+
+        /// <summary>
         /// 获取相关阅读
         /// </summary>
         /// <param name="contentId">文章Id</param>
         /// <returns></returns>
-        public async Task<List<RelatedReadings>> GetRelatedReadings(string contentId, string contentType)
+        public async Task<List<RelatedReadings>> GetRelatedReadings(string contentId, string contentType="news")
         {
             string filename = "relatedReadings_" + contentId + ".json";
             RelatedReadingsResult readings = new RelatedReadingsResult();
@@ -192,7 +207,7 @@ namespace GamerSky.Core.Http
                 readings = await PostJson<RelatedReadingPostData, RelatedReadingsResult>(ServiceUri.TwoCorrelation, postData);
                 if (readings != null && readings.Result != null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<RelatedReadings>>(readings.Result, filename);
+                    await FileHelper.Current.WriteObjectAsync(readings.Result, filename);
                 }
             }
   
@@ -275,8 +290,7 @@ namespace GamerSky.Core.Http
 
             return essayResult?.Result ;
         }
-
-
+        
         /// <summary>
         /// 获取搜索热点词
         /// </summary>
@@ -406,7 +420,7 @@ namespace GamerSky.Core.Http
         /// <param name="content"></param>
         /// <param name="replyId"></param>
         /// <returns></returns>
-        public async Task<CommentResult> AddComment(string loginToken,string topicId,
+        public async Task<AddCommentResult> AddComment(string loginToken,string topicId,
             string topicUrl,string topicTitle,string content,string replyId)
         {
             CommentPostData postData = new CommentPostData
@@ -419,7 +433,7 @@ namespace GamerSky.Core.Http
                 ReplyId = replyId
             };
 
-            var result = await GetJson<CommentResult>(string.Format(ServiceUri.AddComment, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
+            var result = await GetJson<AddCommentResult>(string.Format(ServiceUri.AddComment, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
             return result;
         }
 
@@ -432,6 +446,17 @@ namespace GamerSky.Core.Http
             string url = string.Format(ServiceUri.GetAllReply, jsonData);
             GetAllReplyResult result = await GetJson<GetAllReplyResult>(url);
             return result?.Result.Comments;
+        }
+
+        /// <summary>
+        /// 给评论回复点赞
+        /// {"action":"ding","topicId":855635,"commentID":1080276461,"commentUserID":"531939"}
+        /// </summary>
+        public async Task AddLikeComment(string topicId,string commentId,string commentUserId)
+        {
+            string jsonData = "{ \"action\":\"ding\",\"topicId\":" + topicId + ",\"commentID\":" + commentId + ",\"commentUserID\":" + commentUserId + "}";
+            string url = string.Format(ServiceUri.LikeReply, jsonData);
+            LikeCommentResult result = await GetJson<LikeCommentResult>(url);
         }
 
         /// <summary>
@@ -785,6 +810,5 @@ namespace GamerSky.Core.Http
             }
             return essays;
         }
-
     }
 }

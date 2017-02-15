@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GamerSky.Core.ResultModel
 {
-    public class CommentResult : ResultModelBase
+    public class AddCommentResult : ResultModelBase
     {
         [JsonProperty(PropertyName = "result")]
         public CommentResultData Result { get; set; }

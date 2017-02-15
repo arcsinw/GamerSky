@@ -3,6 +3,7 @@ using GamerSky.View;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
@@ -47,9 +48,22 @@ namespace GamerSky
         private async void SynchronizationContext_UnhandledException(object sender, Core.Helper.UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
-            await new MessageDialog("Synchronization Context Unhandled Exception:\r\n" + GetExceptionDetailMessage(e.Exception), "(╯‵□′)╯︵┻━┻")
-                .ShowAsync();
+            MessageDialog dialog = new MessageDialog(GetExceptionDetailMessage(e.Exception), GlobalStringLoader.GetString("USendEmail"));
+            
+            dialog.Commands.Add(new UICommand("OK", async (a) =>
+            {
+                string subject = "GamerSky.x's Exception";
+                string body = GetExceptionDetailMessage(e.Exception);
+                string address = "wangx86@live.com";
+                var mailto = new Uri($"mailto:{address}?subject={subject}&body={body}");
+                await Launcher.LaunchUriAsync(mailto);
+            }));
+
+            dialog.Commands.Add(new UICommand("Cancle"));
+             
+            await dialog.ShowAsync(); 
         }
+         
 
         // https://github.com/ljw1004/async-exception-stacktrace
         private string GetExceptionDetailMessage(Exception ex)

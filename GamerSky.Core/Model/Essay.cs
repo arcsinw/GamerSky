@@ -59,6 +59,9 @@ namespace GamerSky.Core.Model
             }
         }
 
+        [JsonProperty(PropertyName = "thumbnailUrl")]
+        public string ThumbnailUrl { get; set; }
+
         private string title;
         /// <summary>
         /// 标题

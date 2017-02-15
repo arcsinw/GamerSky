@@ -24,6 +24,9 @@ namespace GamerSky.Core.PostModel
         [JsonProperty(PropertyName = "content")]
         public string Content { get; set; }
 
+        /// <summary>
+        /// 评论回复时 comment_id
+        /// </summary>
         [JsonProperty(PropertyName = "replyID")]
         public string ReplyId { get; set; }
     }

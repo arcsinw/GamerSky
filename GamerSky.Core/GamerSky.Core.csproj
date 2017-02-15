@@ -207,12 +207,13 @@
     <Compile Include="ResultModel\AdStartResult.cs" />
     <Compile Include="ResultModel\AllCommentsResult.cs" />
     <Compile Include="ResultModel\ChannelResult.cs" />
-    <Compile Include="ResultModel\CommentResult.cs" />
+    <Compile Include="ResultModel\AddCommentResult.cs" />
     <Compile Include="ResultModel\EssayResult.cs" />
     <Compile Include="ResultModel\GameDetailEssayResult.cs" />
     <Compile Include="ResultModel\GameDetailResult.cs" />
     <Compile Include="ResultModel\GameResult.cs" />
     <Compile Include="ResultModel\GetAllReplyResult.cs" />
+    <Compile Include="ResultModel\LikeCommentResult.cs" />
     <Compile Include="ResultModel\LoginResult.cs" />
     <Compile Include="ResultModel\NewsResult.cs" />
     <Compile Include="ResultModel\RelatedReadingsResult.cs" />

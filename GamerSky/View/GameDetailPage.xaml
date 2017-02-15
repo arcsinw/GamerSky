@@ -6,31 +6,32 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hp="using:GamerSky.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
+    xmlns:m="using:GamerSky.Core.Model"
     xmlns:vm="using:GamerSky.Core.ViewModel"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     RequestedTheme="{Binding AppTheme}"
     mc:Ignorable="d">
 
-    <Page.Resources>
-        <DataTemplate x:Key="EssayDataTemplate">
-            <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}"
-                      MaxHeight="100">
+    <Page.Resources> 
+
+        <DataTemplate x:Key="EssayDataTemplate" x:DataType="m:GameDetailEssay">
+            <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="2*" MaxWidth="180"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
 
                 <!--默认图片-->
                 <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
 
-                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
+                <Image  Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
                     <Image.Source>
-                        <BitmapImage UriSource="{Binding ThumbnailURLs[0]}"/>
+                        <BitmapImage UriSource="{Binding ThumbnailUrl}"/>
                     </Image.Source>
                 </Image>
 
-                <TextBlock Grid.Column="1" Text="{Binding Title}"/>
+                <TextBlock Grid.Column="1" Margin="4,0" TextWrapping="Wrap"  Text="{x:Bind Title,Mode=OneWay}"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -49,48 +50,53 @@
         </Grid.RowDefinitions>
           
         <!--#region 游戏详情-->
-        <Grid Grid.Row="0" MaxHeight="200" Padding="48" 
-              DataContext="{Binding GameDetail}" >
+        <Grid Grid.Row="0" MaxHeight="240" Padding="12,60,12,12">
             <Grid.Background>
                 <ImageBrush>
                     <ImageBrush.ImageSource>
-                        <BitmapImage UriSource="{Binding BackgroundURL,Mode=OneWay}"/>
+                        <BitmapImage UriSource="{Binding GameDetail.BackgroundURL}"/>
                     </ImageBrush.ImageSource>
                 </ImageBrush>
             </Grid.Background>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Margin="12,0"
-                   HorizontalAlignment="Stretch" VerticalAlignment="Top"
+            <!--游戏封面-->
+            <Image Grid.Column="0" 
+                   HorizontalAlignment="Stretch" VerticalAlignment="Center"
                    Stretch="Uniform"
-                   Source="{Binding ThumbnailURL,Mode=OneWay}"/>
-            <Grid Grid.Column="1" >
+                   Source="{Binding GameDetail.ThumbnailURL,Mode=OneWay}"/>
+            
+            <!--游戏介绍-->
+            <Grid Grid.Column="1" VerticalAlignment="Top">
                 <Grid.Resources>
                     <Style TargetType="TextBlock">
                         <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Margin" Value="0,0,0,4"/>
                     </Style>
                 </Grid.Resources>
                 <StackPanel Orientation="Vertical" >
-                    <TextBlock Text="{Binding Title,Mode=OneWay}" />
+                    <TextBlock Text="{x:Bind viewModel.GameDetail.Title,Mode=OneWay}" />
                     <TextBlock>
                         <Run Text="发售日期："></Run>
-                        <Run Text="{Binding SellTime}"/>
+                        <Run Text="{x:Bind viewModel.GameDetail.SellTime,Mode=OneWay}"/>
                     </TextBlock>
                     <TextBlock>
                         <Run Text="平台："/>
-                        <Run Text="{Binding Platform}"/>
+                        <Run Text="{x:Bind viewModel.GameDetail.Platform,Mode=OneWay}"/>
                     </TextBlock>
                     <TextBlock>
                         <Run Text="游戏类型："/>
-                        <Run Text="{Binding GameType}"/>
+                        <Run Text="{x:Bind viewModel.GameDetail.GameType,Mode=OneWay}"/>
                     </TextBlock>
                     <TextBlock>
                         <Run Text="发行商："/>
-                        <Run Text="{Binding Developer}"/>
+                        <Run Text="{x:Bind viewModel.GameDetail.Developer,Mode=OneWay}"/>
                     </TextBlock>
                     <Button Style="{ThemeResource LightButtonStyle}" HorizontalAlignment="Stretch" 
+                            Background="{ThemeResource ThemeColorBrush}" Foreground="White"
+                            VerticalAlignment="Bottom"
                             Content="关注"/>
                 </StackPanel>
             </Grid>
@@ -99,9 +105,7 @@
 
         <!--#region 标题栏-->
         <Grid Grid.Row="0" Grid.RowSpan="2" Height="48" VerticalAlignment="Top"  
-              Background="{ThemeResource ThemeColorBrush}"
-              DataContext="{Binding GameDetail}"
-               >
+              Background="{ThemeResource ThemeColorBrush}" >
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup>
                     <VisualState x:Name="Desktop">
@@ -117,31 +121,31 @@
             <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}">
                 <SymbolIcon Symbol="Back"/>
             </Button>
-            <TextBlock Text="{Binding Title}" Style="{ThemeResource PageTitleStyle}"/>
+            <TextBlock Text="{x:Bind viewModel.GameDetail.Title,Mode=OneWay}" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
         <!--#endregion-->
 
         <!--#region 文章栏-->
         <Pivot Grid.Row="1"  SelectionChanged="Pivot_SelectionChanged"
-               x:Name="pivot">
+               x:Name="pivot" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="策略" Margin="0">
-                <!--<pr:PullToRefreshBox>-->
-                    <toolkit:PullToRefreshListView ItemsSource="{Binding GameDetailNews}"
+                <toolkit:PullToRefreshListView ItemsSource="{x:Bind viewModel.GameDetailNews,Mode=OneWay}"
                               ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
-                              ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"> 
-                    </toolkit:PullToRefreshListView>
-                <!--</pr:PullToRefreshBox>-->
+                              ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                                               IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
+                                              >
+                </toolkit:PullToRefreshListView>
             </PivotItem>
-            <PivotItem Header="新闻" Margin="0">
-                <!--<pr:PullToRefreshBox>-->
-                    <toolkit:PullToRefreshListView ItemsSource="{Binding GameDetailStrategys}"
+            <PivotItem Header="新闻" Margin="0"> 
+                <toolkit:PullToRefreshListView ItemsSource="{x:Bind viewModel.GameDetailStrategys,Mode=OneWay}"
                              ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                              > 
-                    </toolkit:PullToRefreshListView>
-                <!--</pr:PullToRefreshBox>-->
+                                               IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
+                                          
+                              >
+                </toolkit:PullToRefreshListView>
             </PivotItem>
         </Pivot>
         <!--#endregion-->

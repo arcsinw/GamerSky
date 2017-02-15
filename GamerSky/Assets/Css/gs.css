@@ -123,9 +123,9 @@ table {color : #ccc;}
 .tr2 {text-align:center; background-color:#000}
 
 
-/*----------------------------
+/*------------------------------------------------ -x68
 	相关阅读
--------------------------------*/
+------------------------------------------------ -x68*/
 #gsTemplateContent_RelatedReadingContent {margin-left:-10px; margin-right:-10px;}
 #gsTemplateContent_RelatedReadingContent .Row {padding:0px;}
 #gsTemplateContent_RelatedReadingContent .Row div {margin:0px 10px 0px 10px; white-space:nowrap; text-overflow:ellipsis;}
@@ -138,13 +138,44 @@ table {color : #ccc;}
 	.PageColorMode_Night .list .tit {color:#576476;}
 .list .txtlist {display:block; width:auto; height:auto;}
 .list .txtlist a {display:block;}
-.list .txtlist .Row {display:block; width:100%; height:40px; line-height:40px; font-size:14px; white-space:nowrap; text-overflow:ellipsis;}
+.list .txtlist .Row {display:block; width:100%; height:44px; line-height:44px; font-size:14px; white-space:nowrap; text-overflow:ellipsis;}
 .PageColorMode_Day .list .txtlist .Row {border-top:1.00px solid #e0e0e0; color:#333;}
 .PageColorMode_Night .list .txtlist .Row {border-top:1.00px solid #2a2e38; color:#576476;}
 .list .more {display:block; border-top:1.00px solid #2a2e38; width:100%; font-size:14px; height:40px; line-height:40px; text-align:center; color:#5f5f69;}
 .PageColorMode_Day .list .more {border-top:1.00px solid #e0e0e0; color:#333;}
 .PageColorMode_Night .list .more {border-top:1.00px solid #2a2e38; color:#5f5f69;}
 .list .more a {display:block;}
+
+.PageColorMode_Day .list .tit.red {border-left:5px solid #f22f09;}
+.PageColorMode_Night .list .tit.red {border-left:5px solid #812c25;}
+.PageColorMode_Day .list .tit.yellow {border-left:5px solid #ffc600;}
+.PageColorMode_Night .list .tit.yellow {border-left:5px solid #867025;}
+.PageColorMode_Day .list .tit.blue {border-left:5px solid #3fa5ee;}
+.PageColorMode_Night .list .tit.blue {border-left:5px solid #477399;}
+
+/*------------------------------------------------ -x68
+	相关专题
+------------------------------------------------ -x68*/
+#gsTemplateContent_RelatedTopic {display:block;}
+#gsTemplateContent_RelatedTopicContent {display:block; width:100%; height:auto; padding:0px;}
+#gsTemplateContent_RelatedTopicContent table {margin-bottom:10px; border:1.00px solid #d3d3d3; width:100%; height:74px;}
+	.PageColorMode_Day #gsTemplateContent_RelatedTopicContent table {border:1.00px solid #d3d3d3;}
+	.PageColorMode_Night #gsTemplateContent_RelatedTopicContent table {border:1.00px solid #222b38;}
+#gsTemplateContent_RelatedTopicContent .Content img {float:left; margin:0px 6px 0px 6px; width:94px; height:54px;}
+#gsTemplateContent_RelatedTopicContent .Content .Title {float:none; width:auto; height:34px; line-height:54px; font-size:16px;}
+	.PageColorMode_Day #gsTemplateContent_RelatedTopicContent .Content .Title {color:#333;}
+	.PageColorMode_Night #gsTemplateContent_RelatedTopicContent .Content .Title {color:#576476;}
+#gsTemplateContent_RelatedTopicContent .Content .Subtitle {float:none; width:auto; height:20px; line-height:20px; font-size:14px;}
+	.PageColorMode_Day #gsTemplateContent_RelatedTopicContent .Content .Subtitle {color:#a5a5a5;}
+	.PageColorMode_Night #gsTemplateContent_RelatedTopicContent .Content .Subtitle {color:#464950;}
+#gsTemplateContent_RelatedTopicContent .ButtonArea {width:74px;}
+#gsTemplateContent_RelatedTopicContent .Button {border-radius:2px; width:54px; height:30px; line-height:30px; text-align:center; font-size:12px;}
+	.PageColorMode_Day #gsTemplateContent_RelatedTopicContent .Button {background:#ee5449; color:#f7f7f7;}
+	.PageColorMode_Night #gsTemplateContent_RelatedTopicContent .Button {background:#812c25; color:#c6a09d;}
+#gsTemplateContent_RelatedTopicContent .Readed {}
+	.PageColorMode_Day #gsTemplateContent_RelatedTopicContent .Readed {background:#6699ff;}
+	.PageColorMode_Night #gsTemplateContent_RelatedTopicContent .Readed {background:#336699;}
+
 
 #ScrollToTop
 {
@@ -165,40 +196,81 @@ table {color : #ccc;}
 }
 
 /*------------------------------------------------ -x68
-	视频
+	评测文章图集样式,去除网页中的评测文章图集效果.
 ------------------------------------------------ -x68*/
-/*.GSTemplateContent_VideoBoxer
+
+.Slides
 {
-	background-color:#000;
-	background-position:center center;
-	background-repeat:no-repeat;
+	width:100%;
+	height:auto;
+	background: transparent;
 }
-.GSTemplateContent_VideoBoxer .PlayButtonBackground
+.Slides ul.Bimg li
 {
-	float:none;
-	border-radius:40px;
-	width:80px;
-	height:80px;
-	background-position:center center;
-	background-repeat:no-repeat;
-	-webkit-filter:blur(4px);
+    display: inline-block;
 }
-.GSTemplateContent_VideoBoxer .PlayButton
+.Slides ul.Bimg li a div.mask
 {
-	float:none;
-	margin-top:-80px;
-	border-radius:40px;
-	width:80px;
-	height:80px;
-	background-repeat:no-repeat;
-	background-position:center center;
-	background-size:80px 80px;
-	background-image:url(../gsAppHTMLTemplate_image/gsAppHTMLTemplate_Video_PlayButton@2x.png);
-	-webkit-filter:hue-rotate(0deg);
-}*/
-/**
-div,ul,li{overflow: hidden;}
-#gsTemplateContent_MainBody {line-height:150%;}
-#gsTemplateContent_MainBody p {display:block;}
-#gsTemplateContent_MainBody #youkuplayer0 img {display:inherit; visibility:visible;}
-**/
+    display: none;
+}
+.Slides ul.Bimg li a div.txt
+{
+    position: relative;
+    margin-top: -40px;
+    width: 100%;
+    height: 40px;
+    background: url("http://image.gamersky.com/webimg15/mk3.png") 0px 0px repeat-x;
+    padding-left: 10px;
+    line-height: 40px;
+    text-shadow: 1px 1px 1px #000;
+    font-family: 'Microsoft YaHei';
+    font-size: 18px;
+    font-weight: bold;
+    color: #f2f2f3;
+}
+.Slides .focus-num
+{
+	display: none;
+}
+.Slides a.btn
+{
+	display: none;
+}
+ 
+
+
+/*------------------------------------------------ -x68
+	评测文章子节点标题样式.
+------------------------------------------------ -x68*/
+p .fc
+{
+	text-align: center;
+	font-size: 14px;
+	color: #666;
+}
+.title1
+{
+	margin:30px 0 10px;
+	width:auto;
+	height:38px;
+	line-height:38px;
+	text-indent:20px;
+	font-size:20px;
+	font-weight:bold;
+	background:#e5e5e5;
+	border-left:9px solid #e23703;
+	border-radius:0 4px 4px 0;
+}
+/*------------------------------------------------ -x68
+170204 更新:
+1，专栏文章子节点标题样式。
+------------------------------------------------ -x68*/
+.title1
+{
+	height:auto;
+	border-left-color: #e7222a;
+	background-color: #2a2c2e;
+	padding: 0px 10px 0px 10px;
+	text-indent: 0px;
+	color: #ffffff;
+}

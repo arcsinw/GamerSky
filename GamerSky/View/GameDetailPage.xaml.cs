@@ -24,9 +24,13 @@ namespace GamerSky.View
     {
         public GameDetailPage()
         {
-            this.InitializeComponent();
-            this.Loaded += GameDetailPage_Loaded;
+            this.InitializeComponent(); 
         }
+
+        #region Fields
+        private bool _isStrategyLoaded = false;
+        private bool _isNewsLoaded = false;
+        #endregion
 
         public void Back()
         {
@@ -37,11 +41,7 @@ namespace GamerSky.View
                 frame.GoBack();
             }
         }
-
-        private void GameDetailPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            viewModel.LoadGameDetail();
-        }
+         
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -49,6 +49,7 @@ namespace GamerSky.View
             if (para != null)
             {
                 viewModel.contentId = para;
+                viewModel.LoadGameDetail();
             }
         }
 
@@ -57,16 +58,20 @@ namespace GamerSky.View
             switch(pivot.SelectedIndex)
             {
                 case 0:
-                    viewModel.LoadGameNews(1);
+                    if(!_isStrategyLoaded)
+                    {
+                        viewModel.LoadGameNews(1);
+                        _isStrategyLoaded = true;
+                    }
                     break;
                 case 1:
-                    viewModel.LoadGameStrategys(1);
+                    if(!_isNewsLoaded)
+                    {
+                        viewModel.LoadGameStrategys(1);
+                    }
+                    _isNewsLoaded = true;
                     break;
             }
         }
-
- 
-
-      
     }
 }

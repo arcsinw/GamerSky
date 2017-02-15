@@ -56,7 +56,7 @@ namespace GamerSky.View
             }
             else
             {
-                DayMode();
+                DayMode(); 
             }
             if(ViewModel.IsNoImgMode)
             {
@@ -66,99 +66,72 @@ namespace GamerSky.View
         }
         
         protected override void OnNavigatedFrom(NavigationEventArgs e)
-        { 
+        {
+            ViewModel.ContentHtml = string.Empty;
+            ViewModel.Comments?.Clear();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Essay essay = (Essay)e.Parameter;
             this._currentEssay = essay;
-            ViewModel.SetCurrentEssay(essay,flipView.SelectedIndex);
-            
+            //ViewModel.SetCurrentEssay(essay,flipView.SelectedIndex);
+            _isCommentLoaded = false;
+            _isContentLoaded = false;
+            ViewModel.SetCurrentContentId(essay.ContentId, flipView.SelectedIndex);
         }
-        
-        private async void flipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        #region Js invoke  
+        /// <summary>
+        /// 设置夜间模式
+        /// </summary>
+        public async void NightMode()
         {
-            if (ViewModel.CurrentEssay == null) return;
-            switch (flipView.SelectedIndex)
+            await articlePresenter.InvokeScriptAsync("NightMode", new[] { "" });
+            UIHelper.ShowStatusBar();
+        }
+
+        /// <summary>
+        /// 日间模式
+        /// </summary>
+        public async void DayMode()
+        {
+            await articlePresenter.InvokeScriptAsync("DayMode", new[] { "" });
+            UIHelper.ShowStatusBar();
+        }
+
+        public async void GetAllPictures()
+        {
+            string result = await articlePresenter.InvokeScriptAsync("GetAllPictures", new[] { "" });
+            var imgs = JsonHelper.Deserlialize<List<JsImage>>(result);
+            if (imgs != null)
             {
-                case 0:
-                    if (!_isContentLoaded)
-                    {
-                        await ViewModel.GenerateHtmlString();
-                    }
-                    _isContentLoaded = true;
-                    break;
-                case 1:
-                    if(!_isCommentLoaded)
-                    {
-                        ViewModel.GenerateComments();
-                    }
-                    _isCommentLoaded = true;
-                    break;
+                imgs.ForEach(x => Images.Add(x));
             }
         }
 
+        public async void NoImageMode()
+        {
+            await articlePresenter.InvokeScriptAsync("NoImageMode", new[] { "" });
+        }
 
-        #region Past version
-
-        //protected override void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //    Essay essay = e.Parameter as Essay;
-
-        //    Get(essay);
-        //}
-
-        //private async void Get(Essay essay)
-        //{
-        //    Uri uri = new WebView().BuildLocalStreamUri("id", "/Content.html");
-        //    HtmlStreamUriResolver resolver = new HtmlStreamUriResolver();
-        //    webView.NavigateToLocalStreamUri(uri, resolver);
-
-        //    News news = await ApiService.Instance.ReadEssay(essay.ContentId);
-        //    if (news != null)
-        //    {
-        //        try
-        //        {
-        //            await webView.InvokeScriptAsync("setTitle", new string[] { news.Title });
-        //            await webView.InvokeScriptAsync("setMainTitle", new string[] { news.Title });
-        //            await webView.InvokeScriptAsync("setSubTitle", new string[] { news.SubTitle });
-        //            await webView.InvokeScriptAsync("setBody", new string[] { news.MainBody });
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            string errorText = null;
-        //            switch (ex.HResult)
-        //            {
-        //                case unchecked((int)0x80020006):
-        //                    errorText = "There is no function called doSomething";
-        //                    break;
-        //                case unchecked((int)0x80020101):
-        //                    errorText = "A JavaScript error or exception occured while executing the function doSomething";
-        //                    break;
-
-        //                case unchecked((int)0x800a138a):
-        //                    errorText = "doSomething is not a function";
-        //                    break;
-        //                default:
-        //                    // Some other error occurred.
-        //                    errorText = ex.Message;
-        //                    break;
-        //            }
-        //            Debug.WriteLine(errorText);
-        //        }
-        //    }
-        //} 
+        public async void SetFontSize(string fontSize)
+        {
+            await articlePresenter.InvokeScriptAsync("SetFontSize", new[] { fontSize });
+        }
         #endregion
-
+         
+        #region Flyout's operation
         private void nightCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            DataShareManager.Current.UpdateAPPTheme(true);
+            //DataShareManager.Current.UpdateAPPTheme(true);
+            NightMode();
         }
 
         private void nightCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            DataShareManager.Current.UpdateAPPTheme(false);
+        { 
+            DayMode();
+            //DataShareManager.Current.UpdateAPPTheme(false);
         }
 
         private async void edgeListViewItem_Tapped(object sender, TappedRoutedEventArgs e)
@@ -171,7 +144,7 @@ namespace GamerSky.View
 
         private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            ViewModel.RefreshContent();
         }
 
         private async void saveAppBar_Click(object sender, RoutedEventArgs e)
@@ -219,86 +192,12 @@ namespace GamerSky.View
                 }
                 catch (Exception ex)
                 {
-                    
+                    Debug.WriteLine(ex.Message);
                 }
             }
         }
-
-        #region Js invoke  
-        /// <summary>
-        /// 设置夜间模式
-        /// </summary>
-        public async void NightMode()
-        {
-            await articlePresenter.InvokeScriptAsync("NightMode", new[] { "" });
-        }
-
-        /// <summary>
-        /// 日间模式
-        /// </summary>
-        public async void DayMode()
-        {
-            await articlePresenter.InvokeScriptAsync("DayMode", new[] { "" });
-        }
-
-        public async void GetAllPictures()
-        {
-            string result = await articlePresenter.InvokeScriptAsync("GetAllPictures", new[] { "" });
-            var imgs = JsonHelper.Deserlialize<List<JsImage>>(result);
-            if(imgs!=null)
-            {
-                imgs.ForEach(x => Images.Add(x));
-            }
-        }
-
-        public async void NoImageMode()
-        {
-            await articlePresenter.InvokeScriptAsync("NoImageMode", new[] { "" });
-        }
-
-        public async void SetFontSize(string fontSize)
-        {
-            await articlePresenter.InvokeScriptAsync("SetFontSize", new[] { fontSize });
-        }
-        #endregion
-
-        private void articlePresenter_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
-        {
-            if (ViewModel.AppTheme == ElementTheme.Dark)
-            {
-                NightMode();
-            }
-            else
-            {
-                DayMode();
-            }
-            GetAllPictures();
-        }
-
-        private void articlePresenter_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
-        {
-            args.Handled = true;
-            string tmp = args.Uri.OriginalString;
-            if (tmp.EndsWith(".jpg") ||
-                tmp.EndsWith(".png") ||
-                tmp.EndsWith(".bmp")||
-                tmp.EndsWith(".gif"))
-            {
-                var result = Images.Where(x => x.hdsrc.Equals(tmp));
-             
-                if(result!=null)
-                {
-                    imageFlipView.SelectedIndex = result.First().index;
-                    imageFlipView.Visibility = Visibility.Visible;
-                    commandBar.Visibility = Visibility.Visible;
-                } 
-            }
-        }
-
-        private void articlePresenter_ScriptNotify(object sender, NotifyEventArgs e)
-        {
-            Debug.WriteLine(e.Value);
-        }
+         
+        
 
         private void imageFlipView_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -332,15 +231,83 @@ namespace GamerSky.View
                 NoImageMode();
             }
         }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            SetFontSize("30");
-        }
-
+          
         private void fontSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             SetFontSize(e.NewValue.ToString());
+        }
+        #endregion
+
+        private async void flipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //if (ViewModel.CurrentEssay == null) return;
+            if (string.IsNullOrEmpty(ViewModel.ContentId)) return;
+            switch (flipView.SelectedIndex)
+            {
+                case 0:
+                    if (!_isContentLoaded)
+                    {
+                        await ViewModel.GenerateHtmlString(ViewModel.ContentId);
+                    }
+                    _isContentLoaded = true;
+                    break;
+                case 1:
+                    if (!_isCommentLoaded)
+                    {
+                        ViewModel.GenerateComments(ViewModel.ContentId);
+                    }
+                    _isCommentLoaded = true;
+                    break;
+            }
+        }
+
+        private void articlePresenter_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            if (ViewModel.AppTheme == ElementTheme.Dark)
+            {
+                NightMode();
+            }
+            else
+            {
+                DayMode();
+            }
+            GetAllPictures();
+        }
+
+        private void articlePresenter_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
+        {
+            args.Handled = true;
+            string tmp = args.Uri.OriginalString;
+            if (tmp.EndsWith(".jpg") ||
+                tmp.EndsWith(".png") ||
+                tmp.EndsWith(".bmp") ||
+                tmp.EndsWith(".gif"))
+            {
+                var result = Images.Where(x => x.hdsrc.Equals(tmp));
+
+                if (result != null)
+                {
+                    imageFlipView.SelectedIndex = result.First().index;
+                    imageFlipView.Visibility = Visibility.Visible;
+                    commandBar.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        private void articlePresenter_ScriptNotify(object sender, NotifyEventArgs e)
+        {
+            Debug.WriteLine(e.Value);
+            if (e.Value.Equals("gestures:goback"))
+            {
+                NavigationHelper.GoBack();
+            }
+
+            if (!string.IsNullOrEmpty(e.Value))
+            {
+                _isCommentLoaded = false;
+                _isContentLoaded = false;
+                ViewModel.SetCurrentContentId(e.Value, flipView.SelectedIndex);
+            }
         }
     }
 }

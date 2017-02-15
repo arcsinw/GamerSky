@@ -273,4 +273,7 @@
   <data name="Share.Label" xml:space="preserve">
     <value>Share</value>
   </data>
+  <data name="USendEmail" xml:space="preserve">
+    <value>Send email to improve this app</value>
+  </data>
 </root>

@@ -273,4 +273,7 @@
   <data name="Share.Label" xml:space="preserve">
     <value>共享</value>
   </data>
+  <data name="USendEmail" xml:space="preserve">
+    <value>发送邮件以帮助改进软件</value>
+  </data>
 </root>

@@ -62,7 +62,7 @@
                     </ScrollViewer>
                 </Grid>
             </PivotItem>
-            <PivotItem Header="License" Margin="0">
+            <!--<PivotItem Header="License" Margin="0">
                 <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" Padding="12,0">
                     <RichTextBlock>
                         <Paragraph TextIndent="20">The MIT License (MIT)</Paragraph>
@@ -89,7 +89,7 @@
                         </Paragraph>
                     </RichTextBlock>
                 </ScrollViewer>
-            </PivotItem>
+            </PivotItem>-->
 
             <!--<Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
                     Grid.Column="0">

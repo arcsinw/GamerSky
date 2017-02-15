@@ -131,7 +131,7 @@
                         </Image.Source>
                     </Image>
 
-                    <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0">
+                    <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="4,0">
                         <TextBlock Text="{Binding Title}"  TextWrapping="Wrap" VerticalAlignment="Top"/>
                         <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
                                 <Run Text="{Binding CommentsCount}"/>

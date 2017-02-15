@@ -50,10 +50,7 @@ namespace GamerSky.Controls
 
 
         public NavigateTypeEnum NavigationType { get; set; } = NavigateTypeEnum.String;
-
-
-         
-
+        
 
         #endregion
 
@@ -122,18 +119,17 @@ namespace GamerSky.Controls
                 switch (ex.HResult)
                 {
                     case unchecked((int)0x80020006):
-                        errorText = "There is no function called doSomething";
+                        errorText = $"There is no function called {funcName}";
                         break;
                     case unchecked((int)0x80020101):
-                        errorText = "A JavaScript error or exception occured while executing the function doSomething";
-                        break;
-
+                        errorText = $"A JavaScript error or exception occured while executing the function {funcName}";
+                        break; 
                     case unchecked((int)0x800a138a):
-                        errorText = "doSomething is not a function";
+                        errorText = $"{funcName} is not a function";
                         break;
                     default:
                         // Some other error occurred.
-                        errorText = ex.Message;
+                        errorText = funcName + ex.Message;
                         break;
                 }
                 Debug.WriteLine(errorText);
