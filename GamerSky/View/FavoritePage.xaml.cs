@@ -15,11 +15,11 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using GamerSky.Core.Helper;
-using GamerSky.Core.Model;
-using GamerSky.Core.ViewModel;
 using GamerSky.Helper;
-using GamerSky.Core.Common;
+using GamerSky.Model;
+using GamerSky.ViewModel;
+using GamerSky.Helper;
+using GamerSky.Common;
  
 
 namespace GamerSky.View

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
-using GamerSky.Core.Helper;
-using GamerSky.Core.Model;
+using GamerSky.Helper;
+using GamerSky.Model;
 
 namespace GamerSky.Background
 {

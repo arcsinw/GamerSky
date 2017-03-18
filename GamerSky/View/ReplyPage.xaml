@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:GamerSky.Helper"
-    xmlns:m="using:GamerSky.Core.Model"
+    xmlns:m="using:GamerSky.Model"
     xmlns:converter="using:GamerSky.Converters"
-    xmlns:vm="using:GamerSky.Core.ViewModel"
+    xmlns:vm="using:GamerSky.ViewModel"
     mc:Ignorable="d">
 
     <Page.DataContext>

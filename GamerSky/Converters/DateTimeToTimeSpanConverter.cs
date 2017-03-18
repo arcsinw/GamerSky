@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Windows.UI.Xaml.Data;
-using GamerSky.Core.Helper;
+using GamerSky.Helper;
 
 namespace GamerSky.Converters
 {

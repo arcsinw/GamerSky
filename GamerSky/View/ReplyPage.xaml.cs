@@ -1,4 +1,4 @@
-﻿using GamerSky.Core.ViewModel;
+﻿using GamerSky.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;

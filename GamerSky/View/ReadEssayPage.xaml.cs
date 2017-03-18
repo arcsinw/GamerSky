@@ -1,7 +1,7 @@
-﻿using GamerSky.Core.Helper;
-using GamerSky.Core.Http;
-using GamerSky.Core.Model;
-using GamerSky.Core.ViewModel;
+﻿using GamerSky.Helper;
+using GamerSky.Http;
+using GamerSky.Model;
+using GamerSky.ViewModel;
 using GamerSky.Helper;
 using System;
 using System.Collections.Generic;

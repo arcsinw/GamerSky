@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:controls="using:GamerSky.Controls"
-    xmlns:vm="using:GamerSky.Core.ViewModel"
-    xmlns:m="using:GamerSky.Core.Model"
+    xmlns:vm="using:GamerSky.ViewModel"
+    xmlns:m="using:GamerSky.Model"
     xmlns:converter="using:GamerSky.Converters"
     RequestedTheme="{Binding AppTheme}"
     mc:Ignorable="d">

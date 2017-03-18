@@ -16,8 +16,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using GamerSky.Core.Helper;
-using GamerSky.Core.ViewModel;
+using GamerSky.Helper;
+using GamerSky.ViewModel;
 using GamerSky.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供

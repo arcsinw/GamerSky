@@ -5,8 +5,8 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using GamerSky.Core.Helper;
-using GamerSky.Core.ViewModel;
+using GamerSky.Helper;
+using GamerSky.ViewModel;
 
 namespace GamerSky.Helper
 {

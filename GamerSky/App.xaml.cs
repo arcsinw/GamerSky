@@ -1,4 +1,4 @@
-﻿using GamerSky.Core.Helper;
+﻿using GamerSky.Helper;
 using GamerSky.View;
 using System;
 using Windows.ApplicationModel;
@@ -45,7 +45,7 @@ namespace GamerSky
                 .UnhandledException += SynchronizationContext_UnhandledException;
         }
 
-        private async void SynchronizationContext_UnhandledException(object sender, Core.Helper.UnhandledExceptionEventArgs e)
+        private async void SynchronizationContext_UnhandledException(object sender, Helper.UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
             MessageDialog dialog = new MessageDialog(GetExceptionDetailMessage(e.Exception), GlobalStringLoader.GetString("USendEmail"));

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
-using GamerSky.Core.Model;
+using GamerSky.Model;
 
 namespace GamerSky.Converters
 {

@@ -10,7 +10,7 @@ using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.Web;
 
-namespace GamerSky.Core.Helper
+namespace GamerSky.Helper
 {
     public class HtmlStreamUriResolver : IUriToStreamResolver
     {
