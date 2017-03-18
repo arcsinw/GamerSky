@@ -229,17 +229,21 @@
                     </Grid>
                     <Grid>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Ellipse Height="80" Width="80" HorizontalAlignment="Center" Margin="10">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="ms-appx:///Assets/Images/Login_qq.png"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
+                            <Button Style="{ThemeResource ImageButtonStyle}">
+                                <Ellipse Height="80" Width="80" HorizontalAlignment="Center" Margin="10">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="ms-appx:///Assets/Images/Login_qq.png"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Button>
 
-                            <Ellipse Height="80" Width="80" Margin="10" Tapped="Ellipse_Tapped">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="ms-appx:///Assets/Images/Login_weibo.png"/>
-                                </Ellipse.Fill>
-                            </Ellipse>
+                            <Button Style="{ThemeResource ImageButtonStyle}" Click="Button_Click">
+                                <Ellipse Height="80" Width="80" Margin="10" Tapped="Ellipse_Tapped">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="ms-appx:///Assets/Images/Login_weibo.png"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Button>
                         </StackPanel>
                     </Grid>
                 </StackPanel>

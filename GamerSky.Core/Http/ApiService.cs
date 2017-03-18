@@ -410,6 +410,11 @@ namespace GamerSky.Core.Http
             return result;
         }
 
+        public async Task SinaLogin()
+        {
+            
+        }
+
         /// <summary>
         /// Add a comment
         /// </summary>

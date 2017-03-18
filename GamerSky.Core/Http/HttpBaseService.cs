@@ -14,6 +14,7 @@ namespace GamerSky.Core.Http
     /// </summary>
     public class HttpBaseService
     {
+        private static HttpClient httpClient = new HttpClient();
         /// <summary>
         /// 向服务器发送get请求  返回服务器回复数据(string)
         /// </summary>
@@ -23,7 +24,7 @@ namespace GamerSky.Core.Http
         {
             try
             {
-                HttpResponseMessage response = await new HttpClient().GetAsync(new Uri(uri));
+                HttpResponseMessage response = await httpClient.GetAsync(new Uri(uri));
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync();
             }
@@ -46,7 +47,7 @@ namespace GamerSky.Core.Http
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(uri));
                 request.Content = new HttpStringContent(body, Windows.Storage.Streams.UnicodeEncoding.Utf8, "application/json; charset=utf-8");
-                HttpResponseMessage response = await new HttpClient().SendRequestAsync(request);
+                HttpResponseMessage response = await httpClient.SendRequestAsync(request);
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsStringAsync();
             }
@@ -66,7 +67,7 @@ namespace GamerSky.Core.Http
         {
             try
             {
-                HttpResponseMessage response = await new HttpClient().GetAsync(new Uri(uri));
+                HttpResponseMessage response = await httpClient.GetAsync(new Uri(uri));
                 response.EnsureSuccessStatusCode();
                 return await response.Content.ReadAsBufferAsync();
             }

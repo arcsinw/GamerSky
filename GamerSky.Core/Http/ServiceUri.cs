@@ -68,9 +68,15 @@ namespace GamerSky.Core.Http
         public const string AdStart = "http://appapi2.gamersky.com/v2/adstart";
 
         /// <summary>
-        /// 登录
+        /// 游民登录
         /// </summary>
         public const string Login = "http://appapi2.gamersky.com/v2/login";
+
+        /// <summary>
+        /// 微博登录
+        /// 先使用OAuth获取code 再通过get获取用户信息
+        /// </summary>
+        public const string SinaLogin = "http://i.gamersky.com/api/logincheck?callback=9ca67470f6e25515f28192743109efc6";
 
         /// <summary>
         /// 评论文章

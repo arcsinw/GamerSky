@@ -285,6 +285,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <x:String x:Key="DefaultAvatar">ms-appx:///Assets/Images/members.png</x:String>
     </Page.Resources>
 
     <Page.DataContext>
@@ -298,7 +300,7 @@
                     <VirtualizingStackPanel Orientation="Vertical" />
                 </ItemsPanelTemplate>
             </FlipView.ItemsPanel>
-            
+
             <FlipView.Items>
                 <FlipViewItem>
                     <controls:ArticlePresenter x:Name="articlePresenter" Html="{Binding ContentHtml}" 
@@ -313,7 +315,7 @@
                                                    ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:Comment">
-                                <Grid Padding="8">
+                                <Grid Padding="4,8">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="48"/>
                                         <ColumnDefinition Width="*"/>
@@ -336,32 +338,34 @@
 
                                     <Grid Grid.Row="0" Grid.Column="1" Margin="8,0">
                                         <TextBlock>
-                                        <Run Foreground="{ThemeResource ThemeColorBrush}" Text="{x:Bind NickName }"/>
+                                        <Run Foreground="{ThemeResource ThemeColorBrush}" Text="{Binding NickName }"/>
                                         <LineBreak/>
-                                        <Run Text="{x:Bind IpLocation}"/>
+                                        <Run Text="{Binding IpLocation}"/>
                                         <Run Text="{Binding CreateTime,Converter={StaticResource DateTimeToTimeSpanConverter}}"/>
                                         </TextBlock>
 
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Style="{ThemeResource LightButtonStyle}"/>
-                                            <Button Content="回复" Style="{ThemeResource LightButtonStyle}"/>
+                                            <Button  Style="{ThemeResource LightButtonStyle}"/>
+                                            <Button Content="回复" Background="Transparent" Style="{ThemeResource LightButtonStyle}"/>
                                         </StackPanel>
                                     </Grid>
 
                                     <Grid Grid.Row="1" Grid.Column="1" Margin="8,0">
-                                        <StackPanel  Padding="4">
-                                            <ItemsControl Margin="0,8" ItemsSource="{x:Bind Comments}" BorderBrush="{ThemeResource ThemeColorBrush}" BorderThickness="1">
+                                        <StackPanel>
+
+                                            <ItemsControl Margin="0,8" ItemsSource="{x:Bind Comments,Mode=OneWay}" BorderBrush="Red">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate x:DataType="m:Comment">
-                                                        <Grid HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ThemeColorBrush}" >
+                                                        <Grid HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource CommentBorderBrush}" >
                                                             <StackPanel>
-                                                                <TextBlock Text="{x:Bind NickName}" Foreground="{ThemeResource ThemeColorBrush}"/>
+                                                                <TextBlock Text="{x:Bind NickName}" Foreground="{ThemeResource CommentNickNameBrush}"/>
                                                                 <TextBlock Text="{x:Bind Content}" TextWrapping="Wrap"/>
                                                             </StackPanel>
                                                         </Grid>
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>
+
                                             <TextBlock Text="{Binding Content}" TextWrapping="Wrap"/>
                                         </StackPanel>
                                     </Grid>
@@ -439,7 +443,7 @@
 
                                         <Slider Grid.Column="1"  x:Name="fontSlider" Value="{Binding EssayFontSize,Mode=TwoWay}"
                                                  Minimum="12" Maximum="30"  IsThumbToolTipEnabled="True" StepFrequency="1" 
-                                                ValueChanged="fontSlider_ValueChanged" Style="{StaticResource LightSliderStyle}"/> 
+                                                ValueChanged="fontSlider_ValueChanged" Style="{StaticResource LightSliderStyle}"/>
                                     </Grid>
                                 </ListViewItem>
                                 <ListViewItem>
@@ -521,7 +525,6 @@
             </FlipView.ItemTemplate>
         </FlipView>
 
-
         <TextBlock VerticalAlignment="Bottom" Margin="12" Foreground="White"
                 Visibility="{Binding ElementName=imageFlipView,Path=Visibility}">
             <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex,Converter={StaticResource AddConverter}}" />
@@ -529,10 +532,8 @@
             <Run x:Name="countRun" Text="{x:Bind Images.Count,Mode=OneWay}"/>
         </TextBlock>
         <!--#endregion-->
-    </Grid>
 
-    <Page.BottomAppBar>
-        <CommandBar x:Name="commandBar" Visibility="Collapsed">
+        <CommandBar x:Name="commandBar" VerticalAlignment="Bottom" Visibility="Collapsed">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Save" x:Uid="Save" Click="saveAppBar_Click"/>
                 <AppBarButton Label="HD" >
@@ -547,5 +548,5 @@
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
-    </Page.BottomAppBar>
+    </Grid>
 </Page>

@@ -8,7 +8,7 @@ namespace GamerSky.Core.Helper
 {
     public class DateTimeHelper
     {
-        private static DateTime startTime = new DateTime(1970, 1, 1, 0, 0, 0);
+        private static DateTime startTime = new DateTime(1970, 1, 1, 8, 0, 0);
 
         /// <summary>
         /// Converte unix time stamp to DateTime

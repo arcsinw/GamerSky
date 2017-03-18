@@ -14,7 +14,7 @@
     NavigationCacheMode="Enabled"
     RequestedTheme="{Binding AppTheme}" 
     >
-  
+
     <Page.Transitions>
         <TransitionCollection>
             <PaneThemeTransition Edge="Right"/>
@@ -367,17 +367,16 @@
         <vm:EssayDetailViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-
     <Grid x:Name="rootGrid" Background="{ThemeResource PageBackgroundBrush}">
 
-       <Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
+        <Pivot x:Name="pivot" Style="{ThemeResource EssayPivotStyle}"
                SelectionChanged="pivot_SelectionChanged">
 
             <PivotItem Header="正文" Margin="0" >
                 <WebView x:Name="webView" ex:ExtensionHelper.HtmlString="{Binding HtmlString}"
                     ScriptNotify="webView_ScriptNotify" NavigationCompleted="webView_NavigationCompleted"
                          DOMContentLoaded="webView_DOMContentLoaded" NewWindowRequested="WebView_NewWindowRequested">
-                </WebView> 
+                </WebView>
             </PivotItem>
 
             <PivotItem Header="评论" Margin="0">
@@ -397,7 +396,9 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
 
-                                --><!--Avatar--><!--
+                                -->
+                <!--Avatar-->
+                <!--
                                 <Ellipse Grid.Row="0" Grid.Column="0" 
                                          Width="40" Height="40">
                                     <Ellipse.Fill>
@@ -460,10 +461,12 @@
          
             <FlipViewItem>
                 <controls:ArticlePresenter Html="{Binding HtmlString}"/>
-                --><!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
+                -->
+        <!--<WebView x:Name="webView" hp:ExtensionHelper.HtmlString="{Binding HtmlString}"
                     ScriptNotify="webView_ScriptNotify" NavigationCompleted="webView_NavigationCompleted"
                          DOMContentLoaded="webView_DOMContentLoaded">
-                </WebView>--><!--
+                </WebView>-->
+        <!--
             </FlipViewItem> 
  
             <FlipViewItem>
@@ -482,7 +485,9 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions> 
-                                --><!--Avatar--><!--
+                                -->
+        <!--Avatar-->
+        <!--
                                 <Ellipse Grid.Row="0" Grid.Column="0" 
                                          Width="40" Height="40">
                                     <Ellipse.Fill>
@@ -533,9 +538,6 @@
                 </ListView>
             </FlipViewItem>
         </FlipView>-->
-
- 
-        <!--<WebView x:Name="commentWebView" Visibility="Collapsed"/>-->
 
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
 
@@ -683,7 +685,6 @@
             </FlipView.ItemTemplate>
         </FlipView>
 
-
         <TextBlock VerticalAlignment="Bottom" Margin="12" Foreground="White"
                 Visibility="{Binding ElementName=imageFlipView,Path=Visibility}">
             <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex,Converter={StaticResource AddConverter}}" />
@@ -691,10 +692,8 @@
             <Run x:Name="countRun" />
         </TextBlock>
         <!--#endregion-->
-    </Grid>
-    
-    <Page.BottomAppBar>
-        <CommandBar x:Name="appBar" Visibility="Collapsed">
+
+        <CommandBar x:Name="appBar" VerticalAlignment="Bottom">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Save" Label="保存" x:Name="saveAppBar" Click="saveAppBar_Click"/>
                 <AppBarButton Label="HD"  x:Name="hdAppBar" Click="hdAppBar_Click">
@@ -704,5 +703,5 @@
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
-    </Page.BottomAppBar>
+    </Grid>
 </Page>

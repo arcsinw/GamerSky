@@ -35,6 +35,10 @@
                     <SolidColorBrush x:Key="ListViewBorderBrush" Color="LightGray"/> 
                     <!--设置ListViewItem背景色-->
                     <SolidColorBrush x:Key="SearchListViewItemBackground" Color="White"/>
+                    <!--评论页用户名-->
+                    <SolidColorBrush x:Key="CommentNickNameBrush" Color="#D22222"/>
+                    <!--评论页边框颜色-->
+                    <SolidColorBrush x:Key="CommentBorderBrush" Color="#D22222"/>
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Dark">
@@ -61,6 +65,10 @@
                     <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF3C3C3C"/> 
                     <!--设置ListViewItem背景色-->
                     <SolidColorBrush x:Key="SearchListViewItemBackground" Color="#FF252526"/>
+                    <!--评论页用户名-->
+                    <SolidColorBrush x:Key="CommentNickNameBrush" Color="#CCCCCC"/>
+                    <!--评论页边框颜色-->
+                    <SolidColorBrush x:Key="CommentBorderBrush" Color="#CCCCCC"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
              
@@ -320,7 +328,7 @@
 
             <x:String x:Key="DefaultAvatar">ms-appx:///Assets/Images/members.png</x:String>
 
-            <Thickness x:Key="ListViewBorderThickness">1,0,1,1</Thickness>
+            <Thickness x:Key="ListViewBorderThickness">0,0,0,1</Thickness>
 
             <!--ListView.ItemsContainerStyle-->
             <Style x:Key="EssayListViewItemsContainerStyle" TargetType="ListViewItem">

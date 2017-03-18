@@ -106,6 +106,7 @@
     <Compile Include="Converters\BoolToElementThemeConverter.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Extensions\ExtensionHelper.cs" />
+    <Compile Include="Helper\AuthenticationHelper.cs" />
     <Compile Include="Helper\HtmlStreamUriResolver.cs" />
     <Compile Include="Cache\CacheBase.cs" />
     <Compile Include="Cache\FileCache.cs" />
@@ -281,10 +282,14 @@
     <Content Include="Assets\Images\empty_content_night.png" />
     <Content Include="Assets\Images\empty_subscription.png" />
     <Content Include="Assets\Images\empty_subscription_night.png" />
+    <Content Include="Assets\Images\unlike.png" />
+    <Content Include="Assets\Images\like.png" />
+    <Content Include="Assets\Images\unlike_night.png" />
+    <Content Include="Assets\Images\like_night.png" />
     <Content Include="Assets\Images\icon_dingyue_h.png" />
     <Content Include="Assets\Images\icon_gonglue_h.png" />
     <Content Include="Assets\Images\icon_xinwen_h.png" />
-    <Content Include="Assets\Images\image_loading_day.png" />
+    <Content Include="Assets\Images\image_loading.png" />
     <Content Include="Assets\Images\image_loading_game_lib_day.png" />
     <Content Include="Assets\Images\image_loading_game_lib_night.png" />
     <Content Include="Assets\Images\image_loading_night.png" />
