@@ -1,0 +1,7 @@
+﻿//此文件记录此软件的编程规范
+1.ApiService 返回值
+**函数可以返回null， 但不能抛出异常，所有的异常由HttpBaseService catch，或者由全局异常处理函数处理
+**返回result部分
+2.断网时从缓存读，有网时发post请求获取数据
+**写入缓存的格式为去除ResultBase后的数据格式
+3.ViewModel不记录View层的当前页码
