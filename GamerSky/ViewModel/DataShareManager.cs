@@ -159,18 +159,19 @@ namespace GamerSky.ViewModel
         }
 
         #endregion
-    
+
+        #region Singleton
         /// <summary>
         /// 本地设置
         /// </summary>
         private static ApplicationDataContainer settings = Windows.Storage.ApplicationData.Current.LocalSettings;
-         
+
         private static DataShareManager current;
         public static DataShareManager Current
         {
             get
             {
-                if(current == null)
+                if (current == null)
                 {
                     current = new DataShareManager();
                 }
@@ -178,10 +179,11 @@ namespace GamerSky.ViewModel
             }
         }
 
-        public DataShareManager()
+        private DataShareManager()
         {
             LoadData();
-        }
+        } 
+        #endregion
 
         private async void LoadData()
         {

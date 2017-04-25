@@ -27,6 +27,7 @@ namespace GamerSky
             this.Suspending += OnSuspending;
             UnhandledException += OnUnhandledException;
         }
+
         #region Handle unhandled exception
 
         private async void OnUnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -72,6 +73,7 @@ namespace GamerSky
         }
 
         #endregion
+
         public async void CreateJumpList()
         {
             JumpList jumpList = await JumpList.LoadCurrentAsync();
