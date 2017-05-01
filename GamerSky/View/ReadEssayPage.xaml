@@ -10,6 +10,7 @@
     xmlns:vm="using:GamerSky.ViewModel"
     xmlns:m="using:GamerSky.Model"
     xmlns:converter="using:GamerSky.Converters"
+    xmlns:ex="using:GamerSky.Extensions"
     RequestedTheme="{Binding AppTheme}"
     mc:Ignorable="d">
 
@@ -297,7 +298,7 @@
         <FlipView x:Name="flipView"   SelectionChanged="flipView_SelectionChanged">
             <FlipView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Vertical" />
+                    <VirtualizingStackPanel Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </FlipView.ItemsPanel>
 
@@ -311,6 +312,13 @@
                 </FlipViewItem>
 
                 <FlipViewItem>
+                    <WebView x:Name="commentWebView" 
+                         NavigationStarting="commentWebView_NavigationStarting"
+                         NavigationCompleted="commentWebView_NavigationCompleted"
+                         ex:ExtensionHelper.HtmlString="{Binding CommentString}"/>
+                </FlipViewItem>
+                
+                <!--<FlipViewItem>
                     <ListView ItemsSource="{Binding Comments}" SelectionMode="None"
                                                    ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
                         <ListView.ItemTemplate>
@@ -325,7 +333,7 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
 
-                                    <!--Avatar-->
+                                    --><!--Avatar--><!--
                                     <Ellipse Grid.Row="0" Grid.Column="0" Width="40" Height="40">
                                         <Ellipse.Fill>
                                             <ImageBrush>
@@ -373,13 +381,13 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </FlipViewItem>
+                </FlipViewItem>-->
             </FlipView.Items>
         </FlipView>
 
         <ProgressRing x:Name="progress" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
 
-        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Orientation="Horizontal">
             <Button x:Name="translateBtn" Visibility="Collapsed"  HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Style="{ThemeResource BackButtonStyle}" >
                 <SymbolIcon Symbol="Character" />
@@ -463,7 +471,7 @@
                                     </Grid>
                                 </ListViewItem>
                                 <ListViewItem x:Name="edgeListViewItem" Tapped="edgeListViewItem_Tapped">
-                                    <TextBlock Text="Edge打开"/>
+                                    <TextBlock Text="浏览器打开"/>
                                 </ListViewItem>
                                 <ListViewItem>
                                     <Grid HorizontalAlignment="Stretch" >
@@ -536,7 +544,7 @@
         <CommandBar x:Name="commandBar" VerticalAlignment="Bottom" Visibility="Collapsed">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Save" x:Uid="Save" Click="saveAppBar_Click"/>
-                <AppBarButton Label="HD" >
+                <!--<AppBarButton Label="HD" >
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="ms-appx:///Assets/Images/picture_origin.png"/>
                     </AppBarButton.Icon>
@@ -545,7 +553,7 @@
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="ms-appx:///Assets/Images/Share.png"/>
                     </AppBarButton.Icon>
-                </AppBarButton>
+                </AppBarButton>-->
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Grid>

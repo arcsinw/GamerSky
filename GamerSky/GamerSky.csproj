@@ -437,6 +437,8 @@
     <Content Include="Assets\Images\UnFavorited.png" />
     <Content Include="Assets\Js\gesture.js" />
     <Content Include="Assets\Js\gs.js" />
+    <Content Include="Assets\Js\gsAppHTMLTemplate.js" />
+    <Content Include="Assets\Js\gsAppHTMLTemplate_Video.js" />
     <Content Include="Assets\Js\jquery.lazyload.js" />
     <Content Include="Assets\Js\jquery.min.js" />
     <Content Include="Assets\SplashScreen.scale-100.png" />

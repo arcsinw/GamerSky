@@ -76,6 +76,23 @@ namespace GamerSky.ViewModel
             set { contentHtml = value; OnPropertyChanged(); }
         }
 
+        private string commentString;
+        /// <summary>
+        /// 评论Html
+        /// </summary>
+        public string CommentString
+        {
+            get
+            {
+                return commentString;
+            }
+            set
+            {
+                commentString = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ElementTheme appTheme;
         public ElementTheme AppTheme
         {
@@ -115,6 +132,7 @@ namespace GamerSky.ViewModel
             set
             {
                 currentEssay = value;
+                OnPropertyChanged();
             }
         }
 
@@ -171,7 +189,9 @@ namespace GamerSky.ViewModel
                             + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gesture.js\"></script>"
                             + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/jquery.min.js\"></script>"
                             + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/jquery.lazyload.js\"></script>"
-                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gs.js\"></script>";
+                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gs.js\"></script>"
+                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gsAppHTMLTemplate.js\"></script>"
+                            + "<script type=\"text/javascript\" src=\"ms-appx-web:///Assets/Js/gsAppHTMLTemplate_Video.js\"></script>";
 
                 string title = news.Title;
                 string subTitle = news.SubTitle;
@@ -389,6 +409,28 @@ namespace GamerSky.ViewModel
             Comments = new EssayCommentsCollection(contentId);
             OnPropertyChanged("Comments");
         }
+
+        /// <summary>
+        /// 生成评论网页
+        /// </summary>
+        /// <param name="essay"></param>
+        public async void GenerateCommentString()
+        {
+            IsActive = true;
+            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Html/Comment.html"));
+            CommentString = await FileIO.ReadTextAsync(file);
+
+            if (CurrentEssay != null)
+            {
+                CommentString = CommentString.Replace("{0}", CurrentEssay.Title).Replace("{1}", CurrentEssay.ContentId);
+            }
+            else
+            {
+                CommentString = CommentString.Replace("{0}", "评论").Replace("{1}", ContentId);
+            }
+
+            IsActive = false;
+        }
         #endregion
 
         public async void RefreshContent()
@@ -399,8 +441,10 @@ namespace GamerSky.ViewModel
 
         public void RefreshComments()
         {
-            Comments?.Clear();
-            Comments = new EssayCommentsCollection(ContentId,1);
+            //Comments?.Clear();
+            //Comments = new EssayCommentsCollection(ContentId,1);
+
+            GenerateCommentString();
             OnPropertyChanged("Comments");
         }
     }

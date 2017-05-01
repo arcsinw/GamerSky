@@ -74,11 +74,13 @@ namespace GamerSky.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Essay essay = (Essay)e.Parameter;
-            this._currentEssay = essay;
-            //ViewModel.SetCurrentEssay(essay,flipView.SelectedIndex);
-            _isCommentLoaded = false;
-            _isContentLoaded = false;
-            ViewModel.SetCurrentContentId(essay.ContentId, flipView.SelectedIndex);
+            if (essay != null)
+            {
+                this._currentEssay = essay; 
+                _isCommentLoaded = false;
+                _isContentLoaded = false;
+                ViewModel.SetCurrentEssay(essay, flipView.SelectedIndex);
+            }
         }
 
         #region Js invoke  
@@ -144,7 +146,14 @@ namespace GamerSky.View
 
         private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.RefreshContent();
+            if (flipView.SelectedIndex == 0)
+            {
+                ViewModel.RefreshContent();
+            }
+            else
+            {
+                ViewModel.RefreshComments();
+            }
         }
 
         private async void saveAppBar_Click(object sender, RoutedEventArgs e)
@@ -210,6 +219,10 @@ namespace GamerSky.View
             if (_currentEssay != null)
             {
                 DataShareManager.Current.UpdateFavoriteEssayList(_currentEssay);
+                if (ViewModel.CurrentEssay != null)
+                {
+                    ViewModel.CurrentEssay.IsFavorite = true;
+                }
             }
         }
           
@@ -241,7 +254,11 @@ namespace GamerSky.View
         private async void flipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //if (ViewModel.CurrentEssay == null) return;
-            if (string.IsNullOrEmpty(ViewModel.ContentId)) return;
+            if (string.IsNullOrEmpty(ViewModel.ContentId))
+            {
+
+            }
+
             switch (flipView.SelectedIndex)
             {
                 case 0:
@@ -254,7 +271,8 @@ namespace GamerSky.View
                 case 1:
                     if (!_isCommentLoaded)
                     {
-                        ViewModel.GenerateComments(ViewModel.ContentId);
+                        //ViewModel.GenerateComments(ViewModel.ContentId);
+                        ViewModel.GenerateCommentString();
                     }
                     _isCommentLoaded = true;
                     break;
@@ -308,6 +326,16 @@ namespace GamerSky.View
                 _isContentLoaded = false;
                 ViewModel.SetCurrentContentId(e.Value, flipView.SelectedIndex);
             }
+        }
+
+        private void commentWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        {
+            progress.IsActive = true;
+        }
+
+        private void commentWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            progress.IsActive = false;
         }
     }
 }
