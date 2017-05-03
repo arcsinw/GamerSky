@@ -41,7 +41,8 @@ namespace GamerSky.View
 
         public StrategyPage()
         {
-            this.InitializeComponent(); 
+            this.InitializeComponent();
+            
         }
          
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)

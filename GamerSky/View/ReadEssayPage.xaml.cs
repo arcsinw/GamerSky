@@ -2,7 +2,6 @@
 using GamerSky.Http;
 using GamerSky.Model;
 using GamerSky.ViewModel;
-using GamerSky.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,14 +23,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
+ 
 namespace GamerSky.View
-{
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+{ 
     public sealed partial class ReadEssayPage : Page
     {
         private bool _isContentLoaded = false;
@@ -69,6 +63,8 @@ namespace GamerSky.View
         {
             ViewModel.ContentHtml = string.Empty;
             ViewModel.Comments?.Clear();
+
+            pivot.SelectedIndex = 0;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -79,7 +75,7 @@ namespace GamerSky.View
                 this._currentEssay = essay; 
                 _isCommentLoaded = false;
                 _isContentLoaded = false;
-                ViewModel.SetCurrentEssay(essay, flipView.SelectedIndex);
+                ViewModel.SetCurrentEssay(essay, pivot.SelectedIndex);
             }
         }
 
@@ -89,8 +85,14 @@ namespace GamerSky.View
         /// </summary>
         public async void NightMode()
         {
-            await articlePresenter.InvokeScriptAsync("NightMode", new[] { "" });
-            UIHelper.ShowStatusBar();
+            try
+            {
+                await contentWebView.InvokeScriptAsync("NightMode", new[] { "" });
+                UIHelper.ShowStatusBar();
+            }
+            catch
+            {
+            }
         }
 
         /// <summary>
@@ -98,28 +100,56 @@ namespace GamerSky.View
         /// </summary>
         public async void DayMode()
         {
-            await articlePresenter.InvokeScriptAsync("DayMode", new[] { "" });
-            UIHelper.ShowStatusBar();
+            try
+            {
+                await contentWebView.InvokeScriptAsync("DayMode", new[] { "" });
+                UIHelper.ShowStatusBar();
+            }
+            catch
+            {
+
+            }
         }
 
         public async void GetAllPictures()
         {
-            string result = await articlePresenter.InvokeScriptAsync("GetAllPictures", new[] { "" });
-            var imgs = JsonHelper.Deserlialize<List<JsImage>>(result);
-            if (imgs != null)
+            try
             {
-                imgs.ForEach(x => Images.Add(x));
+                string result = await contentWebView.InvokeScriptAsync("GetAllPictures", new[] { "" });
+                var imgs = JsonHelper.Deserlialize<List<JsImage>>(result);
+                if (imgs != null)
+                {
+                    imgs.ForEach(x => Images.Add(x));
+                }
+            }
+            catch
+            {
+
             }
         }
 
         public async void NoImageMode()
         {
-            await articlePresenter.InvokeScriptAsync("NoImageMode", new[] { "" });
+            try
+            {
+                await contentWebView.InvokeScriptAsync("NoImageMode", new[] { "" });
+            }
+            catch
+            {
+
+            }
         }
 
         public async void SetFontSize(string fontSize)
         {
-            await articlePresenter.InvokeScriptAsync("SetFontSize", new[] { fontSize });
+            try
+            {
+                await contentWebView.InvokeScriptAsync("SetFontSize", new[] { fontSize });
+            }
+            catch
+            {
+
+            }
         }
         #endregion
          
@@ -146,7 +176,7 @@ namespace GamerSky.View
 
         private void refreshButton_Click(object sender, RoutedEventArgs e)
         {
-            if (flipView.SelectedIndex == 0)
+            if (pivot.SelectedIndex == 0)
             {
                 ViewModel.RefreshContent();
             }
@@ -259,7 +289,7 @@ namespace GamerSky.View
 
             }
 
-            switch (flipView.SelectedIndex)
+            switch (pivot.SelectedIndex)
             {
                 case 0:
                     if (!_isContentLoaded)
@@ -324,7 +354,7 @@ namespace GamerSky.View
             {
                 _isCommentLoaded = false;
                 _isContentLoaded = false;
-                ViewModel.SetCurrentContentId(e.Value, flipView.SelectedIndex);
+                ViewModel.SetCurrentContentId(e.Value, pivot.SelectedIndex);
             }
         }
 
@@ -336,6 +366,11 @@ namespace GamerSky.View
         private void commentWebView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
         {
             progress.IsActive = false;
+        }
+
+        private void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
+        {
+            Images.Clear();
         }
     }
 }

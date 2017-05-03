@@ -153,7 +153,7 @@ namespace GamerSky.ViewModel
             set { isNoImgMode = value; OnPropertyChanged(); }
         }
 
-        private int essayFontSize;
+        private int essayFontSize = 12;
 
         public int EssayFontSize
         {
