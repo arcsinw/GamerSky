@@ -152,7 +152,7 @@ namespace GamerSky.Helper
         /// <summary>
         /// pin磁贴到桌面
         /// </summary>
-        public static async void PinSecondaryTile(string argument)
+        public static async Task<bool> PinSecondaryTile(string argument)
         {
             if (!SecondaryTile.Exists(TILE_ID))
             {
@@ -176,13 +176,18 @@ namespace GamerSky.Helper
 
                 //把磁贴pin到桌面
                 bool result = await secondaryTile.RequestCreateAsync();
+                return result;
+            }
+            else
+            {
+                return true;
             }
         }
 
         /// <summary>
         /// 删除桌面磁贴
         /// </summary>
-        public static async void UnPinSecondaryTile()
+        public static async Task UnPinSecondaryTile()
         {
             if(SecondaryTile.Exists(TILE_ID))
             {

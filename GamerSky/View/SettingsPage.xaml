@@ -188,7 +188,7 @@
                     <ListViewItem>
                         <Grid>
                             <TextBlock x:Uid="TransparentTile" VerticalAlignment="Center"/>
-                            <ToggleSwitch IsOn="{x:Bind viewModel.IsTransparentTileOn,Mode=TwoWay}"  HorizontalAlignment="Right" MinWidth="0"
+                            <ToggleSwitch x:Name="transparentTileSwitch" Toggled="transparentTileSwitch_Toggled" HorizontalAlignment="Right" MinWidth="0"
                                           VerticalAlignment="Center"/>
                         </Grid>
                     </ListViewItem>

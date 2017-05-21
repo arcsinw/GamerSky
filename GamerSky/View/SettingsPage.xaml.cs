@@ -100,6 +100,20 @@ namespace GamerSky.View
             MasterDetailPage.Current.DetailFrame.Navigate(typeof(AdStartPage));
         }
 
+        private async void transparentTileSwitch_Toggled(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if (transparentTileSwitch.IsOn)
+            {
+                bool result = await LiveTileHelper.PinSecondaryTile("X");
+                transparentTileSwitch.IsOn = result;
+            }
+            else
+            {
+                await LiveTileHelper.UnPinSecondaryTile();
+            }
+
+        }
+
         /// <summary>
         /// 去除广告
         /// </summary>
