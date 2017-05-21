@@ -1,0 +1,73 @@
+﻿<Page
+    x:Class="GamerSky.View.EmailRegisterPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GamerSky.View"
+    xmlns:vm="using:GamerSky.Core.ViewModel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:hp="using:GamerSky.Helper"
+    NavigationCacheMode="Required"
+    mc:Ignorable="d"
+    RequestedTheme="{x:Bind ViewModel.AppTheme,Mode=OneWay}">
+
+    <Page.DataContext>
+        <vm:EmailRegisterPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <hp:DeviceTypeTrigger PlatformType="Desktop"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="back.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid Background="{ThemeResource ThemeColorBrush}">
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" 
+                    Click="{x:Bind Back}" Grid.Column="0">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock Text="邮箱注册" Style="{ThemeResource PageTitleStyle}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
+            <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
+                <StackPanel Padding="16" >
+                    <TextBox PlaceholderText="请输入用户名" Style="{StaticResource LightTextBoxStyle}" 
+                             Text="{Binding Path=RegisterInfo.UserName,Mode=TwoWay}"/>
+                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserName]}" Style="{ThemeResource ErrorTextBlock}"/>
+                    <PasswordBox PlaceholderText="请输入密码"  Password="{Binding Path=RegisterInfo.UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[UserPassword]}" Style="{ThemeResource ErrorTextBlock}"/>
+                    <!--<PasswordBox PlaceholderText="请再次输入密码" Password="{Binding Path=RegisterInfo.SureUserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[SureUserPassword]}" Style="{ThemeResource ErrorTextBlock}"/>-->
+                    <TextBox PlaceholderText="请输入邮箱" Style="{StaticResource LightTextBoxStyle}" 
+                             Text="{Binding Path=RegisterInfo.Email,Mode=TwoWay}"/>
+                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[Email]}" Style="{ThemeResource ErrorTextBlock}"/>
+                    <TextBox PlaceholderText="请输入密保问题" Style="{StaticResource LightTextBoxStyle}" 
+                             Text="{Binding Path=RegisterInfo.Question,Mode=TwoWay}"/>
+                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[Question]}" Style="{ThemeResource ErrorTextBlock}"/>
+                    <TextBox PlaceholderText="请输入密保答案" Style="{StaticResource LightTextBoxStyle}" 
+                             Text="{Binding Path=RegisterInfo.Answer,Mode=TwoWay}"/>
+                    <TextBlock Text="{Binding Path=RegisterInfo.Errors[Answer]}" Style="{ThemeResource ErrorTextBlock}"/>
+                    <Button Content="注册" IsEnabled="{Binding Path=RegisterInfo.IsValid}" HorizontalAlignment="Stretch" Margin="0,0,0,16"
+                            Background="{ThemeResource ThemeColorBrush}" Foreground="White" Click="{x:Bind Register}" Style="{ThemeResource RoundButtonStyle}"/>
+                    <TextBlock>
+                        <Run Text="注册代表同意接受"/>
+                        <Hyperlink UnderlineStyle="None" Click="{x:Bind Agreement}" Foreground="{ThemeResource ThemeColorBrush}">"服务条款和声明"</Hyperlink>
+                    </TextBlock>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,101 @@
+﻿<Page
+    x:Class="GamerSky.View.SubscribeContentPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GamerSky.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hp="using:GamerSky.Helper"
+    xmlns:pr="using:PullToRefresh.UWP"
+    xmlns:vm="using:GamerSky.Core.ViewModel"
+    xmlns:converter="using:GamerSky.Converters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    RequestedTheme="{Binding AppTheme}">
+
+    <Page.DataContext>
+        <vm:SubscribeContentViewModel x:Name="viewModel"/>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converter:CountToVisibilityConverter x:Key="CountToBoolConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <hp:DeviceTypeTrigger PlatformType="Desktop"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="back.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+ 
+        <!--订阅栏目内文章列表-->
+        <Grid Background="{ThemeResource PageBackgroundBrush}"
+              Grid.Row="0" Grid.RowSpan="2" >
+            <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
+                <ListView ItemsSource="{Binding SubscribeContens}"
+                          Style="{ThemeResource LightListView}"
+                          SelectionMode="None"
+                          x:Name="listView"
+                          Loaded="ListView_Loaded"
+                          ShowsScrollingPlaceholders="True"
+                          IsItemClickEnabled="True"
+                          ItemClick="ListView_ItemClick"
+                          ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                          ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}">    
+                    <ListView.Header>
+                        <Grid>
+                            <Image Height="250" Stretch="Fill">
+                                <Image.Source>
+                                    <BitmapImage UriSource="{Binding HeaderSubscribe.ThumbnailURLs[0]}"/>
+                                </Image.Source>
+                            </Image>
+                            <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
+                                <TextBlock Margin="7,0" Text="{Binding HeaderSubscribe.Title}" Foreground="White" VerticalAlignment="Bottom"/>
+                            </Border>
+                        </Grid>
+                    </ListView.Header> 
+                </ListView>
+            </pr:PullToRefreshBox>
+ 
+            <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
+    
+        </Grid>
+
+        <!--标题栏-->
+        <Grid Background="{ThemeResource ThemeColorBrush}" Height="48"
+              Opacity="0" Visibility="{Binding ElementName=titleBarGrid,Path=Opacity,Converter={StaticResource CountToBoolConverter}}"
+              x:Name="titleBarGrid" Grid.Row="0">
+            <Button x:Name="back"  Click="back_Click" Style="{ThemeResource BackButtonStyle}"
+                    Grid.Column="0">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock Text="{Binding HeaderSubscribe.Title}" Style="{ThemeResource PageTitleStyle}"/>
+        </Grid>
+
+
+        <Popup Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right"  VerticalAlignment="Bottom"
+               Height="48" x:Name="topPop" Width="48" Margin="16,32" >
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <!--<EdgeUIThemeTransition Edge="Bottom"/>-->
+                    <AddDeleteThemeTransition />
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+            <Popup.Child>
+                <Button Click="Button_Click" Style="{ThemeResource ScrollToTopButtonStyle}">
+                    <SymbolIcon Symbol="Up" Foreground="White" />
+                </Button>
+            </Popup.Child>
+        </Popup>
+    </Grid>
+</Page>
