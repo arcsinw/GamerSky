@@ -12,9 +12,7 @@
             </Setter.Value>
         </Setter>
     </Style>-->
-
-    
-
+ 
     <Style TargetType="local:Drawer">
         <Setter Property="Template">
             <Setter.Value>

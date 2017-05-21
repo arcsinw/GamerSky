@@ -12,8 +12,13 @@
 
 using System;
 
-namespace GamerSky.Controls.ImageEx
+namespace GamerSky.Controls
 {
+    /// <summary>
+    /// A delegate for <see cref="ImageEx"/> opened.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The event arguments.</param>
     public delegate void ImageExOpenedEventHandler(object sender, ImageExOpenedEventArgs e);
 
     /// <summary>

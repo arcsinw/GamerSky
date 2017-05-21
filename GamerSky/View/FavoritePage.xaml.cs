@@ -17,8 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GamerSky.Helper;
 using GamerSky.Model;
-using GamerSky.ViewModel;
-using GamerSky.Helper;
+using GamerSky.ViewModel; 
 using GamerSky.Common;
  
 

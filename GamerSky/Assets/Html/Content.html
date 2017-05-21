@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="zh-cn" xmlns="http://www.w3.org/1999/xhtml">
+<<<<<<< HEAD
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -7,6 +8,15 @@
     <link type="text/css" rel="stylesheet" href="gs.css" />
     <script type="text/javascript" src="gs.js"></script>
     <script type="text/javascript" src="gsAppHTMLTemplate.js"></script>
+=======
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="gs.css" />
+    <script type="text/javascript" src="gs.js"></script>
+    <script type="text/javascript" src="gsAppHTMLTemplate.js"></script>
+>>>>>>> bc0cf6a8bf96529d144f2d48907815d9a426b443
 </head>
 <body>
 <div id="body" class="fontsizetwo">
@@ -193,6 +203,7 @@
 </script>
 </body>
 </html>
+<<<<<<< HEAD
 <script type="text/javascript">
     function resizeVideo() {
         var winWidth = document.body.clientWidth;
@@ -226,4 +237,39 @@
     window.onresize = function () {
         resizeVideo();
     };
+=======
+<script type="text/javascript">
+    function resizeVideo() {
+        var winWidth = document.body.clientWidth;
+        var iframes = document.getElementsByTagName('iframe');
+        if (iframes != null) {
+            for (var i = 0; i < iframes.length; i++) {
+                iframes[i].removeAttribute('style');
+                iframes[i].width = winWidth;
+                iframes[i].height = winWidth * (9 / 16);
+            }
+        }
+        var embeds = document.getElementsByTagName('embed');
+        if (embeds != null) {
+            for (var j = 0; j < embeds.length; j++) {
+                var embedTag = embedTags[j];
+
+                embedTag.removeAttribute('style');
+                embedTag.height = winWidth * (9 / 16);
+                embedTag.width = winWidth;
+            }
+        }
+        //div
+        var player = document.getElementById('youkuplayer_0');
+        if (player != null) {
+            player.removeAttribute('style');
+            player.style.width = winWidth + 'px';
+            player.style.height = winWidth * (9 / 16) + 'px';
+        }
+    } var body = document.getElementsByTagName('body')[0];
+    document.onreadystatechange = function () { resizeVideo(); }
+    window.onresize = function () {
+        resizeVideo();
+    };
+>>>>>>> bc0cf6a8bf96529d144f2d48907815d9a426b443
 </script>

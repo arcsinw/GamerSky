@@ -27,7 +27,6 @@ namespace GamerSky.Converters
             {
                 return Visibility.Collapsed;
             }
-            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

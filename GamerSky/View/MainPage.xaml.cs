@@ -1,7 +1,6 @@
 ﻿using GamerSky.Helper;
 using GamerSky.Model;
-using GamerSky.ViewModel;
-using GamerSky.Helper;
+using GamerSky.ViewModel; 
 using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
