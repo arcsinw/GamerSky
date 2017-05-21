@@ -1,5 +1,7 @@
 ﻿using GamerSky.Helper;
 using GamerSky.View;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -26,6 +28,8 @@ namespace GamerSky
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             UnhandledException += OnUnhandledException;
+            
+            MobileCenter.Start("5dd1c060-7a76-4dc2-b261-4476dee882b0", typeof(Analytics));
         }
 
         #region Handle unhandled exception

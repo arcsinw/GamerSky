@@ -119,20 +119,16 @@ namespace GamerSky.Http
                 if (buffer != null)
                 {
                     BitmapImage bi = new BitmapImage();
-                    WriteableBitmap wb = null;
+                    
                     using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
                     {
-
                         Stream stream2Write = stream.AsStreamForWrite();
-
                         await stream2Write.WriteAsync(buffer.ToArray(), 0, (int)buffer.Length);
-
                         await stream2Write.FlushAsync();
                         stream.Seek(0);
 
                         await bi.SetSourceAsync(stream);
-
-                        wb = new WriteableBitmap(bi.PixelWidth, bi.PixelHeight);
+                        WriteableBitmap wb = new WriteableBitmap(bi.PixelWidth, bi.PixelHeight);
                         stream.Seek(0);
                         await wb.SetSourceAsync(stream);
 
@@ -149,5 +145,6 @@ namespace GamerSky.Http
                 return null;
             }
         }
+        
     }
 }

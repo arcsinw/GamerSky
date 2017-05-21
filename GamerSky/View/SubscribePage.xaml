@@ -28,8 +28,7 @@
         <ItemsPanelTemplate x:Key="FourGridViewItemsPanel">
             <WrapGrid MaximumRowsOrColumns="4" VerticalAlignment="Top" Orientation="Horizontal"/>
         </ItemsPanelTemplate>
-
-        
+ 
         <converter:CountToVisibilityConverter x:Key="CountToConverter"/>
         
     </Page.Resources>
@@ -40,13 +39,13 @@
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="订阅内容" Margin="0" Padding="0" >
                 <Grid>
-                    <Image Height="80" Width="80" Source="{ThemeResource EmptySubscribePlaceHolderImage}">
+                    <!--<Image Height="80" Width="80" Source="{ThemeResource EmptySubscribePlaceHolderImage}">
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
                                 <action:NavigationAction NavigationType="Detail" SourcePage="GamerSky.View.MySubscribePage"/>
                             </core:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
-                    </Image>
+                    </Image>-->
                     
                     <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                         <ListView x:Name="subscribeContentListView" 

@@ -119,6 +119,7 @@ namespace GamerSky.View
             {
                 moduleGrid.Visibility = Visibility.Visible;
             }
+
             UpdateUI();
         }
 
