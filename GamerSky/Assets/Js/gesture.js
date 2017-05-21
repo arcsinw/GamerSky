@@ -1,91 +1,75 @@
-//////////////////////////////////////////////////////////////////////////////
-// 手势识别
-var myGesture;
-var myADGesture;
-var myRelatedGesture;
-var myElement;
-var myADElement;
-var myRelatedElement;
+﻿
+var gesture;
+//记录手势操作开始位置
 var gestureStartX;
 
-var isselecting = false;
-document.onselectionchange = function () {
-    if (document.getSelection().toString().length != 0) {
-        isselecting = true;
-    }
-    else {
-        isselecting = false;
-    }
+//触发Id,防止重复触发，触发Id与手势Id
+var gestureId = 1;
+var lastGestureId = 0;
+
+//速度触发
+var gestureVector = 1.5;
+
+//注册手势事件
+function prepareTarget(target, eventListener) {
+    //var target = document.getElementById(targetId);
+    target.addEventListener("MSGestureStart", eventListener, false);
+    target.addEventListener("MSGestureEnd", eventListener, false);
+    target.addEventListener("MSGestureChange", eventListener, false);
+    target.addEventListener("MSInertiaStart", eventListener, false);
+    //target.addEventListener("MSGestureTap", eventListener, false);
+    //target.addEventListener("MSGestureHold", eventListener, false);
+    target.addEventListener("pointerdown", onPointDown, false);
+    target.addEventListener("pointerup", onPointUp, false);
+
+    gesture = new MSGesture();
+    gesture.target = target;
 }
 
-function gestureInit() {
-    gesturePrepareTarget('body', gestureListener);
-    //gesturePrepareTarget('adcontent', gestureListener);
-    //gesturePrepareTarget('related', gestureListener);
-
-    myGesture = new MSGesture();
-    myElement = document.getElementById('body');
-    myGesture.target = myElement;
-      
-    //myRelatedGesture = new MSGesture();
-    //myRelatedElement = document.getElementById('related');
-    //myRelatedGesture.target = myRelatedElement;
+function onPointUp(e) {
+    //把触发时间参数传到gesture
+    gesture.addPointer(e.pointerId);
 }
 
-function onLoad() {
-    gestureInit()
+function onPointDown(e) {
+    //把触发时间参数传到gesture
+    gesture.addPointer(e.pointerId);
 }
 
-function gesturePrepareTarget(targetId, eventListener) {
-    var target = document.getElementById(targetId);
-    target.addEventListener('MSGestureStart', eventListener, false);
-    target.addEventListener('MSGestureEnd', eventListener, false);
-    target.addEventListener('MSGestureChange', eventListener, false);
-    target.addEventListener('MSInertiaStart', eventListener, false);
-    target.addEventListener('MSGestureTap', eventListener, false);
-    target.addEventListener('MSGestureHold', eventListener, false);
-    target.addEventListener('pointerdown', eventListener, false);
-}
-
-function getstureReset() {
-    myGesture.reset();
-    gestureStartX = 0;
-    gestureStartY = 0;
-}
-
-function gestureListener(evt) {
-    if (isselecting) return;
-    if (evt.type == 'pointerdown') {
-        myGesture.addPointer(evt.pointerId);
+//手势事件
+//具体的属性参见：https://msdn.microsoft.com/zh-cn/library/ie/hh772076%28v=vs.85%29.aspx
+function eventListener(evt) {
+    var myGesture = evt.gestureObject;
+    if (evt.type == "MSGestureStart") {
+        //开始触发，记录初始位置
         gestureStartX = evt.clientX;
-        gestureStartY = evt.clientY;
     }
-    else if (evt.type == 'MSGestureStart') {
-        gestureStartX = evt.clientX;
-        gestureStartY = evt.clientY;
-    }
-    else if (evt.type == 'MSGestureTap') {
-    }
-    else if (evt.type == 'MSGestureChange') {
-        var translateY = evt.clientY - gestureStartY;
-        if (translateY < -20 || translateY > 20) {
+    else if (evt.type == "MSInertiaStart") {
+        if (lastGestureId == gestureId || evt.velocityX == "undefined") {
             return;
-        }
-        var translateX = evt.clientX - gestureStartX;
-        if (translateX < -90) {
-            gestureStartX = evt.clientX;
-            window.external.notify('gestures:goforward');
-            myGesture.stop();
-        }
-        else if (translateX > 90) {
-            gestureStartX = evt.clientX;
-            window.external.notify('gestures:goback');
-            myGesture.stop();
+        } else {
+            //释放时触发惯性事件，判断手势释放时的速度
+            if (evt.velocityX > gestureVector) {
+                var jsonObj = { type: "swiperight" };
+                window.external.notify(JSON.stringify(jsonObj));
+                lastGestureId = gestureId;
+            } else if (evt.velocityX < -gestureVector) {
+                jsonObj = { type: "swipeleft" };
+                window.external.notify(JSON.stringify(jsonObj));
+                lastGestureId = gestureId;
+            }
         }
     }
-    else if (evt.type == 'MSGestureEnd') {
-        gestureStartX = evt.clientX;
+    else if (evt.type == "MSGestureChange") {
+        //if (lastGestureId == gestureId) {
+        //    return;
+        //} else {
+        //    var change = evt.clientX - gestureStartX;
+        //    window.external.notify("clientX:" + change);
+        //}
+    } else if (evt.type == "MSGestureEnd") {
+        //手势结束，Id+1
+        gestureId = gestureId + 1;
         myGesture.reset();
     }
-
 }
