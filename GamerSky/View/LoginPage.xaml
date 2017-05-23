@@ -10,7 +10,7 @@
     NavigationCacheMode="Required"
     mc:Ignorable="d"
     RequestedTheme="{Binding Path=AppTheme}">
-    <Page.Resources> 
+    <Page.Resources>
         <Style x:Key="LightPasswordBoxStyle" TargetType="PasswordBox">
             <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
             <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>
@@ -254,4 +254,3 @@
 
     </Grid>
 </Page>
-

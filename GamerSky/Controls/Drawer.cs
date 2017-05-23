@@ -13,8 +13,7 @@ using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
- 
-
+  
 namespace GamerSky.Controls
 {
     public sealed class Drawer : ContentControl

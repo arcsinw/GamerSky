@@ -78,7 +78,7 @@ namespace GamerSky.ViewModel
             }
         }
 
-        private int fontSize;
+        private int fontSize = 13;
         /// <summary>
         /// 字体大小
         /// </summary>
@@ -201,11 +201,7 @@ namespace GamerSky.ViewModel
             if (roamingSettings.Values.ContainsKey(SettingKey_BigFont))
             {
                 fontSize = int.Parse(roamingSettings.Values[SettingKey_BigFont].ToString());
-            }
-            else
-            {
-                fontSize = 20;
-            }
+            } 
 
             if (roamingSettings.Values.ContainsKey(SettingKey_NoImageMode))
             {

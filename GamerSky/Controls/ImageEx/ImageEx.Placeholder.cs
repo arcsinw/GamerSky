@@ -13,7 +13,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
-namespace GamerSky.Controls.ImageEx
+namespace GamerSky.Controls
 {
     /// <summary>
     /// The ImageEx control extends the default Image platform control improving the performance and responsiveness of your Apps.

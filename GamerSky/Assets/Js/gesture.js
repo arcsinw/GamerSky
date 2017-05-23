@@ -1,3 +1,4 @@
+﻿Charset: UTF - 8
 //////////////////////////////////////////////////////////////////////////////
 // 手势识别
 var myGesture;
@@ -26,7 +27,7 @@ function gestureInit() {
     myGesture = new MSGesture();
     myElement = document.getElementById('body');
     myGesture.target = myElement;
-      
+
     //myRelatedGesture = new MSGesture();
     //myRelatedElement = document.getElementById('related');
     //myRelatedGesture.target = myRelatedElement;

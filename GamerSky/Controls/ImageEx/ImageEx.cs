@@ -15,7 +15,7 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace GamerSky.Controls.ImageEx
+namespace GamerSky.Controls
 {
     /// <summary>
     /// The ImageEx control extends the default Image platform control improving the performance and responsiveness of your Apps.
@@ -40,9 +40,8 @@ namespace GamerSky.Controls.ImageEx
 
         private Image _image;
         private ProgressRing _progress;
-        private object _lockObj;
-
         private bool _isInitialized;
+        private object _lockObj;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageEx"/> class.
@@ -50,7 +49,6 @@ namespace GamerSky.Controls.ImageEx
         public ImageEx()
         {
             DefaultStyleKey = typeof(ImageEx);
-            Loaded += OnLoaded;
             _lockObj = new object();
         }
 
@@ -106,19 +104,6 @@ namespace GamerSky.Controls.ImageEx
             ImageFailed?.Invoke(this, e);
             ImageExFailed?.Invoke(this, new ImageExFailedEventArgs(new Exception(e.ErrorMessage)));
             VisualStateManager.GoToState(this, FailedState, true);
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            if (_image != null && _image.Source == null)
-            {
-                RefreshImage();
-            }
-        }
-
-        private async void RefreshImage()
-        {
-            await LoadImageAsync();
         }
     }
 }

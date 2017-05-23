@@ -32,7 +32,7 @@ namespace GamerSky.Controls
         public event TypedEventHandler<WebView, WebViewUnsupportedUriSchemeIdentifiedEventArgs> UnsupportedUriSchemeIdentified;
         public event TypedEventHandler<WebView, WebViewUnviewableContentIdentifiedEventArgs> UnviewableContentIdentified;
         #endregion
-         
+
         #region Properties
         public static readonly DependencyProperty HtmlProperty = DependencyProperty.Register("Html", typeof(string), typeof(ArticlePresenter), new PropertyMetadata(default(string), HtmlChangedCallback));
 
@@ -50,7 +50,7 @@ namespace GamerSky.Controls
 
 
         public NavigateTypeEnum NavigationType { get; set; } = NavigateTypeEnum.String;
-        
+
 
         #endregion
 
@@ -123,7 +123,7 @@ namespace GamerSky.Controls
                         break;
                     case unchecked((int)0x80020101):
                         errorText = $"A JavaScript error or exception occured while executing the function {funcName}";
-                        break; 
+                        break;
                     case unchecked((int)0x800a138a):
                         errorText = $"{funcName} is not a function";
                         break;
@@ -171,7 +171,7 @@ namespace GamerSky.Controls
 
             Content = GridContainer;
         }
-         
+
         private Grid InitializeLayout()
         {
             var grid = new Grid();
@@ -205,7 +205,7 @@ namespace GamerSky.Controls
                         break;
                 }
             }
-        }     
+        }
     }
 
     public enum NavigateTypeEnum

@@ -30,8 +30,7 @@ namespace GamerSky.View
         public AdStartPage()
         {
             this.InitializeComponent();
-             
-
+              
             AdStarts = new ObservableCollection<AdStart>();
             LoadData();
 

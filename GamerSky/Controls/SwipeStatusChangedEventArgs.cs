@@ -22,4 +22,3 @@ namespace GamerSky.Controls
         public SwipeStatus NewValue { get; internal set; }
     }
 }
-

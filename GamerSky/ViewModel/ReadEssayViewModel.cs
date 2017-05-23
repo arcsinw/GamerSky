@@ -231,13 +231,13 @@ namespace GamerSky.ViewModel
                                   "<div class=\"content\" id=\"gsTemplateContent_MainBody\">" + mainBody + "</div>" +
                                   "<div id=\"gsTemplateContent_AD1\"></div>" +
                                   "<div class=\"list\" id=\"gsTemplateContent_RelatedTopic\">" +
-                                        "<div class=\"tit red\" >相关专题</div>" + //style=\"border-left:5px solid #f22f09;\"
+                                       "<div class=\"tit red\" style=\"border-left:5px solid #f22f09;\">相关专题</div>" +
                                             "<div id=\"gsTemplateContent_RelatedTopicContent\">" +
                                             "</div>" +
                                         "</div>" +
                                   "</div>" +
                                   $@"<div class=""list"" id=""gsTemplateContent_RelatedReading"">
-	                                        <div class=""tit yellow"">相关阅读</div>
+	                                        <div class=""tit yellow"" style=""border-left:5px solid #FFC600"">相关阅读</div>
 	                                            <div class=""txtlist"" id=""gsTemplateContent_RelatedReadingContent"">
     	                                            {relatedReadingsHtml}
 	                                            </div>

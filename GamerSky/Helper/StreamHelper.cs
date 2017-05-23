@@ -10,10 +10,11 @@
 // THE CODE OR THE USE OR OTHER DEALINGS IN THE CODE.
 // ******************************************************************
 
-using GamerSky.Http;
+using GamerSky.HttpHelper;
 using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Storage;
@@ -31,14 +32,15 @@ namespace GamerSky.Helper
         /// Get the response stream returned by a HTTP get request.
         /// </summary>
         /// <param name="uri">Uri to request.</param>
+        /// <param name="cancellationToken">instance of <see cref="CancellationToken"/></param>
         /// <returns>Response stream</returns>
-        public static async Task<IRandomAccessStream> GetHttpStreamAsync(this Uri uri)
+        public static async Task<IRandomAccessStream> GetHttpStreamAsync(this Uri uri, CancellationToken cancellationToken = default(CancellationToken))
         {
             var outputStream = new InMemoryRandomAccessStream();
 
             using (var request = new HttpHelperRequest(uri, HttpMethod.Get))
             {
-                using (var response = await HttpHelper.Instance.SendRequestAsync(request).ConfigureAwait(false))
+                using (var response = await HttpHelper.HttpHelper.Instance.SendRequestAsync(request, cancellationToken).ConfigureAwait(false))
                 {
                     if (response.Success)
                     {
@@ -66,7 +68,7 @@ namespace GamerSky.Helper
             {
                 using (var request = new HttpHelperRequest(uri, HttpMethod.Get))
                 {
-                    using (var response = await HttpHelper.Instance.SendRequestAsync(request).ConfigureAwait(false))
+                    using (var response = await HttpHelper.HttpHelper.Instance.SendRequestAsync(request).ConfigureAwait(false))
                     {
                         if (response.Success)
                         {

@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using Windows.Web.Http;
 using Windows.Web.Http.Headers;
 
-namespace GamerSky.Http
+namespace GamerSky.HttpHelper
 {
     /// <summary>
     /// Represents an HTTP request message including headers.

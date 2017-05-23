@@ -1,4 +1,4 @@
-﻿using GamerSky.Helper;
+using GamerSky.Helper;
 using GamerSky.View;
 using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
@@ -27,9 +27,9 @@ namespace GamerSky
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            
             UnhandledException += OnUnhandledException;
             
-            MobileCenter.Start("5dd1c060-7a76-4dc2-b261-4476dee882b0", typeof(Analytics));
         }
 
         #region Handle unhandled exception
@@ -121,6 +121,8 @@ namespace GamerSky
             }
             // 确保当前窗口处于活动状态
             Window.Current.Activate();
+
+            MobileCenter.Start("5dd1c060-7a76-4dc2-b261-4476dee882b0", typeof(Analytics));
             RegisterExceptionHandlingSynchronizationContext();
 
         }

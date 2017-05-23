@@ -17,8 +17,6 @@ using GamerSky.Helper;
 using GamerSky.Model;
 using GamerSky.ViewModel; 
 
-// “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
-
 namespace GamerSky.View
 {
     /// <summary>

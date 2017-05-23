@@ -1,7 +1,6 @@
 ﻿using GamerSky.Helper;
 using GamerSky.Model;
 using GamerSky.ViewModel;
-using GamerSky.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +10,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
- 
+
 namespace GamerSky.View
 { 
     public sealed partial class MasterDetailPage : Page , INotifyPropertyChanged
