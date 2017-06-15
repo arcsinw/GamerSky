@@ -443,7 +443,7 @@
         </control:Drawer>
 
         <!--#region Pane-->
-        <Grid x:Name="paneGrid" Grid.Column="0" Background="{ThemeResource PaneBackgroundBrush}">
+        <Grid x:Name="paneGrid" BorderBrush="{ThemeResource ThemeColorBrush}" BorderThickness="0,0,1,0" Grid.Column="0" Background="{ThemeResource PaneBackgroundBrush}">
 
             <ListView x:Name="paneListView" ItemsSource="{x:Bind PaneItems}" Padding="0" Margin="0"
                       IsItemClickEnabled="True" SelectionMode="Single"

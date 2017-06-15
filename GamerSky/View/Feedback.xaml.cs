@@ -80,7 +80,7 @@ namespace GamerSky.View
         {
             string subject = subjectTextBox.Text;
             string body = bodyTextBox.Text;
-            string address = "wangx86@live.com";
+            string address = "arcsinw@arcsinw.xyz";
             var mailto = new Uri($"mailto:{address}?subject={subject}&body={body}");
             await Launcher.LaunchUriAsync(mailto);
         }
