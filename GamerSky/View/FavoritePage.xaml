@@ -10,8 +10,7 @@
     xmlns:m="using:GamerSky.Model"
     xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
-    RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">
-
+    >
 
     <Grid>
         <Grid.RowDefinitions>

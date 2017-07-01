@@ -25,9 +25,7 @@ namespace GamerSky.ViewModel
         public MainPageViewModel()
         {
             EssaysAndChannels = new ObservableCollection<PivotData>();
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
+            
             if (IsDesignMode)
             {
                 LoadData();
@@ -35,26 +33,7 @@ namespace GamerSky.ViewModel
             LoadData();
             GetCacheSize();
         }
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
-
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
-
+        
         /// <summary>
         /// 加载频道
         /// </summary>

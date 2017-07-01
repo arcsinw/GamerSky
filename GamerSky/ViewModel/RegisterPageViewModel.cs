@@ -17,32 +17,8 @@ namespace GamerSky.ViewModel
         public RegisterPageViewModel()
         {
             RegisterInfo = new UserRegisterByNumberInfo();
-             
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
-
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
-
-
+        
         /// <summary>
         /// 通过手机号注册
         /// </summary>

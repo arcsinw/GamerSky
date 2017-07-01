@@ -39,47 +39,13 @@ namespace GamerSky.ViewModel
         }
 
         private Strategy strategyResult;
-        //public GameStrategysViewModel(Strategy strategyResult)
-        //{
-        //    apiService = new ApiService();
-        //    Strategys = new ObservableCollection<Essay>();
-        //    IncreStrategys = new GameStrategysIncrementalLoadingCollection();
-        //    this.strategyResult = strategyResult;
-
-        //    AppTheme = DataShareManager.Current.AppTheme;
-        //    DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-        //}
 
         public GameStrategysViewModel()
         { 
             Strategys = new ObservableCollection<Essay>();
             //IncreStrategys = new GameStrategysIncrementalLoadingCollection();
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
-
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
-
-
-      
+        
 
         public async Task LoadData(Strategy strategyResult,int pageIndex=1)
         {

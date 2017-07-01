@@ -10,7 +10,6 @@
     xmlns:vm="using:GamerSky.ViewModel"
     xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    RequestedTheme="{Binding AppTheme}"
     mc:Ignorable="d">
 
     <Page.Resources> 

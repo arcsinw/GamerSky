@@ -122,8 +122,8 @@ function gsOnDocumentReadystatechange()
     var screenHeight = window.screen.height;
     for(var i=0;i<images.length;i++)
     {
-          images[i].style.width = "100%";
-          images[i].style.height = "auto";
+//          images[i].style.width = "100%";
+//          images[i].style.height = "auto";
           var src = images[i].src;
           images[i].setAttribute("originsrc",src);
           images[i].setAttribute("gsElementID",i);
@@ -446,31 +446,10 @@ function gsSetPageParam(param)
                         + "\"openMethod\":\"default\"}";
                     relatedReadingURL = encodeURI(relatedReadingURL);
 
-                    var imageHTML = "";
-                    if (relatedReading.thumbnailURL!=null
-                    && typeof(relatedReading.thumbnailURL)!="undefined"
-                    && relatedReading.thumbnailURL.length>0)
-                    {
-                        imageHTML = "<div class=\"Thumbnail\"><img src=\"" + relatedReading.thumbnailURL + "\"></div>";
-                    }
-
-                    var titleHTML = "";
-                    if (relatedReading.title!=null
-                    && typeof(relatedReading.title)!="undefined"
-                    && relatedReading.title.length>0)
-                    {
-                        titleHTML = "<div>" + relatedReading.title + "</div>";
-                    }
-
                     var relatedReadingHTML
-                        = "<a href=\"" + relatedReadingURL + "\"><div class=\"Row\"><div>" + imageHTML + titleHTML + "</div></div></a>"
+                        = "<a href=\"" + relatedReadingURL + "\"><div class=\"Row\"><div>" + relatedReading.title + "</div></div></a>"
 
                     relatedReadingsHTML += relatedReadingHTML;
-
-                    if (relatedReadingIndex>=2)
-                    {
-                        break;
-                    }
                 }
                 if (relatedReadingsHTML!=null
                     && relatedReadingsHTML.length>0
@@ -721,7 +700,7 @@ function gsSetPageParam(param)
                     + "</tr>"
                     + "</tbody></table>"
                     + "</a>";
-                window.handler.print(adHTML);
+
                 var ad1 = document.getElementById("gsTemplateContent_AD1");
                 if (ad1!=null)
                 {
@@ -795,7 +774,7 @@ function gsSetPageParam(param)
                 + "</tr>"
                 + "</table>"
                 + "</a>";
-            window.handler.print(adHTML);
+
             var ad2 = document.getElementById("gsTemplateContent_AD2");
             if (ad2!=null)
             {
@@ -848,7 +827,7 @@ function gsVideoInApp(videoType, videoContent, videoParam, videoWidth, videoHeig
             var hend = temp.indexOf("\"");
             var height = temp.substring(0,hend);
             videoContent = videoContent.replace(height,videoDefaultHeight);
-            window.handler.print(videoContent);
+
         }break;
         case "乐视":
         {
@@ -861,8 +840,6 @@ function gsVideoInApp(videoType, videoContent, videoParam, videoWidth, videoHeig
 
     document.write(videoHTML);
 }
-
-
 function gsCreateLeTvVideoContent(videoId, videoParam)
 {
     var bodyWidth = document.body.clientWidth-20.0;

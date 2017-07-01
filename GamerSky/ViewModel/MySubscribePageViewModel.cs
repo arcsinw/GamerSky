@@ -52,34 +52,18 @@ namespace GamerSky.ViewModel
 
             LoadMySubscribes();
             
-            AppTheme = DataShareManager.Current.AppTheme;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
         private void Current_ShareDataChanged()
         {
-            AppTheme = DataShareManager.Current.AppTheme;
             MySubscribes.Clear();
             foreach (var item in DataShareManager.Current.SubscribeList)
             {
                 MySubscribes.Add(item);
             }
-            
         }
-
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
+        
 
         /// <summary>
         /// 加载所有订阅

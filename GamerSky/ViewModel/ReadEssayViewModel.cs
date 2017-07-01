@@ -158,7 +158,7 @@ namespace GamerSky.ViewModel
         public int EssayFontSize
         {
             get { return essayFontSize; }
-            set { essayFontSize = value;  OnPropertyChanged(); DataShareManager.Current.UpdateFontSize(value); }
+            set { essayFontSize = value;  OnPropertyChanged(); }
         }
 
         public EssayCommentsCollection Comments { get; set; }

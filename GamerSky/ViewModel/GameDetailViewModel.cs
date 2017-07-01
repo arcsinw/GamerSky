@@ -30,30 +30,13 @@ namespace GamerSky.ViewModel
 
         public ObservableCollection<GameDetailEssay> GameDetailStrategys { get; set; }
 
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
-
-
+        
         public GameDetailViewModel()
         { 
             GameDetail = new GameDetail();
             GameDetailNews = new ObservableCollection<GameDetailEssay>();
             GameDetailStrategys = new ObservableCollection<GameDetailEssay>();
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
+            
             if(Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             { 
                 LoadGameDetail();
@@ -62,12 +45,6 @@ namespace GamerSky.ViewModel
             }
         }
         
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
-
         public string contentId { get; set; } = "353478";
 
         public async void LoadGameDetail()

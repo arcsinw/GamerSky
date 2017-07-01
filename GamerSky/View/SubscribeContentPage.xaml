@@ -10,7 +10,7 @@
     xmlns:converter="using:GamerSky.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    RequestedTheme="{Binding AppTheme}">
+    >
 
     <Page.DataContext>
         <vm:SubscribeContentViewModel x:Name="viewModel"/>

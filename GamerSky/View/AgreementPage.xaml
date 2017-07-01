@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:GamerSky.Helper"
     mc:Ignorable="d"
-    RequestedTheme="{x:Bind AppTheme,Mode=TwoWay}"
     >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

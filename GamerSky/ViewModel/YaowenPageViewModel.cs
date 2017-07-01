@@ -43,29 +43,8 @@ namespace GamerSky.ViewModel
         public YaowenPageViewModel()
         { 
             Yaowens = new YaowenIncrementalCollection();
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
-
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
-
+        
         public void Refresh()
         {
             IsActive = true; 

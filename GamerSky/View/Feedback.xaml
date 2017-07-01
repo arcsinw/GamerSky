@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:GamerSky.Helper"
     mc:Ignorable="d"
-    RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">
+    >
+    
     <Page.Resources>
         <Style x:Key="TextBoxStyle1" TargetType="TextBox">
             <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>

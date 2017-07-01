@@ -40,7 +40,7 @@ namespace GamerSky.View
 
         private void Current_ShareDataChanged()
         {
-            if (ViewModel.AppTheme == ElementTheme.Dark)
+            if (DataShareManager.Current.AppTheme == ElementTheme.Dark)
             {
                 NightMode();
             }
@@ -54,7 +54,7 @@ namespace GamerSky.View
                 NoImageMode();
             }
 
-            SetFontSize(ViewModel.EssayFontSize.ToString());
+            //SetFontSize(ViewModel.EssayFontSize.ToString());
         }
         
         protected override void OnNavigatedFrom(NavigationEventArgs e)

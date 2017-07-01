@@ -6,6 +6,7 @@ using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.System;
+using Windows.System.UserProfile;
 using Windows.UI.Popups;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
@@ -123,8 +124,9 @@ namespace GamerSky
             Window.Current.Activate();
 
             MobileCenter.Start("5dd1c060-7a76-4dc2-b261-4476dee882b0", typeof(Analytics));
-            RegisterExceptionHandlingSynchronizationContext();
+            MobileCenter.SetCountryCode(GlobalizationPreferences.HomeGeographicRegion);
 
+            RegisterExceptionHandlingSynchronizationContext();
         }
 
         /// <summary>

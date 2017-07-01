@@ -13,7 +13,7 @@
     xmlns:pr="using:PullToRefresh.UWP"
     mc:Ignorable="d"
     NavigationCacheMode="Required"
-    RequestedTheme="{Binding AppTheme}">
+    >
 
     <Page.DataContext>
         <vm:MainPageViewModel x:Name="ViewModel"/>
@@ -195,8 +195,8 @@
                                                                 <BitmapImage UriSource="{Binding ThumbnailURLs[0]}"/>
                                                             </Image.Source>
                                                         </Image>
-                                                        <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
-                                                            <TextBlock Margin="8,0" Text="{Binding Title}" Foreground="White" VerticalAlignment="Bottom"/>
+                                                        <Border Background="Black"  Opacity="0.9" VerticalAlignment="Bottom">
+                                                            <TextBlock Margin="8,2" Text="{Binding Title}" Foreground="White" VerticalAlignment="Bottom"/>
                                                         </Border>
                                                     </Grid>
                                                 </DataTemplate>
@@ -206,7 +206,7 @@
                                             <RelativePanel Margin="0,0,8,2">
                                                 <RelativePanel.Resources>
                                                     <Style TargetType="Ellipse">
-                                                        <Setter Property="Margin" Value="4"/>
+                                                        <Setter Property="Margin" Value="5"/>
                                                     </Style>
                                                 </RelativePanel.Resources>
                                                 <Ellipse RelativePanel.AlignBottomWithPanel="True"

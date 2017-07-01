@@ -30,8 +30,7 @@ namespace GamerSky.View
             this.InitializeComponent();
 
             FavoriteEssays = new ObservableCollection<Essay>();
-
-            AppTheme = DataShareManager.Current.AppTheme;
+             
             FavoriteEssays = DataShareManager.Current.FavoriteList;
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
             
@@ -53,19 +52,7 @@ namespace GamerSky.View
         public DelegateCommand<Essay> DeleteItem => _deleteItem ?? (_deleteItem = new DelegateCommand<Essay>(ExecuteDeleteItemCommand, CanExecuteDeleteItemCommand));
          
         public ObservableCollection<Essay> FavoriteEssays { get; set; }
-         
-
-        #region 九幽的数据统计
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            JYHelper.TracePageStart(this.BaseUri.LocalPath);
-        }
-        #endregion
+        
 
         public void Back()
         {
@@ -77,23 +64,9 @@ namespace GamerSky.View
 
         private void Current_ShareDataChanged()
         {
-            AppTheme = DataShareManager.Current.AppTheme;
             FavoriteEssays = DataShareManager.Current.FavoriteList;
         }
-
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
+        
 
         private bool isActive = false;
         public bool IsActive

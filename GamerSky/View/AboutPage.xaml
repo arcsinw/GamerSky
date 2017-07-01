@@ -7,66 +7,9 @@
     xmlns:hp="using:GamerSky.Helper"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    RequestedTheme="{x:Bind AppTheme,Mode=OneWay}">
+    >
 
     <Grid>
-        <Pivot Background="{ThemeResource PageBackgroundBrush}" Style="{ThemeResource StrategyPivotStyle}">
-            <PivotItem Header="关于" Margin="0">
-                <Grid>
-                    <Grid.Resources>
-                        <Style TargetType="HyperlinkButton">
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="FontSize" Value="18"/>
-                            <Setter Property="Margin" Value="4"/>
-                        </Style>
-                    </Grid.Resources>
-                    <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" >
-                        <StackPanel>
-                            <Image Margin="0,16" Source="ms-appx:///Assets/Square310x310Logo.png" 
-                           Height="100" Width="100"/>
-                            <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Center" />
-                            <TextBlock Text="{x:Bind Author}" HorizontalAlignment="Center"/>
-                            <TextBlock HorizontalAlignment="Center" x:Name="qqTextBlock" Tapped="{x:Bind CopyToClipboard}" Text="QQ群：473967668"  />
-                            <HyperlinkButton  NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
-                                     HorizontalAlignment="Center" >
-                                <HyperlinkButton.Content>
-                                    <TextBlock x:Uid="Rate"/>
-                                </HyperlinkButton.Content>
-                            </HyperlinkButton>
-                            <HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
-                                <HyperlinkButton.Content>
-                                    <TextBlock x:Uid="UpdateHistory"/>
-                                </HyperlinkButton.Content>
-                            </HyperlinkButton>
-                            <TextBlock x:Uid="Thank" HorizontalAlignment="Center"/>
-                            <HyperlinkButton Content="ms-uap"  NavigateUri="http://www.cnblogs.com/ms-uap/"/>
-                            <HyperlinkButton Content="edi.wang" NavigateUri="http://edi.wang"/>
-                            <HyperlinkButton Content="周见智" NavigateUri="http://www.cnblogs.com/xiaozhi_5638"/>
-                            <HyperlinkButton Content="AsyncTaskEx" NavigateUri="https://github.com/ljw1004/async-exception-stacktrace"/>
-                            <HyperlinkButton Content="MSDN大法好" NavigateUri="http://msdn.microsoft.com"/>
-                            <HyperlinkButton Content="写博客的前辈们" NavigateUri="http://www.cnblogs.com"/>
-                            <HyperlinkButton Content="LanceMcCarthy" NavigateUri="https://github.com/LanceMcCarthy/"/>
-                            <!--<HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
-                        <HyperlinkButton.Content>
-                            <TextBlock Text="人才招聘"/>
-                        </HyperlinkButton.Content>
-                    </HyperlinkButton>
-                    <HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
-                        <HyperlinkButton.Content>
-                            <TextBlock Text="商务合作"/>
-                        </HyperlinkButton.Content>
-                    </HyperlinkButton>-->
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
-            </PivotItem> 
-        </Pivot>
-        
-        <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}" VerticalAlignment="Top">
-            <SymbolIcon Symbol="Back"/>
-        </Button>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Desktop">
@@ -79,6 +22,65 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="{ThemeResource ThemeColorBrush}">
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}" VerticalAlignment="Top">
+                <SymbolIcon Symbol="Back"/>
+            </Button>
+            <TextBlock Text="关于"  Style="{ThemeResource PageTitleStyle}"/>
+        </Grid>
 
+        <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
+            <Grid.Resources>
+                <Style TargetType="HyperlinkButton">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="Margin" Value="4"/>
+                </Style>
+            </Grid.Resources>
+            <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled" >
+                <StackPanel>
+                    <Image Margin="0,16" Source="ms-appx:///Assets/Square310x310Logo.png" 
+                           Height="100" Width="100"/>
+                    <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Center" />
+                    <TextBlock Text="{x:Bind Author}" HorizontalAlignment="Center"/>
+                    <TextBlock HorizontalAlignment="Center" x:Name="qqTextBlock" Tapped="{x:Bind CopyToClipboard}" Text="QQ群：473967668"  />
+                    <HyperlinkButton  NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
+                                     HorizontalAlignment="Center" >
+                        <HyperlinkButton.Content>
+                            <TextBlock x:Uid="Rate"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
+                    <HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
+                        <HyperlinkButton.Content>
+                            <TextBlock x:Uid="UpdateHistory"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
+                    <TextBlock x:Uid="Thank" HorizontalAlignment="Center"/>
+                    <HyperlinkButton Content="ms-uap"  NavigateUri="http://www.cnblogs.com/ms-uap/"/>
+                    <HyperlinkButton Content="edi.wang" NavigateUri="http://edi.wang"/>
+                    <HyperlinkButton Content="周见智" NavigateUri="http://www.cnblogs.com/xiaozhi_5638"/>
+                    <HyperlinkButton Content="AsyncTaskEx" NavigateUri="https://github.com/ljw1004/async-exception-stacktrace"/>
+                    <HyperlinkButton Content="MSDN大法好" NavigateUri="http://msdn.microsoft.com"/>
+                    <HyperlinkButton Content="写博客的前辈们" NavigateUri="http://www.cnblogs.com"/>
+                    <HyperlinkButton Content="LanceMcCarthy" NavigateUri="https://github.com/LanceMcCarthy/"/>
+                    <!--<HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
+                        <HyperlinkButton.Content>
+                            <TextBlock Text="人才招聘"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
+                    <HyperlinkButton  Click="{x:Bind VersionHistory}" HorizontalAlignment="Center">
+                        <HyperlinkButton.Content>
+                            <TextBlock Text="商务合作"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>-->
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>

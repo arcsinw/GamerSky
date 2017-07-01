@@ -270,8 +270,6 @@
         <converter:ElementThemeToBoolConverter x:Key="ElementThemeToBoolConverter"/>
     </Page.Resources>
 
- 
-
     <Grid x:Name="rootGrid" Background="{ThemeResource PageBackgroundBrush}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup" CurrentStateChanged="AdaptiveVisualStateGroup_CurrentStateChanged">

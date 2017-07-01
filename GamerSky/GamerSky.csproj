@@ -285,6 +285,7 @@
     <Compile Include="ViewModel\DataShareManager.cs" />
     <Compile Include="ViewModel\EmailRegisterPageViewModel.cs" />
     <Compile Include="ViewModel\EssayDetailViewModel.cs" />
+    <Compile Include="ViewModel\FavoritePageViewModel.cs" />
     <Compile Include="ViewModel\GameDetailViewModel.cs" />
     <Compile Include="ViewModel\GameSaleViewModel.cs" />
     <Compile Include="ViewModel\GameStrategysViewModel.cs" />

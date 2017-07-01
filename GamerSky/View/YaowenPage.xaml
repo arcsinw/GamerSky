@@ -11,7 +11,7 @@
     xmlns:control="using:GamerSky.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    RequestedTheme="{Binding AppTheme}">
+    >
 
     <Page.DataContext>
         <vm:YaowenPageViewModel x:Name="viewModel"/>
@@ -62,6 +62,8 @@
                                            SelectionMode="None"
                                            IsItemClickEnabled="True"
                                            ItemClick="PullToRefreshListView_ItemClick"  
+                                           Loaded="listView_Loaded"
+                                           x:Name="listView"
                                            >
                 <control:PullToRefreshListView.RefreshIndicatorContent>
                     <TextBlock Text="Pull down to Refresh" HorizontalAlignment="Center"/>
@@ -80,7 +82,7 @@
                 </TransitionCollection>
             </Popup.ChildTransitions>
             <Popup.Child>
-                <Button Click="Button_Click" Style="{ThemeResource ScrollToTopButtonStyle}">
+                <Button x:Name="scrollBtn" Click="scrollBtn_Click" Style="{ThemeResource ScrollToTopButtonStyle}">
                     <SymbolIcon Symbol="Up" Foreground="White" />
                 </Button>
             </Popup.Child>

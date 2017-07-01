@@ -134,13 +134,19 @@ namespace GamerSky.Helper
             }
         }
 
+        static Functions()
+        {
+             resContext = ResourceContext.GetForCurrentView();
+        }
+
+        static ResourceContext resContext;
+
         /// <summary>
         /// 判断是否Mobile设备
         /// </summary>
         /// <returns></returns>
         public static bool IsMobile()
         {
-            ResourceContext resContext = ResourceContext.GetForCurrentView();
             string value = resContext.QualifierValues["DeviceFamily"];
             return value.Equals("Mobile");
         }

@@ -11,7 +11,6 @@
     xmlns:m="using:GamerSky.Model"
     xmlns:converter="using:GamerSky.Converters"
     xmlns:ex="using:GamerSky.Extensions"
-    RequestedTheme="{Binding AppTheme}"
     mc:Ignorable="d">
 
     <Page.Transitions>

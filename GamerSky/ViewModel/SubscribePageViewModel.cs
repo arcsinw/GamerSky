@@ -28,9 +28,7 @@ namespace GamerSky.ViewModel
             //SubscribeContent = new SubscribeIncrementalCollection();
             //SubscribeContent.OnLoadingMoreStart += SubscribeContent_OnLoadingMoreStart;
             //SubscribeContent.OnLoadingMoreEnd += SubscribeContent_OnLoadingMoreEnd;
-
-
-            AppTheme = DataShareManager.Current.AppTheme;
+            
             DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
@@ -46,23 +44,13 @@ namespace GamerSky.ViewModel
 
         private void Current_ShareDataChanged()
         {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
+            //SubscribeTopic.Clear();
+            //SubscribeContent.Clear();
 
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
+            //await LoadSubscribeContent();
+            //await LoadSubscribeTopic();
         }
-
+        
         private bool isActive;
         public bool IsActive
         {

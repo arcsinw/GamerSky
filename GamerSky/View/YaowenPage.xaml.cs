@@ -26,10 +26,7 @@ namespace GamerSky.View
     {
         public YaowenPage()
         {
-            this.InitializeComponent();
-
-            NavigationCacheMode = NavigationCacheMode.Required;
-            
+            this.InitializeComponent(); 
         }
 
         private ScrollViewer scrollViewer;
@@ -73,17 +70,6 @@ namespace GamerSky.View
             }
         }
          
-        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
-        {
-            viewModel.Refresh();
-            await LiveTileHelper.UpdatePrimaryTile();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //listView.ScrollIntoViewSmoothly(listView.Items[0]);
-        }
-
         private async void listView_RefreshRequested(object sender, EventArgs e)
         {
             viewModel.Refresh();
@@ -96,6 +82,16 @@ namespace GamerSky.View
             if (essayResult == null) return;
 
             MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essayResult);
+        }
+
+        /// <summary>
+        /// 跳转到顶部
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void scrollBtn_Click(object sender, RoutedEventArgs e)
+        {
+            listView.ScrollIntoViewSmoothly(listView.Items[0]);
         }
     }
 }

@@ -332,6 +332,7 @@ namespace GamerSky.View
         {
             if (DataShareManager.Current.AppTheme == ElementTheme.Dark)
             {
+                
                 DataShareManager.Current.UpdateAPPTheme(false);
             }
             else

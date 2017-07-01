@@ -71,19 +71,8 @@ namespace GamerSky.ViewModel
             AllStrategys = new ObservableCollection<AlphaKeyGroup<Strategy>>();
 
             Games = new GameIncrementalCollection();
-             
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-            
         }
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
-
         
-
         /// <summary>
         /// 加载关注攻略
         /// </summary>

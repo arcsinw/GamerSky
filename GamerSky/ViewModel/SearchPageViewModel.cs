@@ -16,6 +16,7 @@ namespace GamerSky.ViewModel
 {
     public class SearchPageViewModel : ViewModelBase
     {
+        #region Properties
         /// <summary>
         /// 订阅页面
         /// </summary>
@@ -47,7 +48,7 @@ namespace GamerSky.ViewModel
         /// </summary>
         public ObservableCollection<Subscribe> Subscribes { get; set; }
 
-        #region Properties
+        
         private bool isActive;
         public bool IsActive
         {
@@ -61,21 +62,7 @@ namespace GamerSky.ViewModel
                 OnPropertyChanged("IsActive");
             }
         }
-
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
-
+        
         private Visibility newsGridViewVisibility;
         /// <summary>
         /// 新闻GridView's Visibility
@@ -108,34 +95,17 @@ namespace GamerSky.ViewModel
         }
 
         #endregion
-         
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
+
         public SearchPageViewModel()
-        { 
+        {
             HotSubscribes = new ObservableCollection<Subscribe>();
             HotStrategys = new ObservableCollection<string>();
             HotNews = new ObservableCollection<string>();
             News = new ObservableCollection<Essay>();
             //News = new EssayIncrementalCollection("囧", SearchTypeEnum.news);
             Strategys = new ObservableCollection<Essay>();
-            Subscribes = new ObservableCollection<Subscribe>();
-
-            //LoadHotkey();
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+            Subscribes = new ObservableCollection<Subscribe>(); 
         }
-
-        /// <summary>
-        /// 加载hot keyword
-        /// </summary>
-        //public async void LoadHotkey()
-        //{
-             
-        //}
 
         /// <summary>
         /// 加载攻略热点
