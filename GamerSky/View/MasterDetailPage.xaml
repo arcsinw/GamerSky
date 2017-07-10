@@ -484,70 +484,72 @@
             </StackPanel>
         </Grid>
         <!--#endregion-->
-        
-        <Grid x:Name="moduleGrid" Grid.Column="1" VerticalAlignment="Bottom" Height="50" 
+
+        <Popup IsOpen="True" VerticalAlignment="Bottom" Width="{Binding ElementName=rootGrid,Path=ActualWidth}">
+            <Grid x:Name="moduleGrid" Grid.Column="1" VerticalAlignment="Bottom" Height="50" 
                     Background="{ThemeResource BottomBarBackground}"
                     Opacity="0.8">
-            <Grid.Resources>
-                <Style TargetType="FontIcon">
-                    <Setter Property="FontSize" Value="20"/>
-                    <Setter Property="Margin" Value="0,0,0,4"/>
-                </Style>
-                <Style TargetType="BitmapIcon">
-                    <Setter Property="Height" Value="24"/>
-                    <Setter Property="Width" Value="24"/>
-                </Style>
-            </Grid.Resources>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0" 
+                <Grid.Resources>
+                    <Style TargetType="FontIcon">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Margin" Value="0,0,0,4"/>
+                    </Style>
+                    <Style TargetType="BitmapIcon">
+                        <Setter Property="Height" Value="24"/>
+                        <Setter Property="Width" Value="24"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <RadioButton Grid.Column="0" 
                          GroupName="Module" Style="{StaticResource TabRadioStyle}">
-                <i:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-                        <action:NavigationAction SourcePage="GamerSky.View.MainPage" NavigationType="Master"/>
-                    </core:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-                <RadioButton.Content>
-                    <StackPanel>
-                        <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_xinwen_h.png" Height="24" Width="24"/>
-                        <TextBlock x:Uid="News"/>
-                    </StackPanel>
-                </RadioButton.Content>
-            </RadioButton>
-            <RadioButton Grid.Column="1" Tag="1"
+                    <i:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <action:NavigationAction SourcePage="GamerSky.View.MainPage" NavigationType="Master"/>
+                        </core:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                    <RadioButton.Content>
+                        <StackPanel>
+                            <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_xinwen_h.png" Height="24" Width="24"/>
+                            <TextBlock x:Uid="News"/>
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton Grid.Column="1" Tag="1"
                          GroupName="Module" Style="{StaticResource TabRadioStyle}">
-                <i:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-                        <action:NavigationAction SourcePage="GamerSky.View.StrategyPage" NavigationType="Master"/>
-                    </core:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-                <RadioButton.Content>
-                    <StackPanel>
-                        <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_gonglue_h.png" 
+                    <i:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <action:NavigationAction SourcePage="GamerSky.View.StrategyPage" NavigationType="Master"/>
+                        </core:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                    <RadioButton.Content>
+                        <StackPanel>
+                            <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_gonglue_h.png" 
                                     Height="24" Width="24"/>
-                        <TextBlock x:Uid="Game"/>
-                    </StackPanel>
-                </RadioButton.Content>
-            </RadioButton>
-            <RadioButton Grid.Column="2" Tag="2"
+                            <TextBlock x:Uid="Game"/>
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton Grid.Column="2" Tag="2"
                          GroupName="Module" Style="{StaticResource TabRadioStyle}">
-                <i:Interaction.Behaviors>
-                    <core:EventTriggerBehavior EventName="Tapped">
-                        <action:NavigationAction SourcePage="GamerSky.View.SubscribePage" NavigationType="Master"/>
-                    </core:EventTriggerBehavior>
-                </i:Interaction.Behaviors>
-                <RadioButton.Content>
-                    <StackPanel>
-                        <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_dingyue_h.png" 
+                    <i:Interaction.Behaviors>
+                        <core:EventTriggerBehavior EventName="Tapped">
+                            <action:NavigationAction SourcePage="GamerSky.View.SubscribePage" NavigationType="Master"/>
+                        </core:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                    <RadioButton.Content>
+                        <StackPanel>
+                            <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_dingyue_h.png" 
                                     Height="24" Width="24" />
-                        <TextBlock x:Uid="Subscribe"/>
-                    </StackPanel>
-                </RadioButton.Content>
-            </RadioButton>
-        </Grid>
+                            <TextBlock x:Uid="Subscribe"/>
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
+            </Grid>
+        </Popup>
 
         <Frame x:Name="DetailFrame" x:FieldModifier="Public" Grid.Column="2" Navigated="DetailFrame_Navigated">
             <Frame.ContentTransitions>

@@ -14,6 +14,8 @@ using GamerSky.PostDataModel;
 using GamerSky.ResultModel;
 using GamerSky.PostModel;
 using System.Net;
+using Arcsinx.Toolkit.Helper;
+using GamerSky.Enums;
 
 namespace GamerSky.Http
 {

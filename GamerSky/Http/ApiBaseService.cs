@@ -11,6 +11,7 @@ using Windows.Data.Json;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using GamerSky.Helper;
+using Arcsinx.Toolkit.Helper;
 
 namespace GamerSky.Http
 {

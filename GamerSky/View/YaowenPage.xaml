@@ -8,7 +8,7 @@
     xmlns:model="using:GamerSky.Model"
     xmlns:hp="using:GamerSky.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
-    xmlns:control="using:GamerSky.Controls"
+    xmlns:control="using:Arcsinx.Toolkit.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     >
@@ -43,17 +43,6 @@
         </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
-            <!--<pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">-->
-            <!--<control:PullToRefreshListView ItemsSource="{Binding Yaowens}"
-                      SelectionMode="None" IsPullToRefreshWithMouseEnabled="True"
-                      x:Name="listView" RefreshRequested="listView_RefreshRequested"
-                      Loaded="ListView_Loaded"
-                      OverscrollLimit="0.4" PullThreshold="100"
-                      
-                      IsItemClickEnabled="True"
-                      ItemClick="ListView_ItemClick"
-                      Style="{ThemeResource LightListView}"
-                      >-->
             <control:PullToRefreshListView ItemsSource="{Binding Yaowens}"  
                                            ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"
                                            ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
@@ -69,8 +58,6 @@
                     <TextBlock Text="Pull down to Refresh" HorizontalAlignment="Center"/>
                 </control:PullToRefreshListView.RefreshIndicatorContent>
             </control:PullToRefreshListView>
-            <!--</pr:PullToRefreshBox>-->
- 
             <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Style="{ThemeResource ProgressRingStyle}"/> 
         </Grid>
 
@@ -78,9 +65,11 @@
                 x:Name="topPop" >
             <Popup.ChildTransitions>
                 <TransitionCollection>
-                    <AddDeleteThemeTransition />
+                    <!--<AddDeleteThemeTransition />-->
+                    <PopupThemeTransition FromVerticalOffset="100"/>
                 </TransitionCollection>
             </Popup.ChildTransitions>
+            
             <Popup.Child>
                 <Button x:Name="scrollBtn" Click="scrollBtn_Click" Style="{ThemeResource ScrollToTopButtonStyle}">
                     <SymbolIcon Symbol="Up" Foreground="White" />

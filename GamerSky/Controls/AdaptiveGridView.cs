@@ -7,6 +7,7 @@ using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using GamerSky.Helper;
+using Arcsinx.Toolkit.Helper;
 
 namespace GamerSky.Controls
 {

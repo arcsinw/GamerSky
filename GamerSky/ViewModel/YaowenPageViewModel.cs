@@ -8,25 +8,15 @@ using Windows.UI.Xaml;
 using GamerSky.Http;
 using GamerSky.IncrementalLoadingCollection;
 using GamerSky.Model;
+using Arcsinx.Toolkit.IncrementalCollection;
 
 namespace GamerSky.ViewModel
 {
     public class YaowenPageViewModel : ViewModelBase
-    {  
-        private YaowenIncrementalCollection yaowens;
-        public YaowenIncrementalCollection Yaowens
-        {
-            get
-            {
-                return yaowens;
-            }
-            set
-            {
-                yaowens = value;
-                OnPropertyChanged();
-            }
-        } 
-
+    {
+        #region Properties
+        public IncrementalLoadingCollection<Essay> Yaowens { get; set; }
+        
         private bool isActive;
         public bool IsActive
         {
@@ -40,29 +30,52 @@ namespace GamerSky.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private bool isEmpty;
+
+        public bool IsEmpty
+        {
+            get { return isEmpty; }
+            set { isEmpty = value; OnPropertyChanged(); }
+        } 
+        #endregion
+
         public YaowenPageViewModel()
-        { 
-            Yaowens = new YaowenIncrementalCollection();
+        {
+            Yaowens = new IncrementalLoadingCollection<Essay>(LoadYaowenAsync, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { IsActive = false; });
         }
         
-        public void Refresh()
+        private async Task<IEnumerable<Essay>> LoadYaowenAsync(uint count, int pageIndex)
         {
-            IsActive = true; 
-            YaowenIncrementalCollection s = new YaowenIncrementalCollection();
-            Yaowens = s;
-            s.OnDataLoaded += S_OnDataLoaded;
-            s.OnDataLoading += S_OnDataLoading;
-            IsActive = false; 
-        }
+            var result = await ApiService.Instance.GetYaowen(pageIndex++);
+            if (result != null && result.Count != 0)
+            {
+                return result;
+            }
+            else if (result == null || result.Count == 0)
+            {
+                Yaowens.NoMore();
 
-        private void S_OnDataLoading(object sender, EventArgs e)
+                if (Yaowens.Count == 0)
+                {
+                    IsEmpty = true;
+                }
+                else
+                {
+                    IsEmpty = false;
+                }
+            }
+
+            return null;
+        }
+        
+        public override async void Refresh()
         {
             IsActive = true;
-        }
 
-        private void S_OnDataLoaded(object sender, EventArgs e)
-        {
-            IsActive = false;
+            await Yaowens.ClearAndReloadAsync();
+            
+            IsActive = false; 
         }
     }
 }

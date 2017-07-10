@@ -11,6 +11,7 @@ using GamerSky.Helper;
 using GamerSky.Http;
 using GamerSky.IncrementalLoadingCollection;
 using GamerSky.Model;
+using GamerSky.Enums;
 
 namespace GamerSky.ViewModel
 {

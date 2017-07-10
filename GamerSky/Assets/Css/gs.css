@@ -1,106 +1,110 @@
-.fontsizeone
-{
+.fontsizeone {
     font-size: 14px;
 }
 
-.fontsizetwo
-{
+.fontsizetwo {
     font-size: 17px;
 }
 
-.fontsizethree
-{
+.fontsizethree {
     font-size: 20px;
 }
 
 
 
-html
-{
-	/*-ms-content-zoom : none;*/
-	font-family: "Arial","Microsoft YaHei";
+html {
+    /*-ms-content-zoom : none;*/
+    font-family: "Arial","Microsoft YaHei";
 }
-body
-{ 
-	overflow-x:hidden;
-    margin:12px;
-    background-color:#f7f7f7;
-    color:#333;	
-    text-align:justify;
-	word-break:break-all;
-	/*禁止选中内容, 禁止弹出内容菜单
+
+body {
+    overflow-x: hidden;
+    margin: 12px;
+    background-color: #f7f7f7;
+    color: #333;
+    text-align: justify;
+    word-break: break-all;
+    /*禁止选中内容, 禁止弹出内容菜单
     -webkit-touch-callout:none;
 	-webkit-user-select:none;*/
 }
-.PageColorMode_Day body
-{
-	background-color: #f7f7f7;color: #333;
+
+.PageColorMode_Day body {
+    background-color: #f7f7f7;
+    color: #333;
 }
-.PageColorMode_Night body
-{
-	background-color: #17181a;color: #576476;
+
+.PageColorMode_Night body {
+    background-color: #17181a;
+    color: #576476;
 }
-.heading 
-{
-	margin: 0;
-	padding: 0;
-	top: 22px;
-	line-height: 28px;
-	color: #333;
+
+.heading {
+    margin: 0;
+    padding: 0;
+    top: 22px;
+    line-height: 28px;
+    color: #333;
 }
-	.PageColorMode_Day .heading
-	{
-		color: #333;
-	}
-	.PageColorMode_Night .heading
-	{
-		color: #966122;
-	}
-.info
-{
-	margin: 6px 0px;
-	line-height: 22px;
-	color: gray;
-	font-size: 16px;
-	color: #848484;
+
+.PageColorMode_Day .heading {
+    color: #333;
 }
-	.PageColorMode_Day .info {color:#848484;}
-	.PageColorMode_Night .info {color:#464950;}
-.bar
-{
-	background-color: #eaeaea;
-	margin : 10px 0px 10px 0px; 
-	width : auto;
-	height : 1px;
+
+.PageColorMode_Night .heading {
+    color: #966122;
 }
-	.PageColorMode_Day .bar
-	{
-		background-color: #eaeaea;
-	}
-	.PageColorMode_Night .bar
-	{
-		background-color: #2a2e38;
-	}
-p
-{
-	margin: 10px auto;
-	line-height: 160%;
+
+.info {
+    margin: 6px 0px;
+    line-height: 22px;
+    color: gray;
+    font-size: 16px;
+    color: #848484;
 }
-h1 
-{
-	text-align: left;
-	font-size: 20px;
+
+.PageColorMode_Day .info {
+    color: #848484;
 }
-img
-{
-	height: auto;
-	width: auto;
-	width: 100% !important;
+
+.PageColorMode_Night .info {
+    color: #464950;
 }
-a
-{
-	color: #3871c8;
-	text-decoration: none;
+
+.bar {
+    background-color: #eaeaea;
+    margin: 10px 0px 10px 0px;
+    width: auto;
+    height: 1px;
+}
+
+.PageColorMode_Day .bar {
+    background-color: #eaeaea;
+}
+
+.PageColorMode_Night .bar {
+    background-color: #2a2e38;
+}
+
+p {
+    margin: 10px auto;
+    line-height: 160%;
+}
+
+h1 {
+    text-align: left;
+    font-size: 20px;
+}
+
+img {
+    height: auto;
+    width: auto;
+    width: 100% !important;
+}
+
+a {
+    color: #3871c8;
+    text-decoration: none;
 }
 /*#youkuplayer_0
 {
@@ -111,166 +115,281 @@ a
 {
 	width: 100% !important;
 	 
-}*/ 
+}*/
 
 
 /*----------------------------
 	表格样式
 -------------------------------*/
-table {color : #ccc;}
-.table2 {margin:0 auto; width:98%; border:1.00px solid #555; border-collapse:collapse; background-color:#333; cursor:default;}
-.table2 td {padding:4px; border:1.00px solid #555;}
-.tr2 {text-align:center; background-color:#000}
+table {
+    color: #ccc;
+}
+
+.table2 {
+    margin: 0 auto;
+    width: 98%;
+    border: 1.00px solid #555;
+    border-collapse: collapse;
+    background-color: #333;
+    cursor: default;
+}
+
+    .table2 td {
+        padding: 4px;
+        border: 1.00px solid #555;
+    }
+
+.tr2 {
+    text-align: center;
+    background-color: #000
+}
 
 
 /*----------------------------
 	相关阅读
 -------------------------------*/
-#gsTemplateContent_RelatedReadingContent {margin-left:-10px; margin-right:-10px;}
-#gsTemplateContent_RelatedReadingContent .Row {padding:0px;}
-#gsTemplateContent_RelatedReadingContent .Row div {margin:0px 10px 0px 10px; white-space:nowrap; text-overflow:ellipsis;}
+#gsTemplateContent_RelatedReadingContent {
+    margin-left: -10px;
+    margin-right: -10px;
+}
 
-.list {display:block; width:auto; height:auto; border-radius:2px; border:1.00px solid #e0e0e0; border-top:7px solid #ddd; border-bottom:1px solid #bbb; padding:10px 10px 0 10px;  background:#f7f7f7;}
-	.PageColorMode_Day .list {border:1.00px solid #e0e0e0; border-top:7px solid #ddd; border-bottom:1px solid #bbb; background:#f7f7f7;}
-	.PageColorMode_Night .list {border:1.00px solid #1d1c21; border-top:7px solid #0e0e0e; border-bottom:1px solid #040404; background:#17181a;}
-.list .tit {margin:0 0 10px -10px; padding-left:5px; width:auto; height:20px; line-height:20px; font-weight:bold;}
-	.PageColorMode_Day .list .tit {color:#333;}
-	.PageColorMode_Night .list .tit {color:#576476;}
-.list .txtlist {display:block; width:auto; height:auto;}
-.list .txtlist a {display:block;}
-.list .txtlist .Row {display:block; width:100%; height:40px; line-height:40px; font-size:14px; white-space:nowrap; text-overflow:ellipsis;}
-.PageColorMode_Day .list .txtlist .Row {border-top:1.00px solid #e0e0e0; color:#333;}
-.PageColorMode_Night .list .txtlist .Row {border-top:1.00px solid #2a2e38; color:#576476;}
-.list .more {display:block; border-top:1.00px solid #2a2e38; width:100%; font-size:14px; height:40px; line-height:40px; text-align:center; color:#5f5f69;}
-.PageColorMode_Day .list .more {border-top:1.00px solid #e0e0e0; color:#333;}
-.PageColorMode_Night .list .more {border-top:1.00px solid #2a2e38; color:#5f5f69;}
-.list .more a {display:block;}
+    #gsTemplateContent_RelatedReadingContent .Row {
+        padding: 0px;
+    }
 
-#ScrollToTop
-{
-    position:fixed;
+        #gsTemplateContent_RelatedReadingContent .Row div {
+            margin: 0px 10px 0px 10px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+.list {
+    display: block;
+    width: auto;
+    height: auto;
+    border-radius: 2px;
+    border: 1.00px solid #e0e0e0;
+    border-top: 7px solid #ddd;
+    border-bottom: 1px solid #bbb;
+    padding: 10px 10px 0 10px;
+    background: #f7f7f7;
+}
+
+.PageColorMode_Day .list {
+    border: 1.00px solid #e0e0e0;
+    border-top: 7px solid #ddd;
+    border-bottom: 1px solid #bbb;
+    background: #f7f7f7;
+}
+
+.PageColorMode_Night .list {
+    border: 1.00px solid #1d1c21;
+    border-top: 7px solid #0e0e0e;
+    border-bottom: 1px solid #040404;
+    background: #17181a;
+}
+
+.list .tit {
+    margin: 0 0 10px -10px;
+    padding-left: 5px;
+    width: auto;
+    height: 20px;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+
+#red {
+    border-left: 5px solid #f22f09;
+}
+
+#yellow {
+    border-left: 5px solid #FFC600;
+}
+
+.PageColorMode_Day .list .tit {
+    color: #333;
+}
+
+.PageColorMode_Night .list .tit {
+    color: #576476;
+}
+
+.list .txtlist {
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+.list .txtlist a {
+    display: block;
+}
+
+
+.list .txtlist .Row {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.PageColorMode_Day .list .txtlist .Row {
+    border-top: 1.00px solid #e0e0e0;
+    color: #333;
+}
+
+.PageColorMode_Night .list .txtlist .Row {
+    border-top: 1.00px solid #2a2e38;
+    color: #576476;
+}
+
+.list .more {
+    display: block;
+    border-top: 1.00px solid #2a2e38;
+    width: 100%;
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #5f5f69;
+}
+
+.PageColorMode_Day .list .more {
+    border-top: 1.00px solid #e0e0e0;
+    color: #333;
+}
+
+.PageColorMode_Night .list .more {
+    border-top: 1.00px solid #2a2e38;
+    color: #5f5f69;
+}
+
+.list .more a {
+    display: block;
+}
+
+#ScrollToTop {
+    position: fixed;
     bottom: 30px;
-    left:91%;
-    width:70px;
-    zoom:1;
+    left: 91%;
+    width: 70px;
+    zoom: 1;
 }
 
-#ScrollToTop a
-{
-    background:#787474;
-    color:#fff;
-    display:block;
-    width:40px;
-    height:40px;
-}
+    #ScrollToTop a {
+        background: #787474;
+        color: #fff;
+        display: block;
+        width: 40px;
+        height: 40px;
+    }
 
 /*------------------------------------------------ -x68
 	视频
 ------------------------------------------------ -x68*/
 
-.Slides
-{
-	width:100%;
-	height:auto;
-	background: transparent;
-}
-.Slides ul.Bimg li
-{
-    display: inline-block;
-}
-.Slides ul.Bimg li a div.mask
-{
-    display: none;
-}
-.Slides ul.Bimg li a div.txt
-{
-    position: relative;
-    margin-top: -40px;
+.Slides {
     width: 100%;
-    height: 40px;
-    background: url("http://image.gamersky.com/webimg15/mk3.png") 0px 0px repeat-x;
-    padding-left: 10px;
-    line-height: 40px;
-    text-shadow: 1px 1px 1px #000;
-    font-family: 'Microsoft YaHei';
-    font-size: 18px;
-    font-weight: bold;
-    color: #f2f2f3;
+    height: auto;
+    background: transparent;
 }
-.Slides .focus-num
-{
-	display: none;
-}
-.Slides a.btn
-{
-	display: none;
-}
+
+    .Slides ul.Bimg li {
+        display: inline-block;
+    }
+
+        .Slides ul.Bimg li a div.mask {
+            display: none;
+        }
+
+        .Slides ul.Bimg li a div.txt {
+            position: relative;
+            margin-top: -40px;
+            width: 100%;
+            height: 40px;
+            background: url("http://image.gamersky.com/webimg15/mk3.png") 0px 0px repeat-x;
+            padding-left: 10px;
+            line-height: 40px;
+            text-shadow: 1px 1px 1px #000;
+            font-family: 'Microsoft YaHei';
+            font-size: 18px;
+            font-weight: bold;
+            color: #f2f2f3;
+        }
+
+    .Slides .focus-num {
+        display: none;
+    }
+
+    .Slides a.btn {
+        display: none;
+    }
 
 /*------------------------------------------------ -x68
 	评测文章子节点标题样式.
 ------------------------------------------------ -x68*/
-p .fc
-{
-	text-align: center;
-	font-size: 14px;
-	color: #666;
+p .fc {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
 }
-.title1
-{
-	margin:30px 0 10px;
-	width:auto;
-	height:38px;
-	line-height:38px;
-	text-indent:20px;
-	font-size:20px;
-	font-weight:bold;
-	background:#e5e5e5;
-	border-left:9px solid #e23703;
-	border-radius:0 4px 4px 0;
+
+.title1 {
+    margin: 30px 0 10px;
+    width: auto;
+    height: 38px;
+    line-height: 38px;
+    text-indent: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    background: #e5e5e5;
+    border-left: 9px solid #e23703;
+    border-radius: 0 4px 4px 0;
 }
 /*------------------------------------------------ -x68
 170204 更新:
 1，专栏文章子节点标题样式。
 ------------------------------------------------ -x68*/
-.title1
-{
-	height:auto;
-	border-left-color: #e7222a;
-	background-color: #2a2c2e;
-	padding: 0px 10px 0px 10px;
-	text-indent: 0px;
-	color: #ffffff;
+.title1 {
+    height: auto;
+    border-left-color: #e7222a;
+    background-color: #2a2c2e;
+    padding: 0px 10px 0px 10px;
+    text-indent: 0px;
+    color: #ffffff;
 }
 
-.GSTemplateContent_VideoBoxer
-{
-	background-color:#000;
-	background-position:center center;
-	background-repeat:no-repeat;
+.GSTemplateContent_VideoBoxer {
+    background-color: #000;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
-.GSTemplateContent_VideoBoxer .PlayButtonBackground
-{
-	float:none;
-	border-radius:40px;
-	width:80px;
-	height:80px;
-	background-position:center center;
-	background-repeat:no-repeat;
-	-webkit-filter:blur(4px);
-}
-.GSTemplateContent_VideoBoxer .PlayButton
-{
-	float:none;
-	margin-top:-80px;
-	border-radius:40px;
-	width:80px;
-	height:80px;
-	background-repeat:no-repeat;
-	background-position:center center;
-	background-size:80px 80px;
-	background-image:url(../gsAppHTMLTemplate_image/gsAppHTMLTemplate_Video_PlayButton@2x.png);
-	-webkit-filter:hue-rotate(0deg);
-}
+
+    .GSTemplateContent_VideoBoxer .PlayButtonBackground {
+        float: none;
+        border-radius: 40px;
+        width: 80px;
+        height: 80px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        -webkit-filter: blur(4px);
+    }
+
+    .GSTemplateContent_VideoBoxer .PlayButton {
+        float: none;
+        margin-top: -80px;
+        border-radius: 40px;
+        width: 80px;
+        height: 80px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 80px 80px;
+        background-image: url(../gsAppHTMLTemplate_image/gsAppHTMLTemplate_Video_PlayButton@2x.png);
+        -webkit-filter: hue-rotate(0deg);
+    }
 /**
 div,ul,li{overflow: hidden;}
 #gsTemplateContent_MainBody {line-height:150%;}

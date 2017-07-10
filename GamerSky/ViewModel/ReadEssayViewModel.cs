@@ -199,20 +199,30 @@ namespace GamerSky.ViewModel
                 #region 相关阅读
                 List<RelatedReadings> relatedReadings = await ApiService.Instance.GetRelatedReadings(CurrentEssay.ContentId, CurrentEssay.ContentType);
 
-                StringBuilder relatedReadingsHtml = new StringBuilder(string.Empty);
+                string relatedReadingHtml = string.Empty;
+                
                  
-                if (relatedReadings != null)
+                if (relatedReadings != null && relatedReadings.Count != 0)
                 {
+                    string relatedReading = @"<div class=""list"" id=""gsTemplateContent_RelatedReading"">
+	                                        <div class=""tit yellow"" id=""yellow"">相关阅读</div>
+	                                            <div class=""txtlist"" id=""gsTemplateContent_RelatedReadingContent"">
+    	                                            {0}
+	                                            </div>
+                                        </div>";
+
+                    StringBuilder relatedReadingsStringBuilder = new StringBuilder(string.Empty);
+
+                    StringBuilder tmp = new StringBuilder();
                     foreach (var item in relatedReadings)
                     {
-                        StringBuilder tmp = new StringBuilder();
                         //tmp.Append($"<div class=\"Thumbnail\"><img src=\"{item.thumbnailUrl}\"></div>");
-                        tmp.Append($"<div>{item.title}</div>");
+                        //tmp.Append($"<div>{item.title}</div>");
 
-                        relatedReadingsHtml.Append($@"<a href=""javascript:void(0)"" onclick=""OpenEssayById({item.contentId})""><div class=""Row""><div>{tmp}</div></div></a>");
-
-                        tmp.Clear();    
+                        relatedReadingsStringBuilder.Append($@"<a href=""javascript:void(0)"" onclick=""OpenEssayById({item.contentId})""><div class=""Row""><div><div>{item.title}</div></div></div></a>");
                     }
+
+                    relatedReadingHtml = string.Format(relatedReading, relatedReadingsStringBuilder.ToString());
                 }
                 #endregion
 
@@ -229,20 +239,22 @@ namespace GamerSky.ViewModel
                                   "<span class=\"info\" id=\"gsTemplateContent_Subtitle\">" + subTitle + "</span>" +
                                   "<div class=\"bar\"></div>" +
                                   "<div class=\"content\" id=\"gsTemplateContent_MainBody\">" + mainBody + "</div>" +
-                                  "<div id=\"gsTemplateContent_AD1\"></div>" +
-                                  "<div class=\"list\" id=\"gsTemplateContent_RelatedTopic\">" +
-                                       "<div class=\"tit red\" style=\"border-left:5px solid #f22f09;\">相关专题</div>" +
-                                            "<div id=\"gsTemplateContent_RelatedTopicContent\">" +
-                                            "</div>" +
-                                        "</div>" +
-                                  "</div>" +
-                                  $@"<div class=""list"" id=""gsTemplateContent_RelatedReading"">
-	                                        <div class=""tit yellow"" style=""border-left:5px solid #FFC600"">相关阅读</div>
-	                                            <div class=""txtlist"" id=""gsTemplateContent_RelatedReadingContent"">
-    	                                            {relatedReadingsHtml}
-	                                            </div>
-                                        </div>"+
-                                         //relatedReadingsHtml +
+
+                                  relatedReadingHtml +
+
+                                  //"<div class=\"list\" id=\"gsTemplateContent_RelatedTopic\">" +
+                                  //     "<div class=\"tit\" id=\"red\">相关专题</div>" +
+                                  //          "<div id=\"gsTemplateContent_RelatedTopicContent\">" +
+                                  //          "</div>" +
+                                  //      "</div>" +
+                                  //"</div>" +
+                                  //$@"<div class=""list"" id=""gsTemplateContent_RelatedReading"">
+                                  //       <div class=""tit yellow"" id=""yellow"">相关阅读</div>
+                                  //           <div class=""txtlist"" id=""gsTemplateContent_RelatedReadingContent"">
+                                  //               {relatedReadingsHtml}
+                                  //           </div>
+                                  //      </div>"+
+                                  //relatedReadingsHtml +
                              "</div>" +
                         "</body>" +
                         "<script type=\"text/javascript\">" + 

@@ -13,7 +13,6 @@ namespace GamerSky.ViewModel
     {
         public UserRegisterByEmailInfo RegisterInfo { get; set; }
          
-
         public EmailRegisterPageViewModel()
         {
             RegisterInfo = new UserRegisterByEmailInfo();

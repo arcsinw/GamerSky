@@ -12,7 +12,7 @@ using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
-namespace GamerSky.Helper
+namespace Arcsinx.Toolkit.Helper
 {
     public static class Functions
     {

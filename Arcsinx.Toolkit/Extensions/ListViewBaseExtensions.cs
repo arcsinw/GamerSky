@@ -1,14 +1,29 @@
-﻿using System;
+﻿using Arcsinx.Toolkit.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
-namespace GamerSky.Helper
+namespace Arcsinx.Toolkit.Extensions
 {
     public static class ListViewBaseExtensions
     {
+        public static void ScrollUp(this ListViewBase listView)
+        {
+            var scrollViewer = listView.GetScrollViewer();
+
+        }
+
+        public static void ScrollDown(this ListViewBase listView)
+        {
+            var scrollViewer = listView.GetScrollViewer();
+
+        }
+
         /// <summary>
         /// 平滑滚动到某一项
         /// </summary>
@@ -49,18 +64,18 @@ namespace GamerSky.Helper
                 {
                     scrollViewer.ViewChanged -= scrollHandler;
 
-                    // 最终目的，带平滑滚动效果滚动到 item。
+                    // 最终目的，带平滑滚动效果滚动到 item
                     scrollViewer.ChangeView(targetHorizontalOffset, targetVerticalOffset, null);
                 };
                 scrollViewer.ViewChanged += scrollHandler;
 
-                // 复原位置，且不需要使用动画效果。
-                scrollViewer.ChangeView(originHorizontalOffset, originVerticalOffset, null, true);
+                // 复原位置，且不需要使用动画效果
+                scrollViewer.ChangeView(originHorizontalOffset, originVerticalOffset, null, false);
             };
             listViewBase.LayoutUpdated += layoutUpdatedHandler;
 
-            // 跑腿。
+            // 跑腿
             listViewBase.ScrollIntoView(item, alignment);
         }
-    }
+    } 
 }

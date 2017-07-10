@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace GamerSky.Helper
+namespace Arcsinx.Toolkit.Common
 {
     /// <summary>
     /// 专门用于中继自身功能的命令

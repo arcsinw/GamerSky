@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:vm="using:GamerSky.ViewModel"
     xmlns:hp="using:GamerSky.Helper"
+    xmlns:ts="using:GamerSky.TemplateSelector"
     xmlns:controls="using:GamerSky.Controls"
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:m="using:GamerSky.Model"
@@ -576,7 +577,7 @@
                             Loaded="newsListView_Loaded"
                             ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
                         <ListView.ItemTemplateSelector>
-                            <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+                            <ts:EssayDataTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                                     NoPicDt="{StaticResource NoPicEssayDataTemplate}"
                                                     ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
                                                     />
@@ -625,7 +626,7 @@
                               Loaded="strategysListView_Loaded"
                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
                         <ListView.ItemTemplateSelector>
-                            <hp:EssayListViewItemTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
+                            <ts:EssayDataTemplateSelector OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                                       NoPicDt="{StaticResource NoPicEssayDataTemplate}"
                                                       />
                         </ListView.ItemTemplateSelector>

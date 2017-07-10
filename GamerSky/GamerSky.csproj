@@ -39,7 +39,7 @@
     <Prefer32Bit>true</Prefer32Bit>
     <UseDotNetNativeToolchain>false</UseDotNetNativeToolchain>
     <Optimize>false</Optimize>
-    <EnableGatekeeperAnalysis>true</EnableGatekeeperAnalysis>
+    <EnableGatekeeperAnalysis>false</EnableGatekeeperAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -108,19 +108,15 @@
     <Compile Include="Common\DelegateCommand{T}.cs" />
     <Compile Include="Converters\BoolToElementThemeConverter.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
-    <Compile Include="DataSource\EssayCommentsSource.cs" />
-    <Compile Include="DataSource\GameReleaseDataSource.cs" />
     <Compile Include="Extensions\ExtensionHelper.cs" />
     <Compile Include="Helper\AlphaKeyGroup.cs" />
     <Compile Include="Helper\AuthenticationHelper.cs" />
     <Compile Include="Helper\ConnectionHelper.cs" />
     <Compile Include="Helper\ConnectionType.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
-    <Compile Include="Helper\DeviceInformationHelper.cs" />
     <Compile Include="Helper\DispatcherManager.cs" />
     <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
     <Compile Include="Helper\FileHelper.cs" />
-    <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\GlobalStringLoader.cs" />
     <Compile Include="Helper\HtmlStreamUriResolver.cs" />
     <Compile Include="Cache\CacheBase.cs" />
@@ -176,21 +172,17 @@
     <Compile Include="Extensions\VisualTreeExtensions.cs" />
     <Compile Include="Controls\AdaptiveGridView.cs" />
     <Compile Include="Helper\DeviceTypeTrigger.cs" />
-    <Compile Include="Helper\EssayListViewItemTemplateSelector.cs" />
     <Compile Include="Helper\ImageDownLoadHelper.cs" />
-    <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\JYHelper.cs" />
-    <Compile Include="Helper\ListViewBaseExtensions.cs" />
     <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\LocalSettingsHelper.cs" />
     <Compile Include="Helper\NavigationHelper.cs" />
     <Compile Include="Helper\PageBase.cs" />
     <Compile Include="Controls\StringWrapPanel.cs" />
-    <Compile Include="Helper\RelayCommand.cs" />
-    <Compile Include="Helper\SearchTypeEnum.cs" />
+    <Compile Include="Enums\SearchTypeEnum.cs" />
     <Compile Include="Helper\StorageFileHelper.cs" />
     <Compile Include="Helper\StreamHelper.cs" />
-    <Compile Include="Helper\SubscribeEditEnum.cs" />
+    <Compile Include="Enums\SubscribeEditEnum.cs" />
     <Compile Include="Helper\ToastHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
     <Compile Include="Helper\VerifiableBase.cs" />
@@ -211,7 +203,6 @@
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\SearchIncrementalCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\SubscribeIncrementalCollection.cs" />
-    <Compile Include="IncrementalLoadingCollection\YaowenIncrementalCollection.cs" />
     <Compile Include="Model\AdStart.cs" />
     <Compile Include="Model\Channel.cs" />
     <Compile Include="Model\Collect.cs" />
@@ -359,6 +350,9 @@
     </Compile>
     <Compile Include="View\ReplyPage.xaml.cs">
       <DependentUpon>ReplyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RootPage.xaml.cs">
+      <DependentUpon>RootPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
@@ -603,6 +597,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\RootPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SearchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -628,12 +626,22 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arcsinx.Toolkit\Arcsinx.Toolkit.csproj">
+      <Project>{cf39c3a6-1869-4914-883b-139c66d8d1b3}</Project>
+      <Name>Arcsinx.Toolkit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GamerSky.Background\GamerSky.Background.csproj">
+      <Project>{bf9462ae-5cd2-497f-8e74-0b36b3c7be84}</Project>
+      <Name>GamerSky.Background</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

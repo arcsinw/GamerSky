@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Data;
 using GamerSky.Helper;
 using GamerSky.Http;
 using GamerSky.Model;
+using GamerSky.Enums;
 
 namespace GamerSky.IncrementalLoadingCollection
 {

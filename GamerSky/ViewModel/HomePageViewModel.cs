@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +13,6 @@ namespace GamerSky.ViewModel
     {
         public HomePageViewModel()
         {
-            //AppTheme = DataShareManager.Current.AppTheme;
-            //DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
             GetCacheSize();
         }
          

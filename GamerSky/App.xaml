@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GamerSky"
-    xmlns:hp="using:GamerSky.Helper"
+    xmlns:ts="using:GamerSky.TemplateSelector"
     RequestedTheme="Light">
 
     <Application.Resources> 
@@ -340,14 +340,14 @@
                 <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
             </Style>
  
-            <hp:EssayListViewItemTemplateSelector x:Key="EssayDataTemplateSelector"
+            <ts:EssayDataTemplateSelector x:Key="EssayDataTemplateSelector"
                                                   NoPicDt="{StaticResource NoPicEssayDataTemplate}"
                                                   OnePicDt="{StaticResource OnePicEssayDataTemplate}"
                                                   ThreePicDt="{StaticResource ThreePicEssayDataTemplate}"
                                                   TopicDt="{StaticResource TopicDataTemplate}"
                                                   >
           
-            </hp:EssayListViewItemTemplateSelector>
+            </ts:EssayDataTemplateSelector>
             
             <!--BorderMargin-->
             <Thickness x:Key="EssayBorderMargin">0,2</Thickness>

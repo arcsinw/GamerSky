@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GamerSky.Helper
+namespace GamerSky.Enums
 {
     /// <summary>
     /// 订阅操作枚举

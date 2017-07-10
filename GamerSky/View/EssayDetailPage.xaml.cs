@@ -21,6 +21,7 @@ using GamerSky.ViewModel;
 using GamerSky.IncrementalLoadingCollection;
 using GamerSky.PostDataModel;
 using System.Threading.Tasks;
+using Arcsinx.Toolkit.Helper;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 

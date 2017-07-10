@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Resources.Core;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.UI.ViewManagement;
 
-namespace GamerSky.Helper
+namespace Arcsinx.Toolkit.Helper
 {
     /// <summary>
     /// 获取一些设备信息
     /// </summary>
     public class DeviceInformationHelper
     {
+        static DeviceInformationHelper()
+        {
+            ResourceContext resContext = ResourceContext.GetForCurrentView();
+            string value = resContext.QualifierValues["DeviceFamily"];
+            IsMobile = value.Equals("Mobile");
+        }
+
         private static EasClientDeviceInformation easDeviceInfo = new EasClientDeviceInformation();
         /// <summary>
         /// return local device id
@@ -72,6 +80,8 @@ namespace GamerSky.Helper
         {
             return easDeviceInfo.OperatingSystem == "Desktop";
         }
+
+        public static bool IsMobile { get; private set; }
 
         /// <summary>
         /// 获取屏幕宽度

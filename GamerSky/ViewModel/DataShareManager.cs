@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using GamerSky.Helper;
 using GamerSky.Model;
 using System.Collections.ObjectModel;
+using Arcsinx.Toolkit.Helper;
 
 namespace GamerSky.ViewModel
 {
