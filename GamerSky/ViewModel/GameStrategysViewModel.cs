@@ -8,6 +8,8 @@ using Windows.UI.Xaml;
 using GamerSky.Http;
 using GamerSky.IncrementalLoadingCollection;
 using GamerSky.Model;
+using Arcsinx.Toolkit.IncrementalCollection;
+using Arcsinx.Toolkit.Controls;
 
 namespace GamerSky.ViewModel
 {
@@ -16,14 +18,14 @@ namespace GamerSky.ViewModel
         /// <summary>
         /// 攻略
         /// </summary>
-        public ObservableCollection<Essay> Strategys { get; set; }
+        //public ObservableCollection<Essay> Strategys { get; set; }
 
-       //public GameStrategysIncrementalLoadingCollection IncreStrategys { get; set; }
-        
+        public IncrementalLoadingCollection<Essay> Strategys { get; set; }
 
-        /// <summary>
-        /// ProgressRing IsActive
-        /// </summary>
+        //public GameStrategysIncrementalLoadingCollection IncreStrategys { get; set; }
+
+
+        #region Properties
         private bool isActive = true;
         public bool IsActive
         {
@@ -36,16 +38,24 @@ namespace GamerSky.ViewModel
                 isActive = value;
                 OnPropertyChanged();
             }
-        }
+        } 
+        #endregion
 
         private Strategy strategyResult;
 
         public GameStrategysViewModel()
-        { 
-            Strategys = new ObservableCollection<Essay>();
+        {
+            Strategys = new IncrementalLoadingCollection<Essay>(LoadStrategys, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(((Exception)e).Message); IsActive = false; });
+
+            //Strategys = new ObservableCollection<Essay>();
             //IncreStrategys = new GameStrategysIncrementalLoadingCollection();
         }
-        
+
+        private async Task<IEnumerable<Essay>> LoadStrategys(uint count, int pageIndex)
+        {
+            List<Essay> results = await ApiService.Instance.GetGameStrategys(strategyResult.SpecialID, pageIndex++);
+            return results;
+        }
 
         public async Task LoadData(Strategy strategyResult,int pageIndex=1)
         {
@@ -70,12 +80,12 @@ namespace GamerSky.ViewModel
             await LoadData(strategyResult, pageIndex);
         }
 
-        public async Task Refresh()
+        public override async void Refresh()
         {
             IsActive = true;
-            Strategys.Clear();
-            //IncreStrategys.Clear();
-            await LoadData(strategyResult);
+
+            await Strategys.ClearAndReloadAsync();
+             
             IsActive = false;
         }
 

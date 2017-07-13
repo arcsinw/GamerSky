@@ -7,11 +7,17 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using GamerSky.Http;
 using GamerSky.Model;
+using Arcsinx.Toolkit.IncrementalCollection;
+using Arcsinx.Toolkit.Controls;
+using System.Diagnostics;
+using Windows.UI.Xaml.Controls;
+using GamerSky.View;
 
 namespace GamerSky.ViewModel
 {
     public class GameDetailViewModel : ViewModelBase
-    { 
+    {
+        #region Properties
         private GameDetail gameDetail;
         public GameDetail GameDetail
         {
@@ -26,72 +32,95 @@ namespace GamerSky.ViewModel
             }
         }
 
-        public ObservableCollection<GameDetailEssay> GameDetailNews { get; set; }
+        public IncrementalLoadingCollection<Essay> News { get; set; }
 
-        public ObservableCollection<GameDetailEssay> GameDetailStrategys { get; set; }
+        public IncrementalLoadingCollection<Essay> Strategys { get; set; }
 
-        
+        private bool isActive;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; }
+        }
+
+        #endregion
+
+        public string contentId { get; set; } = "353478";
+
         public GameDetailViewModel()
         { 
             GameDetail = new GameDetail();
-            GameDetailNews = new ObservableCollection<GameDetailEssay>();
-            GameDetailStrategys = new ObservableCollection<GameDetailEssay>();
+
+            News = new IncrementalLoadingCollection<Essay>(LoadNews, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(((Exception)e).Message); });
+            Strategys = new IncrementalLoadingCollection<Essay>(LoadNews, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(((Exception)e).Message); });
             
-            if(Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+            if(IsDesignMode)
             { 
-                LoadGameDetail();
-                LoadGameNews(1);
-                LoadGameStrategys(1);
+                LoadGameDetail(); 
             }
         }
-        
-        public string contentId { get; set; } = "353478";
 
+        #region Load and refresh methods
+        private async Task<IEnumerable<Essay>> LoadNews(uint count, int pageIndex)
+        {
+            var result = await ApiService.Instance.GetGameDetailNews(contentId, pageIndex++);
+            Debug.WriteLine(pageIndex);
+            return result;
+        }
+
+        private async Task<IEnumerable<Essay>> LoadStrategys(uint count, int pageIndex)
+        {
+            var result = await ApiService.Instance.GetGameDetailStrategys(contentId, pageIndex++);
+            Debug.WriteLine(pageIndex);
+            return result;
+        }
+        
         public async void LoadGameDetail()
         {
             GameDetail = await ApiService.Instance.GetGameDetail(contentId);
         }
 
-        /// <summary>
-        /// 加载新闻
-        /// </summary>
-        /// <param name="pageIndex"></param>
-        public async void LoadGameNews(int pageIndex)
-        {
-            var result =await ApiService.Instance.GetGameDetailNews(contentId, pageIndex);
-            if(result!= null)
-            {
-                foreach (var item in result)
-                {
-                    GameDetailNews.Add(item);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 加载攻略
-        /// </summary>
-        /// <param name="pageIndex"></param>
-        public async void LoadGameStrategys(int pageIndex)
-        {
-            var result = await ApiService.Instance.GetGameDetailStrategys(contentId, pageIndex);
-            if(result !=null)
-            {
-                foreach (var item in result)
-                {
-                    GameDetailStrategys.Add(item);
-                }
-            }
-        }
-
         public async void RefreshGameNews()
         {
-            await ApiService.Instance.GetGameDetailNews(contentId, 1);
+            await News.ClearAndReloadAsync();
         }
 
         public async void RefreshStrategys()
         {
-            await ApiService.Instance.GetGameDetailStrategys(contentId, 1);
+            await Strategys.ClearAndReloadAsync();
+        } 
+        #endregion
+
+        #region ItemClick' event
+        public void strategyListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var essayResult = e.ClickedItem as Essay;
+
+            if (!essayResult.ContentType.Equals("zhuanti"))
+            {
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essayResult);
+            }
+            else
+            {
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essayResult.ContentId);
+            }
         }
+
+        public void newsListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var essayResult = e.ClickedItem as Essay;
+
+            if (!essayResult.ContentType.Equals("zhuanti"))
+            {
+                //MasterDetailPage.Current.DetailFrame.Navigate(typeof(EssayDetailPage), essayResult);
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essayResult);
+            }
+            else
+            {
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essayResult.ContentId);
+            }
+        } 
+        #endregion
     }
 }

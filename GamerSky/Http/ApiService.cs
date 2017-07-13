@@ -768,9 +768,9 @@ namespace GamerSky.Http
         /// 获取GameDetail页面中 攻略或新闻
         /// </summary>
         /// <returns></returns>
-        public async Task<List<GameDetailEssay>> GetGameDetailItem(string contentId, int pageIndex,string contentType)
+        public async Task<List<Essay>> GetGameDetailItem(string contentId, int pageIndex,string contentType)
         {
-            List<GameDetailEssay> essay = new List<GameDetailEssay>();
+            List<Essay> essay = new List<Essay>();
             if (!ConnectionHelper.IsInternetAvailable)
             { 
             }
@@ -788,9 +788,9 @@ namespace GamerSky.Http
         /// 获取GameDetail页面中 攻略
         /// </summary>
         /// <returns></returns>
-        public async Task<List<GameDetailEssay>> GetGameDetailStrategys(string contentId,int pageIndex)
+        public async Task<List<Essay>> GetGameDetailStrategys(string contentId,int pageIndex)
         {
-            List<GameDetailEssay> essays = new List<GameDetailEssay>();
+            List<Essay> essays = new List<Essay>();
             if (!ConnectionHelper.IsInternetAvailable)
             {
             }
@@ -805,9 +805,9 @@ namespace GamerSky.Http
         /// 获取GameDetail页面中 新闻
         /// </summary>
         /// <returns></returns>
-        public async Task<List<GameDetailEssay>> GetGameDetailNews(string contentId, int pageIndex)
+        public async Task<List<Essay>> GetGameDetailNews(string contentId, int pageIndex)
         {
-            List<GameDetailEssay> essays = new List<GameDetailEssay>();
+            List<Essay> essays = new List<Essay>();
             if (!ConnectionHelper.IsInternetAvailable)
             {
             }

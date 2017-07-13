@@ -12,6 +12,8 @@ using GamerSky.Model;
 using GamerSky.IncrementalLoadingCollection;
 using GamerSky.Common;
 using GamerSky.Enums;
+using Arcsinx.Toolkit.IncrementalCollection;
+using Arcsinx.Toolkit.Controls;
 
 namespace GamerSky.ViewModel
 {
@@ -31,8 +33,9 @@ namespace GamerSky.ViewModel
         /// <summary>
         /// 游戏库中游戏列表
         /// </summary>
-        public GameIncrementalCollection Games { get; set; }
-         
+        //public GameIncrementalCollection Games { get; set; }
+
+        public IncrementalLoadingCollection<Game> Games { get; set; }
 
         private bool isActive;
         public bool IsActive
@@ -48,32 +51,26 @@ namespace GamerSky.ViewModel
             }
         }
 
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
-         
         #endregion
 
         public StrategyPageViewModel()
-        { 
+        {
 
             FocusStrategys = new ObservableCollection<Strategy>();
 
             AllStrategys = new ObservableCollection<AlphaKeyGroup<Strategy>>();
 
-            Games = new GameIncrementalCollection();
+            Games = new IncrementalLoadingCollection<Game>(LoadGame, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(((Exception)e).Message); IsActive = false; });
+
+            //Games = new GameIncrementalCollection();
         }
-        
+
+        private async Task<IEnumerable<Game>> LoadGame(uint count, int pageIndex)
+        {
+            List<Game> games = await ApiService.Instance.GetGameList(pageIndex++);
+            return games;
+        }
+
         /// <summary>
         /// 加载关注攻略
         /// </summary>
@@ -156,14 +153,15 @@ namespace GamerSky.ViewModel
         /// <summary>
         /// 刷新游戏库游戏列表
         /// </summary>
-        public void RefreshGameList()
+        public async void RefreshGameList()
         {
             IsActive = true;
-            Games.Clear();
-            GameIncrementalCollection g = new GameIncrementalCollection();
-            Games = g;
-            g.OnDataLoaded += OnDataLoaded;
-            g.OnDataLoading += OnDataLoading;
+            await Games.ClearAndReloadAsync();
+            //Games.Clear();
+            //GameIncrementalCollection g = new GameIncrementalCollection();
+            //Games = g;
+            //g.OnDataLoaded += OnDataLoaded;
+            //g.OnDataLoading += OnDataLoading;
             IsActive = false;
         }
 

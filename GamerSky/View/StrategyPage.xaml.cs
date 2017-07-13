@@ -29,7 +29,6 @@ namespace GamerSky.View
          
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            progress.IsActive = true;
             if(!pageIndexDic.ContainsKey(pivot.SelectedIndex))
             {
                 switch(pivot.SelectedIndex)
@@ -50,7 +49,6 @@ namespace GamerSky.View
                 
             }
             pageIndex = pageIndexDic[pivot.SelectedIndex] ++;
-            progress.IsActive = false;
         }
 
         /// <summary>
@@ -60,7 +58,7 @@ namespace GamerSky.View
         /// <param name="args"></param>
         private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
-            progress.IsActive = true;
+            
             switch (pivot.SelectedIndex)
             {
                 case 0:
@@ -73,7 +71,7 @@ namespace GamerSky.View
                     ViewModel.RefreshGameList();
                     break;
             }
-            progress.IsActive = false;
+            
         }
 
         private void GridView_ItemClick(object sender, ItemClickEventArgs e)

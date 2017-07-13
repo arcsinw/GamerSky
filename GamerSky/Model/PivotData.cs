@@ -1,4 +1,5 @@
-﻿using GamerSky.IncrementalLoadingCollection;
+﻿using Arcsinx.Toolkit.IncrementalCollection;
+using GamerSky.IncrementalLoadingCollection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,19 +14,9 @@ namespace GamerSky.Model
     /// </summary>
     public class PivotData:ModelBase
     {  
-        private Channel channel;
-        public Channel Channel
-        {
-            get
-            {
-                return channel;
-            }
-            set
-            {
-                channel = value;
-                OnPropertyChanged();
-            }
-        }
+        public Channel Channel { get; set; }
+
+        //public IncrementalLoadingCollection<Essay> Essays { get; set; }
 
         private EssayIncrementalCollection essays;
 

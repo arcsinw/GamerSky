@@ -12,28 +12,35 @@ using GamerSky.Http;
 using GamerSky.Model;
 using GamerSky.ResultModel;
 using GamerSky.IncrementalLoadingCollection;
+using Arcsinx.Toolkit.IncrementalCollection;
+using Arcsinx.Toolkit.Controls;
 
 namespace GamerSky.ViewModel
 {
-    public class MainPageViewModel:ViewModelBase
-    {  
+    public class MainPageViewModel : ViewModelBase
+    {
         /// <summary>
         /// 同时提供频道和文章列表
         /// </summary>
         public ObservableCollection<PivotData> EssaysAndChannels { get; set; }
 
+        private bool isActive;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; OnPropertyChanged(); }
+        }
+
+
         public MainPageViewModel()
         {
             EssaysAndChannels = new ObservableCollection<PivotData>();
-            
-            if (IsDesignMode)
-            {
-                LoadData();
-            }
+
             LoadData();
             GetCacheSize();
         }
-        
+
         /// <summary>
         /// 加载频道
         /// </summary>
@@ -45,10 +52,42 @@ namespace GamerSky.ViewModel
                 foreach (var item in channels)
                 {
                     EssaysAndChannels.Add(new PivotData { Channel = item,Essays = new EssayIncrementalCollection(item.nodeId) });
+                    //EssaysAndChannels.Add(new PivotData
+                    //{
+                    //    Channel = item,
+                    //    Essays = new IncrementalLoadingCollection<Essay>((count, pageIndex) =>
+                    //    {
+                    //        return LoadEssayAsync(count, pageIndex, item.nodeId);
+                    //    },
+                    //     () => { IsActive = false; }, () => { IsActive = true; }, (e) => { IsActive = false; ToastService.SendToast(((Exception)e).Message); })
+                    //});
                 }
             }
         }
- 
+
+        private async Task<IEnumerable<Essay>> LoadEssayAsync(uint count, int pageIndex, int nodeId)
+        {
+            List<Essay> essays = new List<Essay>();
+            var result = await ApiService.Instance.GetEssayList(nodeId, pageIndex++);
+            if (result != null)
+            {
+                foreach (var item in result)
+                {
+                    if (item.Type.Equals("huandeng"))
+                    {
+                        foreach (var c in item.ChildElements)
+                        {
+                            //HeaderEssays.Add(c);
+                        }
+                        continue;
+                    }
+                    essays.Add(item);
+                }
+            }
+            return essays;
+        }
+    
+
 
         /// <summary>
         /// 加载更多数据
@@ -64,15 +103,14 @@ namespace GamerSky.ViewModel
             {
                 if (item.Type.Equals("huandeng"))
                 {
-                    foreach (var c in item.ChildElements)
-                    {
-                        //EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(nodeId)).First().HeaderEssays.Add(c);
-                    }
+                    //foreach (var c in item.ChildElements)
+                    //{
+                    //    EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(nodeId)).First().HeaderEssays.Add(c);
+                    //}
                     continue;
                 }
                 EssaysAndChannels.Where(x => x.Channel.nodeId.Equals(nodeId)).First().Essays.Add(item);
             }
-            
         }
 
         public void RefreshEssays(int index)

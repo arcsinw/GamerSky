@@ -12,9 +12,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Page.Resources> 
-
-        <DataTemplate x:Key="EssayDataTemplate" x:DataType="m:GameDetailEssay">
+    <Page.Resources>
+        <DataTemplate x:Key="EssayDataTemplate" x:DataType="m:Essay">
             <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*" MaxWidth="180"/>
@@ -117,33 +116,34 @@
                     </VisualState>
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
-            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}">
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
+                    Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
-            <TextBlock Text="{x:Bind viewModel.GameDetail.Title,Mode=OneWay}" Style="{ThemeResource PageTitleStyle}"/>
+            <TextBlock Text="{Binding GameDetail.Title}" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
         <!--#endregion-->
 
         <!--#region 文章栏-->
-        <Pivot Grid.Row="1"  SelectionChanged="Pivot_SelectionChanged"
+        <Pivot Grid.Row="1"
                x:Name="pivot" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="策略" Margin="0">
-                <toolkit:PullToRefreshListView ItemsSource="{x:Bind viewModel.GameDetailNews,Mode=OneWay}"
+                <toolkit:PullToRefreshListView x:Name="strategyListView" ItemsSource="{Binding News}"
                               ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                                               IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
-                                              >
+                              IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
+                              ItemClick="{x:Bind viewModel.strategyListView_ItemClick}"
+                              >
                 </toolkit:PullToRefreshListView>
             </PivotItem>
             <PivotItem Header="新闻" Margin="0"> 
-                <toolkit:PullToRefreshListView ItemsSource="{x:Bind viewModel.GameDetailStrategys,Mode=OneWay}"
+                <toolkit:PullToRefreshListView x:Name="newsListView" ItemsSource="{Binding Strategys}"
                              ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                                               IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
-                                          
-                              >
+                              IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
+                              ItemClick="{x:Bind viewModel.newsListView_ItemClick}">
                 </toolkit:PullToRefreshListView>
             </PivotItem>
         </Pivot>

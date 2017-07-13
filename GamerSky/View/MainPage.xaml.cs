@@ -22,6 +22,10 @@ namespace GamerSky.View
         
         private PivotItem CurrentPivotItem { get; set; }
 
+        /// <summary>
+        /// 保存页数
+        /// TO-DO delete it
+        /// </summary>
         private Dictionary<int, ListView> EssayListviewDic { get; set; } = new Dictionary<int, ListView>();
 
         public MainPage()
@@ -165,11 +169,6 @@ namespace GamerSky.View
             {
                 EssayListviewDic[CurrentPivotIndex] = listView;
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)

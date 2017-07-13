@@ -50,26 +50,6 @@ namespace GamerSky.View
                 viewModel.LoadGameDetail();
             }
         }
-
-        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            switch(pivot.SelectedIndex)
-            {
-                case 0:
-                    if(!_isStrategyLoaded)
-                    {
-                        viewModel.LoadGameNews(1);
-                        _isStrategyLoaded = true;
-                    }
-                    break;
-                case 1:
-                    if(!_isNewsLoaded)
-                    {
-                        viewModel.LoadGameStrategys(1);
-                    }
-                    _isNewsLoaded = true;
-                    break;
-            }
-        }
+        
     }
 }

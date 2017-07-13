@@ -17,6 +17,7 @@ using GamerSky.Model;
 using GamerSky.ViewModel;
 using Arcsinx.Toolkit.Extensions;
 using Arcsinx.Toolkit.Helper;
+using System.Threading.Tasks;
 
 namespace GamerSky.View
 {
@@ -52,11 +53,9 @@ namespace GamerSky.View
             MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essayResult);
         }
 
-        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
-            progressRing.IsActive = true;
-            await viewModel.Refresh();
-            progressRing.IsActive = false;
+            viewModel.Refresh();
         }
 
         private void ListView_Loaded(object sender, RoutedEventArgs e)
@@ -91,16 +90,16 @@ namespace GamerSky.View
                 if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
                 {
                     
-                    if (!IsDataLoading)  //未加载数据
-                    {
-                        IsDataLoading = true;
-                        //IsActive = true;
-                        progressRing.IsActive = true;
-                        await viewModel.LoadMoreStrategys(pageIndex++);
-                        //IsActive = false;
-                        progressRing.IsActive = false;
-                        IsDataLoading = false;
-                    }
+                    //if (!IsDataLoading)  //未加载数据
+                    //{
+                    //    IsDataLoading = true;
+                    //    //IsActive = true;
+                    //    progressRing.IsActive = true;
+                    //    await viewModel.LoadMoreStrategys(pageIndex++);
+                    //    //IsActive = false;
+                    //    progressRing.IsActive = false;
+                    //    IsDataLoading = false;
+                    //}
                 }
             }
         }

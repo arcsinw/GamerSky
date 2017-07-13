@@ -291,7 +291,7 @@
                 </SemanticZoom>
             </PivotItem>
 
-            <!--<PivotItem Header="游戏库"  Margin="0" Padding="0">
+            <PivotItem Header="游戏库"  Margin="0" Padding="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
 
                     <controls:AdaptiveGridView x:Name="gameLibGridView"
@@ -338,7 +338,7 @@
                         </controls:AdaptiveGridView.ItemContainerStyle>
                     </controls:AdaptiveGridView>
                 </pr:PullToRefreshBox>
-            </PivotItem>-->
+            </PivotItem>
         </Pivot>
 
         <Button Style="{ThemeResource BackButtonStyle}"
@@ -349,7 +349,7 @@
             </Button.Content>
         </Button>
 
-        <ProgressRing x:Name="progress"  Style="{ThemeResource ProgressRingStyle}"/>
+        <ProgressRing IsActive="{Binding IsActive}"  Style="{ThemeResource ProgressRingStyle}"/>
 
     </Grid>
 </Page>

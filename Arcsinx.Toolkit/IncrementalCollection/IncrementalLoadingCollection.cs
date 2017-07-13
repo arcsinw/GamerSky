@@ -21,13 +21,15 @@ namespace Arcsinx.Toolkit.IncrementalCollection
         /// 通过页码增量加载
         /// </summary>
         /// <param name="func">页码增量加载方法</param>
+        /// <param name="parameter">参数</param>
         /// <param name="onDataLoadedAction">数据加载完成</param>
         /// <param name="onDataLoadingAction">数据加载中</param>
-        public IncrementalLoadingCollection(Func<uint, int, Task<IEnumerable<T>>> func, System.Action onDataLoadedAction = null, System.Action onDataLoadingAction = null, Action<Exception> onErrorAction = null)
+        /// <param name="onErrorAction">数据加载错误</param>
+        public IncrementalLoadingCollection(Func<uint, int, Task<IEnumerable<T>>> func, Action onDataLoadedAction = null, Action onDataLoadingAction = null, Action<Exception> onErrorAction = null)
         {
-            Page = 0;
+            page = 0;
             this.pageFunc = func;
-            this.HasMoreItems = true;
+            this.HasMoreItems = true; 
 
             this.onDataLoadedAction = onDataLoadedAction;
             this.onDataLoadingAction = onDataLoadingAction;
@@ -40,12 +42,12 @@ namespace Arcsinx.Toolkit.IncrementalCollection
         /// <param name="func">通过时间戳加载数据的方法</param>
         /// <param name="onDataLoadedAction">数据加载完成</param>
         /// <param name="onDataLoadingAction">数据加载中</param>
-        public IncrementalLoadingCollection(Func<uint, string, Task<IEnumerable<T>>> func, System.Action onDataLoadedAction = null, System.Action onDataLoadingAction = null, Action<Exception> onErrorAction = null)
+        public IncrementalLoadingCollection(Func<uint, string, Task<IEnumerable<T>>> func, Action onDataLoadedAction = null, Action onDataLoadingAction = null, Action<Exception> onErrorAction = null)
         {
-            TimeStamp = string.Empty;
+            timeStamp = string.Empty;
             this.timeStampFunc = func;
             this.HasMoreItems = true;
-
+             
             this.onDataLoadingAction = onDataLoadingAction;
             this.onDataLoadedAction = onDataLoadedAction;
             this.onErrorAction = onErrorAction;
@@ -57,13 +59,13 @@ namespace Arcsinx.Toolkit.IncrementalCollection
         /// <summary>
         /// 时间戳
         /// </summary>
-        public string TimeStamp { get; set; } = string.Empty;
+        private string timeStamp = string.Empty;
 
         /// <summary>
         /// 当前页数
         /// </summary>
-        public int Page { get; private set; }
-
+        private int page;
+          
         /// <summary>
         /// 按页码加载
         /// </summary>
@@ -77,17 +79,17 @@ namespace Arcsinx.Toolkit.IncrementalCollection
         /// <summary>
         /// 数据加载完成Action
         /// </summary>
-        private System.Action onDataLoadedAction;
+        private Action onDataLoadedAction;
 
         /// <summary>
         /// 数据正在加载Action
         /// </summary>
-        private System.Action onDataLoadingAction;
+        private Action onDataLoadingAction;
 
         /// <summary>
         /// 加载中出现错误
         /// </summary>
-        private Action<Exception> onErrorAction;
+        private Action<Exception> onErrorAction; 
         #endregion
 
         /// <summary>
@@ -105,8 +107,8 @@ namespace Arcsinx.Toolkit.IncrementalCollection
         public async Task ClearAndReloadAsync()
         {
             Clear();
-            Page = 0;
-            TimeStamp = string.Empty;
+            page = 0;
+            timeStamp = string.Empty;
             HasMoreItems = true;
             await LoadMoreItemsAsync(0);
         }
@@ -144,7 +146,7 @@ namespace Arcsinx.Toolkit.IncrementalCollection
         
                 if (timeStampFunc != null)
                 {
-                    var items = await timeStampFunc(0, TimeStamp);
+                    var items = await timeStampFunc(0, timeStamp);
                     if (items != null && items.Any())
                     {
                         foreach (var item in items)
@@ -159,7 +161,7 @@ namespace Arcsinx.Toolkit.IncrementalCollection
                 }
                 else
                 {
-                    var items = await pageFunc(0, ++Page);
+                    var items = await pageFunc(count, ++page);
                     if (items != null && items.Any())
                     {
                         foreach (var item in items)
@@ -185,6 +187,6 @@ namespace Arcsinx.Toolkit.IncrementalCollection
             }
 
             return new LoadMoreItemsResult { Count = (uint)this.Count };
-        }
+        } 
     }
 }

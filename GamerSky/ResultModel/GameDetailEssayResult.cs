@@ -14,6 +14,6 @@ namespace GamerSky.ResultModel
     public class GameDetailEssayResult : ResultModelBase
     {
         [JsonProperty(PropertyName = "result")]
-        public List<GameDetailEssay> Result { get; set; }
+        public List<Essay> Result { get; set; }
     }
 }

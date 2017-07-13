@@ -107,10 +107,29 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\CacheBase.cs" />
+    <Compile Include="Cache\DataCache.cs" />
+    <Compile Include="Cache\FileCache.cs" />
+    <Compile Include="Cache\ImageCache.cs" />
+    <Compile Include="Cache\InMemoryStorage.cs" />
+    <Compile Include="Cache\InMemoryStorageItem.cs" />
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Controls\GlobalDialog\GlobalDialog.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.Members.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.Placeholder.cs" />
+    <Compile Include="Controls\ImageEx\ImageEx.Source.cs" />
+    <Compile Include="Controls\ImageEx\ImageExFailedEventArgs.cs" />
+    <Compile Include="Controls\ImageEx\ImageExOpenedEventArgs.cs" />
+    <Compile Include="Helper\StorageFileHelper.cs" />
+    <Compile Include="Helper\StreamHelper.cs" />
+    <Compile Include="HttpHelper\HttpHelper.cs" />
+    <Compile Include="HttpHelper\HttpHelperRequest.cs" />
+    <Compile Include="HttpHelper\HttpHelperResponse.cs" />
+    <Compile Include="Interfaces\IBackKeyPress.cs" />
+    <Compile Include="Interfaces\ICustomTitleBar.cs" />
     <Compile Include="Controls\PullToRefreshListView\PullToRefreshListView.cs" />
     <Compile Include="Controls\PullToRefreshListView\RefreshProgressEventArgs.cs" />
-    <Compile Include="Controls\ToastService.cs" />
     <Compile Include="Controls\ToastService\ToastService.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Extensions\ListViewBaseExtensions.cs" />
@@ -124,6 +143,14 @@
     <EmbeddedResource Include="Properties\Arcsinx.Toolkit.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\GlobalDialog\GlobalDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageEx\ImageEx.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\PullToRefreshListView\PullToRefreshListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

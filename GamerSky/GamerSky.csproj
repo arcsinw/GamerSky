@@ -197,11 +197,9 @@
     <Compile Include="IncrementalLoadingCollection\CommentReplyIncrementalCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\EssayCommentsCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\EssayIncrementalCollection.cs" />
-    <Compile Include="IncrementalLoadingCollection\GameIncrementalCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\IIncrementalSource.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingCollection.cs" />
-    <Compile Include="IncrementalLoadingCollection\SearchIncrementalCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\SubscribeIncrementalCollection.cs" />
     <Compile Include="Model\AdStart.cs" />
     <Compile Include="Model\Channel.cs" />
@@ -384,7 +382,6 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\Css\gs.css" />
-    <Content Include="Assets\Css\gsAppHTMLTemplate.css" />
     <Content Include="Assets\Html\Comment.html" />
     <Content Include="Assets\Html\Content.html" />
     <Content Include="Assets\Images\drawer_cache.png" />
