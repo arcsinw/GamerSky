@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using GamerSky.Helper;
-using GamerSky.Http;
 using GamerSky.IncrementalLoadingCollection;
-using GamerSky.Model;
-using GamerSky.Enums;
+using GamerSky.Core.Http;
+using GamerSky.Core.Model;
+using GamerSky.Core.Enums;
 
 namespace GamerSky.ViewModel
 {
@@ -103,7 +103,7 @@ namespace GamerSky.ViewModel
             HotStrategys = new ObservableCollection<string>();
             HotNews = new ObservableCollection<string>();
             News = new ObservableCollection<Essay>();
-            //News = new EssayIncrementalCollection("囧", SearchTypeEnum.news);
+            
             Strategys = new ObservableCollection<Essay>();
             Subscribes = new ObservableCollection<Subscribe>(); 
         }

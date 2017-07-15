@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using GamerSky.Http;
-using GamerSky.Model;
+using GamerSky.Core.Model;
+using GamerSky.Core.Http;
 
 namespace GamerSky.ViewModel
 {
@@ -52,43 +52,18 @@ namespace GamerSky.ViewModel
             }
         }
 
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
-
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
-
         private string sourceId;
         public SubscribeContentViewModel(string sourceId)
         { 
             SubscribeContens = new ObservableCollection<Essay>();
             HeaderSubscribe = new Essay();
             this.sourceId = sourceId;
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
         public SubscribeContentViewModel()
         { 
             SubscribeContens = new ObservableCollection<Essay>();
             HeaderSubscribe = new Essay();
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
         public async Task LoadData(string sourceId, int pageIndex = 1)
@@ -124,11 +99,11 @@ namespace GamerSky.ViewModel
             await LoadData(sourceId, pageIndex);
         }
 
-        public async Task Refresh()
+        public override async void Refresh()
         {
             IsActive = true;
             SubscribeContens.Clear();
-            await LoadData(sourceId);
+            LoadData(sourceId);
             IsActive = false;
         }
     }

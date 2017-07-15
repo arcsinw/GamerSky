@@ -13,11 +13,12 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GamerSky.Helper;
-using GamerSky.Model;
 using GamerSky.ViewModel;
 using Arcsinx.Toolkit.Extensions;
 using Arcsinx.Toolkit.Helper;
 using System.Threading.Tasks;
+using GamerSky.Core.Model;
+using GamerSky.Core.Helper;
 
 namespace GamerSky.View
 {
@@ -33,15 +34,13 @@ namespace GamerSky.View
         }
  
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            progressRing.IsActive = true;
             Strategy strategyResult = e.Parameter as Strategy;
             if (strategyResult != null)
             {
-                await viewModel.LoadData(strategyResult, pageIndex++);
+                viewModel.CurrentStrategy = strategyResult;
             }
-            progressRing.IsActive = false;
         }
  
 
@@ -66,10 +65,8 @@ namespace GamerSky.View
                 scrollViewer.ViewChanged += scrollViewer_ViewChanged;
             }
         }
-
-        private bool IsDataLoading = false;
-        private int pageIndex = 1;
-        private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+         
+        private void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             if (scrollViewer != null)
             {
@@ -86,20 +83,6 @@ namespace GamerSky.View
                     {
                         topPop.IsOpen = true;
                     }
-                }
-                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)  //ListView滚动到底,加载新数据
-                {
-                    
-                    //if (!IsDataLoading)  //未加载数据
-                    //{
-                    //    IsDataLoading = true;
-                    //    //IsActive = true;
-                    //    progressRing.IsActive = true;
-                    //    await viewModel.LoadMoreStrategys(pageIndex++);
-                    //    //IsActive = false;
-                    //    progressRing.IsActive = false;
-                    //    IsDataLoading = false;
-                    //}
                 }
             }
         }

@@ -1,6 +1,4 @@
-﻿
-using Arcsinx.Toolkit.Helper;
-using GamerSky.Model;
+﻿using Arcsinx.Toolkit.Helper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

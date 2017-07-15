@@ -113,6 +113,8 @@
     <Compile Include="Cache\ImageCache.cs" />
     <Compile Include="Cache\InMemoryStorage.cs" />
     <Compile Include="Cache\InMemoryStorageItem.cs" />
+    <Compile Include="Common\DelegateCommand.cs" />
+    <Compile Include="Common\DelegateCommand{T}.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Controls\GlobalDialog\GlobalDialog.cs" />
     <Compile Include="Controls\ImageEx\ImageEx.cs" />
@@ -121,6 +123,11 @@
     <Compile Include="Controls\ImageEx\ImageEx.Source.cs" />
     <Compile Include="Controls\ImageEx\ImageExFailedEventArgs.cs" />
     <Compile Include="Controls\ImageEx\ImageExOpenedEventArgs.cs" />
+    <Compile Include="Converters\BoolToObjectConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\ConverterTools.cs" />
+    <Compile Include="Helper\ConnectionHelper.cs" />
+    <Compile Include="Helper\ConnectionType.cs" />
     <Compile Include="Helper\StorageFileHelper.cs" />
     <Compile Include="Helper\StreamHelper.cs" />
     <Compile Include="HttpHelper\HttpHelper.cs" />
@@ -135,7 +142,6 @@
     <Compile Include="Extensions\ListViewBaseExtensions.cs" />
     <Compile Include="Extensions\VisualTreeExtensions.cs" />
     <Compile Include="Helper\DeviceInformationHelper.cs" />
-    <Compile Include="Helper\Functions.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\LogHelper.cs" />
     <Compile Include="IncrementalCollection\IncrementalLoadingCollection.cs" />

@@ -1,5 +1,5 @@
-﻿using GamerSky.Helper;
-using GamerSky.Model;
+﻿using GamerSky.Core.Model;
+using GamerSky.Helper;
 using GamerSky.ViewModel;
 using System;
 using System.Collections.Generic;

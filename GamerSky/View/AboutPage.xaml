@@ -7,27 +7,21 @@
     xmlns:hp="using:GamerSky.Helper"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
+    xmlns:vm="using:GamerSky.ViewModel"
     >
 
+    <Page.DataContext>
+        <vm:AboutViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+
     <Grid>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Desktop">
-                    <VisualState.StateTriggers>
-                        <hp:DeviceTypeTrigger PlatformType="Desktop"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="back.Visibility" Value="Collapsed"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Background="{ThemeResource ThemeColorBrush}">
-            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}" VerticalAlignment="Top">
+            <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                 <SymbolIcon Symbol="Back"/>
             </Button>
             <TextBlock Text="关于"  Style="{ThemeResource PageTitleStyle}"/>
@@ -47,8 +41,8 @@
                 <StackPanel>
                     <Image Margin="0,16" Source="ms-appx:///Assets/Square310x310Logo.png" 
                            Height="100" Width="100"/>
-                    <TextBlock Text="{x:Bind Version}" HorizontalAlignment="Center" />
-                    <TextBlock Text="{x:Bind Author}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding Version}" HorizontalAlignment="Center" />
+                    <TextBlock Text="{Binding Author}" HorizontalAlignment="Center"/>
                     <TextBlock HorizontalAlignment="Center" x:Name="qqTextBlock" Tapped="{x:Bind CopyToClipboard}" Text="QQ群：473967668"  />
                     <HyperlinkButton  NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
                                      HorizontalAlignment="Center" >

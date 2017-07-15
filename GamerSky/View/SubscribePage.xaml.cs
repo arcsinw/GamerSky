@@ -13,10 +13,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GamerSky.Helper;
-using GamerSky.Model;
+using GamerSky.Core.Model;
 using GamerSky.ViewModel;
 using Arcsinx.Toolkit.Helper;
 using Arcsinx.Toolkit.Extensions;
+using GamerSky.Core.Helper;
 
 namespace GamerSky.View
 {

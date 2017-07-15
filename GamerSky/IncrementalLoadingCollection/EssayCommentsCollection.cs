@@ -1,4 +1,4 @@
-﻿using GamerSky.Model;
+﻿using GamerSky.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Windows.UI.Xaml.Data;
-using GamerSky.Http;
+using GamerSky.Core.Http;
 using System.Diagnostics;
 
 namespace GamerSky.IncrementalLoadingCollection

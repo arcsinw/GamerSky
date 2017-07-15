@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using GamerSky.Model;
+using GamerSky.Core.Model;
 
 namespace GamerSky.View
 {
@@ -10,7 +10,6 @@ namespace GamerSky.View
     /// </summary>
     public sealed partial class StrategyPage : Page
     {
-
         #region Properties
 
         private int pageIndex;  //当前页码

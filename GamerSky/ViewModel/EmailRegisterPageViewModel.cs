@@ -1,11 +1,11 @@
-﻿using System;
+﻿using GamerSky.Core.Http;
+using GamerSky.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using GamerSky.Http;
-using GamerSky.Model;
 
 namespace GamerSky.ViewModel
 {

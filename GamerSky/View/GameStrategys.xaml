@@ -55,10 +55,8 @@
             </ListView>
         </pr:PullToRefreshBox>
 
+        <ProgressRing IsActive="{Binding IsActive}"  Style="{ThemeResource ProgressRingStyle}"/>
          
-        <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}"  Style="{ThemeResource ProgressRingStyle}"/>
-         
-
         <Popup HorizontalAlignment="Right"  VerticalAlignment="Bottom"
                Height="48" x:Name="topPop" Width="48" Margin="16,32" >
             <Popup.ChildTransitions>

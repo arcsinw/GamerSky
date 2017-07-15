@@ -16,8 +16,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using GamerSky.Helper;
-using GamerSky.Http;
-using GamerSky.Model;
+using GamerSky.Core.Http;
+using GamerSky.Core.Model;
 using GamerSky.ViewModel;
 
 namespace GamerSky.View

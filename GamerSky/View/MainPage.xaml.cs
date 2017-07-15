@@ -1,19 +1,18 @@
 ﻿using Arcsinx.Toolkit.Extensions;
 using Arcsinx.Toolkit.Helper;
+using GamerSky.Core.Helper;
 using GamerSky.Helper;
-using GamerSky.Model;
+using GamerSky.Core.Model;
 using GamerSky.ViewModel; 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
 namespace GamerSky.View
 {
-    /// <summary>
-    /// 可用于自身或导航至 Frame 内部的空白页。
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         private int CurrentChannelId { get; set; }
@@ -175,5 +174,6 @@ namespace GamerSky.View
         {
             ViewModel.RefreshEssays(CurrentPivotIndex);
         }
+        
     }
 }

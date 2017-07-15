@@ -9,6 +9,7 @@ namespace GamerSky.ViewModel
 {
     public class ReplyViewModel : ViewModelBase
     {
+        #region Properties
         private CommentReplyIncrementalCollection _comments;
         public CommentReplyIncrementalCollection Comments
         {
@@ -21,7 +22,8 @@ namespace GamerSky.ViewModel
                 _comments = value;
                 OnPropertyChanged();
             }
-        }
+        } 
+        #endregion
 
 
         public ReplyViewModel()

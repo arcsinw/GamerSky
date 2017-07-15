@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using GamerSky.Helper;
-using GamerSky.Http;
-using GamerSky.Model;
+using GamerSky.Core.Http;
+using GamerSky.Core.Model;
 using GamerSky.IncrementalLoadingCollection;
-using GamerSky.Common;
-using GamerSky.Enums;
 using Arcsinx.Toolkit.IncrementalCollection;
 using Arcsinx.Toolkit.Controls;
+using GamerSky.Core.Enums;
 
 namespace GamerSky.ViewModel
 {

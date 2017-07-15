@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
-using GamerSky.Http;
-using GamerSky.Model;
+using GamerSky.Core.Http;
+using GamerSky.Core.Model;
 
 namespace GamerSky.ViewModel
 {

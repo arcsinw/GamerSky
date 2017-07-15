@@ -112,6 +112,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToastBackgroundTask.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GamerSky.Core\GamerSky.Core.csproj">
+      <Project>{e4807d04-290f-4d99-9587-7b01b733d5b9}</Project>
+      <Name>GamerSky.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -14,9 +14,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GamerSky.Helper;
-using GamerSky.Model;
+using GamerSky.Core.Model;
 using Arcsinx.Toolkit.Helper;
 using Arcsinx.Toolkit.Extensions;
+using System.Threading.Tasks;
+using GamerSky.Core.Helper;
 
 namespace GamerSky.View
 {
@@ -53,10 +55,10 @@ namespace GamerSky.View
             MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essayResult);
         }
 
-        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
             progressRing.IsActive = true;
-            await viewModel.Refresh();
+            viewModel.Refresh();
             progressRing.IsActive = false;
         }
 

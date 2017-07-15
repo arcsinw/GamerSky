@@ -28,6 +28,7 @@ namespace GamerSky.ViewModel
             CacheSize = GetFormatSize(cache);
         }
 
+        #region Properties
         private string cacheSize;
         public string CacheSize
         {
@@ -40,7 +41,8 @@ namespace GamerSky.ViewModel
                 cacheSize = value;
                 OnPropertyChanged();
             }
-        }
+        } 
+        #endregion
 
         public async void GetCacheSize()
         {

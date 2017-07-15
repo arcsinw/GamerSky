@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.UI.Xaml;
-using GamerSky.Helper;
-using GamerSky.Model;
+using GamerSky.Core.Helper;
 using System.Collections.ObjectModel;
 using Arcsinx.Toolkit.Helper;
+using GamerSky.Core.Model;
 
 namespace GamerSky.ViewModel
 {

@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using GamerSky.Helper;
 using GamerSky.ViewModel;
 using Arcsinx.Toolkit.Helper;
+using GamerSky.Core.Helper;
 
 namespace GamerSky.View
 {

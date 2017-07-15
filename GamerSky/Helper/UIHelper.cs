@@ -8,6 +8,7 @@ using Windows.UI.Xaml;
 using GamerSky.Helper;
 using GamerSky.ViewModel;
 using Arcsinx.Toolkit.Helper;
+using GamerSky.Core.Helper;
 
 namespace GamerSky.Helper
 {
@@ -34,7 +35,6 @@ namespace GamerSky.Helper
         {
             if (Functions.IsMobile())
             {
-               
                 statusBar.ForegroundColor = Colors.White;
                 statusBar.BackgroundOpacity = 1;
                 if (DataShareManager.Current.AppTheme == ElementTheme.Dark)

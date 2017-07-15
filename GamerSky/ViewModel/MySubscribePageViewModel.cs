@@ -1,17 +1,18 @@
-﻿using System;
+﻿using GamerSky.Core.Http;
+using GamerSky.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using GamerSky.Http;
-using GamerSky.Model;
 
 namespace GamerSky.ViewModel
 {
     public class MySubscribePageViewModel : ViewModelBase
     {
+        #region Properties
         /// <summary>
         /// 全部订阅
         /// </summary>
@@ -26,7 +27,7 @@ namespace GamerSky.ViewModel
         /// 我的订阅
         /// </summary>
         public ObservableCollection<Subscribe> MySubscribes { get; set; }
-         
+
 
         private bool isActive = true;
         /// <summary>
@@ -43,7 +44,9 @@ namespace GamerSky.ViewModel
                 isActive = value;
                 OnPropertyChanged();
             }
-        }
+        } 
+        #endregion
+
         public MySubscribePageViewModel()
         { 
             AllSubscribes = new ObservableCollection<Subscribe>();

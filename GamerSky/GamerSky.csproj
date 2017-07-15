@@ -104,15 +104,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="Common\DelegateCommand.cs" />
-    <Compile Include="Common\DelegateCommand{T}.cs" />
     <Compile Include="Converters\BoolToElementThemeConverter.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Extensions\ExtensionHelper.cs" />
     <Compile Include="Helper\AlphaKeyGroup.cs" />
     <Compile Include="Helper\AuthenticationHelper.cs" />
-    <Compile Include="Helper\ConnectionHelper.cs" />
-    <Compile Include="Helper\ConnectionType.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\DispatcherManager.cs" />
     <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
@@ -179,98 +175,22 @@
     <Compile Include="Helper\NavigationHelper.cs" />
     <Compile Include="Helper\PageBase.cs" />
     <Compile Include="Controls\StringWrapPanel.cs" />
-    <Compile Include="Enums\SearchTypeEnum.cs" />
     <Compile Include="Helper\StorageFileHelper.cs" />
     <Compile Include="Helper\StreamHelper.cs" />
-    <Compile Include="Enums\SubscribeEditEnum.cs" />
     <Compile Include="Helper\ToastHelper.cs" />
     <Compile Include="Helper\UIHelper.cs" />
-    <Compile Include="Helper\VerifiableBase.cs" />
-    <Compile Include="Helper\VerifiableObjectErrors.cs" />
     <Compile Include="HttpHelper\HttpHelper.cs" />
     <Compile Include="HttpHelper\HttpHelperRequest.cs" />
     <Compile Include="HttpHelper\HttpHelperResponse.cs" />
-    <Compile Include="Http\ApiBaseService.cs" />
-    <Compile Include="Http\ApiService.cs" />
-    <Compile Include="Http\HttpBaseService.cs" />
-    <Compile Include="Http\ServiceUri.cs" />
     <Compile Include="IncrementalLoadingCollection\CommentReplyIncrementalCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\EssayCommentsCollection.cs" />
-    <Compile Include="IncrementalLoadingCollection\EssayIncrementalCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\IIncrementalSource.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingCollection.cs" />
     <Compile Include="IncrementalLoadingCollection\SubscribeIncrementalCollection.cs" />
-    <Compile Include="Model\AdStart.cs" />
-    <Compile Include="Model\Channel.cs" />
-    <Compile Include="Model\Collect.cs" />
-    <Compile Include="Model\Comment.cs" />
-    <Compile Include="Model\Essay.cs" />
-    <Compile Include="Model\EssayPageIndex.cs" />
-    <Compile Include="Model\FindPasswordByName.cs" />
-    <Compile Include="Model\Game.cs" />
-    <Compile Include="Model\GameDetail.cs" />
-    <Compile Include="Model\GameDetailEssay.cs" />
-    <Compile Include="Model\GameNodeIdEnum.cs" />
-    <Compile Include="Model\JsImage.cs" />
-    <Compile Include="Model\JSParameter.cs" />
-    <Compile Include="Model\KeyedList.cs" />
-    <Compile Include="Model\ModelBase.cs" />
-    <Compile Include="Model\News.cs" />
-    <Compile Include="Model\OpenPage.cs" />
-    <Compile Include="Model\PaneItem.cs" />
-    <Compile Include="Model\PivotData.cs" />
-    <Compile Include="Model\RelatedReadings.cs" />
-    <Compile Include="Model\SearchResult.cs" />
-    <Compile Include="Model\SemanticCollection.cs" />
-    <Compile Include="Model\Strategy.cs" />
-    <Compile Include="Model\Subscribe.cs" />
-    <Compile Include="Model\SubscribeContent.cs" />
-    <Compile Include="Model\User.cs" />
-    <Compile Include="Model\UserLoginInfo.cs" />
-    <Compile Include="Model\UserRegisterByEmailInfo.cs" />
-    <Compile Include="Model\UserRegisterByNumberInfo.cs" />
-    <Compile Include="Model\VerificationCode.cs" />
-    <Compile Include="PostDataModel\AdStartPostData.cs" />
-    <Compile Include="PostDataModel\AllChannelListPostData.cs" />
-    <Compile Include="PostDataModel\CommentPostData.cs" />
-    <Compile Include="PostDataModel\EditSubscribePostData.cs" />
-    <Compile Include="PostDataModel\EmailRegisterPostData.cs" />
-    <Compile Include="PostDataModel\FindPasswordByNamePostData.cs" />
-    <Compile Include="PostDataModel\GameDetailEssayPostData.cs" />
-    <Compile Include="PostDataModel\GameDetailPostData.cs" />
-    <Compile Include="PostDataModel\GamePostData.cs" />
-    <Compile Include="PostDataModel\GetAllCommentPostData.cs" />
-    <Compile Include="PostDataModel\GetAllReplyPostData.cs" />
-    <Compile Include="PostDataModel\LoginPostData.cs" />
-    <Compile Include="PostDataModel\PostDataBase.cs" />
-    <Compile Include="PostDataModel\RelatedReadingPostData.cs" />
-    <Compile Include="PostDataModel\SearchPostData.cs" />
-    <Compile Include="PostDataModel\StrategyPostData.cs" />
-    <Compile Include="PostDataModel\SubscribeContentPostData.cs" />
-    <Compile Include="PostDataModel\SubscribeSearchPostData.cs" />
-    <Compile Include="PostDataModel\SubscribeTopicPostData.cs" />
-    <Compile Include="PostDataModel\VerificationCodePostData.cs" />
-    <Compile Include="PostDataModel\YaowenPostData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResultModel\AddCommentResult.cs" />
-    <Compile Include="ResultModel\AdStartResult.cs" />
-    <Compile Include="ResultModel\AllCommentsResult.cs" />
-    <Compile Include="ResultModel\ChannelResult.cs" />
-    <Compile Include="ResultModel\EssayResult.cs" />
-    <Compile Include="ResultModel\GameDetailEssayResult.cs" />
-    <Compile Include="ResultModel\GameDetailResult.cs" />
-    <Compile Include="ResultModel\GameResult.cs" />
-    <Compile Include="ResultModel\GetAllReplyResult.cs" />
-    <Compile Include="ResultModel\LikeCommentResult.cs" />
-    <Compile Include="ResultModel\LoginResult.cs" />
-    <Compile Include="ResultModel\NewsResult.cs" />
-    <Compile Include="ResultModel\RelatedReadingsResult.cs" />
-    <Compile Include="ResultModel\ResultModelBase.cs" />
-    <Compile Include="ResultModel\StrategyResult.cs" />
-    <Compile Include="ResultModel\SubscribeContentResult.cs" />
-    <Compile Include="ResultModel\SubscribeResult.cs" />
     <Compile Include="TemplateSelector\EssayDataTemplateSelector.cs" />
+    <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\DataShareManager.cs" />
     <Compile Include="ViewModel\EmailRegisterPageViewModel.cs" />
     <Compile Include="ViewModel\EssayDetailViewModel.cs" />
@@ -281,6 +201,7 @@
     <Compile Include="ViewModel\HomePageViewModel.cs" />
     <Compile Include="ViewModel\LoginPageViewModel.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
+    <Compile Include="ViewModel\MasterDetailViewModel.cs" />
     <Compile Include="ViewModel\MySubscribePageViewModel.cs" />
     <Compile Include="ViewModel\ReadEssayViewModel.cs" />
     <Compile Include="ViewModel\RegisterPageViewModel.cs" />
@@ -637,8 +558,14 @@
       <Project>{bf9462ae-5cd2-497f-8e74-0b36b3c7be84}</Project>
       <Name>GamerSky.Background</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GamerSky.Core\GamerSky.Core.csproj">
+      <Project>{e4807d04-290f-4d99-9587-7b01b733d5b9}</Project>
+      <Name>GamerSky.Core</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

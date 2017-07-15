@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using GamerSky.Http;
 using GamerSky.IncrementalLoadingCollection;
-using GamerSky.Model;
 using Arcsinx.Toolkit.IncrementalCollection;
+using GamerSky.Core.Model;
+using GamerSky.Core.Http;
 
 namespace GamerSky.ViewModel
 {

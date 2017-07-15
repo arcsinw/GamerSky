@@ -7,8 +7,8 @@ using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
-using GamerSky.Http;
-using GamerSky.Model;
+using GamerSky.Core.Http;
+using GamerSky.Core.Model;
 
 namespace GamerSky.Helper
 {

@@ -5,7 +5,7 @@
     xmlns:local="using:GamerSky.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:model="using:GamerSky.Model"
+    xmlns:model="using:GamerSky.Core.Model"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:action="using:GamerSky.Actions"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
@@ -485,7 +485,7 @@
         </Grid>
         <!--#endregion-->
 
-        <Popup IsOpen="True" VerticalAlignment="Bottom" Width="{Binding ElementName=rootGrid,Path=ActualWidth}">
+        <!--<Popup IsOpen="True" VerticalAlignment="Bottom" Width="{Binding ElementName=rootGrid,Path=ActualWidth}">-->
             <Grid x:Name="moduleGrid" Grid.Column="1" VerticalAlignment="Bottom" Height="50" 
                     Background="{ThemeResource BottomBarBackground}"
                     Opacity="0.8">
@@ -549,7 +549,7 @@
                     </RadioButton.Content>
                 </RadioButton>
             </Grid>
-        </Popup>
+        <!--</Popup>-->
 
         <Frame x:Name="DetailFrame" x:FieldModifier="Public" Grid.Column="2" Navigated="DetailFrame_Navigated">
             <Frame.ContentTransitions>

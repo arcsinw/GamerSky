@@ -9,7 +9,7 @@
     xmlns:ts="using:GamerSky.TemplateSelector"
     xmlns:controls="using:GamerSky.Controls"
     xmlns:pr="using:PullToRefresh.UWP"
-    xmlns:m="using:GamerSky.Model"
+    xmlns:m="using:GamerSky.Core.Model"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     >

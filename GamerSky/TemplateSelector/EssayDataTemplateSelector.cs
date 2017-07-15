@@ -1,4 +1,4 @@
-﻿using GamerSky.Model;
+﻿using GamerSky.Core.Model;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using GamerSky.Http;
-using GamerSky.Model;
 using Arcsinx.Toolkit.IncrementalCollection;
 using Arcsinx.Toolkit.Controls;
 using System.Diagnostics;
 using Windows.UI.Xaml.Controls;
 using GamerSky.View;
+using GamerSky.Core.Model;
+using GamerSky.Core.Http;
 
 namespace GamerSky.ViewModel
 {

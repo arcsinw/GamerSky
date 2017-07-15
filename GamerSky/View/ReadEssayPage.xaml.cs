@@ -1,7 +1,7 @@
 ﻿using Arcsinx.Toolkit.Helper;
 using GamerSky.Helper;
-using GamerSky.Http;
-using GamerSky.Model;
+using GamerSky.Core.Http;
+using GamerSky.Core.Model;
 using GamerSky.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using GamerSky.Core.Helper;
 
 namespace GamerSky.View
 { 

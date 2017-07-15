@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hp="using:GamerSky.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
-    xmlns:m="using:GamerSky.Model"
+    xmlns:m="using:GamerSky.Core.Model"
     xmlns:vm="using:GamerSky.ViewModel"
-    xmlns:toolkit="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:controls="using:Arcsinx.Toolkit.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
@@ -104,22 +104,10 @@
         <!--#region 标题栏-->
         <Grid Grid.Row="0" Grid.RowSpan="2" Height="48" VerticalAlignment="Top"  
               Background="{ThemeResource ThemeColorBrush}" >
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup>
-                    <VisualState x:Name="Desktop">
-                        <VisualState.StateTriggers>
-                            <hp:DeviceTypeTrigger PlatformType="Desktop"/>
-                        </VisualState.StateTriggers>
-                        <VisualState.Setters>
-                            <Setter Target="back.Visibility" Value="Collapsed"/>
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
-                    Grid.Column="0">
+            <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind viewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                 <SymbolIcon Symbol="Back"/>
             </Button>
+
             <TextBlock Text="{Binding GameDetail.Title}" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
         <!--#endregion-->
@@ -128,23 +116,23 @@
         <Pivot Grid.Row="1"
                x:Name="pivot" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="策略" Margin="0">
-                <toolkit:PullToRefreshListView x:Name="strategyListView" ItemsSource="{Binding News}"
+                <controls:PullToRefreshListView x:Name="strategyListView" ItemsSource="{Binding News}"
                               ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
                               IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
                               ItemClick="{x:Bind viewModel.strategyListView_ItemClick}"
                               >
-                </toolkit:PullToRefreshListView>
+                </controls:PullToRefreshListView>
             </PivotItem>
             <PivotItem Header="新闻" Margin="0"> 
-                <toolkit:PullToRefreshListView x:Name="newsListView" ItemsSource="{Binding Strategys}"
+                <controls:PullToRefreshListView x:Name="newsListView" ItemsSource="{Binding Strategys}"
                              ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
                               ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
                               IsItemClickEnabled="True" IsPullToRefreshWithMouseEnabled="True"
                               ItemClick="{x:Bind viewModel.newsListView_ItemClick}">
-                </toolkit:PullToRefreshListView>
+                </controls:PullToRefreshListView>
             </PivotItem>
         </Pivot>
         <!--#endregion-->

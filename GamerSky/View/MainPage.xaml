@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:selector="using:GamerSky.TemplateSelector" 
-    xmlns:model="using:GamerSky.Model"
     xmlns:vm="using:GamerSky.ViewModel"
     xmlns:converter="using:GamerSky.Converters"
     xmlns:controls="using:GamerSky.Controls"
@@ -158,7 +157,7 @@
                PivotItemLoaded="essayPivot_PivotItemLoaded">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Channel.nodeName}"/>
+                    <TextBlock FontSize="18" Text="{Binding Channel.nodeName}"/>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
             <Pivot.ItemTemplate>

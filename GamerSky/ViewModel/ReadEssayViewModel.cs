@@ -1,6 +1,6 @@
-﻿using GamerSky.Http;
+﻿using GamerSky.Core.Http;
+using GamerSky.Core.Model;
 using GamerSky.IncrementalLoadingCollection;
-using GamerSky.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

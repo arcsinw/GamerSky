@@ -2,6 +2,7 @@
 using GamerSky.Helper;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
 namespace GamerSky.ViewModel
@@ -38,6 +39,7 @@ namespace GamerSky.ViewModel
                 return Windows.ApplicationModel.DesignMode.DesignModeEnabled;
             }
         }
+        
 
         public void GoBack() => NavigationHelper.GoBack();
 

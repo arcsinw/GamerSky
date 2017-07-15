@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using GamerSky.Http;
-using GamerSky.Model;
-using GamerSky.PostDataModel;
+using GamerSky.Core.PostDataModel;
+using GamerSky.Core.Model;
+using GamerSky.Core.Http;
 
 namespace GamerSky.ViewModel
 {

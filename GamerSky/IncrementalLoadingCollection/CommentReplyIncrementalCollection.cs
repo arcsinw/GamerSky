@@ -1,6 +1,4 @@
-﻿using GamerSky.Http;
-using GamerSky.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +6,8 @@ using System.Threading.Tasks;
 using System.Threading;
 using Windows.UI.Xaml.Data;
 using GamerSky.ViewModel;
+using GamerSky.Core.Model;
+using GamerSky.Core.Http;
 
 namespace GamerSky.IncrementalLoadingCollection
 {
@@ -23,8 +23,7 @@ namespace GamerSky.IncrementalLoadingCollection
                 return _hasMoreItems;
             }
         }
-
-
+        
 
         protected override async Task<LoadMoreItemsResult> LoadMoreItemsAsyncCore(CancellationToken cancel, uint count)
         {

@@ -724,7 +724,7 @@
                               HorizontalScrollMode="Auto" 
                               HorizontalScrollBarVisibility="Auto"
                               Margin="0" Padding="0"
-                              MinZoomFactor="0.5"
+                              MinZoomFactor="0.5"                              
                               >
                             <Image Source="{Binding src}"/>
                         </ScrollViewer>
@@ -733,7 +733,7 @@
             </FlipView.ItemTemplate>
         </FlipView>
 
-        <TextBlock VerticalAlignment="Bottom" Margin="12" Foreground="White"
+        <TextBlock VerticalAlignment="Bottom" Margin="12,0,0,70" Foreground="White"
                 Visibility="{Binding ElementName=imageFlipView,Path=Visibility}">
             <Run Text="{Binding ElementName=imageFlipView,Path=SelectedIndex,Converter={StaticResource AddConverter}}" />
             <Run Text="/"/>

@@ -33,6 +33,7 @@ namespace Arcsinx.Toolkit.Extensions
         {
             ScrollIntoViewSmoothly(listViewBase, item, ScrollIntoViewAlignment.Default);
         }
+
         public static void ScrollIntoViewSmoothly(this ListViewBase listViewBase,object item,ScrollIntoViewAlignment alignment)
         {
             if(listViewBase == null)
@@ -42,7 +43,7 @@ namespace Arcsinx.Toolkit.Extensions
 
             // GetFirstDescendantOfType 是 WinRTXamlToolkit 中的扩展方法，
             // 寻找该控件在可视树上第一个符合类型的子元素。
-            ScrollViewer scrollViewer = Functions.FindChildOfType<ScrollViewer>(listViewBase);
+            ScrollViewer scrollViewer = FindChildOfType<ScrollViewer>(listViewBase);
 
             // 由于 ScrollViewer 肯定有，因此不做 null 检查判断了。
 
@@ -76,6 +77,36 @@ namespace Arcsinx.Toolkit.Extensions
 
             // 跑腿
             listViewBase.ScrollIntoView(item, alignment);
+        }
+
+        /// <summary>
+        /// 在UI对象中查找一个子元素
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="root"></param>
+        /// <returns></returns>
+        public static T FindChildOfType<T>(DependencyObject root) where T : class
+        {
+            //创建一个队列结构来存放可视化树的对象
+            var queue = new Queue<DependencyObject>();
+            queue.Enqueue(root);
+            //循环查找类型
+            while (queue.Count > 0)
+            {
+                DependencyObject current = queue.Dequeue();
+                //查找子节点的对象类型
+                for (int i = VisualTreeHelper.GetChildrenCount(current) - 1; 0 <= i; i--)
+                {
+                    var child = VisualTreeHelper.GetChild(current, i);
+                    var typedChild = child as T;
+                    if (typedChild != null)
+                    {
+                        return typedChild;
+                    }
+                    queue.Enqueue(child);
+                }
+            }
+            return null;
         }
     } 
 }

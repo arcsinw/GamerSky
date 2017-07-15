@@ -8,17 +8,18 @@ using Windows.ApplicationModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using GamerSky.Helper;
-using GamerSky.Http;
-using GamerSky.Model;
-using GamerSky.ResultModel;
 using GamerSky.IncrementalLoadingCollection;
 using Arcsinx.Toolkit.IncrementalCollection;
 using Arcsinx.Toolkit.Controls;
+using GamerSky.Core.Model;
+using GamerSky.Core.Http;
+using GamerSky.Core.IncrementalLoadingCollection;
 
 namespace GamerSky.ViewModel
 {
     public class MainPageViewModel : ViewModelBase
     {
+        #region Properties
         /// <summary>
         /// 同时提供频道和文章列表
         /// </summary>
@@ -30,7 +31,8 @@ namespace GamerSky.ViewModel
         {
             get { return isActive; }
             set { isActive = value; OnPropertyChanged(); }
-        }
+        } 
+        #endregion
 
 
         public MainPageViewModel()

@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:GamerSky.Helper"
     xmlns:pr="using:PullToRefresh.UWP"
-    xmlns:m="using:GamerSky.Model"
+    xmlns:m="using:GamerSky.Core.Model"
     xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
     >
