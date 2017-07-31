@@ -5,99 +5,34 @@
     xmlns:local="using:GamerSky"
     xmlns:ts="using:GamerSky.TemplateSelector"
     xmlns:converter="using:Arcsinx.Toolkit.Converters"
+    xmlns:controls="using:Arcsinx.Toolkit.Controls"
     RequestedTheme="Light">
 
     <Application.Resources> 
         <ResourceDictionary> 
             <!--日夜间资源字典-->
             <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Light">
-                    <!--主题色-->
-                    <Color x:Key="ThemeColor">#D22222</Color>
-                    <!--页面背景色-->
-                    <Color x:Key="PageBackgroundColor">WhiteSmoke</Color>
-                    <!--主题色Brush-->
-                    <SolidColorBrush x:Key="ThemeColorBrush" Color="#D22222"/>
-                    <!--HomePage 底栏背景色-->
-                    <SolidColorBrush x:Key="BottomBarBackground" Color="LightGray" />
-                    <!--PivotHeader 背景色-->
-                    <SolidColorBrush x:Key="PivotHeaderColorBrush" Color="{ThemeResource ThemeColor}"></SolidColorBrush>
-                    <!--PivotHeader 选中的颜色 黑色-->
-                    <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="White" />
-                    <!--PivotHeader 未选中的颜色 灰色-->
-                    <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="#CCCCCC" />
-                    <!--文字颜色-->
-                    <SolidColorBrush x:Key="PhoneForegroundBrush" Color="Black"/>
-                    <!--页面背景色-->
-                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="WhiteSmoke"/>
-                    <!--Pane背景色-->
-                    <SolidColorBrush x:Key="PaneBackgroundBrush" Color="White"/>
-                    <!--ListView BorderBrush-->
-                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="LightGray"/> 
-                    <!--设置ListViewItem背景色-->
-                    <SolidColorBrush x:Key="SearchListViewItemBackground" Color="White"/>
-                    <!--评论页用户名-->
-                    <SolidColorBrush x:Key="CommentNickNameBrush" Color="#D22222"/>
-                    <!--评论页边框颜色-->
-                    <SolidColorBrush x:Key="CommentBorderBrush" Color="#D22222"/>
-                </ResourceDictionary>
-
-                <ResourceDictionary x:Key="Dark">
-
-                    <Color x:Key="ThemeColor">#FF333337</Color>
-                    <!--页面背景色-->
-                    <Color x:Key="PageBackgroundColor">FF1A1A1B</Color>
-                    <SolidColorBrush x:Key="ThemeColorBrush" Color="#FF333337"/>
-                    <!--HomePage 底栏背景色-->
-                    <SolidColorBrush x:Key="BottomBarBackground" Color="#FF1B1B1C" />
-                    <!--PivotHeader 背景色-->
-                    <SolidColorBrush x:Key="PivotHeaderColorBrush" Color="{ThemeResource ThemeColor}"></SolidColorBrush>
-                    <!--PivotHeader 选中的颜色 白色-->
-                    <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="White" />
-                    <!--PivotHeader 未选中的颜色 灰色-->
-                    <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="#CCCCCC" />
-                    <!--文字颜色-->
-                    <SolidColorBrush x:Key="PhoneForegroundBrush" Color="LightGray"/>
-                    <!--页面背景色-->
-                    <SolidColorBrush x:Key="PageBackgroundBrush" Color="#FF1A1A1B"/>
-                    <!--Pane背景色-->
-                    <SolidColorBrush x:Key="PaneBackgroundBrush" Color="#FF5F5F5F"/>
-                    <!--ListView BorderBrush-->
-                    <SolidColorBrush x:Key="ListViewBorderBrush" Color="#FF3C3C3C"/> 
-                    <!--设置ListViewItem背景色-->
-                    <SolidColorBrush x:Key="SearchListViewItemBackground" Color="#FF252526"/>
-                    <!--评论页用户名-->
-                    <SolidColorBrush x:Key="CommentNickNameBrush" Color="#CCCCCC"/>
-                    <!--评论页边框颜色-->
-                    <SolidColorBrush x:Key="CommentBorderBrush" Color="#CCCCCC"/>
-                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light" Source="Themes/LightDictionary.xaml"/>
+                <ResourceDictionary x:Key="Dark" Source="Themes/DarkDictionary.xaml"/>
             </ResourceDictionary.ThemeDictionaries>
              
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ThemeDictionary.xaml"/>
-                <ResourceDictionary Source="Themes/LightDictionary.xaml"/>
-                <ResourceDictionary Source="Themes/DarkDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <x:Double x:Key="PivotHeaderItemFontSize">18</x:Double>
+            
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
-            <!--<converter:BoolToObjectConverter x:Key="BoolToVisibilityConverter">
-                <converter:BoolToObjectConverter.FalseValue>
-                    <Visibility>Visible</Visibility>
-                </converter:BoolToObjectConverter.FalseValue>
-                <converter:BoolToObjectConverter.TrueValue>
-                    <Visibility>Collapsed</Visibility>
-                </converter:BoolToObjectConverter.TrueValue>
-            </converter:BoolToObjectConverter>-->
-
+            <x:Double x:Key="PivotHeaderFontSize">18</x:Double>
+             
             <SymbolIcon x:Key="Back" Symbol="Back"/>
 
             <BitmapImage x:Key="BackImage" UriSource="ms-appx:///Assets/Images/back.png"/>
 
             <!--有三张图的文章模板-->
             <DataTemplate x:Key="ThreePicEssayDataTemplate">
-                <Grid Margin="{StaticResource EssayGridMargin}" 
-                      Padding="{StaticResource EssayGridPadding}">
+                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="2*"/>
@@ -110,34 +45,22 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <!--#region  Images-->
-                        <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="0" Margin="0,0,1,0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
-                        <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="1" Margin="0,0,1,0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
-                        <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="2" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
+
+                        <controls:ImageEx Grid.Column="0" PlaceholderSource="{ThemeResource EssayPlaceHolderImage}" PlaceholderStretch="Fill" MinHeight="40"
+                                          Source="{Binding ThumbnailURLs[0]}" Stretch="Fill" Margin="0,0,1,0"/>
+                        <controls:ImageEx Grid.Column="1" PlaceholderSource="{ThemeResource EssayPlaceHolderImage}" PlaceholderStretch="Fill" MinHeight="40"
+                                          Source="{Binding ThumbnailURLs[1]}" Stretch="Fill" Margin="0,0,1,0"/>
+                        <controls:ImageEx Grid.Column="2" PlaceholderSource="{ThemeResource EssayPlaceHolderImage}" PlaceholderStretch="Fill" MinHeight="40"
+                                          Source="{Binding ThumbnailURLs[2]}" Stretch="Fill"/>
                         
-                        <Image Grid.Column="0" Stretch="Fill" Margin="0,0,1,0">
-                            <Image.Source>
-                                <BitmapImage UriSource="{Binding ThumbnailURLs[0]}"/>
-                            </Image.Source>
-                        </Image>
-                        <Image Grid.Column="1" Stretch="Fill" Margin="0,0,1,0">
-                            <Image.Source>
-                                <BitmapImage UriSource="{Binding ThumbnailURLs[1]}"/>
-                            </Image.Source>
-                        </Image>
-                        <Image Grid.Column="2" Stretch="Fill">
-                            <Image.Source>
-                                <BitmapImage UriSource="{Binding ThumbnailURLs[2]}"/>
-                            </Image.Source>
-                        </Image>
-                        <!--#endregion-->
                     </Grid>
                     <TextBlock Grid.Row="2" Margin="0,2,0,0" HorizontalAlignment="Right">
-                    <Run Text="评论"/>
-                    <Run Text="{Binding CommentsCount}"/>
+                        <Run Text="评论"/>
+                        <Run Text="{Binding CommentsCount}"/>
                     </TextBlock>
                 </Grid>
             </DataTemplate>
+           
             <!--一张图文章模板-->
             <DataTemplate x:Key="OnePicEssayDataTemplate">
                 <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
@@ -146,14 +69,9 @@
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!--默认图片-->
-                    <Image Source="{ThemeResource EssayPlaceHolderImage}" Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40"/>
-
-                    <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" MinHeight="40" >
-                        <Image.Source>
-                            <BitmapImage UriSource="{Binding ThumbnailURLs[0]}"/>
-                        </Image.Source>
-                    </Image>
+                    <controls:ImageEx PlaceholderSource="{ThemeResource EssayPlaceHolderImage}"
+                                      PlaceholderStretch="Fill" MinHeight="40"
+                                      Source="{Binding ThumbnailURLs[0]}" Stretch="Fill"/>
 
                     <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="4,0">
                         <TextBlock Text="{Binding Title}"  TextWrapping="Wrap" VerticalAlignment="Top"/>
@@ -164,10 +82,10 @@
                     </Grid>
                 </Grid>
             </DataTemplate>
+            
             <!--无图模板-->
             <DataTemplate x:Key="NoPicEssayDataTemplate">
-                <Grid Margin="{StaticResource EssayGridMargin}" 
-                      Padding="{StaticResource EssayGridPadding}"
+                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}"
                       MaxHeight="100">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -180,9 +98,11 @@
                     </TextBlock>
                 </Grid>
             </DataTemplate>
+            
             <!--专题模板-->
             <DataTemplate x:Key="TopicDataTemplate">
-                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}">
+                <Grid Margin="{StaticResource EssayGridMargin}" Padding="{StaticResource EssayGridPadding}"
+                      Background="{ThemeResource ListViewItemBackgroundBrush}">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -197,7 +117,6 @@
                     <ListView x:Name="innerTopicListView" ItemsSource="{Binding ChildElements}" Grid.Row="1"
                             ScrollViewer.VerticalScrollMode="Disabled"
                             IsItemClickEnabled="True"
-                            
                             ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
                             ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
                     </ListView>
@@ -354,6 +273,7 @@
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 <Setter Property="BorderBrush" Value="{ThemeResource ListViewBorderBrush}"/>
                 <Setter Property="BorderThickness" Value="{ThemeResource ListViewBorderThickness}"/>
+                <Setter Property="Background" Value="{ThemeResource ListViewItemBackgroundBrush}"/>
             </Style>
  
             <ts:EssayDataTemplateSelector x:Key="EssayDataTemplateSelector"

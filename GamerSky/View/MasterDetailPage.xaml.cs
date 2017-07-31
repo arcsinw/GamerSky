@@ -1,4 +1,7 @@
-﻿using GamerSky.Core.Model;
+﻿using Arcsinx.Toolkit.Controls;
+using Arcsinx.Toolkit.Interfaces;
+using GamerSky.Controls;
+using GamerSky.Core.Model;
 using GamerSky.Helper;
 using GamerSky.ViewModel;
 using System;
@@ -13,65 +16,23 @@ using Windows.UI.Xaml.Navigation;
 
 namespace GamerSky.View
 { 
-    public sealed partial class MasterDetailPage : Page , INotifyPropertyChanged
+    public sealed partial class MasterDetailPage : Page , IBackKeyPressManager
     {
         public static MasterDetailPage Current;
         public MasterDetailPage()
         {
             this.InitializeComponent();
             Current = this;
-            
+            GlobalDialog.InitializeDialog(rootGrid, null);
         }
+         
 
+        public bool isIgnore { get; set; }
 
-        #region Properties
-        private ElementTheme appTheme;
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
+        public void UnRegisterBackKeyPress() => isIgnore = true;
 
-        private bool _isNoImg;
-
-        public bool IsNoImgMode
-        {
-            get { return _isNoImg; }
-            set { _isNoImg = value; }
-        }
-
-
-        private User user;
-        public User User
-        {
-            get
-            {
-                return user;
-            }
-            set
-            {
-                user = value;
-                //DataShareManager.Current.UpdateUser(value);
-                OnPropertyChanged();
-            }
-        }
-        #endregion
-
-        #region INotifyPropertyChanged member
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName]string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
+        public void RegisterBackKeyPress() => isIgnore = false;
+         
           
         #region UI
 
@@ -86,6 +47,7 @@ namespace GamerSky.View
                 VisualStateManager.GoToState(this, "Default", true);
             }
         }
+
         private void AdaptiveVisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
             UpdateUI();
@@ -139,13 +101,11 @@ namespace GamerSky.View
         /// </summary>
         public void NavigateToSearchPage()
         {
-            drawer.DrawerOpened = false;
             NavigationHelper.MasterFrameNavigate(typeof(SearchPage));
         }
 
         public void NavigateToReplyPage()
         {
-            drawer.DrawerOpened = false;
             NavigationHelper.MasterFrameNavigate(typeof(ReplyPage));
         }
 
@@ -154,7 +114,6 @@ namespace GamerSky.View
         /// </summary>
         public void YaoWen()
         {
-            drawer.DrawerOpened = false;
             NavigationHelper.MasterFrameNavigate(typeof(YaowenPage));
         }
 
@@ -163,34 +122,17 @@ namespace GamerSky.View
         /// </summary>
         public void Favorite()
         {
-            drawer.DrawerOpened = false;
             NavigationHelper.MasterFrameNavigate(typeof(FavoritePage));
         }
 
        
-        /// <summary>
-        /// 是否夜间模式
-        /// </summary>
-        public bool IsNight
-        {
-            get
-            {
-                return DataShareManager.Current.AppTheme == ElementTheme.Dark;
-            }
-            set
-            {
-                DataShareManager.Current.UpdateAPPTheme(value);
-
-                UIHelper.ShowStatusBar();
-            }
-        }
+      
 
         /// <summary>
         /// 更多设置
         /// </summary>
         public void NavigateToSettings()
         {
-            drawer.DrawerOpened = false;
             NavigationHelper.MasterFrameNavigate(typeof(SettingsPage));
         }
 
@@ -199,7 +141,6 @@ namespace GamerSky.View
         /// </summary>
         public void FeedBack()
         {
-            drawer.DrawerOpened = false;
             NavigationHelper.MasterFrameNavigate(typeof(Feedback));
         }
 
@@ -208,69 +149,31 @@ namespace GamerSky.View
         /// </summary>
         public void NavigateToLogin()
         {
-            drawer.DrawerOpened = false;
-            NavigationHelper.MasterFrameNavigate(typeof(LoginPage));
-        }
-
-        /// <summary>
-        /// 清空缓存
-        /// </summary>
-        public async void ClearCache()
-        {
-            CacheSize = "删除缓存中...";
-            await FileHelper.Current.DeleteCacheFile();
-            double cache = await FileHelper.Current.GetCacheSize();
-            CacheSize = GetFormatSize(cache);
-        }
-
-        private string cacheSize;
-        public string CacheSize
-        {
-            get
+            if (DataShareManager.Current.CurrentUser == null)
             {
-                return cacheSize;
-            }
-            set
-            {
-                cacheSize = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public async void GetCacheSize()
-        {
-            double size = await FileHelper.Current.GetCacheSize();
-            CacheSize = GetFormatSize(size);
-        }
-
-        private string GetFormatSize(double size)
-        {
-            if (size < 1024)
-            {
-                return size + "byte";
-            }
-            else if (size < 1024 * 1024)
-            {
-                return Math.Round(size / 1024, 2) + "KB";
-            }
-            else if (size < 1024 * 1024 * 1024)
-            {
-                return Math.Round(size / 1024 / 1024, 2) + "MB";
+                NavigationHelper.MasterFrameNavigate(typeof(LoginPage));
             }
             else
             {
-                return Math.Round(size / 1024 / 1024 / 2014, 2) + "GB";
+                ToastService.SendToast("未开发");
             }
         }
+
+        
         #endregion
 
 
         private void MasterDetailPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
+            if (isIgnore)
+            {
+                return;
+            }
+
             e.Handled = true;
             if (DetailFrame.CanGoBack)
             { 
-                var essayDetailPage = (DetailFrame.Content as EssayDetailPage);
+                var essayDetailPage = (DetailFrame.Content as ReadEssayPage);
                 if (essayDetailPage != null)
                 { 
                     essayDetailPage.CloseImageFlipView();
@@ -303,24 +206,17 @@ namespace GamerSky.View
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_comment_reply.png", Title = GlobalStringLoader.GetString("UCommentReply"), SourcePage = typeof(ReplyPage) });
             PaneItems.Add(new PaneItem() { Icon = "ms-appx:///Assets/Images/drawer_collect.png", Title = GlobalStringLoader.GetString("UCollection"), SourcePage = typeof(FavoritePage) });
             UIHelper.ShowStatusBar();
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            User = DataShareManager.Current.CurrentUser;
-            IsNoImgMode = DataShareManager.Current.IsNoImage;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
+             
             SystemNavigationManager.GetForCurrentView().BackRequested += MasterDetailPage_BackRequested;
             DisplayInformation.GetForCurrentView().OrientationChanged += MasterDetailPage_OrientationChanged;
+             
+
+            if (DataShareManager.Current.IsNewVersion)
+            {
+                new MessageDialog().Show();
+            }
         }
-
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-            User = DataShareManager.Current.CurrentUser;
-            IsNoImgMode = DataShareManager.Current.IsNoImage;
-        }
-
+         
 
         private void paneListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -332,13 +228,15 @@ namespace GamerSky.View
         {
             if (DataShareManager.Current.AppTheme == ElementTheme.Dark)
             {
-                
+                ViewModel.AppTheme = ElementTheme.Light;
                 DataShareManager.Current.UpdateAPPTheme(false);
             }
             else
             {
+                ViewModel.AppTheme = ElementTheme.Dark;
                 DataShareManager.Current.UpdateAPPTheme(true);
             }
+
             UIHelper.ShowStatusBar();
         }
           

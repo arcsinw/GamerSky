@@ -7,6 +7,7 @@
     xmlns:vm="using:GamerSky.ViewModel"
     xmlns:converter="using:GamerSky.Converters"
     xmlns:ex="using:GamerSky.Extensions"
+    x:Name="page"
     mc:Ignorable="d">
 
     <Page.Transitions>
@@ -708,7 +709,7 @@
         <!--#region  显示图片-->
         <FlipView x:Name="imageFlipView" Visibility="Collapsed" 
                   ItemsSource="{x:Bind Images,Mode=OneWay}" 
-                  Tapped="imageFlipView_Tapped">
+                  >
             <FlipView.Background>
                 <SolidColorBrush Color="Black" Opacity="0.8"/>
             </FlipView.Background>
@@ -719,14 +720,15 @@
                               ZoomMode="Enabled" 
                               HorizontalContentAlignment="Center" 
                               VerticalContentAlignment="Center"
-                              VerticalScrollMode="Auto" 
-                              VerticalScrollBarVisibility="Auto"
-                              HorizontalScrollMode="Auto" 
-                              HorizontalScrollBarVisibility="Auto"
-                              Margin="0" Padding="0"
-                              MinZoomFactor="0.5"                              
+                              VerticalScrollBarVisibility="Hidden"
+                              HorizontalScrollBarVisibility="Hidden"
+                              
+                              MinZoomFactor="0.5"   
+                              MaxZoomFactor="4"
                               >
-                            <Image Source="{Binding src}"/>
+                            <Image Source="{Binding src}" 
+                                   Width="{Binding ElementName=ImageScrollViewer,Path=ViewportWidth}" 
+                                   Tapped="imageFlipView_Tapped"/>
                         </ScrollViewer>
                     </Grid>
                 </DataTemplate>
@@ -742,10 +744,10 @@
         <!--#endregion-->
 
         <CommandBar x:Name="commandBar" VerticalAlignment="Bottom" 
-                    Visibility="Collapsed" ClosedDisplayMode="Minimal">
+                    Visibility="Collapsed">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Icon="Save" x:Uid="Save" Click="saveAppBar_Click"/>
-                <AppBarButton Label="HD" >
+                <AppBarButton Label="HD" x:Name="hdAppBar"  Click="hdAppBar_Click">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="ms-appx:///Assets/Images/picture_origin.png"/>
                     </AppBarButton.Icon>

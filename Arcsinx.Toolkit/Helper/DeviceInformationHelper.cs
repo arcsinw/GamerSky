@@ -14,12 +14,12 @@ namespace Arcsinx.Toolkit.Helper
     /// </summary>
     public class DeviceInformationHelper
     {
-        static DeviceInformationHelper()
-        {
-            ResourceContext resContext = ResourceContext.GetForCurrentView();
-            string value = resContext.QualifierValues["DeviceFamily"];
-            IsMobile = value.Equals("Mobile");
-        }
+        //static DeviceInformationHelper()
+        //{
+        //    ResourceContext resContext = ResourceContext.GetForCurrentView();
+        //    string value = resContext.QualifierValues["DeviceFamily"];
+        //    IsMobile = value.Equals("Mobile");
+        //}
 
         private static EasClientDeviceInformation easDeviceInfo = new EasClientDeviceInformation();
         /// <summary>
@@ -81,7 +81,7 @@ namespace Arcsinx.Toolkit.Helper
             return easDeviceInfo.OperatingSystem == "Desktop";
         }
 
-        public static bool IsMobile { get; private set; }
+        public static bool IsMobile => ResourceContext.GetForCurrentView().QualifierValues["DeviceFamily"].Equals("Mobile");
 
         /// <summary>
         /// 获取屏幕宽度

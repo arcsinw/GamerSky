@@ -60,7 +60,7 @@ namespace GamerSky
             {
                 string subject = "GamerSky.x's Exception";
                 string body = GetExceptionDetailMessage(e.Exception);
-                string address = "wangx86@live.com";
+                string address = "wangx64@outlook.com";
                 var mailto = new Uri($"mailto:{address}?subject={subject}&body={body}");
                 await Launcher.LaunchUriAsync(mailto);
             }));

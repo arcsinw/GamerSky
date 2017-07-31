@@ -8,7 +8,7 @@
     xmlns:selector="using:GamerSky.TemplateSelector" 
     xmlns:vm="using:GamerSky.ViewModel"
     xmlns:converter="using:GamerSky.Converters"
-    xmlns:controls="using:GamerSky.Controls"
+    xmlns:controls="using:Arcsinx.Toolkit.Controls"
     xmlns:pr="using:PullToRefresh.UWP"
     mc:Ignorable="d"
     NavigationCacheMode="Required"
@@ -172,28 +172,23 @@
                     <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
                         <ListView x:Name="essayListView" 
                                  ItemsSource="{Binding Essays}"
-                                 ShowsScrollingPlaceholders="True"
                                  SelectionMode="None"
                                  IsItemClickEnabled="True"
                                  ItemClick="ListView_ItemClick"
                                  Style="{ThemeResource LightListView}"
-                                  ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"
-                                ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                                 ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"
+                                 ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
                                  >
+                            
                             <ListView.HeaderTemplate>
                                 <DataTemplate>
-                                    <Grid>
-                                        <FlipView x:Name="headEssay" Height="250" ItemsSource="{Binding Essays.HeaderEssays}" 
-                                                  Tapped="FlipView_Tapped">
+                                    <Grid >
+                                        <FlipView x:Name="headEssay" Height="250" ItemsSource="{Binding Essays.HeaderEssays}" >
                                             <FlipView.ItemTemplate>
                                                 <DataTemplate>
-                                                    <Grid>
-                                                        <Image Source="{ThemeResource SlidePlaceHolderImage}" Stretch="Fill"  Height="250"/>
-                                                        <Image Height="250" Stretch="Fill">
-                                                            <Image.Source>
-                                                                <BitmapImage UriSource="{Binding ThumbnailURLs[0]}"/>
-                                                            </Image.Source>
-                                                        </Image>
+                                                    <Grid Tapped="headEssayGrid_Tapped" >
+                                                        <controls:ImageEx PlaceholderSource="{ThemeResource SlidePlaceHolderImage}" PlaceholderStretch="Fill"
+                                                                          Source="{Binding ThumbnailURLs[0]}" Stretch="Fill" Height="250" />
                                                         <Border Background="Black"  Opacity="0.9" VerticalAlignment="Bottom">
                                                             <TextBlock Margin="8,2" Text="{Binding Title}" Foreground="White" VerticalAlignment="Bottom"/>
                                                         </Border>

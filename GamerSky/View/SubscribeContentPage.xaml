@@ -8,6 +8,7 @@
     xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:GamerSky.ViewModel"
     xmlns:converter="using:GamerSky.Converters"
+    xmlns:controls="using:Arcsinx.Toolkit.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     >
@@ -20,19 +21,7 @@
         <converter:CountToVisibilityConverter x:Key="CountToBoolConverter"/>
     </Page.Resources>
 
-    <Grid>
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Desktop">
-                    <VisualState.StateTriggers>
-                        <hp:DeviceTypeTrigger PlatformType="Desktop"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="back.Visibility" Value="Collapsed"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+    <Grid> 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -54,13 +43,16 @@
                           ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}">    
                     <ListView.Header>
                         <Grid>
-                            <Image Height="250" Stretch="Fill">
+                            <controls:ImageEx Height="255" Stretch="Fill" controls:ParallaxService.VerticalMultiplier="-0.3"
+                                              Source="{Binding HeaderSubscribe.ThumbnailURLs[0]}"/>
+                            <!--<Image Height="250" Stretch="Fill" controls:ParallaxService.VerticalMultiplier="-0.3">
                                 <Image.Source>
                                     <BitmapImage UriSource="{Binding HeaderSubscribe.ThumbnailURLs[0]}"/>
                                 </Image.Source>
-                            </Image>
+                            </Image>-->
+
                             <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
-                                <TextBlock Margin="7,0" Text="{Binding HeaderSubscribe.Title}" Foreground="White" VerticalAlignment="Bottom"/>
+                                <TextBlock Margin="8,2" Text="{Binding HeaderSubscribe.Title}" Foreground="White" VerticalAlignment="Bottom"/>
                             </Border>
                         </Grid>
                     </ListView.Header> 
@@ -75,10 +67,11 @@
         <Grid Background="{ThemeResource ThemeColorBrush}" Height="48"
               Opacity="0" Visibility="{Binding ElementName=titleBarGrid,Path=Opacity,Converter={StaticResource CountToBoolConverter}}"
               x:Name="titleBarGrid" Grid.Row="0">
-            <Button x:Name="back"  Click="back_Click" Style="{ThemeResource BackButtonStyle}"
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind viewModel.GoBack}"
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>
+            
             <TextBlock Text="{Binding HeaderSubscribe.Title}" Style="{ThemeResource PageTitleStyle}"/>
         </Grid>
 

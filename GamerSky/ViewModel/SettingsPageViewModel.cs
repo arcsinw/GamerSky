@@ -5,11 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using GamerSky.Helper;
+using GamerSky.Core.Helper;
 
 namespace GamerSky.ViewModel
 {
     public class SettingsPageViewModel : ViewModelBase
     {
+        public SettingsPageViewModel()
+        {
+            GetVersion();
+        }
+
+
         private bool isToastShow = false;
         /// <summary>
         /// 是否推送要闻
@@ -86,6 +93,25 @@ namespace GamerSky.ViewModel
         }
 
 
+        private string version;
+        public string Version
+        {
+            get
+            {
+                return Functions.GetVersion();
+            }
+            private set
+            {
+                version = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void GetVersion()
+        {
+            Version = Functions.GetVersion();
+        }
+
         //public bool IsStatusBarShow
         //{
         //   get
@@ -96,13 +122,9 @@ namespace GamerSky.ViewModel
         //    {
         //        if(value)
         //        {
-                     
+
         //        }
         //    }
-        //}
-        public SettingsPageViewModel()
-        {
-         
-        }
+        //} 
     }
 }

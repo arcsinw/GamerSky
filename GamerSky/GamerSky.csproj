@@ -104,6 +104,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Compile Include="Controls\MessageDialog.xaml.cs">
+      <DependentUpon>MessageDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BoolToElementThemeConverter.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Extensions\ExtensionHelper.cs" />
@@ -112,7 +115,6 @@
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="Helper\DispatcherManager.cs" />
     <Compile Include="Helper\ExceptionHandlingSynchronizationContext.cs" />
-    <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\GlobalStringLoader.cs" />
     <Compile Include="Helper\HtmlStreamUriResolver.cs" />
     <Compile Include="Cache\CacheBase.cs" />
@@ -150,7 +152,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AndroidPivot.cs" />
-    <Compile Include="Controls\Drawer.cs" />
     <Compile Include="Controls\PullToRefreshListView.cs" />
     <Compile Include="Controls\RefreshProgressEventArgs.cs" />
     <Compile Include="Controls\SlidableListItem.cs" />
@@ -170,7 +171,6 @@
     <Compile Include="Helper\DeviceTypeTrigger.cs" />
     <Compile Include="Helper\ImageDownLoadHelper.cs" />
     <Compile Include="Helper\JYHelper.cs" />
-    <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\LocalSettingsHelper.cs" />
     <Compile Include="Helper\NavigationHelper.cs" />
     <Compile Include="Helper\PageBase.cs" />
@@ -191,6 +191,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateSelector\EssayDataTemplateSelector.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
+    <Compile Include="ViewModel\AgreementPageViewModel.cs" />
     <Compile Include="ViewModel\DataShareManager.cs" />
     <Compile Include="ViewModel\EmailRegisterPageViewModel.cs" />
     <Compile Include="ViewModel\EssayDetailViewModel.cs" />
@@ -413,6 +414,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Controls\FlipViewArticle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

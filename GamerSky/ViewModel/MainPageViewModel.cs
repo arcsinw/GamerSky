@@ -14,6 +14,7 @@ using Arcsinx.Toolkit.Controls;
 using GamerSky.Core.Model;
 using GamerSky.Core.Http;
 using GamerSky.Core.IncrementalLoadingCollection;
+using GamerSky.Core.Helper;
 
 namespace GamerSky.ViewModel
 {

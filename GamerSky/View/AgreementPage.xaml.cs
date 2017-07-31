@@ -23,22 +23,13 @@ namespace GamerSky.View
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class AgreementPage : Page , INotifyPropertyChanged
+    public sealed partial class AgreementPage : Page
     {
         public AgreementPage()
         {
-            this.InitializeComponent();
-
-            AppTheme = DataShareManager.Current.AppTheme;
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-
-            NavigationCacheMode = NavigationCacheMode.Required;
+            this.InitializeComponent(); 
         }
-
-        private void Current_ShareDataChanged()
-        {
-            AppTheme = DataShareManager.Current.AppTheme;
-        }
+         
 
         public void Back()
         {
@@ -92,29 +83,7 @@ namespace GamerSky.View
             string text = await FileIO.ReadTextAsync(file);
             return text;
         }
-
-        private ElementTheme appTheme;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName]string propertyName= "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public ElementTheme AppTheme
-        {
-            get
-            {
-                return appTheme;
-            }
-            set
-            {
-                appTheme = value;
-                OnPropertyChanged();
-            }
-        }
-
-
+         
+         
     }
 }

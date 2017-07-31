@@ -25,22 +25,6 @@ namespace GamerSky.View
             this.InitializeComponent(); 
         }
 
-        #region Fields
-        private bool _isStrategyLoaded = false;
-        private bool _isNewsLoaded = false;
-        #endregion
-
-        public void Back()
-        {
-            var frame = (Window.Current.Content as Frame);
-            if (frame == null) return;
-            if(frame.CanGoBack)
-            {
-                frame.GoBack();
-            }
-        }
-         
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var para = e.Parameter as string;
@@ -50,6 +34,5 @@ namespace GamerSky.View
                 viewModel.LoadGameDetail();
             }
         }
-        
     }
 }

@@ -2,14 +2,47 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GamerSky.Themes">
-    <ResourceDictionary.ThemeDictionaries>
-        <ResourceDictionary x:Key="Light">
+    
             <BitmapImage x:Key="EssayPlaceHolderImage" UriSource="ms-appx:///Assets/Images/image_loading.png"/>
             <BitmapImage x:Key="GamePlaceHolderImage" UriSource="ms-appx:///Assets/Images/image_loading_game_lib_day.png"/>
             <BitmapImage x:Key="SlidePlaceHolderImage" UriSource="ms-appx:///Assets/Images/slide_image_loading.png"/>
             <BitmapIcon x:Key="DayNightImage" UriSource="ms-appx:///Assets/Images/drawer_day.png" Height="24" Width="24"/>
             <BitmapImage x:Key="EmptySubscribePlaceHolderImage" UriSource="ms-appx:///Assets/Images/empty_collect.png" DecodePixelHeight="80" DecodePixelWidth="80"/>
             <BitmapImage x:Key="DefaultUserAvatarImage" UriSource="ms-appx:///Assets/Images/member_guest.png"/>
-        </ResourceDictionary>
-    </ResourceDictionary.ThemeDictionaries>
+
+            <!--<SolidColorBrush x:Key="PageBackgroundBrush" Color="#F2F2F2"/>
+            <SolidColorBrush x:Key="ThemeColorBrush" Color="#D22222"/>-->
+            <SolidColorBrush x:Key="ListViewItemBackgroundBrush" Color="White"/>
+
+            <SolidColorBrush x:Key="SubscribeTitleForegroundBrush" Color="#D22222"/>
+
+    <!--主题色-->
+            <Color x:Key="ThemeColor">#D22222</Color>
+            <!--页面背景色-->
+            <Color x:Key="PageBackgroundColor">WhiteSmoke</Color>
+            <!--主题色Brush-->
+            <SolidColorBrush x:Key="ThemeColorBrush" Color="#D22222"/>
+            <!--HomePage 底栏背景色-->
+            <SolidColorBrush x:Key="BottomBarBackground" Color="LightGray" />
+            <!--PivotHeader 背景色-->
+            <SolidColorBrush x:Key="PivotHeaderColorBrush" Color="{ThemeResource ThemeColor}"></SolidColorBrush>
+            <!--PivotHeader 选中的颜色 黑色-->
+            <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="White" />
+            <!--PivotHeader 未选中的颜色 灰色-->
+            <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="#CCCCCC" />
+            <!--文字颜色-->
+            <SolidColorBrush x:Key="PhoneForegroundBrush" Color="Black"/>
+            <!--页面背景色-->
+            <SolidColorBrush x:Key="PageBackgroundBrush" Color="WhiteSmoke"/>
+            <!--Pane背景色-->
+            <SolidColorBrush x:Key="PaneBackgroundBrush" Color="White"/>
+            <!--ListView BorderBrush-->
+            <SolidColorBrush x:Key="ListViewBorderBrush" Color="LightGray"/>
+            <!--设置ListViewItem背景色-->
+            <SolidColorBrush x:Key="SearchListViewItemBackground" Color="White"/>
+            <!--评论页用户名-->
+            <SolidColorBrush x:Key="CommentNickNameBrush" Color="#D22222"/>
+            <!--评论页边框颜色-->
+            <SolidColorBrush x:Key="CommentBorderBrush" Color="#D22222"/>
+    
 </ResourceDictionary>

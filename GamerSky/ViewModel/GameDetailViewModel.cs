@@ -53,7 +53,7 @@ namespace GamerSky.ViewModel
             GameDetail = new GameDetail();
 
             News = new IncrementalLoadingCollection<Essay>(LoadNews, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(((Exception)e).Message); });
-            Strategys = new IncrementalLoadingCollection<Essay>(LoadNews, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(((Exception)e).Message); });
+            Strategys = new IncrementalLoadingCollection<Essay>(LoadStrategys, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { ToastService.SendToast(((Exception)e).Message); });
             
             if(IsDesignMode)
             { 
@@ -65,14 +65,14 @@ namespace GamerSky.ViewModel
         private async Task<IEnumerable<Essay>> LoadNews(uint count, int pageIndex)
         {
             var result = await ApiService.Instance.GetGameDetailNews(contentId, pageIndex++);
-            Debug.WriteLine(pageIndex);
+            
             return result;
         }
 
         private async Task<IEnumerable<Essay>> LoadStrategys(uint count, int pageIndex)
         {
             var result = await ApiService.Instance.GetGameDetailStrategys(contentId, pageIndex++);
-            Debug.WriteLine(pageIndex);
+            
             return result;
         }
         

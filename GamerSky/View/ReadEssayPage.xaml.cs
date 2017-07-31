@@ -79,6 +79,22 @@ namespace GamerSky.View
             }
         }
 
+        public void CloseImageFlipView()
+        {
+            if (imageFlipView.Visibility == Visibility.Visible)
+            {
+                imageFlipView.Visibility = Visibility.Collapsed;
+                commandBar.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                if (Frame.CanGoBack)
+                {
+                    this.Frame.GoBack();
+                }
+            } 
+        }
+
         #region Js invoke  
         /// <summary>
         /// 设置夜间模式
@@ -326,37 +342,56 @@ namespace GamerSky.View
         private void articlePresenter_NewWindowRequested(WebView sender, WebViewNewWindowRequestedEventArgs args)
         {
             args.Handled = true;
-            string tmp = args.Uri.OriginalString;
-            if (tmp.EndsWith(".jpg") ||
-                tmp.EndsWith(".png") ||
-                tmp.EndsWith(".bmp") ||
-                tmp.EndsWith(".gif"))
-            {
-                var result = Images.Where(x => x.hdsrc.Equals(tmp));
+            //string tmp = args.Uri.OriginalString;
+            //if (tmp.EndsWith(".jpg") ||
+            //    tmp.EndsWith(".png") ||
+            //    tmp.EndsWith(".bmp") ||
+            //    tmp.EndsWith(".gif"))
+            //{
+            //    var result = Images.Where(x => x.hdsrc.Equals(tmp));
 
-                if (result != null)
-                {
-                    imageFlipView.SelectedIndex = result.First().index;
-                    imageFlipView.Visibility = Visibility.Visible;
-                    commandBar.Visibility = Visibility.Visible;
-                }
-            }
+            //    if (result != null)
+            //    {
+            //        imageFlipView.SelectedIndex = result.First().index;
+            //        imageFlipView.Visibility = Visibility.Visible;
+            //        commandBar.Visibility = Visibility.Visible;
+            //    }
+            //}
         }
 
         private void articlePresenter_ScriptNotify(object sender, NotifyEventArgs e)
         {
             Debug.WriteLine(e.Value);
-            if (e.Value.Equals("gestures:goback"))
-            {
-                NavigationHelper.GoBack();
-            }
+            string type = e.Value.Split(':').First();
+            string parameter = e.Value.Split(':')[1];
 
-            if (!string.IsNullOrEmpty(e.Value))
+            switch(type)
             {
-                _isCommentLoaded = false;
-                _isContentLoaded = false;
-                ViewModel.SetCurrentContentId(e.Value, pivot.SelectedIndex);
-            }
+                case "Image":
+                    parameter = e.Value.Replace("Image:","");
+                    var result = Images.Where(x => x.src.Equals(parameter));
+                    if (result != null)
+                    {
+                        imageFlipView.SelectedIndex = result.First().index;
+                        imageFlipView.Visibility = Visibility.Visible;
+                        commandBar.Visibility = Visibility.Visible;
+                    }
+                    
+                    break;
+
+                case "Gestures":
+                    if (parameter.Equals("GoBack"))
+                    {
+                        NavigationHelper.GoBack();
+                    }
+                    break;
+
+                case "OpenEssayById":
+                    _isCommentLoaded = false;
+                    _isContentLoaded = false;
+                    ViewModel.SetCurrentContentId(parameter, pivot.SelectedIndex);
+                    break;
+            } 
         }
 
         private void commentWebView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
@@ -372,6 +407,11 @@ namespace GamerSky.View
         private void webView_DOMContentLoaded(WebView sender, WebViewDOMContentLoadedEventArgs args)
         {
             Images.Clear();
+        }
+
+        private void hdAppBar_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

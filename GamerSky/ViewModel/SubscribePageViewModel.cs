@@ -8,49 +8,18 @@ using Windows.UI.Xaml;
 using GamerSky.Core.Http;
 using GamerSky.IncrementalLoadingCollection;
 using GamerSky.Core.Model;
+using Arcsinx.Toolkit.IncrementalCollection;
+using Arcsinx.Toolkit.Controls;
 
 namespace GamerSky.ViewModel
 {
     public class SubscribePageViewModel : ViewModelBase
     {
+        #region Properties
         public ObservableCollection<Essay> SubscribeTopic { get; set; }
-
-        public ObservableCollection<Essay> SubscribeContent { get; set; }
-
-        //public SubscribeIncrementalCollection SubscribeContent { get; set; }
          
+        public IncrementalLoadingCollection<Essay> SubscribeContent { get; set; }
 
-        public SubscribePageViewModel()
-        { 
-            SubscribeTopic = new ObservableCollection<Essay>();
-            
-            SubscribeContent = new ObservableCollection<Essay>();
-            //SubscribeContent = new SubscribeIncrementalCollection();
-            //SubscribeContent.OnLoadingMoreStart += SubscribeContent_OnLoadingMoreStart;
-            //SubscribeContent.OnLoadingMoreEnd += SubscribeContent_OnLoadingMoreEnd;
-            
-            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
-        }
-
-        private void SubscribeContent_OnLoadingMoreEnd(object sender, EventArgs e)
-        {
-            IsActive = false;
-        }
-
-        private void SubscribeContent_OnLoadingMoreStart(object sender, EventArgs e)
-        {
-            IsActive = true;
-        }
-
-        private void Current_ShareDataChanged()
-        {
-            //SubscribeTopic.Clear();
-            //SubscribeContent.Clear();
-
-            //await LoadSubscribeContent();
-            //await LoadSubscribeTopic();
-        }
-        
         private bool isActive;
         public bool IsActive
         {
@@ -63,7 +32,61 @@ namespace GamerSky.ViewModel
                 isActive = value;
                 OnPropertyChanged();
             }
+        } 
+        #endregion
+
+        public SubscribePageViewModel()
+        {
+            SubscribeTopic = new ObservableCollection<Essay>();
+             
+            SubscribeContent = new IncrementalLoadingCollection<Essay>(LoadSubscribeContent, () => { IsActive = false; }, () => { IsActive = true; }, (e) => { IsActive = false; ToastService.SendToast(((Exception)e).Message); });
+            
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
+
+        private async Task<IEnumerable<Essay>> LoadSubscribeContent(uint count, int pageIndex)
+        {
+            List<Essay> essays = new List<Essay>();
+            if (DataShareManager.Current.SubscribeList.Count == 0)
+            {
+                return essays;
+            }
+
+            string x = DataShareManager.Current.SubscribeList[currentSubscribeIndex].SourceId;
+            List<Essay> result = await ApiService.Instance.GetSubscribeContent(x, pageIndex);
+            if (result != null && result.Any())
+            {
+                foreach (var item in result)
+                {
+                    if (!string.IsNullOrEmpty(item.Type) && item.Type.Equals("xinwen"))
+                    {
+                        essays.Add(item);
+                    }
+                }
+            }
+            else 
+            {
+                SubscribeContent.NoMore();
+            }
+
+            if (currentSubscribeIndex == (DataShareManager.Current.SubscribeList.Count - 1))
+            {
+                pageIndex++;
+            }
+            currentSubscribeIndex = ++currentSubscribeIndex % DataShareManager.Current.SubscribeList.Count;
+
+            return essays;
+        }
+         
+
+        private async void Current_ShareDataChanged()
+        {
+            SubscribeTopic.Clear();
+
+            await SubscribeContent.ClearAndReloadAsync();
+            await LoadSubscribeTopic();
+        }
+         
         /// <summary>
         /// 加载订阅专题
         /// </summary>
@@ -76,7 +99,7 @@ namespace GamerSky.ViewModel
                 int pageIndex = subscribeList.Count;
                 foreach (var subscribe in subscribeList)
                 {
-                    var essays = await ApiService.Instance.GetSubscribeTopic(subscribe.SourceId, pageIndex);
+                    var essays = await ApiService.Instance.GetSubscribeTopic(subscribe.SourceId, 1);
                     if (essays != null)
                     {
                         foreach (var item in essays)
@@ -139,10 +162,9 @@ namespace GamerSky.ViewModel
         /// </summary>
         public async Task RefreshSubscribeContent()
         {
-            SubscribeContent.Clear();
+            await SubscribeContent.ClearAndReloadAsync();
             pageIndex = 1;
-            currentSubscribeIndex = 0;
-            await LoadSubscribeContent();
+            currentSubscribeIndex = 0; 
         }
     }
 }

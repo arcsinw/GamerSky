@@ -10,7 +10,8 @@
     xmlns:vm="using:GamerSky.ViewModel"
     xmlns:controls="using:Arcsinx.Toolkit.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    >
 
     <Page.Resources>
         <DataTemplate x:Key="EssayDataTemplate" x:DataType="m:Essay">
@@ -64,7 +65,8 @@
             <Image Grid.Column="0" 
                    HorizontalAlignment="Stretch" VerticalAlignment="Center"
                    Stretch="Uniform"
-                   Source="{Binding GameDetail.ThumbnailURL,Mode=OneWay}"/>
+                   Source="{Binding GameDetail.ThumbnailURL,Mode=OneWay}"
+                   />
             
             <!--游戏介绍-->
             <Grid Grid.Column="1" VerticalAlignment="Top">
@@ -75,7 +77,7 @@
                     </Style>
                 </Grid.Resources>
                 <StackPanel Orientation="Vertical" >
-                    <TextBlock Text="{x:Bind viewModel.GameDetail.Title,Mode=OneWay}" />
+                    <!--<TextBlock Text="{x:Bind viewModel.GameDetail.Title,Mode=OneWay}" />-->
                     <TextBlock>
                         <Run Text="发售日期："></Run>
                         <Run Text="{x:Bind viewModel.GameDetail.SellTime,Mode=OneWay}"/>
@@ -115,7 +117,7 @@
         <!--#region 文章栏-->
         <Pivot Grid.Row="1"
                x:Name="pivot" Style="{ThemeResource StrategyPivotStyle}">
-            <PivotItem Header="策略" Margin="0">
+            <PivotItem Header="新闻" Margin="0">
                 <controls:PullToRefreshListView x:Name="strategyListView" ItemsSource="{Binding News}"
                               ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"
@@ -125,7 +127,7 @@
                               >
                 </controls:PullToRefreshListView>
             </PivotItem>
-            <PivotItem Header="新闻" Margin="0"> 
+            <PivotItem Header="策略" Margin="0"> 
                 <controls:PullToRefreshListView x:Name="newsListView" ItemsSource="{Binding Strategys}"
                              ItemTemplate="{StaticResource EssayDataTemplate}"
                               Style="{ThemeResource LightListView}"

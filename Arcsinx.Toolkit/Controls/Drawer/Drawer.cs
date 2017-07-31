@@ -13,8 +13,8 @@ using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-  
-namespace GamerSky.Controls
+ 
+namespace Arcsinx.Toolkit.Controls
 {
     public sealed class Drawer : ContentControl
     {
@@ -168,7 +168,7 @@ namespace GamerSky.Controls
 
             if (!CanOpen)
                 return;
-
+            
             if (_drawerMaskVisual.Opacity < 1)
             {
                 _drawerMaskBorder.Visibility = Visibility.Visible;

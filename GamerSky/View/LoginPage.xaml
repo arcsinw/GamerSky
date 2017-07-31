@@ -166,26 +166,14 @@
         <vm:LoginPageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Desktop">
-                    <VisualState.StateTriggers>
-                        <hp:DeviceTypeTrigger PlatformType="Desktop"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="back.Visibility" Value="Collapsed"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"> 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Background="{ThemeResource ThemeColorBrush}">
-            <Button x:Name="back"  Click="{x:Bind Back}"
+        <Grid Background="{ThemeResource ThemeColorBrush}" Padding="{StaticResource PhonePadding}">
+            <Button x:Name="back"  Click="{x:Bind ViewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}"
                     Style="{ThemeResource BackButtonStyle}" Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>

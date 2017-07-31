@@ -33,6 +33,7 @@
 
         <Pivot x:Name="pivot"  Background="{ThemeResource PageBackgroundBrush}"
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
+          
             <PivotItem Header="订阅内容" Margin="0" Padding="0" >
                 <Grid>
                     <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
@@ -56,61 +57,63 @@
             
             <PivotItem Header="订阅专题" Margin="0" Padding="0">
                 <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                    <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
-                        <ItemsControl Padding="{ThemeResource PhonePagePadding}" 
-                          ItemsSource="{Binding SubscribeTopic}">
-                            <ItemsControl.ItemContainerTransitions>
-                                <TransitionCollection>
-                                    <AddDeleteThemeTransition />
-                                </TransitionCollection>
-                            </ItemsControl.ItemContainerTransitions>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Margin="0,0,0,8">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Grid Grid.Row="0" Padding="6,12" Tapped="Grid_Tapped" >
-                                            <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" Foreground="{ThemeResource ThemeColorBrush}"/>
-                                            <TextBlock HorizontalAlignment="Right">
+                    <!--<ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">-->
+                    <ListView x:Name="topicListView" Padding="0" 
+                              ItemsSource="{Binding SubscribeTopic}"
+                              SelectionMode="None"
+                              IsItemClickEnabled="True"
+                              ItemClick="topicListView_ItemClick"
+                              ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                              Style="{ThemeResource LightListView}">
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <AddDeleteThemeTransition />
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0" Padding="6,12" Tapped="Grid_Tapped" >
+                                        <TextBlock Text="{Binding Title}" HorizontalAlignment="Left" Foreground="{ThemeResource SubscribeTitleForegroundBrush}"/>
+                                        <TextBlock HorizontalAlignment="Right">
                                         <Run Text="{Binding ReadingCount}"/>
                                         <Run Text="人关注"/>
-                                            </TextBlock>
-                                        </Grid>
-                                        <ListView x:Name="innerTopicListView" ItemsSource="{Binding ChildElements}" Grid.Row="1"
+                                        </TextBlock>
+                                    </Grid>
+                                    <ListView x:Name="innerTopicListView" ItemsSource="{Binding ChildElements}" Grid.Row="1"
                                                 ScrollViewer.VerticalScrollMode="Disabled"
                                                 IsItemClickEnabled="True"
                                                 SelectionMode="None"
                                                 ItemClick="innerTopicListView_ItemClick"
                                                 ItemTemplate="{StaticResource OnePicEssayDataTemplate}"
                                                 ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}">
-                                        </ListView>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <!--<ListView.FooterTemplate>
-                        <DataTemplate>
-                            <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0" Click="Button_Click">
-                                <Button.Content>
+                                    </ListView>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <!--<ListView.FooterTemplate>
+                            <DataTemplate>
+                                <Button  HorizontalAlignment="Stretch" Margin="0,8,0,0">
                                     <StackPanel Orientation="Horizontal">
                                         <SymbolIcon Symbol="Add" Margin="0,0,4,0"/>
                                         <TextBlock Text="添加更多订阅" />
                                     </StackPanel>
-                                </Button.Content>
-                            </Button>
-                        </DataTemplate>
-                    </ListView.FooterTemplate>-->
-                        </ItemsControl>
-                    </ScrollViewer>
+                                </Button>
+                            </DataTemplate>
+                        </ListView.FooterTemplate>-->
+                    </ListView>
+                    <!--</ScrollViewer>-->
                 </pr:PullToRefreshBox>
             </PivotItem>
         </Pivot>
 
         <!--#region 左边后退键-->
-        <Button x:Name="back"  Click="{x:Bind Back}" Visibility="Collapsed" 
-                    HorizontalAlignment="Left" VerticalAlignment="Top"
-                    Style="{ThemeResource BackButtonStyle}" >
+        <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind viewModel.GoBack}"
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
             <SymbolIcon Symbol="Back"/>
         </Button>
         <!--#endregion-->

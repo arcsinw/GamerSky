@@ -27,7 +27,7 @@ namespace GamerSky.ViewModel
             AppTheme = DataShareManager.Current.AppTheme;
             IsNoImgMode = DataShareManager.Current.IsNoImage;
             EssayFontSize = DataShareManager.Current.FontSize;
-            //DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
+            DataShareManager.Current.ShareDataChanged += Current_ShareDataChanged;
         }
 
         private void Current_ShareDataChanged()

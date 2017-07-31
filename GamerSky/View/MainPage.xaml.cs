@@ -3,13 +3,14 @@ using Arcsinx.Toolkit.Helper;
 using GamerSky.Core.Helper;
 using GamerSky.Helper;
 using GamerSky.Core.Model;
-using GamerSky.ViewModel; 
+using GamerSky.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 namespace GamerSky.View
 {
@@ -45,15 +46,7 @@ namespace GamerSky.View
             {
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essayResult.ContentId);
             }
-        }
-          
-        private void FlipView_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            var essayResult = (sender as FlipView)?.SelectedItem as Essay;
-            if (essayResult == null) return;
-
-            MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essayResult);
-        }
+        } 
 
         public void ScrollToTop()
         {
@@ -173,6 +166,15 @@ namespace GamerSky.View
         private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
             ViewModel.RefreshEssays(CurrentPivotIndex);
+        }
+         
+        private void headEssayGrid_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var essay = (sender as Grid).DataContext;
+            if (essay != null)
+            {
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essay);
+            }
         }
         
     }

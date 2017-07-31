@@ -39,12 +39,23 @@ namespace GamerSky.View
         }
 
         /// <summary>
-        /// 复制到剪贴板
+        /// 复制QQ到剪贴板
         /// </summary>
-        public async void CopyToClipboard()
+        public async void CopyQQToClipboard()
         {
             DataPackage dp = new DataPackage();
             dp.SetText("473967668");
+            Clipboard.SetContent(dp);
+            await new MessageDialog("已复制到剪贴板").ShowAsync();
+        }
+
+        /// <summary>
+        /// 复制alipay到剪贴板
+        /// </summary>
+        public async void CopyPayToClipboard()
+        {
+            DataPackage dp = new DataPackage();
+            dp.SetText("2579477466@qq.com");
             Clipboard.SetContent(dp);
             await new MessageDialog("已复制到剪贴板").ShowAsync();
         }

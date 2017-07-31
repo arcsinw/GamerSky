@@ -111,6 +111,7 @@
     <Compile Include="Enums\SubscribeEditEnum.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Helper\Functions.cs" />
+    <Compile Include="Helper\LiveTileHelper.cs" />
     <Compile Include="Helper\VerifiableBase.cs" />
     <Compile Include="Helper\VerifiableObjectErrors.cs" />
     <Compile Include="Http\ApiBaseService.cs" />

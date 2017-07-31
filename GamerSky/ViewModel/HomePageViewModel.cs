@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using GamerSky.Helper;
+using GamerSky.Core.Helper;
 
 namespace GamerSky.ViewModel
 {

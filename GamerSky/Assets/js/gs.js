@@ -70,7 +70,7 @@ function SendNotify(notifyString) {
 
 //通过Id打开新闻
 function OpenEssayById(id) {
-    SendNotify(id.toString());
+    SendNotify("OpenEssayById:"+id.toString());
 }
 
 //获取所有的图片
@@ -84,7 +84,12 @@ function GetAllPictures() {
         img.hdsrc = imgs[i].parentNode.href;
         img.index = i;
         imgArray.push(img);
+
+        imgs[i].onclick = function (e) {
+            SendNotify("Image:"+this.src);
+        };
     }
+
     return JSON.stringify(imgArray);
     //SendNotify(JSON.stringify(imgArray));
 }

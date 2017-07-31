@@ -27,15 +27,7 @@ namespace GamerSky.View
         {
             this.InitializeComponent();
         }
-
-
-        private void Back()
-        {
-            if(Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
-        }
+ 
         /// <summary>
         /// 忘记密码
         /// </summary>

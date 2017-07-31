@@ -9,6 +9,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using GamerSky.Core.Http;
 using GamerSky.Core.Model;
+using Arcsinx.Toolkit.Controls;
 
 namespace GamerSky.ViewModel
 {
@@ -32,14 +33,12 @@ namespace GamerSky.ViewModel
                     if(loginResult.Result !=null)
                     {
                         DataShareManager.Current.UpdateUser(loginResult.Result);
+                        ToastService.SendToast("登录成功");
                     }
                 }
                 else
                 {
-                    await Window.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
-                    {
-                        await new MessageDialog(loginResult.ErrorMessage).ShowAsync();
-                    });
+                    ToastService.SendToast(loginResult.ErrorMessage);
                 }
             }
         }

@@ -31,18 +31,18 @@ namespace GamerSky.View
             this.InitializeComponent();
             
         }
-        
+
         private bool IsSubscribeTopicLoaded = false;
         private bool IsSubscribeContentLoaded = false;
 
         private async void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch(pivot.SelectedIndex)
+            switch (pivot.SelectedIndex)
             {
                 case 0:
-                    if(!IsSubscribeContentLoaded)
+                    if (!IsSubscribeContentLoaded)
                     {
-                        await viewModel.LoadSubscribeContent();
+                        //await viewModel.LoadSubscribeContent();
                         IsSubscribeContentLoaded = true;
                     }
                     break;
@@ -52,11 +52,11 @@ namespace GamerSky.View
                         await viewModel.LoadSubscribeTopic();
                         IsSubscribeTopicLoaded = true;
                     }
-                   break;
+                    break;
             }
         }
 
- 
+
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -88,15 +88,7 @@ namespace GamerSky.View
                     break;
             }
         }
-
-        public void Back()
-        {
-            if(Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
-        }
-
+        
 
         private void ScrollToTop(object sender, RoutedEventArgs e)
         {
@@ -105,9 +97,7 @@ namespace GamerSky.View
 
         private ScrollViewer scrollViewer;
         
-        private bool IsDataLoading = false;
-        //private int pageIndex = 1;
-        private async void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             if (scrollViewer != null)
             {
@@ -123,17 +113,6 @@ namespace GamerSky.View
                     if (!topPop.IsOpen)
                     {
                         topPop.IsOpen = true;
-                    }
-                }
-                if (scrollViewer.VerticalOffset >= scrollViewer.ScrollableHeight)
-                {
-                    if (!IsDataLoading)  //未加载数据
-                    {
-                        IsDataLoading = true;
-                        progress.IsActive = true;
-                        await viewModel.LoadSubscribeContent();
-                        progress.IsActive = false;
-                        IsDataLoading = false;
                     }
                 }
             }
@@ -167,6 +146,15 @@ namespace GamerSky.View
             if (essayResult == null) return;
 
             MasterDetailPage.Current.DetailFrame.Navigate(typeof(ReadEssayPage), essayResult);
+        }
+         
+        private void topicListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Essay essay = e.ClickedItem as Essay;
+            if (essay != null)
+            {
+                MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essay.ContentId);
+            }
         }
     }
 }

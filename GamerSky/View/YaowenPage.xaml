@@ -11,6 +11,7 @@
     xmlns:control="using:Arcsinx.Toolkit.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
     >
 
     <Page.DataContext>
@@ -35,7 +36,7 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <Grid Background="{ThemeResource ThemeColorBrush}">
-            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Click="{x:Bind Back}"
+            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}" Click="{x:Bind viewModel.GoBack}"
                     Grid.Column="0">
                 <SymbolIcon Symbol="Back"/>
             </Button>

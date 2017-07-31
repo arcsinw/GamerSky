@@ -10,7 +10,7 @@ using Windows.UI.StartScreen;
 using GamerSky.Core.Http;
 using GamerSky.Core.Model;
 
-namespace GamerSky.Helper
+namespace GamerSky.Core.Helper
 {
     /// <summary>
     /// 动态磁贴
@@ -19,7 +19,7 @@ namespace GamerSky.Helper
     {
         private const string TILE_TASK_NAME = "TILETASK";
 
-        private const string ENTRY_NAME = "GamerSky.BackgroundTask.LiveTileTask";
+        private const string ENTRY_NAME = "GamerSky.Background.TileBackgroundTask";
         /// <summary>
         /// 注册动态磁贴后台任务
         /// </summary>
@@ -41,7 +41,7 @@ namespace GamerSky.Helper
             
             var taskBuilder = new BackgroundTaskBuilder { Name = TILE_TASK_NAME, TaskEntryPoint = ENTRY_NAME };
             taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
-            taskBuilder.SetTrigger(new TimeTrigger(60 * 6, false));
+            taskBuilder.SetTrigger(new TimeTrigger(60 * 60 * 12, false));
             taskBuilder.Register();
 
         }

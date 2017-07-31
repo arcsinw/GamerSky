@@ -14,25 +14,12 @@ namespace GamerSky.View
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
     public sealed partial class SettingsPage : Page
-    {
-
-        public SettingsPageViewModel viewModel { get; set; }
+    { 
 
         public SettingsPage()
         {
-            this.InitializeComponent();
-            
-            viewModel = new SettingsPageViewModel();
-
-        }
-
-        private void Back()
-        {
-            if(Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
-        }
+            this.InitializeComponent(); 
+        } 
 
         public void NavigateToAbout()
         {
@@ -69,24 +56,7 @@ namespace GamerSky.View
         }
         #endregion
 
-        private string version;
-        public string Version
-        {
-            get
-            {
-                return Functions.GetVersion();
-            }
-            private set
-            {
-                version = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public void GetVersion()
-        {
-            Version = Functions.GetVersion();
-        }
+      
 
         /// <summary>
         /// 检测新版本

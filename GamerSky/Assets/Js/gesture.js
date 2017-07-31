@@ -75,12 +75,12 @@ function gestureListener(evt) {
         var translateX = evt.clientX - gestureStartX;
         if (translateX < -90) {
             gestureStartX = evt.clientX;
-            window.external.notify('gestures:goforward');
+            window.external.notify('Gestures:GoForward');
             myGesture.stop();
         }
         else if (translateX > 90) {
             gestureStartX = evt.clientX;
-            window.external.notify('gestures:goback');
+            window.external.notify('Gestures:GoBack');
             myGesture.stop();
         }
     }

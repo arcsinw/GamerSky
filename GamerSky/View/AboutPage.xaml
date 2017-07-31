@@ -15,7 +15,7 @@
         <vm:AboutViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid>
+    <Grid Background="{ThemeResource PageBackgroundBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="48"/>
             <RowDefinition Height="*"/>
@@ -43,7 +43,8 @@
                            Height="100" Width="100"/>
                     <TextBlock Text="{Binding Version}" HorizontalAlignment="Center" />
                     <TextBlock Text="{Binding Author}" HorizontalAlignment="Center"/>
-                    <TextBlock HorizontalAlignment="Center" x:Name="qqTextBlock" Tapped="{x:Bind CopyToClipboard}" Text="QQ群：473967668"  />
+                    <TextBlock HorizontalAlignment="Center" x:Name="qqTextBlock" Tapped="{x:Bind CopyQQToClipboard}" Text="QQ群：473967668"  />
+                    <TextBlock HorizontalAlignment="Center"  Tapped="{x:Bind CopyPayToClipboard}" Text="支付宝：2579477466@qq.com"  />
                     <HyperlinkButton  NavigateUri="ms-windows-store://review/?ProductId=9NBLGGH5Q5TJ"
                                      HorizontalAlignment="Center" >
                         <HyperlinkButton.Content>

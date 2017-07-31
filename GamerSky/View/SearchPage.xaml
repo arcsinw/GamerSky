@@ -665,6 +665,7 @@
                           Style="{ThemeResource LightListView}"
                           IsItemClickEnabled="True" ItemClick="subscribeListView_ItemClick"
                           SelectionMode="None"  
+                              
                           ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
                         <ListView.ItemTemplate>
                             <DataTemplate x:DataType="m:Subscribe">

@@ -9,14 +9,19 @@
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:action="using:GamerSky.Actions"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:control="using:GamerSky.Controls"
+    xmlns:control="using:Arcsinx.Toolkit.Controls"
     xmlns:vm="using:GamerSky.ViewModel"
     xmlns:converter="using:GamerSky.Converters"
     mc:Ignorable="d"
-    RequestedTheme="{x:Bind AppTheme,Mode=OneWay}"
-    > 
+    RequestedTheme="{Binding AppTheme,Mode=OneWay}"
+    >
+
+    <Page.DataContext>
+        <vm:MasterDetailViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+
     <Page.Resources>
-       
+
         <Style x:Key="PaneButtonStyle" TargetType="Button">
             <Setter Property="Padding" Value="0"/>
             <Setter Property="Background" Value="Transparent" />
@@ -270,7 +275,8 @@
         <converter:ElementThemeToBoolConverter x:Key="ElementThemeToBoolConverter"/>
     </Page.Resources>
 
-    <Grid x:Name="rootGrid" Background="{ThemeResource PageBackgroundBrush}">
+    <Grid x:Name="rootGrid" Background="{ThemeResource PageBackgroundBrush}"
+          Padding="{StaticResource PhonePadding}">
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup" CurrentStateChanged="AdaptiveVisualStateGroup_CurrentStateChanged">
                 <VisualState x:Name="Narrow">
@@ -298,36 +304,33 @@
                         <Setter Target="DetailFrame.Width" Value="Auto"/>
                         <Setter Target="MasterColumn.Width" Value="500"/>
                         <Setter Target="PaneColumn.Width" Value="48"/>
-                        <Setter Target="moduleGrid.Visibility" Value="Collapsed"/> 
+                        <Setter Target="moduleGrid.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
-            </VisualStateGroup> 
+            </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        <Grid x:Name="gridMain">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  x:Name="PaneColumn" Width="48"/>
+                <ColumnDefinition x:Name="MasterColumn" Width="500"/>
+                <ColumnDefinition x:Name="DetailColumn" />
+            </Grid.ColumnDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition  x:Name="PaneColumn" Width="48"/>
-            <ColumnDefinition x:Name="MasterColumn" Width="500"/>
-            <ColumnDefinition x:Name="DetailColumn" />
-        </Grid.ColumnDefinitions>
-         
-        <control:Drawer x:Name="drawer" Grid.Column="1"  DrawerOpenLength="250">
-            <control:Drawer.DrawerMaskerBrush>
-                <SolidColorBrush Color="Black" Opacity="0.8"/>
-            </control:Drawer.DrawerMaskerBrush>
-            <control:Drawer.DrawerContent>
-                <ListView x:Name="drawerContent"  
-                          GotFocus="{x:Bind GetCacheSize}" 
-                          SelectionMode="None" 
-                          Background="{ThemeResource PageBackgroundBrush}">
-                    <ListView.Resources>
-                        <Thickness x:Key="TextBlockMargin">8,0</Thickness>
-                    </ListView.Resources>
-                    <ListView.Items>
-                        <ListViewItem HorizontalContentAlignment="Center" Tapped="{x:Bind NavigateToLogin}"
-                                      Background="{ThemeResource ThemeColorBrush}">
+            <control:Drawer x:Name="drawer" Grid.Column="1"  DrawerOpenLength="250">
+                <control:Drawer.DrawerMaskerBrush>
+                    <SolidColorBrush Color="Black" Opacity="0.8"/>
+                </control:Drawer.DrawerMaskerBrush>
+                <control:Drawer.DrawerContent>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="140"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0" Tapped="{x:Bind NavigateToLogin}" Background="{ThemeResource ThemeColorBrush}">
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
                                 <Grid Height="90" Width="90" HorizontalAlignment="Center">
-                                  
+
                                     <Border Height="90" Width="90">
                                         <Border.Background>
                                             <ImageBrush ImageSource="ms-appx:///Assets/Images/drawer_avatar.png"/>
@@ -336,157 +339,186 @@
 
                                     <Border Height="90" Width="90" CornerRadius="90">
                                         <Border.Background>
-                                            <ImageBrush ImageSource="{x:Bind User.Pic,Mode=OneWay}"/>
+                                            <ImageBrush ImageSource="{Binding User.Pic,Mode=OneWay}"/>
                                         </Border.Background>
                                     </Border>
                                 </Grid>
-                                <TextBlock Text="{x:Bind User.UserName,Mode=OneWay}" x:Uid="Login" HorizontalAlignment="Center" Foreground="White"/>
+                                <TextBlock Text="{Binding User.UserName,Mode=OneWay}" x:Uid="Login" HorizontalAlignment="Center" Foreground="White"/>
                             </StackPanel>
-                        </ListViewItem>
+                        </Grid>
 
-                        <ListViewItem Tapped="{x:Bind Favorite}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_collect.png" Height="24"/>
-                                <TextBlock Text="收藏" x:Uid="Collection" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
+                        <ListView Grid.Row="1" x:Name="drawerContent" 
+                          GotFocus="{x:Bind ViewModel.GetCacheSize}" Style="{ThemeResource LightListView}"
+                          SelectionMode="None" Padding="0,0,0,50"
+                          Background="{ThemeResource PageBackgroundBrush}">
+                            <ListView.Resources>
+                                <Thickness x:Key="TextBlockMargin">8,0</Thickness>
+                            </ListView.Resources>
+                            <ListView.Items>
+                                <!--<ListViewItem HorizontalContentAlignment="Center" >
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8">
+                                    <Grid Height="90" Width="90" HorizontalAlignment="Center">
 
-                        <ListViewItem Tapped="{x:Bind NavigateToSearchPage}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_search.png" Height="24"/>
-                                <TextBlock Text="搜索" x:Uid="Search" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
+                                        <Border Height="90" Width="90">
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="ms-appx:///Assets/Images/drawer_avatar.png"/>
+                                            </Border.Background>
+                                        </Border>
 
-                        <ListViewItem Tapped="{x:Bind YaoWen}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_news.png" Height="24"/>
-                                <TextBlock Text="要闻" x:Uid="Yaowen" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
-
-                        <ListViewItem Tapped="{x:Bind NavigateToReplyPage}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_comment_reply.png" Height="26"/>
-                                <TextBlock  x:Uid="CommentReply" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
-
-                        <ListViewItem Tapped="{x:Bind ClearCache}">
-                            <Grid HorizontalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                                    <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_cache.png" Height="24"/>
-                                    <TextBlock Text="清空缓存" x:Uid="ClearCache" Margin="{StaticResource TextBlockMargin}"/>
+                                        <Border Height="90" Width="90" CornerRadius="90">
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{x:Bind User.Pic,Mode=OneWay}"/>
+                                            </Border.Background>
+                                        </Border>
+                                    </Grid>
+                                    <TextBlock Text="{x:Bind User.UserName,Mode=OneWay}" x:Uid="Login" HorizontalAlignment="Center" Foreground="White"/>
                                 </StackPanel>
-                                <TextBlock  Grid.Column="1" Text="{x:Bind CacheSize,Mode=OneWay,TargetNullValue=''}" 
+                            </ListViewItem>-->
+
+                                <ListViewItem Tapped="{x:Bind Favorite}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_collect.png" Height="24"/>
+                                        <TextBlock Text="收藏" x:Uid="Collection" Margin="{StaticResource TextBlockMargin}"/>
+                                    </StackPanel>
+                                </ListViewItem>
+
+                                <ListViewItem Tapped="{x:Bind NavigateToSearchPage}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_search.png" Height="24"/>
+                                        <TextBlock Text="搜索" x:Uid="Search" Margin="{StaticResource TextBlockMargin}"/>
+                                    </StackPanel>
+                                </ListViewItem>
+
+                                <ListViewItem Tapped="{x:Bind YaoWen}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_news.png" Height="24"/>
+                                        <TextBlock Text="要闻" x:Uid="Yaowen" Margin="{StaticResource TextBlockMargin}"/>
+                                    </StackPanel>
+                                </ListViewItem>
+
+                                <ListViewItem Tapped="{x:Bind NavigateToReplyPage}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_comment_reply.png" Height="26"/>
+                                        <TextBlock  x:Uid="CommentReply" Margin="{StaticResource TextBlockMargin}"/>
+                                    </StackPanel>
+                                </ListViewItem>
+
+                                <ListViewItem Tapped="{x:Bind ViewModel.ClearCache}">
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                                            <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_cache.png" Height="24"/>
+                                            <TextBlock Text="清空缓存" x:Uid="ClearCache" Margin="{StaticResource TextBlockMargin}"/>
+                                        </StackPanel>
+                                        <TextBlock  Grid.Column="1" Text="{Binding CacheSize,Mode=OneWay,TargetNullValue=''}" 
                                             HorizontalAlignment="Right"/>
-                            </Grid>
-                        </ListViewItem>
+                                    </Grid>
+                                </ListViewItem>
 
-                        <ListViewItem  HorizontalContentAlignment="Stretch">
-                            <Grid HorizontalAlignment="Stretch" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+                                <ListViewItem  HorizontalContentAlignment="Stretch">
+                                    <Grid HorizontalAlignment="Stretch" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
 
-                                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
-                                    <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_night.png" Height="24"/>
-                                    <TextBlock Text="夜间模式" x:Uid="NightMode" VerticalAlignment="Center" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
+                                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left">
+                                            <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_night.png" Height="24"/>
+                                            <TextBlock Text="夜间模式" x:Uid="NightMode" VerticalAlignment="Center" Margin="{StaticResource TextBlockMargin}"/>
+                                        </StackPanel>
 
-                                <ToggleSwitch IsOn="{x:Bind IsNight,Mode=TwoWay}"  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </ListViewItem>
+                                        <ToggleSwitch IsOn="{Binding IsNight,Mode=TwoWay}"  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </ListViewItem>
 
-                        <ListViewItem HorizontalContentAlignment="Stretch">
-                            <Grid HorizontalAlignment="Stretch" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                    <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_picmode.png" Height="24"/>
-                                    <TextBlock Text="2G/3G无图" VerticalAlignment="Center" x:Uid="NoPic" Margin="{StaticResource TextBlockMargin}"/>
-                                </StackPanel>
-                                <ToggleSwitch IsOn="{x:Bind IsNoImgMode,Mode=OneWay}"  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </ListViewItem>
+                                <ListViewItem HorizontalContentAlignment="Stretch">
+                                    <Grid HorizontalAlignment="Stretch" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                            <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_picmode.png" Height="24"/>
+                                            <TextBlock Text="2G/3G无图" VerticalAlignment="Center" x:Uid="NoPic" Margin="{StaticResource TextBlockMargin}"/>
+                                        </StackPanel>
+                                        <ToggleSwitch IsOn="{Binding IsNoImgMode,Mode=OneWay}"  MinWidth="0" Grid.Column="1" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </ListViewItem>
 
-                        <ListViewItem Tapped="{x:Bind FeedBack}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_feedback.png" Height="24"/>
-                                <TextBlock Text="意见反馈" x:Uid="FeedBack" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
+                                <ListViewItem Tapped="{x:Bind FeedBack}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_feedback.png" Height="24"/>
+                                        <TextBlock Text="意见反馈" x:Uid="FeedBack" Margin="{StaticResource TextBlockMargin}"/>
+                                    </StackPanel>
+                                </ListViewItem>
 
-                        <ListViewItem Tapped="{x:Bind NavigateToSettings}">
-                            <StackPanel Orientation="Horizontal">
-                                <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_setting.png" Height="24"/>
-                                <TextBlock Text="更多设置" x:Uid="Settings" Margin="{StaticResource TextBlockMargin}"/>
-                            </StackPanel>
-                        </ListViewItem>
-                    </ListView.Items>
-                </ListView>
-            </control:Drawer.DrawerContent>
-            <control:Drawer.Content>
-                <Frame x:Name="MasterFrame" Grid.Column="1" x:FieldModifier="Public"  
+                                <ListViewItem Tapped="{x:Bind NavigateToSettings}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <BitmapIcon Foreground="{ThemeResource PhoneForegroundBrush}" UriSource="ms-appx:///Assets/Images/drawer_setting.png" Height="24"/>
+                                        <TextBlock Text="更多设置" x:Uid="Settings" Margin="{StaticResource TextBlockMargin}"/>
+                                    </StackPanel>
+                                </ListViewItem>
+                            </ListView.Items>
+                        </ListView>
+                    </Grid>
+                </control:Drawer.DrawerContent>
+                <control:Drawer.Content>
+                    <Frame x:Name="MasterFrame" Grid.Column="1" x:FieldModifier="Public"  
                     BorderBrush="{ThemeResource ThemeColorBrush}"
-                    BorderThickness="0,0,1,0" Navigated="MasterFrame_Navigated"/>   
-            </control:Drawer.Content>
-        </control:Drawer>
+                    BorderThickness="0,0,1,0" Navigated="MasterFrame_Navigated"/>
+                </control:Drawer.Content>
+            </control:Drawer>
 
-        <!--#region Pane-->
-        <Grid x:Name="paneGrid" BorderBrush="{ThemeResource ThemeColorBrush}" BorderThickness="0,0,1,0" Grid.Column="0" Background="{ThemeResource PaneBackgroundBrush}">
+            <!--#region Pane-->
+            <Grid x:Name="paneGrid" BorderBrush="{ThemeResource ThemeColorBrush}" BorderThickness="0,0,1,0" Grid.Column="0" Background="{ThemeResource PaneBackgroundBrush}">
 
-            <ListView x:Name="paneListView" ItemsSource="{x:Bind PaneItems}" Padding="0" Margin="0"
+                <ListView x:Name="paneListView" ItemsSource="{x:Bind PaneItems}" Padding="0" Margin="0"
                       IsItemClickEnabled="True" SelectionMode="Single"
                       ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}"
                         ItemClick="paneListView_ItemClick">
-                <ListView.Header>
-                    <Button x:Name="userBtn" Style="{StaticResource PaneButtonStyle}" 
-                            ToolTipService.ToolTip="{x:Bind User.UserName,Mode=OneWay}">
+                    <ListView.Header>
+                        <Button x:Name="userBtn" Click="{x:Bind NavigateToLogin}" Style="{StaticResource PaneButtonStyle}" 
+                            ToolTipService.ToolTip="{Binding User.UserName,Mode=OneWay}">
+                            <!--<i:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <action:NavigationAction SourcePage="GamerSky.View.LoginPage" NavigationType="Master"/>
+                                </core:EventTriggerBehavior>
+                            </i:Interaction.Behaviors>-->
+                            <Grid>
+                                <BitmapIcon UriSource="ms-appx:///Assets/Images/drawer_user.png" Height="24" Width="24"/>
+                                <Image Source="{Binding User.Pic,Mode=OneWay}" Height="48" Width="48"/>
+                            </Grid>
+                        </Button>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:PaneItem">
+                            <BitmapIcon UriSource="{x:Bind Icon}" ToolTipService.ToolTip="{x:Bind Title,Mode=OneWay}" Height="26" Width="26"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackPanel VerticalAlignment="Bottom">
+                    <Button x:Name="themeBtn" Click="themeBtn_Click"  Style="{StaticResource PaneButtonStyle}">
+                        <BitmapIcon Height="26" Width="26"  UriSource="{Binding AppTheme,Mode=OneWay,Converter={StaticResource ElementThemeToUriSourceConverter}}"/>
+                    </Button>
+                    <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings" VerticalAlignment="Bottom">
                         <i:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="Tapped">
-                                <action:NavigationAction SourcePage="GamerSky.View.LoginPage" NavigationType="Master"/>
+                                <action:NavigationAction SourcePage="GamerSky.View.SettingsPage" NavigationType="Master"/>
                             </core:EventTriggerBehavior>
                         </i:Interaction.Behaviors>
-                        <Grid>
-                            <BitmapIcon UriSource="ms-appx:///Assets/Images/drawer_user.png" Height="24" Width="24"/>
-                            <Image Source="{x:Bind User.Pic,Mode=OneWay}" Height="48" Width="48"/>
-                        </Grid>
+                        <Button.Content>
+                            <SymbolIcon Symbol="Setting"/>
+                        </Button.Content>
                     </Button>
-                </ListView.Header>
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:PaneItem">
-                        <BitmapIcon UriSource="{x:Bind Icon}" ToolTipService.ToolTip="{x:Bind Title,Mode=OneWay}" Height="26" Width="26"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <StackPanel VerticalAlignment="Bottom">
-                <Button x:Name="themeBtn" Click="themeBtn_Click"  Style="{StaticResource PaneButtonStyle}">
-                    <BitmapIcon Height="26" Width="26"  UriSource="{x:Bind AppTheme,Mode=OneWay,Converter={StaticResource ElementThemeToUriSourceConverter}}"/>
-                </Button>
-                <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings" VerticalAlignment="Bottom">
-                    <i:Interaction.Behaviors>
-                        <core:EventTriggerBehavior EventName="Tapped">
-                            <action:NavigationAction SourcePage="GamerSky.View.SettingsPage" NavigationType="Master"/>
-                        </core:EventTriggerBehavior>
-                    </i:Interaction.Behaviors>
-                    <Button.Content>
-                        <SymbolIcon Symbol="Setting"/>
-                    </Button.Content>
-                </Button>
-            </StackPanel>
-        </Grid>
-        <!--#endregion-->
+                </StackPanel>
+            </Grid>
+            <!--#endregion-->
 
-        <!--<Popup IsOpen="True" VerticalAlignment="Bottom" Width="{Binding ElementName=rootGrid,Path=ActualWidth}">-->
-            <Grid x:Name="moduleGrid" Grid.Column="1" VerticalAlignment="Bottom" Height="50" 
+            <!--<Popup IsOpen="True" VerticalAlignment="Bottom" Width="{Binding ElementName=rootGrid,Path=ActualWidth}">-->
+            <Grid x:Name="moduleGrid" Grid.Column="1" VerticalAlignment="Bottom" Height="48" 
                     Background="{ThemeResource BottomBarBackground}"
                     Opacity="0.8">
                 <Grid.Resources>
@@ -495,8 +527,8 @@
                         <Setter Property="Margin" Value="0,0,0,4"/>
                     </Style>
                     <Style TargetType="BitmapIcon">
-                        <Setter Property="Height" Value="24"/>
-                        <Setter Property="Width" Value="24"/>
+                        <Setter Property="Height" Value="28"/>
+                        <Setter Property="Width" Value="28"/>
                     </Style>
                 </Grid.Resources>
                 <Grid.ColumnDefinitions>
@@ -513,8 +545,8 @@
                     </i:Interaction.Behaviors>
                     <RadioButton.Content>
                         <StackPanel>
-                            <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_xinwen_h.png" Height="24" Width="24"/>
-                            <TextBlock x:Uid="News"/>
+                            <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_xinwen_h.png"/>
+                            <!--<TextBlock x:Uid="News"/>-->
                         </StackPanel>
                     </RadioButton.Content>
                 </RadioButton>
@@ -527,9 +559,8 @@
                     </i:Interaction.Behaviors>
                     <RadioButton.Content>
                         <StackPanel>
-                            <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_gonglue_h.png" 
-                                    Height="24" Width="24"/>
-                            <TextBlock x:Uid="Game"/>
+                            <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_gonglue_h.png" />
+                            <!--<TextBlock x:Uid="Game"/>-->
                         </StackPanel>
                     </RadioButton.Content>
                 </RadioButton>
@@ -542,25 +573,27 @@
                     </i:Interaction.Behaviors>
                     <RadioButton.Content>
                         <StackPanel>
-                            <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_dingyue_h.png" 
-                                    Height="24" Width="24" />
-                            <TextBlock x:Uid="Subscribe"/>
+                            <BitmapIcon UriSource="ms-appx:///Assets/Images/icon_dingyue_h.png"  />
+                            <!--<TextBlock x:Uid="Subscribe"/>-->
                         </StackPanel>
                     </RadioButton.Content>
                 </RadioButton>
             </Grid>
-        <!--</Popup>-->
+            <!--</Popup>-->
 
-        <Frame x:Name="DetailFrame" x:FieldModifier="Public" Grid.Column="2" Navigated="DetailFrame_Navigated">
-            <Frame.ContentTransitions>
-                <TransitionCollection>
-                    <NavigationThemeTransition>
-                        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                            <EntranceNavigationTransitionInfo/>
-                        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    </NavigationThemeTransition>
-                </TransitionCollection>
-            </Frame.ContentTransitions>
-        </Frame>
+            <Frame x:Name="DetailFrame" x:FieldModifier="Public" Grid.Column="2" Navigated="DetailFrame_Navigated">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                <EntranceNavigationTransitionInfo/>
+                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
+        </Grid>
     </Grid>
 </Page>
+    
+    

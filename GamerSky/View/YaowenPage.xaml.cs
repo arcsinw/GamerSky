@@ -31,15 +31,7 @@ namespace GamerSky.View
         }
 
         private ScrollViewer scrollViewer;
-
-        private void Back()
-        {
-            if (Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
-        }
-          
+         
          
         private void listView_Loaded(object sender, RoutedEventArgs e)
         {

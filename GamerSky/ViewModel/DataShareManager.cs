@@ -28,6 +28,7 @@ namespace GamerSky.ViewModel
         private const string SettingKey_SubscribeList = "SUBSCRIBE_LIST";                   //订阅列表
         private const string SettingKey_IsStatusBarShow = "IS_STATUSBAR_SHOW";
         private const string SettingKey_User = "USER";
+        private const string SettingKey_NewFeature = "NEW_FEATURE"; //新功能
         #endregion
 
         #region Files and folders'  name
@@ -79,7 +80,7 @@ namespace GamerSky.ViewModel
             }
         }
 
-        private int fontSize = 13;
+        private int fontSize = 12;
         /// <summary>
         /// 字体大小
         /// </summary>
@@ -144,14 +145,14 @@ namespace GamerSky.ViewModel
             {
                 var value = settings.Values[SettingKey_IsNewVersion];
                 string ver = Functions.GetVersion();
-                if (value == null)
+                if (value == null || string.IsNullOrEmpty(value.ToString()))
                 {
                     settings.Values[SettingKey_IsNewVersion] = ver;
-
                     return true;
                 }
+
                 settings.Values[SettingKey_IsNewVersion] = ver;
-                return (string)value != ver;
+                return !value.Equals(ver);
             }
             set
             {
@@ -214,6 +215,14 @@ namespace GamerSky.ViewModel
             }
 
             //load user
+            if (localSettings.Values.ContainsKey(SettingKey_User))
+            {
+                var user = JsonHelper.Deserlialize<User>(localSettings.Values[SettingKey_User].ToString());
+                if (user != null)
+                {
+                    currentUser = user;
+                }
+            }
 
             //加载订阅列表
             if (localSettings.Values.ContainsKey(SettingKey_SubscribeList))
@@ -259,11 +268,12 @@ namespace GamerSky.ViewModel
             if(user!=null)
             {
                 this.currentUser = user;
-                //var localSettings = ApplicationData.Current.LocalSettings;
-                //localSettings.Values[SettingKey_User] = JsonHelper.Serializer<User>(user);
+                var localSettings = ApplicationData.Current.LocalSettings;
+                localSettings.Values[SettingKey_User] = JsonHelper.Serializer<User>(user);
                 OnShareDataChanged();
             }
         }
+
         /// <summary>
         /// true 为Dark false 为Light
         /// </summary>
@@ -273,7 +283,7 @@ namespace GamerSky.ViewModel
             appTheme = dark ? ElementTheme.Dark : ElementTheme.Light;
             var roamingSettings = ApplicationData.Current.RoamingSettings;
             roamingSettings.Values["APP_THEME"] = ( appTheme == ElementTheme.Light ? 0 : 1);
-            OnShareDataChanged();
+            //OnShareDataChanged();
         }
 
         public void UpdateFontSize(int _fontSize)
@@ -283,6 +293,7 @@ namespace GamerSky.ViewModel
             roamingSettings.Values["BIG_FONT"] = fontSize;
             OnShareDataChanged();
         }
+
         public void UpdateNoImagesMode(bool _isNoImages)
         {
             isNoImage = _isNoImages;

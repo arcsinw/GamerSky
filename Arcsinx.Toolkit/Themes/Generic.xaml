@@ -6,6 +6,9 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Arcsinx.Toolkit/Controls/PullToRefreshListView/PullToRefreshListView.xaml" />
         <ResourceDictionary Source="ms-appx:///Arcsinx.Toolkit/Controls/ToastService/ToastService.xaml" />
+        <ResourceDictionary Source="ms-appx:///Arcsinx.Toolkit/Controls/ImageEx/ImageEx.xaml" />
+        <ResourceDictionary Source="ms-appx:///Arcsinx.Toolkit/Controls/Drawer/Drawer.xaml" />
+        <ResourceDictionary Source="ms-appx:///Arcsinx.Toolkit/Controls/GlobalDialog/GlobalDialog.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <x:Double x:Key="ScrollViewerCornerX">30</x:Double>

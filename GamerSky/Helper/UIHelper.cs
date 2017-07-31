@@ -25,8 +25,8 @@ namespace GamerSky.Helper
             }
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = new TimeSpan(0, 0, 3);
-
         }
+
         /// <summary>
         /// Mobile 显示StatusBar
         /// PC 显示标题栏

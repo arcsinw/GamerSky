@@ -13,7 +13,7 @@
         </Setter>
     </Style>-->
  
-    <Style TargetType="local:Drawer">
+    <!--<Style TargetType="local:Drawer">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:Drawer">
@@ -41,7 +41,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
     <Style TargetType="local:SlidableListItem" >
         <Setter Property="LeftForeground" Value="White"></Setter>

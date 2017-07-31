@@ -5,32 +5,23 @@
     xmlns:local="using:GamerSky.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:hp="using:GamerSky.Helper"
+    xmlns:vm="using:GamerSky.ViewModel"
     mc:Ignorable="d"
+    NavigationCacheMode="Enabled"
     >
 
+    <Page.DataContext>
+        <vm:AgreementPageViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Desktop">
-                    <VisualState.StateTriggers>
-                        <hp:DeviceTypeTrigger PlatformType="Desktop"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="back.Visibility" Value="Collapsed"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
+ 
         <Grid Background="{ThemeResource ThemeColorBrush}">
-            <Button x:Name="back" Style="{ThemeResource BackButtonStyle}" 
-                    Click="{x:Bind Back}" Grid.Column="0">
+            <Button Style="{ThemeResource BackButtonStyle}" Click="{x:Bind ViewModel.GoBack}" Visibility="{Binding IsMobile,Converter={StaticResource BoolToVisibilityConverter}}">
                 <SymbolIcon Symbol="Back"/>
             </Button>
             <TextBlock x:Name="titleTextBlock" x:Uid="Agreement" Text="协议" Style="{ThemeResource PageTitleStyle}"/>
