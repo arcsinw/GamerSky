@@ -51,9 +51,9 @@
                                 </Image.Source>
                             </Image>-->
 
-                            <Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
+                            <!--<Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
                                 <TextBlock Margin="8,2" Text="{Binding HeaderSubscribe.Title}" Foreground="White" VerticalAlignment="Bottom"/>
-                            </Border>
+                            </Border>-->
                         </Grid>
                     </ListView.Header> 
                 </ListView>

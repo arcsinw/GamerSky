@@ -54,10 +54,11 @@
                                           Source="{Binding ThumbnailURLs[2]}" Stretch="Fill"/>
                         
                     </Grid>
-                    <TextBlock Grid.Row="2" Margin="0,2,0,0" HorizontalAlignment="Right">
-                        <Run Text="评论"/>
-                        <Run Text="{Binding CommentsCount}"/>
-                    </TextBlock>
+                    
+                    <StackPanel Grid.Row="2" Margin="0,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <TextBlock Text="{Binding CommentsCount}" Margin="4,0" VerticalAlignment="Center"/>
+                        <BitmapIcon Height="24" UriSource="ms-appx:///Assets/Images/ic_chat_white.png" VerticalAlignment="Center"/>
+                    </StackPanel>
                 </Grid>
             </DataTemplate>
            
@@ -75,10 +76,11 @@
 
                     <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="4,0">
                         <TextBlock Text="{Binding Title}"  TextWrapping="Wrap" VerticalAlignment="Top"/>
-                        <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,40,0,0">
-                                <Run Text="{Binding CommentsCount}"/>
-                                <Run Text="评论"/>
-                        </TextBlock>
+
+                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                            <TextBlock Text="{Binding CommentsCount}" Margin="4,0" VerticalAlignment="Center"/>
+                            <BitmapIcon Height="24" UriSource="ms-appx:///Assets/Images/ic_chat_white.png" VerticalAlignment="Center"/>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </DataTemplate>
@@ -92,10 +94,10 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="{Binding Title}" TextWrapping="Wrap"/>
-                    <TextBlock  HorizontalAlignment="Right" Grid.Row="1" Margin="5,2" >
-                                <Run Text="{Binding CommentsCount}"/>
-                                <Run Text="评论"/>
-                    </TextBlock>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <TextBlock Text="{Binding CommentsCount}" Margin="4,0" VerticalAlignment="Center"/>
+                        <BitmapIcon Height="24" UriSource="ms-appx:///Assets/Images/ic_chat_white.png" VerticalAlignment="Center"/>
+                    </StackPanel>
                 </Grid>
             </DataTemplate>
             

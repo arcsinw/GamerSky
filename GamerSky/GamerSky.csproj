@@ -126,12 +126,6 @@
     <Compile Include="Controls\FlipViewArticle.xaml.cs">
       <DependentUpon>FlipViewArticle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ImageEx\ImageEx.cs" />
-    <Compile Include="Controls\ImageEx\ImageEx.Members.cs" />
-    <Compile Include="Controls\ImageEx\ImageEx.Placeholder.cs" />
-    <Compile Include="Controls\ImageEx\ImageEx.Source.cs" />
-    <Compile Include="Controls\ImageEx\ImageExFailedEventArgs.cs" />
-    <Compile Include="Controls\ImageEx\ImageExOpenedEventArgs.cs" />
     <Compile Include="Converters\BoolToObjectConverter.cs" />
     <Compile Include="Converters\DateTimeToTimeSpanConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
@@ -187,7 +181,6 @@
     <Compile Include="IncrementalLoadingCollection\IIncrementalSource.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingBase.cs" />
     <Compile Include="IncrementalLoadingCollection\IncrementalLoadingCollection.cs" />
-    <Compile Include="IncrementalLoadingCollection\SubscribeIncrementalCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemplateSelector\EssayDataTemplateSelector.cs" />
     <Compile Include="ViewModel\AboutViewModel.cs" />
@@ -326,6 +319,13 @@
     <Content Include="Assets\Images\empty_content_night.png" />
     <Content Include="Assets\Images\empty_subscription.png" />
     <Content Include="Assets\Images\empty_subscription_night.png" />
+    <Content Include="Assets\Images\icon_xinwen.png" />
+    <Content Include="Assets\Images\icon_xinwen_select.png" />
+    <Content Include="Assets\Images\icon_yonghu.png" />
+    <Content Include="Assets\Images\icon_yonghu_select.png" />
+    <Content Include="Assets\Images\icon_youxi.png" />
+    <Content Include="Assets\Images\icon_youxi_select.png" />
+    <Content Include="Assets\Images\ic_chat_white.png" />
     <Content Include="Assets\Images\unlike.png" />
     <Content Include="Assets\Images\like.png" />
     <Content Include="Assets\Images\unlike_night.png" />
