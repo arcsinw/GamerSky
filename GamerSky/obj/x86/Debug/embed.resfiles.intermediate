@@ -1,0 +1,10 @@
+App.xbf
+Controls\GridSplitter\GridSplitter.xbf
+Controls\ImageEx\ImageEx.xbf
+MainPage.xbf
+Themes\Generic.xbf
+Views\AppShell.xbf
+Views\Game\GamePage.xbf
+Views\MasterDetailPage.xbf
+Views\NewsPage.xbf
+Views\SettingsPage.xbf

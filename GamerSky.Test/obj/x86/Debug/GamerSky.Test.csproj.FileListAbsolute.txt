@@ -1,0 +1,7 @@
+C:\Users\wangx\Documents\Visual Studio 2017\Projects\Gamersky\GamerSky.Test\obj\x86\Debug\GamerSky.Test.csprojResolveAssemblyReference.cache
+C:\Users\wangx\Documents\Visual Studio 2017\Projects\Gamersky\GamerSky.Test\obj\x86\Debug\UnitTestApp.g.i.cs
+C:\Users\wangx\Documents\Visual Studio 2017\Projects\Gamersky\GamerSky.Test\obj\x86\Debug\UnitTestApp.g.cs
+C:\Users\wangx\Documents\Visual Studio 2017\Projects\Gamersky\GamerSky.Test\obj\x86\Debug\XamlTypeInfo.g.cs
+C:\Users\wangx\Documents\Visual Studio 2017\Projects\Gamersky\GamerSky.Test\obj\x86\Debug\UnitTestApp.xaml
+C:\Users\wangx\Documents\Visual Studio 2017\Projects\Gamersky\GamerSky.Test\obj\x86\Debug\UnitTestApp.xbf
+C:\Users\wangx\Documents\Visual Studio 2017\Projects\Gamersky\GamerSky.Test\obj\x86\Debug\XamlSaveStateFile.xml
