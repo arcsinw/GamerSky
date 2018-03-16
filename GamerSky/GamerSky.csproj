@@ -119,7 +119,7 @@
     <Compile Include="HttpHelper\HttpHelper.cs" />
     <Compile Include="HttpHelper\HttpHelperRequest.cs" />
     <Compile Include="HttpHelper\HttpHelperResponse.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Game\GameSpecial.cs" />
@@ -166,6 +166,26 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\Images\icon_xinwen.png" />
+    <Content Include="Assets\Images\icon_xinwen_select.png" />
+    <Content Include="Assets\Images\icon_yonghu.png" />
+    <Content Include="Assets\Images\icon_yonghu_select.png" />
+    <Content Include="Assets\Images\icon_youxi.png" />
+    <Content Include="Assets\Images\icon_youxi_select.png" />
+    <Content Include="Assets\Images\icon_yuanchuang.png" />
+    <Content Include="Assets\Images\icon_yuanchuang_select.png" />
+    <Content Include="Assets\Images\ic_game_fsb.png" />
+    <Content Include="Assets\Images\ic_game_history.png" />
+    <Content Include="Assets\Images\ic_game_phb.png" />
+    <Content Include="Assets\Images\ic_game_tszt.png" />
+    <Content Include="Assets\Images\ic_game_wjdp.png" />
+    <Content Include="Assets\Images\ic_game_zyx.png" />
+    <Content Include="Assets\Images\ic_main_quanzi_default.png" />
+    <Content Include="Assets\Images\ic_main_quanzi_selected.png" />
+    <Content Include="Assets\Images\ic_search.png" />
+    <Content Include="Assets\Images\ranking_sort_one.png" />
+    <Content Include="Assets\Images\ranking_sort_three.png" />
+    <Content Include="Assets\Images\ranking_sort_two.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -229,7 +249,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Page Include="MainPage.xaml">
+    <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
