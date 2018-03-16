@@ -4,8 +4,8 @@
     xmlns:controls="using:GamerSky.Controls">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ms-appx:///GamerSky/Controls/ImageEx/ImageEx.xaml" />
-        <ResourceDictionary Source="ms-appx:///GamerSky/Controls/GridSplitter/GridSplitter.xaml" />
+        <ResourceDictionary Source="/Controls/ImageEx/ImageEx.xaml" />
+        <ResourceDictionary Source="/Controls/GridSplitter/GridSplitter.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="controls:RadioButton">

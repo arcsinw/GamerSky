@@ -43,11 +43,11 @@ namespace GamerSky
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                // This just gets in the way.
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //{
+            //    // This just gets in the way.
+            //    this.DebugSettings.EnableFrameRateCounter = true;
+            //}
 #endif
 
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 200));

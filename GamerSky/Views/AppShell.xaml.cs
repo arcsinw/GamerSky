@@ -30,7 +30,7 @@ namespace GamerSky.Views
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
 
-        public static AppShell Current = null;
+        public static AppShell Current = null; 
 
         public Frame MasterFrame { get { return this.masterFrame; } }
 

@@ -370,10 +370,23 @@
             </StackPanel>
         </Grid>
         <!--#endregion-->
-        
+
         <Frame x:Name="masterFrame" Grid.Column="1" 
                BorderThickness="0,0,1,0"
-               BorderBrush="{ThemeResource ThemeColorBrush}"/>
+               BorderBrush="{ThemeResource ThemeColorBrush}">
+            <Frame.Content>
+                <local:MasterDetailPage/>
+            </Frame.Content>
+        </Frame>
+
+        <controls:GridSplitter Grid.Column="1"
+                               Width="11"
+                               ResizeDirection="Auto"
+                               GripperForeground="White"
+                               GripperCursor="Default"
+                               Background="Gray"
+                               HorizontalAlignment="Right"
+                               CursorBehavior="ChangeOnSplitterHover"/>
 
         <Frame x:Name="detailFrame" Grid.Column="2" />
     </Grid>
