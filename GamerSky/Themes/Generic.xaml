@@ -6,19 +6,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Controls/ImageEx/ImageEx.xaml" />
         <ResourceDictionary Source="/Controls/GridSplitter/GridSplitter.xaml" />
+        <ResourceDictionary Source="/Controls/SimpleRadioButton/SimpleRadioButton.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="controls:RadioButton">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="controls:RadioButton">
-                    <Border
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    
 </ResourceDictionary>

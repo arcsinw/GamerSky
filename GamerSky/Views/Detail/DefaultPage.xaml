@@ -1,13 +1,16 @@
 ﻿<Page
-    x:Class="GamerSky.Views.MainPage"
+    x:Class="GamerSky.Views.DefaultPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GamerSky"
+    xmlns:local="using:GamerSky.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Image Source="ms-appx:///Assets/Images/ic_launcher.png" 
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Height="196" Width="196"/>
     </Grid>
 </Page>

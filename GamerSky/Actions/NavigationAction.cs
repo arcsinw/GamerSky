@@ -41,11 +41,11 @@ namespace GamerSky.Actions
         {
             if (NavigationType == PageType.Master)
             {
-                AppShell.Current.MasterFrame.Navigate(Type.GetType(SourcePage));
+                MasterDetailPage.Current.MasterFrame.Navigate(Type.GetType(SourcePage));
             }
             else
             {
-                AppShell.Current.DetailFrame.Navigate(Type.GetType(SourcePage));
+                MasterDetailPage.Current.DetailFrame.Navigate(Type.GetType(SourcePage));
             }
             return true;
         }

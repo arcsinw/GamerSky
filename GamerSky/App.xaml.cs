@@ -50,7 +50,7 @@ namespace GamerSky
             //}
 #endif
 
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 200));
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 400));
 
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
             if (titleBar != null)

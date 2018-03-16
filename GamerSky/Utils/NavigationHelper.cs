@@ -12,33 +12,33 @@ namespace GamerSky.Utils
     {
         public static void MasterFrameNavigate(Type sourcePage, object parameter)
         {
-            AppShell.Current.MasterFrame.Navigate(sourcePage, parameter);
+            MasterDetailPage.Current.MasterFrame.Navigate(sourcePage, parameter);
         }
 
         public static void MasterFrameNavigate(Type sourcePage)
         {
-            AppShell.Current.MasterFrame.Navigate(sourcePage);
+            MasterDetailPage.Current.MasterFrame.Navigate(sourcePage);
         }
 
         public static void DetailFrameNavigate(Type sourcePage)
         {
-            AppShell.Current.DetailFrame.Navigate(sourcePage);
+            MasterDetailPage.Current.DetailFrame.Navigate(sourcePage);
         }
 
         public static void DetailFrameNavigate(Type sourcePage, object parameter)
         {
-            AppShell.Current.DetailFrame.Navigate(sourcePage, parameter);
+            MasterDetailPage.Current.DetailFrame.Navigate(sourcePage, parameter);
         }
 
         public static void GoBack()
         {
-            if(AppShell.Current.DetailFrame.CanGoBack)
+            if(MasterDetailPage.Current.DetailFrame.CanGoBack)
             {
-                AppShell.Current.DetailFrame.GoBack();
+                MasterDetailPage.Current.DetailFrame.GoBack();
             }
-            else if(AppShell.Current.MasterFrame.CanGoBack)
+            else if(MasterDetailPage.Current.MasterFrame.CanGoBack)
             {
-                AppShell.Current.MasterFrame.GoBack();
+                MasterDetailPage.Current.MasterFrame.GoBack();
             }
             else
             {
