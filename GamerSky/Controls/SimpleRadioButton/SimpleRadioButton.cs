@@ -18,7 +18,9 @@ namespace GamerSky.Controls
             this.DefaultStyleKey = typeof(SimpleRadioButton);
         }
 
+        public ContentPresenter contentPresenter = null;
 
+        private const string ContentPresenterName = "ContentPresenter";
 
         #region Properties
         public string Source
@@ -40,7 +42,7 @@ namespace GamerSky.Controls
 
         // Using a DependencyProperty as the backing store for Title.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(SimpleRadioButton), new PropertyMetadata(0));
+            DependencyProperty.Register("Title", typeof(string), typeof(SimpleRadioButton), new PropertyMetadata(""));
 
         public string SelectedSource
         {
@@ -53,6 +55,19 @@ namespace GamerSky.Controls
             DependencyProperty.Register("SelectedSource", typeof(string), typeof(SimpleRadioButton), new PropertyMetadata(null));
 
         #endregion
+
+        protected override void OnApplyTemplate()
+        {
+            contentPresenter = GetTemplateChild(ContentPresenterName) as ContentPresenter;
+
+            if (contentPresenter !=null)
+            {
+                if (string.IsNullOrEmpty(Title))
+                {
+                    contentPresenter.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
 
     }
 }

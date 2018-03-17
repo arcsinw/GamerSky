@@ -367,9 +367,7 @@
         </Grid>
         <!--#endregion-->
 
-        <Frame x:Name="Frame" Grid.Column="1" 
-               BorderThickness="0,0,1,0"
-               BorderBrush="{ThemeResource ThemeColorBrush}">
+        <Frame x:Name="Frame" Grid.Column="1">
             <Frame.Content>
                 <local:MasterDetailPage/>
             </Frame.Content>

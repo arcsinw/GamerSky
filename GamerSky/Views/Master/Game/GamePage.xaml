@@ -15,6 +15,11 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style x:Key="ImageButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>

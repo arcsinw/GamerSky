@@ -122,14 +122,21 @@
     <Compile Include="HttpHelper\HttpHelper.cs" />
     <Compile Include="HttpHelper\HttpHelperRequest.cs" />
     <Compile Include="HttpHelper\HttpHelperResponse.cs" />
+    <Compile Include="Models\Channel.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Essay.cs" />
     <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\PostDataModel\AllChannelListRequest.cs" />
     <Compile Include="Models\PostDataModel\PostDataTemplate.cs" />
+    <Compile Include="Models\ResultDataModel\EssayComments.cs" />
     <Compile Include="Models\ResultDataModel\ResultDataTemplate.cs" />
     <Compile Include="Services\ApiBaseService.cs" />
+    <Compile Include="Services\ApiService.cs" />
     <Compile Include="Services\HttpBaseService.cs" />
     <Compile Include="Services\ServiceUri.cs" />
     <Compile Include="Utils\DeviceInformationHelper.cs" />
+    <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Views\Detail\DefaultPage.xaml.cs">
       <DependentUpon>DefaultPage.xaml</DependentUpon>
     </Compile>
@@ -204,6 +211,7 @@
     <Content Include="Assets\Images\ranking_sort_one.png" />
     <Content Include="Assets\Images\ranking_sort_three.png" />
     <Content Include="Assets\Images\ranking_sort_two.png" />
+    <Content Include="Assets\Images\user_default_photo.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />

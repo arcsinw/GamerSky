@@ -8,6 +8,11 @@ using Windows.Data.Json;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Net;
+using GamerSky.Models;
+using GamerSky.ResultModel;
+using GamerSky.Models.PostDataModel;
+using GamerSky.Utils;
+using GamerSky.Models.ResultDataModel;
 
 namespace GamerSky.Services
 {
@@ -39,28 +44,28 @@ namespace GamerSky.Services
         public async Task<List<Channel>> GetChannelList()
         {
             string filename = "channelList.json";
-            ChannelResult channelResult = new ChannelResult();
-            channelResult.Result = await FileHelper.Current.ReadObjectAsync<List<Channel>>(filename);
+
+            ResultModelTemplate<List<Channel>> channelResult = new ResultModelTemplate<List<Channel>>();
             
+            channelResult.Result = await FileHelper.Current.ReadObjectAsync<List<Channel>>(filename);
+
 
             if (channelResult.Result == null)
             {
-                if (ConnectionHelper.IsInternetAvailable)
+                PostDataTemplate<AllChannelListRequest> postData = new PostDataTemplate<AllChannelListRequest>()
                 {
-                    AllChannelListPostData postData = new AllChannelListPostData();
-
-                    postData.deviceId = DeviceInformationHelper.GetDeviceId();
-                    postData.request = new request() { type = "0" };
-                    channelResult = await PostJson<AllChannelListPostData, ChannelResult>(ServiceUri.AllChannel, postData);
-                    if (channelResult != null && channelResult.Result != null)
-                    {
-                        await FileHelper.Current.WriteObjectAsync(channelResult.Result, filename);
-                    }
+                    deviceId = DeviceInformationHelper.GetDeviceId(),
+                    request = new AllChannelListRequest() { type = "0" }
+                };
+                
+                channelResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultModelTemplate<List<Channel>>>(ServiceUri.AllChannel, postData);
+                if (channelResult != null && channelResult.Result != null)
+                {
+                    await FileHelper.Current.WriteObjectAsync(channelResult.Result, filename);
                 }
-                    
             }
-            channelResult.Result.Insert(0,new Channel { isTop = "False", nodeId = 0, nodeName = "头条" });
 
+            channelResult.Result.Insert(0,new Channel { IsTop = "False", NodeId = 0, NodeName = "头条" });
             return channelResult.Result;  
         }
         
@@ -73,27 +78,30 @@ namespace GamerSky.Services
         public async Task<List<Essay>> GetEssayList(int nodeId, int pageIndex)
         {
             string filename = "essayList_"+nodeId+"_"+pageIndex+".json";
-            EssayResult essayResult = new EssayResult();
+            ResultModelTemplate<List<Essay>> essayResult = new ResultModelTemplate<List<Essay>>();
             if (!ConnectionHelper.IsInternetAvailable) //无网络
             {
                 essayResult.Result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
-                AllChannelListPostData postData = new AllChannelListPostData();
-                postData.deviceId = DeviceInformationHelper.GetDeviceId();
-                postData.request = new request()
+                PostDataTemplate<AllChannelListRequest> postData = new PostDataTemplate<AllChannelListRequest>()
                 {
-                    elementsCountPerPage = 20,
-                    nodeIds = nodeId,
-                    pageIndex = pageIndex,
-                    parentNodeId = "news",
-                    type = "null",
+                    deviceId = DeviceInformationHelper.GetDeviceId(),
+                    request = new AllChannelListRequest()
+                    {
+                        elementsCountPerPage = 20,
+                        nodeIds = nodeId,
+                        pageIndex = pageIndex,
+                        parentNodeId = "news",
+                        type = "null",
+                    }
                 };
-                essayResult = await PostJson<AllChannelListPostData, EssayResult>(ServiceUri.AllChannelList, postData);
+
+                essayResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultModelTemplate<List<Essay>>>(ServiceUri.AllChannelList, postData);
                 if (essayResult != null && essayResult.Result!=null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.Result, filename);
+                    await FileHelper.Current.WriteObjectAsync(essayResult.Result, filename);
                 }
             }
             
@@ -106,25 +114,31 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="contentId">文章Id</param>
         /// <returns></returns>
-        public async Task<News> ReadEssay(string contentId)
+        public async Task<News> GetEssay(string contentId)
         {
             string filename = "news_" + contentId + ".json";
-            NewsResult newsResult = new NewsResult();
+            ResultModelTemplate<News> newsResult = new ResultModelTemplate<News>();
             if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
                 newsResult.Result = await FileHelper.Current.ReadObjectAsync<News>(filename);
             }
             else
             {
-                AllChannelListPostData postData = new AllChannelListPostData();
-                postData.request = new request { contentId = contentId,pageIndex =1 };
-                postData.deviceId = DeviceInformationHelper.GetDeviceId();
-                newsResult = await PostJson<AllChannelListPostData, NewsResult>(ServiceUri.TwoArticle, postData);
+                PostDataTemplate<AllChannelListRequest> postData = new PostDataTemplate<AllChannelListRequest>()
+                {
+                    request = new AllChannelListRequest
+                    {
+                        contentId = contentId,
+                        pageIndex = 1
+                    },
+                    deviceId = DeviceInformationHelper.GetDeviceId()
+                };
+
+                newsResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultModelTemplate<News>>(ServiceUri.TwoArticle, postData);
                 if (newsResult != null && newsResult.Result != null)
                 {
                     await FileHelper.Current.WriteObjectAsync<News>(newsResult.Result, filename);
                 }
-
             }
 
             return newsResult?.Result;
@@ -147,7 +161,7 @@ namespace GamerSky.Services
                     pageSize = 20,
                     topicId = contentId
                 };
-                var result = await GetJson<AllCommentsResult>(string.Format(ServiceUri.AllComments, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
+                var result = await GetJson<ResultModelTemplate<EssayComments>>(string.Format(ServiceUri.AllComments, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
                 if(result!=null)
                 {
                     comments = result.Result.Result;

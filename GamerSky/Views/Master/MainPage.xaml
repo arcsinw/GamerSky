@@ -111,7 +111,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <Grid x:Name="moduleGrid" VerticalAlignment="Bottom" Padding="4"
+        <Grid x:Name="moduleGrid" VerticalAlignment="Bottom" Padding="4,8"
               BorderThickness="0,1,0,0" BorderBrush="LightGray">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -123,28 +123,29 @@
 
             <controls:SimpleRadioButton Grid.Column="0"
                 Source="ms-appx:///Assets/Images/icon_xinwen.png"
-                                        SelectedSource="ms-appx:///Assets/Images/icon_xinwen_select.png"
-                                        Title="新闻"/>
+                                        SelectedSource="ms-appx:///Assets/Images/icon_xinwen_select.png"/>
+            <!--Title="新闻"/>-->
 
             <controls:SimpleRadioButton Grid.Column="1"
                 Source="ms-appx:///Assets/Images/icon_youxi.png"
                                         SelectedSource="ms-appx:///Assets/Images/icon_youxi_select.png"
-                                        Title="游戏"/>
- 
+                                        />
+            <!--Title="游戏"/>-->
+
             <controls:SimpleRadioButton Grid.Column="2"
                 Source="ms-appx:///Assets/Images/ic_main_quanzi_default.png"
-                                        SelectedSource="ms-appx:///Assets/Images/ic_main_quanzi_selected.png"
-                                        Title="圈子"/>
+                                        SelectedSource="ms-appx:///Assets/Images/ic_main_quanzi_selected.png"/>
+            <!--Title="圈子"/>-->
 
             <controls:SimpleRadioButton Grid.Column="3"
                 Source="ms-appx:///Assets/Images/icon_yuanchuang.png"
-                                        SelectedSource="ms-appx:///Assets/Images/icon_yuanchuang_select.png"
-                                        Title="原创"/>
+                                        SelectedSource="ms-appx:///Assets/Images/icon_yuanchuang_select.png"/>
+            <!--Title="原创"/>-->
 
             <controls:SimpleRadioButton Grid.Column="4"
                 Source="ms-appx:///Assets/Images/icon_yonghu.png"
-                                        SelectedSource="ms-appx:///Assets/Images/icon_yonghu_select.png"
-                                        Title="我的"/>
+                                        SelectedSource="ms-appx:///Assets/Images/icon_yonghu_select.png"/>
+            <!--Title="我的"/>-->
         </Grid>
     </Grid>
 </Page>
