@@ -2,7 +2,7 @@
     x:Class="GamerSky.Views.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GamerSky"
+    xmlns:local="using:GamerSky.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:GamerSky.Controls"
@@ -110,7 +110,11 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Frame>
+            <local:NewsPage/>
+        </Frame>
+        
+        <!--#region Module Grid-->
         <Grid x:Name="moduleGrid" VerticalAlignment="Bottom" Padding="4,8"
               BorderThickness="0,1,0,0" BorderBrush="LightGray">
             <Grid.ColumnDefinitions>
@@ -147,5 +151,6 @@
                                         SelectedSource="ms-appx:///Assets/Images/icon_yonghu_select.png"/>
             <!--Title="我的"/>-->
         </Grid>
+        <!--#endregion-->
     </Grid>
 </Page>

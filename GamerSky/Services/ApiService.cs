@@ -8,11 +8,12 @@ using Windows.Data.Json;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Net;
-using GamerSky.Models;
-using GamerSky.ResultModel;
+using GamerSky.Models; 
 using GamerSky.Models.PostDataModel;
 using GamerSky.Utils;
 using GamerSky.Models.ResultDataModel;
+using GamerSky.Enums;
+using GamerSky.PostDataModel;
 
 namespace GamerSky.Services
 {
@@ -45,7 +46,7 @@ namespace GamerSky.Services
         {
             string filename = "channelList.json";
 
-            ResultModelTemplate<List<Channel>> channelResult = new ResultModelTemplate<List<Channel>>();
+            ResultDataTemplate<List<Channel>> channelResult = new ResultDataTemplate<List<Channel>>();
             
             channelResult.Result = await FileHelper.Current.ReadObjectAsync<List<Channel>>(filename);
 
@@ -58,7 +59,7 @@ namespace GamerSky.Services
                     request = new AllChannelListRequest() { type = "0" }
                 };
                 
-                channelResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultModelTemplate<List<Channel>>>(ServiceUri.AllChannel, postData);
+                channelResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultDataTemplate<List<Channel>>>(ServiceUri.AllChannel, postData);
                 if (channelResult != null && channelResult.Result != null)
                 {
                     await FileHelper.Current.WriteObjectAsync(channelResult.Result, filename);
@@ -78,7 +79,7 @@ namespace GamerSky.Services
         public async Task<List<Essay>> GetEssayList(int nodeId, int pageIndex)
         {
             string filename = "essayList_"+nodeId+"_"+pageIndex+".json";
-            ResultModelTemplate<List<Essay>> essayResult = new ResultModelTemplate<List<Essay>>();
+            ResultDataTemplate<List<Essay>> essayResult = new ResultDataTemplate<List<Essay>>();
             if (!ConnectionHelper.IsInternetAvailable) //无网络
             {
                 essayResult.Result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
@@ -98,7 +99,7 @@ namespace GamerSky.Services
                     }
                 };
 
-                essayResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultModelTemplate<List<Essay>>>(ServiceUri.AllChannelList, postData);
+                essayResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultDataTemplate<List<Essay>>>(ServiceUri.AllChannelList, postData);
                 if (essayResult != null && essayResult.Result!=null)
                 {
                     await FileHelper.Current.WriteObjectAsync(essayResult.Result, filename);
@@ -117,7 +118,7 @@ namespace GamerSky.Services
         public async Task<News> GetEssay(string contentId)
         {
             string filename = "news_" + contentId + ".json";
-            ResultModelTemplate<News> newsResult = new ResultModelTemplate<News>();
+            ResultDataTemplate<News> newsResult = new ResultDataTemplate<News>();
             if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
                 newsResult.Result = await FileHelper.Current.ReadObjectAsync<News>(filename);
@@ -134,7 +135,7 @@ namespace GamerSky.Services
                     deviceId = DeviceInformationHelper.GetDeviceId()
                 };
 
-                newsResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultModelTemplate<News>>(ServiceUri.TwoArticle, postData);
+                newsResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultDataTemplate<News>>(ServiceUri.TwoArticle, postData);
                 if (newsResult != null && newsResult.Result != null)
                 {
                     await FileHelper.Current.WriteObjectAsync<News>(newsResult.Result, filename);
@@ -144,85 +145,87 @@ namespace GamerSky.Services
             return newsResult?.Result;
         }
 
-        /// <summary>
-        /// 获取某文章所有评论
-        /// </summary>
-        /// <param name="contentId"></param>
-        /// <param name="pageIndex"></param>
-        /// <returns></returns>
-        public async Task<List<Comment>> GetAllComments(string contentId,int pageIndex)
-        {
-            List<Comment> comments = new List<Comment>();
-            if(ConnectionHelper.IsInternetAvailable)
-            {
-                GetAllCommentPostData postData = new GetAllCommentPostData()
-                {
-                    pageIndex = pageIndex,
-                    pageSize = 20,
-                    topicId = contentId
-                };
-                var result = await GetJson<ResultModelTemplate<EssayComments>>(string.Format(ServiceUri.AllComments, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
-                if(result!=null)
-                {
-                    comments = result.Result.Result;
-                }
-            }
-            return comments;
-        }
+        #region Isolated APIs
+        ///// <summary>
+        ///// 获取某文章所有评论
+        ///// </summary>
+        ///// <param name="contentId"></param>
+        ///// <param name="pageIndex"></param>
+        ///// <returns></returns>
+        //public async Task<List<Comment>> GetAllComments(string contentId,int pageIndex)
+        //{
+        //    List<Comment> comments = new List<Comment>();
+        //    if(ConnectionHelper.IsInternetAvailable)
+        //    {
+        //        GetAllCommentPostData postData = new GetAllCommentPostData()
+        //        {
+        //            pageIndex = pageIndex,
+        //            pageSize = 20,
+        //            topicId = contentId
+        //        };
+        //        var result = await GetJson<ResultDataTemplate<EssayComments>>(string.Format(ServiceUri.AllComments, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
+        //        if(result!=null)
+        //        {
+        //            comments = result.Result.Result;
+        //        }
+        //    }
+        //    return comments;
+        //}
 
-        /// <summary>
-        /// 获取热门评论
-        /// </summary>
-        /// <param name="contentId"></param>
-        /// <param name="pageIndex"></param>
-        /// <returns></returns>
-        public async Task<List<Comment>> GetHotComments(string contentId, int pageIndex)
-        {
-            List<Comment> comments = new List<Comment>();
-            if (ConnectionHelper.IsInternetAvailable)
-            {
-                GetAllCommentPostData postData = new GetAllCommentPostData()
-                {
-                    pageIndex = pageIndex,
-                    pageSize = 20,
-                    topicId = contentId
-                };
-                var result = await GetJson<AllCommentsResult>(string.Format(ServiceUri.HotComments, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
-                if (result != null)
-                {
-                    comments = result.Result.Result;
-                }
-            }
-            return comments;
-        }
+        ///// <summary>
+        ///// 获取热门评论
+        ///// </summary>
+        ///// <param name="contentId"></param>
+        ///// <param name="pageIndex"></param>
+        ///// <returns></returns>
+        //public async Task<List<Comment>> GetHotComments(string contentId, int pageIndex)
+        //{
+        //    List<Comment> comments = new List<Comment>();
+        //    if (ConnectionHelper.IsInternetAvailable)
+        //    {
+        //        GetAllCommentPostData postData = new GetAllCommentPostData()
+        //        {
+        //            pageIndex = pageIndex,
+        //            pageSize = 20,
+        //            topicId = contentId
+        //        };
+        //        var result = await GetJson<AllCommentsResult>(string.Format(ServiceUri.HotComments, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
+        //        if (result != null)
+        //        {
+        //            comments = result.Result.Result;
+        //        }
+        //    }
+        //    return comments;
+        //}
 
-        /// <summary>
-        /// 获取相关阅读
-        /// </summary>
-        /// <param name="contentId">文章Id</param>
-        /// <returns></returns>
-        public async Task<List<RelatedReadings>> GetRelatedReadings(string contentId, string contentType="news")
-        {
-            string filename = "relatedReadings_" + contentId + ".json";
-            RelatedReadingsResult readings = new RelatedReadingsResult();
-            if (!ConnectionHelper.IsInternetAvailable)  //无网络
-            {
-                readings.Result = await FileHelper.Current.ReadObjectAsync<List<RelatedReadings>>(filename);
-            }
-            else
-            {
-                RelatedReadingPostData postData = new RelatedReadingPostData();
-                postData.request = new RelatedReadingRequest{ contentId = contentId, contentType = contentType};
-                postData.deviceId = DeviceInformationHelper.GetDeviceId();
-                readings = await PostJson<RelatedReadingPostData, RelatedReadingsResult>(ServiceUri.TwoCorrelation, postData);
-                if (readings != null && readings.Result != null)
-                {
-                    await FileHelper.Current.WriteObjectAsync(readings.Result, filename);
-                }
-            }
-  
-            return readings?.Result;
-        }
+        ///// <summary>
+        ///// 获取相关阅读
+        ///// </summary>
+        ///// <param name="contentId">文章Id</param>
+        ///// <returns></returns>
+        //public async Task<List<RelatedReadings>> GetRelatedReadings(string contentId, string contentType="news")
+        //{
+        //    string filename = "relatedReadings_" + contentId + ".json";
+        //    RelatedReadingsResult readings = new RelatedReadingsResult();
+        //    if (!ConnectionHelper.IsInternetAvailable)  //无网络
+        //    {
+        //        readings.Result = await FileHelper.Current.ReadObjectAsync<List<RelatedReadings>>(filename);
+        //    }
+        //    else
+        //    {
+        //        RelatedReadingPostData postData = new RelatedReadingPostData();
+        //        postData.request = new RelatedReadingRequest{ contentId = contentId, contentType = contentType};
+        //        postData.deviceId = DeviceInformationHelper.GetDeviceId();
+        //        readings = await PostJson<RelatedReadingPostData, RelatedReadingsResult>(ServiceUri.TwoCorrelation, postData);
+        //        if (readings != null && readings.Result != null)
+        //        {
+        //            await FileHelper.Current.WriteObjectAsync(readings.Result, filename);
+        //        }
+        //    }
+
+        //    return readings?.Result;
+        //} 
+        #endregion
 
         /// <summary>
         /// 获取有攻略的游戏 关注
@@ -231,16 +234,19 @@ namespace GamerSky.Services
         public async Task<List<Strategy>> GetStrategys(int pageCount = 20,int type=0)
         {
             string filename = "focusStrategys.json";
-            StrategyResult strategyResult = new StrategyResult();
+            ResultDataTemplate<List<Strategy>> strategyResult = new ResultDataTemplate<List<Strategy>>();
             if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
                 strategyResult.Result = await FileHelper.Current.ReadObjectAsync<List<Strategy>>(filename);
             }
             else
             {
-                StrategyPostData postData = new StrategyPostData();
-                postData.request = new StrategyRequest { pageIndex = 1, pageCount = pageCount, type = type };
-                strategyResult = await PostJson<StrategyPostData, StrategyResult>(ServiceUri.Strategy, postData);
+                PostDataTemplate<StrategyRequest> postData = new PostDataTemplate<StrategyRequest>
+                {
+                    request = new StrategyRequest { pageIndex = 1, pageCount = pageCount, type = type }
+                };
+
+                strategyResult = await PostJson<PostDataTemplate<StrategyRequest>, ResultDataTemplate<List<Strategy>>>(ServiceUri.Strategy, postData);
                 if (strategyResult != null && strategyResult.Result != null)
                 {
                     await FileHelper.Current.WriteObjectAsync<List<Strategy>>(strategyResult.Result, filename);
@@ -276,12 +282,12 @@ namespace GamerSky.Services
 
         /// <summary>
         /// 获取某个游戏的所有攻略
-        /// </summary>
+        /// </summary>   
         /// <param name="contentId"></param>
         /// <returns></returns>
         public async Task<List<Essay>> GetGameStrategys(int specialID,int pageIndex=1)
         {
-            EssayResult essayResult = new EssayResult();
+            ResultDataTemplate<List<Essay>> essayResult = new ResultDataTemplate<List<Essay>>();
             string filename = "gameStrategys_" + specialID + ".json";
             if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
@@ -289,12 +295,21 @@ namespace GamerSky.Services
             }
             else
             {
-                AllChannelListPostData postData = new AllChannelListPostData();
-                postData.request = new request { elementsCountPerPage = 20, nodeIds = specialID, pageIndex = pageIndex, parentNodeId = "strategy" };
-                essayResult = await PostJson<AllChannelListPostData, EssayResult>(ServiceUri.GameStrategys, postData);
+                PostDataTemplate<AllChannelListRequest> postData = new PostDataTemplate<AllChannelListRequest>()
+                {
+                    request = new AllChannelListRequest()
+                    {
+                        elementsCountPerPage = 20,
+                        nodeIds = specialID,
+                        pageIndex = pageIndex,
+                        parentNodeId = "strategy"
+                    }
+                };
+                
+                essayResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultDataTemplate<List<Essay>>>(ServiceUri.GameStrategys, postData);
                 if (essayResult != null && essayResult.Result != null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.Result, filename);
+                    await FileHelper.Current.WriteObjectAsync(essayResult.Result, filename);
                 }
             }
 
@@ -309,23 +324,29 @@ namespace GamerSky.Services
         public async Task<List<string>> GetSearchHotKey(string searchType)
         {
             string filename = "searchHotKey_"+searchType+".json";
-            SearchResult searchResult = new SearchResult();
+            ResultDataTemplate<List<string>> searchResult = new ResultDataTemplate<List<string>>();
             if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
-                searchResult.result = await FileHelper.Current.ReadObjectAsync<List<string>>(filename);
+                searchResult.Result = await FileHelper.Current.ReadObjectAsync<List<string>>(filename);
             }
             else
             {
-                SearchPostData postData = new SearchPostData() { request = new SearchRequest { searchType = searchType } };
-                searchResult = await PostJson<SearchPostData, SearchResult>(ServiceUri.SearchHotDict, postData);
-
-                if (searchResult != null && searchResult.result != null)
+                PostDataTemplate<SearchRequest> postData = new PostDataTemplate<SearchRequest>()
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<string>>(searchResult.result, filename);
+                    request = new SearchRequest
+                    {
+                        searchType = searchType
+                    }
+                };
+                searchResult = await PostJson<PostDataTemplate<SearchRequest>, ResultDataTemplate<List<string>>>(ServiceUri.SearchHotDict, postData);
+
+                if (searchResult != null && searchResult.Result != null)
+                {
+                    await FileHelper.Current.WriteObjectAsync<List<string>>(searchResult.Result, filename);
                 }
             }
 
-            return searchResult?.result;
+            return searchResult?.Result;
         }
 
         /// <summary>
@@ -335,18 +356,22 @@ namespace GamerSky.Services
         public async Task<List<Subscribe>> GetSubscribeHotKey(string type="1")
         {
             string filename = "subscribeHotKey_" + type + ".json";
-            SubscribeResult subscribeResult = new SubscribeResult();
+            ResultDataTemplate<List<Subscribe>> subscribeResult = new ResultDataTemplate<List<Subscribe>>();
             if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
                 subscribeResult.Result = await FileHelper.Current.ReadObjectAsync<List<Subscribe>>(filename);
             }
             else
             {
-                SubscribeSearchPostData postData = new SubscribeSearchPostData { request = new SubscribeSearchRequest { type = type } };
-                subscribeResult = await PostJson<SubscribeSearchPostData, SubscribeResult>(ServiceUri.Subscribe, postData);
+                PostDataTemplate<SubscribeSearchRequest> postData = new PostDataTemplate<SubscribeSearchRequest>
+                {
+                    request = new SubscribeSearchRequest { type = type }
+                };
+
+                subscribeResult = await PostJson<PostDataTemplate<SubscribeSearchRequest>, ResultDataTemplate<List<Subscribe>>>(ServiceUri.Subscribe, postData);
                 if (subscribeResult != null && subscribeResult.Result != null)
                 {
-                    await FileHelper.Current.WriteObjectAsync<List<Subscribe>>(subscribeResult.Result, filename);
+                    await FileHelper.Current.WriteObjectAsync(subscribeResult.Result, filename);
                 }
             }
             return subscribeResult?.Result;
@@ -362,16 +387,24 @@ namespace GamerSky.Services
         /// <returns></returns>
         public async Task<List<Essay>> SearchByKey(string searchKey,SearchTypeEnum searchType,int pageIndex)
         {
-            EssayResult essayResult = new EssayResult();
+            ResultDataTemplate<List<Essay>> essayResult = new ResultDataTemplate<List<Essay>>();
             if (!ConnectionHelper.IsInternetAvailable) //无网络
             {
             }
             else
             {
-                SearchPostData postData = new SearchPostData();
-                postData.request = new SearchRequest { elementsCountPerPage = "20", pageIndex = pageIndex, searchKey = searchKey, searchType = searchType.ToString() };
+                PostDataTemplate<SearchRequest> postData = new PostDataTemplate<SearchRequest>()
+                {
+                    request = new SearchRequest()
+                    {
+                        elementsCountPerPage = "20",
+                        pageIndex = pageIndex,
+                        searchKey = searchKey,
+                        searchType = searchType.ToString()
+                    }
+                };
                 
-                essayResult = await PostJson<SearchPostData, EssayResult>(ServiceUri.Search, postData);
+                essayResult = await PostJson<PostDataTemplate<SearchRequest>, ResultDataTemplate<List<Essay>>>(ServiceUri.Search, postData);
             }
 
             return essayResult?.Result;
@@ -385,7 +418,7 @@ namespace GamerSky.Services
         /// <returns></returns>
         public async Task<List<Essay>> GetSubscribeContent(string sourceId, int pageIndex = 1)
         {
-            EssayResult subscribeContent = new EssayResult();
+            ResultDataTemplate<List<Essay>> subscribeContent = new ResultDataTemplate<List<Essay>>();
             string filename = "subscribeContent_" + sourceId + ".json";
             if (!ConnectionHelper.IsInternetAvailable)  //无网络
             {
@@ -393,9 +426,12 @@ namespace GamerSky.Services
             }
             else
             {
-                SubscribeContentPostData postData = new SubscribeContentPostData();
-                postData.request = new SubscribeContentRequest { nodeIds = sourceId, pageCount = 10, pageIndex = pageIndex };
-                subscribeContent = await PostJson<SubscribeContentPostData, EssayResult>(ServiceUri.SubscribeContent, postData);
+                PostDataTemplate<SubscribeContentRequest> postData = new PostDataTemplate<SubscribeContentRequest>
+                {
+                    request = new SubscribeContentRequest { nodeIds = sourceId, pageCount = 10, pageIndex = pageIndex }
+                };
+
+                subscribeContent = await PostJson<PostDataTemplate<SubscribeContentRequest>, ResultDataTemplate<List<Essay>>>(ServiceUri.SubscribeContent, postData);
 
                 if (subscribeContent != null && subscribeContent.Result != null)
                 {
@@ -406,73 +442,76 @@ namespace GamerSky.Services
             return subscribeContent?.Result;
         }
 
-        /// <summary>
-        /// 登录
-        /// </summary>
-        /// <param name="passWord">用户名</param>
-        /// <param name="userName">密码</param>
-        /// <returns></returns>
-        public async Task<LoginResult> Login(string passWord, string userName)
-        {
-            LoginPostData postData = new LoginPostData();
-            postData.request = new LoginPostDataRequest { passWord = passWord, userName = userName };
-            var result = await PostJson<LoginPostData, LoginResult>(ServiceUri.Login, postData);
-            return result;
-        }
+        ///// <summary>
+        ///// 登录
+        ///// </summary>
+        ///// <param name="passWord">用户名</param>
+        ///// <param name="userName">密码</param>
+        ///// <returns></returns>
+        //public async Task<LoginResult> Login(string passWord, string userName)
+        //{
+        //    PostDataTemplate<LoginRequest> postData = new PostDataTemplate<LoginRequest>();
+        //    postData.request = new LoginPostDataRequest { passWord = passWord, userName = userName };
+        //    var result = await PostJson<LoginPostData, LoginResult>(ServiceUri.Login, postData);
+        //    return result;
+        //}
 
         public async Task SinaLogin()
         {
             
         }
 
-        /// <summary>
-        /// Add a comment
-        /// </summary>
-        /// <param name="loginToken"></param>
-        /// <param name="topicId"></param>
-        /// <param name="topicUrl"></param>
-        /// <param name="topicTitle"></param>
-        /// <param name="content"></param>
-        /// <param name="replyId"></param>
-        /// <returns></returns>
-        public async Task<AddCommentResult> AddComment(string loginToken,string topicId,
-            string topicUrl,string topicTitle,string content,string replyId)
-        {
-            CommentPostData postData = new CommentPostData
-            {
-                LoginToken = loginToken,
-                TopicId = topicId,
-                TopicTitle = topicTitle,
-                TopicUrl = topicUrl,
-                Content = content,
-                ReplyId = replyId
-            };
+        //#region Comment
+        ///// <summary>
+        ///// Add a comment
+        ///// </summary>
+        ///// <param name="loginToken"></param>
+        ///// <param name="topicId"></param>
+        ///// <param name="topicUrl"></param>
+        ///// <param name="topicTitle"></param>
+        ///// <param name="content"></param>
+        ///// <param name="replyId"></param>
+        ///// <returns></returns>
+        //public async Task<AddCommentResult> AddComment(string loginToken, string topicId,
+        //    string topicUrl, string topicTitle, string content, string replyId)
+        //{
+        //    CommentRequest postData = new CommentRequest
+        //    {
+        //        LoginToken = loginToken,
+        //        TopicId = topicId,
+        //        TopicTitle = topicTitle,
+        //        TopicUrl = topicUrl,
+        //        Content = content,
+        //        ReplyId = replyId
+        //    };
 
-            var result = await GetJson<AddCommentResult>(string.Format(ServiceUri.AddComment, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
-            return result;
-        }
+        //    var result = await GetJson<AddCommentResult>(string.Format(ServiceUri.AddComment, WebUtility.UrlEncode(JsonHelper.Serializer(postData))));
+        //    return result;
+        //}
 
-        /// <summary>
-        /// 获取评论回复
-        /// </summary>
-        public async Task<List<Comment>> GetAllReply(string userId,int pageIndex)
-        {
-            string jsonData = "{\"userId\":" + userId + ",\"pageIndex\":"+pageIndex + ",\"pageSize\":20}";
-            string url = string.Format(ServiceUri.GetAllReply, jsonData);
-            GetAllReplyResult result = await GetJson<GetAllReplyResult>(url);
-            return result?.Result.Comments;
-        }
+        ///// <summary>
+        ///// 获取评论回复
+        ///// </summary>
+        //public async Task<List<Comment>> GetAllReply(string userId, int pageIndex)
+        //{
+        //    string jsonData = "{\"userId\":" + userId + ",\"pageIndex\":" + pageIndex + ",\"pageSize\":20}";
+        //    string url = string.Format(ServiceUri.GetAllReply, jsonData);
+        //    GetAllReplyResult result = await GetJson<GetAllReplyResult>(url);
+        //    return result?.Result.Comments;
+        //}
 
-        /// <summary>
-        /// 给评论回复点赞
-        /// {"action":"ding","topicId":855635,"commentID":1080276461,"commentUserID":"531939"}
-        /// </summary>
-        public async Task AddLikeComment(string topicId,string commentId,string commentUserId)
-        {
-            string jsonData = "{ \"action\":\"ding\",\"topicId\":" + topicId + ",\"commentID\":" + commentId + ",\"commentUserID\":" + commentUserId + "}";
-            string url = string.Format(ServiceUri.LikeReply, jsonData);
-            LikeCommentResult result = await GetJson<LikeCommentResult>(url);
-        }
+        ///// <summary>
+        ///// 给评论回复点赞
+        ///// {"action":"ding","topicId":855635,"commentID":1080276461,"commentUserID":"531939"}
+        ///// </summary>
+        //public async Task AddLikeComment(string topicId, string commentId, string commentUserId)
+        //{
+        //    string jsonData = "{ \"action\":\"ding\",\"topicId\":" + topicId + ",\"commentID\":" + commentId + ",\"commentUserID\":" + commentUserId + "}";
+        //    string url = string.Format(ServiceUri.LikeReply, jsonData);
+        //    LikeCommentResult result = await GetJson<LikeCommentResult>(url);
+        //}
+
+        //#endregion
 
         /// <summary>
         /// 获取要闻
@@ -481,16 +520,22 @@ namespace GamerSky.Services
         public async Task<List<Essay>> GetYaowen(int pageIndex=1)
         {
             string filename = "yaowen.json";
-            EssayResult essayResult = new EssayResult();
+            ResultDataTemplate<List<Essay>> essayResult = new ResultDataTemplate<List<Essay>>();
             if (!ConnectionHelper.IsInternetAvailable) //无网络
             {
                 essayResult.Result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
-                YaowenPostData postData = new YaowenPostData();
-                postData.request = new YaowenRequest(){ pageIndex = pageIndex };
-                essayResult = await PostJson<YaowenPostData, EssayResult>(ServiceUri.AllChannelList, postData);
+                PostDataTemplate<YaowenRequest> postData = new PostDataTemplate<YaowenRequest>()
+                {
+                    request = new YaowenRequest()
+                    {
+                        pageIndex = pageIndex
+                    }
+                };
+                
+                essayResult = await PostJson<PostDataTemplate<YaowenRequest>, ResultDataTemplate<List<Essay>>>(ServiceUri.AllChannelList, postData);
                 if(essayResult!=null && essayResult.Result!= null)
                 {
                     await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.Result, filename);
@@ -514,8 +559,8 @@ namespace GamerSky.Services
             }
             else
             {
-                AdStartPostData postData = new AdStartPostData();
-                AdStartResult adStartResult = await PostJson<AdStartPostData, AdStartResult>(ServiceUri.AdStart, postData);
+                PostDataTemplate<string> postData = new PostDataTemplate<string>();
+                ResultDataTemplate<List<AdStart>> adStartResult = await PostJson<PostDataTemplate<string>, ResultDataTemplate<List<AdStart>>>(ServiceUri.AdStart, postData);
                 
                 if (adStarts != null && adStartResult?.Result != null)
                 {
@@ -540,10 +585,12 @@ namespace GamerSky.Services
         /// <returns></returns>
         public async Task<VerificationCode> GetVerificationCode(string phoneNumber,string username,string email,string codetype="1")
         {
-            VerificationCodePostData postData = new VerificationCodePostData();
-            postData.request = new VerificationCodeRequest() { codetype = codetype, email = email, phoneNumber = phoneNumber, username = username };
+            PostDataTemplate<VerificationCodeRequest> postData = new PostDataTemplate<VerificationCodeRequest>
+            {
+                request = new VerificationCodeRequest() { codetype = codetype, email = email, phoneNumber = phoneNumber, username = username }
+            };
 
-            VerificationCode verificationCode = await PostJson<VerificationCodePostData, VerificationCode>(ServiceUri.GetVerificationCode, postData);
+            VerificationCode verificationCode = await PostJson<PostDataTemplate<VerificationCodeRequest>, VerificationCode>(ServiceUri.GetVerificationCode, postData);
             return verificationCode;
         }
 
@@ -560,19 +607,21 @@ namespace GamerSky.Services
         /// <returns></returns>
         public async Task<VerificationCode> RegisterByEmail(string answer,string password,string email,string question,string userName)
         {
-            EmailRegisterPostData postData = new EmailRegisterPostData();
-            postData.request = new EmailRegisterRequest()
+            PostDataTemplate<AccountRegisterRequest> postData = new PostDataTemplate<AccountRegisterRequest>
             {
-                answer = answer,
-                confirmpassword = password,
-                email = email,
-                password = password,
-                phoneNumber = "",
-                phoneVerificationCode = "",
-                question = question,
-                userName = userName
+                request = new AccountRegisterRequest()
+                {
+                    answer = answer,
+                    confirmpassword = password,
+                    email = email,
+                    password = password,
+                    phoneNumber = "",
+                    phoneVerificationCode = "",
+                    question = question,
+                    userName = userName
+                }
             };
-            VerificationCode verificationCode = await PostJson<EmailRegisterPostData, VerificationCode>(ServiceUri.RegisterByEmail, postData);
+            VerificationCode verificationCode = await PostJson<PostDataTemplate<AccountRegisterRequest>, VerificationCode>(ServiceUri.RegisterByEmail, postData);
 
             return verificationCode;
         }
@@ -590,34 +639,37 @@ namespace GamerSky.Services
         /// <returns></returns>
         public async Task<VerificationCode> RegisterByPhone(string password,  string userName, string phoneNumber , string phoneVerificationCode)
         {
-            EmailRegisterPostData postData = new EmailRegisterPostData();
-            postData.request = new EmailRegisterRequest()
+            PostDataTemplate<AccountRegisterRequest> postData = new PostDataTemplate<AccountRegisterRequest>
             {
-                answer = "",
-                confirmpassword = password,
-                email = "",
-                password = password,
-                phoneNumber = phoneNumber,
-                phoneVerificationCode = phoneVerificationCode,
-                question = "",
-                userName = userName
+                request = new AccountRegisterRequest()
+                {
+                    answer = "",
+                    confirmpassword = password,
+                    email = "",
+                    password = password,
+                    phoneNumber = phoneNumber,
+                    phoneVerificationCode = phoneVerificationCode,
+                    question = "",
+                    userName = userName
+                }
             };
-            VerificationCode verificationCode = await PostJson<EmailRegisterPostData, VerificationCode>(ServiceUri.RegisterByEmail, postData);
+
+            VerificationCode verificationCode = await PostJson<PostDataTemplate<AccountRegisterRequest>, VerificationCode>(ServiceUri.RegisterByEmail, postData);
 
             return verificationCode;
         }
 
-        /// <summary>
-        /// 通过用户名查找能找回密码的方式
-        /// </summary>
-        /// <returns></returns>
-        public async Task FindWayByName(string username)
-        {
-            FindPasswordByNamePostData postData = new FindPasswordByNamePostData();
-            postData.request = new FindPasswordByNameRequest() { username = username };
-            FindPasswordByName result = await PostJson<FindPasswordByNamePostData, FindPasswordByName>(ServiceUri.FindPassword,postData);
+        ///// <summary>
+        ///// 通过用户名查找能找回密码的方式
+        ///// </summary>
+        ///// <returns></returns>
+        //public async Task FindWayByName(string username)
+        //{
+        //    FindPasswordByNamePostData postData = new FindPasswordByNamePostData();
+        //    postData.request = new FindPasswordByNameRequest() { username = username };
+        //    FindPasswordByName result = await PostJson<FindPasswordByNamePostData, FindPasswordByName>(ServiceUri.FindPassword,postData);
             
-        }
+        //}
 
         /// <summary>
         /// 获取订阅专题
@@ -627,24 +679,27 @@ namespace GamerSky.Services
         public async Task<List<Essay>> GetSubscribeTopic(string nodeIds,int pageIndex)
         {
             string filename = "subscribeTopic_" + nodeIds + "_"+pageIndex+ ".json";
-            EssayResult essayResult = new EssayResult();
+            ResultDataTemplate<List<Essay>> essayResult = new ResultDataTemplate<List<Essay>>();
             if (!ConnectionHelper.IsInternetAvailable)
             {
                 essayResult.Result = await FileHelper.Current.ReadObjectAsync<List<Essay>>(filename);
             }
             else
             {
-                SubscribeTopicPostData postData = new SubscribeTopicPostData();
-                postData.request = new SubscribeTopicRequest
+                PostDataTemplate<SubscribeTopicRequest> postData = new PostDataTemplate<SubscribeTopicRequest>
                 {
-                    elementsCountPerPage = "20",
-                    lastUpdateTime = Functions.GetUnixTimeStamp().ToString(),
-                    nodeIds = nodeIds,
-                    pageIndex = pageIndex,
-                    parentNodeId = "dingyue",
-                    type = "dingyueTopic"
+                    request = new SubscribeTopicRequest
+                    {
+                        elementsCountPerPage = "20",
+                        lastUpdateTime = Functions.GetUnixTimeStamp().ToString(),
+                        nodeIds = nodeIds,
+                        pageIndex = pageIndex,
+                        parentNodeId = "dingyue",
+                        type = "dingyueTopic"
+                    }
                 };
-                essayResult = await PostJson<SubscribeTopicPostData, EssayResult>(ServiceUri.SubscribeTopic, postData);
+
+                essayResult = await PostJson<PostDataTemplate<SubscribeTopicRequest>, ResultDataTemplate<List<Essay>>>(ServiceUri.SubscribeTopic, postData);
                 if (essayResult != null && essayResult.Result != null)
                 {
                     await FileHelper.Current.WriteObjectAsync<List<Essay>>(essayResult.Result, filename);
@@ -683,11 +738,16 @@ namespace GamerSky.Services
         /// <returns></returns>
         public async Task<VerificationCode> EditSubscribe(SubscribeOperateEnum operate,string subscribeId)
         {
-            EditSubscribePostData postData = new EditSubscribePostData();
-            postData.request = new EditSubscribeRequest { operate = operate.ToString(), subscribeId = subscribeId };
-            VerificationCode result = await PostJson<EditSubscribePostData, VerificationCode>(ServiceUri.EditSubscription, postData);
+            PostDataTemplate<EditSubscribeRequest> postData = new PostDataTemplate<EditSubscribeRequest>
+            {
+                request = new EditSubscribeRequest { operate = operate.ToString(), subscribeId = subscribeId }
+            };
+
+            VerificationCode result = await PostJson<PostDataTemplate<EditSubscribeRequest>, VerificationCode>(ServiceUri.EditSubscription, postData);
             return result;
         }
+
+        #region GamePage-Old Edition
 
         /// <summary>
         /// 获取游戏库中游戏列表
@@ -695,7 +755,7 @@ namespace GamerSky.Services
         /// <returns></returns>
         public async Task<List<Game>> GetGameList(int pageIndex)
         {
-            string filename = "GameList_"+pageIndex+".json";
+            string filename = "GameList_" + pageIndex + ".json";
             List<Game> gameList = new List<Game>();
             if (!ConnectionHelper.IsInternetAvailable)
             {
@@ -703,16 +763,19 @@ namespace GamerSky.Services
             }
             else
             {
-                GamePostData postData = new GamePostData();
-                postData.request = new GamePostDataRequest() { pageIndex = pageIndex };
-                var result = await PostJson<GamePostData, GameResult>(ServiceUri.GameList, postData);
-                if(result!= null)
+                PostDataTemplate<GameRequest> postData = new PostDataTemplate<GameRequest>
+                {
+                    request = new GameRequest() { pageIndex = pageIndex }
+                };
+
+                var result = await PostJson<PostDataTemplate<GameRequest>, ResultDataTemplate<List<Game>>>(ServiceUri.GameList, postData);
+                if (result != null)
                 {
                     foreach (var item in result.Result)
                     {
                         gameList.Add(item);
                     }
-                    await FileHelper.Current.WriteObjectAsync<List<Game>>(gameList,filename);
+                    await FileHelper.Current.WriteObjectAsync<List<Game>>(gameList, filename);
                 }
             }
             return gameList;
@@ -724,7 +787,7 @@ namespace GamerSky.Services
         /// <param name="pageIndex"></param>
         /// <param name="nodeIds"></param>
         /// <returns></returns>
-        public async Task<List<Game>> GetGameReleaseList(int pageIndex,GameNodeIdEnum nodeId)
+        public async Task<List<Game>> GetGameReleaseList(int pageIndex, GameNodeIdEnum nodeId)
         {
             string filename = "GameReleaseList_" + pageIndex + ".json";
             List<Game> gameList = new List<Game>();
@@ -734,9 +797,12 @@ namespace GamerSky.Services
             }
             else
             {
-                GamePostData postData = new GamePostData();
-                postData.request = new GamePostDataRequest() { pageIndex = pageIndex ,nodeIds = nodeId.ToString()};
-                var result = await PostJson<GamePostData, GameResult>(ServiceUri.GameList, postData);
+                PostDataTemplate<GameRequest> postData = new PostDataTemplate<GameRequest>
+                {
+                    request = new GameRequest() { pageIndex = pageIndex, nodeIds = nodeId.ToString() }
+                };
+
+                var result = await PostJson<PostDataTemplate<GameRequest>, ResultDataTemplate<List<Game>>>(ServiceUri.GameList, postData);
                 if (result != null)
                 {
                     foreach (var item in result.Result)
@@ -764,9 +830,12 @@ namespace GamerSky.Services
             }
             else
             {
-                GameDetailPostData postData = new GameDetailPostData();
-                postData.request = new GameDetailRequest() { contentId = contentId };
-                var gameDetailResult = await PostJson<GameDetailPostData, GameDetailResult>(ServiceUri.GameDetail, postData);
+                PostDataTemplate<GameDetailRequest> postData = new PostDataTemplate<GameDetailRequest>
+                {
+                    request = new GameDetailRequest() { contentId = contentId }
+                };
+
+                var gameDetailResult = await PostJson<PostDataTemplate<GameDetailRequest>, ResultDataTemplate<GameDetail>>(ServiceUri.GameDetail, postData);
                 gameDetail = gameDetailResult?.Result;
             }
             return gameDetail;
@@ -776,19 +845,23 @@ namespace GamerSky.Services
         /// 获取GameDetail页面中 攻略或新闻
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Essay>> GetGameDetailItem(string contentId, int pageIndex,string contentType)
+        public async Task<List<Essay>> GetGameDetailItem(string contentId, int pageIndex, string contentType)
         {
             List<Essay> essay = new List<Essay>();
             if (!ConnectionHelper.IsInternetAvailable)
-            { 
+            {
             }
             else
             {
-                GameDetailEssayPostData postData = new GameDetailEssayPostData();
-                postData.request = new GameDetailEssayRequest() { contentId = contentId, contentType = contentType, elementsCountPerPage = 10, pageIndex = pageIndex };
-                var gameDetailResult = await PostJson<GameDetailEssayPostData, GameDetailEssayResult>(ServiceUri.TwoCorrelation, postData);
+                PostDataTemplate<GameDetailEssayRequest> postData = new PostDataTemplate<GameDetailEssayRequest>
+                {
+                    request = new GameDetailEssayRequest() { contentId = contentId, contentType = contentType, elementsCountPerPage = 10, pageIndex = pageIndex }
+                };
+
+                var gameDetailResult = await PostJson<PostDataTemplate<GameDetailEssayRequest>, ResultDataTemplate<List<Essay>>>(ServiceUri.TwoCorrelation, postData);
                 essay = gameDetailResult?.Result;
             }
+
             return essay;
         }
 
@@ -796,7 +869,7 @@ namespace GamerSky.Services
         /// 获取GameDetail页面中 攻略
         /// </summary>
         /// <returns></returns>
-        public async Task<List<Essay>> GetGameDetailStrategys(string contentId,int pageIndex)
+        public async Task<List<Essay>> GetGameDetailStrategys(string contentId, int pageIndex)
         {
             List<Essay> essays = new List<Essay>();
             if (!ConnectionHelper.IsInternetAvailable)
@@ -804,7 +877,7 @@ namespace GamerSky.Services
             }
             else
             {
-                essays =  await GetGameDetailItem(contentId, pageIndex, "strategy");
+                essays = await GetGameDetailItem(contentId, pageIndex, "strategy");
             }
             return essays;
         }
@@ -827,6 +900,8 @@ namespace GamerSky.Services
         }
 
 
+        #endregion
+
         #region GamePage
 
         /// <summary>
@@ -834,11 +909,11 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<ResultModel<List<GameSpecialDetail>>> GetGameSpecialDetail(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecialDetail>>> GetGameSpecialDetail(int pageIndex = 1)
         {
-            PostDataTemplate<GameSpecialDetailPostData> postData = new PostDataTemplate<GameSpecialDetailPostData>()
+            PostDataTemplate<GameSpecialDetailRequest> postData = new PostDataTemplate<GameSpecialDetailRequest>()
             {
-                request = new GameSpecialDetailPostData()
+                request = new GameSpecialDetailRequest()
                 {
                     ElementsCountPerPage = 4,
                     ExtraField1 = "Position",
@@ -848,7 +923,8 @@ namespace GamerSky.Services
                     PageIndex = pageIndex,
                 }
             };
-            ResultModel<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameSpecialDetailPostData>, ResultModel<List<GameSpecialDetail>>>(ServiceUri.GameSpecialDetail, postData);
+
+            ResultDataTemplate<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameSpecialDetailRequest>, ResultDataTemplate<List<GameSpecialDetail>>>(ServiceUri.GameSpecialDetail, postData);
 
             return result;
         }
@@ -858,11 +934,11 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<ResultModel<List<GameSpecialDetail>>> GetGameHomePage(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecialDetail>>> GetGameHomePage(int pageIndex = 1)
         {
-            PostDataTemplate<GameHomePagePostData> postData = new PostDataTemplate<GameHomePagePostData>()
+            PostDataTemplate<GameHomePageRequest> postData = new PostDataTemplate<GameHomePageRequest>()
             {
-                request = new GameHomePagePostData()
+                request = new GameHomePageRequest()
                 {
                     ElementsCountPerPage = 5,
                     ExtraField1 = "Position",
@@ -872,7 +948,7 @@ namespace GamerSky.Services
                 }
             };
 
-            ResultModel<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameHomePagePostData>, ResultModel<List<GameSpecialDetail>>>(ServiceUri.GameHomePage, postData);
+            ResultDataTemplate<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameHomePageRequest>, ResultDataTemplate<List<GameSpecialDetail>>>(ServiceUri.GameHomePage, postData);
 
             return result;
         }
@@ -882,17 +958,17 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<ResultModel<List<GameSpecial>>> GetGameSpecialList(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecial>>> GetGameSpecialList(int pageIndex = 1)
         {
-            PostDataTemplate<GameSpecialListPostData> postData = new PostDataTemplate<GameSpecialListPostData>()
+            PostDataTemplate<GameSpecialListRequest> postData = new PostDataTemplate<GameSpecialListRequest>()
             {
-                request = new GameSpecialListPostData()
+                request = new GameSpecialListRequest()
                 { 
                     PageIndex = pageIndex,
                 }
             };
 
-            ResultModel<List<GameSpecial>> result = await PostJson<PostDataTemplate<GameSpecialListPostData>, ResultModel<List<GameSpecial>>>(ServiceUri.GameSpecialList, postData);
+            ResultDataTemplate<List<GameSpecial>> result = await PostJson<PostDataTemplate<GameSpecialListRequest>, ResultDataTemplate<List<GameSpecial>>>(ServiceUri.GameSpecialList, postData);
 
             return result;
         }
@@ -902,11 +978,11 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<ResultModel<List<GameSpecialDetail>>> GetNewSellGames(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecialDetail>>> GetNewSellGames(int pageIndex = 1)
         {
-            PostDataTemplate<GameHomePagePostData> postData = new PostDataTemplate<GameHomePagePostData>()
+            PostDataTemplate<GameHomePageRequest> postData = new PostDataTemplate<GameHomePageRequest>()
             {
-                request = new GameHomePagePostData()
+                request = new GameHomePageRequest()
                 {
                     ElementsCountPerPage = 5,
                     ExtraField1 = "Position",
@@ -916,7 +992,7 @@ namespace GamerSky.Services
                 }
             };
 
-            ResultModel<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameHomePagePostData>, ResultModel<List<GameSpecialDetail>>>(ServiceUri.GameHomePage, postData);
+            ResultDataTemplate<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameHomePageRequest>, ResultDataTemplate<List<GameSpecialDetail>>>(ServiceUri.GameHomePage, postData);
 
             return result;
         }
@@ -926,19 +1002,18 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<ResultModel<List<GameSpecialDetail>>> GetHighRank(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecialDetail>>> GetHighRank(int pageIndex = 1)
         {
-            PostDataTemplate<GameRankingListPostData> postData = new PostDataTemplate<GameRankingListPostData>()
+            PostDataTemplate<GameRankingListRequest> postData = new PostDataTemplate<GameRankingListRequest>()
             {
-                request = new GameRankingListPostData()
+                request = new GameRankingListRequest()
                 {
                     Type = "fractions",
                     PageIndex = pageIndex,
                 }
             };
 
-            ResultModel<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameRankingListPostData>, ResultModel<List<GameSpecialDetail>>>(ServiceUri.GameRankingList, postData);
-
+            ResultDataTemplate<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameRankingListRequest>, ResultDataTemplate<List<GameSpecialDetail>>>(ServiceUri.GameRankingList, postData);
             return result;
         }
 
@@ -947,19 +1022,18 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<ResultModel<List<GameSpecialDetail>>> GetMostExpected(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecialDetail>>> GetMostExpected(int pageIndex = 1)
         {
-            PostDataTemplate<GameRankingListPostData> postData = new PostDataTemplate<GameRankingListPostData>()
+            PostDataTemplate<GameRankingListRequest> postData = new PostDataTemplate<GameRankingListRequest>()
             {
-                request = new GameRankingListPostData()
+                request = new GameRankingListRequest()
                 {
                     Type = "hot",
                     PageIndex = pageIndex,
                 }
             };
 
-            ResultModel<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameRankingListPostData>, ResultModel<List<GameSpecialDetail>>>(ServiceUri.GameRankingList, postData);
-
+            ResultDataTemplate<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameRankingListRequest>, ResultDataTemplate<List<GameSpecialDetail>>>(ServiceUri.GameRankingList, postData);
             return result;
         }
 
@@ -968,11 +1042,11 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<ResultModel<List<GameSpecialDetail>>> GetHighRankedFPS(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecialDetail>>> GetHighRankedFPS(int pageIndex = 1)
         {
-            PostDataTemplate<GameRankingListPostData> postData = new PostDataTemplate<GameRankingListPostData>()
+            PostDataTemplate<GameRankingListRequest> postData = new PostDataTemplate<GameRankingListRequest>()
             {
-                request = new GameRankingListPostData()
+                request = new GameRankingListRequest()
                 {
                     Type = "fractions",
                     GameClass = 20066,
@@ -980,8 +1054,7 @@ namespace GamerSky.Services
                 }
             };
 
-            ResultModel<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameRankingListPostData>, ResultModel<List<GameSpecialDetail>>>(ServiceUri.GameRankingList, postData);
-
+            ResultDataTemplate<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameRankingListRequest>, ResultDataTemplate<List<GameSpecialDetail>>>(ServiceUri.GameRankingList, postData);
             return result;
         }
 
@@ -990,11 +1063,11 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<ResultModel<List<GameSpecialDetail>>> GetHighRankedACT(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecialDetail>>> GetHighRankedACT(int pageIndex = 1)
         {
-            PostDataTemplate<GameRankingListPostData> postData = new PostDataTemplate<GameRankingListPostData>()
+            PostDataTemplate<GameRankingListRequest> postData = new PostDataTemplate<GameRankingListRequest>()
             {
-                request = new GameRankingListPostData()
+                request = new GameRankingListRequest()
                 {
                     Type = "fractions",
                     GameClass = 20042,
@@ -1002,8 +1075,7 @@ namespace GamerSky.Services
                 }
             };
 
-            ResultModel<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameRankingListPostData>, ResultModel<List<GameSpecialDetail>>>(ServiceUri.GameRankingList, postData);
-
+            ResultDataTemplate<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameRankingListRequest>, ResultDataTemplate<List<GameSpecialDetail>>>(ServiceUri.GameRankingList, postData);
             return result;
         }
 
@@ -1012,11 +1084,11 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        public async Task<ResultModel<List<GameSpecialDetail>>> GetMostExpectedGames(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecialDetail>>> GetMostExpectedGames(int pageIndex = 1)
         {
-            PostDataTemplate<GameHomePagePostData> postData = new PostDataTemplate<GameHomePagePostData>()
+            PostDataTemplate<GameHomePageRequest> postData = new PostDataTemplate<GameHomePageRequest>()
             {
-                request = new GameHomePagePostData()
+                request = new GameHomePageRequest()
                 {
                     ElementsCountPerPage = 5,
                     ExtraField1 = "Position",
@@ -1026,7 +1098,7 @@ namespace GamerSky.Services
                 }
             };
 
-            ResultModel<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameHomePagePostData>, ResultModel<List<GameSpecialDetail>>>(ServiceUri.GameHomePage, postData);
+            ResultDataTemplate<List<GameSpecialDetail>> result = await PostJson<PostDataTemplate<GameHomePageRequest>, ResultDataTemplate<List<GameSpecialDetail>>>(ServiceUri.GameHomePage, postData);
 
             return result;
         }

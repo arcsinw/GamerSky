@@ -66,12 +66,15 @@ namespace GamerSky.Views
         #endregion
 
         public static MasterDetailPage Current = null;
-         
+
+        public event EventHandler<VisualStateChangedEventArgs> AdaptiveVisualStateChanged;
+
         private void AdaptiveVisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
-            UpdateForVisualState();
+            UpdateForVisualState(); 
         }
 
+        
         private void UpdateForVisualState()
         {
             var isNarrow = AdaptiveVisualStateGroup.CurrentState.Name == "NarrowState";
@@ -86,6 +89,22 @@ namespace GamerSky.Views
 
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = 
                 DetailFrame.CanGoBack || MasterFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            AppShell.Current.AdaptiveVisualStateChanged -= Current_AdaptiveVisualStateChanged;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            MasterFrame.Navigate(typeof(MainPage));
+            AppShell.Current.AdaptiveVisualStateChanged += Current_AdaptiveVisualStateChanged;
+        }
+
+        private void Current_AdaptiveVisualStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            AdaptiveVisualStateChanged?.Invoke(sender, e);
         }
 
         private void DetailFrame_Navigated(object sender, NavigationEventArgs e)

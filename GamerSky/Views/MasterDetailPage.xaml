@@ -17,7 +17,7 @@
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="AdaptiveVisualStateGroup" CurrentStateChanged="AdaptiveVisualStateGroup_CurrentStateChanged">
                 <VisualStateGroup.States>
-                    <VisualState x:Name="NarrowState">
+                    <VisualState x:Name="Narrow">
                         <VisualState.StateTriggers>
                             <AdaptiveTrigger MinWindowWidth="0"/>
                         </VisualState.StateTriggers>
@@ -29,7 +29,7 @@
                         </VisualState.Setters>
                     </VisualState>
 
-                    <VisualState x:Name="DefaultState">
+                    <VisualState x:Name="Default">
                         <VisualState.StateTriggers>
                             <AdaptiveTrigger MinWindowWidth="720"/>
                         </VisualState.StateTriggers>
@@ -39,18 +39,37 @@
                             <Setter Target="detailColumn.Width" Value="*"/>
                             <Setter Target="GridSplitter.Visibility" Value="Visible"/>
                         </VisualState.Setters>
+                        
                     </VisualState>
                 </VisualStateGroup.States>
-
+                <VisualStateGroup.Transitions>
+                    <VisualTransition From="DefaultState" To="NarrowState">
+                        <VisualTransition.GeneratedEasingFunction>
+                            <QuinticEase EasingMode="EaseInOut"/>
+                        </VisualTransition.GeneratedEasingFunction>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <!--<VisualStateGroup.Transitions>
+                    <VisualTransition From="NarrowState" To="DefaultState" GeneratedDuration="0:0:0">
+                        <VisualTransition.Storyboard>
+                            <Storyboard>
+                                <FadeInThemeAnimation/>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Icon">
+                                    <DiscreteObjectKeyFrame KeyTime="0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <Visibility>Collapsed</Visibility>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualTransition.Storyboard>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>-->
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
         <Frame x:Name="MasterFrame" x:FieldModifier="Public" Grid.Column="0" 
-               Navigated="MasterFrame_Navigated">
-            <Frame.Content>
-                <local:MainPage/>
-            </Frame.Content>
-        </Frame>
+               Navigated="MasterFrame_Navigated"/>
 
         <controls:GridSplitter x:Name="GridSplitter" Grid.Column="0"
                                Width="1"

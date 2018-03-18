@@ -27,13 +27,26 @@ namespace GamerSky.Views
             Current = this; 
         }
 
-        public static AppShell Current = null; 
-         
+        public static AppShell Current = null;
+
+        public event EventHandler<VisualStateChangedEventArgs> AdaptiveVisualStateChanged;
+
+
         public List<NavMenuItem> Menus { get; set; } = new List<NavMenuItem>()
         {
             new NavMenuItem() { Icon = "ms-appx:///Assets/Images/icon_xinwen_h.png", Title = GlobalizationStringLoader.GetString("News"), DestPage = typeof(MainPage) },
             new NavMenuItem() { Icon = "ms-appx:///Assets/Images/icon_gonglue_h.png", Title = GlobalizationStringLoader.GetString("Game"), DestPage = typeof(GamePage) }
-        }; 
+        };
+
+        private void VisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            AdaptiveVisualStateChanged?.Invoke(sender, e);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Frame.Navigate(typeof(MasterDetailPage));
+        }
     }
 }
 

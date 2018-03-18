@@ -25,5 +25,28 @@ namespace GamerSky.Views
         {
             this.InitializeComponent();
         }
+
+        private void Current_VisualStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            switch(e.NewState.Name)
+            {
+                case "Narrow":
+                    moduleGrid.Visibility = Visibility.Visible;
+                    break;
+                case "Default":
+                    moduleGrid.Visibility = Visibility.Collapsed;
+                    break;
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            MasterDetailPage.Current.AdaptiveVisualStateChanged += Current_VisualStateChanged;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            MasterDetailPage.Current.AdaptiveVisualStateChanged -= Current_VisualStateChanged;
+        }
     }
 }

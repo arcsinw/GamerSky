@@ -104,6 +104,7 @@
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\DelegateCommand{T}.cs" />
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Controls\GlobalDialog\GlobalDialog.cs" />
     <Compile Include="Controls\GridSplitter\GridSplitter.cs" />
     <Compile Include="Controls\GridSplitter\GridSplitter.Data.cs" />
     <Compile Include="Controls\GridSplitter\GridSplitter.Events.cs" />
@@ -119,24 +120,56 @@
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
+    <Compile Include="Enums\GameNodeIdEnum.cs" />
+    <Compile Include="Enums\SearchTypeEnum.cs" />
+    <Compile Include="Enums\SubscribeEditEnum.cs" />
     <Compile Include="HttpHelper\HttpHelper.cs" />
     <Compile Include="HttpHelper\HttpHelperRequest.cs" />
     <Compile Include="HttpHelper\HttpHelperResponse.cs" />
+    <Compile Include="Interfaces\IBackKeyPress.cs" />
+    <Compile Include="Interfaces\ICustomTitleBar.cs" />
+    <Compile Include="Models\AdStart.cs" />
     <Compile Include="Models\Channel.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Essay.cs" />
+    <Compile Include="Models\Game\Game.cs" />
+    <Compile Include="Models\Game\GameDetail.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\PostDataModel\AllChannelListRequest.cs" />
+    <Compile Include="Models\PostDataModel\CommentRequest.cs" />
+    <Compile Include="Models\PostDataModel\EditSubscribeRequest.cs" />
+    <Compile Include="Models\PostDataModel\EmailRegisterRequest.cs" />
+    <Compile Include="Models\PostDataModel\GameDetailEssayRequest.cs" />
+    <Compile Include="Models\PostDataModel\GameDetailRequest.cs" />
+    <Compile Include="Models\PostDataModel\GameRequest.cs" />
+    <Compile Include="Models\PostDataModel\Game\GameHomePagePostData.cs" />
+    <Compile Include="Models\PostDataModel\Game\GameRankingListPostData.cs" />
+    <Compile Include="Models\PostDataModel\Game\GameSpecialDetailPostData.cs" />
+    <Compile Include="Models\PostDataModel\Game\GameSpecialListPostData.cs" />
+    <Compile Include="Models\PostDataModel\LoginRequest.cs" />
     <Compile Include="Models\PostDataModel\PostDataTemplate.cs" />
+    <Compile Include="Models\PostDataModel\SearchRequest.cs" />
+    <Compile Include="Models\PostDataModel\StrategyRequest.cs" />
+    <Compile Include="Models\PostDataModel\SubscribeContentRequest.cs" />
+    <Compile Include="Models\PostDataModel\SubscribeSearchRequest.cs" />
+    <Compile Include="Models\PostDataModel\SubscribeTopicRequest.cs" />
+    <Compile Include="Models\PostDataModel\VerificationCodeRequest.cs" />
     <Compile Include="Models\ResultDataModel\EssayComments.cs" />
     <Compile Include="Models\ResultDataModel\ResultDataTemplate.cs" />
+    <Compile Include="Models\ResultDataModel\VerificationCode.cs" />
+    <Compile Include="Models\Strategy.cs" />
+    <Compile Include="Models\Subscribe.cs" />
+    <Compile Include="Models\YaowenRequest.cs" />
     <Compile Include="Services\ApiBaseService.cs" />
     <Compile Include="Services\ApiService.cs" />
     <Compile Include="Services\HttpBaseService.cs" />
     <Compile Include="Services\ServiceUri.cs" />
+    <Compile Include="Utils\ConnectionHelper.cs" />
+    <Compile Include="Utils\ConnectionType.cs" />
     <Compile Include="Utils\DeviceInformationHelper.cs" />
     <Compile Include="Utils\FileHelper.cs" />
+    <Compile Include="Utils\Functions.cs" />
     <Compile Include="Views\Detail\DefaultPage.xaml.cs">
       <DependentUpon>DefaultPage.xaml</DependentUpon>
     </Compile>
@@ -150,7 +183,6 @@
     <Compile Include="Models\Game\GameSpecialDetail.cs" />
     <Compile Include="Models\NavMenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResultModel\ResultModel.cs" />
     <Compile Include="Utils\GlobalizationStringLoader.cs" />
     <Compile Include="Utils\JsonHelper.cs" />
     <Compile Include="Utils\NavigationHelper.cs" />
@@ -275,6 +307,10 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Page Include="Controls\GlobalDialog\GlobalDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\SimpleRadioButton\SimpleRadioButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
