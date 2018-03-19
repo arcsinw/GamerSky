@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="GamerSky.Views.ExtendedSplash"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GamerSky.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid><!--Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">-->
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="180"/>
+        </Grid.RowDefinitions>
+
+        <Canvas Grid.Row="0" Grid.RowSpan="2">
+            <Image x:Name="extendedSplashImage" Source="ms-appx:///Assets/Images/ic_launcher.png"/>
+        </Canvas>
+
+        <ProgressRing x:Name="progressRing" Foreground="{ThemeResource ThemeColorBrush}" IsActive="True"
+                      Height="48" Width="48" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+    </Grid>
+</Page>

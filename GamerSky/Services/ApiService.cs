@@ -455,8 +455,8 @@ namespace GamerSky.Services
         //    var result = await PostJson<LoginPostData, LoginResult>(ServiceUri.Login, postData);
         //    return result;
         //}
-
-        public async Task SinaLogin()
+         
+        public async void SinaLogin()
         {
             
         }

@@ -1,4 +1,5 @@
-﻿using GamerSky.Views;
+﻿using GamerSky.Utils;
+using GamerSky.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -35,6 +36,7 @@ namespace GamerSky
             this.Suspending += OnSuspending;
         }
 
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -50,16 +52,7 @@ namespace GamerSky
             //}
 #endif
 
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 400));
-
-            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
-            if (titleBar != null)
-            {
-                Color titleBarColor = (Color)App.Current.Resources["ThemeColor"];
-                //titleBar.InactiveBackgroundColor = (Color)App.Current.Resources["SystemChromeMediumColor"];
-                titleBar.BackgroundColor = titleBarColor;
-                titleBar.ButtonBackgroundColor = titleBarColor;
-            }
+            TitleBarPersonalizeHelper.PersonalizeTitleBar();
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -94,6 +87,8 @@ namespace GamerSky
                 Window.Current.Activate();
             }
         }
+
+
 
         /// <summary>
         /// Invoked when Navigation to a certain page fails

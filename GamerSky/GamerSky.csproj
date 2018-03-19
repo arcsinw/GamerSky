@@ -104,6 +104,7 @@
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\DelegateCommand{T}.cs" />
     <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Controls\GlobalDialog\GlobalDialog.cs" />
     <Compile Include="Controls\GridSplitter\GridSplitter.cs" />
     <Compile Include="Controls\GridSplitter\GridSplitter.Data.cs" />
@@ -170,11 +171,16 @@
     <Compile Include="Utils\DeviceInformationHelper.cs" />
     <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Utils\Functions.cs" />
+    <Compile Include="Utils\TitleBarPersonalizeHelper.cs" />
+    <Compile Include="ViewModels\MasterDetailPageViewModel.cs" />
     <Compile Include="Views\Detail\DefaultPage.xaml.cs">
       <DependentUpon>DefaultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Detail\WebViewPage.xaml.cs">
       <DependentUpon>WebViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Master\GroupPage.xaml.cs">
+      <DependentUpon>GroupPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Master\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -208,6 +214,9 @@
     <Compile Include="Views\Master\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ExtendedSplash.xaml.cs">
+      <DependentUpon>ExtendedSplash.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -222,6 +231,9 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\Images\drawer_day.png" />
+    <Content Include="Assets\Images\drawer_night.png" />
+    <Content Include="Assets\Images\drawer_user.png" />
     <Content Include="Assets\Images\icon_xinwen.png" />
     <Content Include="Assets\Images\icon_xinwen_select.png" />
     <Content Include="Assets\Images\icon_yonghu.png" />
@@ -239,10 +251,41 @@
     <Content Include="Assets\Images\ic_launcher.png" />
     <Content Include="Assets\Images\ic_main_quanzi_default.png" />
     <Content Include="Assets\Images\ic_main_quanzi_selected.png" />
+    <Content Include="Assets\Images\ic_news_live.png" />
+    <Content Include="Assets\Images\ic_quanzi_changtu_badge.png" />
+    <Content Include="Assets\Images\ic_quanzi_gif_badge.png" />
+    <Content Include="Assets\Images\ic_quanzi_jinghua.png" />
+    <Content Include="Assets\Images\ic_quanzi_link.png" />
+    <Content Include="Assets\Images\ic_quanzi_video.png" />
+    <Content Include="Assets\Images\ic_quanzi_zhiding.png" />
     <Content Include="Assets\Images\ic_search.png" />
+    <Content Include="Assets\Images\ic_title.png" />
+    <Content Include="Assets\Images\image_loading_focus.png" />
+    <Content Include="Assets\Images\launch_title.png" />
+    <Content Include="Assets\Images\login_weibo.png" />
+    <Content Include="Assets\Images\login_weixin.png" />
+    <Content Include="Assets\Images\message_news.png" />
+    <Content Include="Assets\Images\message_official.png" />
+    <Content Include="Assets\Images\message_read.png" />
+    <Content Include="Assets\Images\message_reply.png" />
+    <Content Include="Assets\Images\message_setting.png" />
+    <Content Include="Assets\Images\message_zan.png" />
     <Content Include="Assets\Images\ranking_sort_one.png" />
     <Content Include="Assets\Images\ranking_sort_three.png" />
     <Content Include="Assets\Images\ranking_sort_two.png" />
+    <Content Include="Assets\Images\salelist_platform_pc.png" />
+    <Content Include="Assets\Images\salelist_platform_ps3_black.png" />
+    <Content Include="Assets\Images\salelist_platform_ps4_white.png" />
+    <Content Include="Assets\Images\salelist_platform_x1_white.png" />
+    <Content Include="Assets\Images\salelist_platform_x360_green.png" />
+    <Content Include="Assets\Images\share_pengyouquan.png" />
+    <Content Include="Assets\Images\share_qq.png" />
+    <Content Include="Assets\Images\share_qqkongjian.png" />
+    <Content Include="Assets\Images\share_save.png" />
+    <Content Include="Assets\Images\share_weibo.png" />
+    <Content Include="Assets\Images\share_weixin.png" />
+    <Content Include="Assets\Images\star.png" />
+    <Content Include="Assets\Images\star_outline.png" />
     <Content Include="Assets\Images\user_default_photo.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
@@ -323,6 +366,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Master\GroupPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Master\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -353,6 +400,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Master\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExtendedSplash.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

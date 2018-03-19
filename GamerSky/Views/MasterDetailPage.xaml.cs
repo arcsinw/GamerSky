@@ -77,7 +77,7 @@ namespace GamerSky.Views
         
         private void UpdateForVisualState()
         {
-            var isNarrow = AdaptiveVisualStateGroup.CurrentState.Name == "NarrowState";
+            var isNarrow = AdaptiveVisualStateGroup.CurrentState.Name == "Narrow";
             if (isNarrow)
             {
                 DetailFrame.Visibility = DetailFrame.CanGoBack ? Visibility.Visible : Visibility.Collapsed;
