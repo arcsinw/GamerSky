@@ -107,16 +107,25 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
+         
+
+        <Storyboard x:Name="ShowStoryboard" Storyboard.TargetName="moduleGrid" Storyboard.TargetProperty="Margin">
+            <PopInThemeAnimation FromVerticalOffset="60" FromHorizontalOffset="0" Duration="10"/>
+        </Storyboard>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Frame>
-            <local:NewsPage/>
-        </Frame>
-        
+        <Frame x:Name="Frame"/>
+
         <!--#region Module Grid-->
         <Grid x:Name="moduleGrid" VerticalAlignment="Bottom" Padding="4,8"
               BorderThickness="0,1,0,0" BorderBrush="LightGray">
+            <Grid.Transitions>
+                <TransitionCollection>
+                    <PopupThemeTransition/>
+                </TransitionCollection>
+            </Grid.Transitions> 
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -125,31 +134,37 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <controls:SimpleRadioButton Grid.Column="0"
-                Source="ms-appx:///Assets/Images/icon_xinwen.png"
-                                        SelectedSource="ms-appx:///Assets/Images/icon_xinwen_select.png"/>
-            <!--Title="新闻"/>-->
+            <!--#region SimpleRadioButons-->
+                <controls:SimpleRadioButton Grid.Column="0" Tag="0" IsChecked="True"
+                Source="ms-appx:///Assets/Images/icon_xinwen.png" ToolTipService.ToolTip="新闻"
+                                        SelectedSource="ms-appx:///Assets/Images/icon_xinwen_select.png"
+                                        Checked="SimpleRadioButton_Checked"/>
+                <!--Title="新闻"/>-->
 
-            <controls:SimpleRadioButton Grid.Column="1"
+                <controls:SimpleRadioButton Grid.Column="1" Tag="1" ToolTipService.ToolTip="游戏"
                 Source="ms-appx:///Assets/Images/icon_youxi.png"
                                         SelectedSource="ms-appx:///Assets/Images/icon_youxi_select.png"
-                                        />
-            <!--Title="游戏"/>-->
+                                        Checked="SimpleRadioButton_Checked"/>
+                <!--Title="游戏"/>-->
 
-            <controls:SimpleRadioButton Grid.Column="2"
+                <controls:SimpleRadioButton Grid.Column="2" Tag="2" ToolTipService.ToolTip="圈子"
                 Source="ms-appx:///Assets/Images/ic_main_quanzi_default.png"
-                                        SelectedSource="ms-appx:///Assets/Images/ic_main_quanzi_selected.png"/>
-            <!--Title="圈子"/>-->
+                                        SelectedSource="ms-appx:///Assets/Images/ic_main_quanzi_selected.png"
+                                        Checked="SimpleRadioButton_Checked"/>
+                <!--Title="圈子"/>-->
 
-            <controls:SimpleRadioButton Grid.Column="3"
+                <controls:SimpleRadioButton Grid.Column="3" Tag="3" ToolTipService.ToolTip="原创"
                 Source="ms-appx:///Assets/Images/icon_yuanchuang.png"
-                                        SelectedSource="ms-appx:///Assets/Images/icon_yuanchuang_select.png"/>
-            <!--Title="原创"/>-->
+                                        SelectedSource="ms-appx:///Assets/Images/icon_yuanchuang_select.png"
+                                        Checked="SimpleRadioButton_Checked"/>
+                <!--Title="原创"/>-->
 
-            <controls:SimpleRadioButton Grid.Column="4"
+                <controls:SimpleRadioButton Grid.Column="4" Tag="4" ToolTipService.ToolTip="我的"
                 Source="ms-appx:///Assets/Images/icon_yonghu.png"
-                                        SelectedSource="ms-appx:///Assets/Images/icon_yonghu_select.png"/>
-            <!--Title="我的"/>-->
+                                        SelectedSource="ms-appx:///Assets/Images/icon_yonghu_select.png"
+                                        Checked="SimpleRadioButton_Checked"/>
+                <!--Title="我的"/>-->
+            <!--#endregion-->
         </Grid>
         <!--#endregion-->
     </Grid>

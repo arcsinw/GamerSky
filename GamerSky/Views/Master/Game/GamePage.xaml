@@ -14,12 +14,7 @@
         <vm:GamePageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.Resources>
-            <Style x:Key="ImageButtonStyle" TargetType="Button">
-                <Setter Property="Background" Value="Transparent"/>
-            </Style>
-        </Grid.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"> 
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -29,17 +24,17 @@
             <TextBlock Text="游戏" FontSize="20" VerticalAlignment="Center"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Style="{StaticResource ImageButtonStyle}" Padding="12" Height="48" Width="48">
+                <Button Style="{StaticResource ImageButtonStyle}" Padding="12" Height="48" Width="48" Click="{x:Bind Show}">
                     <Image Source="/Assets/Images/ic_game_history.png"/>
                 </Button>
 
-                <Button Style="{StaticResource ImageButtonStyle}" Padding="12" Height="48" Width="48">
+                <Button Style="{StaticResource ImageButtonStyle}" Padding="12" Height="48" Width="48" Click="{x:Bind Hide}">
                     <Image Source="/Assets/Images/ic_search.png"/>
                 </Button>
             </StackPanel>
         </Grid>
 
-        <ItemsControl Grid.Row="1" >
+        <ItemsControl Grid.Row="1">
             <!--<ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel/>
@@ -98,7 +93,8 @@
                 <ControlTemplate TargetType="ItemsControl">
                     <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
                         <ScrollViewer x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" 
-                                          HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}" Style="{StaticResource LightScrollViewerStyle}">
+                                          HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}" 
+                                      Style="{StaticResource LightScrollViewerStyle}">
                             <ItemsPresenter Padding="{TemplateBinding Padding}"/>
                         </ScrollViewer>
                     </Border>

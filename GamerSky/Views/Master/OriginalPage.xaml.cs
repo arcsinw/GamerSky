@@ -13,26 +13,17 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 namespace GamerSky.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GamePage : Page
+    public sealed partial class OriginalPage : Page
     {
-        public GamePage()
+        public OriginalPage()
         {
             this.InitializeComponent();
-        }
-
-        public void Show()
-        {
-            MainPage.Current.ShowModuleGrid();
-        }
-         
-        public void Hide()
-        {
-            MainPage.Current.HideModuleGrid();
         }
     }
 }

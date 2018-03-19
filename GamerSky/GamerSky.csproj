@@ -211,6 +211,9 @@
     <Compile Include="Views\Master\NewsPage.xaml.cs">
       <DependentUpon>NewsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Master\OriginalPage.xaml.cs">
+      <DependentUpon>OriginalPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Master\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -261,6 +264,8 @@
     <Content Include="Assets\Images\ic_search.png" />
     <Content Include="Assets\Images\ic_title.png" />
     <Content Include="Assets\Images\image_loading_focus.png" />
+    <Content Include="Assets\Images\image_loading_game_lib_day.png" />
+    <Content Include="Assets\Images\image_loading_game_lib_night.png" />
     <Content Include="Assets\Images\launch_title.png" />
     <Content Include="Assets\Images\login_weibo.png" />
     <Content Include="Assets\Images\login_weixin.png" />
@@ -396,6 +401,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Master\NewsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Master\OriginalPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

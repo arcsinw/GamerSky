@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GamerSky.Controls;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +25,11 @@ namespace GamerSky.Views
         public MainPage()
         {
             this.InitializeComponent();
+
+            Current = this;
         }
+
+        public static MainPage Current = null;
 
         private void Current_VisualStateChanged(object sender, VisualStateChangedEventArgs e)
         {
@@ -47,6 +52,42 @@ namespace GamerSky.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             MasterDetailPage.Current.AdaptiveVisualStateChanged -= Current_VisualStateChanged;
+        }
+
+        private void SimpleRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is SimpleRadioButton radioButton)
+            {
+                switch (radioButton.Tag)
+                {
+                    case "0":
+                        Frame.Navigate(typeof(NewsPage));
+                        break;
+                    case "1":
+                        Frame.Navigate(typeof(GamePage));
+                        break;                                               
+                    case "2":                                               
+                        Frame.Navigate(typeof(GroupPage));
+                        break;                                               
+                    case "3":                                               
+                        Frame.Navigate(typeof(OriginalPage));
+                        break;                                               
+                    case "4":                                               
+                        Frame.Navigate(typeof(MyPage));
+                        break;
+                }
+            }
+        }
+
+        public void ShowModuleGrid()
+        {
+            moduleGrid.Visibility = Visibility.Visible;
+            ShowStoryboard.Begin();
+        }
+
+        public void HideModuleGrid()
+        {
+            //moduleGrid.Visibility = Visibility.Collapsed;
         }
     }
 }
