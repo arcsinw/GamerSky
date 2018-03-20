@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Enumeration;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,21 +25,15 @@ namespace GamerSky.Views
         public AppShell()
         {
             this.InitializeComponent();
-
-            Current = this; 
+             
+            Current = this;
         }
-
+         
         public static AppShell Current = null;
 
         public event EventHandler<VisualStateChangedEventArgs> AdaptiveVisualStateChanged;
 
-
-        public List<NavMenuItem> Menus { get; set; } = new List<NavMenuItem>()
-        {
-            new NavMenuItem() { Icon = "ms-appx:///Assets/Images/icon_xinwen_h.png", Title = GlobalizationStringLoader.GetString("News"), DestPage = typeof(MainPage) },
-            new NavMenuItem() { Icon = "ms-appx:///Assets/Images/icon_gonglue_h.png", Title = GlobalizationStringLoader.GetString("Game"), DestPage = typeof(GamePage) }
-        };
-
+         
         private void VisualStateGroup_CurrentStateChanged(object sender, VisualStateChangedEventArgs e)
         {
             AdaptiveVisualStateChanged?.Invoke(sender, e);

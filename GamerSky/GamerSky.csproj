@@ -173,6 +173,7 @@
     <Compile Include="Utils\Functions.cs" />
     <Compile Include="Utils\TitleBarPersonalizeHelper.cs" />
     <Compile Include="ViewModels\MasterDetailPageViewModel.cs" />
+    <Compile Include="ViewModels\NewsPageViewModel.cs" />
     <Compile Include="Views\Detail\DefaultPage.xaml.cs">
       <DependentUpon>DefaultPage.xaml</DependentUpon>
     </Compile>

@@ -1,10 +1,13 @@
-﻿using System;
+﻿using GamerSky.Models;
+using GamerSky.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -30,7 +33,27 @@ namespace GamerSky.Views
             Current = this;
 
             SystemNavigationManager.GetForCurrentView().BackRequested += SystemNavigationManager_BackRequested;
+            DisplayInformation.GetForCurrentView().OrientationChanged += AppShell_OrientationChanged;
         }
+
+
+        private void AppShell_OrientationChanged(DisplayInformation sender, object args)
+        {
+            if (sender.CurrentOrientation == DisplayOrientations.Portrait || sender.CurrentOrientation == DisplayOrientations.PortraitFlipped)
+            {
+                VisualStateManager.GoToState(this, "Narrow", true);
+            }
+            else
+            {
+                VisualStateManager.GoToState(this, "Default", true);
+            }
+        }
+
+        public List<NavMenuItem> Menus { get; set; } = new List<NavMenuItem>()
+        {
+            new NavMenuItem() { Icon = "ms-appx:///Assets/Images/icon_xinwen_h.png", Title = GlobalizationStringLoader.GetString("News"), DestPage = typeof(MainPage) },
+            new NavMenuItem() { Icon = "ms-appx:///Assets/Images/icon_gonglue_h.png", Title = GlobalizationStringLoader.GetString("Game"), DestPage = typeof(GamePage) }
+        };
 
         #region BackRequested Handlers
 
@@ -99,12 +122,14 @@ namespace GamerSky.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             MasterFrame.Navigate(typeof(MainPage));
+            DetailFrame.Navigate(typeof(DefaultPage));
             AppShell.Current.AdaptiveVisualStateChanged += Current_AdaptiveVisualStateChanged;
         }
 
         private void Current_AdaptiveVisualStateChanged(object sender, VisualStateChangedEventArgs e)
         {
             AdaptiveVisualStateChanged?.Invoke(sender, e);
+            UpdateForVisualState();
         }
 
         private void DetailFrame_Navigated(object sender, NavigationEventArgs e)

@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d">
+
+    
     
     <Page.Resources>
         <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
@@ -107,19 +109,18 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
-         
-
+          
         <Storyboard x:Name="ShowStoryboard" Storyboard.TargetName="moduleGrid" Storyboard.TargetProperty="Margin">
             <PopInThemeAnimation FromVerticalOffset="60" FromHorizontalOffset="0" Duration="10"/>
         </Storyboard>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Frame x:Name="Frame"/>
+        <Frame x:Name="frame"/>
 
         <!--#region Module Grid-->
         <Grid x:Name="moduleGrid" VerticalAlignment="Bottom" Padding="4,8"
-              BorderThickness="0,1,0,0" BorderBrush="LightGray">
+              BorderThickness="0,1,0,0" BorderBrush="LightGray" >
             <Grid.Transitions>
                 <TransitionCollection>
                     <PopupThemeTransition/>
@@ -167,5 +168,6 @@
             <!--#endregion-->
         </Grid>
         <!--#endregion-->
+        
     </Grid>
 </Page>

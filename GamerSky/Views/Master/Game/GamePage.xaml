@@ -35,11 +35,11 @@
         </Grid>
 
         <ItemsControl Grid.Row="1">
-            <!--<ItemsControl.ItemsPanel>
+            <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel/>
+                    <ItemsStackPanel/>
                 </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>-->
+            </ItemsControl.ItemsPanel>
             <ItemsControl.Resources>
 
                 <Style TargetType="TextBlock" x:Key="HeaderTextBlockStyle">

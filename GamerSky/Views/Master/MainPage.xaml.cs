@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 
@@ -61,19 +62,19 @@ namespace GamerSky.Views
                 switch (radioButton.Tag)
                 {
                     case "0":
-                        Frame.Navigate(typeof(NewsPage));
+                        frame.Navigate(typeof(NewsPage));
                         break;
                     case "1":
-                        Frame.Navigate(typeof(GamePage));
+                        frame.Navigate(typeof(GamePage));
                         break;                                               
                     case "2":                                               
-                        Frame.Navigate(typeof(GroupPage));
+                        frame.Navigate(typeof(GroupPage));
                         break;                                               
                     case "3":                                               
-                        Frame.Navigate(typeof(OriginalPage));
+                        frame.Navigate(typeof(OriginalPage));
                         break;                                               
                     case "4":                                               
-                        Frame.Navigate(typeof(MyPage));
+                        frame.Navigate(typeof(MyPage));
                         break;
                 }
             }
