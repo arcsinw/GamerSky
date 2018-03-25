@@ -8,13 +8,68 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
+    SizeChanged="Page_SizeChanged"
     >
+    <Page.Resources>
+        <Style x:Key="SimpleHyperlinkButtonStyle" TargetType="HyperlinkButton">
+            <Setter Property="Foreground" Value="{ThemeResource SystemControlHyperlinkTextBrush}"/>
+            <!--<Setter Property="BorderThickness" Value="{ThemeResource HyperlinkButtonBorderThemeThickness}"/>-->
+            <Setter Property="Padding" Value="0,6,0,6"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding }"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="HyperlinkButton">
+                        <Grid x:Name="RootGrid">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHyperlinkBaseMediumBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlDisabledBaseMediumLowBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Page.DataContext>
         <vm:GamePageViewModel x:Name="ViewModel"/>
     </Page.DataContext>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"> 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition/>
@@ -75,14 +130,21 @@
                 </Style>
 
                 <Style TargetType="Button" x:Key="PartButtonStyle" BasedOn="{StaticResource ImageButtonStyle}">
-                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                    <Setter Property="Height" Value="64"/>
-                    <Setter Property="Width" Value="64"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    <!--<Setter Property="Height" Value="64"/>
+                    <Setter Property="Width" Value="64"/>-->
                 </Style>
 
                 <Style TargetType="TextBlock">
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                     <Setter Property="FontSize" Value="14"/>
+                </Style>
+
+                <Style TargetType="Image">
+                    <Setter Property="Height" Value="48"/>
+                    <Setter Property="Width" Value="48"/>
                 </Style>
 
                 <Style TargetType="StackPanel" x:Key="PartStackPanelStyle">
@@ -110,55 +172,60 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                        <Button Style="{StaticResource PartButtonStyle}" >
+                    <Button Grid.Column="0" Style="{StaticResource PartButtonStyle}" >
+                        <StackPanel>
                             <Image Source="/Assets/Images/ic_game_tszt.png"/>
-                        </Button>
-                        <TextBlock Text="特色专题" />
-                    </StackPanel>
+                            <TextBlock Text="特色专题" />
+                        </StackPanel>
+                    </Button>
 
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <Button Style="{StaticResource PartButtonStyle}" >
+                    <Button Grid.Column="1" Style="{StaticResource PartButtonStyle}" >
+                        <StackPanel>
                             <Image Source="/Assets/Images/ic_game_phb.png"/>
-                        </Button>
-                        <TextBlock Grid.Column="1" Text="排行榜" />
-                    </StackPanel>
+                            <TextBlock Grid.Column="1" Text="排行榜" />
+                        </StackPanel>
+                    </Button>
 
-                    <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                        <Button Style="{StaticResource PartButtonStyle}">
+                    <Button Grid.Column="2" Style="{StaticResource PartButtonStyle}">
+                        <StackPanel>
                             <Image Source="/Assets/Images/ic_game_fsb.png"/>
-                        </Button>
-                        <TextBlock Grid.Column="2" Text="发售表" />
-                    </StackPanel>
+                            <TextBlock Grid.Column="2" Text="发售表" />
+                        </StackPanel>
+                    </Button>
 
-                    <StackPanel Grid.Column="3" VerticalAlignment="Center">
-                        <Button Style="{StaticResource PartButtonStyle}">
+                    <Button Grid.Column="3" Style="{StaticResource PartButtonStyle}">
+                        <StackPanel  VerticalAlignment="Center">
                             <Image Source="/Assets/Images/ic_game_wjdp.png"/>
-                        </Button>
-                        <TextBlock Grid.Column="3" Text="玩家点评" />
-                    </StackPanel>
+                            <TextBlock Grid.Column="3" Text="玩家点评" />
+                        </StackPanel>
+                    </Button>
 
-                    <StackPanel Grid.Column="4" VerticalAlignment="Center">
-                        <Button Style="{StaticResource PartButtonStyle}">
+
+                    <Button Grid.Column="4" Style="{StaticResource PartButtonStyle}">
+                        <StackPanel  VerticalAlignment="Center">
                             <Image Source="/Assets/Images/ic_game_zyx.png"/>
-                        </Button>
-                        <TextBlock Grid.Column="4" Text="找游戏" />
-                    </StackPanel>
+                            <TextBlock Grid.Column="4" Text="找游戏" />
+                        </StackPanel>
+                    </Button>
                 </Grid>
 
                 <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
                     <Grid Style="{StaticResource TitleGridStyle}">
                         <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
                         <TextBlock Text="新游推荐" Style="{StaticResource HeaderTextBlockStyle}"/>
-                        <HyperlinkButton Content="全部" HorizontalAlignment="Right"/>
+                        <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                     </Grid>
-                    <FlipView ItemsSource="{Binding NewGames}" Height="Auto" MaxHeight="300">
+                    <FlipView x:Name="flipView" ItemsSource="{Binding NewGames}" MaxHeight="254" VerticalAlignment="Top">
                         <FlipView.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <controls:ImageEx Source="{Binding LargeImage}" 
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="{Binding LargeImage}" Stretch="UniformToFill"/>
+                                    </Grid.Background>
+                                    <!--<controls:ImageEx Source="{Binding LargeImage}" 
                                                       PlaceholderSource="{StaticResource GamePlaceHolderImage}"
-                                                      Stretch="UniformToFill"/>
+                                                      Height="254" Width="450" Stretch="Fill"/>-->
+
                                     <StackPanel VerticalAlignment="Bottom">
                                         <TextBlock Foreground="White" TextWrapping="Wrap" Margin="24">
                                     <Run Text="{Binding Title}" FontSize="20"/>
@@ -176,7 +243,7 @@
                     <Grid Style="{StaticResource TitleGridStyle}">
                         <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
                         <TextBlock Text="最近大家都在玩" Style="{StaticResource HeaderTextBlockStyle}"/>
-                        <Button Content="全部" HorizontalAlignment="Right"/>
+                        <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                     </Grid>
                     <ListView ItemsSource="{Binding RecentGames}">
                         <ListView.ItemTemplate>
@@ -196,7 +263,7 @@
                     <Grid Style="{StaticResource TitleGridStyle}">
                         <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
                         <TextBlock Text="特色专题" Style="{StaticResource HeaderTextBlockStyle}"/>
-                        <Button Content="全部" HorizontalAlignment="Right"/>
+                        <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                     </Grid>
                     <ListView ItemsSource="{Binding GameSpecialList}">
                         <ListView.ItemTemplate>
@@ -223,7 +290,7 @@
                     <Grid Style="{StaticResource TitleGridStyle}">
                         <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
                         <TextBlock Text="即将上市" Style="{StaticResource HeaderTextBlockStyle}"/>
-                        <Button Content="全部" HorizontalAlignment="Right"/>
+                        <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                     </Grid>
                     <ListView ItemsSource="{Binding NewSellingGames}">
                         <ListView.ItemTemplate>
@@ -243,7 +310,7 @@
                     <Grid Style="{StaticResource TitleGridStyle}">
                         <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
                         <TextBlock Text="高分榜" Style="{StaticResource HeaderTextBlockStyle}"/>
-                        <Button Content="全部" HorizontalAlignment="Right"/>
+                        <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                     </Grid>
                     <ListView ItemsSource="{Binding HighRankedGames}">
                         <ListView.ItemTemplate>
@@ -263,7 +330,7 @@
                     <Grid Style="{StaticResource TitleGridStyle}">
                         <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
                         <TextBlock Text="最期待游戏" Style="{StaticResource HeaderTextBlockStyle}"/>
-                        <Button Content="全部" HorizontalAlignment="Right"/>
+                        <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                     </Grid>
                     <ListView ItemsSource="{Binding MostExpectedGames}">
                         <ListView.ItemTemplate>
@@ -288,7 +355,7 @@
                     <Grid Style="{StaticResource TitleGridStyle}">
                         <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
                         <TextBlock Text="找游戏" Style="{StaticResource HeaderTextBlockStyle}"/>
-                        <Button Content="全部" HorizontalAlignment="Right"/>
+                        <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                     </Grid>
                     <ListView>
 

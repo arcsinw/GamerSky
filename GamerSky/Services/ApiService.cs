@@ -456,7 +456,7 @@ namespace GamerSky.Services
         //    return result;
         //}
          
-        public async void SinaLogin()
+        public void SinaLogin()
         {
             
         }

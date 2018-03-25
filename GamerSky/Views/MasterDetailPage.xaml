@@ -9,8 +9,9 @@
     xmlns:models="using:GamerSky.Models"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:actions="using:GamerSky.Actions"
-    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:converter="using:GamerSky.Converters"
+    DataContext="{Binding Path=MasterDetailPageInstance, Source={StaticResource ViewModelLocator}}"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -357,9 +358,15 @@
         <Grid x:Name="paneGrid" BorderBrush="{ThemeResource ThemeColorBrush}" BorderThickness="0,0,1,0" Grid.Column="0" 
               Background="{ThemeResource PaneBackgroundBrush}">
 
-            <ListView x:Name="paneListView" ItemsSource="{x:Bind Menus}" Padding="0" Margin="0"
+            <ListView x:Name="paneListView" ItemsSource="{Binding Menus}" Padding="0" Margin="0"
                       IsItemClickEnabled="True" SelectionMode="Single"
+                      SelectedItem="{Binding Path=MasterDetailPageInstance.SelectedMenu,Mode=TwoWay,Source={StaticResource ViewModelLocator}}"
                       ItemContainerStyle="{StaticResource NavMenuItemContainerStyle}">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{Binding Path=MasterDetailPageInstance.ItemSelectedCommand,Source={StaticResource ViewModelLocator}}" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
                 <ListView.Header>
                     <Button x:Name="userBtn" Style="{StaticResource PaneButtonStyle}" 
                             ToolTipService.ToolTip="{Binding User.UserName,Mode=OneWay}">
@@ -385,11 +392,11 @@
                     <BitmapIcon Height="26" Width="26"  UriSource="{Binding AppTheme,Mode=OneWay,Converter={StaticResource ElementThemeToUriSourceConverter}}"/>
                 </Button>
                 <Button x:Name="setting" Style="{StaticResource PaneButtonStyle}" ToolTipService.ToolTip="Settings" VerticalAlignment="Bottom">
-                    <i:Interaction.Behaviors>
+                    <interactivity:Interaction.Behaviors>
                         <core:EventTriggerBehavior EventName="Tapped">
                             <actions:NavigationAction SourcePage="GamerSky.Views.SettingsPage" NavigationType="Master"/>
                         </core:EventTriggerBehavior>
-                    </i:Interaction.Behaviors>
+                    </interactivity:Interaction.Behaviors>
                     <Button.Content>
                         <SymbolIcon Symbol="Setting"/>
                     </Button.Content>

@@ -1,4 +1,5 @@
-﻿using GamerSky.Models;
+﻿using GalaSoft.MvvmLight;
+using GamerSky.Models;
 using GamerSky.Models.ResultDataModel;
 using GamerSky.Utils;
 using System;
@@ -47,7 +48,7 @@ namespace GamerSky.ViewModels
 
         public GamePageViewModel()
         {
-            if (IsDesignMode)
+            if (IsInDesignModeStatic)
             {
                 LoadDesignTimeData();
             }

@@ -3,15 +3,19 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GamerSky"
+    xmlns:vm="using:GamerSky.ViewModels"
     RequestedTheme="Light">
 
     <Application.Resources>
+        
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
                     <!--主题色-->
                     <Color x:Key="ThemeColor">#fe0103</Color>
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="#fe0103"/>
+
+                    <SolidColorBrush x:Key="PageBackgroundThemeBrush" Color="#f5f5f5"/>
                     <!--Pane背景色-->
                     <SolidColorBrush x:Key="PaneBackgroundBrush" Color="White"/>
 
@@ -23,6 +27,7 @@
                     <Color x:Key="ThemeColor">#FF333337</Color>
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="#fe0103"/>
 
+                    <SolidColorBrush x:Key="PageBackgroundThemeBrush" Color="#f5f5f5"/>
                     <!--Pane背景色-->
                     <SolidColorBrush x:Key="PaneBackgroundBrush" Color="#FF5F5F5F"/>
 
@@ -32,6 +37,7 @@
 
             </ResourceDictionary.ThemeDictionaries>
 
+            <vm:ViewModelLocator x:Key="ViewModelLocator"/>
 
             <!--#region ListView-->
             <Style x:Key="LightScrollBarStyle" TargetType="ScrollBar">

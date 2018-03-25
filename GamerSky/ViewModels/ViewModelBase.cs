@@ -41,8 +41,6 @@ namespace GamerSky.ViewModels
         }
         
 
-        public void GoBack() => NavigationHelper.GoBack();
-
         public virtual void Refresh() { }
     }
 }

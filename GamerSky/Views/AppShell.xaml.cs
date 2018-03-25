@@ -41,7 +41,7 @@ namespace GamerSky.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            Frame.Navigate(typeof(MasterDetailPage));
+            frame.Navigate(typeof(MasterDetailPage));
         }
     }
 }

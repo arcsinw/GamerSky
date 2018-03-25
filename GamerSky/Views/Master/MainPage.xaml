@@ -7,9 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d">
-
-    
-    
+ 
     <Page.Resources>
         <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
             <Setter Property="Background" Value="Transparent"/>
@@ -109,9 +107,18 @@
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
-          
-        <Storyboard x:Name="ShowStoryboard" Storyboard.TargetName="moduleGrid" Storyboard.TargetProperty="Margin">
-            <PopInThemeAnimation FromVerticalOffset="60" FromHorizontalOffset="0" Duration="10"/>
+
+        <Storyboard x:Name="HideStoryboard" >
+            <DoubleAnimation Storyboard.TargetName="translateTransform" Storyboard.TargetProperty="Y"
+                             To="60" Duration="0:0:0.3"/>
+            <!--<PopInThemeAnimation Storyboard.TargetName="translateTransform" Storyboard.TargetProperty="Y"
+                              Duration="0:0:0.3" FromVerticalOffset="60"/>-->
+        </Storyboard>
+
+        <Storyboard x:Name="ShowStoryboard">
+            <DoubleAnimation Storyboard.TargetName="translateTransform" Storyboard.TargetProperty="Y"
+                             To="0" Duration="0:0:0.3"/>
+            
         </Storyboard>
     </Page.Resources>
 
@@ -119,8 +126,11 @@
         <Frame x:Name="frame"/>
 
         <!--#region Module Grid-->
-        <Grid x:Name="moduleGrid" VerticalAlignment="Bottom" Padding="4,8"
-              BorderThickness="0,1,0,0" BorderBrush="LightGray" >
+        <Grid x:Name="moduleGrid" VerticalAlignment="Bottom" Padding="4,8" Visibility="Collapsed"
+              BorderThickness="0,1,0,0" BorderBrush="LightGray" Background="White">
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="translateTransform"/>
+            </Grid.RenderTransform>
             <Grid.Transitions>
                 <TransitionCollection>
                     <PopupThemeTransition/>

@@ -2,16 +2,23 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace GamerSky.Models
 {
     /// <summary>
     /// 游戏库中的游戏
     /// </summary>
-    public class Game
+    public class Game : ModelBase
     {
         [JsonProperty(PropertyName = "contentId")]
         public string ContentId { get; set; }
@@ -53,5 +60,76 @@ namespace GamerSky.Models
         {
             IsFavorite = !IsFavorite;
         }
+
+
+        #region Image cache
+        WeakReference bitmapImage;
+
+        public ImageSource ImageSource
+        {
+            get
+            {
+                if (bitmapImage != null)
+                {
+                    if (bitmapImage.IsAlive)
+                    {
+                        return (ImageSource)bitmapImage.Target;
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Image was destroyed");
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(ThumbnailURL))
+                {
+                    Task.Factory.StartNew(() => { DownloadImage(new Uri(ThumbnailURL)); });
+                }
+
+                return null;
+            }
+        }
+
+
+        async void DownloadImage(Uri uri)
+        {
+            List<Byte> bytes = new List<byte>();
+            Stream streamForUI;
+            using (var response = await HttpWebRequest.Create(uri).GetResponseAsync())
+            {
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    byte[] buffer = new byte[4000];
+                    int byteRead = 0;
+                    while ((byteRead = await responseStream.ReadAsync(buffer,0,4000)) > 0)
+                    {
+                        bytes.AddRange(buffer.Take(byteRead));
+                    }
+                }
+            }
+
+            streamForUI = new MemoryStream((int)bytes.Count);
+            streamForUI.Write(bytes.ToArray(), 0, bytes.Count);
+            streamForUI.Seek(0, SeekOrigin.Begin);
+            
+            await Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                BitmapImage bm = new BitmapImage();
+                bm.SetSource(streamForUI.AsRandomAccessStream());
+
+                if (bitmapImage == null)
+                {
+                    bitmapImage = new WeakReference(bm);
+                }
+                else
+                {
+                    bitmapImage.Target = bm;
+                }
+
+                OnPropertyChanged("ImageSource");
+            });
+
+        }
+        #endregion
     }
 }
