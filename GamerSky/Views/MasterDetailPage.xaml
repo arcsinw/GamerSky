@@ -404,9 +404,15 @@
             </StackPanel>
         </Grid>
         <!--#endregion-->
-        
+
         <Frame x:Name="MasterFrame" x:FieldModifier="Public" Grid.Column="1" 
-               Navigated="MasterFrame_Navigated"/>
+               Navigated="MasterFrame_Navigated">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <ContentThemeTransition/>
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
 
         <controls:GridSplitter x:Name="GridSplitter" Grid.Column="1"
                                Width="1"
@@ -421,15 +427,11 @@
         <Frame x:Name="DetailFrame" x:FieldModifier="Public" 
                Grid.Column="2" 
                Navigated="DetailFrame_Navigated">
-            <Frame.Transitions>
+            <Frame.ContentTransitions>
                 <TransitionCollection>
-                    <NavigationThemeTransition>
-                        <NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                            <EntranceNavigationTransitionInfo/>
-                        </NavigationThemeTransition.DefaultNavigationTransitionInfo>
-                    </NavigationThemeTransition>
+                    <ContentThemeTransition/>
                 </TransitionCollection>
-            </Frame.Transitions>
+            </Frame.ContentTransitions>
         </Frame>
     </Grid>
 </Page>

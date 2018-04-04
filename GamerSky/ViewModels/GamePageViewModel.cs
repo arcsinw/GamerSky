@@ -1,4 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GamerSky.Interfaces;
 using GamerSky.Models;
 using GamerSky.Models.ResultDataModel;
 using GamerSky.Utils;
@@ -46,8 +48,16 @@ namespace GamerSky.ViewModels
         public ObservableCollection<GameSpecialDetail> HighRankedGames { get; set; } = new ObservableCollection<GameSpecialDetail>();
         #endregion
 
-        public GamePageViewModel()
+        private readonly IMasterDetailNavigationService _navigationService;
+
+        public RelayCommand NavigateToSearchPageCommand { get; set; }
+
+        public RelayCommand NavigateToHistoryPageCommand { get; set; }
+
+        public GamePageViewModel(IMasterDetailNavigationService navigationService)
         {
+            _navigationService = navigationService;
+
             if (IsInDesignModeStatic)
             {
                 LoadDesignTimeData();
@@ -56,7 +66,16 @@ namespace GamerSky.ViewModels
             {
                 LoadDesignTimeData();
             }
+
+            NavigateToSearchPageCommand = new RelayCommand(NavigationToSearchPage);
         }
+
+        private void NavigationToSearchPage()
+        {
+            _navigationService.DetailNavigateTo("SearchPage");
+        }
+
+
          
 
         public void LoadDesignTimeData()

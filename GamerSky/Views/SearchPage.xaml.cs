@@ -1,7 +1,10 @@
-﻿using System;
+﻿using GamerSky.Utils;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -13,7 +16,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace GamerSky.Views
 {
@@ -25,6 +27,20 @@ namespace GamerSky.Views
         public SearchPage()
         {
             this.InitializeComponent();
+        }
+
+        public ObservableCollection<string> SearchHistories { get; set; } = new ObservableCollection<string>();
+
+        public void InitSearch()
+        {
+            var input = Observable.FromEventPattern(searchBox, "TextChanged")
+                .Select(_ => searchBox.Text)
+                .Throttle(TimeSpan.FromSeconds(2))
+                .DistinctUntilChanged(new TrimStringComparer())
+                .Subscribe(x => Window.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Low, () =>
+                      {
+                          SearchHistories.Add(x);
+                      }));
         }
     }
 }

@@ -5,7 +5,8 @@
     xmlns:local="using:GamerSky.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding Path=SearchPageInstance, Source={StaticResource ViewModelLocator}}">
 
     <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -20,9 +21,21 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
-            <AutoSuggestBox PlaceholderText="请输入搜索内容" Margin="12,8" QueryIcon="Find" />
+            <AutoSuggestBox x:Name="searchBox"  PlaceholderText="请输入搜索内容" Margin="12,8" QueryIcon="Find" />
 
             <Button Grid.Column="1" Content="取消" Style="{StaticResource LightButtonStyle}"/>
+        </Grid>
+        <!--#endregion-->   
+        
+        <!--#region 搜索历史-->
+        <Grid Grid.Row="1">
+            <ListView ItemsSource="{x:Bind SearchHistories,Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
         <!--#endregion-->
         

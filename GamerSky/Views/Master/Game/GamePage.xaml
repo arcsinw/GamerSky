@@ -9,6 +9,7 @@
     xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
     SizeChanged="Page_SizeChanged"
+    DataContext="{Binding Path=GamePageInstance, Source={StaticResource ViewModelLocator}}"
     >
     <Page.Resources>
         <Style x:Key="SimpleHyperlinkButtonStyle" TargetType="HyperlinkButton">
@@ -64,11 +65,7 @@
             </Setter>
         </Style>
     </Page.Resources>
-
-    <Page.DataContext>
-        <vm:GamePageViewModel x:Name="ViewModel"/>
-    </Page.DataContext>
-
+ 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
@@ -83,7 +80,8 @@
                     <Image Source="/Assets/Images/ic_game_history.png"/>
                 </Button>
 
-                <Button Style="{StaticResource ImageButtonStyle}" Padding="12" Height="48" Width="48" Click="{x:Bind Hide}">
+                <Button Style="{StaticResource ImageButtonStyle}" Padding="12" Height="48" Width="48" Click="{x:Bind Hide}"
+                        Command="{Binding NavigateToSearchPageCommand}">
                     <Image Source="/Assets/Images/ic_search.png"/>
                 </Button>
             </StackPanel>

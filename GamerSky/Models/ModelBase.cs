@@ -23,6 +23,7 @@ namespace GamerSky.Models
             {
                 return;
             }
+
             storage = newValue;
             OnPropertyChanged(propertyName);
         }

@@ -101,10 +101,13 @@
     <Compile Include="Cache\ImageCache.cs" />
     <Compile Include="Cache\InMemoryStorage.cs" />
     <Compile Include="Cache\InMemoryStorageItem.cs" />
+    <Compile Include="Collections\EssayIncrementalCollection.cs" />
+    <Compile Include="Collections\IncrementalLoadingBase.cs" />
     <Compile Include="Common\DelegateCommand.cs" />
     <Compile Include="Common\DelegateCommand{T}.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Controls\ArticlePresenter.cs" />
     <Compile Include="Controls\GlobalDialog\GlobalDialog.cs" />
     <Compile Include="Controls\GridSplitter\GridSplitter.cs" />
     <Compile Include="Controls\GridSplitter\GridSplitter.Data.cs" />
@@ -174,10 +177,13 @@
     <Compile Include="Utils\FileHelper.cs" />
     <Compile Include="Utils\Functions.cs" />
     <Compile Include="Utils\IncrementalLoadingCollection.cs" />
+    <Compile Include="Utils\TrimStringComparer.cs" />
     <Compile Include="Utils\TitleBarPersonalizeHelper.cs" />
+    <Compile Include="ViewModels\GroupPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MasterDetailPageViewModel.cs" />
     <Compile Include="ViewModels\NewsPageViewModel.cs" />
+    <Compile Include="ViewModels\SearchPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\WebViewPageViewModel.cs" />
     <Compile Include="Views\Detail\DefaultPage.xaml.cs">
@@ -450,7 +456,10 @@
       <Version>5.4.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.1</Version>
+      <Version>11.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="System.Reactive">
+      <Version>3.1.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

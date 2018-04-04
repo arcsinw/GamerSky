@@ -1,8 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
+using GamerSky.Collection;
 using GamerSky.Common;
 using GamerSky.Interfaces;
 using GamerSky.Models;
+using GamerSky.Services;
+using GamerSky.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,42 +19,62 @@ namespace GamerSky.ViewModels
     public class NewsPageViewModel : ViewModelBase
     {
         #region fields
-        public ObservableCollection<Tuple<Channel, List<Essay>>> Essays { get; set; }
+        public ObservableCollection<Tuple<Channel, EssayIncrementalCollection>> Essays { get; set; }
 
         public Essay SelectedEssay { get; set; }
 
-        private readonly IMasterDetailNavigationService _navigationService; 
+        private readonly IMasterDetailNavigationService _navigationService;
         #endregion
+         
+        public IncrementalLoadingCollection<Essay> Essay { get; set; }
+
+        private void OnError(Exception obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnDataLoading()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnDataLoaded()
+        {
+            throw new NotImplementedException();
+        }
+         
+
+        private async void LoadData()
+        {
+            List<Channel> channels = await ApiService.Instance.GetChannelList();
+            if (channels != null)
+            {
+                foreach (var item in channels)
+                {
+                    
+                    Essays.Add(new Tuple<Channel, EssayIncrementalCollection>(item, new EssayIncrementalCollection(item.NodeId)));
+                }
+            }
+        }
 
         public NewsPageViewModel(IMasterDetailNavigationService navigationService)
         {
             _navigationService = navigationService;
 
-            Essays = new ObservableCollection<Tuple<Channel, List<Essay>>>();
+            Essays = new ObservableCollection<Tuple<Channel, EssayIncrementalCollection>>();
 
             ItemSelectedCommand = new RelayCommand(NavigateCommandAction);
 
-            if (IsInDesignModeStatic)
-            {
-             
-            }
-
-            LoadDesignTimeData();
+            LoadData();
         }
+         
 
-        public void LoadDesignTimeData()
-        {
-            Essays.Add(new Tuple<Channel, List<Essay>>(new Channel { NodeName = "头条" }, new List<Essay>() { new Essay() { Title = "A" }}));
-            Essays.Add(new Tuple<Channel, List<Essay>>(new Channel { NodeName = "新闻" }, new List<Essay>() { new Essay() { Title = "B" } }));
-            Essays.Add(new Tuple<Channel, List<Essay>>(new Channel { NodeName = "游戏" }, new List<Essay>() { new Essay() { Title = "C" } }));
-            Essays.Add(new Tuple<Channel, List<Essay>>(new Channel { NodeName = "影视" }, new List<Essay>() { new Essay() { Title = "D" } }));
-            Essays.Add(new Tuple<Channel, List<Essay>>(new Channel { NodeName = "热点" }, new List<Essay>() { new Essay() { Title = "E" } }));
-        }
-        
         public RelayCommand ItemSelectedCommand { get; private set; }
-        
+
         private void NavigateCommandAction()
         {
+            Messenger.Default.Send(SelectedEssay);
+            
             _navigationService.DetailNavigateTo("WebViewPage", SelectedEssay);
         }
     }
