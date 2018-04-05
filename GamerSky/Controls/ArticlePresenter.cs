@@ -45,7 +45,10 @@ namespace GamerSky.Controls
         private static void HtmlChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
         {
             var articlePresenter = (ArticlePresenter)dependencyObject;
-            AssignHtml(eventArgs.NewValue, articlePresenter);
+            if (!articlePresenter.Html.Equals(eventArgs.NewValue))
+            {
+                AssignHtml(eventArgs.NewValue, articlePresenter);
+            }
         }
 
 

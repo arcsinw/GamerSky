@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,6 +26,38 @@ namespace GamerSky.Views
         public WebViewPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            if (DataContext is ViewModels.WebViewPageViewModel viewModel)
+            {
+                if (e.Parameter is Models.Essay essay)
+                {
+                    viewModel.SetContentUrl(essay);
+                }
+            }
+        }
+
+        private void webView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        {
+            progressRing.IsActive = false;
+        }
+
+        private void webView_NavigationFailed(object sender, WebViewNavigationFailedEventArgs e)
+        {
+            progressRing.IsActive = false;
+        }
+
+        private void webView_NavigationStarting(WebView sender, WebViewNavigationStartingEventArgs args)
+        {
+            progressRing.IsActive = true;
+        }
+
+        private void webView_UnsupportedUriSchemeIdentified(WebView sender, WebViewUnsupportedUriSchemeIdentifiedEventArgs args)
+        {
+            args.Handled = true;
         }
     }
 }

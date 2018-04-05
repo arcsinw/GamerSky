@@ -9,6 +9,5 @@
         <ResourceDictionary Source="/Controls/SimpleRadioButton/SimpleRadioButton.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-
-  
+   
 </ResourceDictionary>

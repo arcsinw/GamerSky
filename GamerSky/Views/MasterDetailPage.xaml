@@ -427,11 +427,11 @@
         <Frame x:Name="DetailFrame" x:FieldModifier="Public" 
                Grid.Column="2" 
                Navigated="DetailFrame_Navigated">
-            <Frame.ContentTransitions>
+            <!--<Frame.ContentTransitions>
                 <TransitionCollection>
                     <ContentThemeTransition/>
                 </TransitionCollection>
-            </Frame.ContentTransitions>
+            </Frame.ContentTransitions>-->
         </Frame>
     </Grid>
 </Page>

@@ -7,7 +7,7 @@
     RequestedTheme="Light">
 
     <Application.Resources>
-        
+
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
@@ -705,5 +705,6 @@
             </Style>
 
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

@@ -19,39 +19,49 @@ namespace GamerSky.ViewModels
             set
             {
                 contentUrl = value;
-                RaisePropertyChanged("ContentUrl");
+                RaisePropertyChanged();
             }
         }
 
-        
+        public void SetContentUrl(Essay essay)
+        {
+            if (essay.Badges != null && essay.Badges.Contains("短讯"))
+            {
+                ContentUrl = essay.ContentURL;
+            }
+            else if (essay.ContentType.Equals("URL", StringComparison.OrdinalIgnoreCase))
+            {
+                ContentUrl = essay.ContentURL;
+            }
+
+            ContentUrl = "http://appapi2.gamersky.com/v1/ContentDetail/" + essay.ContentId + "/1?fontSize=1&nullImageMode=1&tag=1&deviceid=000000000000000&platform=android&nightMode=0&original=0&t=8424174&v=2";
+
+            //else
+            //{
+            //    if (DataShareManager.Current.AppTheme == ElementTheme.Dark)
+            //    {
+            //        ContentUrl = "http://appapi2.gamersky.com/v1/ContentDetail/" + essay.ContentId + "/1?fontSize=1&nullImageMode=1&tag=1&deviceid=000000000000000&platform=android&nightMode=1&original=0&t=8424174&v=2";
+            //    }
+            //    else
+            //    {
+            //        ContentUrl = "http://appapi2.gamersky.com/v1/ContentDetail/" + essay.ContentId + "/1?fontSize=1&nullImageMode=1&tag=1&deviceid=000000000000000&platform=android&nightMode=0&original=0&t=8424174&v=2";
+            //    }
+            //}
+
+        }
+
         public WebViewPageViewModel()
         {
-            Messenger.Default.Register<Essay>(this, (Essay essay) =>
-            {
-                if (essay.Badges != null && essay.Badges.Contains("短讯"))
-                {
-                    ContentUrl = essay.ContentURL;
-                }
-                else if (essay.ContentType.Equals("URL", StringComparison.OrdinalIgnoreCase))
-                {
-                    ContentUrl = essay.ContentURL;
-                }
+            //Messenger.Default.Register<Essay>(this, (Essay essay) =>
+            //{
+            //    SetContentUrl(essay);            
+            //});
+        }
 
-                ContentUrl = "http://appapi2.gamersky.com/v1/ContentDetail/" + essay.ContentId + "/1?fontSize=1&nullImageMode=1&tag=1&deviceid=000000000000000&platform=android&nightMode=0&original=0&t=8424174&v=2";
-
-                //else
-                //{
-                //    if (DataShareManager.Current.AppTheme == ElementTheme.Dark)
-                //    {
-                //        ContentUrl = "http://appapi2.gamersky.com/v1/ContentDetail/" + essay.ContentId + "/1?fontSize=1&nullImageMode=1&tag=1&deviceid=000000000000000&platform=android&nightMode=1&original=0&t=8424174&v=2";
-                //    }
-                //    else
-                //    {
-                //        ContentUrl = "http://appapi2.gamersky.com/v1/ContentDetail/" + essay.ContentId + "/1?fontSize=1&nullImageMode=1&tag=1&deviceid=000000000000000&platform=android&nightMode=0&original=0&t=8424174&v=2";
-                //    }
-                //}
-
-            });
+        public override void Cleanup()
+        {
+            base.Cleanup();
+            ViewModelLocator.Cleanup();
         }
     }
 }

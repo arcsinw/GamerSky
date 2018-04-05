@@ -138,6 +138,8 @@ namespace GamerSky.Views
             {
                 DetailFrame.BackStack.RemoveAt(1);
             }
+
+            UpdateForVisualState();
         }
 
         private void MasterFrame_Navigated(object sender, NavigationEventArgs e)

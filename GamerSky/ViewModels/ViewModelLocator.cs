@@ -110,7 +110,14 @@ namespace GamerSky.ViewModels
 
         public static void Cleanup()
         {
-
+            SimpleIoc.Default.Reset();
+            
+            SimpleIoc.Default.Register<NewsPageViewModel>();
+            SimpleIoc.Default.Register<WebViewPageViewModel>();
+            SimpleIoc.Default.Register<MasterDetailPageViewModel>();
+            SimpleIoc.Default.Register<MainPageViewModel>();
+            SimpleIoc.Default.Register<SearchPageViewModel>();
+            SimpleIoc.Default.Register<GamePageViewModel>();
         }
     }
 }

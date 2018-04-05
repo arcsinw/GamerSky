@@ -26,22 +26,6 @@ namespace GamerSky.ViewModels
         private readonly IMasterDetailNavigationService _navigationService;
         #endregion
          
-        public IncrementalLoadingCollection<Essay> Essay { get; set; }
-
-        private void OnError(Exception obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnDataLoading()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void OnDataLoaded()
-        {
-            throw new NotImplementedException();
-        }
          
 
         private async void LoadData()
@@ -73,7 +57,7 @@ namespace GamerSky.ViewModels
 
         private void NavigateCommandAction()
         {
-            Messenger.Default.Send(SelectedEssay);
+            //Messenger.Default.Send(SelectedEssay);
             
             _navigationService.DetailNavigateTo("WebViewPage", SelectedEssay);
         }

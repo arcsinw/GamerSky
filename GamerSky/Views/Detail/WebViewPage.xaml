@@ -8,9 +8,26 @@
     xmlns:control="using:GamerSky.Controls"
     mc:Ignorable="d"
     DataContext="{Binding Path=WebViewPageInstance, Source={StaticResource ViewModelLocator}}"
-    >
+    Background="White">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <control:ArticlePresenter x:Name="articlePresenter" Html="{Binding ContentUrl}" NavigationType="Uri"/>
+
+    <Grid Background="White">
+        <!--<control:ArticlePresenter x:Name="articlePresenter" Html="{Binding ContentUrl}" NavigationType="Uri"
+                                  UnsupportedUriSchemeIdentified="articlePresenter_UnsupportedUriSchemeIdentified"
+                                  NavigationStarting="articlePresenter_NavigationStarting"
+                                  NavigationFailed="articlePresenter_NavigationFailed"
+                                  NavigationCompleted="articlePresenter_NavigationCompleted"
+                                  />-->
+
+        <WebView x:Name="webView" Source="{Binding ContentUrl}"
+                 NavigationCompleted="webView_NavigationCompleted"
+                 NavigationFailed="webView_NavigationFailed"
+                 NavigationStarting="webView_NavigationStarting"
+                 DefaultBackgroundColor="White"
+                 
+                 UnsupportedUriSchemeIdentified="webView_UnsupportedUriSchemeIdentified"/> 
+
+        <ProgressRing x:Name="progressRing" Foreground="{ThemeResource ThemeColorBrush}" 
+                      Width="60" Height="60"/>
     </Grid>
 </Page>

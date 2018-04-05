@@ -124,6 +124,7 @@
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
+    <Compile Include="TemplateSelector\NewsDataTemplateSelector.cs" />
     <Compile Include="Enums\GameNodeIdEnum.cs" />
     <Compile Include="Enums\SearchTypeEnum.cs" />
     <Compile Include="Enums\SubscribeEditEnum.cs" />

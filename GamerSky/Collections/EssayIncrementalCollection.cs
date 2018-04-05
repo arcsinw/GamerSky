@@ -49,6 +49,8 @@ namespace GamerSky.Collection
 
         protected override async Task<LoadMoreItemsResult> LoadMoreItemsAsyncCore(CancellationToken cancel, uint count)
         {
+            System.Diagnostics.Debug.WriteLine("LoadMoreItemsAsyncCore");
+
             LoadMoreItemsResult result = new LoadMoreItemsResult();
             this.OnDataLoading?.Invoke(this, EventArgs.Empty);
             if (cancel.IsCancellationRequested)
