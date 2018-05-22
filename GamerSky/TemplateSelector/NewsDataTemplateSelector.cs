@@ -11,14 +11,14 @@ namespace GamerSky.TemplateSelector
 {
     public class NewsDataTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate NoPicture { get; set; }
-        public DataTemplate OnePicture { get; set; }
+        public DataTemplate NoPictureDT { get; set; }
+        public DataTemplate OnePictureDT { get; set; }
 
-        public DataTemplate TwoPicture { get; set; }
+        public DataTemplate TwoPictureDT { get; set; }
 
-        public DataTemplate ThreePicture { get; set; }
+        public DataTemplate ThreePictureDT { get; set; }
 
-        public DataTemplate Topic { get; set; }
+        public DataTemplate TopicDT { get; set; }
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
@@ -26,23 +26,23 @@ namespace GamerSky.TemplateSelector
             {
                 if (essay.ContentType.Equals("zhuanti"))
                 {
-                    return Topic;
+                    return TopicDT;
                 }
                 if (essay.ThumbnailURLs == null || essay.ThumbnailURLs.Length == 0)
                 {
-                    return NoPicture;
+                    return NoPictureDT;
                 }
                 if (essay.ThumbnailURLs.Length == 1)
                 {
-                    return OnePicture;
+                    return OnePictureDT;
                 }
                 else
                 {
-                    return ThreePicture;
+                    return ThreePictureDT;
                 }
             }
 
-            return NoPicture;
+            return NoPictureDT;
         }
     }
 }

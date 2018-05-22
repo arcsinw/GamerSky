@@ -122,7 +122,7 @@
         </Storyboard>
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="Transparent">
         <Frame x:Name="frame"/>
 
         <!--#region Module Grid-->

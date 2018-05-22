@@ -1103,5 +1103,18 @@ namespace GamerSky.Services
             return result;
         }
         #endregion
+
+
+
+        #region Origin
+        /// <summary>
+        /// 全部栏目
+        /// </summary>
+        public async void GetAllCOlumn()
+        {
+
+        }
+
+        #endregion
     }
 }

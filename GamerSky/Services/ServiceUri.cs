@@ -172,5 +172,12 @@ namespace GamerSky.Services
         /// </summary>
         public static string GameTags { get; set; } = "http://appapi2.gamersky.com/game/GameTags";
         #endregion
+
+        /// <summary>
+        /// 全部专栏
+        /// Post
+        /// </summary>
+        public static string ColumnNodeList { get; set; } = "http://appapi2.gamersky.com/v2/ColumnNodeList";
+
     }
 }

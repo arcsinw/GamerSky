@@ -107,6 +107,8 @@
 
                 <Style TargetType="ListView">
                     <Setter Property="ItemsPanel" Value="{StaticResource HorizontalItemsPanel}"/>
+                    <Setter Property="SelectionMode" Value="None"/>
+                    <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
                     <Setter Property="ItemContainerStyle">
                         <Setter.Value>
                             <Style TargetType="ListViewItem">

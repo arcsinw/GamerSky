@@ -7,7 +7,37 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock>Original</TextBlock>
+    <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" BorderThickness="0,0,0,1" BorderBrush="LightGray" Padding="12,0,0,0"
+              Background="{ThemeResource TitleBarBackgroundThemeBrush}">
+            <TextBlock Text="原创" FontSize="20" VerticalAlignment="Center"/>
+
+            <Button Style="{StaticResource ImageButtonStyle}" Padding="12" Height="48" Width="48"
+                    HorizontalAlignment="Right" Command="{Binding NavigateToSearchPageCommand}">
+                <Image Source="/Assets/Images/ic_search.png"/>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Padding="12">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Assets/Images/ic_original_column.png" Height="20" Width="20"
+                           VerticalAlignment="Center"
+                           Margin="0,0,8,0"/>
+                    <TextBlock Text="全部栏目" Foreground="Gray" 
+                               FontSize="16"/>
+                </StackPanel>
+                
+                <ListView>
+
+                </ListView>
+                
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

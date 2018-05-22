@@ -11,8 +11,8 @@
     <AssemblyName>GamerSky</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.10586.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10586.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -124,6 +124,7 @@
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
+    <Compile Include="Models\PostDataModel\GetAllColumnRequest.cs" />
     <Compile Include="TemplateSelector\NewsDataTemplateSelector.cs" />
     <Compile Include="Enums\GameNodeIdEnum.cs" />
     <Compile Include="Enums\SearchTypeEnum.cs" />
@@ -150,10 +151,10 @@
     <Compile Include="Models\PostDataModel\GameDetailEssayRequest.cs" />
     <Compile Include="Models\PostDataModel\GameDetailRequest.cs" />
     <Compile Include="Models\PostDataModel\GameRequest.cs" />
-    <Compile Include="Models\PostDataModel\Game\GameHomePagePostData.cs" />
-    <Compile Include="Models\PostDataModel\Game\GameRankingListPostData.cs" />
-    <Compile Include="Models\PostDataModel\Game\GameSpecialDetailPostData.cs" />
-    <Compile Include="Models\PostDataModel\Game\GameSpecialListPostData.cs" />
+    <Compile Include="Models\PostDataModel\Game\GameHomePageRequest.cs" />
+    <Compile Include="Models\PostDataModel\Game\GameRankingListRequest.cs" />
+    <Compile Include="Models\PostDataModel\Game\GameSpecialDetailRequest.cs" />
+    <Compile Include="Models\PostDataModel\Game\GameSpecialListRequest.cs" />
     <Compile Include="Models\PostDataModel\LoginRequest.cs" />
     <Compile Include="Models\PostDataModel\PostDataTemplate.cs" />
     <Compile Include="Models\PostDataModel\SearchRequest.cs" />
@@ -276,6 +277,7 @@
     <Content Include="Assets\Images\ic_main_quanzi_selected.png" />
     <Content Include="Assets\Images\ic_news_live.png" />
     <Content Include="Assets\Images\ic_notification.png" />
+    <Content Include="Assets\Images\ic_original_column.png" />
     <Content Include="Assets\Images\ic_quanzi_changtu_badge.png" />
     <Content Include="Assets\Images\ic_quanzi_gif_badge.png" />
     <Content Include="Assets\Images\ic_quanzi_jinghua.png" />
@@ -284,10 +286,12 @@
     <Content Include="Assets\Images\ic_quanzi_zhiding.png" />
     <Content Include="Assets\Images\ic_search.png" />
     <Content Include="Assets\Images\ic_settings.png" />
+    <Content Include="Assets\Images\ic_subscription_latest.png" />
     <Content Include="Assets\Images\ic_title.png" />
-    <Content Include="Assets\Images\image_loading_focus.png" />
+    <Content Include="Assets\Images\image_loading.png" />
     <Content Include="Assets\Images\image_loading_game_lib_day.png" />
     <Content Include="Assets\Images\image_loading_game_lib_night.png" />
+    <Content Include="Assets\Images\image_loading_night.png" />
     <Content Include="Assets\Images\launch_title.png" />
     <Content Include="Assets\Images\login_weibo.png" />
     <Content Include="Assets\Images\login_weixin.png" />

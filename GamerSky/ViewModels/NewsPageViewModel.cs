@@ -25,8 +25,21 @@ namespace GamerSky.ViewModels
 
         private readonly IMasterDetailNavigationService _navigationService;
         #endregion
-         
-         
+
+        private bool isActive;
+
+        public bool IsActive
+        {
+            get { return isActive; }
+            set
+            {
+                isActive = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+
 
         private async void LoadData()
         {
@@ -35,10 +48,23 @@ namespace GamerSky.ViewModels
             {
                 foreach (var item in channels)
                 {
-                    
-                    Essays.Add(new Tuple<Channel, EssayIncrementalCollection>(item, new EssayIncrementalCollection(item.NodeId)));
+                    var essayIncrementalCollection = new EssayIncrementalCollection(item.NodeId);
+                    essayIncrementalCollection.OnDataLoading += EssayIncrementalCollection_OnDataLoading;
+                    essayIncrementalCollection.OnDataLoaded += EssayIncrementalCollection_OnDataLoaded;
+
+                    Essays.Add(new Tuple<Channel, EssayIncrementalCollection>(item, essayIncrementalCollection));
                 }
             }
+        }
+
+        private void EssayIncrementalCollection_OnDataLoaded(object sender, EventArgs e)
+        {
+            IsActive = false;
+        }
+
+        private void EssayIncrementalCollection_OnDataLoading(object sender, EventArgs e)
+        {
+            IsActive = true;
         }
 
         public NewsPageViewModel(IMasterDetailNavigationService navigationService)

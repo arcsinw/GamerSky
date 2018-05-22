@@ -407,11 +407,11 @@
 
         <Frame x:Name="MasterFrame" x:FieldModifier="Public" Grid.Column="1" 
                Navigated="MasterFrame_Navigated">
-            <Frame.ContentTransitions>
+            <!--<Frame.ContentTransitions>
                 <TransitionCollection>
                     <ContentThemeTransition/>
                 </TransitionCollection>
-            </Frame.ContentTransitions>
+            </Frame.ContentTransitions>-->
         </Frame>
 
         <controls:GridSplitter x:Name="GridSplitter" Grid.Column="1"
