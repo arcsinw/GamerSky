@@ -124,7 +124,12 @@
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
+    <Compile Include="Models\Group\Club.cs" />
+    <Compile Include="Models\Group\Topic.cs" />
+    <Compile Include="Models\PostDataModel\ClubsListRequest.cs" />
     <Compile Include="Models\PostDataModel\GetAllColumnRequest.cs" />
+    <Compile Include="Models\PostDataModel\TopicsListRequest.cs" />
+    <Compile Include="Models\ResultDataModel\UserComments.cs" />
     <Compile Include="TemplateSelector\NewsDataTemplateSelector.cs" />
     <Compile Include="Enums\GameNodeIdEnum.cs" />
     <Compile Include="Enums\SearchTypeEnum.cs" />

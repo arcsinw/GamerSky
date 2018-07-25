@@ -11,6 +11,7 @@
     xmlns:m="using:GamerSky.Models"
     xmlns:controls="using:GamerSky.Controls"
     DataContext="{Binding Path=NewsPageInstance, Source={StaticResource ViewModelLocator}}"
+    NavigationCacheMode="Enabled"
     >
 
     <Page.Resources>
@@ -116,6 +117,6 @@
             </Pivot.ItemContainerStyle>
         </Pivot>
 
-        <ProgressRing Height="48" Width="48" IsActive="{Binding IsActive}"/>
+        <ProgressRing Style="{ThemeResource LightProgressRingStyle}" IsActive="{Binding IsActive}"/>
     </Grid>
 </Page>

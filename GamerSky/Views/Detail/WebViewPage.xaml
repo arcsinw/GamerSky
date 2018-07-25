@@ -25,9 +25,8 @@
                  NavigationStarting="webView_NavigationStarting"
                  DefaultBackgroundColor="White"
                  
-                 UnsupportedUriSchemeIdentified="webView_UnsupportedUriSchemeIdentified"/> 
+                 UnsupportedUriSchemeIdentified="webView_UnsupportedUriSchemeIdentified"/>
 
-        <ProgressRing x:Name="progressRing" Foreground="{ThemeResource ThemeColorBrush}" 
-                      Width="60" Height="60"/>
+        <ProgressRing x:Name="progressRing" Style="{ThemeResource LightProgressRingStyle}"/>
     </Grid>
 </Page>

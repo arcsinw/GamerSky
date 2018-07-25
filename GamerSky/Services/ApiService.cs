@@ -14,6 +14,7 @@ using GamerSky.Utils;
 using GamerSky.Models.ResultDataModel;
 using GamerSky.Enums;
 using GamerSky.PostDataModel;
+using GamerSky.Models.Group;
 
 namespace GamerSky.Services
 {
@@ -144,6 +145,10 @@ namespace GamerSky.Services
 
             return newsResult?.Result;
         }
+
+        #region Login
+
+        #endregion
 
         #region Isolated APIs
         ///// <summary>
@@ -489,16 +494,16 @@ namespace GamerSky.Services
         //    return result;
         //}
 
-        ///// <summary>
-        ///// 获取评论回复
-        ///// </summary>
-        //public async Task<List<Comment>> GetAllReply(string userId, int pageIndex)
-        //{
-        //    string jsonData = "{\"userId\":" + userId + ",\"pageIndex\":" + pageIndex + ",\"pageSize\":20}";
-        //    string url = string.Format(ServiceUri.GetAllReply, jsonData);
-        //    GetAllReplyResult result = await GetJson<GetAllReplyResult>(url);
-        //    return result?.Result.Comments;
-        //}
+        /// <summary>
+        /// 获取用户的所有评论回复
+        /// </summary>
+        public async Task<List<Comment>> GetAllReply(string userId, int pageIndex)
+        {
+            string jsonData = "{\"userId\":" + userId + ",\"pageIndex\":" + pageIndex + ",\"pageSize\":20}";
+            string url = string.Format(ServiceUri.GetAllReply, jsonData);
+            ResultDataTemplate<UserComments> comments= await GetJson<ResultDataTemplate<UserComments>>(url);
+            return comments.Result.Comments;
+        }
 
         ///// <summary>
         ///// 给评论回复点赞
@@ -1106,13 +1111,56 @@ namespace GamerSky.Services
 
 
 
-        #region Origin
+        #region 原创
         /// <summary>
         /// 全部栏目
         /// </summary>
-        public async void GetAllCOlumn()
+        public async void GetAllColumn()
         {
 
+        }
+
+        #endregion
+
+        #region 圈子
+        /// <summary>
+        /// 获取所有主题
+        /// </summary>
+        public async Task<List<Club>> GetClubsList()
+        {
+            PostDataTemplate<ClubsListRequest> postData = new PostDataTemplate<ClubsListRequest>()
+            {
+                request = new ClubsListRequest()
+                {
+                    elementsPerPage = 20,
+                    pageIndex = 1,
+                    type = "tuiJian"
+                }
+            };
+            ResultDataTemplate<List<Club>> result = 
+                await PostJson<PostDataTemplate<ClubsListRequest>, ResultDataTemplate<List<Club>>>(ServiceUri.ClubsList, postData);
+
+            
+            return result.Result;    
+        }
+
+        /// <summary>
+        /// 获取发帖
+        /// </summary>
+        public async Task<List<Topic>> GetTopicsList(int pageIndex)
+        {
+            PostDataTemplate<TopicsListRequest> postData = new PostDataTemplate<TopicsListRequest>()
+            {
+                request = new TopicsListRequest()
+                {
+                    pageIndex = pageIndex,
+                }
+            };
+            ResultDataTemplate<List<Topic>> result =
+                await PostJson<PostDataTemplate<TopicsListRequest>, ResultDataTemplate<List<Topic>>>(ServiceUri.TopicsList, postData);
+
+
+            return result.Result;
         }
 
         #endregion

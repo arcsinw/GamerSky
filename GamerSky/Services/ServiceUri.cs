@@ -179,5 +179,11 @@ namespace GamerSky.Services
         /// </summary>
         public static string ColumnNodeList { get; set; } = "http://appapi2.gamersky.com/v2/ColumnNodeList";
 
+
+        #region 圈子
+        public static string ClubsList { get; set; } = "http://i.gamersky.com/appapi/v2/getClubsList";
+
+        public static string TopicsList { get; set; } = "http://i.gamersky.com/appapi/v2/getTopicsList";
+        #endregion
     }
 }
