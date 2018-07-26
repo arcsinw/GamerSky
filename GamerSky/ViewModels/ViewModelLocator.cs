@@ -22,6 +22,7 @@ namespace GamerSky.ViewModels
         public const string MainPageKey = "MainPage";
         public const string SearchPageKey = "SearchPage";
         public const string GamePageKey = "GamePage";
+        public const string GroupPageKey = "GroupPage";
         #endregion
 
         public ViewModelLocator()
@@ -39,7 +40,7 @@ namespace GamerSky.ViewModels
             Configure();
         }
 
-        private void Configure()
+        private static void Configure()
         {
             var nav = new MasterDetailNavigationService();
             nav.Configure(NewsPageKey, typeof(NewsPage));
@@ -48,6 +49,7 @@ namespace GamerSky.ViewModels
             nav.Configure(MainPageKey, typeof(MainPage));
             nav.Configure(SearchPageKey, typeof(SearchPage));
             nav.Configure(GamePageKey, typeof(GamePage));
+            nav.Configure(GroupPageKey, typeof(GroupPage));
 
             SimpleIoc.Default.Register<IMasterDetailNavigationService>(() => nav);
             SimpleIoc.Default.Register<NewsPageViewModel>();
@@ -56,6 +58,7 @@ namespace GamerSky.ViewModels
             SimpleIoc.Default.Register<MainPageViewModel>();
             SimpleIoc.Default.Register<SearchPageViewModel>();
             SimpleIoc.Default.Register<GamePageViewModel>();
+            SimpleIoc.Default.Register<GroupPageViewModel>();
         }
 
         #region ViewModels' instances
@@ -106,18 +109,28 @@ namespace GamerSky.ViewModels
                 return ServiceLocator.Current.GetInstance<SearchPageViewModel>();
             }
         }
+
+        public GroupPageViewModel GroupPageInstance
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GroupPageViewModel>();
+            }
+        }
         #endregion
 
         public static void Cleanup()
         {
             SimpleIoc.Default.Reset();
-            
-            SimpleIoc.Default.Register<NewsPageViewModel>();
-            SimpleIoc.Default.Register<WebViewPageViewModel>();
-            SimpleIoc.Default.Register<MasterDetailPageViewModel>();
-            SimpleIoc.Default.Register<MainPageViewModel>();
-            SimpleIoc.Default.Register<SearchPageViewModel>();
-            SimpleIoc.Default.Register<GamePageViewModel>();
+
+            Configure();
+            //SimpleIoc.Default.Register<NewsPageViewModel>();
+            //SimpleIoc.Default.Register<WebViewPageViewModel>();
+            //SimpleIoc.Default.Register<MasterDetailPageViewModel>();
+            //SimpleIoc.Default.Register<MainPageViewModel>();
+            //SimpleIoc.Default.Register<SearchPageViewModel>();
+            //SimpleIoc.Default.Register<GamePageViewModel>();
+            //SimpleIoc.Default.Register<GroupPageViewModel>();
         }
     }
 }

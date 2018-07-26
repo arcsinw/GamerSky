@@ -1126,7 +1126,7 @@ namespace GamerSky.Services
         /// <summary>
         /// 获取所有主题
         /// </summary>
-        public async Task<List<Club>> GetClubsList()
+        public async Task<List<Club>> GetClubsListAsync()
         {
             PostDataTemplate<ClubsListRequest> postData = new PostDataTemplate<ClubsListRequest>()
             {
@@ -1139,7 +1139,6 @@ namespace GamerSky.Services
             };
             ResultDataTemplate<List<Club>> result = 
                 await PostJson<PostDataTemplate<ClubsListRequest>, ResultDataTemplate<List<Club>>>(ServiceUri.ClubsList, postData);
-
             
             return result.Result;    
         }
@@ -1147,7 +1146,7 @@ namespace GamerSky.Services
         /// <summary>
         /// 获取发帖
         /// </summary>
-        public async Task<List<Topic>> GetTopicsList(int pageIndex)
+        public async Task<List<Topic>> GetTopicsListAsync(int pageIndex)
         {
             PostDataTemplate<TopicsListRequest> postData = new PostDataTemplate<TopicsListRequest>()
             {
@@ -1158,7 +1157,26 @@ namespace GamerSky.Services
             };
             ResultDataTemplate<List<Topic>> result =
                 await PostJson<PostDataTemplate<TopicsListRequest>, ResultDataTemplate<List<Topic>>>(ServiceUri.TopicsList, postData);
+            
+            return result.Result;
+        }
 
+        /// <summary>
+        /// 获取全部话题
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        public async Task<List<Club>> GetSubjectsListAsync(int pageIndex)
+        {
+            PostDataTemplate<SubjectsListRequest> postData = new PostDataTemplate<SubjectsListRequest>()
+            {
+                request = new SubjectsListRequest()
+                {
+                    pageIndex = pageIndex,
+                }
+            };
+            ResultDataTemplate<List<Club>> result =
+                await PostJson<PostDataTemplate<SubjectsListRequest>, ResultDataTemplate<List<Club>>>(ServiceUri.SubjectList, postData);
 
             return result.Result;
         }

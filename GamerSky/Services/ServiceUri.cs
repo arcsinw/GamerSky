@@ -181,9 +181,21 @@ namespace GamerSky.Services
 
 
         #region 圈子
+        /// <summary>
+        /// 主题
+        /// </summary>
         public static string ClubsList { get; set; } = "http://i.gamersky.com/appapi/v2/getClubsList";
 
+        /// <summary>
+        /// 全部帖子
+        /// </summary>
         public static string TopicsList { get; set; } = "http://i.gamersky.com/appapi/v2/getTopicsList";
+
+        /// <summary>
+        /// 全部话题
+        /// Post
+        /// </summary>
+        public static string SubjectList { get; set; } = "http://i.gamersky.com/appapi/v2/getSubjectsList";
         #endregion
     }
 }

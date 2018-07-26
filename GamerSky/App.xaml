@@ -13,6 +13,9 @@
                 <ResourceDictionary x:Key="Light">
                     <!--主题色-->
                     <Color x:Key="ThemeColor">#fe0103</Color>
+                    <!--字体颜色-->
+                    <Color x:Key="TextColor">Black</Color>
+                    
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="#fe0103"/>
 
                     <SolidColorBrush x:Key="PageBackgroundThemeBrush" Color="#f5f5f5"/>
@@ -27,6 +30,9 @@
                 <ResourceDictionary x:Key="Dark">
                     <!--主题色-->
                     <Color x:Key="ThemeColor">#FF333337</Color>
+                    <!--字体颜色-->
+                    <Color x:Key="TextColor">White</Color>
+                    
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="#fe0103"/>
 
                     <SolidColorBrush x:Key="PageBackgroundThemeBrush" Color="#f5f5f5"/>
@@ -41,6 +47,11 @@
 
             </ResourceDictionary.ThemeDictionaries>
 
+            
+            
+            <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="Red" />
+            <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="#66FFFFFF" />
+            
             <vm:ViewModelLocator x:Key="ViewModelLocator"/>
 
             <!--#region ListView-->
@@ -526,6 +537,8 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            
             <!--#endregion-->
 
             <!--无背景色-->
@@ -671,6 +684,7 @@
                 <Setter Property="Foreground" Value="{ThemeResource ThemeColorBrush}"/>
             </Style>
         </ResourceDictionary>
+        
         
     </Application.Resources>
 </Application>

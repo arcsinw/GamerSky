@@ -128,6 +128,7 @@
     <Compile Include="Models\Group\Topic.cs" />
     <Compile Include="Models\PostDataModel\ClubsListRequest.cs" />
     <Compile Include="Models\PostDataModel\GetAllColumnRequest.cs" />
+    <Compile Include="Models\PostDataModel\SubjectsListRequest.cs" />
     <Compile Include="Models\PostDataModel\TopicsListRequest.cs" />
     <Compile Include="Models\ResultDataModel\UserComments.cs" />
     <Compile Include="TemplateSelector\NewsDataTemplateSelector.cs" />

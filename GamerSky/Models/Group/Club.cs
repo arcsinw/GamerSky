@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace GamerSky.Models.Group
 {
     /// <summary>
-    /// 圈子 主题
+    /// 圈子 
+    /// 主题 | 话题
     /// </summary>
     public class Club
     {
