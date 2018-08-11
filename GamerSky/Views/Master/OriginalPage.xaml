@@ -5,7 +5,8 @@
     xmlns:local="using:GamerSky.Views.Master"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    DataContext="{Binding Path=OriginPageInstance, Source={StaticResource ViewModelLocator}}">
 
     <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -23,20 +24,71 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="1" Padding="12">
+        <Grid Grid.Row="1" Padding="12,8">
             <StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Assets/Images/ic_original_column.png" Height="20" Width="20"
-                           VerticalAlignment="Center"
-                           Margin="0,0,8,0"/>
-                    <TextBlock Text="全部栏目" Foreground="Gray" 
-                               FontSize="16"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/Assets/Images/ic_original_column.png" Height="20" Width="20" Margin="0,0,8,0"/>
+                    <TextBlock Text="全部栏目" Foreground="Gray" FontSize="16"/>
                 </StackPanel>
                 
                 <ListView>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="0"/>
+                            <Setter Property="Margin" Value="0"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    
+                        <ListViewItem>
+                            <Grid Height="100" Width="80" Background="LightGray">
+                                <Image/>
+                                <TextBlock/>
+                            </Grid>
+                        </ListViewItem>
+
+                        <ListViewItem>
+                            <Grid Height="100" Width="80" Background="LightGray">
+                                <Image/>
+                                <TextBlock/>
+                            </Grid>
+                        </ListViewItem>
+
+                        <ListViewItem>
+                            <Grid Height="100" Width="80" Background="LightGray">
+                                <Image/>
+                                <TextBlock/>
+                            </Grid>
+                        </ListViewItem>
+
+                        <ListViewItem>
+                            <Grid Height="100" Width="80" Background="LightGray">
+                                <Image/>
+                                <TextBlock/>
+                            </Grid>
+                        </ListViewItem>
+
+                    <ListViewItem>
+                        <Grid Height="100" Width="80" Background="LightGray">
+                            <Image/>
+                            <TextBlock/>
+                        </Grid>
+                    </ListViewItem>
+                </ListView>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/Assets/Images/ic_subscription_latest.png" Height="20" Width="20" Margin="0,0,8,0"/>
+                    <TextBlock Text="最新动态" Foreground="Gray" FontSize="16"/>
+                </StackPanel>
+                <ListView>
 
                 </ListView>
-                
+
             </StackPanel>
         </Grid>
     </Grid>

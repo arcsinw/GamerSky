@@ -141,7 +141,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
+                <!--<ColumnDefinition/>-->
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
@@ -164,10 +164,10 @@
                                         Checked="SimpleRadioButton_Checked"/>
                 <!--Title="圈子"/>-->
 
-                <controls:SimpleRadioButton Grid.Column="3" Tag="3" ToolTipService.ToolTip="原创"
+                <!--<controls:SimpleRadioButton Grid.Column="3" Tag="3" ToolTipService.ToolTip="原创"
                 Source="ms-appx:///Assets/Images/icon_yuanchuang.png"
                                         SelectedSource="ms-appx:///Assets/Images/icon_yuanchuang_select.png"
-                                        Checked="SimpleRadioButton_Checked"/>
+                                        Checked="SimpleRadioButton_Checked"/>-->
                 <!--Title="原创"/>-->
 
                 <controls:SimpleRadioButton Grid.Column="4" Tag="4" ToolTipService.ToolTip="我的"

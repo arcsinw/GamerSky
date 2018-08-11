@@ -243,7 +243,7 @@
             </Button>
 
             <Button HorizontalAlignment="Right" Style="{StaticResource ImageButtonStyle}">
-                <Image Source="/Assets/Images/ic_settings.png" Height="32" Width="32"/>
+                <Image Source="/Assets/Images/ic_settings.png" Height="30" Width="30"/>
             </Button>
         </Grid>
 
@@ -251,15 +251,15 @@
               BorderBrush="#DBDBDB" BorderThickness="0,1">
             <Grid.Resources>
                 <Style TargetType="Image">
-                    <Setter Property="Height" Value="36"/>
-                    <Setter Property="Width" Value="36"/>
+                    <Setter Property="Height" Value="34"/>
+                    <Setter Property="Width" Value="34"/>
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                 </Style>
 
                 <Style TargetType="TextBlock">
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                     <Setter Property="Margin" Value="0,4,0,0"/>
-                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="FontSize" Value="14"/>
                 </Style>
 
                 <Style TargetType="Button" BasedOn="{StaticResource ImageButtonStyle}">
@@ -333,6 +333,16 @@
                         <Grid>
                             <TextBlock Text="清除缓存" VerticalAlignment="Center"/>
                             <TextBlock Text="799KB" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ListViewItem>
+
+                    <ListViewItem Margin="0,12,0,0">
+                        <Grid>
+                            <TextBlock Text="意见反馈" HorizontalAlignment="Left"/>
+
+                            <Button HorizontalAlignment="Right">
+                                
+                            </Button>
                         </Grid>
                     </ListViewItem>
 

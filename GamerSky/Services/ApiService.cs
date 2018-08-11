@@ -13,8 +13,8 @@ using GamerSky.Models.PostDataModel;
 using GamerSky.Utils;
 using GamerSky.Models.ResultDataModel;
 using GamerSky.Enums;
-using GamerSky.PostDataModel;
 using GamerSky.Models.Group;
+using GamerSky.Requests;
 
 namespace GamerSky.Services
 {
@@ -1117,7 +1117,7 @@ namespace GamerSky.Services
         /// </summary>
         public async void GetAllColumn()
         {
-
+            
         }
 
         #endregion
@@ -1178,7 +1178,7 @@ namespace GamerSky.Services
             ResultDataTemplate<List<Club>> result =
                 await PostJson<PostDataTemplate<SubjectsListRequest>, ResultDataTemplate<List<Club>>>(ServiceUri.SubjectList, postData);
 
-            return result.Result;
+            return result?.Result;
         }
 
         #endregion

@@ -22,7 +22,6 @@ namespace GamerSky.ViewModels
 
 
         private readonly IMasterDetailNavigationService _navigationService;
-
         
 
         public GroupPageViewModel()
@@ -49,9 +48,13 @@ namespace GamerSky.ViewModels
         public async void LoadSubjects()
         {
             var result = await ApiService.Instance.GetSubjectsListAsync(1);
-            foreach (var item in result)
+
+            if (result != null)
             {
-                Subjects.Add(item);
+                foreach (var item in result)
+                {
+                    Subjects.Add(item);
+                }
             }
         }
     }

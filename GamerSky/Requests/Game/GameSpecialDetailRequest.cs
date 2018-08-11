@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GamerSky.PostDataModel
+namespace GamerSky.Requests
 {
     public class GameSpecialDetailRequest
     {

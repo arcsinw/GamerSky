@@ -18,7 +18,7 @@
                     
                     <SolidColorBrush x:Key="ThemeColorBrush" Color="#fe0103"/>
 
-                    <SolidColorBrush x:Key="PageBackgroundThemeBrush" Color="#f5f5f5"/>
+                    <SolidColorBrush x:Key="PageBackgroundThemeBrush" Color="WhiteSmoke"/>
                     
                     <SolidColorBrush x:Key="TitleBarBackgroundThemeBrush" Color="White"/>
                     <!--Pane背景色-->
@@ -48,12 +48,14 @@
             </ResourceDictionary.ThemeDictionaries>
 
             
-            
             <SolidColorBrush x:Key="PivotHeaderForegroundSelectedBrush" Color="Red" />
             <SolidColorBrush x:Key="PivotHeaderForegroundUnselectedBrush" Color="#66FFFFFF" />
             
             <vm:ViewModelLocator x:Key="ViewModelLocator"/>
 
+            
+            
+            
             <!--#region ListView-->
             <Style x:Key="LightScrollBarStyle" TargetType="ScrollBar">
                 <Setter Property="MinWidth" Value="12"/>
@@ -538,7 +540,13 @@
                 </Setter>
             </Style>
 
-            
+            <SolidColorBrush x:Key="TransparentBrush" Color="Transparent"/>
+
+            <StaticResource x:Key="ListViewItemBackgroundPointerOver" ResourceKey="TransparentBrush" />
+            <StaticResource x:Key="ListViewItemBackgroundPressed" ResourceKey="TransparentBrush" />
+            <StaticResource x:Key="ListViewItemBackgroundSelected" ResourceKey="TransparentBrush"/>
+            <StaticResource x:Key="ListViewItemBackgroundSelectedPointerOver" ResourceKey="TransparentBrush" />
+            <StaticResource x:Key="ListViewItemBackgroundSelectedPressed" ResourceKey="TransparentBrush" />
             <!--#endregion-->
 
             <!--无背景色-->
@@ -557,7 +565,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
-                            <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                            <Grid x:Name="RootGrid" Background="{TemplateBinding Background}" CornerRadius="2">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="CommonStates">
                                         <VisualState x:Name="Normal">

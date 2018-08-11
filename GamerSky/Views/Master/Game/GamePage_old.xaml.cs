@@ -13,7 +13,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-
 namespace GamerSky.Views
 {
     /// <summary>
@@ -25,5 +24,27 @@ namespace GamerSky.Views
         {
             this.InitializeComponent();
         }
+
+        public void Show()
+        {
+            MainPage.Current.ShowModuleGrid();
+        }
+
+        public void Hide()
+        {
+            MainPage.Current.HideModuleGrid();
+        }
+
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            flipView.Height = e.NewSize.Width * 9 / 16;
+        }
+
+
+        
+
     }
+
+   
 }
+

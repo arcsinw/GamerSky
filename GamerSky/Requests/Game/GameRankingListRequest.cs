@@ -5,10 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GamerSky.PostDataModel
+namespace GamerSky.Requests
 {
-    public class GameHomePageRequest
+    public class GameRankingListRequest
     {
+        [JsonProperty(PropertyName = "annualClass")]
+        public string AnnualClass { get; set; }
+
         [JsonProperty("extraField1")]
         public string ExtraField1 { get; set; } = "Position";
 
@@ -18,10 +21,17 @@ namespace GamerSky.PostDataModel
         [JsonProperty("elementsCountPerPage")]
         public int ElementsCountPerPage { get; set; } = 5;
 
-        [JsonProperty("group")]
-        public string Group { get; set; } = "recent-hot";
+        [JsonProperty("gameClass")]
+        public int GameClass { get; set; } = 0;
 
         [JsonProperty("pageIndex")]
         public int PageIndex { get; set; }
+
+        /// <summary>
+        /// hot 最期待游戏
+        /// fractions 高分榜
+        /// </summary>
+        [JsonProperty(PropertyName = "type")]
+        public string Type { get; set; } 
     }
 }

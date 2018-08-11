@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GamerSky.Models.Origin
+{
+    /// <summary>
+    /// 全部栏目
+    /// </summary>
+    public class Column
+    {
+        public string ImageUrl { get; set; }
+
+        public string Description { get; set; }
+    }
+}

@@ -121,11 +121,14 @@
     <Compile Include="Controls\ImageEx\ImageEx.Source.cs" />
     <Compile Include="Controls\ImageEx\ImageExFailedEventArgs.cs" />
     <Compile Include="Controls\ImageEx\ImageExOpenedEventArgs.cs" />
+    <Compile Include="Controls\LightButton\LightButton.cs" />
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
+    <Compile Include="Models\Game\GamePageToItem.cs" />
     <Compile Include="Models\Group\Club.cs" />
     <Compile Include="Models\Group\Topic.cs" />
+    <Compile Include="Models\Origin\Column.cs" />
     <Compile Include="Models\PostDataModel\ClubsListRequest.cs" />
     <Compile Include="Models\PostDataModel\GetAllColumnRequest.cs" />
     <Compile Include="Models\PostDataModel\SubjectsListRequest.cs" />
@@ -157,10 +160,10 @@
     <Compile Include="Models\PostDataModel\GameDetailEssayRequest.cs" />
     <Compile Include="Models\PostDataModel\GameDetailRequest.cs" />
     <Compile Include="Models\PostDataModel\GameRequest.cs" />
-    <Compile Include="Models\PostDataModel\Game\GameHomePageRequest.cs" />
-    <Compile Include="Models\PostDataModel\Game\GameRankingListRequest.cs" />
-    <Compile Include="Models\PostDataModel\Game\GameSpecialDetailRequest.cs" />
-    <Compile Include="Models\PostDataModel\Game\GameSpecialListRequest.cs" />
+    <Compile Include="Requests\Game\GameHomePageRequest.cs" />
+    <Compile Include="Requests\Game\GameRankingListRequest.cs" />
+    <Compile Include="Requests\Game\GameSpecialDetailRequest.cs" />
+    <Compile Include="Requests\Game\GameSpecialListRequest.cs" />
     <Compile Include="Models\PostDataModel\LoginRequest.cs" />
     <Compile Include="Models\PostDataModel\PostDataTemplate.cs" />
     <Compile Include="Models\PostDataModel\SearchRequest.cs" />
@@ -191,6 +194,7 @@
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MasterDetailPageViewModel.cs" />
     <Compile Include="ViewModels\NewsPageViewModel.cs" />
+    <Compile Include="ViewModels\OriginPageViewModel.cs" />
     <Compile Include="ViewModels\SearchPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\WebViewPageViewModel.cs" />
@@ -199,6 +203,9 @@
     </Compile>
     <Compile Include="Views\Detail\WebViewPage.xaml.cs">
       <DependentUpon>WebViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Master\Game\GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Master\GroupPage.xaml.cs">
       <DependentUpon>GroupPage.xaml</DependentUpon>
@@ -218,9 +225,6 @@
     <Compile Include="ViewModels\GamePageViewModel.cs" />
     <Compile Include="Views\AppShell.xaml.cs">
       <DependentUpon>AppShell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Master\Game\GamePage.xaml.cs">
-      <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MasterDetailPage.xaml.cs">
       <DependentUpon>MasterDetailPage.xaml</DependentUpon>
@@ -260,6 +264,14 @@
     <Content Include="Assets\Images\drawer_day.png" />
     <Content Include="Assets\Images\drawer_night.png" />
     <Content Include="Assets\Images\drawer_user.png" />
+    <Content Include="Assets\Images\Game\game_tag_top_ns_dz.png" />
+    <Content Include="Assets\Images\Game\game_tag_top_pcdr.png" />
+    <Content Include="Assets\Images\Game\game_tag_top_ps4_dz.png" />
+    <Content Include="Assets\Images\Game\game_tag_top_psn_xm.png" />
+    <Content Include="Assets\Images\Game\game_tag_top_steamrm.png" />
+    <Content Include="Assets\Images\Game\game_tag_top_steamzk.png" />
+    <Content Include="Assets\Images\Game\game_tag_top_xbox_dz.png" />
+    <Content Include="Assets\Images\Game\game_tag_top_zyx.png" />
     <Content Include="Assets\Images\icon_xinwen.png" />
     <Content Include="Assets\Images\icon_xinwen_select.png" />
     <Content Include="Assets\Images\icon_yonghu.png" />
@@ -391,6 +403,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Controls\LightButton\LightButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SimpleRadioButton\SimpleRadioButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -400,6 +416,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Detail\WebViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Master\Game\GamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -417,10 +437,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Views\AppShell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Master\Game\GamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -478,6 +494,12 @@
       <Project>{359f76a7-dacb-448c-a741-067f2ae9da50}</Project>
       <Name>GamerSky.BackgroundTask</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Requests\Group\" />
+    <Folder Include="Requests\Me\" />
+    <Folder Include="Requests\Origin\" />
+    <Folder Include="Responses\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

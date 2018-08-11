@@ -46,6 +46,18 @@ namespace GamerSky.ViewModels
         /// 高分榜
         /// </summary>
         public ObservableCollection<GameSpecialDetail> HighRankedGames { get; set; } = new ObservableCollection<GameSpecialDetail>();
+
+        public List<GamePageTopItem> GamePageTopItems { get; set; } = new List<GamePageTopItem>()
+        {
+            new GamePageTopItem(){ ImageUrl = "/Assets/Images/Game/game_tag_top_zyx.png", Description = "找游戏"},
+            new GamePageTopItem(){ ImageUrl = "/Assets/Images/Game/game_tag_top_steamzk.png", Description = "Steam折扣"},
+            new GamePageTopItem(){ ImageUrl = "/Assets/Images/Game/game_tag_top_psn_xm.png", Description = "PSN限免"},
+            new GamePageTopItem(){ ImageUrl = "/Assets/Images/Game/game_tag_top_steamrm.png", Description = "Steam热门"},
+            new GamePageTopItem(){ ImageUrl = "/Assets/Images/Game/game_tag_top_ps4_dz.png", Description = "PS4独占"},
+            new GamePageTopItem(){ ImageUrl = "/Assets/Images/Game/game_tag_top_ns_dz.png", Description = "NS独占"},
+            new GamePageTopItem(){ ImageUrl = "/Assets/Images/Game/game_tag_top_xbox_dz.png", Description = "XB1独占"},
+            new GamePageTopItem(){ ImageUrl = "/Assets/Images/Game/game_tag_top_pcdr.png", Description = "PC多人"},
+        };
         #endregion
 
         private readonly IMasterDetailNavigationService _navigationService;
@@ -123,4 +135,6 @@ namespace GamerSky.ViewModels
             }
         }
     }
+
+    
 }

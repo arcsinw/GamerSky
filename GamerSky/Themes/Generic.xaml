@@ -7,7 +7,9 @@
         <ResourceDictionary Source="/Controls/ImageEx/ImageEx.xaml" />
         <ResourceDictionary Source="/Controls/GridSplitter/GridSplitter.xaml" />
         <ResourceDictionary Source="/Controls/SimpleRadioButton/SimpleRadioButton.xaml"/>
+        <ResourceDictionary Source="/Controls/LightButton/LightButton.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
    
+    
 </ResourceDictionary>
