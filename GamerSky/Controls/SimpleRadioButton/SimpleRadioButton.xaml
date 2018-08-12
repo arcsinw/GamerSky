@@ -93,8 +93,9 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Image x:Name="Icon" Source="{Binding Source,RelativeSource={RelativeSource TemplatedParent}}" Grid.Row="0" Style="{StaticResource ModuleImageStyle}"/>
-                        <Image x:Name="SelectedIcon" Source="{Binding SelectedSource,RelativeSource={RelativeSource TemplatedParent}}" Grid.Row="0" Style="{StaticResource ModuleImageStyle}" Visibility="Collapsed"/>
+                        <Image x:Name="Icon" Source="{TemplateBinding Source}" Grid.Row="0" Style="{StaticResource ModuleImageStyle}"/>
+                        
+                        <Image x:Name="SelectedIcon" Source="{TemplateBinding SelectedSource}" Grid.Row="0" Style="{StaticResource ModuleImageStyle}" Visibility="Collapsed"/>
                         
                         <ContentPresenter x:Name="ContentPresenter" Grid.Row="1" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Title}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                               Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>

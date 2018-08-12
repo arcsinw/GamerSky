@@ -35,11 +35,9 @@ namespace GamerSky.Views
             {
                 case "Narrow":
                     ShowModuleGrid();
-                    //moduleGrid.Visibility = Visibility.Visible;
                     break;
                 case "Default":
                     HideModuleGrid();
-                    //moduleGrid.Visibility = Visibility.Collapsed;
                     break;
             }
         }
@@ -50,7 +48,7 @@ namespace GamerSky.Views
 
             if (e.Parameter is NavMenuItem menu)
             {
-                frame.Navigate(menu.DestPage);
+                MasterFrame.Navigate(menu.DestPage);
             }
         }
 
@@ -66,19 +64,19 @@ namespace GamerSky.Views
                 switch (radioButton.Tag)
                 {
                     case "0":
-                        frame.Navigate(typeof(NewsPage));
+                        MasterFrame.Navigate(typeof(NewsPage));
                         break;
                     case "1":
-                        frame.Navigate(typeof(GamePage));
+                        MasterFrame.Navigate(typeof(GamePage));
                         break;                                               
-                    case "2":                                               
-                        frame.Navigate(typeof(GroupPage));
+                    case "2":
+                        MasterFrame.Navigate(typeof(GroupPage));
                         break;                                               
-                    case "3":                                               
-                        frame.Navigate(typeof(OriginalPage));
+                    case "3":
+                        MasterFrame.Navigate(typeof(OriginalPage));
                         break;                                               
-                    case "4":                                               
-                        frame.Navigate(typeof(MyPage));
+                    case "4":
+                        MasterFrame.Navigate(typeof(MyPage));
                         break;
                 }
             }
@@ -93,7 +91,7 @@ namespace GamerSky.Views
         public void HideModuleGrid()
         {
             HideStoryboard.Begin();
-            //moduleGrid.Visibility = Visibility.Collapsed;
+            moduleGrid.Visibility = Visibility.Collapsed;
         }
     }
 }

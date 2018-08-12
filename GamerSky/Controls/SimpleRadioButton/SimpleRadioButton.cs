@@ -23,15 +23,15 @@ namespace GamerSky.Controls
         private const string ContentPresenterName = "ContentPresenter";
 
         #region Properties
-        public string Source
+        public ImageSource Source
         {
-            get { return (string)GetValue(SourceProperty); }
+            get { return (ImageSource)GetValue(SourceProperty); }
             set { SetValue(SourceProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Icon.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register("Source", typeof(string), typeof(SimpleRadioButton), new PropertyMetadata(null));
+            DependencyProperty.Register("Source", typeof(ImageSource), typeof(SimpleRadioButton), new PropertyMetadata(default(ImageSource)));
          
 
         public string Title
@@ -44,15 +44,15 @@ namespace GamerSky.Controls
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(SimpleRadioButton), new PropertyMetadata(""));
 
-        public string SelectedSource
+        public ImageSource SelectedSource
         {
-            get { return (string)GetValue(SelectedSourceProperty); }
+            get { return (ImageSource)GetValue(SelectedSourceProperty); }
             set { SetValue(SelectedSourceProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for IconSelected.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedSourceProperty =
-            DependencyProperty.Register("SelectedSource", typeof(string), typeof(SimpleRadioButton), new PropertyMetadata(null));
+            DependencyProperty.Register("SelectedSource", typeof(ImageSource), typeof(SimpleRadioButton), new PropertyMetadata(default(ImageSource)));
 
         #endregion
 

@@ -73,11 +73,11 @@
 
         <StackPanel Grid.Row="0" Background="White" Padding="12,12,12,0">
             <controls:LightButton HorizontalAlignment="Stretch" 
-                    Background="LightGray"
+                    Background="WhiteSmoke"
                     BorderThickness="0"
-                    CornerRadius="16">
+                    CornerRadius="14">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <SymbolIcon Symbol="Find"/>
+                    <BitmapIcon UriSource="ms-appx:///Assets/Images/Game/ic_search2.png" Height="16" Width="16"/>
                     <TextBlock Text="搜索游戏/攻略" Margin="4,0"/>
                 </StackPanel>
             </controls:LightButton>
@@ -125,7 +125,7 @@
                     </Style>
 
                     <Style TargetType="Grid" x:Key="TitleGridStyle">
-                        <Setter Property="Margin" Value="0,12,0,12"/>
+                        <Setter Property="Margin" Value="0,8,0,8"/>
                     </Style>
 
                     <Style TargetType="Button" x:Key="PartButtonStyle" BasedOn="{StaticResource ImageButtonStyle}">
@@ -136,9 +136,16 @@
 
 
                     <Style TargetType="StackPanel" x:Key="PartStackPanelStyle">
-                        <Setter Property="Margin" Value="0,4,0,0"/>
+                        <Setter Property="Margin" Value="0,6,0,0"/>
                         <Setter Property="Padding" Value="12,0"/>
                         <Setter Property="Background" Value="White"/>
+                    </Style>
+
+                    <Style TargetType="Rectangle" x:Key="RectangleStyle">
+                        <Setter Property="Height" Value="18"/>
+                        <Setter Property="Width" Value="4"/>
+                        <Setter Property="Fill" Value="{ThemeResource ThemeColorBrush}"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
                     </Style>
                 </ItemsControl.Resources>
                 <ItemsControl.Template>
@@ -187,11 +194,11 @@
                     
                     <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
                         <Grid Style="{StaticResource TitleGridStyle}">
-                            <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
+                            <Rectangle Style="{StaticResource RectangleStyle}"/>
                             <TextBlock Text="新游推荐" Style="{StaticResource HeaderTextBlockStyle}"/>
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
-                        <FlipView x:Name="flipView" ItemsSource="{Binding NewGames}" MaxHeight="254" VerticalAlignment="Top">
+                        <FlipView x:Name="flipView" ItemsSource="{Binding NewGames}" MaxHeight="254" VerticalAlignment="Top" Margin="0,0,0,8">
                             <FlipView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -219,8 +226,8 @@
 
                     <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
                         <Grid Style="{StaticResource TitleGridStyle}">
-                            <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="最近大家都在玩" Style="{StaticResource HeaderTextBlockStyle}"/>
+                            <Rectangle Style="{StaticResource RectangleStyle}"/>
+                            <TextBlock Text="近期热门" Style="{StaticResource HeaderTextBlockStyle}"/>
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
                         <ListView ItemsSource="{Binding RecentGames}" Style="{StaticResource HorizontalListViewStyle}">
@@ -228,7 +235,9 @@
                                 <DataTemplate>
                                     <Grid>
                                         <StackPanel Orientation="Vertical">
-                                            <Image Source="{Binding DefaultPicUrl}"/>
+                                            <controls:ImageEx Source="{Binding DefaultPicUrl}" PlaceholderSource="{StaticResource VerticalPlaceHolderImage}"
+                                                              Height="100" Width="80" PlaceholderStretch="UniformToFill"/>
+                                            
                                             <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"/>
                                         </StackPanel>
                                     </Grid>
@@ -239,19 +248,21 @@
 
                     <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
                         <Grid Style="{StaticResource TitleGridStyle}">
-                            <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
+                            <Rectangle Style="{StaticResource RectangleStyle}"/>
                             <TextBlock Text="特色专题" Style="{StaticResource HeaderTextBlockStyle}"/>
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
                         <ListView ItemsSource="{Binding GameSpecialList}" Style="{StaticResource HorizontalListViewStyle}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Height="130" Width="180" CornerRadius="2">
+                                    <!--<Border Height="130" Width="180" CornerRadius="2">
                                         <Border.Background>
                                             <ImageBrush ImageSource="{Binding SmallImage}"/>
                                         </Border.Background>
-                                    </Border>
-                                    <!--<controls:ImageEx Source="{Binding SmallImage}"/>-->
+                                    </Border>-->
+                                    <controls:ImageEx Source="{Binding SmallImage}" Height="130" Width="180" 
+                                                      PlaceholderSource="{StaticResource HorizontalPlaceHolderImage}" 
+                                                      PlaceholderStretch="UniformToFill"/>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             <ListView.ItemContainerStyle>
@@ -266,7 +277,49 @@
 
                     <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
                         <Grid Style="{StaticResource TitleGridStyle}">
-                            <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
+                            <Rectangle Style="{StaticResource RectangleStyle}"/>
+                            <TextBlock Text="最新上市" Style="{StaticResource HeaderTextBlockStyle}"/>
+                            <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
+                        </Grid>
+
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <controls:SimpleRadioButton Source="ms-appx:///Assets/Images/Game/latest_listing_pc_icon.png"
+                                                    SelectedSource="ms-appx:///Assets/Images/Game/latest_listing_pc_icon_select.png"
+                                                    IsChecked="True"/>
+
+                                <controls:SimpleRadioButton Source="ms-appx:///Assets/Images/Game/latest_listing_ps_icon.png"
+                                                    SelectedSource="ms-appx:///Assets/Images/Game/latest_listing_ps_icon_select.png"
+                                                    />
+
+                                <controls:SimpleRadioButton Source="ms-appx:///Assets/Images/Game/latest_listing_xbox_icon.png"
+                                                    SelectedSource="ms-appx:///Assets/Images/Game/latest_listing_xbox_icon_select.png"
+                                                    />
+
+                                <controls:SimpleRadioButton Source="ms-appx:///Assets/Images/Game/latest_listing_ns_icon.png"
+                                                    SelectedSource="ms-appx:///Assets/Images/Game/latest_listing_ns_icon_select.png"
+                                                    />
+                            </StackPanel>
+                            <ListView ItemsSource="{Binding RecentGames}" Style="{StaticResource HorizontalListViewStyle}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <StackPanel Orientation="Vertical">
+                                                <controls:ImageEx Source="{Binding DefaultPicUrl}" PlaceholderSource="{StaticResource VerticalPlaceHolderImage}"
+                                                              Height="100" Width="80" PlaceholderStretch="UniformToFill"/>
+
+                                                <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
+                        <Grid Style="{StaticResource TitleGridStyle}">
+                            <Rectangle Style="{StaticResource RectangleStyle}"/>
                             <TextBlock Text="即将上市" Style="{StaticResource HeaderTextBlockStyle}"/>
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
@@ -275,8 +328,10 @@
                                 <DataTemplate>
                                     <Grid>
                                         <StackPanel Orientation="Vertical">
-                                            <Image Source="{Binding DefaultPicUrl}" HorizontalAlignment="Center" Stretch="UniformToFill"/>
-                                            <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" TextTrimming="Clip"/>
+                                            <controls:ImageEx Source="{Binding DefaultPicUrl}" PlaceholderSource="{StaticResource VerticalPlaceHolderImage}"
+                                                              Height="100" Width="80" PlaceholderStretch="UniformToFill"/>
+
+                                            <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"/>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -286,10 +341,12 @@
 
                     <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
                         <Grid Style="{StaticResource TitleGridStyle}">
-                            <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
+                            <Rectangle Style="{StaticResource RectangleStyle}"/>
                             <TextBlock Text="高分榜" Style="{StaticResource HeaderTextBlockStyle}"/>
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
+
+                        
                         <ListView ItemsSource="{Binding HighRankedGames}" Style="{StaticResource HorizontalListViewStyle}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -304,9 +361,9 @@
                         </ListView>
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
+                    <!--<StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
                         <Grid Style="{StaticResource TitleGridStyle}">
-                            <Rectangle Height="24" Width="4" Fill="{ThemeResource ThemeColorBrush}" HorizontalAlignment="Left"/>
+                            <Rectangle Style="{StaticResource RectangleStyle}"/>
                             <TextBlock Text="最期待游戏" Style="{StaticResource HeaderTextBlockStyle}"/>
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
@@ -338,7 +395,7 @@
                         <ListView Style="{StaticResource HorizontalListViewStyle}">
 
                         </ListView>
-                    </StackPanel>
+                    </StackPanel>-->
                 </ItemsControl.Items>
             </ItemsControl>
         </Grid>

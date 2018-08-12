@@ -8,6 +8,7 @@
         <ResourceDictionary Source="/Controls/GridSplitter/GridSplitter.xaml" />
         <ResourceDictionary Source="/Controls/SimpleRadioButton/SimpleRadioButton.xaml"/>
         <ResourceDictionary Source="/Controls/LightButton/LightButton.xaml"/>
+        <ResourceDictionary Source="/Controls/IndicatorPivot/IndicatorPivot.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
    

@@ -70,10 +70,15 @@
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot ItemsSource="{Binding Essays}">
-            <Pivot.HeaderTemplate>
+        <controls:IndicatorPivot x:Name="pivot" ItemsSource="{Binding Essays}">
+            <!--<Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock FontSize="18" Text="{Binding Item1.NodeName}"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>-->
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Item1.NodeName}" FontSize="18" Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>
                 </DataTemplate>
             </Pivot.HeaderTemplate>
 
@@ -115,7 +120,7 @@
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                 </Style>
             </Pivot.ItemContainerStyle>
-        </Pivot>
+        </controls:IndicatorPivot>
 
         <ProgressRing Style="{ThemeResource LightProgressRingStyle}" IsActive="{Binding IsActive}"/>
     </Grid>

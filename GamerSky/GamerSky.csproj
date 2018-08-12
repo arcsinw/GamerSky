@@ -11,7 +11,7 @@
     <AssemblyName>GamerSky</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.14393.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -121,6 +121,7 @@
     <Compile Include="Controls\ImageEx\ImageEx.Source.cs" />
     <Compile Include="Controls\ImageEx\ImageExFailedEventArgs.cs" />
     <Compile Include="Controls\ImageEx\ImageExOpenedEventArgs.cs" />
+    <Compile Include="Controls\IndicatorPivot\IndicatorPivot.cs" />
     <Compile Include="Controls\LightButton\LightButton.cs" />
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
@@ -272,6 +273,15 @@
     <Content Include="Assets\Images\Game\game_tag_top_steamzk.png" />
     <Content Include="Assets\Images\Game\game_tag_top_xbox_dz.png" />
     <Content Include="Assets\Images\Game\game_tag_top_zyx.png" />
+    <Content Include="Assets\Images\Game\ic_search2.png" />
+    <Content Include="Assets\Images\Game\latest_listing_ns_icon.png" />
+    <Content Include="Assets\Images\Game\latest_listing_ns_icon_select.png" />
+    <Content Include="Assets\Images\Game\latest_listing_pc_icon.png" />
+    <Content Include="Assets\Images\Game\latest_listing_pc_icon_select.png" />
+    <Content Include="Assets\Images\Game\latest_listing_ps_icon.png" />
+    <Content Include="Assets\Images\Game\latest_listing_ps_icon_select.png" />
+    <Content Include="Assets\Images\Game\latest_listing_xbox_icon.png" />
+    <Content Include="Assets\Images\Game\latest_listing_xbox_icon_select.png" />
     <Content Include="Assets\Images\icon_xinwen.png" />
     <Content Include="Assets\Images\icon_xinwen_select.png" />
     <Content Include="Assets\Images\icon_yonghu.png" />
@@ -306,10 +316,10 @@
     <Content Include="Assets\Images\ic_settings.png" />
     <Content Include="Assets\Images\ic_subscription_latest.png" />
     <Content Include="Assets\Images\ic_title.png" />
-    <Content Include="Assets\Images\image_loading.png" />
-    <Content Include="Assets\Images\image_loading_game_lib_day.png" />
-    <Content Include="Assets\Images\image_loading_game_lib_night.png" />
-    <Content Include="Assets\Images\image_loading_night.png" />
+    <Content Include="Assets\Images\horizontal_placeholder.png" />
+    <Content Include="Assets\Images\vertical_placeholder.png" />
+    <Content Include="Assets\Images\vertical_placeholder_night.png" />
+    <Content Include="Assets\Images\horizontal_placeholder_night.png" />
     <Content Include="Assets\Images\launch_title.png" />
     <Content Include="Assets\Images\login_weibo.png" />
     <Content Include="Assets\Images\login_weixin.png" />
@@ -400,6 +410,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Page Include="Controls\GlobalDialog\GlobalDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\IndicatorPivot\IndicatorPivot.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
