@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:GamerSky.Controls"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     DataContext="{Binding Path=GamePageInstance, Source={StaticResource ViewModelLocator}}">
 
     <Page.Resources>
@@ -62,6 +64,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <DataTemplate x:Name="VerticalGameDataTemplate">
+            <Grid>
+                <StackPanel Orientation="Vertical">
+                    <controls:ImageEx Source="{Binding DefaultPicUrl}" PlaceholderSource="{StaticResource VerticalPlaceHolderImage}"
+                                Height="180" Width="120" PlaceholderStretch="UniformToFill"/>
+                    <TextBlock Text="{Binding Title}" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
 
@@ -198,16 +210,17 @@
                             <TextBlock Text="新游推荐" Style="{StaticResource HeaderTextBlockStyle}"/>
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
-                        <FlipView x:Name="flipView" ItemsSource="{Binding NewGames}" MaxHeight="254" VerticalAlignment="Top" Margin="0,0,0,8">
+                        <FlipView x:Name="flipView" ItemsSource="{Binding NewGames}" MaxHeight="254" VerticalAlignment="Top" Margin="0,0,0,12"
+                                  SelectedItem="{Binding Path=GamePageInstance.SelectedNewGame, Mode=TwoWay, Source={StaticResource ViewModelLocator}}">
                             <FlipView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <Grid.Background>
+                                        <Border>
+                                            <controls:ImageEx Source="{Binding LargeImage}" Stretch="UniformToFill" />
+                                        </Border>
+                                        <!--<Grid.Background>
                                             <ImageBrush ImageSource="{Binding LargeImage}" Stretch="UniformToFill"/>
-                                        </Grid.Background>
-                                        <!--<controls:ImageEx Source="{Binding LargeImage}" 
-                                                    PlaceholderSource="{StaticResource GamePlaceHolderImage}"
-                                                    Height="254" Width="450" Stretch="Fill"/>-->
+                                        </Grid.Background>-->
 
                                         <StackPanel VerticalAlignment="Bottom">
                                             <TextBlock Foreground="White" TextWrapping="Wrap" Margin="24">
@@ -230,20 +243,19 @@
                             <TextBlock Text="近期热门" Style="{StaticResource HeaderTextBlockStyle}"/>
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding RecentGames}" Style="{StaticResource HorizontalListViewStyle}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <StackPanel Orientation="Vertical">
-                                            <controls:ImageEx Source="{Binding DefaultPicUrl}" PlaceholderSource="{StaticResource VerticalPlaceHolderImage}"
-                                                              Height="100" Width="80" PlaceholderStretch="UniformToFill"/>
-                                            
-                                            <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
+                        <ListView ItemsSource="{Binding RecentGames}" Style="{StaticResource HorizontalListViewStyle}"
+                                  ItemTemplate="{StaticResource VerticalGameDataTemplate}"
+                                  Margin="0,0,0,12"
+                                  SelectedItem="{Binding Path=GamePageInstance.SelectedRecentGame, Mode=TwoWay, Source={StaticResource ViewModelLocator}}"
+                                  IsItemClickEnabled="True"
+                                  >
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="ItemClick">
+                                    <core:InvokeCommandAction Command="{Binding Path=GamePageInstance.GameItemClickCommand,Source={StaticResource ViewModelLocator}}" />
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
                         </ListView>
+
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
@@ -252,17 +264,15 @@
                             <TextBlock Text="特色专题" Style="{StaticResource HeaderTextBlockStyle}"/>
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding GameSpecialList}" Style="{StaticResource HorizontalListViewStyle}">
+                        <ListView ItemsSource="{Binding GameSpecialList}" Style="{StaticResource HorizontalListViewStyle}" Margin="0,0,0,12"
+                                  SelectedItem="{Binding Path=GamePageInstance.SelectedGameSpecial, Mode=TwoWay, Source={StaticResource ViewModelLocator}}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <!--<Border Height="130" Width="180" CornerRadius="2">
-                                        <Border.Background>
-                                            <ImageBrush ImageSource="{Binding SmallImage}"/>
-                                        </Border.Background>
-                                    </Border>-->
-                                    <controls:ImageEx Source="{Binding SmallImage}" Height="130" Width="180" 
+                                    <Border CornerRadius="4">
+                                        <controls:ImageEx Source="{Binding SmallImage}" Width="180"
                                                       PlaceholderSource="{StaticResource HorizontalPlaceHolderImage}" 
-                                                      PlaceholderStretch="UniformToFill"/>
+                                                      PlaceholderStretch="Fill"/>
+                                    </Border>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             <ListView.ItemContainerStyle>
@@ -300,20 +310,10 @@
                                                     SelectedSource="ms-appx:///Assets/Images/Game/latest_listing_ns_icon_select.png"
                                                     />
                             </StackPanel>
-                            <ListView ItemsSource="{Binding RecentGames}" Style="{StaticResource HorizontalListViewStyle}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <StackPanel Orientation="Vertical">
-                                                <controls:ImageEx Source="{Binding DefaultPicUrl}" PlaceholderSource="{StaticResource VerticalPlaceHolderImage}"
-                                                              Height="100" Width="80" PlaceholderStretch="UniformToFill"/>
-
-                                                <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                            <ListView ItemsSource="{Binding RecentGames}" Style="{StaticResource HorizontalListViewStyle}" 
+                                      ItemTemplate="{StaticResource VerticalGameDataTemplate}"
+                                      Margin="0,0,0,12"
+                                      />
                         </StackPanel>
                     </StackPanel>
                     
@@ -321,22 +321,12 @@
                         <Grid Style="{StaticResource TitleGridStyle}">
                             <Rectangle Style="{StaticResource RectangleStyle}"/>
                             <TextBlock Text="即将上市" Style="{StaticResource HeaderTextBlockStyle}"/>
-                            <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
+                            <HyperlinkButton Content="查看发售表" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
-                        <ListView ItemsSource="{Binding NewSellingGames}" Style="{StaticResource HorizontalListViewStyle}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <StackPanel Orientation="Vertical">
-                                            <controls:ImageEx Source="{Binding DefaultPicUrl}" PlaceholderSource="{StaticResource VerticalPlaceHolderImage}"
-                                                              Height="100" Width="80" PlaceholderStretch="UniformToFill"/>
+                        <ListView ItemsSource="{Binding NewSellingGames}" Style="{StaticResource HorizontalListViewStyle}" 
+                                  ItemTemplate="{StaticResource VerticalGameDataTemplate}"
+                                  Margin="0,0,0,12"/>
 
-                                            <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">

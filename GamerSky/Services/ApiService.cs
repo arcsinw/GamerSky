@@ -1107,6 +1107,27 @@ namespace GamerSky.Services
 
             return result;
         }
+        
+        /// <summary>
+        /// 获取游戏Detail
+        /// </summary>
+        /// <param name="gameId"></param>
+        /// <returns></returns>
+        public async Task<GameDetailV4> GetGameDetailV4(string gameId)
+        {
+            PostDataTemplate<GameDetailRequestV4> postData = new PostDataTemplate<GameDetailRequestV4>()
+            {
+                request = new GameDetailRequestV4()
+                {
+                    gameId = gameId
+                }
+            };
+
+            ResultDataTemplate<GameDetailV4> result = await PostJson<PostDataTemplate<GameDetailRequestV4>, ResultDataTemplate<GameDetailV4>> (ServiceUri.GameHomePage, postData);
+
+            return result?.Result;
+        }
+        
         #endregion
 
 

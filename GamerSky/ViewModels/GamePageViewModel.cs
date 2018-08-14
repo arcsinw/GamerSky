@@ -22,15 +22,21 @@ namespace GamerSky.ViewModels
         /// </summary>
         public ObservableCollection<GameSpecialDetail> NewGames { get; set; } = new ObservableCollection<GameSpecialDetail>();
 
+        public GameSpecialDetail SelectedNewGame { get; set; }
+
         /// <summary>
         /// 最近游戏
         /// </summary>
         public ObservableCollection<GameSpecialDetail> RecentGames { get; set; } = new ObservableCollection<GameSpecialDetail>();
 
+        public GameSpecialDetail SelectedRecentGame { get; set; }
+
         /// <summary>
         /// 特色专题
         /// </summary>
         public ObservableCollection<GameSpecial> GameSpecialList { get; set; } = new ObservableCollection<GameSpecial>();
+
+        public GameSpecial SelectedGameSpecial { get; set; }
 
         /// <summary>
         /// 即将上市
@@ -58,6 +64,10 @@ namespace GamerSky.ViewModels
             new GamePageTopItem(){ ImageUrl = "/Assets/Images/Game/game_tag_top_xbox_dz.png", Description = "XB1独占"},
             new GamePageTopItem(){ ImageUrl = "/Assets/Images/Game/game_tag_top_pcdr.png", Description = "PC多人"},
         };
+
+        
+
+        public RelayCommand GameItemClickCommand { get; set; } 
         #endregion
 
         private readonly IMasterDetailNavigationService _navigationService;
@@ -80,6 +90,7 @@ namespace GamerSky.ViewModels
             }
 
             NavigateToSearchPageCommand = new RelayCommand(NavigationToSearchPage);
+            GameItemClickCommand = new RelayCommand(ItemClick);
         }
 
         private void NavigationToSearchPage()
@@ -87,8 +98,10 @@ namespace GamerSky.ViewModels
             _navigationService.DetailNavigateTo("SearchPage");
         }
 
-
-         
+        public void ItemClick()
+        {
+            _navigationService.DetailNavigateTo("GameDetailPage");
+        }
 
         public void LoadDesignTimeData()
         {
@@ -134,7 +147,12 @@ namespace GamerSky.ViewModels
                 NewSellingGames.Add(item);
             }
         }
-    }
 
-    
+        public void LoadData()
+        {
+
+        }
+
+        
+    }
 }

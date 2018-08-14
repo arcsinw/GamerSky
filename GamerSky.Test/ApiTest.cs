@@ -15,7 +15,7 @@ namespace GamerSky.Test
         private ApiService apiService = ApiService.Instance;
 
         [TestMethod]
-        public async Task GetAllChannel()
+        public async void GetAllChannel()
         {
             List<Channel> channels = await apiService.GetChannelList();
             Assert.IsNotNull(channels);

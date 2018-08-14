@@ -126,6 +126,7 @@
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
+    <Compile Include="Models\Game\GameDetailV4.cs" />
     <Compile Include="Models\Game\GamePageToItem.cs" />
     <Compile Include="Models\Group\Club.cs" />
     <Compile Include="Models\Group\Topic.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Models\PostDataModel\SubjectsListRequest.cs" />
     <Compile Include="Models\PostDataModel\TopicsListRequest.cs" />
     <Compile Include="Models\ResultDataModel\UserComments.cs" />
+    <Compile Include="Requests\Game\GameDetailRequestV4.cs" />
     <Compile Include="TemplateSelector\NewsDataTemplateSelector.cs" />
     <Compile Include="Enums\GameNodeIdEnum.cs" />
     <Compile Include="Enums\SearchTypeEnum.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="Utils\IncrementalLoadingCollection.cs" />
     <Compile Include="Utils\TrimStringComparer.cs" />
     <Compile Include="Utils\TitleBarPersonalizeHelper.cs" />
+    <Compile Include="ViewModels\GameDetailPageViewModel.cs" />
     <Compile Include="ViewModels\GroupPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MasterDetailPageViewModel.cs" />
@@ -204,6 +207,9 @@
     </Compile>
     <Compile Include="Views\Detail\WebViewPage.xaml.cs">
       <DependentUpon>WebViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Master\Game\GameDetailPage.xaml.cs">
+      <DependentUpon>GameDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Master\Game\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
@@ -273,6 +279,15 @@
     <Content Include="Assets\Images\Game\game_tag_top_steamzk.png" />
     <Content Include="Assets\Images\Game\game_tag_top_xbox_dz.png" />
     <Content Include="Assets\Images\Game\game_tag_top_zyx.png" />
+    <Content Include="Assets\Images\Game\ic_comment_edit.png" />
+    <Content Include="Assets\Images\Game\ic_configure.png" />
+    <Content Include="Assets\Images\Game\ic_game_multiplayer.png" />
+    <Content Include="Assets\Images\Game\ic_game_official_chinese.png" />
+    <Content Include="Assets\Images\Game\ic_game_online.png" />
+    <Content Include="Assets\Images\Game\ic_game_price.png" />
+    <Content Include="Assets\Images\Game\ic_game_sell_time.png" />
+    <Content Include="Assets\Images\Game\ic_game_support_platform.png" />
+    <Content Include="Assets\Images\Game\ic_game_vip_free.png" />
     <Content Include="Assets\Images\Game\ic_search2.png" />
     <Content Include="Assets\Images\Game\latest_listing_ns_icon.png" />
     <Content Include="Assets\Images\Game\latest_listing_ns_icon_select.png" />
@@ -282,6 +297,9 @@
     <Content Include="Assets\Images\Game\latest_listing_ps_icon_select.png" />
     <Content Include="Assets\Images\Game\latest_listing_xbox_icon.png" />
     <Content Include="Assets\Images\Game\latest_listing_xbox_icon_select.png" />
+    <Content Include="Assets\Images\Game\quanzi_share.png" />
+    <Content Include="Assets\Images\game_feature_bg.9.png" />
+    <Content Include="Assets\Images\game_feature_bg_nomination.9.png" />
     <Content Include="Assets\Images\icon_xinwen.png" />
     <Content Include="Assets\Images\icon_xinwen_select.png" />
     <Content Include="Assets\Images\icon_yonghu.png" />
@@ -303,6 +321,7 @@
     <Content Include="Assets\Images\ic_launcher.png" />
     <Content Include="Assets\Images\ic_main_quanzi_default.png" />
     <Content Include="Assets\Images\ic_main_quanzi_selected.png" />
+    <Content Include="Assets\Images\ic_menu_share_white.png" />
     <Content Include="Assets\Images\ic_news_live.png" />
     <Content Include="Assets\Images\ic_notification.png" />
     <Content Include="Assets\Images\ic_original_column.png" />
@@ -433,6 +452,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Master\Game\GameDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Master\Game\GamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -488,7 +511,7 @@
       <Version>2.5.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.8</Version>
+      <Version>6.1.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.0</Version>
@@ -500,7 +523,7 @@
       <Version>11.0.2</Version>
     </PackageReference>
     <PackageReference Include="System.Reactive">
-      <Version>3.1.1</Version>
+      <Version>4.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
