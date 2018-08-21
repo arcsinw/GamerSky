@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,22 +13,17 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 namespace GamerSky.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GroupPage : Page
+    public sealed partial class SubjectContentPage : Page
     {
-        public GroupPage()
+        public SubjectContentPage()
         {
             this.InitializeComponent();
-        }
-
-
-        public void ListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubjectContentPage));
         }
     }
 }

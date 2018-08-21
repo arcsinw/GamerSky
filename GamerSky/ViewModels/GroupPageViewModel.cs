@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GamerSky.Interfaces;
 using GamerSky.Models.Group;
 using GamerSky.Models.ResultDataModel;
@@ -10,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace GamerSky.ViewModels
 {
@@ -20,9 +22,10 @@ namespace GamerSky.ViewModels
         /// </summary>
         public ObservableCollection<Club> Subjects { get; set; } = new ObservableCollection<Club>();
 
+        public RelayCommand SubjectSelectedCommand { get; set; }
 
         private readonly IMasterDetailNavigationService _navigationService;
-        
+
 
         public GroupPageViewModel()
         {

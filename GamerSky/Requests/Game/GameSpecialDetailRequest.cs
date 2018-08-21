@@ -19,7 +19,7 @@ namespace GamerSky.Requests
         public string ExtraField2 { get; set; }
 
         [JsonProperty("elementsCountPerPage")]
-        public int ElementsCountPerPage { get; set; }
+        public int ElementsCountPerPage { get; set; } = 20;
 
         [JsonProperty("extraField3")]
         public string ExtraField3 { get; set; }

@@ -50,8 +50,7 @@ namespace GamerSky.Services
             ResultDataTemplate<List<Channel>> channelResult = new ResultDataTemplate<List<Channel>>();
             
             channelResult.Result = await FileHelper.Current.ReadObjectAsync<List<Channel>>(filename);
-
-
+            
             if (channelResult.Result == null)
             {
                 PostDataTemplate<AllChannelListRequest> postData = new PostDataTemplate<AllChannelListRequest>()
@@ -67,7 +66,9 @@ namespace GamerSky.Services
                 }
             }
 
-            channelResult.Result.Insert(0,new Channel { IsTop = "False", NodeId = 0, NodeName = "头条" });
+            channelResult.Result.Insert(0,new Channel { IsTop = "False", NodeId = "0", NodeName = "头条" });
+            channelResult.Result.Insert(1, new Channel { IsTop = "False", NodeId = "9", NodeName = "订阅" });
+            channelResult.Result.Insert(1, new Channel { IsTop = "False", NodeId = "9", NodeName = "视频" });
             return channelResult.Result;  
         }
         
@@ -77,7 +78,7 @@ namespace GamerSky.Services
         /// <param name="nodeId">频道ID</param>
         /// <param name="pageIndex">页码</param>
         /// <returns></returns>
-        public async Task<List<Essay>> GetEssayList(int nodeId, int pageIndex)
+        public async Task<List<Essay>> GetEssayList(string nodeId, int pageIndex)
         {
             string filename = "essayList_"+nodeId+"_"+pageIndex+".json";
             ResultDataTemplate<List<Essay>> essayResult = new ResultDataTemplate<List<Essay>>();
@@ -87,16 +88,15 @@ namespace GamerSky.Services
             }
             else
             {
+
                 PostDataTemplate<AllChannelListRequest> postData = new PostDataTemplate<AllChannelListRequest>()
                 {
-                    deviceId = DeviceInformationHelper.GetDeviceId(),
                     request = new AllChannelListRequest()
                     {
                         elementsCountPerPage = 20,
                         nodeIds = nodeId,
                         pageIndex = pageIndex,
                         parentNodeId = "news",
-                        type = "null",
                     }
                 };
 
@@ -133,7 +133,6 @@ namespace GamerSky.Services
                         contentId = contentId,
                         pageIndex = 1
                     },
-                    deviceId = DeviceInformationHelper.GetDeviceId()
                 };
 
                 newsResult = await PostJson<PostDataTemplate<AllChannelListRequest>, ResultDataTemplate<News>>(ServiceUri.TwoArticle, postData);
@@ -290,7 +289,7 @@ namespace GamerSky.Services
         /// </summary>   
         /// <param name="contentId"></param>
         /// <returns></returns>
-        public async Task<List<Essay>> GetGameStrategys(int specialID,int pageIndex=1)
+        public async Task<List<Essay>> GetGameStrategys(string specialID, int pageIndex=1)
         {
             ResultDataTemplate<List<Essay>> essayResult = new ResultDataTemplate<List<Essay>>();
             string filename = "gameStrategys_" + specialID + ".json";
@@ -907,14 +906,15 @@ namespace GamerSky.Services
 
         #endregion
 
-        #region GamePage
+        #region 游戏
 
         /// <summary>
         /// 新游推荐
         /// </summary>
         /// <param name="pageIndex"></param>
+        /// <param name="pageCount">查看更多中设置为20</param>
         /// <returns></returns>
-        public async Task<ResultDataTemplate<List<GameSpecialDetail>>> GetGameSpecialDetail(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecialDetail>>> GetGameSpecialDetail(int pageIndex = 1, int pageCount = 4)
         {
             PostDataTemplate<GameSpecialDetailRequest> postData = new PostDataTemplate<GameSpecialDetailRequest>()
             {
@@ -935,7 +935,7 @@ namespace GamerSky.Services
         }
 
         /// <summary>
-        /// 最近大家都在玩
+        /// 近期热门
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
@@ -1128,9 +1128,52 @@ namespace GamerSky.Services
             return result?.Result;
         }
         
+        /// <summary>
+        /// 热门点评
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        public async Task<List<GameReview>> GetGameReview(int pageIndex)
+        {
+            PostDataTemplate<GameReviewRequest> postData = new PostDataTemplate<GameReviewRequest>()
+            {
+                request = new GameReviewRequest()
+                {
+                    extraField1 = "Position,GameType,wantplayCount,scoreUserCount",
+                    extraField2 = "gsScore,gameTag",
+                    pageIndex = pageIndex,
+                    type = "wanGuoZuiXin",
+                }
+            };
+
+            ResultDataTemplate<List<GameReview>> result = await PostJson<PostDataTemplate<GameReviewRequest>, ResultDataTemplate<List<GameReview>>>(ServiceUri.ReviewList, postData);
+
+            return result?.Result;
+        }
         #endregion
 
+        #region 首页
+        /// <summary>
+        /// 首页 -> 订阅
+        /// </summary>
+        public async Task<List<Essay>> GetSubscribe(int pageIndex = 1)
+        {
+            PostDataTemplate<Requests.AllChannelListRequest> postData = new PostDataTemplate<Requests.AllChannelListRequest>
+            {
+                request = new Requests.AllChannelListRequest
+                {
+                    elementsCountPerPage = 20,
+                    nodeIds = "101, 99, 100, 102, 118, 137, 126, 130, 120, 129, 119",
+                    pageIndex = pageIndex,
+                    parentNodeId = "dingyue",
+                    type = "newsList"
+                }
+            };
 
+            ResultDataTemplate<List<Essay>> result = await PostJson<PostDataTemplate<Requests.AllChannelListRequest>, ResultDataTemplate<List<Essay>>>(ServiceUri.AllChannelList, postData);
+            return result?.Result;
+        }
+        #endregion
 
         #region 原创
         /// <summary>
@@ -1165,15 +1208,17 @@ namespace GamerSky.Services
         }
 
         /// <summary>
-        /// 获取发帖
+        /// 获取发帖 
+        /// 点击话题的内容
         /// </summary>
-        public async Task<List<Topic>> GetTopicsListAsync(int pageIndex)
+        public async Task<List<Topic>> GetTopicsListAsync(int pageIndex, int subjectId)
         {
             PostDataTemplate<TopicsListRequest> postData = new PostDataTemplate<TopicsListRequest>()
             {
                 request = new TopicsListRequest()
                 {
                     pageIndex = pageIndex,
+                    subjectId = subjectId,
                 }
             };
             ResultDataTemplate<List<Topic>> result =

@@ -71,11 +71,6 @@
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <controls:IndicatorPivot x:Name="pivot" ItemsSource="{Binding Essays}">
-            <!--<Pivot.HeaderTemplate>
-                <DataTemplate>
-                    <TextBlock FontSize="18" Text="{Binding Item1.NodeName}"/>
-                </DataTemplate>
-            </Pivot.HeaderTemplate>-->
             <Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Item1.NodeName}" FontSize="18" Width="{Binding ElementName=pivot,Path=HeaderWidth}"/>

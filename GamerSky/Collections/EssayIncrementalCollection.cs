@@ -14,12 +14,12 @@ namespace GamerSky.Collection
     public class EssayIncrementalCollection : IncrementalLoadingBase<Essay>
     {
 
-        public EssayIncrementalCollection(int nodeId)
+        public EssayIncrementalCollection(string nodeId)
         {
             this.nodeId = nodeId;
         }
 
-        private int nodeId;
+        private string nodeId;
         private int pageIndex = 1; 
          
         private ObservableCollection<Essay> headerEssays = new ObservableCollection<Essay>();

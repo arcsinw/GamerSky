@@ -171,6 +171,11 @@ namespace GamerSky.Services
         /// 找游戏
         /// </summary>
         public static string GameTags { get; set; } = "http://appapi2.gamersky.com/game/GameTags";
+
+        /// <summary>
+        /// 热门点评
+        /// </summary>
+        public static string ReviewList { get; set; } = "http://appapi2.gamersky.com/game/reviewList";
         #endregion
 
         /// <summary>

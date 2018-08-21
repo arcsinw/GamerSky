@@ -25,7 +25,7 @@ namespace GamerSky.ViewModels
         public const string GroupPageKey = "GroupPage";
         public const string OriginPageKey = "OriginPage";
         public const string GameDetailPageKey = "GameDetailPage";
-
+        public const string SubjectContentPageKey = "SubjectContentPage";
         #endregion
 
         public ViewModelLocator()
@@ -55,6 +55,7 @@ namespace GamerSky.ViewModels
             nav.Configure(GroupPageKey, typeof(GroupPage));
             nav.Configure(OriginPageKey, typeof(OriginalPage));
             nav.Configure(GameDetailPageKey, typeof(GameDetailPage));
+            nav.Configure(SubjectContentPageKey, typeof(SubjectContentPage));
 
             SimpleIoc.Default.Register<IMasterDetailNavigationService>(() => nav);
             SimpleIoc.Default.Register<NewsPageViewModel>();
@@ -66,6 +67,7 @@ namespace GamerSky.ViewModels
             SimpleIoc.Default.Register<GroupPageViewModel>();
             SimpleIoc.Default.Register<OriginPageViewModel>();
             SimpleIoc.Default.Register<GameDetailPageViewModel>();
+            SimpleIoc.Default.Register<SubjectContentPageViewModel>();
         }
 
         #region ViewModels' instances
@@ -138,6 +140,14 @@ namespace GamerSky.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<GameDetailPageViewModel>();
+            }
+        }
+
+        public SubjectContentPageViewModel SubjectContentPageInstance
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SubjectContentPageViewModel>();
             }
         }
         #endregion

@@ -126,17 +126,22 @@
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Models\Game\GameDetailV4.cs" />
     <Compile Include="Models\Game\GamePageToItem.cs" />
+    <Compile Include="Models\Game\GameReview.cs" />
+    <Compile Include="Models\Game\SteamVideo.cs" />
     <Compile Include="Models\Group\Club.cs" />
     <Compile Include="Models\Group\Topic.cs" />
     <Compile Include="Models\Origin\Column.cs" />
     <Compile Include="Models\PostDataModel\ClubsListRequest.cs" />
     <Compile Include="Models\PostDataModel\GetAllColumnRequest.cs" />
     <Compile Include="Models\PostDataModel\SubjectsListRequest.cs" />
-    <Compile Include="Models\PostDataModel\TopicsListRequest.cs" />
+    <Compile Include="Requests\Group\TopicsListRequest.cs" />
     <Compile Include="Models\ResultDataModel\UserComments.cs" />
     <Compile Include="Requests\Game\GameDetailRequestV4.cs" />
+    <Compile Include="Requests\Game\GameReviewRequest.cs" />
+    <Compile Include="Requests\Home\AllChannelListRequest.cs" />
     <Compile Include="TemplateSelector\NewsDataTemplateSelector.cs" />
     <Compile Include="Enums\GameNodeIdEnum.cs" />
     <Compile Include="Enums\SearchTypeEnum.cs" />
@@ -156,7 +161,6 @@
     <Compile Include="Models\Game\GameDetail.cs" />
     <Compile Include="Models\ModelBase.cs" />
     <Compile Include="Models\News.cs" />
-    <Compile Include="Models\PostDataModel\AllChannelListRequest.cs" />
     <Compile Include="Models\PostDataModel\CommentRequest.cs" />
     <Compile Include="Models\PostDataModel\EditSubscribeRequest.cs" />
     <Compile Include="Models\PostDataModel\EmailRegisterRequest.cs" />
@@ -200,13 +204,20 @@
     <Compile Include="ViewModels\NewsPageViewModel.cs" />
     <Compile Include="ViewModels\OriginPageViewModel.cs" />
     <Compile Include="ViewModels\SearchPageViewModel.cs" />
+    <Compile Include="ViewModels\SubjectContentPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\WebViewPageViewModel.cs" />
     <Compile Include="Views\Detail\DefaultPage.xaml.cs">
       <DependentUpon>DefaultPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Detail\SubjectContentPage.xaml.cs">
+      <DependentUpon>SubjectContentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Detail\WebViewPage.xaml.cs">
       <DependentUpon>WebViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Master\Game\FindGamePage.xaml.cs">
+      <DependentUpon>FindGamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Master\Game\GameDetailPage.xaml.cs">
       <DependentUpon>GameDetailPage.xaml</DependentUpon>
@@ -448,7 +459,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Detail\SubjectContentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Detail\WebViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Master\Game\FindGamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -533,7 +552,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Requests\Group\" />
     <Folder Include="Requests\Me\" />
     <Folder Include="Requests\Origin\" />
     <Folder Include="Responses\" />

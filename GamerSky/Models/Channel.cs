@@ -16,7 +16,7 @@ namespace GamerSky.Models
         public string IsTop { get; set; }
 
         [JsonProperty(PropertyName = "nodeId")]
-        public int NodeId { get; set; }
+        public string NodeId { get; set; }
 
         /// <summary>
         /// 栏目名

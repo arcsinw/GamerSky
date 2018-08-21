@@ -266,7 +266,7 @@
             <PivotItem Header="简介">
                 <Grid>
                     <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled"
-                          ScrollViewer.VerticalScrollBarVisibility="Auto">
+                          ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <StackPanel>
                             <controls:LightButton HorizontalAlignment="Stretch" 
                             Background="WhiteSmoke"

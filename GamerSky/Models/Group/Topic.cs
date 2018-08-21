@@ -5,8 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GamerSky.Models.Group
+namespace GamerSky.Models
 {
+    /// <summary>
+    /// 帖子
+    /// </summary>
     public class Topic
     {
         [JsonProperty(PropertyName = "clubContentId")]
