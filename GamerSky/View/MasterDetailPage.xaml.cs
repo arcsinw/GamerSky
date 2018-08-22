@@ -211,10 +211,10 @@ namespace GamerSky.View
             DisplayInformation.GetForCurrentView().OrientationChanged += MasterDetailPage_OrientationChanged;
              
 
-            if (DataShareManager.Current.IsNewVersion)
-            {
-                new MessageDialog().Show();
-            }
+            //if (DataShareManager.Current.IsNewVersion)
+            //{
+            //    new MessageDialog().Show();
+            //}
         }
          
 

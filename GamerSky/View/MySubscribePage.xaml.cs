@@ -28,18 +28,6 @@ namespace GamerSky.View
             this.InitializeComponent();
         }
 
-        #region 九幽的数据统计
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            JYHelper.TracePageEnd(this.BaseUri.LocalPath);
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            JYHelper.TracePageStart(this.BaseUri.LocalPath);
-        }
-        #endregion
-
         private void SubscribeListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var result = e.ClickedItem as Subscribe;
@@ -115,6 +103,22 @@ namespace GamerSky.View
         private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
             switch(pivot.SelectedIndex)
+            {
+                case 0:
+                    await ViewModel.HotSubscribesRefresh();
+                    break;
+                case 1:
+                    await ViewModel.AllSubscribesRefresh();
+                    break;
+                case 2:
+                    ViewModel.MySubscribesRefresh();
+                    break;
+            }
+        }
+
+        private async void PullToRefreshListView_RefreshRequested(object sender, EventArgs e)
+        {
+            switch (pivot.SelectedIndex)
             {
                 case 0:
                     await ViewModel.HotSubscribesRefresh();

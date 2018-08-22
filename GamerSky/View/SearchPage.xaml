@@ -8,7 +8,6 @@
     xmlns:hp="using:GamerSky.Helper"
     xmlns:ts="using:GamerSky.TemplateSelector"
     xmlns:controls="using:GamerSky.Controls"
-    xmlns:pr="using:PullToRefresh.UWP"
     xmlns:m="using:GamerSky.Core.Model"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -659,45 +658,44 @@
                 </Grid>
             </PivotItem>
             <PivotItem Header="订阅" Margin="0">
-                <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                    <ListView x:Name="subscribeListView" Loaded="subscribeListView_Loaded" 
+                <controls:PullToRefreshListView RefreshRequested="PullToRefreshListView_RefreshRequested"
+                          x:Name="subscribeListView" Loaded="subscribeListView_Loaded" 
                           ItemsSource="{Binding HotSubscribes}" 
                           Style="{ThemeResource LightListView}"
                           IsItemClickEnabled="True" ItemClick="subscribeListView_ItemClick"
-                          SelectionMode="None"  
-                              
-                          ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="m:Subscribe">
-                                <Grid  MaxHeight="85">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*" MaxWidth="180"/>
-                                        <ColumnDefinition Width="3*"/>
-                                        <ColumnDefinition Width="2*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <!--#region PlaceHolderImage-->
-                                    <Image Source="{ThemeResource EssayPlaceHolderImage}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
-                                    <!--#endregion-->
-                                    <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
-                                        <Image.Source>
-                                            <BitmapImage UriSource="{x:Bind ThumbnailUrl,Mode=OneWay}"/>
-                                        </Image.Source>
-                                    </Image>
-                                    <Grid Grid.Column="1" Margin="5,0">
-                                        <TextBlock Text="{x:Bind SourceName}" VerticalAlignment="Top" TextWrapping="Wrap"/>
-                                        <TextBlock  Margin="0,4,0,0" VerticalAlignment="Bottom">
+                          SelectionMode="None"                      
+                          ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}"
+                          IsPullToRefreshWithMouseEnabled="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="m:Subscribe">
+                            <Grid  MaxHeight="85">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" MaxWidth="180"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <!--#region PlaceHolderImage-->
+                                <Image Source="{ThemeResource EssayPlaceHolderImage}" HorizontalAlignment="Left" Grid.Column="0" Stretch="Fill" />
+                                <!--#endregion-->
+                                <Image Grid.Column="0" Stretch="Fill" HorizontalAlignment="Left" >
+                                    <Image.Source>
+                                        <BitmapImage UriSource="{x:Bind ThumbnailUrl,Mode=OneWay}"/>
+                                    </Image.Source>
+                                </Image>
+                                <Grid Grid.Column="1" Margin="5,0">
+                                    <TextBlock Text="{x:Bind SourceName}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+                                    <TextBlock  Margin="0,4,0,0" VerticalAlignment="Bottom">
                                         <Run Text="{x:Bind ReadingCount}"/>
-                                        <Run Text="人订阅"/>   
-                                        </TextBlock>
-                                    </Grid>
-                                    <Button Grid.Column="3" HorizontalAlignment="Right" Content="订阅" 
-                                        Style="{Binding IsFavorite,Converter={StaticResource BoolToStyleConverter}}"
-                                        Command="{x:Bind ToggleFavorite}"/> 
+                                        <Run Text="人订阅"/>
+                                    </TextBlock>
                                 </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </pr:PullToRefreshBox>
+                                <Button Grid.Column="3" HorizontalAlignment="Right" Content="订阅" 
+                                        Style="{Binding IsFavorite,Converter={StaticResource BoolToStyleConverter}}"
+                                        Command="{x:Bind ToggleFavorite}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </controls:PullToRefreshListView>
             </PivotItem>
 
         </Pivot>

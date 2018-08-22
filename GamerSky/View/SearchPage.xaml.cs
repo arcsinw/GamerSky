@@ -333,9 +333,8 @@ namespace GamerSky.View
             
             }
         }
-
         
-        private async void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
+        private async void PullToRefreshListView_RefreshRequested(object sender, EventArgs e)
         {
             await viewModel.RefreshSubscribeHotKey();
         }

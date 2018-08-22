@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:hp="using:GamerSky.Helper"
-    xmlns:pr="using:PullToRefresh.UWP"
     xmlns:m="using:GamerSky.Core.Model"
     xmlns:controls="using:GamerSky.Controls"
     mc:Ignorable="d"
@@ -39,7 +38,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Background="{ThemeResource PageBackgroundBrush}">
-            <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
+            <controls:PullToRefreshListView>
                 <ListView  SelectionMode="None" 
                                Style="{ThemeResource LightListView}"
                                ItemsSource="{x:Bind FavoriteEssays,Mode=OneWay}"
@@ -106,7 +105,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>-->
                 </ListView>
-            </pr:PullToRefreshBox>
+            </controls:PullToRefreshListView>
             <ProgressRing x:Name="progressRing" IsActive="{x:Bind IsActive,Mode=OneWay}"  Style="{ThemeResource ProgressRingStyle}"/>
 
         </Grid>

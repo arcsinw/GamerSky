@@ -30,8 +30,8 @@
         <!--订阅栏目内文章列表-->
         <Grid Background="{ThemeResource PageBackgroundBrush}"
               Grid.Row="0" Grid.RowSpan="2" >
-            <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                <ListView ItemsSource="{Binding SubscribeContens}"
+            <controls:PullToRefreshListView RefreshRequested="PullToRefreshListView_RefreshRequested"
+                          ItemsSource="{Binding SubscribeContens}"
                           Style="{ThemeResource LightListView}"
                           SelectionMode="None"
                           x:Name="listView"
@@ -40,25 +40,24 @@
                           IsItemClickEnabled="True"
                           ItemClick="ListView_ItemClick"
                           ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                          ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}">    
-                    <ListView.Header>
-                        <Grid>
-                            <controls:ImageEx Height="255" Stretch="Fill" controls:ParallaxService.VerticalMultiplier="-0.3"
+                          ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}">
+                <ListView.Header>
+                    <Grid>
+                        <controls:ImageEx Height="255" Stretch="Fill" controls:ParallaxService.VerticalMultiplier="-0.3"
                                               Source="{Binding HeaderSubscribe.ThumbnailURLs[0]}"/>
-                            <!--<Image Height="250" Stretch="Fill" controls:ParallaxService.VerticalMultiplier="-0.3">
+                        <!--<Image Height="250" Stretch="Fill" controls:ParallaxService.VerticalMultiplier="-0.3">
                                 <Image.Source>
                                     <BitmapImage UriSource="{Binding HeaderSubscribe.ThumbnailURLs[0]}"/>
                                 </Image.Source>
                             </Image>-->
 
-                            <!--<Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
+                        <!--<Border Background="Black"  Opacity="0.8" VerticalAlignment="Bottom">
                                 <TextBlock Margin="8,2" Text="{Binding HeaderSubscribe.Title}" Foreground="White" VerticalAlignment="Bottom"/>
                             </Border>-->
-                        </Grid>
-                    </ListView.Header> 
-                </ListView>
-            </pr:PullToRefreshBox>
- 
+                    </Grid>
+                </ListView.Header>
+            </controls:PullToRefreshListView>
+
             <ProgressRing x:Name="progressRing" IsActive="{Binding IsActive}" Style="{ThemeResource ProgressRingStyle}"/>
     
         </Grid>

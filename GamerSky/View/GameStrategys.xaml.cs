@@ -54,7 +54,7 @@ namespace GamerSky.View
 
         private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args)
         {
-            viewModel.Refresh();
+            
         }
 
         private void ListView_Loaded(object sender, RoutedEventArgs e)
@@ -90,6 +90,11 @@ namespace GamerSky.View
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             listView.ScrollIntoViewSmoothly(listView.Items[0]);
+        }
+
+        private void PullToRefreshListView_RefreshRequested(object sender, EventArgs e)
+        {
+            viewModel.Refresh();
         }
     }
 }

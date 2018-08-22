@@ -9,7 +9,6 @@
     xmlns:vm="using:GamerSky.ViewModel"
     xmlns:converter="using:GamerSky.Converters"
     xmlns:controls="using:Arcsinx.Toolkit.Controls"
-    xmlns:pr="using:PullToRefresh.UWP"
     mc:Ignorable="d"
     NavigationCacheMode="Required"
     >
@@ -162,88 +161,97 @@
             </Pivot.HeaderTemplate>
             <Pivot.ItemTemplate>
                 <DataTemplate>
-                    <!--<controls:PullToRefreshListView 
+                    <controls:PullToRefreshListView 
                         RefreshRequested="PullToRefreshListView_RefreshRequested"
                         IsPullToRefreshWithMouseEnabled="True"
                         ItemsSource="{Binding Essays}"
                         SelectionMode="None"
                         ItemClick="ListView_ItemClick"
-                        ShowsScrollingPlaceholders="True">-->
-                    <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                        <ListView x:Name="essayListView" 
-                                 ItemsSource="{Binding Essays}"
-                                 SelectionMode="None"
-                                 IsItemClickEnabled="True"
-                                 ItemClick="ListView_ItemClick"
-                                 Style="{ThemeResource LightListView}"
-                                 ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"
-                                 ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
-                                 >
-                            
-                            <ListView.HeaderTemplate>
-                                <DataTemplate>
-                                    <Grid >
-                                        <FlipView x:Name="headEssay" Height="250" ItemsSource="{Binding Essays.HeaderEssays}" >
-                                            <FlipView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Grid Tapped="headEssayGrid_Tapped" >
-                                                        <controls:ImageEx PlaceholderSource="{ThemeResource SlidePlaceHolderImage}" PlaceholderStretch="Fill"
+                        x:Name="essayListView" 
+                        IsItemClickEnabled="True"
+                        Style="{ThemeResource LightListView}"
+                        ItemTemplateSelector="{ThemeResource EssayDataTemplateSelector}"
+                        ItemContainerStyle="{ThemeResource EssayListViewItemsContainerStyle}"
+                        >
+                        <controls:PullToRefreshListView.RefreshIndicatorContent>
+                            <TextBlock Text="Pull down to Refresh" HorizontalAlignment="Center"/>
+                        </controls:PullToRefreshListView.RefreshIndicatorContent>
+
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid >
+                                    <FlipView x:Name="headEssay" Height="250" ItemsSource="{Binding Essays.HeaderEssays}" >
+                                        <FlipView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Tapped="headEssayGrid_Tapped" >
+                                                    <controls:ImageEx PlaceholderSource="{ThemeResource SlidePlaceHolderImage}" PlaceholderStretch="Fill"
                                                                           Source="{Binding ThumbnailURLs[0]}" Stretch="Fill" Height="250" />
-                                                        <Border Background="Black"  Opacity="0.9" VerticalAlignment="Bottom">
-                                                            <TextBlock Margin="8,2" Text="{Binding Title}" Foreground="White" VerticalAlignment="Bottom"/>
-                                                        </Border>
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </FlipView.ItemTemplate>
-                                        </FlipView>
-                                        <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                            <RelativePanel Margin="0,0,8,2">
-                                                <RelativePanel.Resources>
-                                                    <Style TargetType="Ellipse">
-                                                        <Setter Property="Margin" Value="5"/>
-                                                    </Style>
-                                                </RelativePanel.Resources>
-                                                <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                                    <Border Background="Black"  Opacity="0.9" VerticalAlignment="Bottom">
+                                                        <TextBlock Margin="8,2" Text="{Binding Title}" Foreground="White" VerticalAlignment="Bottom"/>
+                                                    </Border>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </FlipView.ItemTemplate>
+                                    </FlipView>
+                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                        <RelativePanel Margin="0,0,8,2">
+                                            <RelativePanel.Resources>
+                                                <Style TargetType="Ellipse">
+                                                    <Setter Property="Margin" Value="5"/>
+                                                </Style>
+                                            </RelativePanel.Resources>
+                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
                                            RelativePanel.AlignHorizontalCenterWithPanel="True"
                                            Width="6"
                                            Height="6"
                                            Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=0}"
                                            Name="rect11">
-                                                </Ellipse>
-                                                <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                            </Ellipse>
+                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
                                            RelativePanel.RightOf="rect11"
                                            Width="6"
                                            Height="6"
                                            Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=1}"
                                            Name="rect21">
-                                                </Ellipse>
-                                                <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                            </Ellipse>
+                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
                                            RelativePanel.RightOf="rect21"
                                            Width="6"
                                            Height="6"
                                            Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=2}"
                                            Name="rect31">
-                                                </Ellipse>
-                                                <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                            </Ellipse>
+                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
                                            RelativePanel.RightOf="rect31"
                                            Width="6"
                                            Height="6"
                                            Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=3}"
-                                           Name="rect41">
-                                                </Ellipse>
-                                            </RelativePanel>
-                                        </Grid>
+                                           Name="rect41"/>
+                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                           RelativePanel.RightOf="rect41"
+                                           Width="6"
+                                           Height="6"
+                                           Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=4}"
+                                           Name="rect51"/>
+                                            <Ellipse RelativePanel.AlignBottomWithPanel="True"
+                                           RelativePanel.RightOf="rect51"
+                                           Width="6"
+                                           Height="6"
+                                           Fill="{Binding ElementName=headEssay, Path=SelectedIndex, Converter={StaticResource IndexToColorConverter}, ConverterParameter=5}"
+                                           Name="rect61"/>
+                                        </RelativePanel>
                                     </Grid>
-                                </DataTemplate>
-                            </ListView.HeaderTemplate>
-                            <ListView.ItemContainerTransitions>
-                                <TransitionCollection>
-                                    <AddDeleteThemeTransition />
-                                </TransitionCollection>
-                            </ListView.ItemContainerTransitions>
-                        </ListView>
-                    </pr:PullToRefreshBox>
-                    <!--</controls:PullToRefreshListView>-->
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <AddDeleteThemeTransition />
+                            </TransitionCollection>
+                        </ListView.ItemContainerTransitions>
+
+
+                    </controls:PullToRefreshListView>
                 </DataTemplate>
             </Pivot.ItemTemplate>
             <Pivot.ItemContainerStyle>

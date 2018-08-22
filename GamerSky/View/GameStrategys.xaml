@@ -5,8 +5,8 @@
     xmlns:local="using:GamerSky.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:ts="using:GamerSky.TemplateSelector"
-    xmlns:pr="using:PullToRefresh.UWP"
     xmlns:vm="using:GamerSky.ViewModel"
+    xmlns:controls="using:Arcsinx.Toolkit.Controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     >
@@ -18,8 +18,8 @@
 
     <!--某款游戏的攻略列表页-->
     <Grid Background="{ThemeResource PageBackgroundBrush}">
-        <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-            <ListView ItemsSource="{Binding Strategys}"
+        <controls:PullToRefreshListView RefreshRequested="PullToRefreshListView_RefreshRequested"
+                  ItemsSource="{Binding Strategys}"
                   SelectionMode="None"
                   Style="{ThemeResource LightListView}"
                   x:Name="listView"
@@ -51,9 +51,7 @@
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
                     </Style>
                 </ListView.ItemContainerStyle>-->
-
-            </ListView>
-        </pr:PullToRefreshBox>
+        </controls:PullToRefreshListView>
 
         <ProgressRing IsActive="{Binding IsActive}"  Style="{ThemeResource ProgressRingStyle}"/>
          

@@ -128,5 +128,12 @@ namespace GamerSky.View
         {
             listView.ScrollIntoViewSmoothly(listView.Items[0]);
         }
+
+        private void PullToRefreshListView_RefreshRequested(object sender, EventArgs e)
+        {
+            progressRing.IsActive = true;
+            viewModel.Refresh();
+            progressRing.IsActive = false;
+        }
     }
 }

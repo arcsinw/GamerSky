@@ -156,5 +156,18 @@ namespace GamerSky.View
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(SubscribeContentPage), essay.ContentId);
             }
         }
+
+        private async void PullToRefreshListView_RefreshRequested(object sender, EventArgs e)
+        {
+            switch (pivot.SelectedIndex)
+            {
+                case 0:
+                    await viewModel.RefreshSubscribeContent();
+                    break;
+                case 1:
+                    await viewModel.RefreshSubscribeTopic();
+                    break;
+            }
+        }
     }
 }

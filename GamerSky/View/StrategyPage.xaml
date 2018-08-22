@@ -79,10 +79,9 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot x:Name="pivot"  Background="{ThemeResource PageBackgroundBrush}"
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
-             
+
             <PivotItem Header="关注" Margin="0" Padding="0">
-                <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked"> 
-                    <controls:AdaptiveGridView ItemsSource="{Binding FocusStrategys}" Padding="8"
+                <controls:AdaptiveGridView ItemsSource="{Binding FocusStrategys}" Padding="8"
                           HorizontalAlignment="Center"
                           HorizontalContentAlignment="Center"
                           SelectionMode="None" 
@@ -92,8 +91,8 @@
                           MinItemHeight="150"
                           MinItemWidth="210" Style="{StaticResource LightAdaptiveGridViewStyle}"
                         >
-                      
-                        <!--<hp:AdaptiveGridView.Template>
+
+                    <!--<hp:AdaptiveGridView.Template>
                             <ControlTemplate>
                                 <ScrollViewer ScrollViewer.VerticalScrollMode="Enabled">
                                     <Viewbox Stretch="Uniform" Margin="8" VerticalAlignment="Stretch" 
@@ -103,7 +102,7 @@
                                 </ScrollViewer>
                             </ControlTemplate>
                         </hp:AdaptiveGridView.Template>-->
-                        <!--<controls:AdaptiveGridView.Header>
+                    <!--<controls:AdaptiveGridView.Header>
                             <Grid Margin="0,0,0,8">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -113,32 +112,31 @@
                                 <Button Style="{ThemeResource LightButtonStyle}" Click="{x:Bind NavigateToGameSalePage}" Content="发售表" Grid.Column="1"/>
                             </Grid>
                         </controls:AdaptiveGridView.Header>-->
-                        <controls:AdaptiveGridView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
+                    <controls:AdaptiveGridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                                    <controls:ImageEx Grid.Row="0" PlaceholderSource="{ThemeResource EssayPlaceHolderImage}" PlaceholderStretch="Fill"
+                                <controls:ImageEx Grid.Row="0" PlaceholderSource="{ThemeResource EssayPlaceHolderImage}" PlaceholderStretch="Fill"
                                                       Source="{Binding ThumbnailUrl}" Stretch="Fill" />
- 
-                                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding Title}" 
+
+                                <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding Title}" 
                                                TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" VerticalAlignment="Bottom"
                                                Margin="4"/>
-                                </Grid>
-                            </DataTemplate>
-                        </controls:AdaptiveGridView.ItemTemplate>
-                        <controls:AdaptiveGridView.ItemContainerStyle>
-                            <Style TargetType="GridViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Background" Value="{ThemeResource ListViewItemBackgroundBrush}"/>
-                            </Style>
-                        </controls:AdaptiveGridView.ItemContainerStyle>
-                    </controls:AdaptiveGridView>
-                </pr:PullToRefreshBox>
+                            </Grid>
+                        </DataTemplate>
+                    </controls:AdaptiveGridView.ItemTemplate>
+                    <controls:AdaptiveGridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Background" Value="{ThemeResource ListViewItemBackgroundBrush}"/>
+                        </Style>
+                    </controls:AdaptiveGridView.ItemContainerStyle>
+                </controls:AdaptiveGridView>
             </PivotItem>
 
             <PivotItem Header="全部" Margin="0" Padding="0">
@@ -258,9 +256,7 @@
             </PivotItem>
 
             <PivotItem Header="游戏库"  Margin="0" Padding="0">
-                <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-
-                    <controls:AdaptiveGridView x:Name="gameLibGridView"
+                <controls:AdaptiveGridView x:Name="gameLibGridView"
                           ItemsSource="{Binding Games}" Padding="8"
                           SelectionMode="None" 
                           ShowsScrollingPlaceholders="True"
@@ -270,18 +266,18 @@
                           MinItemWidth="130"
                           Style="{StaticResource LightAdaptiveGridViewStyle}"
                         >
-                        <controls:AdaptiveGridView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
+                    <controls:AdaptiveGridView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                                    <controls:ImageEx Grid.Column="0" PlaceholderSource="{ThemeResource GamePlaceHolderImage}" PlaceholderStretch="Fill"
+                                <controls:ImageEx Grid.Column="0" PlaceholderSource="{ThemeResource GamePlaceHolderImage}" PlaceholderStretch="Fill"
                                                       Source="{Binding ThumbnailURL}" Stretch="Fill"/>
 
-                                    <!--<Image Source="{ThemeResource GamePlaceHolderImage}" Grid.Column="0" Stretch="Fill"
+                                <!--<Image Source="{ThemeResource GamePlaceHolderImage}" Grid.Column="0" Stretch="Fill"
                                                VerticalAlignment="Stretch"/>
                                     <Image Grid.Row="0" Stretch="Fill"  VerticalAlignment="Stretch">
                                         <Image.Source>
@@ -289,26 +285,25 @@
                                         </Image.Source>
                                     </Image>-->
 
-                                    <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
+                                <Image Grid.Row="0" Grid.RowSpan="2" Source="ms-appx:///Assets/hot.png" 
                                        Width="30" HorizontalAlignment="Right" VerticalAlignment="Top"/>
 
-                                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding Title}" 
+                                <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" Text="{Binding Title}" 
                                                TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
                                                VerticalAlignment="Bottom" Margin="4"/>
-                                </Grid>
-                            </DataTemplate>
-                        </controls:AdaptiveGridView.ItemTemplate>
+                            </Grid>
+                        </DataTemplate>
+                    </controls:AdaptiveGridView.ItemTemplate>
 
-                        <controls:AdaptiveGridView.ItemContainerStyle>
-                            <Style TargetType="GridViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                <Setter Property="Margin" Value="2"/>
-                                <Setter Property="Background" Value="{ThemeResource ListViewItemBackgroundBrush}"/>
-                            </Style>
-                        </controls:AdaptiveGridView.ItemContainerStyle>
-                    </controls:AdaptiveGridView>
-                </pr:PullToRefreshBox>
+                    <controls:AdaptiveGridView.ItemContainerStyle>
+                        <Style TargetType="GridViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Margin" Value="2"/>
+                            <Setter Property="Background" Value="{ThemeResource ListViewItemBackgroundBrush}"/>
+                        </Style>
+                    </controls:AdaptiveGridView.ItemContainerStyle>
+                </controls:AdaptiveGridView>
             </PivotItem>
         </Pivot>
 

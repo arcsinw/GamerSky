@@ -4,11 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GamerSky.View"
     xmlns:vm="using:GamerSky.ViewModel"
-    xmlns:pr="using:PullToRefresh.UWP"
     xmlns:hp="using:GamerSky.Helper"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:m="using:GamerSky.Core.Model"
+    xmlns:controls="using:Arcsinx.Toolkit.Controls"
     mc:Ignorable="d"
     >
 
@@ -20,7 +20,7 @@
         <DataTemplate x:Key="SubscribeListViewDataTemplate" x:DataType="m:Subscribe">
             <Grid  MaxHeight="85">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" MaxWidth="180"/>
+                    <ColumnDefinition Width="2*" MaxWidth="180"/>
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
@@ -91,34 +91,34 @@
         <Pivot x:Name="pivot" Background="{ThemeResource PageBackgroundBrush}"  
                SelectionChanged="Pivot_SelectionChanged" Style="{ThemeResource StrategyPivotStyle}">
             <PivotItem Header="热门"  Margin="0">
-                <pr:PullToRefreshBox  RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                <ListView x:Name="hotSubscribeListView" ItemsSource="{Binding HotSubscribes}" 
+                <controls:PullToRefreshListView RefreshRequested="PullToRefreshListView_RefreshRequested"
+                          x:Name="hotSubscribeListView" ItemsSource="{Binding HotSubscribes}" 
                           IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick" 
                           Style="{ThemeResource LightListView}"
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
-                          ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
-                </ListView>
-                </pr:PullToRefreshBox>
+                          ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}"
+                          IsPullToRefreshWithMouseEnabled="True">
+                </controls:PullToRefreshListView>
             </PivotItem>
             <PivotItem Header="全部" Margin="0">
-                <pr:PullToRefreshBox RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                    <ListView x:Name="allSubscribeListView" ItemsSource="{Binding AllSubscribes}" 
+                <controls:PullToRefreshListView RefreshRequested="PullToRefreshListView_RefreshRequested"
+                          x:Name="allSubscribeListView" ItemsSource="{Binding AllSubscribes}" 
                           IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick" 
                           Style="{ThemeResource LightListView}" 
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
-                          ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
-                    </ListView>
-                </pr:PullToRefreshBox>
+                          ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}"
+                          IsPullToRefreshWithMouseEnabled="True">
+                </controls:PullToRefreshListView>
             </PivotItem>
             <PivotItem Header="我的" Margin="0">
-                <pr:PullToRefreshBox  RefreshInvoked="PullToRefreshBox_RefreshInvoked">
-                    <ListView x:Name="mySubscribeListView" ItemsSource="{Binding MySubscribes}" 
+                <controls:PullToRefreshListView RefreshRequested="PullToRefreshListView_RefreshRequested"
+                          x:Name="mySubscribeListView" ItemsSource="{Binding MySubscribes}" 
                           IsItemClickEnabled="True" ItemClick="SubscribeListView_ItemClick" 
                           Style="{ThemeResource LightListView}"
                           ItemTemplate="{ThemeResource SubscribeListViewDataTemplate}"
-                          ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}">
-                    </ListView>
-                </pr:PullToRefreshBox>
+                          ItemContainerStyle="{ThemeResource SubscribeListViewItemsContainerStyle}"
+                          IsPullToRefreshWithMouseEnabled="True">
+                </controls:PullToRefreshListView>
             </PivotItem>
         </Pivot>
 

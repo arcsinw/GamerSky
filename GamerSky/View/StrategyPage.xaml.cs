@@ -127,6 +127,22 @@ namespace GamerSky.View
             {
                 MasterDetailPage.Current.DetailFrame.Navigate(typeof(GameDetailPage), game.ContentId);
             }
-        } 
+        }
+
+        private async void PullToRefreshListView_RefreshRequested(object sender, System.EventArgs e)
+        {
+            switch (pivot.SelectedIndex)
+            {
+                case 0:
+                    await ViewModel.RefreshFocusStrategy();
+                    break;
+                case 1:
+                    await ViewModel.RefreshAllStrategy();
+                    break;
+                case 2:
+                    ViewModel.RefreshGameList();
+                    break;
+            }
+        }
     }
 }
