@@ -21,7 +21,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
     <AppxBundle>Always</AppxBundle>
     <PackageCertificateThumbprint>CA29A97BC2F7A998D93CA251EC2F609BF586BE50</PackageCertificateThumbprint>
@@ -397,13 +397,13 @@
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Data\Agreement.txt" />
     <Content Include="Data\VersionHistory.txt" />
-    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Html\Content.html" />
     <Content Include="Html\gs.css" />
     <Content Include="Html\gs.js" />
     <Content Include="Html\gsAppHTMLTemplate.css" />
     <Content Include="Html\gsAppHTMLTemplate.js" />
     <Content Include="Html\News.html" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
