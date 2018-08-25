@@ -7,6 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:GamerSky.Controls"
+    xmlns:model="using:GamerSky.Models"
+    NavigationCacheMode="Required"
     DataContext="{Binding Path=GameDetailPageInstance, Source={StaticResource ViewModelLocator}}">
     
     <Page.Resources>
@@ -251,6 +253,19 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <ItemsPanelTemplate x:Key="HorizontalItemsPanel">
+            <ItemsStackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+
+        <Style TargetType="ListView" x:Key="HorizontalListViewStyle">
+            <Setter Property="ItemsPanel" Value="{StaticResource HorizontalItemsPanel}"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Enabled"/>
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled"/>
+        </Style>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -274,24 +289,47 @@
                             CornerRadius="14">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <BitmapIcon UriSource="ms-appx:///Assets/Images/Game/ic_search2.png" Height="16" Width="16"/>
-                                    <TextBlock Text="搜索游戏/攻略" Margin="4,0"/>
+                                    <TextBlock Margin="4,0">
+                                        <Run Text="在"/>
+                                        <Run Text="{Binding GameDetail.Title}"/>
+                                        <Run Text="下搜索"/>
+                                    </TextBlock>
                                 </StackPanel>
                             </controls:LightButton>
 
-                            <MediaElement HorizontalAlignment="Stretch" Height="200" Source="{Binding GameDetail.SteamVideos}"/>
+                            <MediaElement HorizontalAlignment="Stretch" Width="Auto" MinHeight="280"  Margin="0,12,0,0"
+                                        Source="{Binding GameDetail.SteamVideos[0].MoviesWebm480}"
+                                        AreTransportControlsEnabled="True" RealTimePlayback="True" />
 
+                            <ListView ItemsSource="{Binding GameDetail.SteamVideos}" Padding="0" Margin="0,1,0,0"
+                                      Style="{StaticResource HorizontalListViewStyle}"
+                                      SelectionMode="Single">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate x:DataType="model:SteamVideo">
+                                        <Image Source="{x:Bind MyMoviesThumbnail}" Height="50"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="Margin" Value="0,0,1,0"/>
+                                        <Setter Property="Padding" Value="0"/>
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                            </ListView>
+                            
                             <Grid Margin="0,12,0,0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0">
+                                <Grid Grid.Column="0">
                                     <TextBlock Text="{Binding GameDetail.Title}" FontSize="20"/>
-                                    <TextBlock Text="{Binding GameDetail.EnglishTitle}" Foreground="Gray" Margin="0,12,0,0"/>
-                                </StackPanel>
+                                    <TextBlock Text="{Binding GameDetail.EnglishTitle}" 
+                                               Foreground="Gray" VerticalAlignment="Bottom"/>
+                                </Grid>
 
-                                <Border Grid.Column="1" Background="LightGreen" CornerRadius="5">
+                                <Border Grid.Column="1" Background="LightGreen" CornerRadius="5" Padding="16">
                                     <StackPanel VerticalAlignment="Center">
                                         <TextBlock Text="{Binding GameDetail.GsScore}" 
                                                HorizontalAlignment="Center" FontSize="20"

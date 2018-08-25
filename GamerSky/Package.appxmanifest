@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="62d8f01b-6a2f-4111-8b37-b118860dcd2a" Publisher="CN=wangx" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="62d8f01b-6a2f-4111-8b37-b118860dcd2a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="46918Xsetups..X" Publisher="CN=6C0637F1-510E-45BC-90C0-3F7555214A61" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="5232c118-1e4e-45dc-8b64-f29645aba50c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>GamerSky</DisplayName>
-    <PublisherDisplayName>wangx</PublisherDisplayName>
+    <PublisherDisplayName>Xsetups</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

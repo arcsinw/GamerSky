@@ -822,12 +822,12 @@ namespace GamerSky.Services
         /// <summary>
         /// 获取游戏详情
         /// </summary>
-        /// <param name="contentId"></param>
+        /// <param name="gameId"></param>
         /// <returns></returns>
-        public async Task<GameDetail> GetGameDetail(string contentId)
+        public async Task<GameDetail> GetGameDetailAsync(string gameId)
         {
             GameDetail gameDetail = new GameDetail();
-            string fileName = "GameDetail_" + contentId + ".json";
+            string fileName = "GameDetail_" + gameId + ".json";
             if (!ConnectionHelper.IsInternetAvailable)
             {
                 gameDetail = await FileHelper.Current.ReadObjectAsync<GameDetail>(fileName);
@@ -836,7 +836,7 @@ namespace GamerSky.Services
             {
                 PostDataTemplate<GameDetailRequest> postData = new PostDataTemplate<GameDetailRequest>
                 {
-                    request = new GameDetailRequest() { contentId = contentId }
+                    request = new GameDetailRequest() { contentId = gameId }
                 };
 
                 var gameDetailResult = await PostJson<PostDataTemplate<GameDetailRequest>, ResultDataTemplate<GameDetail>>(ServiceUri.GameDetail, postData);
@@ -924,7 +924,7 @@ namespace GamerSky.Services
                     ExtraField1 = "Position",
                     ExtraField2 = "gsScore",
                     ExtraField3 = "largeImage,description",
-                    NodeId = 13,
+                    NodeId = "13",
                     PageIndex = pageIndex,
                 }
             };
@@ -962,14 +962,16 @@ namespace GamerSky.Services
         /// 特色专题
         /// </summary>
         /// <param name="pageIndex"></param>
+        /// <param name="pageCount">5 || 20 （20为特色专题独立页面）</param>
         /// <returns></returns>
-        public async Task<ResultDataTemplate<List<GameSpecial>>> GetGameSpecialList(int pageIndex = 1)
+        public async Task<ResultDataTemplate<List<GameSpecial>>> GetGameSpecialList(int pageIndex = 1, int pageCount = 5)
         {
             PostDataTemplate<GameSpecialListRequest> postData = new PostDataTemplate<GameSpecialListRequest>()
             {
                 request = new GameSpecialListRequest()
                 { 
                     PageIndex = pageIndex,
+                    ElementsCountPerPage = pageCount,
                 }
             };
 
@@ -1113,7 +1115,7 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="gameId"></param>
         /// <returns></returns>
-        public async Task<GameDetailV4> GetGameDetailV4(string gameId)
+        public async Task<GameDetailV4> GetGameDetailV4Async(string gameId)
         {
             PostDataTemplate<GameDetailRequestV4> postData = new PostDataTemplate<GameDetailRequestV4>()
             {
@@ -1123,7 +1125,7 @@ namespace GamerSky.Services
                 }
             };
 
-            ResultDataTemplate<GameDetailV4> result = await PostJson<PostDataTemplate<GameDetailRequestV4>, ResultDataTemplate<GameDetailV4>> (ServiceUri.GameHomePage, postData);
+            ResultDataTemplate<GameDetailV4> result = await PostJson<PostDataTemplate<GameDetailRequestV4>, ResultDataTemplate<GameDetailV4>> (ServiceUri.GetGame, postData);
 
             return result?.Result;
         }
@@ -1149,6 +1151,62 @@ namespace GamerSky.Services
             ResultDataTemplate<List<GameReview>> result = await PostJson<PostDataTemplate<GameReviewRequest>, ResultDataTemplate<List<GameReview>>>(ServiceUri.ReviewList, postData);
 
             return result?.Result;
+        }
+
+        /// <summary>
+        /// 获取一个专题下的 子专题
+        /// </summary>
+        /// <param name="nodeId"></param>
+        /// <returns></returns>
+        public async Task<List<GameSubList>> GetGameSpecialSubListAsync(string nodeId)
+        {
+            PostDataTemplate<GameSpecialSubListRequest> postData = new PostDataTemplate<GameSpecialSubListRequest>()
+            {
+                request = new GameSpecialSubListRequest()
+                {
+                    nodeId = nodeId,
+                }
+            };
+
+            ResultDataTemplate<List<GameSubList>> result = await PostJson<PostDataTemplate<GameSpecialSubListRequest>, ResultDataTemplate<List<GameSubList>>>(ServiceUri.GameSpecialSubList, postData);
+
+            return result?.Result;
+        }
+
+        /// <summary>
+        /// 特色专题 点击
+        /// 第一步 获取SubList
+        /// 第二部 合并结果
+        /// </summary>
+        public async Task<List<Tuple<string,List<GameDetailV4>>>> GetGameSpecialSubjectContentAsync (string nodeId, int pageIndex = 1)
+        {
+            var subList = await GetGameSpecialSubListAsync(nodeId);
+            List<Tuple<string, List<GameDetailV4>>> result = new List<Tuple<string, List<GameDetailV4>>>();
+
+            foreach (var item in subList)
+            {
+                PostDataTemplate<GameSpecialDetailRequest> postData = new PostDataTemplate<GameSpecialDetailRequest>()
+                {
+                    request = new GameSpecialDetailRequest()
+                    {
+                        ExtraField1 = "Position,DeputyNodeId,EnTitle,AllTime,PCTime,PS4Time,XboxOneTime,NintendoSwitchTime",
+                        ExtraField2 = "gsScore,wantplayCount,gameTag,playCount,isMarket",
+                        ExtraField3 = "description",
+                        PageIndex = pageIndex,
+                        NodeId = nodeId,
+                        ElementsCountPerPage = 1000
+                    }
+                };
+
+                ResultDataTemplate<List<GameDetailV4>> resultData = await PostJson<PostDataTemplate<GameSpecialDetailRequest>, ResultDataTemplate<List<GameDetailV4>>>(ServiceUri.GameSpecialDetail, postData);
+                Tuple<string, List<GameDetailV4>> tmp = new Tuple<string, List<GameDetailV4>>
+                (
+                    item.Title, resultData?.Result
+                );
+                result.Add(tmp);
+            }
+            
+            return result;
         }
         #endregion
 

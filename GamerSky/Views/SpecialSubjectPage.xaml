@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="GamerSky.Views.SpecialSubjectPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GamerSky.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Path=SpecialSubjectPageInstance, Source={StaticResource ViewModelLocator}}"
+    xmlns:controls="using:GamerSky.Controls"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:action="using:GamerSky.Actions">
+
+    <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="White">
+            <Button Style="{StaticResource BackButtonStyle}"/>
+            <TextBlock Text="特色专题" Style="{StaticResource TitleTextBlockStyle}" 
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <controls:AdaptiveGridView ItemsSource="{Binding GameSpecials}"
+                          HorizontalAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          SelectionMode="Single" 
+                          IsItemClickEnabled="True"
+                          SelectedItem="{Binding SelectedGameSpecial, Mode=TwoWay}"
+                          MinItemHeight="130"
+                          MinItemWidth="300">
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction Command="{Binding ItemClickCommand}"/>
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                
+                <controls:AdaptiveGridView.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="4">
+                            <Image Source="{Binding Image}"/>
+                        </Border>
+                    </DataTemplate>
+                </controls:AdaptiveGridView.ItemTemplate>
+
+                <controls:AdaptiveGridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="Margin" Value="12,12,0,0"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                    </Style>
+                </controls:AdaptiveGridView.ItemContainerStyle>
+            </controls:AdaptiveGridView>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GamerSky.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,8 +95,24 @@ namespace GamerSky.Models
         public string SteamFinal { get; set; }
 
         [JsonProperty(PropertyName = "SteamVideos")]
-        public string SteamVideos { get; set; }
-        
+        public string SteamVideosJson { get; set; }
+
+        [JsonIgnore]
+        public List<SteamVideo> SteamVideos
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(SteamVideosJson))
+                {
+                    return JsonHelper.Deserlialize<List<SteamVideo>>(SteamVideosJson);
+                }
+                else
+                {
+                    return new List<SteamVideo>();
+                }
+            }
+        }
+
         [JsonProperty(PropertyName = "SteamImages")]
         public string SteamImages { get; set; }
 

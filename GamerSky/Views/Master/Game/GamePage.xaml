@@ -9,6 +9,7 @@
     xmlns:controls="using:GamerSky.Controls"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:action="using:GamerSky.Actions"
     DataContext="{Binding Path=GamePageInstance, Source={StaticResource ViewModelLocator}}">
 
     <Page.Resources>
@@ -120,18 +121,15 @@
                                     </VisualState>
                                     <VisualState x:Name="PointerOver">
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="BorderBackground"
-                                            Storyboard.TargetProperty="Opacity"
-                                            Duration="0"
-                                            To="1" />
                                             <DoubleAnimation Storyboard.TargetName="ContentBorderScale"
-                                            Storyboard.TargetProperty="ScaleX"
-                                            Duration="0:0:0.1"
-                                            To="1.05" />
+                                                Storyboard.TargetProperty="ScaleX"
+                                                Duration="0:0:0.1"
+                                                To="1.05" />
                                             <DoubleAnimation Storyboard.TargetName="ContentBorderScale"
-                                            Storyboard.TargetProperty="ScaleY"
-                                            Duration="0:0:0.1"
-                                            To="1.05" />
+                                                Storyboard.TargetProperty="ScaleY"
+                                                Duration="0:0:0.1"
+                                                To="1.05" /> 
+                                            
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderBackground" Storyboard.TargetProperty="Fill">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightListLowBrush}" />
                                             </ObjectAnimationUsingKeyFrames>
@@ -539,7 +537,6 @@
         </Style>
     </Page.Resources>
 
-
     <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -556,17 +553,10 @@
                     <TextBlock Text="搜索游戏/攻略" Margin="4,0"/>
                 </StackPanel>
             </controls:LightButton>
-
-            
         </StackPanel>
 
         <Grid Grid.Row="1">
             <ItemsControl Grid.Row="1">
-                <!--<ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <ItemsStackPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>-->
                 <ItemsControl.Resources>
 
                     <Style TargetType="TextBlock" x:Key="HeaderTextBlockStyle">
@@ -674,7 +664,12 @@
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
                         <FlipView x:Name="flipView" ItemsSource="{Binding NewGames}" MaxHeight="254" VerticalAlignment="Top" Margin="0,0,0,12"
-                                  SelectedItem="{Binding Path=GamePageInstance.SelectedNewGame, Mode=TwoWay, Source={StaticResource ViewModelLocator}}">
+                                  SelectedItem="{Binding Path=GamePageInstance.SelectedGameSpecialDetail, Mode=TwoWay, Source={StaticResource ViewModelLocator}}">
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <core:InvokeCommandAction Command="{Binding Path=GamePageInstance.GameSpecialDetailClickCommand,Source={StaticResource ViewModelLocator}}"/>
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
                             <FlipView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -709,12 +704,12 @@
                         <ListView ItemsSource="{Binding RecentGames}" Style="{StaticResource HorizontalListViewStyle}"
                                   ItemTemplate="{StaticResource VerticalGameDataTemplate}"
                                   Margin="0,0,0,12"
-                                  SelectedItem="{Binding Path=GamePageInstance.SelectedRecentGame, Mode=TwoWay, Source={StaticResource ViewModelLocator}}"
+                                  SelectedItem="{Binding Path=GamePageInstance.SelectedGameSpecialDetail, Mode=TwoWay, Source={StaticResource ViewModelLocator}}"
                                   IsItemClickEnabled="True"
                                   >
                             <interactivity:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="ItemClick">
-                                    <core:InvokeCommandAction Command="{Binding Path=GamePageInstance.GameItemClickCommand,Source={StaticResource ViewModelLocator}}" />
+                                <core:EventTriggerBehavior EventName="SelectionChanged">
+                                    <core:InvokeCommandAction Command="{Binding Path=GamePageInstance.GameSpecialDetailClickCommand,Source={StaticResource ViewModelLocator}}"/>
                                 </core:EventTriggerBehavior>
                             </interactivity:Interaction.Behaviors>
                         </ListView>
@@ -725,10 +720,23 @@
                         <Grid Style="{StaticResource TitleGridStyle}">
                             <Rectangle Style="{StaticResource RectangleStyle}"/>
                             <TextBlock Text="特色专题" Style="{StaticResource HeaderTextBlockStyle}"/>
-                            <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
+                            <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" 
+                                             Style="{StaticResource SimpleHyperlinkButtonStyle}">
+                                <interactivity:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Tapped">
+                                        <action:NavigationAction NavigationType="Detail" SourcePage="GamerSky.Views.SpecialSubjectPage"/>
+                                    </core:EventTriggerBehavior>
+                                </interactivity:Interaction.Behaviors>
+                            </HyperlinkButton>
+                                             
                         </Grid>
                         <ListView ItemsSource="{Binding GameSpecialList}" Style="{StaticResource HorizontalListViewStyle}" Margin="0,0,0,12"
                                   SelectedItem="{Binding Path=GamePageInstance.SelectedGameSpecial, Mode=TwoWay, Source={StaticResource ViewModelLocator}}">
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="SelectionChanged">
+                                    <core:InvokeCommandAction Command="{Binding Path=GamePageInstance.GameSpecialClickCommand,Source={StaticResource ViewModelLocator}}"/>
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Border CornerRadius="4">
@@ -791,7 +799,15 @@
                         </Grid>
                         <ListView ItemsSource="{Binding NewSellingGames}" Style="{StaticResource HorizontalListViewStyle}" 
                                   ItemTemplate="{StaticResource VerticalGameDataTemplate}"
-                                  Margin="0,0,0,12"/>
+                                  Margin="0,0,0,12"
+                                  SelectedItem="{Binding Path=GamePageInstance.SelectedGameSpecialDetail, Mode=TwoWay, Source={StaticResource ViewModelLocator}}"
+                                  IsItemClickEnabled="True">
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="SelectionChanged">
+                                    <core:InvokeCommandAction Command="{Binding Path=GamePageInstance.GameSpecialDetailClickCommand,Source={StaticResource ViewModelLocator}}"/>
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+                        </ListView>
 
                     </StackPanel>
 
@@ -803,7 +819,9 @@
                         </Grid>
 
                         
-                        <ListView ItemsSource="{Binding HighRankedGames}" Style="{StaticResource HorizontalListViewStyle}">
+                        <ListView ItemsSource="{Binding HighRankedGames}" Style="{StaticResource HorizontalListViewStyle}"
+                                  SelectedItem="{Binding Path=GamePageInstance.SelectedGameSpecialDetail, Mode=TwoWay, Source={StaticResource ViewModelLocator}}"
+                                  IsItemClickEnabled="True">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -814,6 +832,11 @@
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="SelectionChanged">
+                                    <core:InvokeCommandAction Command="{Binding Path=GamePageInstance.GameSpecialDetailClickCommand,Source={StaticResource ViewModelLocator}}"/>
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
                         </ListView>
                     </StackPanel>
 

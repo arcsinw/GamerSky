@@ -1,16 +1,19 @@
 ﻿using GalaSoft.MvvmLight;
+using GamerSky.Interfaces;
 using GamerSky.Models;
 using GamerSky.Models.ResultDataModel;
+using GamerSky.Services;
 using GamerSky.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Navigation;
 
 namespace GamerSky.ViewModels
 {
-    public class GameDetailPageViewModel : ViewModelBase
+    public class GameDetailPageViewModel : ViewModelBase, INavigable
     {
         public GameDetailPageViewModel()
         {
@@ -18,7 +21,7 @@ namespace GamerSky.ViewModels
             {
                 LoadDesignTimeData();
             }
-            LoadDesignTimeData();
+            
         }
 
         //public GameDetailPageViewModel(string gameId)
@@ -33,7 +36,19 @@ namespace GamerSky.ViewModels
         //    }
         //}
 
-        public GameDetailV4 GameDetail { get; set; }
+        private GameDetailV4 gameDetail;
+        public GameDetailV4 GameDetail
+        {
+            get
+            {
+                return gameDetail;
+            }
+            set
+            {
+                gameDetail = value;
+                RaisePropertyChanged();
+            }
+        }
 
 
         public void LoadDesignTimeData()
@@ -47,9 +62,31 @@ namespace GamerSky.ViewModels
 
         }
 
-        public void LoadData(string gameId)
+        public async Task LoadGameDetail(string gameId)
+        {
+            GameDetail = await ApiService.Instance.GetGameDetailV4Async(gameId);
+        }
+
+        public async Task LoadGameSpecial(string nodeId)
         {
 
+        }
+
+        public void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            
+        }
+
+        public async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is GameSpecialDetail game)
+            {
+                await LoadGameDetail(game.Id.ToString());
+            }
+            else if (e.Parameter is GameSpecial gameSpecial)
+            {
+                await LoadGameSpecial(gameSpecial.NodeId);
+            }
         }
     }
 }

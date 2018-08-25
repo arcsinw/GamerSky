@@ -162,6 +162,12 @@ namespace GamerSky.Services
         public static string GameSpecialList { get; set; } = "http://appapi2.gamersky.com/game/gameSpecialList";
 
         /// <summary>
+        /// 
+        /// </summary>
+        public static string GameSpecialSubList { get; set; } = "http://appapi2.gamersky.com/game/gameSpecialSubList";
+        
+
+        /// <summary>
         /// 最期待游戏，高分榜
         /// </summary>
         //{"os":"android","app":"GSAPP","osVersion":"5.0","deviceType":"P001","appVersion":"3.7.0","deviceId":"359981060795505","request":{"annualClass":"all","elementsCountPerPage":"5","gameClass":"0","type":"fractions","pageIndex":1,"extraField2":"gsScore","extraField1":"Position"}}
@@ -176,6 +182,11 @@ namespace GamerSky.Services
         /// 热门点评
         /// </summary>
         public static string ReviewList { get; set; } = "http://appapi2.gamersky.com/game/reviewList";
+
+        /// <summary>
+        /// 获取游戏详细信息
+        /// </summary>
+        public static string GetGame { get; set; } = "http://appapi2.gamersky.com/v4/getGame";
         #endregion
 
         /// <summary>

@@ -13,7 +13,7 @@ namespace GamerSky.Requests
         public int NodeId { get; set; } = 1;
 
         [JsonProperty("elementsCountPerPage")]
-        public int ElementsCountPerPage { get; set; } = 5;
+        public int ElementsCountPerPage { get; set; }
         
         [JsonProperty("pageIndex")]
         public int PageIndex { get; set; }

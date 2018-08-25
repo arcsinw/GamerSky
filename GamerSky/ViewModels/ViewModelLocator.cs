@@ -26,6 +26,9 @@ namespace GamerSky.ViewModels
         public const string OriginPageKey = "OriginPage";
         public const string GameDetailPageKey = "GameDetailPage";
         public const string SubjectContentPageKey = "SubjectContentPage";
+        public const string LoginPageKey = "LoginPage";
+        public const string SpecialSubjectPageKey = "SpecialSubjectPage";
+        public const string SpecialSubjectContentPageKey = "SpecialSubjectContentPage";
         #endregion
 
         public ViewModelLocator()
@@ -56,6 +59,9 @@ namespace GamerSky.ViewModels
             nav.Configure(OriginPageKey, typeof(OriginalPage));
             nav.Configure(GameDetailPageKey, typeof(GameDetailPage));
             nav.Configure(SubjectContentPageKey, typeof(SubjectContentPage));
+            nav.Configure(LoginPageKey, typeof(LoginPage));
+            nav.Configure(SpecialSubjectPageKey, typeof(SpecialSubjectPage));
+            nav.Configure(SpecialSubjectContentPageKey, typeof(SpecialSubjectContentPage));
 
             SimpleIoc.Default.Register<IMasterDetailNavigationService>(() => nav);
             SimpleIoc.Default.Register<NewsPageViewModel>();
@@ -68,6 +74,9 @@ namespace GamerSky.ViewModels
             SimpleIoc.Default.Register<OriginPageViewModel>();
             SimpleIoc.Default.Register<GameDetailPageViewModel>();
             SimpleIoc.Default.Register<SubjectContentPageViewModel>();
+            SimpleIoc.Default.Register<LoginPageViewModel>();
+            SimpleIoc.Default.Register<SpecialSubjectPageViewModel>();
+            SimpleIoc.Default.Register<SpecialSubjectContentPageViewModel>();
         }
 
         #region ViewModels' instances
@@ -148,6 +157,30 @@ namespace GamerSky.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<SubjectContentPageViewModel>();
+            }
+        }
+
+        public LoginPageViewModel LoginPageInstance
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LoginPageViewModel>();
+            }
+        }
+
+        public SpecialSubjectPageViewModel SpecialSubjectPageInstance
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SpecialSubjectPageViewModel>();
+            }
+        }
+
+        public SpecialSubjectContentPageViewModel SpecialSubjectContentPageInstance
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SpecialSubjectContentPageViewModel>();
             }
         }
         #endregion

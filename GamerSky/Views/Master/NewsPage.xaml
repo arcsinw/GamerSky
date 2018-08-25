@@ -94,7 +94,6 @@
                                                          ThreePictureDT="{StaticResource ThreePictureDT}"/>
                         </ListView.ItemTemplateSelector>
                        
-                        
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="MinHeight" Value="100"/>

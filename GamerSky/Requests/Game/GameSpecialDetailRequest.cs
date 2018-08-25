@@ -10,7 +10,7 @@ namespace GamerSky.Requests
     public class GameSpecialDetailRequest
     {
         [JsonProperty("nodeId")]
-        public int NodeId { get; set; }
+        public string NodeId { get; set; }
 
         [JsonProperty("extraField1")]
         public string ExtraField1 { get; set; }

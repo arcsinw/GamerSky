@@ -17,7 +17,14 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <PackageCertificateKeyFile>GamerSky_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>GamerSky_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>2973F5364A03DE77A3B644C57E153817A1193563</PackageCertificateThumbprint>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <AppxBundle>Never</AppxBundle>
+    <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
+    <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -107,6 +114,7 @@
     <Compile Include="Common\DelegateCommand{T}.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Controls\AdaptiveGridView\AdaptiveGridView.cs" />
     <Compile Include="Controls\ArticlePresenter.cs" />
     <Compile Include="Controls\GlobalDialog\GlobalDialog.cs" />
     <Compile Include="Controls\GridSplitter\GridSplitter.cs" />
@@ -124,9 +132,11 @@
     <Compile Include="Controls\IndicatorPivot\IndicatorPivot.cs" />
     <Compile Include="Controls\LightButton\LightButton.cs" />
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
+    <Compile Include="Controls\ToastService\ToastService.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Interfaces\INavigable.cs" />
     <Compile Include="Models\Game\GameDetailV4.cs" />
     <Compile Include="Models\Game\GamePageToItem.cs" />
     <Compile Include="Models\Game\GameReview.cs" />
@@ -137,6 +147,8 @@
     <Compile Include="Models\PostDataModel\ClubsListRequest.cs" />
     <Compile Include="Models\PostDataModel\GetAllColumnRequest.cs" />
     <Compile Include="Models\PostDataModel\SubjectsListRequest.cs" />
+    <Compile Include="Models\Game\GameSubList.cs" />
+    <Compile Include="Requests\Game\GameSpecialSubListRequest.cs" />
     <Compile Include="Requests\Group\TopicsListRequest.cs" />
     <Compile Include="Models\ResultDataModel\UserComments.cs" />
     <Compile Include="Requests\Game\GameDetailRequestV4.cs" />
@@ -199,11 +211,14 @@
     <Compile Include="Utils\TitleBarPersonalizeHelper.cs" />
     <Compile Include="ViewModels\GameDetailPageViewModel.cs" />
     <Compile Include="ViewModels\GroupPageViewModel.cs" />
+    <Compile Include="ViewModels\LoginPageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\MasterDetailPageViewModel.cs" />
     <Compile Include="ViewModels\NewsPageViewModel.cs" />
     <Compile Include="ViewModels\OriginPageViewModel.cs" />
     <Compile Include="ViewModels\SearchPageViewModel.cs" />
+    <Compile Include="ViewModels\SpecialSubjectContentPageViewModel.cs" />
+    <Compile Include="ViewModels\SpecialSubjectPageViewModel.cs" />
     <Compile Include="ViewModels\SubjectContentPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="ViewModels\WebViewPageViewModel.cs" />
@@ -215,6 +230,9 @@
     </Compile>
     <Compile Include="Views\Detail\WebViewPage.xaml.cs">
       <DependentUpon>WebViewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Master\Game\FindGamePage.xaml.cs">
       <DependentUpon>FindGamePage.xaml</DependentUpon>
@@ -265,12 +283,18 @@
     <Compile Include="Views\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SpecialSubjectContentPage.xaml.cs">
+      <DependentUpon>SpecialSubjectContentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpecialSubjectPage.xaml.cs">
+      <DependentUpon>SpecialSubjectPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="GamerSky_TemporaryKey.pfx" />
+    <None Include="GamerSky_StoreKey.pfx" />
     <PRIResource Include="Strings\zh-CN\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +306,8 @@
     <Content Include="Assets\Images\drawer_day.png" />
     <Content Include="Assets\Images\drawer_night.png" />
     <Content Include="Assets\Images\drawer_user.png" />
+    <Content Include="Assets\Images\Game\game_feature_bg.9.png" />
+    <Content Include="Assets\Images\Game\game_feature_bg_nomination.9.png" />
     <Content Include="Assets\Images\Game\game_tag_top_ns_dz.png" />
     <Content Include="Assets\Images\Game\game_tag_top_pcdr.png" />
     <Content Include="Assets\Images\Game\game_tag_top_ps4_dz.png" />
@@ -309,8 +335,6 @@
     <Content Include="Assets\Images\Game\latest_listing_xbox_icon.png" />
     <Content Include="Assets\Images\Game\latest_listing_xbox_icon_select.png" />
     <Content Include="Assets\Images\Game\quanzi_share.png" />
-    <Content Include="Assets\Images\game_feature_bg.9.png" />
-    <Content Include="Assets\Images\game_feature_bg_nomination.9.png" />
     <Content Include="Assets\Images\icon_xinwen.png" />
     <Content Include="Assets\Images\icon_xinwen_select.png" />
     <Content Include="Assets\Images\icon_yonghu.png" />
@@ -416,6 +440,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -455,6 +480,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\ToastService\ToastService.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Detail\DefaultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -464,6 +493,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Detail\WebViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -524,6 +557,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SpecialSubjectContentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpecialSubjectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LottieUWP">
@@ -555,6 +596,7 @@
     <Folder Include="Requests\Me\" />
     <Folder Include="Requests\Origin\" />
     <Folder Include="Responses\" />
+    <Folder Include="Triggers\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

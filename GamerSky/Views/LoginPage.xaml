@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="GamerSky.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GamerSky.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:GamerSky.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    DataContext="{Binding Path=LoginPageInstance, Source={StaticResource ViewModelLocator}}"
+    >
+
+    <Grid>
+        <StackPanel Padding="24">
+            <Image Source="ms-appx:///Assets/Images/ic_title.png" Height="200" Width="200"/>
+            <TextBox PlaceholderText="用户名或手机号"/>
+            <TextBox PlaceholderText="密码"/>
+
+            <Button Content="登陆" Style="{StaticResource LightButtonStyle}" 
+                    Background="#FF007ACC"
+                    Foreground="White"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,20"/>
+        </StackPanel>
+
+        <Button HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource BackButtonStyle}">
+            <SymbolIcon Symbol="Back"/>
+        </Button>
+    </Grid>
+</Page>
