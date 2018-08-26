@@ -370,11 +370,11 @@
                 <ListView.Header>
                     <Button x:Name="userBtn" Style="{StaticResource PaneButtonStyle}" 
                             ToolTipService.ToolTip="{Binding User.UserName,Mode=OneWay}">
-                        <!--<i:Interaction.Behaviors>
-                                <core:EventTriggerBehavior EventName="Tapped">
-                                    <action:NavigationAction SourcePage="GamerSky.View.LoginPage" NavigationType="Master"/>
-                                </core:EventTriggerBehavior>
-                            </i:Interaction.Behaviors>-->
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="Tapped">
+                                <actions:NavigationAction SourcePage="GamerSky.Views.LoginPage" NavigationType="Master"/>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
                         <Grid>
                             <BitmapIcon UriSource="ms-appx:///Assets/Images/drawer_user.png" Height="24" Width="24"/>
                             <Image Source="{Binding User.Pic,Mode=OneWay}" Height="48" Width="48"/>

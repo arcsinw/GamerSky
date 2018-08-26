@@ -335,6 +335,17 @@
     <Content Include="Assets\Images\Game\latest_listing_xbox_icon.png" />
     <Content Include="Assets\Images\Game\latest_listing_xbox_icon_select.png" />
     <Content Include="Assets\Images\Game\quanzi_share.png" />
+    <Content Include="Assets\Images\Game\ranking_sort_one.png" />
+    <Content Include="Assets\Images\Game\ranking_sort_three.png" />
+    <Content Include="Assets\Images\Game\ranking_sort_two.png" />
+    <Content Include="Assets\Images\Group\ic_quanzi_changtu_badge.png" />
+    <Content Include="Assets\Images\Group\ic_quanzi_chevron_right_blackp.png" />
+    <Content Include="Assets\Images\Group\ic_quanzi_gif_badge.png" />
+    <Content Include="Assets\Images\Group\ic_quanzi_jinghua.png" />
+    <Content Include="Assets\Images\Group\ic_quanzi_video.png" />
+    <Content Include="Assets\Images\Group\ic_quanzi_zan.png" />
+    <Content Include="Assets\Images\Group\ic_quanzi_zan_light.png" />
+    <Content Include="Assets\Images\Group\ic_quanzi_zhiding.png" />
     <Content Include="Assets\Images\icon_xinwen.png" />
     <Content Include="Assets\Images\icon_xinwen_select.png" />
     <Content Include="Assets\Images\icon_yonghu.png" />
@@ -343,6 +354,7 @@
     <Content Include="Assets\Images\icon_youxi_select.png" />
     <Content Include="Assets\Images\icon_yuanchuang.png" />
     <Content Include="Assets\Images\icon_yuanchuang_select.png" />
+    <Content Include="Assets\Images\ic_chat_white_24dp.png" />
     <Content Include="Assets\Images\ic_collect_yellow.png" />
     <Content Include="Assets\Images\ic_comment.png" />
     <Content Include="Assets\Images\ic_game_fsb.png" />
@@ -383,9 +395,6 @@
     <Content Include="Assets\Images\message_reply.png" />
     <Content Include="Assets\Images\message_setting.png" />
     <Content Include="Assets\Images\message_zan.png" />
-    <Content Include="Assets\Images\ranking_sort_one.png" />
-    <Content Include="Assets\Images\ranking_sort_three.png" />
-    <Content Include="Assets\Images\ranking_sort_two.png" />
     <Content Include="Assets\Images\salelist_platform_pc.png" />
     <Content Include="Assets\Images\salelist_platform_ps3_black.png" />
     <Content Include="Assets\Images\salelist_platform_ps4_white.png" />

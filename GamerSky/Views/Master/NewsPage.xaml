@@ -31,10 +31,10 @@
                 <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="8,0">
                     <TextBlock Text="{x:Bind Title}"  TextWrapping="Wrap" VerticalAlignment="Top"/>
 
-                    <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                                   <Run Text="{x:Bind CommentsCount}"/>
-                                                    <Run Text="评"/>
-                    </TextBlock>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+                        <TextBlock Text="{x:Bind CommentsCount}"/>
+                        <BitmapIcon Height="20" Width="20" Foreground="Black" UriSource="ms-appx:///Assets/Image/ic_chat_white_24dp.png"/>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </DataTemplate>
@@ -61,15 +61,15 @@
                     <Image Grid.Column="2" MinHeight="40" Source="{Binding ThumbnailURLs[2]}" Stretch="Fill" />
                     <!--PlaceholderSource="{StaticResource NewsPlaceholderImage}" PlaceholderStretch="UniformToFill"/>-->
                 </Grid>
-                <TextBlock  Grid.Row="2" Margin="0,2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                            <Run Text="{Binding CommentsCount}"/>
-                                            <Run Text="评"/>
+                <TextBlock  Grid.Row="2" Margin="0,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextWrapping="Wrap">
+                    <Run Text="{Binding CommentsCount}"/>
+                    <Run Text="评"/>
                 </TextBlock>
             </Grid>
         </DataTemplate>
     </Page.Resources>
     
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource PageBackgroundThemeBrush}">
         <controls:IndicatorPivot x:Name="pivot" ItemsSource="{Binding Essays}">
             <Pivot.HeaderTemplate>
                 <DataTemplate>
@@ -98,8 +98,10 @@
                             <Style TargetType="ListViewItem">
                                 <Setter Property="MinHeight" Value="100"/>
                                 <Setter Property="Padding" Value="12"/>
+                                <Setter Property="Margin" Value="0,1,0,0"/>
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                 <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Background" Value="White"/>
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>

@@ -51,10 +51,15 @@ namespace GamerSky.ViewModels
                     var essayIncrementalCollection = new EssayIncrementalCollection(item.NodeId);
                     essayIncrementalCollection.OnDataLoading += EssayIncrementalCollection_OnDataLoading;
                     essayIncrementalCollection.OnDataLoaded += EssayIncrementalCollection_OnDataLoaded;
-
+                    essayIncrementalCollection.OnError += EssayIncrementalCollection_OnError;
                     Essays.Add(new Tuple<Channel, EssayIncrementalCollection>(item, essayIncrementalCollection));
                 }
             }
+        }
+
+        private void EssayIncrementalCollection_OnError(object sender, Exception e)
+        {
+            IsActive = false;
         }
 
         private void EssayIncrementalCollection_OnDataLoaded(object sender, EventArgs e)

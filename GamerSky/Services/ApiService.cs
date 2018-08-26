@@ -1170,7 +1170,7 @@ namespace GamerSky.Services
 
             ResultDataTemplate<List<GameSubList>> result = await PostJson<PostDataTemplate<GameSpecialSubListRequest>, ResultDataTemplate<List<GameSubList>>>(ServiceUri.GameSpecialSubList, postData);
 
-            return result?.Result;
+            return result?.Result ?? new List<GameSubList>();
         }
 
         /// <summary>

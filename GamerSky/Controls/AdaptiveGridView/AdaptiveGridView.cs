@@ -86,7 +86,7 @@ namespace GamerSky.Controls
                 if (MinItemWidth == 0)
                     throw new DivideByZeroException("You need to have a MinItemWidth greater than zero");
 
-                var availableWidth = availableSize.Width - (this.Padding.Left + this.Padding.Left);
+                var availableWidth = availableSize.Width - (this.Padding.Left + this.Padding.Right);
 
                 var numColumns = Math.Floor(availableWidth / MinItemWidth);
                 numColumns = numColumns == 0 ? 1 : numColumns;

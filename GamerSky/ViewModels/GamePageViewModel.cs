@@ -73,6 +73,9 @@ namespace GamerSky.ViewModels
         /// </summary>
         public RelayCommand GameSpecialDetailClickCommand { get; set; }
 
+        /// <summary>
+        /// 特色专题
+        /// </summary>
         public RelayCommand GameSpecialClickCommand { get; set; }
 
         public RelayCommand NavigateToSearchPageCommand { get; set; }
@@ -112,7 +115,7 @@ namespace GamerSky.ViewModels
 
         public void GameSpecialClick()
         {
-            _navigationService.DetailNavigateTo("GameDetailPage", SelectedGameSpecial);
+            _navigationService.DetailNavigateTo("SpecialSubjectContentPage", SelectedGameSpecial);
         }
 
         public void LoadDesignTimeData()

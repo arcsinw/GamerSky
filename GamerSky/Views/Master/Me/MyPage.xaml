@@ -5,6 +5,9 @@
     xmlns:local="using:GamerSky.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:action="using:GamerSky.Actions"
     mc:Ignorable="d"
     >
     <Page.Resources>
@@ -227,10 +230,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="White" Padding="12"
@@ -240,10 +240,20 @@
                     <Image Source="/Assets/Images/user_default_photo.png" Height="52" Width="52"/>
                     <TextBlock Text="立即登录" VerticalAlignment="Center" FontSize="16" Margin="12,0"/>
                 </StackPanel>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <action:NavigationAction NavigationType="Detail" SourcePage="GamerSky.Views.LoginPage" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
             </Button>
 
             <Button HorizontalAlignment="Right" Style="{StaticResource ImageButtonStyle}">
                 <Image Source="/Assets/Images/ic_settings.png" Height="30" Width="30"/>
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Tapped">
+                        <action:NavigationAction NavigationType="Detail" SourcePage="GamerSky.Views.SettingsPage" />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
             </Button>
         </Grid>
 
@@ -310,55 +320,55 @@
             </Button>
         </Grid>
 
-        <Grid Grid.Row="2">
-            <ListView SelectionMode="None">
-                <ListView.Items>
-                    <ListViewItem>
-                        <Grid>
-                            <TextBlock Text="非WiFi网络无图" VerticalAlignment="Center"/>
-                            <ToggleSwitch HorizontalAlignment="Right" MinWidth="0"
-                                          VerticalAlignment="Center" Style="{StaticResource SimpleToggleSwitchStyle}"/>
-                        </Grid>
-                    </ListViewItem>
+        
+        <ListView Grid.Row="2" SelectionMode="None">
+            <ListView.Items>
+                <ListViewItem>
+                    <Grid>
+                        <TextBlock Text="非WiFi网络无图" VerticalAlignment="Center"/>
+                        <ToggleSwitch HorizontalAlignment="Right" MinWidth="0"
+                                        VerticalAlignment="Center" Style="{StaticResource SimpleToggleSwitchStyle}"/>
+                    </Grid>
+                </ListViewItem>
 
-                    <ListViewItem>
-                        <Grid>
-                            <TextBlock Text="夜间模式" VerticalAlignment="Center"/>
-                            <ToggleSwitch x:Name="transparentTileSwitch" HorizontalAlignment="Right" MinWidth="0"
-                                          VerticalAlignment="Center" Style="{StaticResource SimpleToggleSwitchStyle}"/>
-                        </Grid>
-                    </ListViewItem>
+                <ListViewItem>
+                    <Grid>
+                        <TextBlock Text="夜间模式" VerticalAlignment="Center"/>
+                        <ToggleSwitch x:Name="transparentTileSwitch" HorizontalAlignment="Right" MinWidth="0"
+                                        VerticalAlignment="Center" Style="{StaticResource SimpleToggleSwitchStyle}"/>
+                    </Grid>
+                </ListViewItem>
 
-                    <ListViewItem>
-                        <Grid>
-                            <TextBlock Text="清除缓存" VerticalAlignment="Center"/>
-                            <TextBlock Text="799KB" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        </Grid>
-                    </ListViewItem>
+                <ListViewItem>
+                    <Grid>
+                        <TextBlock Text="清除缓存" VerticalAlignment="Center"/>
+                        <TextBlock Text="799KB" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    </Grid>
+                </ListViewItem>
 
-                    <ListViewItem Margin="0,12,0,0">
-                        <Grid>
-                            <TextBlock Text="意见反馈" HorizontalAlignment="Left"/>
+                <ListViewItem Margin="0,12,0,0">
+                    <Grid>
+                        <TextBlock Text="意见反馈" HorizontalAlignment="Left"/>
 
-                            <Button HorizontalAlignment="Right">
+                        <Button HorizontalAlignment="Right">
                                 
-                            </Button>
-                        </Grid>
-                    </ListViewItem>
+                        </Button>
+                    </Grid>
+                </ListViewItem>
 
-                </ListView.Items>
+            </ListView.Items>
 
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="VerticalAlignment" Value="Center"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                        <Setter Property="Margin" Value="0,0,0,1"/>
-                        <Setter Property="Background" Value="White"/>
-                    </Style>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="0,0,0,1"/>
+                    <Setter Property="Background" Value="White"/>
+                </Style>
 
-                </ListView.ItemContainerStyle>
-            </ListView>
-        </Grid>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        
     </Grid>
 </Page>

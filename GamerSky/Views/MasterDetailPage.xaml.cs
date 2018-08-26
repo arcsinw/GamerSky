@@ -1,5 +1,6 @@
 ﻿using GamerSky.Models;
 using GamerSky.Utils;
+using GamerSky.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,12 +49,7 @@ namespace GamerSky.Views
                 VisualStateManager.GoToState(this, "Default", true);
             }
         }
-
-        public List<NavMenuItem> Menus { get; set; } = new List<NavMenuItem>()
-        {
-            new NavMenuItem() { Icon = "ms-appx:///Assets/Images/icon_xinwen_h.png", Title = GlobalizationStringLoader.GetString("News"), DestPage = typeof(MainPage) },
-            new NavMenuItem() { Icon = "ms-appx:///Assets/Images/icon_gonglue_h.png", Title = GlobalizationStringLoader.GetString("Game"), DestPage = typeof(GamePage) }
-        };
+        
 
         #region BackRequested Handlers
 

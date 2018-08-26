@@ -21,9 +21,7 @@
 
         <Grid Grid.Row="0" Background="White">
             <Button Style="{StaticResource BackButtonStyle}"/>
-            <TextBlock Text="特色专题" Style="{StaticResource TitleTextBlockStyle}" 
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
+            <TextBlock Text="特色专题" Style="{StaticResource TitleTextBlockStyle}"/>
         </Grid>
 
         <Grid Grid.Row="1">

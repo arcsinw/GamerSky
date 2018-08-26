@@ -75,6 +75,10 @@ namespace GamerSky.Collection
                         Add(item);
                     }
                 }
+                else
+                {
+                    this.OnError.Invoke(this, new Exception());
+                }
             }
             this.OnDataLoaded?.Invoke(this, EventArgs.Empty);
             return result;
@@ -85,10 +89,16 @@ namespace GamerSky.Collection
         /// 开始加载时发生
         /// </summary>
         public event EventHandler OnDataLoading;
+        
         /// <summary>
         /// 加载完成后发生
         /// </summary>
         public event EventHandler OnDataLoaded;
+
+        /// <summary>
+        /// Fire while exception throw
+        /// </summary>
+        public event EventHandler<Exception> OnError;
         #endregion
     }
 }
