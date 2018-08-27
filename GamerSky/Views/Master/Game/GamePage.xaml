@@ -618,7 +618,8 @@
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
                             <ScrollViewer x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}" 
                                         HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}" IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" TabNavigation="{TemplateBinding TabNavigation}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}" 
-                                    Style="{StaticResource LightScrollViewerStyle}">
+                                          Style="{StaticResource LightScrollViewerStyle}"
+                                    >
                                 <ItemsPresenter Padding="{TemplateBinding Padding}"/>
                             </ScrollViewer>
                         </Border>
@@ -663,7 +664,7 @@
                             <TextBlock Text="新游推荐" Style="{StaticResource HeaderTextBlockStyle}"/>
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
-                        <FlipView x:Name="flipView" ItemsSource="{Binding NewGames}" MaxHeight="254" VerticalAlignment="Top" Margin="0,0,0,12"
+                        <FlipView x:Name="flipView" ItemsSource="{Binding NewGames}" VerticalAlignment="Center" MaxHeight="300" Margin="0,0,0,12"
                                   SelectedItem="{Binding Path=GamePageInstance.SelectedGameSpecialDetail, Mode=TwoWay, Source={StaticResource ViewModelLocator}}">
                             <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="Tapped">
@@ -673,20 +674,15 @@
                             <FlipView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <Border>
-                                            <controls:ImageEx Source="{Binding LargeImage}" Stretch="UniformToFill" />
-                                        </Border>
-                                        <!--<Grid.Background>
-                                            <ImageBrush ImageSource="{Binding LargeImage}" Stretch="UniformToFill"/>
-                                        </Grid.Background>-->
-
+                                        <controls:ImageEx Source="{Binding LargeImage}" Stretch="UniformToFill"/>
+                                        
                                         <StackPanel VerticalAlignment="Bottom">
                                             <TextBlock Foreground="White" TextWrapping="Wrap" Margin="24">
-                                                <Run Text="{Binding Title}" FontSize="20"/>
-                                                <Run Text="/"/>
-                                                <Run Text="{Binding GsScore}" Foreground="Green"/>
-                                                <LineBreak/>
-                                                <Run Text="{Binding Description}" FontSize="13"/>
+                                            <Run Text="{Binding Title}" FontSize="20"/>
+                                            <Run Text="/"/>
+                                            <Run Text="{Binding GsScore}" Foreground="Green"/>
+                                            <LineBreak/>
+                                            <Run Text="{Binding Description}" FontSize="13"/>
                                             </TextBlock>
                                         </StackPanel>
                                     </Grid>

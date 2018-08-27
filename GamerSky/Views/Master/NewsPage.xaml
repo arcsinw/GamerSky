@@ -83,6 +83,7 @@
                               SelectedItem="{Binding Path=NewsPageInstance.SelectedEssay, Mode=TwoWay,Source={StaticResource ViewModelLocator}}"
                               IsItemClickEnabled="True" 
                               ShowsScrollingPlaceholders="False"
+                              Style="{StaticResource LightListView}"
                               >
                         <interactivity:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="SelectionChanged">

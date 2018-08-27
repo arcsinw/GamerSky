@@ -26,32 +26,44 @@
 
         <Grid Grid.Row="1">
             <controls:AdaptiveGridView ItemsSource="{Binding GameSpecials}"
-                          HorizontalAlignment="Center"
-                          HorizontalContentAlignment="Center"
                           SelectionMode="Single" 
                           IsItemClickEnabled="True"
                           SelectedItem="{Binding SelectedGameSpecial, Mode=TwoWay}"
                           MinItemHeight="130"
-                          MinItemWidth="300">
+                          MinItemWidth="300"
+                          Padding="12,0,0,12"
+                          Style="{StaticResource LightGridView}">
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="SelectionChanged">
                         <core:InvokeCommandAction Command="{Binding ItemClickCommand}"/>
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
+  
+                <controls:AdaptiveGridView.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition/>
+                    </TransitionCollection>
+                </controls:AdaptiveGridView.ItemContainerTransitions>
                 
                 <controls:AdaptiveGridView.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="4">
-                            <Image Source="{Binding Image}"/>
-                        </Border>
+                        <Viewbox Stretch="UniformToFill">
+                            <controls:ShadowContentControl Z_Depth="1" IsCached="True" CornerRadius="4">
+                                <Grid Height="130" Width="300" CornerRadius="4">
+                                    <Image Source="{Binding Image}" Stretch="UniformToFill"/>
+                                </Grid>
+                            </controls:ShadowContentControl>
+                        </Viewbox>
                     </DataTemplate>
                 </controls:AdaptiveGridView.ItemTemplate>
 
                 <controls:AdaptiveGridView.ItemContainerStyle>
                     <Style TargetType="GridViewItem">
-                        <Setter Property="Margin" Value="12,12,0,0"/>
+                        <Setter Property="Margin" Value="0,12,12,0"/>
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
                         <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="Width" Value="Auto"/>
+                        <Setter Property="Height" Value="Auto"/>
                     </Style>
                 </controls:AdaptiveGridView.ItemContainerStyle>
             </controls:AdaptiveGridView>

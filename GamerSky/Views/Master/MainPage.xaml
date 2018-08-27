@@ -38,26 +38,26 @@
         <Frame x:Name="MasterFrame" x:FieldModifier="Public"/>
 
         <!--#region Module Grid-->
-        <Grid x:Name="moduleGrid" VerticalAlignment="Bottom" Padding="4,8"
-              BorderThickness="0,1,0,0" BorderBrush="LightGray" Background="White">
-            <Grid.RenderTransform>
-                <TranslateTransform x:Name="translateTransform"/>
-            </Grid.RenderTransform>
-            <Grid.Transitions>
-                <TransitionCollection>
-                    <PopupThemeTransition/>
-                </TransitionCollection>
-            </Grid.Transitions> 
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <!--<ColumnDefinition/>-->
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <controls:ShadowContentControl  x:Name="moduleGrid" Z_Depth="3" CornerRadius="4" VerticalAlignment="Bottom">
+            <Grid BorderThickness="0,1,0,0" BorderBrush="LightGray" Background="White" Padding="4,8">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="translateTransform"/>
+                </Grid.RenderTransform>
+                <Grid.Transitions>
+                    <TransitionCollection>
+                        <PopupThemeTransition/>
+                    </TransitionCollection>
+                </Grid.Transitions>
 
-            <!--#region SimpleRadioButons-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <!--<ColumnDefinition/>-->
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!--#region SimpleRadioButons-->
                 <controls:SimpleRadioButton Grid.Column="0" Tag="0" IsChecked="True" GroupName="Module"
                 Source="ms-appx:///Assets/Images/icon_xinwen.png" ToolTipService.ToolTip="新闻"
                                         SelectedSource="ms-appx:///Assets/Images/icon_xinwen_select.png"
@@ -87,8 +87,9 @@
                                         SelectedSource="ms-appx:///Assets/Images/icon_yonghu_select.png"
                                         Checked="SimpleRadioButton_Checked"/>
                 <!--Title="我的"/>-->
-            <!--#endregion-->
-        </Grid>
+                <!--#endregion-->
+            </Grid>
+        </controls:ShadowContentControl>
         <!--#endregion-->
         
     </Grid>
