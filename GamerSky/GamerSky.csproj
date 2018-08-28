@@ -114,7 +114,9 @@
     <Compile Include="Common\DelegateCommand{T}.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Controls\AdaptiveGridView.cs" />
+    <Compile Include="Controls\AdaptiveGridView\AdaptiveGridView.cs" />
+    <Compile Include="Controls\AdaptiveGridView\AdaptiveGridView.Properties.cs" />
+    <Compile Include="Controls\AdaptiveGridView\AdaptiveHeightValueConverter.cs" />
     <Compile Include="Controls\ArticlePresenter.cs" />
     <Compile Include="Controls\AspectContentControl\AspectContentControl.cs" />
     <Compile Include="Controls\GlobalDialog\GlobalDialog.cs" />
@@ -135,28 +137,37 @@
     <Compile Include="Controls\ShadowContentControl\ShadowContentControl.cs" />
     <Compile Include="Controls\ShadowContentControl\ShadowConfig.cs" />
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
+    <Compile Include="Controls\StringWrapPanel\StringWrapPanel.cs" />
     <Compile Include="Controls\ToastService\ToastService.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Interfaces\INavigable.cs" />
+    <Compile Include="Models\CollectItem.cs" />
     <Compile Include="Models\Game\GameDetailV4.cs" />
     <Compile Include="Models\Game\GamePageToItem.cs" />
     <Compile Include="Models\Game\GameReview.cs" />
     <Compile Include="Models\Game\SteamVideo.cs" />
     <Compile Include="Models\Group\Club.cs" />
     <Compile Include="Models\Group\Topic.cs" />
+    <Compile Include="Models\Me\UserInfo.cs" />
     <Compile Include="Models\Origin\Column.cs" />
     <Compile Include="Models\PostDataModel\ClubsListRequest.cs" />
     <Compile Include="Models\PostDataModel\GetAllColumnRequest.cs" />
     <Compile Include="Models\PostDataModel\SubjectsListRequest.cs" />
     <Compile Include="Models\Game\GameSubList.cs" />
     <Compile Include="Requests\Game\GameSpecialSubListRequest.cs" />
+    <Compile Include="Requests\Me\GetUserDynamicsRequest.cs" />
+    <Compile Include="Requests\Me\GetUserGameListRequest.cs" />
+    <Compile Include="Requests\Me\GetUserInfoRequest.cs" />
     <Compile Include="Requests\Group\TopicsListRequest.cs" />
     <Compile Include="Models\ResultDataModel\UserComments.cs" />
     <Compile Include="Requests\Game\GameDetailRequestV4.cs" />
     <Compile Include="Requests\Game\GameReviewRequest.cs" />
     <Compile Include="Requests\Home\AllChannelListRequest.cs" />
+    <Compile Include="Requests\Me\LoginRequest.cs" />
+    <Compile Include="Requests\Me\GetCollectListRequest.cs" />
+    <Compile Include="Responses\LoginResponse.cs" />
     <Compile Include="TemplateSelector\NewsDataTemplateSelector.cs" />
     <Compile Include="Enums\GameNodeIdEnum.cs" />
     <Compile Include="Enums\SearchTypeEnum.cs" />
@@ -616,9 +627,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Requests\Me\" />
     <Folder Include="Requests\Origin\" />
-    <Folder Include="Responses\" />
     <Folder Include="Triggers\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

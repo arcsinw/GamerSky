@@ -100,7 +100,7 @@ namespace GamerSky.Services
         /// 获取所有评论回复
         /// {"userId":531939,"pageIndex":2,"pageSize":20}
         /// </summary>
-        public static string GetAllReply { get; set; } = "http://cm.gamersky.com/appapi/GetUserComment?jsondata={0}";
+        public static string GetUserComment { get; set; } = "http://cm.gamersky.com/appapi/GetUserComment?jsondata={0}";
 
         /// <summary>
         /// 对评论回复点赞
@@ -212,6 +212,40 @@ namespace GamerSky.Services
         /// Post
         /// </summary>
         public static string SubjectList { get; set; } = "http://i.gamersky.com/appapi/v2/getSubjectsList";
+        #endregion
+
+
+        #region 用户相关
+        /// <summary>
+        /// 登录
+        /// </summary>
+        public static string TwoLogin { get; set; } = "http://appapi2.gamersky.com/v2/TwoLogin";
+
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        public static string GetUserInfo { get; set; } = "http://appapi2.gamersky.com/v4/getUserInfo";
+
+        /// <summary>
+        /// 获取用户订阅专栏
+        /// </summary>
+        public static string GetUserSubscriptionColumns { get; set; } = "http://appapi2.gamersky.com/v4/getUserSubscriptionColumns";
+
+        /// <summary>
+        /// 获取用户收藏
+        /// </summary>
+        public static string GetCollectList { get; set; } = "http://appapi2.gamersky.com/v2/GetCollectList";
+
+        /// <summary>
+        /// 获取用户动态
+        /// </summary>
+        public static string GetUserDynamics { get; set; } = "http://i.gamersky.com/appapi/v2/getUserDynamics";
+
+        /// <summary>
+        /// 获取用户游戏列表
+        /// </summary>
+        public static string GetUserGameList { get; set; } = "http://appapi2.gamersky.com/game/getUserGameList";
+        
         #endregion
     }
 }

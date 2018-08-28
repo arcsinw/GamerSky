@@ -15,6 +15,9 @@ using GamerSky.Models.ResultDataModel;
 using GamerSky.Enums;
 using GamerSky.Models.Group;
 using GamerSky.Requests;
+using GamerSky.Responses;
+using GamerSky.Models.Me;
+using GamerSky.Requests.Me;
 
 namespace GamerSky.Services
 {
@@ -145,9 +148,7 @@ namespace GamerSky.Services
             return newsResult?.Result;
         }
 
-        #region Login
-
-        #endregion
+       
 
         #region Isolated APIs
         ///// <summary>
@@ -325,7 +326,7 @@ namespace GamerSky.Services
         /// </summary>
         /// <param name="searchType">热点词类型 strategy news shouyou</param>
         /// <returns></returns>
-        public async Task<List<string>> GetSearchHotKey(string searchType)
+        public async Task<List<string>> GetSearchHotKey(string searchType = "strategy")
         {
             string filename = "searchHotKey_"+searchType+".json";
             ResultDataTemplate<List<string>> searchResult = new ResultDataTemplate<List<string>>();
@@ -493,17 +494,7 @@ namespace GamerSky.Services
         //    return result;
         //}
 
-        /// <summary>
-        /// 获取用户的所有评论回复
-        /// </summary>
-        public async Task<List<Comment>> GetAllReply(string userId, int pageIndex)
-        {
-            string jsonData = "{\"userId\":" + userId + ",\"pageIndex\":" + pageIndex + ",\"pageSize\":20}";
-            string url = string.Format(ServiceUri.GetAllReply, jsonData);
-            ResultDataTemplate<UserComments> comments= await GetJson<ResultDataTemplate<UserComments>>(url);
-            return comments.Result.Comments;
-        }
-
+        
         ///// <summary>
         ///// 给评论回复点赞
         ///// {"action":"ding","topicId":855635,"commentID":1080276461,"commentUserID":"531939"}
@@ -1304,6 +1295,135 @@ namespace GamerSky.Services
 
             return result?.Result;
         }
+
+        #endregion
+
+        #region 用户相关
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="verifyCode"></param>
+        /// <returns></returns>
+        public async Task<LoginResponse> Login(string userName, string password, string verifyCode = "")
+        {
+            PostDataTemplate<Requests.Me.LoginRequest> postData = new PostDataTemplate<Requests.Me.LoginRequest>()
+            {
+                request = new Requests.Me.LoginRequest()
+                {
+                    userInfo = userName,
+                    password = password,
+                    veriCode = verifyCode,
+                }
+            };
+
+            var result = await PostJson<PostDataTemplate<Requests.Me.LoginRequest>, ResultDataTemplate<LoginResponse>>(ServiceUri.TwoLogin, postData);
+            return result?.Result;
+        }
+
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        public async Task<UserInfo> GetUserInfo(string userId)
+        {
+            PostDataTemplate<GetUserInfoRequest> postData = new PostDataTemplate<GetUserInfoRequest>()
+            {
+                request = new GetUserInfoRequest()
+                {
+                    userId = userId,
+                }
+            };
+
+            var result = await PostJson<PostDataTemplate<GetUserInfoRequest>, ResultDataTemplate<UserInfo>>(ServiceUri.TwoLogin, postData);
+            return result?.Result;
+        }
+
+        
+        /// <summary>
+        /// 获取用户信息 TODO
+        /// </summary>
+        public async Task<UserInfo> GetUserSubscriptionColumns()
+        {
+            PostDataTemplate<GetUserInfoRequest> postData = new PostDataTemplate<GetUserInfoRequest>()
+            {
+                request = new GetUserInfoRequest()
+                {
+                    
+                }
+            };
+
+            var result = await PostJson<PostDataTemplate<GetUserInfoRequest>, ResultDataTemplate<UserInfo>>(ServiceUri.TwoLogin, postData);
+            return result?.Result;
+        }
+
+        /// <summary>
+        /// 获取用户收藏
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<CollectItem>> GetCollectList(int pageIndex = 1)
+        {
+            PostDataTemplate<GetCollectListRequest> postData = new PostDataTemplate<GetCollectListRequest>()
+            {
+                request = new GetCollectListRequest()
+                {
+                    pageIndex = pageIndex,
+                }
+            };
+
+            var result = await PostJson<PostDataTemplate<GetCollectListRequest>, ResultDataTemplate<List<CollectItem>>>(ServiceUri.GetCollectList, postData);
+            return result?.Result;
+        }
+
+        /// <summary>
+        /// 获取用户收藏
+        /// </summary>
+        /// <returns></returns>
+        public async Task GetUserDynamics(int pageIndex = 1)
+        {
+            PostDataTemplate<GetUserDynamicsRequest> postData = new PostDataTemplate<GetUserDynamicsRequest>()
+            {
+                request = new GetUserDynamicsRequest()
+                {
+                    pageIndex = pageIndex,
+                }
+            };
+
+            var result = await PostJson<PostDataTemplate<GetUserDynamicsRequest>, ResultDataTemplate<List<CollectItem>>>(ServiceUri.GetUserDynamics, postData);
+            
+        }
+
+        /// <summary>
+        /// 获取用户游戏列表
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        public async Task GetUserGameList(int pageIndex = 1)
+        {
+            PostDataTemplate<GetUserGameListRequest> postData = new PostDataTemplate<GetUserGameListRequest>()
+            {
+                request = new GetUserGameListRequest()
+                {
+                    pageIndex = pageIndex,
+                }
+            };
+
+            var result = await PostJson<PostDataTemplate<GetUserGameListRequest>, ResultDataTemplate<List<CollectItem>>>(ServiceUri.GetUserGameList, postData);
+
+        }
+
+        /// <summary>
+        /// 获取用户的所有评论回复
+        /// </summary>
+        public async Task<List<Comment>> GetAllReply(string userId, int pageIndex)
+        {
+            string jsonData = "{\"userId\":" + userId + ",\"pageIndex\":" + pageIndex + ",\"pageSize\":20}";
+            string url = string.Format(ServiceUri.GetUserComment, jsonData);
+            ResultDataTemplate<UserComments> comments = await GetJson<ResultDataTemplate<UserComments>>(url);
+            return comments.Result.Comments;
+        }
+
 
         #endregion
     }

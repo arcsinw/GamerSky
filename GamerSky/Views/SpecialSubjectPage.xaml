@@ -29,10 +29,11 @@
                           SelectionMode="Single" 
                           IsItemClickEnabled="True"
                           SelectedItem="{Binding SelectedGameSpecial, Mode=TwoWay}"
-                          MinItemHeight="130"
-                          MinItemWidth="300"
+                          
+                          DesiredWidth="300"
                           Padding="12,0,0,12"
                           Style="{StaticResource LightGridView}">
+                <!--MinItemHeight="130"-->
                 <interactivity:Interaction.Behaviors>
                     <core:EventTriggerBehavior EventName="SelectionChanged">
                         <core:InvokeCommandAction Command="{Binding ItemClickCommand}"/>
@@ -49,7 +50,7 @@
                     <DataTemplate>
                         <Viewbox Stretch="UniformToFill">
                             <controls:ShadowContentControl Z_Depth="1" IsCached="True" CornerRadius="4">
-                                <Grid Height="130" Width="300" CornerRadius="4">
+                                <Grid CornerRadius="4">
                                     <Image Source="{Binding Image}" Stretch="UniformToFill"/>
                                 </Grid>
                             </controls:ShadowContentControl>
@@ -62,8 +63,6 @@
                         <Setter Property="Margin" Value="0,12,12,0"/>
                         <Setter Property="HorizontalAlignment" Value="Stretch"/>
                         <Setter Property="VerticalAlignment" Value="Stretch"/>
-                        <Setter Property="Width" Value="Auto"/>
-                        <Setter Property="Height" Value="Auto"/>
                     </Style>
                 </controls:AdaptiveGridView.ItemContainerStyle>
             </controls:AdaptiveGridView>

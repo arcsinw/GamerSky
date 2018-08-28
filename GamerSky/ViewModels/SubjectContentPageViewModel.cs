@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Messaging;
 using GamerSky.Models;
 using GamerSky.Models.ResultDataModel;
+using GamerSky.Services;
 using GamerSky.Utils;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace GamerSky.ViewModels
 
         public void LoadData()
         {
-
+            
         }
 
         

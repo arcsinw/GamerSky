@@ -36,14 +36,15 @@ namespace GamerSky.Collection
             {
                 headerEssays = value;
             }
-        } 
+        }
 
+        private bool hasMoreItems = true;
 
         protected override bool HasMoreItemsCore
         {
             get
             {
-                return true;
+                return hasMoreItems;
             }
         }
 
@@ -62,6 +63,13 @@ namespace GamerSky.Collection
                 var essays = await ApiService.Instance.GetEssayList(nodeId, pageIndex++);
                 if (essays != null)
                 {
+                    if (essays.Count == 0)
+                    {
+                        hasMoreItems = false;
+                        this.OnDataLoaded?.Invoke(this, EventArgs.Empty);
+                        return result;
+                    }
+
                     foreach (var item in essays)
                     {
                         if (item.Type.Equals("huandeng"))

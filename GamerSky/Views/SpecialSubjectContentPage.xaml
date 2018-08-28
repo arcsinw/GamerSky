@@ -66,14 +66,14 @@
                         <Setter Property="Background" Value="White"/>
                     </Style>
                 </ListView.ItemContainerStyle>
-                <ListView.GroupStyle>
+                <!--<ListView.GroupStyle>
                     <GroupStyle HidesIfEmpty="True">
                         <GroupStyle.HeaderTemplate>
                             <DataTemplate>
                                 <Grid Height="40">
-                                    <!--<Image Source="ms-appx:///Assets/Images/Game/game_feature_bg.9.png" 
+                                    --><!--<Image Source="ms-appx:///Assets/Images/Game/game_feature_bg.9.png" 
                                            NineGrid="30,0,30,0" 
-                                           HorizontalAlignment="Center"/>-->
+                                           HorizontalAlignment="Center"/>--><!--
                                     <TextBlock Text="{Binding Item1}" HorizontalAlignment="Center" 
                                                VerticalAlignment="Center"
                                                FontSize="16"/>
@@ -88,7 +88,7 @@
                             </Style>
                         </GroupStyle.HeaderContainerStyle>
                     </GroupStyle>
-                </ListView.GroupStyle>
+                </ListView.GroupStyle>-->
             </ListView>
         </Grid>
     </Grid>
