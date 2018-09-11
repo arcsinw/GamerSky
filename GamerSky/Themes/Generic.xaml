@@ -11,5 +11,6 @@
         <ResourceDictionary Source="/Controls/IndicatorPivot/IndicatorPivot.xaml"/>
         <ResourceDictionary Source="/Controls/AspectContentControl/AspectContentControl.xaml"/>
         <ResourceDictionary Source="/Controls/ShadowContentControl/ShadowContentControl.xaml"/>
+        <ResourceDictionary Source="/Controls/PullToRefreshListView/PullToRefreshListView.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

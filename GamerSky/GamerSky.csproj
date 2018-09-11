@@ -134,6 +134,8 @@
     <Compile Include="Controls\ImageEx\ImageExOpenedEventArgs.cs" />
     <Compile Include="Controls\IndicatorPivot\IndicatorPivot.cs" />
     <Compile Include="Controls\LightButton\LightButton.cs" />
+    <Compile Include="Controls\PullToRefreshListView\PullToRefreshListView.cs" />
+    <Compile Include="Controls\PullToRefreshListView\RefreshProgressEventArgs.cs" />
     <Compile Include="Controls\ShadowContentControl\ShadowContentControl.cs" />
     <Compile Include="Controls\ShadowContentControl\ShadowConfig.cs" />
     <Compile Include="Controls\SimpleRadioButton\SimpleRadioButton.cs" />
@@ -141,7 +143,13 @@
     <Compile Include="Controls\ToastService\ToastService.cs" />
     <Compile Include="Converters\ElementThemeToBoolConverter.cs" />
     <Compile Include="Converters\ElementThemeToUriSourceConverter.cs" />
+    <Compile Include="Extensions\FrameworkElement\FrameworkElementExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\ScrollViewer\ScrollViewerExtensions.cs" />
+    <Compile Include="Extensions\ScrollViewer\ScrollViewerExtensions.Properties.cs" />
+    <Compile Include="Extensions\StatusBar\StatusBarExtensions.cs" />
+    <Compile Include="Extensions\Tree\LogicalTree.cs" />
+    <Compile Include="Extensions\Tree\VisualTree.cs" />
     <Compile Include="Interfaces\INavigable.cs" />
     <Compile Include="Models\CollectItem.cs" />
     <Compile Include="Models\Game\GameDetailV4.cs" />
@@ -368,6 +376,7 @@
     <Content Include="Assets\Images\icon_youxi_select.png" />
     <Content Include="Assets\Images\icon_yuanchuang.png" />
     <Content Include="Assets\Images\icon_yuanchuang_select.png" />
+    <Content Include="Assets\Images\ic_chat_black_24dp.png" />
     <Content Include="Assets\Images\ic_chat_white_24dp.png" />
     <Content Include="Assets\Images\ic_collect_yellow.png" />
     <Content Include="Assets\Images\ic_comment.png" />
@@ -503,6 +512,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\PullToRefreshListView\PullToRefreshListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\ShadowContentControl\ShadowContentControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -629,6 +642,11 @@
   <ItemGroup>
     <Folder Include="Requests\Origin\" />
     <Folder Include="Triggers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

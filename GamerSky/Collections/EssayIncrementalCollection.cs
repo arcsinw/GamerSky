@@ -20,23 +20,11 @@ namespace GamerSky.Collection
         }
 
         private string nodeId;
-        private int pageIndex = 1; 
-         
-        private ObservableCollection<Essay> headerEssays = new ObservableCollection<Essay>();
+        private int pageIndex = 1;
         /// <summary>
         /// 幻灯片
         /// </summary>
-        public ObservableCollection<Essay> HeaderEssays
-        {
-            get
-            {
-                return headerEssays;
-            }
-            set
-            {
-                headerEssays = value;
-            }
-        }
+        public ObservableCollection<Essay> HeaderEssays { get; set; } = new ObservableCollection<Essay>();
 
         private bool hasMoreItems = true;
 
@@ -72,11 +60,14 @@ namespace GamerSky.Collection
 
                     foreach (var item in essays)
                     {
-                        if (item.Type.Equals("huandeng"))
+                        if (item != null && item.Type.Equals("huandeng"))
                         {
-                            foreach (var c in item.ChildElements)
+                            if (item.ChildElements != null)
                             {
-                                HeaderEssays.Add(c);
+                                foreach (var c in item.ChildElements)
+                                {
+                                    HeaderEssays.Add(c);
+                                }
                             }
                             continue;
                         }
@@ -85,7 +76,7 @@ namespace GamerSky.Collection
                 }
                 else
                 {
-                    this.OnError.Invoke(this, new Exception());
+                    this.OnError?.Invoke(this, new Exception());
                 }
             }
             this.OnDataLoaded?.Invoke(this, EventArgs.Empty);

@@ -31,14 +31,27 @@
                 <Grid Grid.Column="1" HorizontalAlignment="Stretch" Margin="8,0">
                     <TextBlock Text="{x:Bind Title}"  TextWrapping="Wrap" VerticalAlignment="Top"/>
 
-                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-                        <TextBlock Text="{x:Bind CommentsCount}"/>
-                        <BitmapIcon Height="20" Width="20" Foreground="Black" UriSource="ms-appx:///Assets/Image/ic_chat_white_24dp.png"/>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <Image Height="20" Width="20"
+                                    Source="ms-appx:///Assets/Images/ic_chat_black_24dp.png"/>
+                        <TextBlock Text="{x:Bind CommentsCount}" Margin="4,0,0,0"/>
                     </StackPanel>
                 </Grid>
             </Grid>
         </DataTemplate>
 
+        <DataTemplate x:Key="NoPictureDT" x:DataType="m:Essay">
+            <Grid>
+                <TextBlock Text="{x:Bind Title}"  TextWrapping="Wrap" VerticalAlignment="Top"/>
+
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                    <Image Height="20" Width="20"
+                                    Source="ms-appx:///Assets/Images/ic_chat_black_24dp.png"/>
+                    <TextBlock Text="{x:Bind CommentsCount}" Margin="4,0,0,0"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        
         <DataTemplate x:Key="ThreePictureDT">
             <Grid>
                 <Grid.RowDefinitions>
@@ -61,10 +74,11 @@
                     <Image Grid.Column="2" MinHeight="40" Source="{Binding ThumbnailURLs[2]}" Stretch="Fill" />
                     <!--PlaceholderSource="{StaticResource NewsPlaceholderImage}" PlaceholderStretch="UniformToFill"/>-->
                 </Grid>
-                <TextBlock  Grid.Row="2" Margin="0,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" TextWrapping="Wrap">
-                    <Run Text="{Binding CommentsCount}"/>
-                    <Run Text="评"/>
-                </TextBlock>
+                <StackPanel Grid.Row="2" HorizontalAlignment="Right" Margin="0,4,0,0"
+                            VerticalAlignment="Bottom" Orientation="Horizontal">
+                    <Image Height="20" Width="20" Source="ms-appx:///Assets/Images/ic_chat_black_24dp.png"/>
+                    <TextBlock Text="{Binding CommentsCount}" Margin="4,0,0,0"/>
+                </StackPanel>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -79,22 +93,26 @@
 
             <Pivot.ItemTemplate>
                 <DataTemplate>
-                    <ListView ItemsSource="{Binding Item2}" 
+                    <controls:PullToRefreshListView ItemsSource="{Binding Item2}" 
                               SelectedItem="{Binding Path=NewsPageInstance.SelectedEssay, Mode=TwoWay,Source={StaticResource ViewModelLocator}}"
                               IsItemClickEnabled="True" 
                               ShowsScrollingPlaceholders="False"
                               Style="{StaticResource LightListView}"
-                              >
+                              IsPullToRefreshWithMouseEnabled="True"
+                              PullToRefreshLabel="Refreshing"
+                              RefreshRequested="PullToRefreshListView_RefreshRequested">
+                        
                         <interactivity:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="SelectionChanged">
                                 <core:InvokeCommandAction Command="{Binding Path=NewsPageInstance.ItemSelectedCommand,Source={StaticResource ViewModelLocator}}" />
                             </core:EventTriggerBehavior>
-                        </interactivity:Interaction.Behaviors> 
+                        </interactivity:Interaction.Behaviors>
                         <ListView.ItemTemplateSelector>
                             <ts:NewsDataTemplateSelector OnePictureDT="{StaticResource OnePictureDT}"
-                                                         ThreePictureDT="{StaticResource ThreePictureDT}"/>
+                                                         ThreePictureDT="{StaticResource ThreePictureDT}"
+                                                         NoPictureDT="{StaticResource NoPictureDT}"/>
                         </ListView.ItemTemplateSelector>
-                       
+
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="MinHeight" Value="100"/>
@@ -105,7 +123,7 @@
                                 <Setter Property="Background" Value="White"/>
                             </Style>
                         </ListView.ItemContainerStyle>
-                    </ListView>
+                    </controls:PullToRefreshListView>
                 </DataTemplate>
             </Pivot.ItemTemplate>
 

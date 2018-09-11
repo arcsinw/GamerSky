@@ -25,5 +25,12 @@ namespace GamerSky.Views
         {
             this.InitializeComponent();
         }
+
+        private void PullToRefreshListView_RefreshRequested(object sender, EventArgs e)
+        {
+            int index = pivot.SelectedIndex;
+
+
+        }
     }
 }

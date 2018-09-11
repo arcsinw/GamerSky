@@ -86,11 +86,19 @@ namespace GamerSky.ViewModels
 
         public RelayCommand ItemSelectedCommand { get; private set; }
 
+        public RelayCommand RelayCommand { get; set; }
+
         private void NavigateCommandAction()
         {
             //Messenger.Default.Send(SelectedEssay);
             
             _navigationService.DetailNavigateTo("WebViewPage", SelectedEssay);
+        }
+
+        private void Refresh(int index)
+        {
+            Essays.Clear();
+            LoadData();   
         }
     }
 }

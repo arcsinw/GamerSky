@@ -673,33 +673,32 @@
                             <HyperlinkButton Content="全部" HorizontalAlignment="Right" BorderThickness="0" Style="{StaticResource SimpleHyperlinkButtonStyle}"/>
                         </Grid>
 
-                        <Viewbox  Margin="0,0,0,12" MinHeight="250">
-                            <FlipView x:Name="flipView" ItemsSource="{Binding NewGames}" MinHeight="250" VerticalAlignment="Stretch" 
+                        <FlipView x:Name="flipView" ItemsSource="{Binding NewGames}" Height="220" VerticalAlignment="Stretch" 
                                 SelectedItem="{Binding Path=GamePageInstance.SelectedGameSpecialDetail, Mode=TwoWay, Source={StaticResource ViewModelLocator}}">
-                                <interactivity:Interaction.Behaviors>
-                                    <core:EventTriggerBehavior EventName="Tapped">
-                                        <core:InvokeCommandAction Command="{Binding Path=GamePageInstance.GameSpecialDetailClickCommand,Source={StaticResource ViewModelLocator}}"/>
-                                    </core:EventTriggerBehavior>
-                                </interactivity:Interaction.Behaviors>
-                                <FlipView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <controls:ImageEx Source="{Binding LargeImage}" Stretch="UniformToFill"/>
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="Tapped">
+                                    <core:InvokeCommandAction Command="{Binding Path=GamePageInstance.GameSpecialDetailClickCommand,Source={StaticResource ViewModelLocator}}"/>
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+                            <FlipView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <controls:ImageEx Source="{Binding LargeImage}" Stretch="UniformToFill"/>
 
-                                            <StackPanel VerticalAlignment="Bottom">
-                                                <TextBlock Foreground="White" TextWrapping="Wrap" Margin="24">
+                                        <StackPanel VerticalAlignment="Bottom">
+                                            <TextBlock Foreground="White" TextWrapping="Wrap" Margin="24">
                                                 <Run Text="{Binding Title}" FontSize="20"/>
                                                 <Run Text="/"/>
                                                 <Run Text="{Binding GsScore}" Foreground="Green"/>
                                                 <LineBreak/>
                                                 <Run Text="{Binding Description}" FontSize="14"/>
-                                                </TextBlock>
-                                            </StackPanel>
-                                        </Grid>
-                                    </DataTemplate>
-                                </FlipView.ItemTemplate>
-                            </FlipView>
-                        </Viewbox>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </FlipView.ItemTemplate>
+                        </FlipView>
+
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Style="{StaticResource PartStackPanelStyle}">
